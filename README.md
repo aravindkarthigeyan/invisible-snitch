@@ -60,7 +60,7 @@ A longer plain-language walkthrough is in **[docs/PROOF_OVERVIEW.md](docs/PROOF_
 
 | Path | What it is |
 |---|---|
-| [`paper/snitch.pdf`](paper/snitch.pdf) | **The proof**: a 49-page standalone paper proving the theorem and the corollary. Start here. |
+| [`paper/snitch.pdf`](paper/snitch.pdf) | **The proof**: a 50-page standalone paper proving the theorem and the corollary. Start here. |
 | [`paper/verify_constants.py`](paper/verify_constants.py) | Checks all 218 numerical conditions the proof relies on, in 50-digit arithmetic. |
 | [`record/short-paper-v1.pdf`](record/short-paper-v1.pdf) | The first version of the short paper (43 pages, $v_0 = 6\cdot10^{-5}$). Version 2 sharpened three estimates (tilts, near pairs, far pairs and length) to reach $5.8\cdot10^{-3}$. |
 | [`record/research-record.pdf`](record/research-record.pdf) | The full 163-page research record. It covers everything else that was found: weaker theorems for $\varepsilon>0$, lower bounds on the capture time, conditional results up to $v \approx 0.47$, refuted conjectures, and numerics. |

@@ -130,11 +130,10 @@ label interval $J$: $\Vu(J):=\int_J|T-\uhat|^2ds$.
 Let $u\mapsto x_u$ be a regular $C^1$ curve and $J=(a,b)$ a label interval.
 \begin{enumerate}
 \item[(a)] $E(a',b')\le E(a,b)$ for $a\le a'<b'\le b$.
-\item[(b)] $\Vu(J)=2[l(J)-(x_b-x_a)\cdot\uhat]=N(J)^2+c(J)|e_J-\uhat|^2$. Hence $N^2\le\Vu$, $|e_J-\uhat|^2\le\Vu/c$,
-$\int_J|T-e_J|^2ds=N(J)^2$, $\Vu$ is additive over adjacent intervals, and
+\item[(b)] $\Vu(J)=2[l(J)-(x_b-x_a)\cdot\uhat]$, and $\Vu(J)=N(J)^2+c(J)|e_J-\uhat|^2$ if $c(J)>0$. Hence $N^2\le\Vu$; if $c(J)>0$ also $|e_J-\uhat|^2\le\Vu/c$ and
+$\int_J|T-e_J|^2ds=N(J)^2$. In all cases $\Vu$ is additive over adjacent intervals and
 $|\uhat\times(x_b-x_a)|\le\int_J|T-\uhat|\,ds\le(l\,\Vu)^{1/2}$.
 \item[(c)] If the tangent angle is $K$-Lipschitz in arclength on $J$ and $Kl\le\pi$, then $N\le(K/\sqrt{12})\,l^{3/2}$.
-\item[(d)] \textup{(sub-chord tilt)} $|e_{a'b'}-e_{ab}|\le[l(a',b')^{1/2}N(a,b)+E(a',b')]/c(a',b')$ for $a\le a'<b'\le b$.
 \end{enumerate}
 \end{lemma}
 
@@ -147,8 +146,6 @@ $\uhat\times(x_b-x_a)=\int_J\uhat\times(T-\uhat)\,ds$, and Cauchy--Schwarz.
 $|\psi-\psi_{\mathrm m}|\le K|s-l/2|\le\pi/2$, so
 $c\ge(x_b-x_a)\cdot e^{i\psi_{\mathrm m}}=\int_0^l\cos(\psi-\psi_{\mathrm m})\,ds\ge\int_0^l\cos(K|s-l/2|)\,ds=(2/K)\sin(Kl/2)\ge l-K^2l^3/24$;
 thus $N^2=2E\le K^2l^3/12$.
-(d) $c(a',b')e_{a'b'}-l(a',b')e_{ab}=\int_{a'}^{b'}(T-e_{ab})\,ds$ has norm $\le l(a',b')^{1/2}N(a,b)$ by Cauchy--Schwarz and (b),
-and equals $c(a',b')(e_{a'b'}-e_{ab})-E(a',b')e_{ab}$.
 \end{proof}
 
 For a label interval $K=(a',b')$ of a curve we write $\vv_K:=x_{b'}-x_{a'}=\int_KT\,ds=c(K)e_K$.
@@ -272,7 +269,7 @@ that for $\alpha'\in\mathcal U$ and $k\ge k_0$ the candidate $\alpha'$ under $G_
 $[0,\tau']$. Indeed, as $|(\rho^G_\alpha)'|\le1+v$, the candidate $\alpha$ under $G$ is defined with $\rho^G_\alpha\ge c/2$ on
 $[0,\tau']$. Write $S:=S_\alpha$ under $G$ and $\tilde S:=S_{\alpha'}$ under $G_k$.
 While $|S-G|,|\tilde S-G_k|\ge c/4$, the inequality above gives
-$|\tilde S-S|'\le(8v/c)(|\tilde S-S|+\|G_k-G\|_\infty)$, hence by Gr\"onwall
+$|\tilde S-S|(t)\le|\tilde S-S|(0)+(8v/c)\int_0^t(|\tilde S-S|+\|G_k-G\|_\infty)$ (the function $|\tilde S-S|$ is Lipschitz), hence by Gr\"onwall
 $|\tilde S-S|\le b_k:=\bigl(d|e^{i\alpha'}-e^{i\alpha}|+(8v/c)\bar T\|G_k-G\|_\infty\bigr)e^{8v\bar T/c}$. Choose $\mathcal U$, $k_0$ with
 $b_k+\|G_k-G\|_\infty<c/4$. Let $I$ be the set of $s\in[0,\tau']$ such that $\tilde S$ is defined on $[0,s]$ with $|\tilde S-G_k|\ge c/4$
 there. Then $0\in I$ ($|\tilde S(0)-G_k(0)|=d\ge c$), $I$ is closed, and for $s\in I$ the bound gives
@@ -284,6 +281,6 @@ exists, as a catch time is such a time), and pass to a subsequence with $t_N\to 
 $t^*$, then $\rho^H_\alpha$ would be defined and positive on $[0,t^*]$, hence $\ge c>0$ there, and the Claim ($G=H$, $G_k=H_N$,
 $\alpha'=\alpha$, $\tau=t^*$) would give $\rho^{H_N}_\alpha\ge c/4$ on $[0,\min(t^*+c/(2(1+v)),\bar T)]\ni t_N$ for large $N$,
 contradicting $\eps_N\to0$. So $H$ catches every direction of $\bigcup_ND_N$ by time $\bar T$. Finally, the Claim with $G_k=G=H$ and
-$\tau=\bar T$ shows that the set of directions not caught by $H$ on $[0,\bar T]$ is open. It is disjoint from the dense set
+$\tau=\bar T$ shows that the set of directions not caught by $H$ on $[0,\bar T]$ is open in $\mathbb R/2\pi\mathbb Z$. It is disjoint from the dense set
 $\bigcup_ND_N$, hence empty.
 \end{proof}
