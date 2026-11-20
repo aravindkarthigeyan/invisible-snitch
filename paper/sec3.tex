@@ -66,48 +66,57 @@ p=(\gamma,R,m,s_0,\fF,\kappa,c_A,K_R,K_f,\Keps,\eta_1,\qc,\nu,\dL,\delta_1,A_0).
 Its \emph{derived constants} are
 \begingroup\allowdisplaybreaks
 \begin{align*}
-&M:=mR^{-\gamma},\quad \chig:=\kappa\dL,\quad c_6:=\frac{1+\delta_1}{c_A},\quad
-c_t(r):=\frac{\kappa^{1/2}r^{1/2+\gamma}+m/2}{c_A}\ (r\ge1),\quad \sigma_q:=\frac1{1-\qc^{-\gamma}},\\
-&C_A:=\sigma_q\,c_t(\qc),\quad C_B:=C_A+c_t(3),\quad \CTL:=C_A+C_B,\quad \CmuA:=1+\kappa C_A^2,\quad \ConeA:=(\kappa\CmuA)^{1/2},\\
-&c_\rho:=c_A-\frac{2\delta_1+\kappa}{K_f},\quad c_R:=c_AK_R-\frac{\delta_1}{\Keps}-\kappa,\quad K_1:=\frac{c_\rho K_f}{\kappa},\quad
-K_2:=\frac{c_R}{\kappa},\quad \camp:=\frac{\aD(K_1)\chig}{c_\rho},\\
-&B_{2U}:=\frac{2\kappa^{3/2}(1+1/K_2)}{c_R^2},\quad
-B_{2\eta}:=\frac{2\kappa^{3/2}(1+1/K_1)}{c_\rho^2}\Bigl(\frac{\chig}{\eta_1}+\frac{\dL}{\Keps\eta_1^2}\Bigr),\\
-&r_f:=1+\frac1{K_f-2},\quad C_p:=\kappa\bigl[c_t(r_f)+C_B(1+1/K_f)^\gamma\bigr],\quad B_3:=\frac{2\kappa^{3/2}C_p}{c_\rho^3},\\
-&\PsiI:=2+\log K_f,\quad \TI:=\dL(\kappa c_6+2)+c_6\chig\PsiI,\quad \Ta:=\frac{\dL}{c_6}+\chig(2+\log K_f),\\
-&\Tb:=2^\gamma\Bigl[2\dL+\chig\Bigl(\frac34+\frac{K_f^\gamma-1}{2\gamma}\Bigr)\Bigr],\quad
-k_0:=\max(\ConeA,\kappa2^\gamma C_A),\\
-&\DI:=\CmuA\TI,\quad \DIIs:=c_6^2\ConeA^2\Ta+2c_6^2\kappa\CTL\ConeA\Tb+4\dL c_6\ConeA k_0,\quad
-\DIIl:=\frac{c_6(K_f+1)^\gamma\ConeA\Ta}m,\\
-&B_5:=\frac2{c_\rho}\Bigl[\frac{(C_p+\kappa^{1/2}K_f^{-1-\gamma})^2}{c_\rho^2}+K_f^{-2\gamma}\Bigr],\quad
+&M:=mR^{-\gamma},\quad \chig:=\kappa\dL,\quad c_6:=\frac{1+\delta_1}{c_A},\quad \sigma_q:=\frac1{1-\qc^{-\gamma}},\quad
+r_*:=\max\Bigl(\qc,\frac{2\qc}{\qc-1}\Bigr),\\
+&\mathsf s(r):=\frac{\kappa^{1/2}}{c_A}\cdot\begin{cases}r/2,&1\le r\le2,\\(r-1)^{1/2},&r\ge2,\end{cases}\qquad
+\omega_r:=\Bigl(1-\frac{m^2r}{4c_A}\Bigr)^{-1/2},\\
+&\CT:=\omega_{r_*}\max\Bigl(\sigma_q\,\mathsf s(\qc),\,\mathsf s\Bigl(\frac{2\qc}{\qc-1}\Bigr)\Bigr),\quad \Cmu:=1+\kappa\CT^2,\\
+&c_\rho^*:=c_A-\frac{2\delta_1}{K_f},\quad c_\eta:=c_A-\frac{\delta_1}{\Keps\eta_1},\quad c_R^*:=c_AK_R-\frac{\delta_1}{\Keps},\\
+&K_1:=\frac{c_\rho^*K_f}{\kappa},\quad K_2:=\frac{c_R^*}{\kappa},\quad \camp:=\frac{\aD(K_1)\chig}{c_\rho^*},\\
+&B_{2U}':=\frac{2\kappa^{3/2}(1+1/K_2)}{\pi},\quad
+B_{2\eta}^*:=\frac{2\kappa^{3/2}(1+1/K_1)}{\pi c_\eta^2}\Bigl(\frac{\chig}{\eta_1}+\frac{\dL}{\Keps\eta_1^2}\Bigr),\\
+&C_p':=\kappa^{1/2}\Bigl(1+\frac1{K_f}\Bigr)^{1/2+\gamma}K_f^{-1/2}+\kappa\CT\Bigl(1+\frac1{K_f}\Bigr)^\gamma,\quad
+C_p^V:=(\kappa\Cmu)^{1/2}\Bigl(1+\frac1{K_f}\Bigr)^{1/2+\gamma},\\
+&C_p^*:=\min(C_p',C_p^V),\quad C_{\mathrm{ar}}:=\frac{\kappa^{3/2}(1+1/K_f)^{3/2+\gamma}}{c_A},\quad
+\hat C(x):=\min(C_p^*,C_{\mathrm{ar}}x^{1/2}),\\
+&B_3':=\frac{2\kappa^{3/2}K_f^{-\nu}}{\pi(c_\rho^*)^3}\Bigl[2\dL K_f^{\nu+\gamma-2}\hat C(K_f)+\chig\int_{K_f}^\infty x^{\nu+\gamma-2}\hat C(x)\,dx\Bigr],\\
+&\PsiI:=2+\log K_f,\quad\TI:=\dL(\kappa c_6+2)+c_6\chig\PsiI,\\
+&B_5^*:=\frac1{c_\rho^*}\Bigl[\frac{C_p^*+\kappa^{1/2}K_f^{-1-\gamma}/\pi}{c_\rho^*}+K_f^{-\gamma}\Bigr]^2,\quad
 I_5:=\frac{\chig(\eta_1+1/\Keps)^{2\gamma}}{2\gamma},
 \end{align*}
-and, for a length $U_0>0$,
+where $\aD$ is the function of Lemma~\ref{lem:duhamel}; and $\bar\theta:=\fF^2+2\vz D'$, with the near-pair constant $D'$ of
+Definition~\ref{def:Dprime} (it depends only on the tuple). With $x_*:=(C_p^*/C_{\mathrm{ar}})^2$ and $\hat p:=\nu+\gamma-2\in(-\frac32,-1)$,
+the integral in $B_3'$ is $C_{\mathrm{ar}}(x_*^{\hat p+3/2}-K_f^{\hat p+3/2})/(\hat p+\frac32)+C_p^*x_*^{\hat p+1}/(-\hat p-1)$ if $x_*>K_f$
+(then $\hat C(K_f)=C_{\mathrm{ar}}K_f^{1/2}$), and $C_p^*K_f^{\hat p+1}/(-\hat p-1)$ otherwise (then $\hat C(K_f)=C_p^*$). For a length $U_0>0$ and a
+non-decreasing function $\Cfl:[0,\infty)\to[0,\infty)$ put $\rho_{\Cfl}(y):=\max(c_AK_RR,\Cfl(y))-\delta_1R/\Keps$ and, for $k=1,2$,
 \begin{align*}
-&\Xfar(U_0):=\vz\Bigl[\frac{\chig U_0}{c_RR}+\frac1{c_\rho}\Bigl(\frac{\dL}{\Keps\eta_1}+\chig\log\frac{K_R}{\eta_1}\Bigr)\Bigr],\\
-&\LJ(U_0):=\exp\bigl(\Xfar(U_0)+B_5I_5\vz m^2\bigr)+\vz\kappa\TI,\qquad \bar\theta:=\fF^2+2\vz\bigl[\DI+\max(\DIIs,\DIIl)\bigr].
+&J_k^{\Cfl}(U_0):=\frac{2\dL R}{\Keps(c_R^*R)^k}+\chig\Bigl[\int_{K_RR}^{\max(K_RR,U_0/2)}\rho_{\Cfl}^{-k}+\int_0^{U_0/2}\rho_{\Cfl}^{-k}\Bigr],\\
+&J_k(U_0):=\min\Bigl\{\frac{\chig U_0}{(c_R^*R)^k},\,J_k^{\Cfl}(U_0)\Bigr\},\\
+&\Xfar(U_0):=\vz\Bigl[J_1(U_0)+\frac1{c_\eta}\Bigl(\frac{\dL}{\Keps\eta_1}+\chig\log\frac{K_R}{\eta_1}\Bigr)\Bigr],\\
+&\LJ(U_0):=\exp\bigl(\Xfar(U_0)+B_5^*I_5\vz m^2\bigr)+\vz\kappa\TI .
 \end{align*}
 \endgroup
-\namedlabel{hyp:P}{\textup{(P0)--(P7)}}\textbf{Side conditions} for $(p,U_0)$:
+\namedlabel{hyp:P}{\textup{(P0)--(P8)}}\textbf{Side conditions} for $(p,U_0,\Cfl)$:
 \begin{itemize}
 \item[(P0)] $1/2<\gamma$, $\gamma+\nu<1$; $0<R\le1$; $m>0$; $0<s_0\le\fF<1$; $1<\kappa\le4/3$; $0<c_A\le1$; $K_f\ge3$,
-$K_f+1\le K_R$; $\Keps\ge3/2$; $0<\eta_1\le K_f/(K_f+1)$; $\qc>1$; $\nu\ge0$; $\dL,\delta_1,A_0\ge1$; $0<\vz<1$;
+$K_f+1\le K_R$; $\Keps\ge2$; $0<\eta_1\le K_f/(K_f+1)$; $\qc>1$; $\nu\ge0$; $\dL,\delta_1,A_0\ge1$; $0<\vz<1$;
 \item[(P1)] $1/(1-\vz)\le\dL$ and $e^{2\vz/(1-\vz)}\le\delta_1$;
-\item[(P2)] $c_\rho K_f\ge2$, $c_R\Keps\ge1$, $c_6\le K_R\Keps$;
+\item[(P2)] $c_\rho^*K_f\ge2$, $c_R^*\Keps\ge1$, $c_6\le K_R\Keps$, $c_\eta>0$;
 \item[(P3)] $\camp\vz\le\nu$;
-\item[(P4)] $\vz\bigl[2\aD(K_1)\dL/(c_\rho K_f)+\aD(K_2)\chig U_0/(c_RR)\bigr]\le\log A_0$;
-\item[(P5)] $A_0\Bigl[s_0+\Bigl(\dfrac{K_R}{K_f}\Bigr)^{\!\nu}\dfrac{\vz}m\Bigl(\dfrac{B_{2U}\chig U_0}R+B_{2\eta}\Bigr)
-+B_3K_f^{\gamma-1}\Bigl(\dfrac{2\dL}{K_f}+\dfrac{\chig}{1-\gamma-\nu}\Bigr)\vz\Bigr]\le\fF$;
-\item[(P6)] $\bar\theta<1$;\qquad (P7) $\LJ(U_0)<\kappa$.
+\item[(P4)] $\vz\bigl[2\aD(K_1)\dL/(c_\rho^*K_f)+\aD(K_2)J_1(U_0)\bigr]\le\log A_0$;
+\item[(P5)] $A_0\Bigl[s_0+\Bigl(\dfrac{K_R}{K_f}\Bigr)^{\!\nu}\dfrac{\vz}m\bigl(B_{2U}'RJ_2(U_0)+B_{2\eta}^*\bigr)+B_3'\vz\Bigr]\le\fF$;
+\item[(P6)] $\bar\theta<1$;\qquad (P7) $\LJ(U_0)<\kappa$;\qquad (P8) $m^2r_*<4c_A$.
 \end{itemize}
 \end{definition}
-By (P2), $c_\rho>0$ and $c_R>0$. By (P1), $1/(1-v)\le\dL$ and $e^{2\mu}\le\delta_1$. Note $c_6\ge2$, $K_R\ge4$, and that $\aD$ is
-decreasing.
+By (P2), $c_\rho^*>0$ and $c_R^*>0$; so $\rho_{\Cfl}\ge c_R^*R>0$, and $J_k$ is non-decreasing in $U_0$. By (P1), $1/(1-v)\le\dL$
+and $e^{2\mu}\le\delta_1$. Note $c_6\ge2$, $K_R\ge4$, that $\aD$ is decreasing, and that by (P8) $\omega_r$ is defined and
+increasing for $1\le r\le r_*$, and $\mathsf s$ is increasing.
 
 \medskip\noindent\namedlabel{hyp:end}{(H)}\textbf{Setting (H).} The working front on $[0,U]$ and the chase cut at $b_{\mathrm c}=U$;
-$(p,U_0)$ satisfies (P0)--(P7); $U\le U_0$; $\eps\le R/\Keps$; an \emph{excuse length} $\We\ge0$ with $\We=0$ or
+a non-decreasing function $\Cfl:[0,\infty)\to[0,\infty)$;
+$(p,U_0,\Cfl)$ satisfies (P0)--(P8); $U\le U_0$; $\eps\le R/\Keps$; an \emph{excuse length} $\We\ge0$ with $\We=0$ or
 $U\ge2\We+R+\eps$; and a number $\delta_t\ge0$ (in the application, $\delta_t=e^{\vz K_w}-1$ of
-Section~\ref{sec:dep}). (S1) and (S2) are hypotheses at the time $\ttd$. A pair $(a,b)$, $0\le a<b\le U$, is a \emph{body pair} if $U-b\ge\We$, a \emph{tail pair} if $U-b<\We$, and
+Section~\ref{sec:dep}). (S1), (S1G) and (S2) are hypotheses at the time $\ttd$. A pair $(a,b)$, $0\le a<b\le U$, is a \emph{body pair} if $U-b\ge\We$, a \emph{tail pair} if $U-b<\We$, and
 \emph{good} if $a\ge\We$ or $U-b\ge\We$. A pair that is not good has $\lambda>U-2\We\ge R+\eps$; so \emph{every pair with
 $\lambda\le R$ is good}. The \emph{family of leg $j+1$} consists of the pairs with $\eps/2\le\lambda\le R$ and ($a=a_j$ or
 $a\ge a_{j+1}$); the \emph{family} $\Fam(t)$ is the family of leg $j(t)+1$ (so $\Fam(t_j)$, $j\ge1$, is the family of leg $j$, which
@@ -117,6 +126,7 @@ and \emph{near} otherwise. Let $\jW$ be the first $j$ with $a_j\ge\We$ and $\tW:
 of $\Fam(t)$ if $t\ge\tW$. Hypotheses:
 \begin{itemize}
 \item[(S1)] $c(a,b;\ttd)\ge c_A\min(\lambda,K_RR)$ for all good pairs with $\lambda\ge\eps/2$;
+\item[(S1G)] $c(a,b;\ttd)\ge\Cfl\bigl(\min(\lambda,a+U-b)\bigr)$ for all pairs with $\lambda>K_RR$;
 \item[(S2)] $N(a,b;\ttd)\le s_0M\lambda^{1/2+\gamma}\min\bigl(1,K_f\lambda/\min(a,K_RR)\bigr)^\nu$ for all body pairs with
 $\eps/2\le\lambda\le R$ (the last factor is $1$ if $a=0$);
 \item[(TW)] (only if $\We>0$) if $\tW$ is reached, every tail pair with $\eps/2\le\lambda\le R$ satisfies, with $g_W:=a-a_{\jW}$,
@@ -142,10 +152,10 @@ if $\We>0$, then $\tW$ is reached. Moreover, for all good pairs with $\lambda\ge
 \end{equation}
 \item[(b)] \emph{(the end)} every non-final leg advances the base by $a_{j+1}-a_j\in[\eps/\kappa,\eps]$; the chase stops at
 $\Tstop\le\ttd+\kappa U/(1-v)$; the direction of every true label of $[0,U]$ is seen by $\Tstop$.
-\item[(c)] \emph{(tilts)} at every $t\in[\ttd,\Tstop]$, for pairs $J\subset I$ of $\FamS(t)$: $|e_J-e_I|\le\CTL m(\lambda_I/R)^\gamma$, with
-$C_A$ in place of $\CTL$ if $J,I$ have the same left end, and $C_B$ if they have the same right end.
+\item[(c)] \emph{(tilts)} at every $t\in[\ttd,\Tstop]$, for pairs $J\subset I$ of $\FamS(t)$: $|e_J-e_I|\le\CT m(\lambda_I/R)^\gamma$.
 \item[(d)] \emph{(distance from the base)} for $t$ in leg $j+1$ and a label $s\ge a_j$ with ($U-s\ge\We$ or $a_j\ge\We$):
-$\rho_s(t)\ge c_A\min(s-a_j,K_RR)-\delta_1\eps$ and $\max(\rho_s,\eps)\ge\min(s-a_j,K_RR)/c_6$.
+$\rho_s(t)\ge c_A\min(s-a_j,K_RR)-\delta_1\eps$ and $\max(\rho_s,\eps)\ge\min(s-a_j,K_RR)/c_6$; and, under \textup{(S1G)}, if
+$s-a_j>K_RR$: $\rho_s(t)\ge\max\bigl(c_AK_RR,\Cfl(\min(s-a_j,a_j+U-s))\bigr)-\delta_1\eps$.
 \item[(e)] \emph{(causality)} if a path agrees with the chase on $[0,t_j]$, then \textup{(a)}, \textup{(c)}, \textup{(d)} hold for it on
 $[\ttd,t_j]$.
 \end{enumerate}
@@ -181,7 +191,7 @@ Always $a_{j+1}-a_j\le l_{t_j}(a_j,a_{j+1})\le\eps$, since $w\ge1$. \emph{Admiss
 $s\le a_j+\eps$ has $U-s>U-\We-\eps\ge\We+R$: the pairs $(a_j,s)$ are body pairs; and $U-a_j>\eps$. If $t_j\ge\tW$,
 $\FamS(t_j)=\Fam(t_j)$. Every pair $(a_j,s)$ with $\eps/2\le s-a_j\le R$ is in $\Fam(t_j)$ (for $j=0$ it has first point $a_0$; for
 $j\ge1$, $a_j\ge a_j$ in the family of leg $j$).
-(i) The label $s:=a_j+\eps/2$ is $\le U$, and $\eps/2\le R$ ($\Keps\ge3/2$); (J1) gives $l_{t_j}(a_j,s)\le\kappa\eps/2\le\eps$, so
+(i) The label $s:=a_j+\eps/2$ is $\le U$, and $\eps/2\le R$ ($\Keps\ge2$); (J1) gives $l_{t_j}(a_j,s)\le\kappa\eps/2\le\eps$, so
 $a_{j+1}\ge s$. If leg $j+1$ is non-final, $a_{j+1}<U$ and $l_{t_j}(a_j,a_{j+1})=\eps$ by maximality; the pair $(a_j,a_{j+1})$ has
 $\eps/2\le\lambda\le\eps\le R$, and (J1) gives $\eps\le\kappa\lambda$.
 (ii) A final leg $j+1$ has $U-a_j\le l_{t_j}(a_j,U)\le\eps$, so $a_j\ge U-\eps>\We$ if $\We>0$: legs with $a_j<\We$ are not final.
@@ -210,6 +220,11 @@ $\mathcal T$, then
 \textstyle\int_{\mathcal T}h(g(\tau))\,d\tau\le\chig\int_0^{\bar g+\eps/\kappa}h(g)\,dg .
 \]
 \item[(iii)] At most $\kappa x/\eps+1$ legs meet $\{\tau\in\mathcal T:g(\tau)<x\}$.
+\item[(iv)] If $g(\tau)\in(g_0,Y]$ on $\mathcal T$, and $H\ge0$ is non-increasing on $(0,Y/2]$ and non-decreasing on $[Y/2,\infty)$, with
+$H\le H_{\max}$ on $(g_0,Y]$, then \textup(an integral over an empty range is $0$\textup)
+\[
+\textstyle\int_{\mathcal T}H(g(\tau))\,d\tau\le2\dL\eps H_{\max}+\chig\bigl(\int_{g_0}^{Y/2}H(g)\,dg+\int_{Y/2}^YH(g)\,dg\bigr).
+\]
 \end{enumerate}
 \end{lemma}
 
@@ -219,53 +234,79 @@ The bases of non-final legs increase by at least $\eps/\kappa$ (Lemma~\ref{lem:l
 $h(g_i)\le(\kappa/\eps)\int_{g_i-\eps/\kappa}^{g_i}h$; these intervals are disjoint and lie in $[g_{\min},\infty)$. So the integral is
 $\le\dL\eps\sum_ih(g_i)\le\dL\eps\,h(g_{\min})+\dL\kappa\int_{g_{\min}}^\infty h$. (ii) Likewise $h(g_i)\le(\kappa/\eps)
 \int_{g_i}^{g_i+\eps/\kappa}h$ for every value $g_i$, with disjoint intervals in $[0,\bar g+\eps/\kappa]$. (iii) The values in $[0,x)$
-are spaced by at least $\eps/\kappa$.
+are spaced by at least $\eps/\kappa$. (iv) Let $g_1>\dots>g_n$ be the values of $g$ on $\mathcal T$. For each value $\le Y/2$ except
+the smallest, $H(g_i)\le(\kappa/\eps)\int_{g_i-\eps/\kappa}^{g_i}H$ ($H$ is non-increasing on $(0,Y/2]$ and
+$g_i-\eps/\kappa\ge g_{i+1}>g_0$); these intervals are disjoint and lie in $(g_0,Y/2]$. For each value $>Y/2$ except the largest,
+$H(g_i)\le(\kappa/\eps)\int_{g_i}^{g_i+\eps/\kappa}H$ ($H$ is non-decreasing on $[Y/2,\infty)$ and $g_i+\eps/\kappa\le g_{i-1}\le Y$); these
+intervals are disjoint and lie in $[Y/2,Y]$. The two exceptional values contribute at most $2\dL\eps H_{\max}$, the others at most
+$\dL\eps(\kappa/\eps)(\int_{g_0}^{Y/2}H+\int_{Y/2}^YH)$.
 \end{proof}
 
 \begin{lemma}[Distance from the base]\label{lem:dist}
 Let $t\le T_{\mathrm{def}}$ lie in leg $j+1$ \textup($t\in[t_j,t_{j+1}]$, or $t=t_j=\Tstop$\textup), and let $s\ge a_j$ be a label
-with $U-s\ge\We$ or $a_j\ge\We$. Then $\rho_s(t)\ge c_A\min(s-a_j,K_RR)-\delta_1\eps$ and $\max(\rho_s(t),\eps)\ge\min(s-a_j,K_RR)/c_6$.
+with $U-s\ge\We$ or $a_j\ge\We$. Then
+\begin{enumerate}
+\item[(i)] $\rho_s(t)\ge c_A\min(s-a_j,K_RR)-\delta_1\eps$;
+\item[(ii)] $\max(\rho_s(t),\eps)\ge\min(s-a_j,K_RR)/c_6$;
+\item[(iii)] under \textup{(S1G)}, if $w:=s-a_j>K_RR$: $\rho_s(t)\ge\max\bigl(c_AK_RR,\Cfl(\min(w,a_j+U-s))\bigr)-\delta_1\eps$.
+\end{enumerate}
+We call (i) the first and (ii) the second form.
 \end{lemma}
 
 \begin{proof}
 Let $w:=s-a_j$. If $w<\eps/2$, the first right side is negative ($\delta_1\ge1>c_A/2$). Otherwise $(a_j,s)$ is good, and by
-\eqref{eq:CA} and $|P-x_{a_j}|\le e^{2\mu}\eps\le\delta_1\eps$ (Lemma~\ref{lem:chase}(3), (P1); at $t=t_j$, $P=x_{a_j}$): $\rho_s\ge c(a_j,s;t)-|P-x_{a_j}|\ge c_A\min(w,K_RR)-\delta_1\eps$. Put
+\eqref{eq:CA} and $|P-x_{a_j}|\le e^{2\mu}\eps\le\delta_1\eps$ (Lemma~\ref{lem:chase}(3), (P1); at $t=t_j$, $P=x_{a_j}$):
+$\rho_s\ge c(a_j,s;t)-|P-x_{a_j}|\ge c_A\min(w,K_RR)-\delta_1\eps$; here $c(a_j,s;t)\ge c(a_j,s;\ttd)$ (Lemma~\ref{lem:sep}(c)). Put
 $y:=\min(w,K_RR)$. If $c_Ay-\delta_1\eps\ge y/c_6$ we are done; otherwise, as $c_A-1/c_6=c_A\delta_1/(1+\delta_1)$,
-$y\,c_A\delta_1/(1+\delta_1)<\delta_1\eps$, i.e.\ $y<c_6\eps$.
+$y\,c_A\delta_1/(1+\delta_1)<\delta_1\eps$, i.e.\ $y<c_6\eps$. (iii) As in (i), $\rho_s\ge c(a_j,s;\ttd)-\delta_1\eps$, and
+$c(a_j,s;\ttd)\ge\Cfl(\min(w,a_j+U-s))$ by (S1G) for the pair $(a_j,s)$.
 \end{proof}
 
 \begin{lemma}[Tilts]\label{lem:tilt}
 Let $t\le T_{\mathrm{def}}$ lie in leg $j+1$, let $I=(a,b)$ be a pair of the family of leg $j+1$, and suppose that \textup{(J1)},
 \textup{(J2)} hold at time $t$ for every pair of the family of leg $j+1$ contained in $[a_j,\max(b,a_{j+1})]$. Then:
 \begin{enumerate}
-\item[(i)] for pairs $J\subset I$ of the family of leg $j+1$, $|e_J-e_I|\le\CTL M\lambda_I^\gamma=\CTL m(\lambda_I/R)^\gamma$, with
-$C_A$ in place of $\CTL$ if $J$, $I$ have the same left end and $C_B$ if they have the same right end;
+\item[(o)] for pairs $J\subset I$ of the family of leg $j+1$ with $\lambda_I\le r\lambda_J$ and $1\le r<4c_A/m^2$:
+$|e_J-e_I|\le\omega_r\mathsf s(r)M\lambda_I^\gamma$;
+\item[(i)] for pairs $J\subset I$ of the family of leg $j+1$: $|e_J-e_I|\le\CT M\lambda_I^\gamma=\CT m(\lambda_I/R)^\gamma$;
 \item[(ii)] for $a<s\le b$ and $\lambda_s:=\max(s-a,\eps/2)$,
 \begin{equation}\label{eq:Emu}
-\textup{(E-$\mu$)}\qquad\int_a^s|T-e_{ab}|^2ds\le\CmuA M^2\lambda^{2\gamma}\lambda_s,\qquad\int_a^s|T-e_{ab}|\,ds\le\ConeA M\lambda^\gamma\lambda_s.
+\textup{(E-$\mu$)}\quad\int_a^s|T-e_{ab}|^2ds\le M^2\lambda^{2\gamma}\min(\Cmu\lambda_s,\lambda),\quad
+\int_a^s|T-e_{ab}|\,ds\le M\lambda^\gamma\bigl(\kappa\lambda_s\min(\Cmu\lambda_s,\lambda)\bigr)^{1/2}.
 \end{equation}
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
 All pairs below lie in $[a_j,\max(b,a_{j+1})]$ and in the family of leg $j+1$, so (J1), (J2) and \eqref{eq:CA} apply to them.
-\emph{One step.} Let $J_1\subset I_1$ be such pairs with $\lambda_{I_1}\le r\lambda_{J_1}$, $r\ge1$. By Lemma~\ref{lem:static}(d),
-(J1), (J2), \eqref{eq:CA} and $M\lambda_{J_1}^\gamma\le MR^\gamma=m$,
-\[
-|e_{J_1}-e_{I_1}|\le\frac{(\kappa\lambda_{J_1})^{1/2}M(r\lambda_{J_1})^{1/2+\gamma}+\frac12M^2\lambda_{J_1}^{1+2\gamma}}{c_A\lambda_{J_1}}
-\le c_t(r)M\lambda_{J_1}^\gamma .
-\]
-\emph{Chains.} Let $J=(a',b')\subset I$. (A) Put $b_k:=\min(a'+\qc^k\lambda_J,b)$, $k=0,\dots,k_1$, $b_{k_1}=b$. The pairs $(a',b_k)$
-have the first point $a'$ of $J$ and label lengths in $[\lambda_J,\lambda_I]$, and $\lambda(a',b_{k+1})\le\qc\lambda(a',b_k)$. Summing
-the one-step bounds from the largest scale down, $|e_J-e_{a'b}|\le c_t(\qc)M\lambda_I^\gamma\sum_{i\ge0}\qc^{-i\gamma}=C_AM\lambda_I^\gamma$.
-(B) If $a'>a$, let $a^\circ:=a$ if $a\ge a_{j+1}$, and $a^\circ:=a_{j+1}$ if $a=a_j$ (then $a'\ge a_{j+1}$); the pairs
-$(\max(b-\qc^k\lambda(a',b),a^\circ),b)$ have first points $\ge a^\circ$, and the same sum gives $|e_{a'b}-e_{a^\circ b}|\le
-C_AM\lambda_I^\gamma$. (C) If $a=a_j\ne a^\circ$: $\lambda(a_{j+1},b)\ge\lambda(a',b)\ge\eps/2$ and $\lambda(a_j,b)\le\lambda(a_{j+1},b)+\eps
-\le3\lambda(a_{j+1},b)$, so one step gives $|e_{a^\circ b}-e_{ab}|\le c_t(3)M\lambda_I^\gamma$. If $a'=a$, (A) alone is needed; if
-$b'=b$, (B) and (C); in general all three: this is (i). (ii) Let $J:=(a,a+\lambda_s)$, a pair of the family with left end $a$. By
-Lemma~\ref{lem:static}(b) with $\uhat=e_{ab}$, (J2), (J1) and (i),
-$\int_J|T-e_{ab}|^2=N(J)^2+c(J)|e_J-e_{ab}|^2\le M^2\lambda_s^{1+2\gamma}+\kappa\lambda_sC_A^2M^2\lambda^{2\gamma}\le\CmuA M^2\lambda^{2\gamma}\lambda_s$,
-and by Cauchy--Schwarz $\int_J|T-e_{ab}|\le(\kappa\lambda_s\cdot\CmuA M^2\lambda^{2\gamma}\lambda_s)^{1/2}=\ConeA M\lambda^\gamma\lambda_s$.
+(o) Let $J\ne I$ (otherwise there is nothing to prove). By Lemma~\ref{lem:split}(i), $Z^2\le N(I)^2f(l(J))$ with
+$f(\ell):=\ell(1-\ell/l(I))$; $f$ increases in $l(I)$, and $l(I)\le\kappa\lambda_I$, $l(J)\le\kappa\lambda_J$ by (J1). So
+$f(l(J))\le\max_{0<\ell\le\kappa\lambda_J}\ell(1-\ell/(\kappa\lambda_I))=\kappa\lambda_J\tilde\rho(\rho)$, where $\rho:=\lambda_I/\lambda_J$
+and $\tilde\rho(\rho)=\rho/4$ for $\rho\le2$, $\tilde\rho(\rho)=1-1/\rho$ for $\rho\ge2$. By (J2) and \eqref{eq:CA} ($c(J)\ge c_A\lambda_J$),
+$Z/c(J)\le M\lambda_I^{1/2+\gamma}(\kappa\lambda_J\tilde\rho)^{1/2}/(c_A\lambda_J)=(\kappa^{1/2}/c_A)(\rho\tilde\rho(\rho))^{1/2}M\lambda_I^\gamma
+=\mathsf s(\rho)M\lambda_I^\gamma\le\mathsf s(r)M\lambda_I^\gamma$, since $\rho\tilde\rho(\rho)$ is $\rho^2/4$ resp.\ $\rho-1$, $\mathsf s$ is increasing and
+$\rho\le r$. Further $N(I)^2/(4c(J))\le M^2\lambda_I^{1+2\gamma}/(4c_A\lambda_J)\le m^2r/(4c_A)<1$ ($M\lambda_I^\gamma\le MR^\gamma=m$),
+and Lemma~\ref{lem:split}(ii) gives the claim.
+
+(i) Let $J=(a',b')\subset I$, $q:=\qc$, $\lambda_k:=\lambda_Iq^{-k}$ and $K:=\min\{k\ge1:\lambda_k\le\lambda_J\}$.
+\emph{Case A: $a\ge a_{j+1}$, or $a'=a$, or $\lambda_I(1-1/q)\ge\eps$.} For $0\le k\le K-1$ put $\alpha_k:=\min(a',b-\lambda_k)$,
+$I_k:=(\alpha_k,\alpha_k+\lambda_k)$, and $I_K:=J$. (1) $J\subset I_k\subset I$: $\alpha_k\ge\min(a',b-\lambda_I)=a$ and $\alpha_k\le a'$; the
+right end is $\min(a'+\lambda_k,b)\le b$, and it is $\ge b'$ as $\lambda_k>\lambda_J$ for $k\le K-1$. (2) $\alpha_k$ is non-decreasing in $k$
+and the right end non-increasing, so $I_{k+1}\subset I_k$. (3) Each $I_k$ is in the family: its length $\lambda_k\in(\lambda_J,\lambda_I]
+\subset[\eps/2,R]$, and its first point is $a'$ (the first point of the family pair $J$) or $b-\lambda_k<a'$; in the second case $k\ge1$
+($I_0=I$) and $b-\lambda_k\ge a+\lambda_I(1-1/q)$, which is $\ge a\ge a_{j+1}$ if $a\ge a_{j+1}$, and $\ge a_j+\eps\ge a_{j+1}$ if
+$\lambda_I(1-1/q)\ge\eps$ ($a_{j+1}-a_j\le l_{t_j}(a_j,a_{j+1})\le\eps$, as $w\ge1$); if $a'=a$, then $\alpha_k=a$ for all $k$.
+(4) $\lambda(I_k)/\lambda(I_{k+1})=q$ for $k+1\le K-1$, and $\lambda(I_{K-1})/\lambda_J\in[1,q]$. By (o) with $r=q$,
+$|e_{I_{k+1}}-e_{I_k}|\le\omega_q\mathsf s(q)M\lambda_k^\gamma$ ($q\le r_*<4c_A/m^2$ by (P8)), and summing,
+$|e_J-e_I|\le\omega_q\mathsf s(q)M\lambda_I^\gamma\sum_{k=0}^{K-1}q^{-k\gamma}<\omega_{r_*}\sigma_q\mathsf s(q)M\lambda_I^\gamma\le\CT M\lambda_I^\gamma$.
+\emph{Case B: $a=a_j$, $a'>a$ and $\lambda_I(1-1/q)<\eps$.} Then $\lambda_I/\lambda_J<(\eps q/(q-1))/(\eps/2)=2q/(q-1)\le r_*$, and
+(o) with $r=2q/(q-1)$ gives $|e_J-e_I|\le\omega_{r_*}\mathsf s(2q/(q-1))M\lambda_I^\gamma\le\CT M\lambda_I^\gamma$. The two cases are exhaustive.
+
+(ii) $J:=(a,a+\lambda_s)$ is a pair of the family (first point $a$, length in $[\eps/2,\lambda]$) contained in $I$. By
+Lemma~\ref{lem:static}(b) with $\uhat=e:=e_{ab}$, (J2), (J1) and (i),
+$\int_a^s|T-e|^2\le\int_J|T-e|^2=N(J)^2+c(J)|e_J-e|^2\le M^2\lambda_s^{1+2\gamma}+\kappa\lambda_s\CT^2M^2\lambda^{2\gamma}\le\Cmu M^2\lambda^{2\gamma}\lambda_s$;
+also $\int_a^s|T-e|^2\le\int_I|T-e|^2=N(I)^2\le M^2\lambda^{1+2\gamma}$. The second bound follows by Cauchy--Schwarz, as
+$l(a,s)\le l(J)\le\kappa\lambda_s$.
 \end{proof}
 
 \begin{lemma}[Locality]\label{lem:local}
@@ -293,8 +334,9 @@ A pair with first point $a_{\jW-1}<\We$ and $\lambda\le R$ has $U-b>U-\We-R\ge\W
 \noindent\textbf{Locality principle.} The proofs of Propositions~\ref{prop:far}--\ref{prop:length} for a pair $(a,b)\in\FamS(t)$
 use the family bounds (J1), (J2) only for the pairs of Lemma~\ref{lem:local}(i), (iii) (at the times $t'$ allowed there),
 \eqref{eq:CA} only for these pairs and for the pairs $(a_{j(t')},s)$, $s\in[a,b]$, of Lemma~\ref{lem:local}(ii) (through
-Lemma~\ref{lem:dist}), and, beyond the bounds of the pairs of Lemma~\ref{lem:local}(i) (which include $(a,b)$ itself), only the
-start data of $(a,b)$ at $t_\circ$. Each invocation in Section~\ref{sec:farnear} is of this kind.
+Lemma~\ref{lem:dist}), the hypothesis (S1G) at $\ttd$ only for these pairs $(a_{j(t')},s)$ (through Lemma~\ref{lem:dist}(iii)),
+and, beyond the bounds of the pairs of Lemma~\ref{lem:local}(i) (which include $(a,b)$ itself), only the start data of $(a,b)$ at
+$t_\circ$. Each invocation in Section~\ref{sec:farnear} is of this kind.
 
 \begin{lemma}[Continuity scheme]\label{lem:cont}
 Consider the statement, for a time $t$:

@@ -21,7 +21,7 @@ runs to the circle of radius $d$ and around it sees every direction when $v\less
 $v$, and a time, that do not degenerate as $\eps\to0$.
 
 \begin{theorem}\label{thm:main}
-Let $\vz:=6\cdot10^{-5}$, $T_0:=10.13$ and $\epsS:=4\cdot10^{-11}$. For every $d>0$, every $\eps\in(0,d)$ and every
+Let $\vz:=5.8\cdot10^{-3}$, $T_0:=13.1$ and $\epsS:=4\cdot10^{-11}$. For every $d>0$, every $\eps\in(0,d)$ and every
 $v\in(0,\vz]$ the path $H=H_{v,\eps,d}$ --- design~T \textup{(Definition~\ref{def:T})} followed by the greedy chase
 \textup{(Definition~\ref{def:chase})} on the working front of Theorem~\ref{thm:touchdown}, both for the vision radius
 $\eps':=\min(\eps,\epsS d)$ and scaled to distance $d$ --- satisfies $H(0)=0$, $|H'|\le1$ a.e., depends only on $(v,\eps,d)$, and
@@ -29,8 +29,8 @@ for every $\alpha\in[0,2\pi)$ there is $t\le T_0d$ with $|S_\alpha(t)-H(t)|\le\e
 \end{theorem}
 
 \begin{corollary}\label{cor:exact}
-Let $d>0$ and $v\in(0,6\cdot10^{-5}]$. There is a path $H$ with $H(0)=0$, $|H'|\le1$ a.e., such that for every
-$\alpha\in[0,2\pi)$ there is $t\le10.13\,d$ with $S_\alpha(t)=H(t)$.
+Let $d>0$ and $v\in(0,5.8\cdot10^{-3}]$. There is a path $H$ with $H(0)=0$, $|H'|\le1$ a.e., such that for every
+$\alpha\in[0,2\pi)$ there is $t\le13.1\,d$ with $S_\alpha(t)=H(t)$.
 \end{corollary}
 
 Both are proved in Section~\ref{sec:proof}; the corollary follows from the theorem and the compactness Lemma~\ref{lem:compact},
@@ -38,9 +38,10 @@ because the time bound of Theorem~\ref{thm:main} is uniform in $\eps$.
 
 \begin{remark}\label{rem:numerics}
 The parameters of Appendix~\ref{app:const} were found by numerical optimisation; the script \texttt{verify\_constants.py}
-checks every side condition in $50$-digit arithmetic. The method as it stands cannot reach much beyond $v\approx10^{-4}$: the
-near-pair estimate (Proposition~\ref{prop:near}) is the bottleneck. Simulations suggest that the same path works for much
-larger $v$.
+checks every side condition in $50$-digit arithmetic; the near-pair constant $D'$ (Definition~\ref{def:Dprime}), a supremum
+over a two-parameter family, is bounded there by an evaluation in outward-rounded arithmetic. At the chosen parameters several
+side conditions are nearly tight at once (Table~\ref{tab:side}), so the method as it stands does not reach much beyond the
+stated $\vz$. Simulations suggest that the same path works for much larger $v$.
 \end{remark}
 
 \paragraph{Outline of the proof.} We take $d=1$. Inside the vision disc the field $x/|x|$ of \eqref{eq:snitch} is singular, so
@@ -60,7 +61,8 @@ multiple of $\lambda^{1+2\gamma}$, with $\gamma>\frac12$, and chords are compara
 $l\le\kappa\lambda$ and the excess bound $N=(2E)^{1/2}\le M\lambda^{1/2+\gamma}$ persist along the whole chase, every
 leg advances the label by at least $\eps/\kappa$, and the chase ends after time $\kappa U/(1-v)$, where $U$ is the length of
 the front. Pairs far ahead of the pursuer are controlled by a Duhamel inequality (Lemma~\ref{lem:duhamel}), pairs near him by
-integrating the excess identity over the legs (Section~\ref{sec:farnear}). No constant depends on $\eps$.
+integrating the excess identity over the legs, with the pursuer's position averaged along each leg (Section~\ref{sec:farnear}).
+No constant depends on $\eps$.
 
 The start data come from \emph{design~T} (Definition~\ref{def:T}). The pursuer first runs straight through the set of possible
 positions, catching direction $0$ and seeing a thin sector around it; he then turns and runs along a straight line that
@@ -69,7 +71,7 @@ motion of the candidates has two exact integrals (Proposition~\ref{prop:runs}), 
 transport the tangent and the curvature of the front exactly (Lemma~\ref{lem:transport}). This yields the front at touch-down
 explicitly enough (Theorem~\ref{thm:touchdown}): it is a $C^1$ curve of bounded length that starts at the pursuer, is
 flat at \emph{both} ends with tangent close to the run-2 heading, has excess $N\le c_N\lambda^{3/2-\muTb}$ on small scales and
-chords bounded below on large ones.
+chords bounded below on large ones (Theorem~\ref{thm:touchdown}, Lemma~\ref{lem:T2star}).
 
 The front ends close to its start: its last point lies a distance at most of order $\eps^{1/2}$ behind the pursuer at $\ttd$. Pairs
 with one point at the beginning of the front and the other near its end do not satisfy the start conditions. They are

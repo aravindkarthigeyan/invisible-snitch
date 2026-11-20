@@ -58,12 +58,12 @@ The assembly (§8) puts it together in one walk. Every pair of points at every t
 
 ## 7. From $\varepsilon > 0$ to exact capture (§2, Cor. 1.2)
 
-For each vision radius $\varepsilon$ there is a path that sees everything by time $T_0 = 10.13$. Take $\varepsilon_N \to 0$. All these paths are 1-Lipschitz on the same interval $[0, T_0]$, so a subsequence converges uniformly to a 1-Lipschitz path $H$. If some direction were never caught exactly by $H$, it would stay a positive distance from $H$, and by continuity also from the nearby paths $H_N$. That contradicts their coming within $\varepsilon_N \to 0$ of it. So $H$ catches every direction exactly.
+For each vision radius $\varepsilon$ there is a path that sees everything by time $T_0 = 13.1$. Take $\varepsilon_N \to 0$. All these paths are 1-Lipschitz on the same interval $[0, T_0]$, so a subsequence converges uniformly to a 1-Lipschitz path $H$. If some direction were never caught exactly by $H$, it would stay a positive distance from $H$, and by continuity also from the nearby paths $H_N$. That contradicts their coming within $\varepsilon_N \to 0$ of it. So $H$ catches every direction exactly.
 
 This step is why the time bound must not depend on $\varepsilon$.
 
 ## 8. The constants (Appendix A)
 
-The proof has many explicit constants: thresholds for "near" and "far", exponents, scales, and the touch-down constants. They must satisfy 201 inequalities. `paper/verify_constants.py` checks every one in 50-digit arithmetic. The largest speed for which all of them hold, with safe rounding, is $v_0 = 6\cdot 10^{-5}$.
+The proof has many explicit constants: thresholds for "near" and "far", exponents, scales, and the touch-down constants. They must satisfy 218 inequalities. `paper/verify_constants.py` checks every one in 50-digit arithmetic. The largest speed for which all of them hold, with safe rounding, is $v_0 = 5.8\cdot 10^{-3}$.
 
-The binding inequalities belong to the near-pair estimate of Prop. 4.3, which is loose: simulations show about $10^5$ times less growth than it allows. With this method $v$ cannot go much beyond about $10^{-4}$. Going further would need a sharper near-pair estimate.
+An earlier version had $v_0 = 6\cdot10^{-5}$, limited by a loose estimate for pairs of points near Harry (constant $D \approx 7300$). Version 2 replaced the tilt lemma by a direct one (one constant $C_T = 2.91$ instead of a chain of three), rebuilt the near-pair estimate ($D \le 64.6$, certified by interval arithmetic), and sharpened the far-pair and length estimates, including a new global chord bound at touch-down. The binding conditions are now spread over the length estimate, the assembly and the thresholds between near and far pairs. The proof framework itself assumes the front is nearly straight at every scale, which fails somewhere around $v \approx 0.05$.

@@ -9,23 +9,23 @@ Theorem~\ref{thm:end}.
 
 Throughout, $d=1$, $0<v\le\vz$, $0<\eps\le\epsS$, and the parameter tuple $\pA$ and the numbers $\We$, $\UA$, $\UE$, $G_f$,
 $\Dbar$, $z_0^{\max}$, $X_*$, $\zeta$, $\etaD$, $\etaN$, $\theta_0$, $\theta_y$, $\kD$ are those of \eqref{eq:asm} in
-Section~\ref{sec:proof}; $\bar\omega$, $c_k$ and $\delta_0=0.149785\,R$ (Table~\ref{tab:asm}) are free parameters. All values are in Appendix~\ref{app:const}. The two
+Section~\ref{sec:proof}; $\bar\omega$, $c_k$ and $\delta_0=0.251113\,R$ (Table~\ref{tab:asm}) are free parameters. All values are in Appendix~\ref{app:const}. The two
 results below use only the inequalities among these numbers collected in (A3), (A4) of Section~\ref{sec:asmconst}.
 
 \subsection{Heading of the first legs}
 
 The \emph{stage-A chase} is a chase (Definition~\ref{def:chase}) on a working front, cut at the label $\UA$, for which the
 conclusions (a)--(d) of Theorem~\ref{thm:end} hold with the tuple $\pA$ and excuse length $0$ on $[\ttd,t_j]$ for the leg starts
-$t_j$ considered: exponent $\gD$, $M_{\mathrm A}=mR^{-\gD}$, tilt constants $C_A^{\mathrm A}$, $C_B^{\mathrm A}$. With excuse
+$t_j$ considered: exponent $\gD$, $M_{\mathrm A}=mR^{-\gD}$, tilt constant $\CT^{\mathrm A}$. With excuse
 length $0$ every pair is good and $\FamS=\Fam$. We use the \emph{heading constants}
 \begin{equation}\label{eq:dep-headconst}
 \begin{gathered}
 \bar\sigma:=\theta_{\mathrm v}G_f^{1-\mub},\qquad\theta_G:=\theta_{\mathrm v}G_f^{1-\mub-\gD},\qquad k_\sigma:=\frac{1+\bar\sigma/2}{1-\bar\sigma^2/2},\qquad
-C_3:=2C_B^{\mathrm A}+C_A^{\mathrm A},\\
+C_3:=2\CT^{\mathrm A},\\
 c_\tau:=\frac1{1-m^2/2},\qquad\rho_*:=c_A(R-\delta_0-\epsS)-\delta_1\epsS,\qquad
 K_{\mathrm{rot}}:=\frac{\kappa}{1-\vz}\Bigl[\frac{2R}{c_A\delta_0}+\frac{\We+\epsS}{\rho_*}\Bigr],\\
-\omega_0:=C_A^{\mathrm A}m\Bigl(\frac{\delta_0}R\Bigr)^{\gD}+k_\sigma\bar\sigma+\vz K_{\mathrm{rot}},\qquad
-\theta_{h1}:=\frac{C_A^{\mathrm A}m}{R^{\gD}}+2^{\gD}k_\sigma\theta_G+\frac{2^{\gD+2}\vz\kappa C_3m}{c_A(1-\vz)R^{\gD}},\\
+\omega_0:=\CT^{\mathrm A}m\Bigl(\frac{\delta_0}R\Bigr)^{\gD}+k_\sigma\bar\sigma+\vz K_{\mathrm{rot}},\qquad
+\theta_{h1}:=\frac{\CT^{\mathrm A}m}{R^{\gD}}+2^{\gD}k_\sigma\theta_G+\frac{2^{\gD+2}\vz\kappa C_3m}{c_A(1-\vz)R^{\gD}},\\
 \vartheta_h:=c_\tau^{\gD}\max\bigl(\theta_{h1},\,\omega_0\delta_0^{-\gD}\bigr).
 \end{gathered}
 \end{equation}
@@ -48,7 +48,7 @@ times of legs $i+1\le j+1$ (its first point is $a_j\ge a_{i+1}$ or is the base, 
 
 \emph{Step 1 (time $t_j$).} $J:=(a_j,a_{j+1})$ has label length in $[\eps/\kappa,\eps]\subset[\eps/2,R]$ (Theorem~\ref{thm:end}(b),
 $\kappa\le2$), so it is a family pair, $J\subset I$ with the same left end, and $e_J(t_j)=\uhat_{j+1}$ since $P(t_j)=x_{a_j}(t_j)$
-(Definition~\ref{def:chase}). By Theorem~\ref{thm:end}(c), $|\uhat_{j+1}-e_I(t_j)|\le C_A^{\mathrm A}m(\lambda_I/R)^{\gD}$.
+(Definition~\ref{def:chase}). By Theorem~\ref{thm:end}(c), $|\uhat_{j+1}-e_I(t_j)|\le\CT^{\mathrm A}m(\lambda_I/R)^{\gD}$.
 
 \emph{Step 2 (time $\ttd$).} Let $\sigma:=\sup_{u\in I}|T(u,\ttd)-\nhat|$. As $b\le G_f$ and $\gD\le1-\mub$,
 $\sigma\le\theta_{\mathrm v}b^{1-\mub}\le\min(\bar\sigma,\theta_Gb^{\gD})$, and $b\le a_j+\Lambda\le2\Lambda$. At $\ttd$ the labels are
@@ -70,7 +70,7 @@ $K_2:=(a_{i+1},b)$, $K_3:=(a_i,a_{i+1})$, $K_4:=(a_i,b)$ and $I$ belong to the f
 $\ge a_{i+1}$, their label lengths are $\ge\eps/\kappa\ge\eps/2$ and $\le W+\lambda_I+\eps\le R$. Here $I\subset K_2\subset K_4$ share
 the right end, $K_1\subset K_2$ and $K_3\subset K_4$ the left end, so by Theorem~\ref{thm:end}(c)
 \[
-|e_I-e_{K_1}|\le|e_I-e_{K_2}|+|e_{K_2}-e_{K_1}|\le(C_B^{\mathrm A}+C_A^{\mathrm A})\kappa_W\le s,\qquad
+|e_I-e_{K_1}|\le|e_I-e_{K_2}|+|e_{K_2}-e_{K_1}|\le2\CT^{\mathrm A}\kappa_W=s,\qquad
 |e_I-\uhat_{i+1}|\le|e_I-e_{K_4}|+|e_{K_4}-e_{K_3}|\le s .
 \]
 Now $r_a=c(K_1)e_{K_1}+\varrho\uhat_{i+1}$ and $r_b=c(K_2)e_{K_2}+\varrho\uhat_{i+1}$ with non-negative coefficients; since
@@ -104,7 +104,7 @@ close case occurs, and with $\psi_\star(s)\le2s$,
 In general, with $\psi_\star\le1$ and $\min(\Lambda,R)/\lambda_I\le R/\delta_0$,
 $|e_I(t_j)-e_I(\ttd)|\le\frac{v\kappa}{1-v}\bigl[\frac{2R}{c_A\delta_0}+\frac{\We+\eps}{\rho_*}\bigr]\le\vz K_{\mathrm{rot}}$.
 
-\emph{Step 4 (sum).} By Steps 1--3, $|\uhat_{j+1}-\nhat|\le C_A^{\mathrm A}m(\lambda_I/R)^{\gD}+k_\sigma\sigma+|e_I(t_j)-e_I(\ttd)|$.
+\emph{Step 4 (sum).} By Steps 1--3, $|\uhat_{j+1}-\nhat|\le\CT^{\mathrm A}m(\lambda_I/R)^{\gD}+k_\sigma\sigma+|e_I(t_j)-e_I(\ttd)|$.
 (i) Always, with $\lambda_I\le\delta_0$ and $\sigma\le\bar\sigma$, this is $\le\omega_0$. (ii) If $\Lambda\le\delta_0$, with
 $\sigma\le\theta_G(2\Lambda)^{\gD}$ and $v\le\vz$ it is $\le\theta_{h1}\Lambda^{\gD}$. (iii) If $\Lambda>\delta_0$, it is
 $\le\omega_0\le\omega_0\delta_0^{-\gD}\Lambda^{\gD}$. So $|\uhat_{j+1}-\nhat|\le\max(\theta_{h1},\omega_0\delta_0^{-\gD})\Lambda^{\gD}$.
@@ -143,7 +143,7 @@ K_w:=\frac{(\Theta_0+\theta_{0y}/\zeta)^2X_*^{2\gD}}{\gD\zeta}+\frac{2\omega_0^2
 \delta_t:=e^{\vz K_w}-1,\\
 \Theta_{\mathrm p}:=\frac{(1+\bar\omega_y+\vz)(1+1/\kD)^{\gD}\Theta_0}{1-\omega_T^2/2}+\theta_{0y}+\frac{\vartheta_h}{1-\etaD},\\
 c_n:=\frac{(1+\delta_t)^{1/2}\kD^{\gD}}{\gD\zeta},\qquad
-c_\beta:=\frac{2(1+\delta_t)^{3/2}\kD^{\gD-1}}{\zeta^3(1-\gD)} .
+c_\beta:=\frac{2(1+\delta_t)^{3/2}\kD^{\gD-1}}{\pi\zeta^3(1-\gD)} .
 \end{gathered}
 \end{equation}
 They are numbers: the actual $v\le\vz$ and $\eps\le\epsS$ enter only through the hypotheses.
@@ -187,10 +187,10 @@ $(X/X_0)^{\etaD}X_0^{1+\gamma}\le XX_0^\gamma$. This gives (ii) and, for $0\le\t
 +\frac{X(\toff')^{\etaD}(\toff'+z_0)^{1-\etaD}\hH(\toff')}{1-\etaD}.
 \end{equation}
 
-\textbf{(iii)} By Lemma~\ref{lem:flow}(b), $T_t=v(AT-(T\cdot AT)T)$, so $\mathfrak p:=1-T\cdot\uhat=\frac12\delta^2$, $\delta:=|T-\uhat|$,
-satisfies $\partial_t\mathfrak p=v[(T-\uhat)\cdot AT-(T\cdot AT)\mathfrak p]\le v(T-\uhat)\cdot AT$. Write $T-\uhat=:\mathbf d$; then
+\textbf{(iii)} By Lemma~\ref{lem:flow}(b), $T_t=v(AT-(T\cdot AT)T)$, so $\mathfrak d:=1-T\cdot\uhat=\frac12\delta^2$, $\delta:=|T-\uhat|$,
+satisfies $\partial_t\mathfrak d=v[(T-\uhat)\cdot AT-(T\cdot AT)\mathfrak d]\le v(T-\uhat)\cdot AT$. Write $T-\uhat=:\mathbf d$; then
 $\mathbf d\cdot AT=\mathbf d\cdot A\mathbf d+\mathbf d\cdot A\uhat$, $\mathbf d\cdot A\mathbf d\le a^*\delta^2$, and $\mathbf d\cdot A\uhat=(\uhat\cdot A\uhat)(\mathbf d\cdot\uhat)+(\uhat^\perp\cdot A\uhat)(\mathbf d\cdot\uhat^\perp)
-\le\delta|q_{\uhat}|$, where $q_{\uhat}:=\uhat^\perp\cdot A\uhat$, since $\mathbf d\cdot\uhat=-\mathfrak p\le0$ and $A\ge0$. By
+\le\delta|q_{\uhat}|$, where $q_{\uhat}:=\uhat^\perp\cdot A\uhat$, since $\mathbf d\cdot\uhat=-\mathfrak d\le0$ and $A\ge0$. By
 Lemma~\ref{lem:field}(iii), $|q_{\uhat}|\le|r_s\times\uhat|/\rho_s^2=|y_s|/\rho_s^2\le|y_s|/(\zeta X)^2$. With
 $\delta_\varpi:=(\delta^2+\varpi^2)^{1/2}$ we get $\delta_\varpi'\le va^*\delta_\varpi+v|q_{\uhat}|$; by variation of constants, (i), and
 $\varpi\to0$,
@@ -233,16 +233,17 @@ N(\toff)\le N(0)+v(1+\delta_t)^{1/2}\frac{\Theta_b}\zeta\lambda^{1/2}\frac{(\til
 \]
 since $\tilde g+\toff_0=\kD\lambda$ if $\toff_0>0$ (if $\toff_0=0$ there is nothing to prove).
 
-\emph{Phase $\toff\ge\toff_0$.} The convex hull of the arc $[a,b]$ lies in $\{x:(x-P)\cdot\uhat\ge\min_sz_s\}$, so by (i), (iv) and
-$\kD\ge4(1+\delta_t)/\zeta$:
-$\rho_m\ge\zeta(\tilde g+\toff)\ge\zeta\kD\lambda\ge4(1+\delta_t)\lambda\ge4l$, and $\rho_m\ge\zeta z_0\ge\eps$. Lemma~\ref{lem:duhamel}
-with $K=4$ applies on $[\toff_0,\toff]$, with $\alpha\le\aD(4)v/\rho_m\le\etaN/(\tilde g+\toff')$ and $\beta=2vl^{3/2}|p_a|/\rho_m^3$.
+\emph{Phase $\toff\ge\toff_0$.} The arc $[a,b]$ lies in $\{x:(x-P)\cdot\uhat\ge\min_sz_s\}$, so by (i), (iv) and
+$\kD\ge4(1+\delta_t)/\zeta$ its arc distance satisfies
+$\rhoarc\ge\zeta(\tilde g+\toff)\ge\zeta\kD\lambda\ge4(1+\delta_t)\lambda\ge4l$, and $\rhoarc\ge\zeta z_0\ge\eps$. Lemma~\ref{lem:duhamel}
+with $K=4$ applies on $[\toff_0,\toff]$, with $\alpha\le\aD(4)v/\rhoarc\le\etaN/(\tilde g+\toff')$ and
+$\beta=2vl^{3/2}|p_a|/(\pi\rhoarc^3)$.
 Here $p_a=r_a\times e_{ab}=z_a(\uhat\times e_{ab})+y_a(\uhat^\perp\times e_{ab})$, so $|p_a|\le\rho_a|\uhat\times e_{ab}|+|y_a|$, and:
 $|\uhat\times e_{ab}|\le(l/c)\sup_{[a,b]}\delta\le\Theta_0X_b^\gamma/(1-\omega_T^2/2)$ with
 $X_b=\tilde g+\lambda+\toff'\le(1+1/\kD)(\tilde g+\toff')$; $\rho_a(\toff')\le a+z_0+|y_0|+(1+v)\toff'\le(1+\bar\omega_y+v)(\tilde g+\toff')$,
 as $|y_0|\le\theta_yz_0^{1+\gamma}\le\bar\omega_yz_0$; and $|y_a|\le(\tilde g+\toff')^{1+\gamma}(\theta_{0y}+\vartheta_h/(1-\etaD))$ by (ii)
 ($X_a=\tilde g+\toff'$, $\hH\le\vartheta_h(\tilde g+\toff')^\gamma$). Hence $|p_a|\le\Theta_{\mathrm p}(\tilde g+\toff')^{1+\gamma}$ and
-$\beta\le2v(1+\delta_t)^{3/2}\Theta_{\mathrm p}\lambda^{3/2}(\tilde g+\toff')^{\gamma-2}/\zeta^3$. As
+$\beta\le2v(1+\delta_t)^{3/2}\Theta_{\mathrm p}\lambda^{3/2}(\tilde g+\toff')^{\gamma-2}/(\pi\zeta^3)$. As
 $\int_{\toff_0}^\infty(\tilde g+\toff')^{\gamma-2}d\toff'\le(\kD\lambda)^{\gamma-1}/(1-\gamma)$, Lemma~\ref{lem:duhamel} gives
 \[
 N(\toff)\le\Bigl(\frac{\tilde g+\toff}{\tilde g+\toff_0}\Bigr)^{\etaN}\bigl[N(\toff_0)+vc_\beta\Theta_{\mathrm p}\lambda^{1/2+\gamma}\bigr],

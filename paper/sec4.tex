@@ -16,17 +16,13 @@ $[t_\circ,t]$, constant on each leg, and $g(t_\circ)=a$ for body pairs, $g(t_\ci
 Lemma~\ref{lem:local}, at every $\tau\in[t_\circ,t]$: Lemma~\ref{lem:dist} applies at every $s\in[a,b]$ with the base $\beta(\tau)$;
 the pairs of the family of the leg of $\tau$ contained in $[\beta(\tau),\max(b,\beta^+(\tau))]$ are admissible, so they satisfy (J1),
 (J2), and Lemma~\ref{lem:tilt} applies to them; by Lemma~\ref{lem:chase}(1), $P(\tau)$ lies on the segment
-$[x_{\beta(\tau)},x_{\beta^+(\tau)}]$. Finally $\sigma_s:=s-a$, $w_s:=s-\beta(\tau)=g(\tau)+\sigma_s$ and $D(s):=\max(\rho_s,\eps)$.
+$[x_{\beta(\tau)},x_{\beta^+(\tau)}]$. Finally $\sigma_s:=s-a$, $w_s:=s-\beta(\tau)=g(\tau)+\sigma_s$, $D(s):=\max(\rho_s,\eps)$, and
+$\rhoarc:=\min_{s\in[a,b]}\rho_s$ is the arc distance of Lemma~\ref{lem:excess}(v).
 
-\begin{lemma}[Two integrals]\label{lem:int}
-For $\lambda>0$ and $z>0$ let
-\[
-h_1(z):=\int_z^\infty\min(\lambda,y)\,y^{-2}dy,\qquad h_3(z):=\int_z^\infty\min(\lambda,y)\,y^{-3}dy .
-\]
-Then
-$h_1(z)=1+\log(\lambda/z)$ for $z\le\lambda$, $h_1(z)=\lambda/z$ for $z>\lambda$; $h_3(z)=1/z-1/(2\lambda)$ for $z\le\lambda$,
-$h_3(z)=\lambda/(2z^2)$ for $z>\lambda$. Both are non-increasing; $z\,h_1(z)\le\lambda$; $\int_0^{K\lambda}h_1=\lambda(2+\log K)$ for
-$K\ge1$; and $z\,h_3(z)=G_3(z/\lambda)$ with $G_3(x)=1-x/2$ for $x\le1$, $G_3(x)=1/(2x)$ for $x>1$.
+\begin{lemma}[An integral]\label{lem:int}
+For $\lambda>0$ and $z>0$ let $h_1(z):=\int_z^\infty\min(\lambda,y)\,y^{-2}dy$. Then $h_1(z)=1+\log(\lambda/z)$ for $z\le\lambda$ and
+$h_1(z)=\lambda/z$ for $z>\lambda$; $h_1$ is non-increasing, $z\,h_1(z)\le\lambda$, and $\int_0^{K\lambda}h_1=\lambda(2+\log K)$ for
+$K\ge1$.
 \end{lemma}
 
 \begin{proof}
@@ -34,54 +30,78 @@ Direct integration. For $x=z/\lambda\le1$, $z\,h_1(z)=\lambda x(1-\log x)\le\lam
 $z>\lambda$, $z\,h_1(z)=\lambda$. Finally $\int_0^\lambda(1+\log(\lambda/z))\,dz=2\lambda$ and $\int_\lambda^{K\lambda}\lambda z^{-1}dz=\lambda\log K$.
 \end{proof}
 
+\subsection{Far pairs}
+
 \begin{proposition}[Far pairs]\label{prop:far}
 If $(a,b)$ is far at $t$, it is far on $[t_\circ,t]$, and $N(a,b;t)\le\fF M\lambda^{1/2+\gamma}$. Moreover, at every $\tau\in[t_\circ,t]$,
-with $g=g(\tau)$: $\rho_m\ge c_\rho g$ if $g\le K_RR$, $\rho_m\ge c_RR$ if $g>K_RR$, and $|p_a|\le C_pMg^{1+\gamma}$ if $g\le\eta_1R$.
+with $g=g(\tau)$ and $\rhoarc=\rhoarc(\tau)$:
+\begin{enumerate}
+\item[(i)] $\rhoarc\ge c_\rho^*g$ and $\rhoarc\ge K_1l$ if $g\le K_RR$;
+\item[(ii)] $\rhoarc\ge c_\eta g$ if $\eta_1R<g\le K_RR$;
+\item[(iii)] $\rhoarc\ge c_R^*R$, $\rhoarc\ge K_2l$ and $\rhoarc\ge\rho_{\Cfl}(\min(g,U-\lambda-g))$ if $g>K_RR$;
+\item[(iv)] $|p_a|\le\hat C(g/\lambda)Mg^{1+\gamma}$ if $g\le\eta_1R$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
 The gap is non-increasing, so the pair is far on $[t_\circ,t]$. Fix $\tau\in[t_\circ,t]$, $g=g(\tau)\ge K_f\lambda\ge K_f\eps/2>\eps$; so
 $a>\beta^+(\tau)$.
 
-\emph{Distance.} The arc has length $l\le\kappa\lambda$ (J1), so its convex hull lies in the ball of radius $l$ about $x_a$, and by
-Lemma~\ref{lem:dist} at $s=a$: $\rho_m\ge\rho_a-l\ge c_A\min(g,K_RR)-\delta_1\eps-\kappa\lambda$. If $g\le K_RR$, then with $\eps\le2\lambda$
-and $\lambda\le g/K_f$: $\rho_m\ge c_Ag-(2\delta_1+\kappa)\lambda\ge c_\rho g\ge c_\rho K_f\lambda$. If $g>K_RR$, then with
-$\eps\le R/\Keps$ and $\lambda\le R$: $\rho_m\ge c_AK_RR-\delta_1R/\Keps-\kappa R=c_RR\ge c_R\lambda$. In both cases $\rho_m\ge\eps$, by
-(P2) ($c_\rho K_f\eps/2\ge\eps$, resp.\ $c_RR\ge c_R\Keps\eps\ge\eps$), and $\rho_m\ge K_1l$, resp.\ $\rho_m\ge K_2l$. So
-Lemma~\ref{lem:duhamel} applies on $[t_\circ,t]$, with $\alpha\le\aD(K_1)v/(c_\rho g)$ while $g\le K_RR$ and $\alpha\le\aD(K_2)v/(c_RR)$ while
-$g>K_RR$.
+\emph{Distance.} For $s\in[a,b]$, $w_s\ge g$, and Lemma~\ref{lem:dist}(i) gives $\rho_s\ge c_A\min(g,K_RR)-\delta_1\eps$. If
+$g\le K_RR$, then with $\eps\le2\lambda\le2g/K_f$, $\rhoarc\ge c_Ag-\delta_1\eps\ge c_\rho^*g$; if moreover $g>\eta_1R$, then with
+$\eps\le R/\Keps<g/(\Keps\eta_1)$, $\rhoarc\ge c_\eta g$. If $g>K_RR$, then $\rhoarc\ge c_AK_RR-\delta_1R/\Keps=c_R^*R$; and
+Lemma~\ref{lem:dist}(iii) at each $s\in[a,b]$, where $w_s\ge g$ and $\beta+U-s\ge U-\lambda-g\ge0$, gives
+$\rhoarc\ge\rho_{\Cfl}(\min(g,U-\lambda-g))$, as $\Cfl$ is non-decreasing and $\eps\le R/\Keps$. By (P2), $c_\rho^*g\ge c_\rho^*K_f\eps/2\ge\eps$
+and $c_R^*R\ge c_R^*\Keps\eps\ge\eps$, so $\rhoarc\ge\eps$; by (J1), $c_\rho^*g\ge c_\rho^*K_f\lambda\ge K_1l$ and $c_R^*R\ge c_R^*\lambda\ge K_2l$.
+So Lemma~\ref{lem:duhamel} applies on $[t_\circ,t]$ ($c(a,b;t_\circ)>0$ by \eqref{eq:CA}), with $\alpha\le\aD(K_1)v/(c_\rho^*g)$ while
+$g\le K_RR$ and $\alpha\le\aD(K_2)v/\rhoarc$ while $g>K_RR$.
 
-\emph{Amplification.} For $t_\circ\le\tau\le t$:
-$\exp\int_\tau^t\alpha\le A_0\bigl(\min(g(\tau),K_RR)/\hat g\bigr)^\nu$. Indeed, the times with $g>K_RR$ form an initial segment of
-length $\le T_B=\chig U$ (Lemma~\ref{lem:legs}(iv)), on which $\int\alpha\le\aD(K_2)v\chig U/(c_RR)$. On the times of $[\tau,t]$ with
-$g\le K_RR$ (present only if $g(t)\le K_RR$), Lemma~\ref{lem:gapint}(i) with $h(y)=y^{-1}\mathbf 1\{y\le\min(g(\tau),K_RR)\}$ and
-$g_{\min}=g(t)\ge K_f\eps/2$ gives
+\emph{The regime $g>K_RR$.} Let $\mathcal T_3:=\{\tau\in[t_\circ,t]:g(\tau)>K_RR\}$. We claim
+$\int_{\mathcal T_3}\rhoarc^{-k}d\tau\le J_k(U_0)$ for $k=1,2$. First entry: $\mathcal T_3$ is an initial segment of $[t_\circ,t]$, of
+length at most $T_B=\chig U\le\chig U_0$ (Lemma~\ref{lem:legs}(iv)), and $\rhoarc\ge c_R^*R$ there. Second entry: put $Y:=U-\lambda$
+and $\rho_{\Cfl}(y):=\rho_{\Cfl}(0)$ for $y<0$. On $\mathcal T_3$, $g\le a\le Y$ and $\rhoarc^{-k}\le H(g):=\rho_{\Cfl}(\min(g,Y-g))^{-k}$;
+$H$ is non-increasing on $(0,Y/2]$ and non-decreasing on $[Y/2,\infty)$, and $H\le(c_R^*R)^{-k}$. Lemma~\ref{lem:gapint}(iv) with
+$g_0:=K_RR$, $\eps\le R/\Keps$, and the substitution $y=Y-g$ on $[Y/2,Y]$ give
+$\int_{\mathcal T_3}\rhoarc^{-k}\le2\dL R(c_R^*R)^{-k}/\Keps+\chig\bigl[\int_{K_RR}^{\max(K_RR,Y/2)}\rho_{\Cfl}^{-k}+\int_0^{Y/2}\rho_{\Cfl}^{-k}\bigr]$,
+and $Y/2\le U_0/2$.
+
+\emph{Amplification.} For $t_\circ\le\tau\le t$: $\exp\int_\tau^t\alpha\le A_0\bigl(\min(g(\tau),K_RR)/\hat g\bigr)^\nu$. Indeed, the times
+of $\mathcal T_3$ contribute at most $\aD(K_2)vJ_1(U_0)$, by the claim. On the times of $[\tau,t]$ with $g\le K_RR$ (present only if
+$g(t)\le K_RR$), Lemma~\ref{lem:gapint}(i) with $h(y)=y^{-1}\mathbf 1\{y\le\min(g(\tau),K_RR)\}$ and $g_{\min}=g(t)\ge K_f\eps/2$ gives
 \[
-\int\alpha\le\frac{\aD(K_1)v}{c_\rho}\Bigl[\frac{\dL\eps}{g(t)}+\chig\log\frac{\min(g(\tau),K_RR)}{g(t)}\Bigr]
-\le\frac{2\aD(K_1)\dL v}{c_\rho K_f}+\camp v\log\frac{\min(g(\tau),K_RR)}{g(t)} .
+\int\alpha\le\frac{\aD(K_1)v}{c_\rho^*}\Bigl[\frac{\dL\eps}{g(t)}+\chig\log\frac{\min(g(\tau),K_RR)}{g(t)}\Bigr]
+\le\frac{2\aD(K_1)\dL v}{c_\rho^*K_f}+\camp v\log\frac{\min(g(\tau),K_RR)}{g(t)} .
 \]
-As $v\le\vz$ and $U\le U_0$, (P4) and (P3) (the ratio is $\ge1$) give the claim.
+As $v\le\vz$, $U\le U_0$ and $J_1$ is non-decreasing in $U_0$, (P4) and (P3) (the ratio is $\ge1$) give the claim.
 
-\emph{Forcing} $\beta_{\mathrm f}:=2v\,l^{3/2}|p_a|/\rho_m^3$, where $|p_a|=\dist(P,\text{line}(x_a,x_b))$.
-\emph{Case $g>\eta_1R$.} $|p_a|\le\rho_a\le\rho_m+l\le\rho_m(1+1/K_1)$ if $g\le K_RR$, resp.\ $\le\rho_m(1+1/K_2)$ if
-$g>K_RR$ (as $\rho_m\ge K_1l$, resp.\ $\rho_m\ge K_2l$). So $\beta_{\mathrm f}\le2v\kappa^{3/2}\lambda^{3/2}(1+1/K_1)/(c_\rho g)^2$
-if $\eta_1R<g\le K_RR$, and $\beta_{\mathrm f}\le2v\kappa^{3/2}\lambda^{3/2}(1+1/K_2)/(c_RR)^2$ if $g>K_RR$. The second regime lasts at
-most $\chig U$. For the first, Lemma~\ref{lem:gapint}(i) with $g_0=\eta_1R$, $h(y)=y^{-2}\mathbf 1\{y\le K_RR\}$ gives
+\emph{Forcing} $\beta_{\mathrm f}:=2v\,l^{3/2}|p_a|/(\pi\rhoarc^3)$, where $|p_a|=\dist(P,\text{line}(x_a,x_b))$.
+\emph{Case $g>\eta_1R$.} $|p_a|\le\rho_a\le\rhoarc+l\le\rhoarc(1+1/K)$ with $K=K_1$ if $g\le K_RR$ and $K=K_2$ if $g>K_RR$ (as
+$|x_a-x_s|\le l$ for the minimising $s$). So $\beta_{\mathrm f}\le2v\kappa^{3/2}\lambda^{3/2}(1+1/K)/(\pi\rhoarc^2)$. On $\mathcal T_3$ the
+claim ($k=2$) gives $\int_{\mathcal T_3}\beta_{\mathrm f}\le B_{2U}'v\lambda^{3/2}J_2(U_0)$. On $\{\eta_1R<g\le K_RR\}$, $\rhoarc\ge c_\eta g$, and
+Lemma~\ref{lem:gapint}(i) with $g_0=\eta_1R$, $h(y)=y^{-2}\mathbf 1\{y\le K_RR\}$ gives
 $\int g^{-2}d\tau\le\dL\eps/(\eta_1R)^2+\chig/(\eta_1R)\le(\dL/(\Keps\eta_1^2)+\chig/\eta_1)/R$. Hence
 \[
-\int_{\{g>\eta_1R\}}\beta_{\mathrm f}\,d\tau\le v\lambda^{3/2}\bigl[B_{2U}\chig U/R^2+B_{2\eta}/R\bigr].
+\int_{\{g>\eta_1R\}}\beta_{\mathrm f}\,d\tau\le v\lambda^{3/2}\bigl[B_{2U}'J_2(U_0)+B_{2\eta}^*/R\bigr].
 \]
-\emph{Case $g\le\eta_1R$.} As $P$ lies on $[x_{\beta},x_{\beta^+}]$ and the distance to a line is convex,
-\[
-|p_a|\le\max_{a'\in\{\beta,\beta^+\}}c(a',a)|e_{a'a}\times e|\le\max_{a'}c(a',a)\bigl(|e_{a'a}-e_{a'b}|+|e_{a'b}-e|\bigr).
-\]
-The pairs
-$(a',a)$, $(a',b)$, $(a,b)$ lie in $[\beta,b]$ and belong to the family of the leg: their first points are $a'$ or $a$;
-$\lambda(a',a)\ge g-\eps\ge(K_f-2)\lambda\ge\eps/2$; $\lambda(a',b)\le g+\lambda\le\eta_1R(1+1/K_f)\le R$ by (P0). Since
-$\lambda(a',b)/\lambda(a',a)\le1+1/(K_f-2)=r_f$, the one-step bound of Lemma~\ref{lem:tilt} gives $|e_{a'a}-e_{a'b}|\le c_t(r_f)Mg^\gamma$;
-same right end: $|e_{a'b}-e|\le C_BM(g+\lambda)^\gamma\le C_B(1+1/K_f)^\gamma Mg^\gamma$; and $c(a',a)\le\kappa g$. So
-$|p_a|\le C_pMg^{1+\gamma}$, and with $\rho_m\ge c_\rho g$: $\beta_{\mathrm f}\le2v(\kappa\lambda)^{3/2}C_pMg^{1+\gamma}/(c_\rho g)^3
-=B_3vM\lambda^{3/2}g^{\gamma-2}$.
+\emph{Case $g\le\eta_1R$.} As $P$ lies on $[x_\beta,x_{\beta^+}]$ and the distance to a line is convex,
+$|p_a|\le\max_{a'\in\{\beta,\beta^+\}}Y_{a'}$, $Y_{a'}:=|(x_a-x_{a'})\times e|$. Fix $a'$ and put $g':=a-a'\in[g-\eps,g]$,
+$L:=(a',a)$, $I':=(a',b)$, $J:=(a,b)$. These pairs lie in $[\beta,b]$ and belong to the family of the leg: their first points are $a'$
+or $a$; $\lambda(L)=g'\ge g-\eps\ge(K_f-2)\lambda\ge\eps/2$; $\lambda(I')\le g+\lambda\le\eta_1R(1+1/K_f)\le R$ by (P0). So (J1), (J2),
+\eqref{eq:CA} and Lemma~\ref{lem:tilt} apply to them; note $g'+\lambda\le g(1+1/K_f)$ and $\lambda\le g/K_f$. Three bounds:
+\begin{enumerate}
+\item[(1)] By Lemma~\ref{lem:split}(iii) ($J$ shares the right end of $I'$, $\vv_L=x_a-x_{a'}$) and Lemma~\ref{lem:split}(i),
+$Y_{a'}\le Z'+c(L)|e_{I'}-e|$ with $Z':=|\vv_J\times e_{I'}|\le N(I')l(J)^{1/2}\le M(g'+\lambda)^{1/2+\gamma}(\kappa\lambda)^{1/2}$. With
+$|e_{I'}-e|\le\CT M(g'+\lambda)^\gamma$ (Lemma~\ref{lem:tilt}(i)) and $c(L)\le\kappa g'$: $Y_{a'}\le C_p'Mg^{1+\gamma}$.
+\item[(2)] By Lemma~\ref{lem:static}(b) with $\uhat=e$, $Y_{a'}\le\int_{a'}^a|T-e|\le(l(L)V_e(L))^{1/2}$, and
+$V_e(L)\le V_e(I')=N(I')^2+c(I')|e_{I'}-e|^2\le M^2(g+\lambda)^{1+2\gamma}+\kappa(g+\lambda)\CT^2M^2(g+\lambda)^{2\gamma}=\Cmu M^2(g+\lambda)^{1+2\gamma}$;
+with $l(L)\le\kappa g$: $Y_{a'}\le C_p^VMg^{1+\gamma}$.
+\item[(3)] Put $u:=e_{I'}$. As $\vv_J\times e=0$, $Y_{a'}=|\vv_{I'}\times e|=c(I')|u\times e|$, and
+$c(J)\,u\times e=u\times\vv_J=\int_Ju\times(T-u)\,ds$, so $c(J)|u\times e|\le(l(J)V_u(J))^{1/2}\le(\kappa\lambda)^{1/2}N(I')$
+($V_u(J)\le V_u(I')=N(I')^2$). With $c(J)\ge c_A\lambda$, $c(I')\le\kappa(g+\lambda)$, $N(I')\le M(g+\lambda)^{1/2+\gamma}$:
+$Y_{a'}\le(\kappa^{3/2}/c_A)M(g+\lambda)^{3/2+\gamma}\lambda^{-1/2}\le C_{\mathrm{ar}}Mg^{1+\gamma}(g/\lambda)^{1/2}$.
+\end{enumerate}
+This proves (iv), and with $\rhoarc\ge c_\rho^*g$, $l\le\kappa\lambda$:
+$\beta_{\mathrm f}\le\frac{2\kappa^{3/2}}{\pi(c_\rho^*)^3}vM\lambda^{3/2}g^{\gamma-2}\hat C(g/\lambda)$.
 
 \emph{Result.} By Lemma~\ref{lem:duhamel} on $[t_\circ,t]$ and the amplification bound (on $\{g\le\eta_1R\}$, $\min(g(\tau),K_RR)=g(\tau)$
 and $\hat g=g$),
@@ -90,118 +110,261 @@ N(t)\le A_0\Bigl(\frac{\min(g(t_\circ),K_RR)}{\hat g}\Bigr)^{\!\nu}N(t_\circ)+A_
 \int_{\{g>\eta_1R\}}\beta_{\mathrm f}+A_0\int_{\{g\le\eta_1R\}}\Bigl(\frac{g(\tau)}{g}\Bigr)^{\!\nu}\beta_{\mathrm f}(\tau)\,d\tau .
 \]
 \emph{First term.} By (S2) ($g(t_\circ)=a$) resp.\ (TW) ($g(t_\circ)=g_W$), and as $g(t_\circ)\ge g>0$,
-\[
-N(t_\circ)\le s_0M\lambda^{1/2+\gamma}\min\bigl(1,K_f\lambda/\min(g(t_\circ),K_RR)\bigr)^\nu .
-\]
-The weight of $s_0M\lambda^{1/2+\gamma}$ is
+$N(t_\circ)\le s_0M\lambda^{1/2+\gamma}\min\bigl(1,K_f\lambda/\min(g(t_\circ),K_RR)\bigr)^\nu$. The weight of $s_0M\lambda^{1/2+\gamma}$ is
 $(\min(g(t_\circ),K_RR,K_f\lambda)/\hat g)^\nu$, which is $\le(K_f\lambda/g)^\nu\le1$ if $g\le K_RR$ and $\le1$ otherwise. So the term is
 $\le A_0s_0M\lambda^{1/2+\gamma}$.
 \emph{Second term.} $(K_RR/\hat g)^\nu\le(K_R/K_f)^\nu(R/\lambda)^\nu$ (if $g\le K_RR$ use $g\ge K_f\lambda$; otherwise the left side is $1$,
-and $K_R>K_f$, $R\ge\lambda$). As $\gamma+\nu<1$ and $\lambda\le R$, $\lambda^{3/2}(R/\lambda)^\nu=\lambda^{1/2+\gamma}\lambda^{1-\gamma-\nu}R^\nu\le
-\lambda^{1/2+\gamma}R^{1-\gamma}$. With $R^{-\gamma}=M/m$ the term is $\le A_0(K_R/K_f)^\nu(v/m)(B_{2U}\chig U/R+B_{2\eta})M\lambda^{1/2+\gamma}$.
-\emph{Third term} (present only if $g\le\eta_1R$). It is $\le A_0B_3vM\lambda^{3/2}g^{-\nu}\int g(\tau)^{\nu+\gamma-2}d\tau$, and
-Lemma~\ref{lem:gapint}(i) ($h(y)=y^{\nu+\gamma-2}$, $g_{\min}=g$) gives $\int\le\dL\eps g^{\nu+\gamma-2}+\chig g^{\nu+\gamma-1}/(1-\gamma-\nu)$. With
-$g\ge K_f\lambda$, $\eps\le2\lambda$ and $\gamma<1$ the term is
-$\le A_0B_3K_f^{\gamma-1}\bigl(2\dL/K_f+\chig/(1-\gamma-\nu)\bigr)vM\lambda^{1/2+\gamma}$.
-With $v\le\vz$, $U\le U_0$, (P5) gives $N\le\fF M\lambda^{1/2+\gamma}$.
+and $K_R>K_f$, $R\ge\lambda$). As $\gamma+\nu<1$ and $\lambda\le R$, $\lambda^{3/2}(R/\lambda)^\nu\le\lambda^{1/2+\gamma}R^{1-\gamma}$. With
+$R^{-\gamma}=M/m$ the term is $\le A_0(K_R/K_f)^\nu(v/m)\bigl(B_{2U}'RJ_2(U_0)+B_{2\eta}^*\bigr)M\lambda^{1/2+\gamma}$.
+\emph{Third term} (present only if $g\le\eta_1R$). It is $\le A_0\frac{2\kappa^{3/2}}{\pi(c_\rho^*)^3}vM\lambda^{3/2}g^{-\nu}\int h(g(\tau))\,d\tau$
+with $h(y):=y^{\nu+\gamma-2}\hat C(y/\lambda)\mathbf 1\{y\le\eta_1R\}$, which is non-increasing ($y^{\nu+\gamma-2}\hat C(y/\lambda)$ is the
+minimum of multiples of $y^{\nu+\gamma-2}$ and $y^{\nu+\gamma-3/2}$, and $\nu+\gamma<1$). Lemma~\ref{lem:gapint}(i) ($g_{\min}=g$) gives
+$\int h\le\dL\eps h(g)+\chig\int_g^\infty h$. With $y=\lambda x$, $x_0:=g/\lambda\ge K_f$ and $\eps\le2\lambda$,
+\[
+g^{-\nu}\int h\le\lambda^{\gamma-1}\Phi(x_0),\qquad
+\Phi(x_0):=x_0^{-\nu}\Bigl[2\dL x_0^{\nu+\gamma-2}\hat C(x_0)+\chig\int_{x_0}^\infty x^{\nu+\gamma-2}\hat C(x)\,dx\Bigr].
+\]
+$\Phi$ is non-increasing ($x_0^{-\nu}x_0^{\nu+\gamma-2}\hat C(x_0)=x_0^{\gamma-2}\hat C(x_0)$ is, and the second part is a product of two
+non-negative non-increasing functions), so $\Phi(x_0)\le\Phi(K_f)$, and the term is $\le A_0B_3'vM\lambda^{1/2+\gamma}$.
+With $v\le\vz$ and $U\le U_0$, (P5) gives $N\le\fF M\lambda^{1/2+\gamma}$.
+\end{proof}
+
+\subsection{Near pairs}
+
+\begin{definition}[near-pair constant]\label{def:Dprime}
+For $0<\theta\le2$, $\sigma\in[0,1]$, $w\ge0$ and $y\ge0$ let $\ell:=\max(y,\theta/2)$, $\lambda_\sigma:=\max(\sigma,\theta/2)$,
+$\dL':=3\dL-2$, and
+\begin{gather*}
+\varphi_\theta(w):=\max(\theta,\,c_Aw-\delta_1\theta),\qquad\bar\Omega(\sigma):=\min(1,\Cmu\lambda_\sigma),\qquad
+\bar Q(\sigma):=\kappa\lambda_\sigma\bar\Omega(\sigma),\qquad\bar G:=\bar Q^{1/2},\\
+\mathfrak i(x):=\int_{[0,1]}\Bigl[\frac1{\varphi_\theta(x+\sigma)}+\frac{\mathbf 1\{x+\sigma<c_6\theta\}}\theta\Bigr]d\bar\Omega(\sigma),\\
+\mathfrak q(x):=\int_{[0,1]}\frac{d\bar Q(\sigma)}{\varphi_\theta(x+\sigma)^2},\quad
+\mathfrak j_k(x):=\int_{[0,1]}\frac{d\bar G(\sigma)}{\varphi_\theta(x+\sigma)^k}
+\end{gather*}
+(Stieltjes integrals over $[0,1]$ including the atom of the integrator at $0$),
+\begin{gather*}
+\mathfrak p(y):=(1+y)^\gamma\min\Bigl\{\Cmu^{1/2}\bigl(\kappa\ell(1+y)\bigr)^{1/2},\ \Bigl(1+\frac{\kappa\ell}{c_A}\Bigr)
+\Bigl(\frac{\kappa\ell(1+y)}{1+\ell}\Bigr)^{1/2},\ 2\kappa\CT y\ \text{(only if $y\ge\theta/2$)}\Bigr\},\\
+\mathfrak p_L(y):=\Bigl(1+\frac{\kappa\ell}{c_A}\Bigr)\Bigl(\frac{2\kappa(\kappa-c_A)(1+y)\ell}{1+\ell}\Bigr)^{1/2},\\
+\mathfrak p(0)=\mathfrak p_L(0):=0,\qquad f^*(z):=\sup_{0\le y\le z}f(y)\ \ (f^*(z):=0\text{ for }z\le0),\\
+P_0(\theta):=\bar G(\theta)\ (\theta\le1),\\
+P_0(\theta):=\max\Bigl\{\bar G(1),\min\Bigl(\kappa\CT\theta^{1+\gamma},
+\bigl((\kappa\theta-c_A)\Cmu\theta^{1+2\gamma}\bigr)^{1/2},\frac{\kappa^{3/2}}{2c_A}\theta^{2+\gamma}\Bigr)\Bigr\}\ (\theta>1).
+\end{gather*}
+For $r\ge1$ and $0<x<K_f$ put
+\begin{align*}
+S_r(x)&:=\tfrac{\dL}2\mathfrak q(x)+\tfrac12\min\Bigl\{\dL\mathfrak p(x)+\dL'\mathfrak p^*(x-\tfrac\theta\kappa),\
+\tfrac{r^\gamma}m\bigl(\dL\mathfrak p_L(x)+\dL'\mathfrak p_L^*(x-\tfrac\theta\kappa)\bigr)\Bigr\}\mathfrak j_2(x),\\
+L_r(x)&:=\min\Bigl\{\tfrac{\dL r^\gamma}m\mathfrak j_1(x),\ \tfrac{\dL}2\mathfrak q(x)+\tfrac{r^\gamma}{2m}
+\bigl(\dL\mathfrak p_L(x)+\dL'\mathfrak p_L^*(x-\tfrac\theta\kappa)\bigr)\mathfrak j_2(x)\Bigr\},\\
+H_r(x)&:=\dL\,\mathfrak i(x)+\begin{cases}S_r(x),&x\le r-1,\\L_r(x),&x>r-1,\end{cases}\qquad
+H_0:=\dL\mathfrak i(0)+\tfrac{\dL}2\mathfrak q(0)+\tfrac{\dL'}2P_0(\theta)\mathfrak j_2(0),
+\end{align*}
+$H_r^*(x):=\sup_{x\le y<K_f}H_r(y)$, $k^*:=\lceil\kappa K_f/\theta\rceil-1$, and
+\[
+\mathcal D(\theta,r):=\theta H_0+\theta\sum_{k=1}^{k^*}H_r^*(k\theta/\kappa),\qquad
+D':=\sup\bigl\{\mathcal D(\theta,r):\ 0<\theta\le2,\ r\ge\max(1,\Keps\theta)\bigr\}.
+\]
+All these functions depend on $\theta$ and on the tuple; $\mathfrak i,\mathfrak q,\mathfrak j_k,\mathfrak p,\mathfrak p_L,P_0$ do not depend on $r$.
+\end{definition}
+
+For Lemmas~\ref{lem:Nd}--\ref{lem:Nsum} and Proposition~\ref{prop:near}, $(a,b)$ is near at $t$, and we put
+$m_\lambda:=M\lambda^\gamma$, $\theta:=\eps/\lambda\in(0,2]$ and $r_\lambda:=R/\lambda\ge1$; as $\eps\le R/\Keps$, $r_\lambda\ge\Keps\theta$,
+and $m_\lambda=mr_\lambda^{-\gamma}$. For $\tau$ in the near phase, $g=g(\tau)<K_f\lambda$ and $x:=g/\lambda$; for $s\in[a,b]$,
+$\sigma:=\sigma_s/\lambda\in[0,1]$, so $w_s=\lambda(x+\sigma)$. The time $\tau$ is \emph{short-type} if $g+\lambda\le R$ and
+\emph{long-type} otherwise (i.e.\ if $x>r_\lambda-1$).
+
+\begin{lemma}[distance]\label{lem:Nd}
+$D(s)\ge\lambda\varphi_\theta(x+\sigma)$, and $a^*(\rho_s)\le\lambda^{-1}\bigl[\varphi_\theta(x+\sigma)^{-1}+\theta^{-1}\mathbf 1\{x+\sigma<c_6\theta\}\bigr]$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:dist}(i) with the base $\beta$, $\rho_s\ge c_A\min(w_s,K_RR)-\delta_1\eps$, and
+$w_s\le g+\lambda<(K_f+1)\lambda\le(K_f+1)R\le K_RR$ by (P0); with $D\ge\eps$ this is the first claim. If $\rho_s\ge\eps$, then
+$a^*=1/\rho_s=1/D$. If $\rho_s<\eps$, then $a^*=2/\eps=1/D+1/\eps$, and $c_Aw_s-\delta_1\eps\le\rho_s<\eps$ gives $w_s<c_6\eps$, i.e.\
+$x+\sigma<c_6\theta$.
+\end{proof}
+
+\begin{lemma}[budgets]\label{lem:Nb}
+Let $\Omega(\sigma):=\int_a^{a+\lambda\sigma}|T-e|^2ds$ and $G(\sigma):=\int_a^{a+\lambda\sigma}|\vsig|\,ds$. Then
+$\Omega(\sigma)\le m_\lambda^2\lambda\,\bar\Omega(\sigma)$ and $G(\sigma)\le\int_a^{a+\lambda\sigma}|T-e|\,ds\le m_\lambda\lambda\,\bar G(\sigma)$.
+\end{lemma}
+
+\begin{proof}
+For $\sigma=0$ the left sides vanish. Otherwise let $s:=a+\lambda\sigma$, so $\lambda_s=\max(s-a,\eps/2)=\lambda\lambda_\sigma$;
+Lemma~\ref{lem:tilt}(ii) gives $\Omega\le M^2\lambda^{2\gamma}\min(\Cmu\lambda\lambda_\sigma,\lambda)=m_\lambda^2\lambda\bar\Omega(\sigma)$ and
+$\int_a^s|T-e|\le M\lambda^\gamma(\kappa\lambda\lambda_\sigma\cdot\lambda\bar\Omega(\sigma))^{1/2}=m_\lambda\lambda\bar G(\sigma)$; and
+$|\vsig|\le|T-e|$ (Lemma~\ref{lem:excess}(ii)).
+\end{proof}
+
+\begin{lemma}[layer cake]\label{lem:Nl}
+Let $\nu'$ be a finite positive Borel measure on $[0,1]$, $\Phi$ non-decreasing with $\nu'([0,\sigma])\le\Phi(\sigma)$ for all $\sigma$, and
+$\psi\ge0$ non-increasing. Then $\int\psi\,d\nu'\le\int_{[0,1]}\psi\,d\Phi$ \textup(with the atom $\Phi(0)$ at $0$\textup).
+\end{lemma}
+
+\begin{proof}
+$\int\psi\,d\nu'=\int_0^\infty\nu'(\{\psi>t\})\,dt$, and $\{\psi>t\}$ is $[0,\sigma_t)$ or $[0,\sigma_t]$. In the second case
+$\nu'\le\Phi(\sigma_t)$; in the first, $\nu'([0,\sigma_t))=\lim_{\sigma\uparrow\sigma_t}\nu'([0,\sigma])\le\Phi(\sigma_t-)$. These are the
+$d\Phi$-measures of the same sets, and $\int_0^\infty d\Phi(\{\psi>t\})\,dt=\int\psi\,d\Phi$.
+\end{proof}
+
+\begin{lemma}[offsets]\label{lem:No}
+Let $\tau$ lie in a leg with base $\beta$ and next base $\beta^+$, and write $P(\tau)=(1-\varpi_\tau)x_\beta+\varpi_\tau x_{\beta^+}$,
+$\varpi_\tau\in[0,1]$. For $a'\in\{\beta,\beta^+\}$ with $g':=a-a'\ge0$ put $y:=g'/\lambda$ and $Y_{a'}:=|(x_a-x_{a'})\times e|$. Then
+$|p_a|\le(1-\varpi_\tau)Y_\beta+\varpi_\tau Y_{\beta^+}$, and:
+\begin{enumerate}
+\item[(i)] at short-type times with $g'>0$: $Y_{a'}\le m_\lambda\lambda\,\mathfrak p(y)$;
+\item[(ii)] at all times with $g'>0$: $Y_{a'}\le\lambda\,\mathfrak p_L(y)$;
+\item[(iii)] if $g=0$: $Y_\beta=0$, and if moreover the leg is not final, $Y_{\beta^+}\le m_\lambda\lambda P_0(\theta)$;
+\item[(iv)] if $g>0$: $g\ge\eps/\kappa$, $a\ge\beta^+$ and $a-\beta^+\le g-\eps/\kappa$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$p_a$ is affine in $P$, and $z\mapsto|(z-x_a)\times e|$ is convex; this gives the first claim. (iv) A near pair with $g>0$ is in the
+family with $a\ne\beta$, so $a\ge\beta^+$; then the leg is not final ($\beta^+<U$), and $\beta^+-\beta\ge\eps/\kappa$
+(Lemma~\ref{lem:legs}(i)).
+
+\emph{Lengths.} Put $I':=(a',b)$, $J:=(a,b)$, $L:=(a',a)$, $\Lambda:=g'+\lambda$. Then $l(J)\le\kappa\lambda$. If $g'<\eps/2$, then
+$a'=\beta^+$ (by (iv)) and $L\subset(a',a'+\eps/2)\subset I'$, a pair of the family, so $l(L)\le\kappa\eps/2$. If $\eps/2\le g'\le R$, $L$ is
+a pair of the family and $l(L)\le\kappa g'$. If $g'>R$, cover $L$ by $k:=\lceil g'/R\rceil$ consecutive pieces of label length
+$g'/k\in(R/2,R]$; their first points are $a'$ or $\ge a'+R/2\ge\beta+\eps\ge\beta^+$ (by (P0), $R/2\ge\Keps\eps/2\ge\eps$), and they lie
+in $[\beta,b]$, so they are admissible pairs of the family (Lemma~\ref{lem:local}(i)), and $l(L)\le\kappa g'$. Thus
+$l(L)\le\kappa\ell\lambda$ with $\ell=\max(y,\theta/2)$. Likewise $l(I')\le\kappa\Lambda$: by (J1) if $\Lambda\le R$, and otherwise (which
+includes the case $\eps/2\le g'\le R<\Lambda$) by covering $I'$ with $\lceil\Lambda/R\rceil$ consecutive pieces of label length in
+$(R/2,R]$, as for $L$. Also $c(J)\ge c_A\lambda$ and $c(L)\le l(L)$.
+
+(i) Now $\Lambda\le g+\lambda\le R$, so $I'$ is a pair of the family, $N(I')\le M\Lambda^{1/2+\gamma}$, and $|e_{I'}-e|\le\CT M\Lambda^\gamma$
+(Lemma~\ref{lem:tilt}(i)). \emph{Route 1:} $Y_{a'}=|\int_L(T-e)\times e|\le(l(L)\int_{I'}|T-e|^2)^{1/2}$ and
+$\int_{I'}|T-e|^2=N(I')^2+c(I')|e_{I'}-e|^2\le\Cmu M^2\Lambda^{1+2\gamma}$ (Lemma~\ref{lem:static}(b)). \emph{Route 2:}
+Lemma~\ref{lem:split}(i), (iii) ($J$ shares the right end of $I'$, $\vv_L=x_a-x_{a'}$) and the monotonicity of $(u,v)\mapsto uv/(u+v)$:
+$Y_{a'}\le(1+c(L)/c(J))Z$ with $Z^2\le N(I')^2l(J)l(L)/(l(J)+l(L))\le M^2\Lambda^{1+2\gamma}\kappa\lambda\cdot\kappa\ell\lambda/(\kappa\lambda+\kappa\ell\lambda)$.
+\emph{Route 3} (if $g'\ge\eps/2$): $Y_{a'}=c(L)|e_L\times e|\le\kappa g'(|e_L-e_{I'}|+|e_{I'}-e|)\le2\kappa\CT g'M\Lambda^\gamma$. With
+$\Lambda=\lambda(1+y)$ and $m_\lambda=M\lambda^\gamma$ these are the three entries of $\mathfrak p$ ($y\ge\theta/2$ iff $g'\ge\eps/2$).
+(ii) The pair $I'$ is good: for $a'=\beta$ by Lemma~\ref{lem:local}(ii); for $a'=\beta^+$, body pairs have $U-b\ge\We$, and for tail
+pairs (near only after $\tW$) $\beta^+>\beta\ge a_{\jW}\ge\We$. As $\eps/2\le\Lambda<(K_f+1)\lambda\le K_RR$, \eqref{eq:CA} gives
+$c(I')\ge c_A\Lambda$, and with $l(I')\le\kappa\Lambda$: $N(I')^2=2(l(I')-c(I'))\le2(\kappa-c_A)\Lambda$. Route 2 as in (i) gives
+$Y_{a'}\le\lambda\mathfrak p_L(y)$.
+(iii) $x_a=x_\beta$, so $Y_\beta=0$. Let the leg be non-final, so $\beta^+-\beta\in[\eps/\kappa,\eps]$ (if it is final, then $\tau=\Tstop$
+and $P=x_\beta=x_a$, so $p_a=0$ and $\varpi_\tau=0$). If $\beta^+\le b$: $Y_{\beta^+}\le G((\beta^+-a)/\lambda)\le m_\lambda\lambda\bar G(\min(\theta,1))$
+by Lemma~\ref{lem:Nb}, as $(x_{\beta^+}-x_a)\times e=\int_a^{\beta^+}T\times e$, $|T\times e|=|\vsig|$, $\beta^+-a\le\min(\eps,\lambda)$ and $\bar G$
+is non-decreasing. If $\beta^+>b$ (then $\theta>1$): $I_0:=(\beta,\beta^+)$ is a pair of the family with $\lambda_{I_0}\le\eps$, containing $J$
+with the same left end. (a) $Y_{\beta^+}=c(I_0)|e_{I_0}\times e|\le\kappa\eps\,\CT M\eps^\gamma$ (Lemma~\ref{lem:tilt}(i)).
+(b) As $(x_b-x_a)\times e=0$, $Y_{\beta^+}=|(x_{\beta^+}-x_b)\times e|\le\int_b^{\beta^+}|T-e|\le(l(b,\beta^+)\int_{I_0}|T-e|^2)^{1/2}$, with
+$l(b,\beta^+)=l(I_0)-l(J)\le\kappa\eps-c_A\lambda$ and $\int_{I_0}|T-e|^2=N(I_0)^2+c(I_0)|e_{I_0}-e|^2\le\Cmu M^2\eps^{1+2\gamma}$.
+(c) By Lemma~\ref{lem:split}(i), (iii) with $I=I_0$: $Y_{\beta^+}=|\vv_{I_0}\times e|=(c(I_0)/c(J))Z_0$, $Z_0^2\le N(I_0)^2l(J)l_c/l(I_0)\le N(I_0)^2l(I_0)/4$,
+so $Y_{\beta^+}\le(\kappa\eps)^{3/2}M\eps^{1/2+\gamma}/(2c_A\lambda)$. Dividing by $m_\lambda\lambda=M\lambda^{1+\gamma}$ gives $P_0(\theta)$; $\bar G(1)$
+covers the case $\beta^+\le b$.
+\end{proof}
+
+\begin{lemma}[time averages on a leg]\label{lem:Na}
+On a leg $[t_j,t_{j+1}]$ \textup(or a part of it\textup) with base $\beta$ and next base $\beta^+$:
+$\int(1-\varpi_\tau)\,d\tau\le\dL\eps/2$ and $\int\varpi_\tau\,d\tau\le\dL'\eps/2$.
+\end{lemma}
+
+\begin{proof}
+If the leg is final it is not walked, and $\varpi\equiv0$. Otherwise, by Lemma~\ref{lem:chase}(1), $P=x_\beta+d_-\uhat$ and
+$x_{\beta^+}=P+d_+\uhat$ with $\uhat:=\uhat_{j+1}$, so $\varpi=d_-/(d_-+d_+)$; $d_-(t_j)=0$, $1\le d_-'\le1+v$,
+$d_+(t_j)=c_0:=c(\beta,\beta^+;t_j)\le\eps$, $d_+'\le-(1-v)$; $d_-+d_+=c(\beta,\beta^+;\tau)\ge c_0$ (Lemma~\ref{lem:sep}(c)); and the leg lasts
+at most $c_0/(1-v)$. With $\tau':=\tau-t_j$: $1-\varpi\le d_+/c_0\le1-(1-v)\tau'/c_0$, whose integral over $[0,c_0/(1-v)]$ is
+$c_0/(2(1-v))\le\dL\eps/2$; and $\varpi\le\min(1,(1+v)\tau'/c_0)$, whose integral is $\le c_0/(1-v)-c_0/(2(1+v))=c_0(1+3v)/(2(1-v^2))\le
+c_0(1+2v)/(2(1-v))\le\frac\eps2\dL(3-2/\dL)$, as $v\le1-1/\dL$ (P1). The integrands are non-negative, so parts of legs are covered.
+\end{proof}
+
+\begin{lemma}[leg sums]\label{lem:Nsum}
+The near phase meets at most one leg with $g=0$, and legs with distinct gaps $g_1>\dots>g_n$, $g_i\in[\eps/\kappa,K_f\lambda)$,
+$g_i-g_{i+1}\ge\eps/\kappa$; each lasts at most $\dL\eps$. For $H^*$ non-increasing on $(0,K_f)$,
+$\sum_iH^*(g_i/\lambda)\le\sum_{k=1}^{k^*}H^*(k\theta/\kappa)\le H^*(\theta/\kappa)+(\kappa/\theta)\int_{\theta/\kappa}^{K_f}H^*$.
+\end{lemma}
+
+\begin{proof}
+Lemma~\ref{lem:gapint} (preamble), Lemma~\ref{lem:No}(iv) and Lemma~\ref{lem:legs}(iv). In increasing order $z_k:=g_{n+1-k}/\lambda\ge
+k\theta/\kappa$, and $z_n<K_f$ gives $n\le k^*$. For the integral, $H^*(k\theta/\kappa)\le(\kappa/\theta)\int_{(k-1)\theta/\kappa}^{k\theta/\kappa}H^*$
+for $k\ge2$.
 \end{proof}
 
 \begin{proposition}[Near pairs]\label{prop:near}
-If $(a,b)$ is near at $t$, then $E(a,b;t)\le\frac12\bar\theta M^2\lambda^{1+2\gamma}$.
+If $(a,b)$ is near at $t$, then
+\[
+E(a,b;t)\le\tfrac12\fF^2M^2\lambda^{1+2\gamma}+v\,\mathcal D(\theta,r_\lambda)M^2\lambda^{1+2\gamma}\le\tfrac12\bar\theta M^2\lambda^{1+2\gamma}.
+\]
 \end{proposition}
 
 \begin{proof}
 \emph{Start value.} The gap is constant on legs and non-increasing, so the set of times of $[t_\circ,t]$ at which the pair is near
 is either $[t_\circ,t]$ or $(t_n,t]$ for a leg start $t_n\ge t_\circ$ at which it is far. In the first case $t_\circ=\ttd$ (tail pairs
-are far at $\tW$), and $E(\ttd)\le\frac12s_0^2M^2\lambda^{1+2\gamma}$ by (S2); we put $t_n:=\ttd$. In the second case
-Proposition~\ref{prop:far} at time $t_n$ (or (TW) if $t_n=\tW$) gives $E(t_n)\le\frac12\fF^2M^2\lambda^{1+2\gamma}$. We bound the
-increase on $(t_n,t]$, where $g<K_f\lambda$, using Lemma~\ref{lem:excess}(iii) with $\bar q=0$: $E'\le\mathrm I+\mathrm{II}$,
-$\mathrm I:=v\int_a^ba^*(\rho)|T-e|^2ds$, $\mathrm{II}:=v\int_a^b|\vsig||q|\,ds$.
+are far at $\tW$), and $E(\ttd)\le\frac12s_0^2M^2\lambda^{1+2\gamma}\le\frac12\fF^2M^2\lambda^{1+2\gamma}$ by (S2); we put $t_n:=\ttd$. In the
+second case Proposition~\ref{prop:far} at time $t_n$ (or (TW) if $t_n=\tW$) gives $E(t_n)\le\frac12\fF^2M^2\lambda^{1+2\gamma}$. On $(t_n,t]$,
+Lemma~\ref{lem:excess}(iii) with $\bar q=0$ gives $E'\le\mathrm I+\mathrm{II}$, $\mathrm I:=v\int_a^ba^*(\rho)|T-e|^2ds$,
+$\mathrm{II}:=v\int_a^b|\vsig||q|\,ds$. Fix $\tau$ in a leg with gap $x$; we use $\sigma$ as the variable on $[a,b]$. All kernels below are
+non-increasing in $\sigma$, as $\varphi_\theta$ is non-decreasing.
 
-\emph{Term \textup{I}.} Since $a^*(\rho)=\eps^{-1}\mathbf 1\{\rho<\eps\}+\int_{\max(\rho,\eps)}^\infty y^{-2}dy$,
-$\mathrm I=v[\omega(\eps)/\eps+\int_\eps^\infty\omega(y)y^{-2}dy]$ with $\omega(y):=\int_{\{s\in(a,b):\rho_s<y\}}|T-e|^2ds$. Let $y\ge\eps$.
-If $(y+\delta_1\eps)/c_A\le K_RR$, then by Lemma~\ref{lem:dist} $\rho_s<y$ forces $c_A\min(w_s,K_RR)-\delta_1\eps<y$, i.e.\
-$\min(w_s,K_RR)<(y+\delta_1\eps)/c_A\le K_RR$, hence $w_s<(y+\delta_1\eps)/c_A\le(1+\delta_1)y/c_A=c_6y$, so these $s$ lie in
-$(a,a+\lambda_y)$, $\lambda_y:=\min(\lambda,\max(c_6y-g,\eps/2))\le\min(\lambda,c_6y)$, and \eqref{eq:Emu} gives
-$\omega(y)\le\CmuA M^2\lambda^{2\gamma}\min(\lambda,c_6y)$. If $(y+\delta_1\eps)/c_A>K_RR$, then $c_6y>K_RR\ge\lambda$ and
-$\omega(y)\le N^2\le M^2\lambda^{1+2\gamma}\le\CmuA M^2\lambda^{2\gamma}\min(\lambda,c_6y)$. Also $\omega(y)=0$ for $y\le\min\rho$.
-The piece $\omega(\eps)/\eps$ is non-zero only if $\min_{[a,b]}\rho<\eps$: then $c_A\min(w_s,K_RR)-\delta_1\eps<\eps$ for some $s$, i.e.\
-$\min(w_s,K_RR)<c_6\eps\le K_RR$ ((P2), $\eps\le R/\Keps$), so $g\le w_s<c_6\eps$; and it is $\le\CmuA M^2\lambda^{2\gamma}\min(\lambda,c_6\eps)/\eps$.
-With $\bar\rho:=\max(\eps,\min\rho)$ the integral piece is
-$\int_{\bar\rho}^\infty\omega y^{-2}dy\le\CmuA M^2\lambda^{2\gamma}c_6h_1(c_6\bar\rho)$ ($z=c_6y$). By the second form of
-Lemma~\ref{lem:dist} ($w_s\ge g$), $c_6\bar\rho\ge\min(g,K_RR)\ge\min(g,K_R\lambda)$, and $c_6\bar\rho\ge c_6\eps$; so
-$h_1(c_6\bar\rho)\le\bar h(g):=h_1(\max(c_6\eps,\min(g,K_R\lambda)))$, non-increasing in $g$.
+\emph{Term \textup{I}.} By Lemma~\ref{lem:Nd}, $\mathrm I\le(v/\lambda)\int\psi_{\mathrm I}\,d\Omega$ with
+$\psi_{\mathrm I}(\sigma):=\varphi_\theta(x+\sigma)^{-1}+\theta^{-1}\mathbf 1\{x+\sigma<c_6\theta\}$; by Lemmas~\ref{lem:Nb} and~\ref{lem:Nl}
+(with $\Phi=m_\lambda^2\lambda\bar\Omega$), $\mathrm I\le vm_\lambda^2\,\mathfrak i(x)$.
 
-\emph{Time integral of \textup{I}} (in units of $v\CmuA M^2\lambda^{2\gamma}$). By Lemma~\ref{lem:gapint}(iii) at most $\kappa c_6+1$ legs
-have $g<c_6\eps$, each lasting $\le\dL\eps$: the first piece contributes $\le(\kappa c_6+1)\dL\min(\lambda,c_6\eps)\le\dL(\kappa c_6+1)\lambda$.
-By Lemma~\ref{lem:gapint}(i) ($g_0=0$, $h=c_6\bar h\,\mathbf 1\{g<K_f\lambda\}$), Lemma~\ref{lem:int} and $K_f\le K_R$, the second piece
-contributes $\le c_6\dL\eps\,h_1(c_6\eps)+c_6\chig\int_0^{K_f\lambda}h_1\le\dL\lambda+c_6\chig\PsiI\lambda$. Hence
-$\int_{t_n}^t\mathrm I\le v\DI M^2\lambda^{1+2\gamma}$.
+\emph{Term \textup{II}, offset route.} By Lemma~\ref{lem:field}(iii), $|q(s)|\le|p(s)|/D(s)^2$ with $p(s):=(x_s-P)\times e$, and
+$|p(s)|\le|(x_s-x_a)\times e|+|p_a|\le G(\sigma)+|p_a|$ (as $|T\times e|=|\vsig|$). So, with $\psi_2(\sigma):=\varphi_\theta(x+\sigma)^{-2}$,
+$\mathrm{II}\le(v/\lambda^2)\bigl[\int\psi_2\,d(G^2/2)+|p_a|\int\psi_2\,dG\bigr]$ (the measures $d(G^2)=2G|\vsig|\,ds$ and $dG=|\vsig|\,ds$,
+as functions of $\sigma$). Lemma~\ref{lem:Nl} with $G^2\le m_\lambda^2\lambda^2\bar Q$ and $G\le m_\lambda\lambda\bar G$ (Lemma~\ref{lem:Nb})
+gives $\mathrm{II}\le vm_\lambda^2\bigl[\frac12\mathfrak q(x)+\frac{|p_a|}{m_\lambda\lambda}\mathfrak j_2(x)\bigr]$.
+\emph{Term \textup{II}, route $1/D$.} $|q|\le\rho/D^2\le1/D$, so $\mathrm{II}\le(v/\lambda)\int\varphi_\theta^{-1}\,dG\le vm_\lambda\mathfrak j_1(x)
+=vm_\lambda^2(r_\lambda^\gamma/m)\mathfrak j_1(x)$, as $m_\lambda=mr_\lambda^{-\gamma}$.
 
-\emph{Term \textup{II}.} By Lemma~\ref{lem:field}(iii), $|q(s)|\le|p(s)|/D(s)^2$, $p(s):=(x_s-P)\times e=(x_s-x_a)\times e+p_a$, and
-$|(x_s-x_a)\times e|\le\int_a^s|T-e|\le\ConeA M\lambda^\gamma\max(\sigma_s,\eps/2)$ by \eqref{eq:Emu}. As $P\in[x_\beta,x_{\beta^+}]$,
-$|p_a|\le\max_{a'\in\{\beta,\beta^+\}}|(x_a-x_{a'})\times e|$. Let $\Psi(y):=\int_{\{s\in(a,b):w_s<y\}}|\vsig|\,ds$; it vanishes for
-$y\le g$, and for $y\ge\eps/2$, by \eqref{eq:Emu} and $|\vsig|\le|T-e|$, $\Psi(y)\le\ConeA M\lambda^\gamma\min(\lambda,y)$.
+\emph{One leg.} Integrate over the leg, whose duration is at most $\dL\eps=\dL\theta\lambda$. By Lemmas~\ref{lem:No} and~\ref{lem:Na},
+$\int_{\mathrm{leg}}|p_a|\le\frac\eps2(\dL Y_\beta+\dL'Y_{\beta^+})$, where by Lemma~\ref{lem:No}(i), (ii), (iv) and the monotonicity of
+$\mathfrak p^*$, $\mathfrak p_L^*$: at short-type times $Y_\beta\le m_\lambda\lambda\mathfrak p(x)$ and $Y_{\beta^+}\le m_\lambda\lambda\mathfrak p^*(x-\theta/\kappa)$,
+and at all times $Y_\beta\le\lambda\mathfrak p_L(x)=m_\lambda\lambda(r_\lambda^\gamma/m)\mathfrak p_L(x)$ and
+$Y_{\beta^+}\le m_\lambda\lambda(r_\lambda^\gamma/m)\mathfrak p_L^*(x-\theta/\kappa)$. These bounds are uniform on the leg, since the type of a time
+depends only on $g$, which is constant on the leg. Taking for each leg the smallest of the admissible bounds, the increase of $E$ over a
+leg with gap $x>0$ is at most $vm_\lambda^2\lambda\,\theta H_{r_\lambda}(x)$; over the leg with $g=0$ (always short-type,
+Lemma~\ref{lem:No}(iii)) it is at most $vm_\lambda^2\lambda\,\theta H_0$.
 
-\emph{Short case: $(K_f+1)\lambda\le R$.} Then $w_s<(K_f+1)\lambda\le K_RR$, so $D(s)\ge\max(w_s,c_6\eps)/c_6$ by Lemma~\ref{lem:dist}.
-
-(i) \emph{Offset $|p_a|$.} \emph{Case $g=0$} ($a=\beta$; $x_a$ is on the line). If $\beta^+\le b$,
-$|(x_{\beta^+}-x_a)\times e|\le\ConeA M\lambda^\gamma\max(\beta^+-\beta,\eps/2)\le\ConeA M\lambda^\gamma\eps$. If $\beta^+>b$, the pair
-$I_0:=(\beta,\beta^+)$ ($\lambda_{I_0}\in[\eps/\kappa,\eps]$) belongs to the family and contains $(a,b)$ with the same left end, so
-$|(x_{\beta^+}-x_a)\times e|\le c(I_0)|e_{I_0}-e|\le\kappa\eps\,C_AM\eps^\gamma\le\kappa2^\gamma C_AM\lambda^\gamma\eps$. So $|p_a|\le k_0M\lambda^\gamma\eps$.
-\emph{Case $g>0$} ($a\ge\beta^+$, so $g\ge\eps/\kappa>\eps/2$). For $a'\in\{\beta,\beta^+\}$ let $g':=a-a'\le g$. If $g'=0$ the term
-vanishes. If $g'\ge\eps/2$, the pairs $(a',a)$, $(a',b)$, $(a,b)$ are in the family ($\lambda(a',b)\le g+\lambda<(K_f+1)\lambda\le R$), and
-$|(x_a-x_{a'})\times e|\le c(a',a)(|e_{a'a}-e_{a'b}|+|e_{a'b}-e|)\le\kappa g(C_A+C_B)M(g+\lambda)^\gamma$. If $0<g'<\eps/2$ (then
-$a'=\beta^+$), $J_0:=(a',a'+\eps/2)\subset(a',b)$ is in the family and contains $(a',a)$; by Cauchy--Schwarz, Lemma~\ref{lem:static}(b)
-and $|e_{J_0}-e|\le|e_{J_0}-e_{a'b}|+|e_{a'b}-e|\le\CTL M(g'+\lambda)^\gamma$,
-\[
-|(x_a-x_{a'})\times e|\le l(J_0)^{1/2}\bigl(N(J_0)^2+c(J_0)|e_{J_0}-e|^2\bigr)^{1/2}
-\le\tfrac12\kappa^{1/2}\eps(1+\kappa\CTL^2)^{1/2}M(g+\lambda)^\gamma
-\]
-($\eps/2\le\lambda$). Since $\eps\le\kappa g$ and $\frac12\kappa^{1/2}(1+\kappa\CTL^2)^{1/2}\le\CTL$ (i.e.\ $\kappa\le\CTL^2(4-\kappa^2)$,
-true as $\kappa\le4/3$ and $\CTL\ge c_t(3)\ge3^{1/2}$), this is $\le\kappa\CTL M(g+\lambda)^\gamma g$. So $|p_a|\le\kappa\CTL M(g+\lambda)^\gamma g$
-whenever $g>0$.
-
-(ii) \emph{Split.} As $\max(\sigma_s,\eps/2)\le c_6D(s)$,
-$\mathrm{II}\le v\ConeA M\lambda^\gamma c_6\int_a^b|\vsig|/D\,ds+v|p_a|\int_a^b|\vsig|/D^2\,ds=:\mathrm{II}_\alpha+\mathrm{II}_\beta$. Here
-$1/D\le\varphi_1(w_s)$, $\varphi_1(w):=c_6/\max(w,c_6\eps)=\int_{\max(w,c_6\eps)}^\infty c_6y^{-2}dy$, and $1/D^2\le\varphi_1(w_s)^2=
-\int_{\max(w_s,c_6\eps)}^\infty2c_6^2y^{-3}dy$. By Fubini, $\int|\vsig|\varphi_1(w_s)\,ds=\int_{c_6\eps}^\infty c_6y^{-2}\Psi(y)\,dy$, and
-similarly for $\varphi_1^2$. Put $y_0:=\max(c_6\eps,g)$ and $h_2(g):=h_1(y_0)$.
-\begin{itemize}
-\item $\mathrm{II}_\alpha\le vc_6^2\ConeA^2M^2\lambda^{2\gamma}\int_{y_0}^\infty\min(\lambda,y)y^{-2}dy=vc_6^2\ConeA^2M^2\lambda^{2\gamma}h_2(g)$.
-\item $g=0$: $\Psi(y)\le\ConeA M\lambda^\gamma y$ and $\int_{c_6\eps}^\infty2c_6^2y^{-2}dy=2c_6/\eps$, so
-$\mathrm{II}_\beta\le2c_6\ConeA k_0vM^2\lambda^{2\gamma}$.
-\item $g>0$: with (i), $h_3(y_0)\le h_3(g)$ and Lemma~\ref{lem:int}, for $x:=g/\lambda$,
-\[
-\begin{aligned}
-\mathrm{II}_\beta&\le v|p_a|\,2c_6^2\ConeA M\lambda^\gamma h_3(y_0)\le2c_6^2\kappa\CTL\ConeA vM^2\lambda^\gamma(g+\lambda)^\gamma g\,h_3(g)\\
-&=2c_6^2\kappa\CTL\ConeA vM^2\lambda^{2\gamma}(1+x)^\gamma G_3(x).
-\end{aligned}
-\]
-Here $(1+x)^\gamma G_3(x)\le H(x)$,
-$H(x):=2^\gamma(1-x/2)$ for $x\le1$, $H(x):=(1+x)^\gamma/(2x)$ for $x>1$; $H$ is continuous, non-increasing ($(1+x)^\gamma/x$ decreases, as
-$\gamma<1$), and $H\le2^\gamma$.
-\end{itemize}
-\emph{Time integrals.} $\mathrm{II}_\alpha$: Lemma~\ref{lem:gapint}(i) ($g_0=0$, $h=h_2\mathbf 1\{g<K_f\lambda\}$) and Lemma~\ref{lem:int} give
-$\le\dL\eps h_1(c_6\eps)+\chig\int_0^{K_f\lambda}h_1\le\Ta\lambda$. $\mathrm{II}_\beta$ with $g=0$: one leg, of duration $\le\dL\eps\le2\dL\lambda$.
-$\mathrm{II}_\beta$ with $g>0$: Lemma~\ref{lem:gapint}(i) ($g_0=\eps/\kappa$, $h=H(\cdot/\lambda)\mathbf 1\{g<K_f\lambda\}$) gives
-$\le2^\gamma\dL\eps+\chig\lambda\int_0^{K_f}H\le\Tb\lambda$, using $\int_0^12^\gamma(1-x/2)dx=\frac342^\gamma$ and, on $[1,K_f]$,
-$(1+x)^\gamma\le(2x)^\gamma$, $\int_1^{K_f}(2x)^{\gamma-1}dx=2^{\gamma-1}(K_f^\gamma-1)/\gamma$. In total
-$\int_{t_n}^t\mathrm{II}\le v\DIIs M^2\lambda^{1+2\gamma}$.
-
-\emph{Long case: $(K_f+1)\lambda>R$.} Now $|p(s)|\le\rho_s\le D(s)$, so $|q|\le1/D$; and $w_s<(K_f+1)\lambda\le(K_f+1)R\le K_RR$, so again
-$1/D\le\varphi_1(w_s)$. Hence $\mathrm{II}\le v\int|\vsig|\varphi_1(w_s)\,ds\le vc_6\ConeA M\lambda^\gamma h_2(g)$, and as for
-$\mathrm{II}_\alpha$, $\int_{t_n}^t\mathrm{II}\le vc_6\ConeA\Ta M\lambda^{1+\gamma}$. Since $M\lambda^\gamma=m(\lambda/R)^\gamma>m(K_f+1)^{-\gamma}$,
-$M\lambda^{1+\gamma}\le((K_f+1)^\gamma/m)M^2\lambda^{1+2\gamma}$, and $\int_{t_n}^t\mathrm{II}\le v\DIIl M^2\lambda^{1+2\gamma}$.
-
-\emph{Conclusion.} $E(t)\le\frac12\fF^2M^2\lambda^{1+2\gamma}+v[\DI+\max(\DIIs,\DIIl)]M^2\lambda^{1+2\gamma}\le\frac12\bar\theta M^2\lambda^{1+2\gamma}$,
-as $s_0\le\fF$ and $v\le\vz$.
+\emph{Sum.} By Lemma~\ref{lem:Nsum} applied to $H_{r_\lambda}^*$, $E(t)-E(t_n)\le vm_\lambda^2\lambda\,\mathcal D(\theta,r_\lambda)
+=v\mathcal D(\theta,r_\lambda)M^2\lambda^{1+2\gamma}$, and $\mathcal D(\theta,r_\lambda)\le D'$ since $0<\theta\le2$ and
+$r_\lambda\ge\max(1,\Keps\theta)$. With $v\le\vz$: $E(t)\le\frac12(\fF^2+2\vz D')M^2\lambda^{1+2\gamma}$.
 \end{proof}
+
+\begin{lemma}[evaluation]\label{lem:Ne}
+For the main tuple $p$ of Section~\ref{sec:proof}, $D'\le63.068$; for the stage-A tuple $\pA$, $D'\le64.6357$.
+\end{lemma}
+
+\begin{proof}[Proof \textup(computer-assisted\textup)]
+\emph{Cells.} $(0,2]$ is covered by $(0,10^{-7}]$ and cells $[\theta_l,\theta_h]$ with $\theta_h/\theta_l\le1.03$; the range
+$[\max(1,\Keps\theta_l),K_f+1]$ of $r$ by cells of width $0.05$, together with $r\ge K_f+1$ (where every time is short-type and $S_r$ is used
+without its $\mathfrak p_L$ entry). In a cell every occurrence of $\theta$ or $r$ is replaced by the endpoint that increases the bound:
+$\varphi_\theta(w)\ge\max(\theta_l,c_Aw-\delta_1\theta_h)$; $\theta/\varphi_\theta(w)=\min(1,\theta/(c_Aw-\delta_1\theta)^+)$ is non-decreasing in
+$\theta$, so it is $\le\theta_h/\varphi_{\theta_h}(w)$ (used for every term carrying a factor $\theta$); $\bar\Omega,\bar Q,\bar G,\mathfrak p,\mathfrak p_L,P_0$
+and $\mathbf 1\{w<c_6\theta\}$ are non-decreasing in $\theta$; $\mathfrak p^*(x-\theta/\kappa)\le\mathfrak p^*(x-\theta_l/\kappa)$; $k^*(\theta)\le k^*(\theta_l)$
+and $H^*(k\theta/\kappa)\le H^*(k\theta_l/\kappa)$; $r^\gamma\le r_h^\gamma$, and $r^\gamma<(1+x)^\gamma$ at long-type times; a time is
+short-type if $x\le r_l-1$, long-type if $x>r_h-1$, and otherwise the larger of the two bounds is used.
+\emph{Integrals.} Each $\int\psi\,d\Phi$ is bounded by its upper Riemann--Stieltjes sum (kernel at the left end of each $\sigma$-cell; $\psi$
+non-increasing, $\Phi$ non-decreasing, atom included). In $x$, on each cell $[x_i,x_{i+1}]$ the kernels are taken at $x_i$ and the
+increasing factors ($\mathfrak p,\mathfrak p^*,\mathfrak p_L,\mathfrak p_L^*,(1+x)^\gamma$) at $x_{i+1}$ (on the range $x\ge\theta_l/\kappa$ used, $x\ge\theta_h/2$ since $\theta_h/\theta_l\le1.03<2/\kappa$, so all three entries of $\mathfrak p$ are present and $\mathfrak p$ is increasing there; $\mathfrak p^*$, $\mathfrak p_L$, $\mathfrak p_L^*$ are increasing everywhere); $H^*$ is bounded by the running maximum from
+the right. The smaller of the discrete and the integral form of Lemma~\ref{lem:Nsum} is used.
+\emph{Bottom cell} $(0,\theta_b]$, $\theta_b=10^{-7}$. There the kernels use $\varphi_\theta(w)\ge\max(w/c_6,c_Aw-\delta_1\theta_b)$ (note
+$\max(\theta,c_Aw-\delta_1\theta)\ge w/c_6$); the budgets are split into an atom and a $\theta$-free part, $\bar\Phi_\theta(\sigma)\le\Phi_c(\sigma)+\Phi_c(\theta/2)$
+($\bar\Phi_\theta=F(\max(\sigma,\theta/2))$ with $F$ non-decreasing), with atoms $\le\Cmu\theta/2$, $\kappa\Cmu\theta^2/4$, $(\kappa\Cmu)^{1/2}\theta/2$
+paired with $\theta/\varphi_\theta\le\theta_b/\varphi_{\theta_b}$; only the integral form is used; and on $x\in(0,x_1]$, $x_1=10^{-7}$, the
+explicit majorants $\mathfrak i\le\Cmu(\frac12+c_6+c_6\log(1+u_c/x))$, $\mathfrak q\le\frac{\kappa\Cmu}4+\frac{\kappa c_6^2}{u_c}+2\kappa\Cmu c_6^2\log(1+u_c/x)$,
+$\mathfrak j_2\le C_1c_6(\frac12+c_6)/x+\frac{\kappa^{1/2}c_6^2}{3u_c^{3/2}}$, $\mathfrak j_1\le\frac{C_1}2+\frac{c_6\kappa^{1/2}}{u_c^{1/2}}+C_1c_6\log(1+u_c/x)$
+($u_c:=1/\Cmu$, $C_1:=(\kappa\Cmu)^{1/2}$, from $1/\varphi\le c_6/w$) and $\mathfrak p,\mathfrak p^*\le(1+x)^{\gamma+1/2}\max(2\kappa\CT x,\Cmu^{1/2}(\kappa x)^{1/2})$
+(as $\theta\le\kappa x$) are integrated in closed form.
+\emph{Arithmetic.} The script \texttt{verify\_constants.py} (Appendix~\ref{app:const}) evaluates this scheme with the grid sizes $500$
+in $x$ and $700$ in $\sigma$, and certifies the result: the parameters are read as decimal strings and every scalar constant ($\CT$, $\Cmu$,
+$c_6$, $P_0$, the closed forms of the bottom cell, $r_h^\gamma$) is evaluated in interval arithmetic and rounded outward to double
+precision; $(1+y)^\gamma$ is bounded by an increasing table computed in interval arithmetic; every array operation is done in IEEE double
+precision and rounded outward by one unit in the last place; and every sum, of at most $5\cdot10^4$ non-negative terms, is multiplied by
+$1+10^{-11}$, which exceeds the relative error bound of floating-point summation \cite[Lemma~3.1 and \S4.2]{Higham}. The resulting upper bounds are
+$63.06791$ for $p$ and $64.63563$ for $\pA$.
+\end{proof}
+
+\subsection{Length}
 
 \begin{proposition}[Length]\label{prop:length}
 With $\delta:=0$ for body pairs and $\delta:=\delta_t$ for tail pairs,
 \[
-l_t(a,b)\le(1+\delta)\exp\bigl(\Xfar(U_0)+B_5I_5\vz m^2\bigr)\lambda+\vz\kappa\TI\lambda\le(1+\delta)\LJ(U_0)\lambda<\kappa\lambda .
+l_t(a,b)\le(1+\delta)\exp\bigl(\Xfar(U_0)+B_5^*I_5\vz m^2\bigr)\lambda+\vz\kappa\TI\lambda\le(1+\delta)\LJ(U_0)\lambda<\kappa\lambda .
 \]
 \end{proposition}
 
@@ -209,24 +372,39 @@ l_t(a,b)\le(1+\delta)\exp\bigl(\Xfar(U_0)+B_5I_5\vz m^2\bigr)\lambda+\vz\kappa\T
 $l(t_\circ)\le(1+\delta)\lambda$ ($l(\ttd)=\lambda$; (TW)), and $l'=v\int T\cdot AT\le v\int a^*(\rho)\,ds$ (Lemma~\ref{lem:excess}(i),
 Lemma~\ref{lem:field}(ii)). The pair is far on an initial segment of $[t_\circ,t]$ and near afterwards.
 
-\emph{Far, $g>\eta_1R$.} By Proposition~\ref{prop:far}, $\rho\ge\rho_m\ge\eps$ on the arc, so $(\log l)'\le v/\rho_m$, which is $\le v/(c_RR)$
-while $g>K_RR$ (for a time $\le\chig U$) and $\le v/(c_\rho g)$ while $\eta_1R<g\le K_RR$. Lemma~\ref{lem:gapint}(i) ($g_0=\eta_1R$,
-$h(y)=y^{-1}\mathbf 1\{y\le K_RR\}$) gives $\int d\tau/g\le\dL\eps/(\eta_1R)+\chig\log(K_R/\eta_1)\le\dL/(\Keps\eta_1)+\chig\log(K_R/\eta_1)$.
-So $\log l$ increases by at most $\Xfar(U_0)$ here.
+\emph{Far, $g>K_RR$.} On the arc $\rho\ge\rhoarc\ge\eps$ (Proposition~\ref{prop:far}), so $A=\Pi/\rho$, $l'=v\int\sin^2\!\phi/\rho\le vl/\rhoarc$
+and $(\log l)'\le v/\rhoarc$; by the claim in the proof of Proposition~\ref{prop:far} ($k=1$), $\log l$ increases by at most $vJ_1(U_0)$
+here.
 
-\emph{Far, $g\le\eta_1R$.} By Lemma~\ref{lem:excess}(v), $l'\le(2v/\rho_m)[l(|p_a|+l^{1/2}N)^2/\rho_m^2+N^2]$, with $|p_a|\le C_pMg^{1+\gamma}$,
-$\rho_m\ge c_\rho g$ (Proposition~\ref{prop:far}), $l^{1/2}N\le\kappa^{1/2}M\lambda^{1+\gamma}\le\kappa^{1/2}K_f^{-1-\gamma}Mg^{1+\gamma}$ and
-$N^2\le M^2\lambda^{1+2\gamma}\le lM^2(g/K_f)^{2\gamma}$. So $(\log l)'\le B_5vM^2g^{2\gamma-1}$. These times form a final segment of the
-far period with gaps $\le\eta_1R$; as $\gamma>1/2$, $y\mapsto y^{2\gamma-1}$ is non-decreasing, and Lemma~\ref{lem:gapint}(ii)
-($\bar g=\eta_1R$) gives $\int g^{2\gamma-1}d\tau\le\chig(\eta_1R+\eps/\kappa)^{2\gamma}/(2\gamma)\le I_5R^{2\gamma}$ ($\eps\le R/\Keps$). So
-$\log l$ increases by at most $B_5I_5vM^2R^{2\gamma}=B_5I_5vm^2$ here.
+\emph{Far, $\eta_1R<g\le K_RR$.} $(\log l)'\le v/\rhoarc\le v/(c_\eta g)$ (Proposition~\ref{prop:far}(ii)), and Lemma~\ref{lem:gapint}(i)
+($g_0=\eta_1R$, $h(y)=y^{-1}\mathbf 1\{y\le K_RR\}$) gives $\int d\tau/g\le\dL\eps/(\eta_1R)+\chig\log(K_R/\eta_1)\le\dL/(\Keps\eta_1)+\chig\log(K_R/\eta_1)$.
+With the previous regime, $\log l$ increases by at most $\Xfar(U_0)$.
 
-\emph{Near.} $l'\le v[\tilde\omega(\eps)/\eps+\int_\eps^\infty\tilde\omega(y)y^{-2}dy]$ with $\tilde\omega(y):=|\{s\in(a,b):\rho_s<y\}|$
-(arclength). As in Term~I of Proposition~\ref{prop:near}, with (J1) for $(a,a+\lambda_y)$ in place of \eqref{eq:Emu},
-$\tilde\omega(y)\le\kappa\min(\lambda,c_6y)$, and $\tilde\omega(\eps)>0$ only if $g<c_6\eps$. So the increase while near is
-$\le v\kappa\TI\lambda$.
+\emph{Far, $g\le\eta_1R$.} By Lemma~\ref{lem:excess}(v), $(\log l)'\le(v/\rhoarc)\bigl[N/l^{1/2}+(|p_a|+l^{1/2}N/\pi)/\rhoarc\bigr]^2$, with
+$\rhoarc\ge c_\rho^*g$, $|p_a|\le C_p^*Mg^{1+\gamma}$ (Proposition~\ref{prop:far}(i), (iv); $\hat C\le C_p^*$),
+$N/l^{1/2}\le M\lambda^{1/2+\gamma}/\lambda^{1/2}\le K_f^{-\gamma}Mg^\gamma$ ($l\ge\lambda$) and
+$l^{1/2}N\le\kappa^{1/2}M\lambda^{1+\gamma}\le\kappa^{1/2}K_f^{-1-\gamma}Mg^{1+\gamma}$. So $(\log l)'\le B_5^*vM^2g^{2\gamma-1}$. These times form
+a final segment of the far period with gaps $\le\eta_1R$; as $\gamma>1/2$, $y\mapsto y^{2\gamma-1}$ is non-decreasing, and
+Lemma~\ref{lem:gapint}(ii) ($\bar g=\eta_1R$) gives $\int g^{2\gamma-1}d\tau\le\chig(\eta_1R+\eps/\kappa)^{2\gamma}/(2\gamma)\le I_5R^{2\gamma}$
+($\eps\le R/\Keps$). So $\log l$ increases by at most $B_5^*I_5vM^2R^{2\gamma}=B_5^*I_5vm^2$ here.
 
-Hence $l_t\le(1+\delta)\lambda\exp(\Xfar(U_0)+B_5I_5\vz m^2)+\vz\kappa\TI\lambda\le(1+\delta)\LJ(U_0)\lambda$, which is $<\kappa\lambda$ by
+\emph{Near.} As $a^*(\rho)=\eps^{-1}\mathbf 1\{\rho<\eps\}+\int_{\max(\rho,\eps)}^\infty y^{-2}dy$,
+$l'\le v[\tilde\omega(\eps)/\eps+\int_\eps^\infty\tilde\omega(y)y^{-2}dy]$ with $\tilde\omega(y):=|\{s\in(a,b):\rho_s<y\}|$ (arclength).
+Let $y\ge\eps$. If $(y+\delta_1\eps)/c_A\le K_RR$, then by Lemma~\ref{lem:dist}(i) $\rho_s<y$ forces $c_A\min(w_s,K_RR)-\delta_1\eps<y$, i.e.\
+$\min(w_s,K_RR)<(y+\delta_1\eps)/c_A\le K_RR$, hence $w_s<(y+\delta_1\eps)/c_A\le c_6y$; so these $s$ lie in $(a,a+\lambda_y)$,
+$\lambda_y:=\min(\lambda,\max(c_6y-g,\eps/2))\le\min(\lambda,c_6y)$, and (J1) for the pair $(a,a+\lambda_y)$ of the family gives
+$\tilde\omega(y)\le\kappa\min(\lambda,c_6y)$. If $(y+\delta_1\eps)/c_A>K_RR$, then $c_6y>K_RR\ge\lambda$ and
+$\tilde\omega(y)\le l\le\kappa\lambda=\kappa\min(\lambda,c_6y)$. The piece $\tilde\omega(\eps)/\eps$ is non-zero only if $\min_{[a,b]}\rho<\eps$;
+then $c_A\min(w_s,K_RR)-\delta_1\eps<\eps$ for some $s$, i.e.\ $\min(w_s,K_RR)<c_6\eps\le K_RR$ ((P2), $\eps\le R/\Keps$), so $g\le w_s<c_6\eps$;
+and it is $\le\kappa\min(\lambda,c_6\eps)/\eps$. With $\bar\rho:=\max(\eps,\min_{[a,b]}\rho)$ the integral piece is
+$\int_{\bar\rho}^\infty\tilde\omega y^{-2}dy\le\kappa c_6h_1(c_6\bar\rho)$ ($z=c_6y$, Lemma~\ref{lem:int}); by Lemma~\ref{lem:dist}(ii) ($w_s\ge g$,
+and $g<K_f\lambda\le K_RR$), $c_6\bar\rho\ge\max(c_6\eps,g)$, so it is $\le\kappa c_6h_1(\max(c_6\eps,g))$, a non-increasing function of $g$.
+In time: by Lemma~\ref{lem:gapint}(iii) at most $\kappa c_6+1$ legs have $g<c_6\eps$, each lasting $\le\dL\eps$, so the first piece
+contributes $\le\kappa\dL(\kappa c_6+1)\lambda$; by Lemma~\ref{lem:gapint}(i) ($g_0=0$, $h=c_6h_1(\max(c_6\eps,\cdot))\mathbf 1\{\cdot<K_f\lambda\}$)
+and Lemma~\ref{lem:int}, the second contributes $\le\kappa[c_6\dL\eps\,h_1(c_6\eps)+c_6\chig\int_0^{K_f\lambda}h_1]\le\kappa(\dL\lambda+c_6\chig\PsiI\lambda)$.
+So the increase while near is $\le v\kappa\TI\lambda$.
+
+Hence $l_t\le(1+\delta)\lambda\exp(\Xfar(U_0)+B_5^*I_5\vz m^2)+\vz\kappa\TI\lambda\le(1+\delta)\LJ(U_0)\lambda$, which is $<\kappa\lambda$ by
 (P7) resp.\ (PT).
 \end{proof}
 
@@ -235,8 +413,9 @@ Hence $l_t\le(1+\delta)\lambda\exp(\Xfar(U_0)+B_5I_5\vz m^2)+\vz\kappa\TI\lambda
 \eqref{eq:CA} was proved in Section~\ref{sec:end}. Let $t^*$ be as in Lemma~\ref{lem:cont}, i.e.\ as in the standing assumptions, and
 $t\in[\ttd,t^*]$. Every pair of $\FamS(t)$ satisfies the bounds of (Imp): for a tail pair at $t=\tW$ by (TW); otherwise $E$ is bounded by
 Proposition~\ref{prop:far} ($\frac12\fF^2\le\frac12\bar\theta$) or Proposition~\ref{prop:near}, and $l$ by Proposition~\ref{prop:length}. In
-these proofs every family bound and every use of \eqref{eq:CA} concerns a pair allowed by the locality principle, so they are covered by
-the assumption on $[\ttd,t^*]$. Lemma~\ref{lem:cont} gives the proviso, the stop, (a), and that $\tW$ is reached if $\We>0$.
+these proofs every family bound, every use of \eqref{eq:CA} and every use of (S1G) concerns a pair allowed by the locality principle, so
+they are covered by the assumption on $[\ttd,t^*]$ and by the hypotheses at $\ttd$. Lemma~\ref{lem:cont} gives the proviso, the stop, (a),
+and that $\tW$ is reached if $\We>0$.
 
 (b) By (a), (J1) holds at every leg start, so Lemma~\ref{lem:legs} applies with $t'=\Tstop=t_J$: every non-final leg advances the base by
 $[\eps/\kappa,\eps]$, there are at most $\kappa U/\eps$ of them, and each lasts at most $\eps/(1-v)$ (Lemma~\ref{lem:chase}(1)); so

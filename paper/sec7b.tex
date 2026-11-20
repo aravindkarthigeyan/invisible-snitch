@@ -279,7 +279,7 @@ The cases are exhaustive, $\lambda^{3/2-\mu}\le\lambda^{3/2-\muT}$, and $c_N=\ma
 \end{proof}
 
 \begin{theorem}\label{thm:touchdown}
-Let $0<v\le6\cdot10^{-5}$, $0<\eps\le10^{-3}$, and let $P$ follow design~T. Then $\ttd\le T_2$, and the curve $\xz$ of
+Let $0<v\le5.8\cdot10^{-3}$, $0<\eps\le10^{-3}$, and let $P$ follow design~T. Then $\ttd\le T_2$, and the curve $\xz$ of
 Definition~\ref{def:x0} is $C^1$ with $|\partial_u\xz|\equiv1$ and $1\le U\le U_{\max}$. With $\nhat$ of Definition~\ref{def:T},
 $u'=U-u$, $T$ the unit tangent of $\xz$, $\lambda=u_b-u_a$, and $l,c,N$ referring to $\xz$:
 \begin{itemize}
@@ -292,14 +292,15 @@ or is the direction of a true label.
 \item[\textup{(T5)}] $P(\ttd)-\xz(U)=z_0\nhat+y_0\nhat^\perp$ with $\czlo\eps^{1/(2-2v)}\le z_0\le\czhi\eps^{1/2}$ and
 $|y_0|\le c_y(z_0+\eps)^{2-\muTb}$.
 \end{itemize}
-Here $T_2=3.73247$, $U_{\max}=6.29320$, $\lambda_0=0.0333$, $c_{\mathrm{sep}}=0.0330591$, $\kc=0.988089$, $c_N=2.72160$,
-$\muTb=1.79990\cdot10^{-4}$, $\mub=6.00037\cdot10^{-5}$, $\theta_{\mathrm v}=1.07003$, $c_{T4}=1.04263$, $\czlo=1.27025$, $\czhi=1.56563$,
-$c_y=0.619797$ and $G_{\mathrm T}=0.05$.
+Here $T_2=3.77231$, $U_{\max}=7.17768$, $\lambda_0=0.0337254$, $c_{\mathrm{sep}}=0.0276152$, $\kc=0.951517$, $c_N=3.41207$,
+$\muTb=0.0172997$, $\mub=0.00583384$, $\theta_{\mathrm v}=1.153$, $c_{T4}=1.12275$, $\czlo=1.20086$, $\czhi=1.67043$,
+$c_y=0.697925$ and $G_{\mathrm T}=0.030573$.
 \end{theorem}
 
 \begin{proof}
-By Table~\ref{tab:td} (Appendix~\ref{app:const}) the parameters $\vbar=6\cdot10^{-5}$, $\eta=0.1$, $\epsbar=10^{-3}$, $\xi_1=1.007$,
-$\lambda_0=0.0333$, $G_{\mathrm T}=0.05$ satisfy \hyptag{SC1}--\hyptag{SC48}, and the numbers displayed are the constants
+By Table~\ref{tab:td} (Appendix~\ref{app:const}) the parameters $\vbar=5.8\cdot10^{-3}$, $\eta=0.11639$, $\epsbar=10^{-3}$,
+$\xi_1=1.16171$, $\lambda_0=0.0337254$, $G_{\mathrm T}=0.030573$ satisfy \hyptag{SC1}--\hyptag{SC48}, and the numbers displayed are the
+constants
 $T_2$, $U_{\max}$, $c_{\mathrm{sep}}$, $\kc$, $c_N$, $\muTb$, $\mub$, $\theta_{\mathrm v}$, $\theta_{\mathrm t}/h_{\mathrm t}$,
 $h_{\mathrm t}\xi_-$, $z_{\mathrm T}\xi_+$, $c_y$ of Definition~\ref{def:tdconst}, rounded down for $c_{\mathrm{sep}}$, $\kc$, $\czlo$ and up
 for the others. So it suffices to prove the theorem with these constants of Definition~\ref{def:tdconst} in place of the numbers. Also
@@ -339,4 +340,30 @@ $z_0+\eps\le z_{\mathrm T}\bar\xi_{\mathrm e}+\epsbar<1$ \hyptag{SC48}.
 lies in the tail zone, and $|T-\nhat|\le\theta_{\mathrm t}\xi^{1-\muT}\le\theta_{\mathrm t}s^{1-\muT}$. By (T5), $s\le u'+z_0/h_{\mathrm t}\le
 (u'+z_0)/h_{\mathrm t}$; so $|T-\nhat|\le(\theta_{\mathrm t}/h_{\mathrm t})(u'+z_0)^{1-\muT}\le(\theta_{\mathrm t}/h_{\mathrm t})(u'+z_0)^{1-\muTb}$,
 using $u'+z_0\le G_{\mathrm T}+z_{\mathrm T}\bar\xi_{\mathrm e}\le1$ \hyptag{SC48}.
+\end{proof}
+
+\begin{lemma}[global chords]\label{lem:T2star}
+In the setting of Theorem~\ref{thm:touchdown}, let $u_a<u_b$ be labels of $\xz$ with $\lambda=u_b-u_a>\lambda_0$, and put
+$d_c:=u_a+U-u_b$. Then, with the constants $W_x$, $\hat L$ and $\kc$ of Definition~\ref{def:tdconst},
+\[
+c(a,b)\ge\min\Bigl(\kc d_c,\ 2\sin\Bigl(\frac12\min\Bigl(\pi,\frac{\min(\lambda,d_c)}{W_x\hat L}\Bigr)\Bigr)\Bigr).
+\]
+The product $W_x\hat L$ is at most $1.22122$.
+\end{lemma}
+
+\begin{proof}
+Let $\Theta_a<\Theta_b$ be the labels of $u_a,u_b$ and $\Delta:=\Theta_b-\Theta_a$; by Lemma~\ref{lem:len}, $\Delta>\Delta_0$. \emph{Case
+$\Delta>2\pi-\Delta_0$.} The proof of (T2) (its second case) gives $c\ge\kc d_c$. \emph{Case $\Delta\le2\pi-\Delta_0$.} As in the proof of (T2),
+$\xz(u_a)$, $\xz(u_b)$ are positions at $\ttd$ as in Lemma~\ref{lem:bulk}(c), with initial points at distance $2\sin(\tilde\Delta/2)$,
+$\tilde\Delta:=\min(\Delta,2\pi-\Delta)\in[\Delta_0,\pi]$; since $2\sin(\tilde\Delta/2)\ge c_{\mathrm{sep}}>2\epsbar\ge2\eps$ \hyptag{SC42},
+\hyptag{SC43}, Lemma~\ref{lem:bulk}(c) gives $c\ge2\sin(\tilde\Delta/2)$. By the proof of Lemma~\ref{lem:len}, $w\le W_x(2/\circab\theta)^{2v}$ at
+every label $\theta\ne2\pi$, and by the arc bound the integral of $(2/\circab\theta)^{2v}$ over any arc of length $\Delta'\le2\pi$ is at most
+$\Delta'(4/\Delta')^{2v}/(1-2v)$. For $\Delta'\ge\Delta_0$, $(4/\Delta')^{2v}\le\max(1,4/\Delta_0)^{2v}\le(8/\lambda_0)^{2v}$ (as
+$4/\Delta_0=4W_x\hat L/\lambda_0\le8/\lambda_0$ by \hyptag{SC41}, and $8/\lambda_0\ge1$ as $\lambda_0<1$), and $(8/\lambda_0)^{2v}/(1-2v)\le\hat L$ ($v\le\vbar$); so
+the integral of $w$ over such an arc is at most $W_x\hat L\Delta'$. First, $\lambda=\int_{\Theta_a}^{\Theta_b}w\,d\theta\le W_x\hat L\Delta$.
+Second, $d_c=\int_{\alpha_0}^{\Theta_a}w+\int_{\Theta_b}^{2\pi+\be}w$, with $\be<\alpha_0$ (Lemma~\ref{lem:tail}(a)); modulo $2\pi$ both label sets lie
+in the arc $[\Theta_b,\Theta_a+2\pi]$ of length $2\pi-\Delta\ge\Delta_0$ (as $\Theta_b\le2\pi+\be<2\pi+\alpha_0\le2\pi+\Theta_a$) and are
+disjoint, and the pointwise bound depends only on $\theta$ mod $2\pi$; so $d_c\le W_x\hat L(2\pi-\Delta)$. Hence
+$\tilde\Delta\ge\min(\lambda,d_c)/(W_x\hat L)$, and since $\tilde\Delta\le\pi$ and $x\mapsto2\sin(x/2)$ is increasing on $[0,\pi]$, the claim
+follows. The value of $W_x\hat L$ is in Table~\ref{tab:td}.
 \end{proof}

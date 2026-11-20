@@ -151,6 +151,33 @@ thus $N^2=2E\le K^2l^3/12$.
 and equals $c(a',b')(e_{a'b'}-e_{ab})-E(a',b')e_{ab}$.
 \end{proof}
 
+For a label interval $K=(a',b')$ of a curve we write $\vv_K:=x_{b'}-x_{a'}=\int_KT\,ds=c(K)e_K$.
+
+\begin{lemma}[split tilt]\label{lem:split}
+Let $u\mapsto x_u$ be a regular $C^1$ curve, $I$ a label interval with $c(I)>0$, and $J\subset I$, $J\ne I$, a label interval
+with $c(J)>0$; put $l_c:=l(I)-l(J)$ and $Z:=|\vv_J\times e_I|$.
+\begin{enumerate}
+\item[(i)] $Z^2\le N(I)^2\,l(J)\,l_c/l(I)$.
+\item[(ii)] If $N(I)^2<4c(J)$, then $|e_J-e_I|\le(Z/c(J))\bigl(1-N(I)^2/(4c(J))\bigr)^{-1/2}$.
+\item[(iii)] $|\vv_I\times e_J|=(c(I)/c(J))Z$. If $J$ shares the right end of $I$ and $L:=I\setminus J$, then
+$|\vv_L\times e_J|=|\vv_I\times e_J|\le(1+c(L)/c(J))Z$, and also $|\vv_L\times e_J|\le Z+c(L)|e_I-e_J|$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $\vv_J\times e_I=\int_J(T-e_I)\times e_I\,ds$ and $|(T-e_I)\times e_I|\le|T-e_I|$, so $Z^2\le l(J)\int_J|T-e_I|^2$ by
+Cauchy--Schwarz. Since $\vv_I\times e_I=0$ and $\vv_I$ is the sum of $\vv_J$ and the chord vectors of the one or two intervals of
+$I\setminus J$, also $Z^2\le l_c\int_{I\setminus J}|T-e_I|^2$. Adding $Z^2/l(J)+Z^2/l_c\le\int_I|T-e_I|^2=N(I)^2$
+(Lemma~\ref{lem:static}(b)) and using $1/l(J)+1/l_c=l(I)/(l(J)l_c)$ gives (i).
+(ii) Put $d:=e_J-e_I$ and $\cos\vartheta:=e_J\cdot e_I$. Then $|d|^2(1-|d|^2/4)=(2-2\cos\vartheta)(1+\cos\vartheta)/2=\sin^2\vartheta=
+|e_J\times e_I|^2=Z^2/c(J)^2$. By Lemma~\ref{lem:static}(b) with $\uhat=e_I$, additivity and non-negativity of $V_{e_I}$,
+$c(J)|d|^2\le V_{e_I}(J)\le V_{e_I}(I)=N(I)^2$, so $1-|d|^2/4\ge1-N(I)^2/(4c(J))>0$, which gives (ii).
+(iii) $|\vv_I\times e_J|=c(I)|e_I\times e_J|$ and $Z=c(J)|e_J\times e_I|$. If $J$ shares the right end of $I$, then
+$\vv_L=\vv_I-\vv_J$ and $\vv_J\times e_J=0$, so $\vv_L\times e_J=\vv_I\times e_J$; and $c(I)\le c(L)+c(J)$. Finally
+$\vv_L\times e_J=\vv_L\times e_I+\vv_L\times(e_J-e_I)$, where $|\vv_L\times e_I|=|\vv_J\times e_I|=Z$ and
+$|\vv_L\times(e_J-e_I)|\le c(L)|e_J-e_I|$.
+\end{proof}
+
 \begin{lemma}\label{lem:excess}
 For a virtual flow, fixed labels $a<b$ and any time $t$ with $c(a,b;t)>0$ \textup(primes are $t$-derivatives, integrals are over
 $s\in[a,b]$, $A=A(r(s))$\textup):
@@ -160,10 +187,11 @@ $s\in[a,b]$, $A=A(r(s))$\textup):
 $\int\vsig\,ds=0$ and $|\vsig|\le|T-e|$.
 \item[(iii)] For every constant $\bar q$: $E'\le v\int a^*(\rho)|T-e|^2ds+v\int\vsig(q-\bar q)\,ds$.
 \item[(iv)] $E'\le vN\|AT\|_{L^2(ds)}$.
-\item[(v)] \textup{(far inequality)} If $\rho_m:=\dist(P,\conv\{x_s:a\le s\le b\})\ge\eps$ and $p_a:=r_a\times e$, then
+\item[(v)] \textup{(far inequality)} Let $\rhoarc:=\min_{s\in[a,b]}\rho_s$ \textup(the \emph{arc distance}; it is at least
+$\rho_m:=\dist(P,\conv\{x_s:a\le s\le b\})$\textup) and $p_a:=r_a\times e$. If $\rhoarc\ge\eps$, then
 \[
-E'\le\frac v{\rho_m}\Bigl(1+\frac l{\rho_m}+\frac{2l^2}{\rho_m^2}\Bigr)N^2+\frac{2vl^{3/2}|p_a|N}{\rho_m^3},\qquad
-l'\le\frac{2v}{\rho_m}\Bigl[\frac{l(|p_a|+l^{1/2}N)^2}{\rho_m^2}+N^2\Bigr].
+E'\le\frac v{\rhoarc}\Bigl(1+\frac l{\pi\rhoarc}+\frac{2l^2}{\pi^2\rhoarc^2}\Bigr)N^2+\frac{2vl^{3/2}|p_a|N}{\pi\rhoarc^3},\qquad
+l'\le\frac v{\rhoarc}\Bigl[N+\frac{l^{1/2}|p_a|+lN/\pi}{\rhoarc}\Bigr]^2.
 \]
 \end{enumerate}
 \end{lemma}
@@ -178,37 +206,49 @@ $\int\vsig=(x_b-x_a)\cdot e^\perp=0$, and $|\vsig|=|(T-e)\cdot e^\perp|\le|T-e|$
 (iii) In (ii), $(T-e)\cdot A(T-e)\le a^*|T-e|^2$ and $e\cdot Ae\ge0$ (Lemma~\ref{lem:field}(ii)), and $\int\vsig q=\int\vsig(q-\bar q)$.
 (iv) Cauchy--Schwarz in $E'=v\int(T-e)\cdot AT$, with $\int|T-e|^2=N^2$.
 
-(v) Let $\mathcal K:=\conv\{x_s:a\le s\le b\}-P$; on $\mathcal K$, $|y|\ge\rho_m\ge\eps$, so $A(y)=\Pi(y)/|y|$ and $q(s)=Q(r(s))$
-with $Q(y):=-(y\cdot e)(y\cdot e^\perp)/|y|^3$. In the coordinates $y_1:=y\cdot e$, $y_2:=y\cdot e^\perp$,
+(v) Fix $t$ and parametrise the arc by arclength $\sigma\in[0,l]$, with $\sigma=0$ at $a$. On the arc $\rho\ge\rhoarc\ge\eps$, so
+by Lemma~\ref{lem:field}(ii) $A(r)=\Pi(r)/\rho$, $0\le A\le I/\rhoarc$, $e\cdot Ae\ge0$, and $q=Q(r)$ with
+$Q(y):=-(y\cdot e)(y\cdot e^\perp)/|y|^3$. In the coordinates $y_1:=y\cdot e$, $y_2:=y\cdot e^\perp$,
 $\partial_{y_2}Q=-y_1(y_1^2-2y_2^2)/|y|^5$ and $\partial_{y_1}Q=-y_2(y_2^2-2y_1^2)/|y|^5$; hence $|\partial_{y_2}Q|\le|y|^{-2}$
-(as $\max_{|z|\le1}|z(3z^2-2)|=1$) and $|\partial_{y_1}Q|\le2|y_2|/|y|^3$. For $s\in[a,b]$ the segment
-$y(\sigma)=r_a+\sigma(x_s-x_a)$, $\sigma\in[0,1]$, lies in $\mathcal K$; along it $dy_2=\delta(s)\,d\sigma$,
-$dy_1=((x_s-x_a)\cdot e)\,d\sigma$,
-where $\delta(s):=(x_s-x_a)\cdot e^\perp=\int_a^s\vsig$ satisfies $|\delta(s)|\le\int|T-e|\le l^{1/2}N$; moreover
-$|(x_s-x_a)\cdot e|\le l$ and $|y_2|\le|p_a|+|\delta(s)|$ (note $|r_a\cdot e^\perp|=|r_a\times e|=|p_a|$). Therefore
+(as $\max_{|z|\le1}|z(3z^2-2)|=1$) and $|\partial_{y_1}Q|\le2|y_2|/|y|^3$.
+\emph{The function $\delta$.} Put $\delta(\sigma):=\int_0^\sigma\vsig=(x(\sigma)-x_a)\cdot e^\perp$. It is $C^1$, $\delta'=\vsig$,
+$\delta(0)=0$, $\delta(l)=c\,e\cdot e^\perp=0$, and $\int_0^l\vsig^2\le N^2$ by (ii). By Wirtinger's inequality
+\cite[Thm.~257]{HLP} ($\int_0^l\delta^2\le(l/\pi)^2\int_0^l\delta'^2$ for $\delta\in C^1[0,l]$ vanishing at both ends; expand the odd
+$2l$-periodic extension of $\delta$ in a sine series and use Parseval),
 \[
-|q(s)-q(a)|\le\frac{l^{1/2}N}{\rho_m^2}+\frac{2l(|p_a|+l^{1/2}N)}{\rho_m^3}.
+\textstyle\int_0^l\delta^2\le(l/\pi)^2N^2,\qquad\int_0^l|\delta|\le l^{1/2}\bigl(\int_0^l\delta^2\bigr)^{1/2}\le l^{3/2}N/\pi .
 \]
-Apply (iii) with $\bar q=q(a)$, $a^*(\rho)\le1/\rho_m$ on the arc, $\int|T-e|^2=N^2$ and $\int|\vsig|\le l^{1/2}N$:
-$E'\le(v/\rho_m)N^2+vl^{1/2}N\sup_s|q(s)-q(a)|$, which is the first claim. For the length, $T\cdot AT=\sin^2\!\phi/\rho$ and
-$\rho\sin\phi=T\times r=e\times r+(T-e)\times r$, where $|e\times r(s)|=|r(s)\cdot e^\perp|=|\delta(s)-p_a|\le|p_a|+l^{1/2}N$. Hence
-$\sin^2\!\phi/\rho\le2(|p_a|+l^{1/2}N)^2/\rho^3+2|T-e|^2/\rho$; integrate with $\rho\ge\rho_m$ and use (i).
+\emph{Integration by parts.} As $\int\vsig=0$, $\int\vsig q\,d\sigma=\int_0^l\delta'G\,d\sigma$ with $G(\sigma):=Q(r(\sigma))-Q(r(0))$, a
+$C^1$ function with $G'=\nabla Q(r)\cdot T$ and $G(0)=0$; since $\delta(l)=0$, $\int\vsig q\,d\sigma=-\int_0^l\delta\,\nabla Q(r)\cdot T\,d\sigma$.
+Here $\nabla Q(r)\cdot T=\partial_{y_1}Q\,(T\cdot e)+\partial_{y_2}Q\,\vsig$, $|T\cdot e|\le1$, and the coordinate $y_2$ of $r(\sigma)$ is
+$r_a\cdot e^\perp+\delta(\sigma)$, with $|r_a\cdot e^\perp|=|r_a\times e|=|p_a|$. Hence, with $\rho\ge\rhoarc$,
+\[
+\Bigl|\int\vsig q\Bigr|\le\frac{\int|\delta||\vsig|}{\rhoarc^2}+\frac{2\int|\delta|(|p_a|+|\delta|)}{\rhoarc^3}
+\le\frac{lN^2}{\pi\rhoarc^2}+\frac{2|p_a|l^{3/2}N}{\pi\rhoarc^3}+\frac{2l^2N^2}{\pi^2\rhoarc^3}.
+\]
+\emph{Excess.} In (ii) the first term is $\le(v/\rhoarc)\int|T-e|^2=vN^2/\rhoarc$ and the second is $\le0$; add $v$ times the last
+bound. \emph{Length.} By (i), $l'=v\int\sin^2\!\phi/\rho$ ($T\cdot\Pi T=1-\cos^2\phi$). Now $\rho|\sin\phi|=|T\times r|\le|e\times r|+|T-e|\rho$
+and $|e\times r|=|r\cdot e^\perp|\le|p_a|+|\delta|$, so $|\sin\phi|\rho^{-1/2}\le(|p_a|+|\delta|)\rhoarc^{-3/2}+|T-e|\rhoarc^{-1/2}$
+pointwise, and by Minkowski's inequality in $L^2(d\sigma)$,
+$(\int\sin^2\!\phi/\rho)^{1/2}\le\rhoarc^{-3/2}(|p_a|l^{1/2}+lN/\pi)+\rhoarc^{-1/2}N$. Square and multiply by $v$.
 \end{proof}
 
 \begin{lemma}\label{lem:duhamel}
-Let $a<b$ be labels of a virtual flow with $c(a,b;t_1)>0$, and suppose $\rho_m(t)\ge\eps$ on $[t_1,t_2]$. With
-$\alpha:=(v/\rho_m)(1+l/\rho_m+2l^2/\rho_m^2)$ and $\beta:=2vl^{3/2}|p_a|/\rho_m^3$ \textup(functions of $t$\textup),
+Let $a<b$ be labels of a virtual flow with $c(a,b;t_1)>0$, and suppose $\rhoarc(t)\ge\eps$ on $[t_1,t_2]$. With
+$\alpha:=(v/\rhoarc)\bigl(1+l/(\pi\rhoarc)+2l^2/(\pi^2\rhoarc^2)\bigr)$ and $\beta:=2vl^{3/2}|p_a|/(\pi\rhoarc^3)$ \textup(functions
+of $t$\textup),
 \[
 N(t_2)\le e^{\int_{t_1}^{t_2}\alpha}N(t_1)+\int_{t_1}^{t_2}e^{\int_t^{t_2}\alpha}\beta(t)\,dt .
 \]
-If moreover $\rho_m\ge Kl$ on $[t_1,t_2]$, then $\alpha\le\aD(K)\,v/\rho_m$, where $\aD(K):=1+1/K+2/K^2$.
+If moreover $\rhoarc\ge Kl$ on $[t_1,t_2]$, then $\alpha\le\aD(K)\,v/\rhoarc$, where $\aD(K):=1+1/(\pi K)+2/(\pi K)^2$.
 \end{lemma}
 
 \begin{proof}
-By Lemma~\ref{lem:sep}(c), $c>0$ on $[t_1,t_2]$; $\alpha,\beta$ are continuous. For $\eta>0$ let $N_\eta:=(N^2+\eta^2)^{1/2}$, a
+By Lemma~\ref{lem:sep}(c), $c>0$ on $[t_1,t_2]$; $\rhoarc$ is continuous (a minimum over a compact label set of a jointly
+continuous function), so $\alpha,\beta$ are continuous. For $\eta>0$ let $N_\eta:=(N^2+\eta^2)^{1/2}$, a
 $C^1$ function (Lemma~\ref{lem:flow}(c)). By Lemma~\ref{lem:excess}(v), $N_\eta N_\eta'=E'\le\alpha N^2+\beta N\le\alpha
 N_\eta^2+\beta N_\eta$, so $N_\eta'\le\alpha N_\eta+\beta$, i.e.\ $(N_\eta e^{-\int_{t_1}^t\alpha})'\le\beta e^{-\int_{t_1}^t\alpha}$.
-Integrate and let $\eta\to0$. The last claim is $l/\rho_m\le1/K$.
+Integrate and let $\eta\to0$. The last claim is $l/\rhoarc\le1/K$.
 \end{proof}
 
 \subsection{Vanishing vision radius}

@@ -7,6 +7,6 @@ date-released: 2026-11-20
 license: CC-BY-4.0
 abstract: >
   For the invisible-Snitch pursuit problem, an explicit path fixed in advance sees every
-  starting direction by time 10.13 d whenever the Snitch's speed is at most 6e-5, for every
+  starting direction by time 13.1 d whenever the Snitch's speed is at most 5.8e-3, for every
   vision radius; consequently a single path catches the Snitch exactly. Proofs checked by
   AI referees and audits, not yet by a human.

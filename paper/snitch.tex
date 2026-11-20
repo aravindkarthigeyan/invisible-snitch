@@ -11,13 +11,13 @@
 \begin{abstract}
 A point $S$ (the Snitch) starts at distance $d$ from the origin in an unknown direction $\alpha$ and always moves with speed $v$
 directly away from a pursuer $H$ of speed at most $1$, which starts at the origin and must fix its path in advance; $S$ counts as
-found once it is within distance $\eps$ of $H$. We prove that for $v\le6\cdot10^{-5}$ there is, for every $\eps\in(0,d)$, an
-explicit path that finds the Snitch, whatever $\alpha$ is, by time $10.13\,d$; the time bound does not depend on $\eps$. By
+found once it is within distance $\eps$ of $H$. We prove that for $v\le5.8\cdot10^{-3}$ there is, for every $\eps\in(0,d)$, an
+explicit path that finds the Snitch, whatever $\alpha$ is, by time $13.1\,d$; the time bound does not depend on $\eps$. By
 compactness the same holds with $\eps=0$: a single path of speed at most $1$ catches the Snitch exactly, in every direction, by
-time $10.13\,d$. The path runs once through the set of possible positions, turns so as to touch this set tangentially, and then
+time $13.1\,d$. The path runs once through the set of possible positions, turns so as to touch this set tangentially, and then
 follows a greedy chase along a regularised (``virtual'') version of it. The proof is a bootstrap for the two-point excess (arc
 minus chord) of the virtual front, uniform in $\eps$, combined with exact formulas for the front after the two straight runs.
-All constants are explicit and are verified by a short script.
+All constants are explicit and are verified by a short script, which also certifies, in outward-rounded arithmetic, the one constant defined as a supremum.
 \end{abstract}
 
 \input{sec1}
@@ -29,9 +29,12 @@ All constants are explicit and are verified by a short script.
 \input{sec7}
 \input{sec8}
 
-\begin{thebibliography}{1}
+\begin{thebibliography}{3}
+\bibitem{HLP} G.~H.~Hardy, J.~E.~Littlewood and G.~P\'olya, \emph{Inequalities}, 2nd ed., Cambridge University Press,
+Cambridge, 1952.
 \bibitem{Hartman} P.~Hartman, \emph{Ordinary Differential Equations}, Wiley, New York, 1964; 2nd ed., Classics in Applied
 Mathematics~38, SIAM, Philadelphia, 2002.
+\bibitem{Higham} N.~J.~Higham, \emph{Accuracy and Stability of Numerical Algorithms}, 2nd ed., SIAM, Philadelphia, 2002.
 \end{thebibliography}
 
 \appendix

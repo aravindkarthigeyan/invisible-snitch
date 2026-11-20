@@ -5,9 +5,9 @@
 
 The \emph{main tuple} $p=(\gamma,R,m,s_0,\fF,\kappa,c_A,K_R,K_f,\Keps,\eta_1,\qc,\nu,\dL,\delta_1,A_0)$ is that of
 Table~\ref{tab:core}; the \emph{stage-A tuple} $\pA$ is $p$ with $\gamma$ replaced by $\gD$, so $M_{\mathrm A}=mR^{-\gD}$, and
-$C_A^{\mathrm A}$, $C_B^{\mathrm A}$ are the tilt constants $C_A$, $C_B$ of Definition~\ref{def:param} computed for $\pA$. The free
+$\CT^{\mathrm A}$ is the tilt constant $\CT$ of Definition~\ref{def:param} computed for $\pA$. The free
 assembly parameters are $\bar\omega$, $c_k$, $\delta_0$; the touch-down constants are those of Theorem~\ref{thm:touchdown}; $a'$ is the
-number of Table~\ref{tab:asm} and $C_0:=c_N$. Put
+number of Table~\ref{tab:asm}, $C_0:=c_N$, and $W_x\hat L$ is the constant of Lemma~\ref{lem:T2star} (Table~\ref{tab:td}). Put
 \begin{equation}\label{eq:asm}
 \begin{gathered}
 \zeta:=(1-\bar\omega^2)^{1/2}-\vz,\qquad\etaN:=\aD(4)\frac{\vz}\zeta,\qquad\etaD:=\frac{\vz}\zeta,\qquad
@@ -19,7 +19,9 @@ c_{\mathrm{sep}}^{\mathrm A}:=\min\bigl(c_{\mathrm{sep}},\kc(1-\UA)\bigr),\\
 \theta_0:=c_{T4}X_*^{1-\muTb-\gD},\qquad\theta_y:=c_y2^{2-\muTb}(z_0^{\max})^{1-\muTb-\gD},\qquad
 \kD:=c_k\frac{4(1+\delta_t)}\zeta,\\
 \mathrm{(TS)}:=\Bigl(1+\frac{\Dbar}{\kD R}\Bigr)^{\etaN}\Bigl[C_0R^{a'}+\vz(c_n\Theta_b+c_\beta\Theta_{\mathrm p})R^{\gD}\Bigr],\qquad
-\Tsharp:=T_2+\frac{\kappa U_{\max}}{1-\vz},
+\Tsharp:=T_2+\frac{\kappa U_{\max}}{1-\vz},\\
+c_0':=1-\tfrac12(C_0\lambda_0^{a'})^2,\qquad
+\Cfl(y):=\min\Bigl(c_0'y,\ \kc y,\ 2\sin\Bigl(\frac12\min\Bigl(\pi,\frac y{W_x\hat L}\Bigr)\Bigr)\Bigr)\quad(y\ge0),
 \end{gathered}
 \end{equation}
 with the heading constants \eqref{eq:dep-headconst} and the departure constants \eqref{eq:dep-const} ($\delta_t$ does not depend on
@@ -33,17 +35,18 @@ $\kD$; $\Theta_{\mathrm p}$, $c_n$, $c_\beta$ do).
 \item[(C6)] $C_0R^{a'}\le s_0m(K_f/K_R)^\nu$.
 \end{itemize}
 
-\noindent\textbf{Side conditions of the assembly.}\namedlabel{hyp:A}{(A1)--(A6)}
+\noindent\textbf{Side conditions of the assembly.}\namedlabel{hyp:A}{(A1)--(A7)}
 \begin{itemize}
-\item[(A1)] (P0)--(P7) for $(p,U_{\max})$, and (C1)--(C6) for $p$ with $(a',C_0,\lambda_0,c_{\mathrm{sep}})$;
-\item[(A2)] (P0)--(P7) for $(\pA,\UA)$, (C1)--(C6) for $\pA$ with $(a',C_0,\lambda_0,c_{\mathrm{sep}}^{\mathrm A})$, and
+\item[(A1)] (P0)--(P8) for $(p,U_{\max},\Cfl)$, and (C1)--(C6) for $p$ with $(a',C_0,\lambda_0,c_{\mathrm{sep}})$;
+\item[(A2)] (P0)--(P8) for $(\pA,\UA,\Cfl)$, (C1)--(C6) for $\pA$ with $(a',C_0,\lambda_0,c_{\mathrm{sep}}^{\mathrm A})$, and
 $1-\UA\ge\We$;
 \item[(A3)] (heading) $G_f\le G_{\mathrm T}$, $\epsS\le\delta_0\le R/2$, $\bar\sigma\le\frac12$, $\rho_*\ge\epsS$, $m^2<2$,
 $\gD\le1-\mub$, $\UA\ge\We+2\epsS+\delta_0$, $\kappa\le2$, $K_R\ge1$;
 \item[(A4)] (departure) (D3), $\gD\le1-\muTb$, $\czlo\epsS^{1/(2-2\vz)}\ge\epsS/\zeta$, $\UE\le G_{\mathrm T}$;
 \item[(A5)] (tail start) $\gD\ge\gamma+\nu+\etaN$, $\gD+\nu\le a'$, $\mathrm{(TS)}\le s_0m(K_f/K_R)^\nu$,
 $K_RR\le1-\UE-\We-\epsS$, and (PT): $(1+\delta_t)\LJ(U_{\max})<\kappa$;
-\item[(A6)] $\vz\le\vbar$, $\epsS\le\min(\epsbar,R/\Keps)$, $2\We+R+\epsS\le1$, $K_RR<\lambda_0$, $a'\le1-\muTb$, $\Tsharp\le10.13$.
+\item[(A6)] $\vz\le\vbar$, $\epsS\le\min(\epsbar,R/\Keps)$, $2\We+R+\epsS\le1$, $K_RR<\lambda_0$, $a'\le1-\muTb$, $\Tsharp\le13.1$;
+\item[(A7)] (chord floor) $c_0'>0$ and $8/\lambda_0\ge1$.
 \end{itemize}
 All of them hold; they are checked in Appendix~\ref{app:const}.
 
@@ -75,6 +78,19 @@ $c\ge\min(\varphi(K_RR),\varphi(\lambda_0))\ge c_AK_RR$ by concavity, (C2) and (
 $\mathcal P$, then $c\ge c'_{\mathrm{sep}}\ge c_AK_RR$ by (C4).
 \end{proof}
 
+\begin{lemma}[(S1G) at touch-down]\label{lem:S1G}
+Under the hypotheses of Lemma~\ref{lem:start}, Theorem~\ref{thm:touchdown} and \textup{(A7)}, let $0<\bar U\le U$. Then every pair of
+$[0,\bar U]$ with $\lambda>K_RR$ satisfies $c(a,b;\ttd)\ge\Cfl(\min(\lambda,a+\bar U-b))$, with the function $\Cfl$ of \eqref{eq:asm}.
+\end{lemma}
+
+\begin{proof}
+$\Cfl$ is non-negative ((A7)) and non-decreasing. Let $\lambda>K_RR$ and $y:=\min(\lambda,a+\bar U-b)\le\lambda$. If $\lambda\le\lambda_0$:
+as $\lambda>K_RR\ge\eps/2$, the proof of Lemma~\ref{lem:start} gives $c\ge\varphi(\lambda)=\lambda(1-\frac12C_0^2\lambda^{2a'})\ge c_0'\lambda\ge
+c_0'y\ge\Cfl(y)$. If $\lambda>\lambda_0$: $d_c:=a+U-b\ge a+\bar U-b\ge y$, and Lemma~\ref{lem:T2star} gives
+$c\ge\min\bigl(\kc d_c,2\sin(\frac12\min(\pi,\min(\lambda,d_c)/(W_x\hat L)))\bigr)\ge\min\bigl(\kc y,2\sin(\frac12\min(\pi,y/(W_x\hat L)))\bigr)
+\ge\Cfl(y)$; here $\kc$ and $W_x\hat L$ may be replaced by their printed values, which are on the safe side.
+\end{proof}
+
 \subsection{The conditional theorem}
 
 \begin{proposition}[Conditional form]\label{prop:cond}
@@ -85,7 +101,7 @@ and every direction $\alpha\in[0,2\pi)$ is seen by $\Tstop\le\ttd+\kappa U/(1-v)
 \end{proposition}
 
 \begin{proof}
-We use the conditions (A1)--(A6). All constants are numbers computed at $(\vz,\epsS)$; in the arguments below the actual $v$ and
+We use the conditions (A1)--(A7). All constants are numbers computed at $(\vz,\epsS)$; in the arguments below the actual $v$ and
 $\eps$ enter only through $v\le\vz$ and $\eps\le\epsS$ inside expressions that are visibly monotone (positive factors,
 $1/(1-v)$, $e^{cv}$), through $\eps^{1/(2-2v)}/\eps$, which is non-increasing in $\eps\in(0,1)$ and in $v\in(0,\frac12)$, and through
 $D\le\Dbar$, $z_0\le z_0^{\max}$. The touch-down constants are valid for all $v\le\vz$, $\eps\le\epsS\le\epsbar$
@@ -95,8 +111,9 @@ $D\le\Dbar$, $z_0\le z_0^{\max}$. The touch-down constants are valid for all $v\
 $\UA\le1-\We<1\le U$ by (A2)); it is the chase of Theorem~\ref{thm:end} on the front restricted to $[0,\UA]$. A pair in $[0,\UA]$
 with $\lambda>\lambda_0$ has $a+U-b\ge U-\UA\ge1-\UA$, so (T2) gives $c\ge c_{\mathrm{sep}}^{\mathrm A}$. Lemma~\ref{lem:start}
 with $\pA$, $c'_{\mathrm{sep}}=c^{\mathrm A}_{\mathrm{sep}}$ and $\mathcal P$ the pairs in $[0,\UA]$ ((A2), (A6)) gives (S1) and
-(S2). With (P0)--(P7) for $(\pA,\UA)$ and $\eps\le R/\Keps$, Theorem~\ref{thm:end} with excuse length $0$ applies: conclusions
-(a)--(e) hold for $P_{\mathrm A}$ with the tuple $\pA$.
+(S2), and Lemma~\ref{lem:S1G} with $\bar U=\UA$ gives (S1G) for the front cut at $\UA$. With (P0)--(P8) for $(\pA,\UA,\Cfl)$ and
+$\eps\le R/\Keps$, Theorem~\ref{thm:end} with excuse length $0$ applies: conclusions (a)--(e) hold for $P_{\mathrm A}$ with the tuple
+$\pA$.
 
 \emph{Step 2 (common legs; $\tW$; duration).} Let $a_j,t_j$ be the bases and leg starts of $P$. Suppose $P=P_{\mathrm A}$ on
 $[0,t_j]$ and $a_j<\We$. By Lemma~\ref{lem:chase}(4) the two working fronts agree on $[\ttd,t_j]$, so the bases agree, and since
@@ -145,10 +162,11 @@ The bound required by (TW) is $s_0M\lambda^{1/2+\gamma}(K_f\lambda/(K_RR))^\nu$.
 \]
 since both exponents are $\ge0$ ($\gamma+\nu+\etaN\le\gD\le a'$) and $\lambda\le R$. So (TW) holds, and (PT) is part of (A5).
 
-\emph{Step 6 (the end theorem on $[0,U]$).} Apply Theorem~\ref{thm:end} with $p$, $U_0=U_{\max}$ and excuse length $\We$: (P0)--(P7)
-hold by (A1); $U\le U_{\max}$; $\eps\le R/\Keps$ and $U\ge1\ge2\We+R+\eps$ by (A6). (S1): if $(a,b)$ is good and $\lambda>\lambda_0$,
+\emph{Step 6 (the end theorem on $[0,U]$).} Apply Theorem~\ref{thm:end} with $p$, $U_0=U_{\max}$, $\Cfl$ and excuse length $\We$:
+(P0)--(P8) hold by (A1); $U\le U_{\max}$; $\eps\le R/\Keps$ and $U\ge1\ge2\We+R+\eps$ by (A6). (S1): if $(a,b)$ is good and $\lambda>\lambda_0$,
 then $a\ge\We$ or $U-b\ge\We$, so by (T2) $c\ge\min(c_{\mathrm{sep}},\kc\We)=\min(c_{\mathrm{sep}},c_AK_RR)=c_AK_RR$ ((C4) for $p$);
-Lemma~\ref{lem:start} with $\mathcal P$ the good pairs and $c'_{\mathrm{sep}}=c_AK_RR$ gives (S1) and (S2). (TW), (PT): Step~5. Hence
+Lemma~\ref{lem:start} with $\mathcal P$ the good pairs and $c'_{\mathrm{sep}}=c_AK_RR$ gives (S1) and (S2), and Lemma~\ref{lem:S1G}
+with $\bar U=U$ gives (S1G). (TW), (PT): Step~5. Hence
 all legs are defined, the chase stops at $\Tstop\le\ttd+\kappa U/(1-v)\le T_2+\kappa U_{\max}/(1-\vz)=\Tsharp$, and the direction of
 every true label of $[0,U]$ is seen by $\Tstop$ (Theorem~\ref{thm:end}(b)).
 
@@ -166,10 +184,10 @@ each leg is determined by $\xz$ and by $P$ at earlier times (Lemma~\ref{lem:chas
 object & times & established by\\
 \midrule
 directions not carried by true labels (ghost set, run-1 catches) & $[0,\ttd]$ & (T0) of Theorem~\ref{thm:touchdown}\\
-stage-A chase on $[0,\UA]$: (J1), (J2), (CA), tilts, distances & $[\ttd,\tW]$ & Theorem~\ref{thm:end}, excuse $0$; data Lemma~\ref{lem:start}\\
+stage-A chase on $[0,\UA]$: (J1), (J2), (CA), tilts, distances & $[\ttd,\tW]$ & Theorem~\ref{thm:end}, excuse $0$; data Lemmas~\ref{lem:start}, \ref{lem:S1G}\\
 $P=P_{\mathrm A}$; heading $|P'-\nhat|\le\hH$ & $[\ttd,\tW]$ & Step~2; Lemma~\ref{lem:heading}\\
 departure arc $\{u'\le\UE\}$; data (TW) of tail pairs & $[\ttd,\tW]$; at $\tW$ & Theorem~\ref{thm:departure}; Step~5\\
-body pairs of $[0,U]$ & $[\ttd,\Tstop]$ & Theorem~\ref{thm:end}; (S1), (S2) by Lemma~\ref{lem:start}\\
+body pairs of $[0,U]$ & $[\ttd,\Tstop]$ & Theorem~\ref{thm:end}; (S1), (S2), (S1G) by Lemmas~\ref{lem:start}, \ref{lem:S1G}\\
 tail pairs & excused before $\tW$; $[\tW,\Tstop]$ & Theorem~\ref{thm:end} with (TW), (PT)\\
 true labels of $[0,U]$ (seen) & by $\Tstop\le\Tsharp$ & Theorem~\ref{thm:end}(b)\\
 \bottomrule
@@ -191,7 +209,7 @@ by (A6), and $|S_\alpha(t)-H(t)|\le d\hat\eps\le\eps$. The constants $\vz$ and $
 
 \begin{proof}[Proof of Corollary~\ref{cor:exact}]
 By the scaling of the previous proof (an exact catch is preserved) we may take $d=1$. Fix $v\in(0,\vz]$ and check the hypotheses
-of Lemma~\ref{lem:compact} with $\bar T:=10.13$.
+of Lemma~\ref{lem:compact} with $\bar T:=13.1$.
 \emph{Directions:} $D_N:=\{2\pi i/2^N:0\le i<2^N\}$, $N\ge1$, are finite, nested, and their union is dense.
 \emph{Radii:} $\eps_N:=2^{-N}\epsS\in(0,1)$, $\eps_N\to0$.
 \emph{Paths:} $H_N$ is the path of Theorem~\ref{thm:main} for $(v,\eps_N,1)$ (the same $v$ for all $N$; its vision radius is
@@ -199,5 +217,5 @@ $\min(\eps_N,\epsS)=\eps_N$); $H_N(0)=0$ and $|H_N'|\le1$ a.e.\ on $[0,\infty)\s
 \emph{Proximity with a common time:} by Theorem~\ref{thm:main}, for every $\alpha$, in particular every $\alpha\in D_N$, the true
 candidate $S_\alpha$ of $H_N$ comes within $\eps_N$ of $H_N$ at some time $t\le\bar T$, and $\bar T$ does not depend on $N$.
 Lemma~\ref{lem:compact} gives a path $H$ on $[0,\bar T]$ with $H(0)=0$ and $|H'|\le1$ that catches every direction exactly by time
-$\bar T=10.13$; extended as a constant after $\bar T$, it is a path on $[0,\infty)$ as required.
+$\bar T=13.1$; extended as a constant after $\bar T$, it is a path on $[0,\infty)$ as required.
 \end{proof}

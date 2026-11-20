@@ -25,13 +25,13 @@ The problem was posed in the video [*The Invisible Golden Snitch Riddle*](https:
 
 ## The result
 
-> **Theorem.** If $v \le 6\cdot 10^{-5}$, then for every vision radius $\varepsilon \in (0, d)$ there is an explicit path, fixed in advance and of speed at most 1, along which every starting direction is seen by time $10.13\,d$.
+> **Theorem.** If $v \le 5.8\cdot 10^{-3}$, then for every vision radius $\varepsilon \in (0, d)$ there is an explicit path, fixed in advance and of speed at most 1, along which every starting direction is seen by time $13.1\,d$.
 >
-> **Corollary (exact capture).** If $v \le 6\cdot 10^{-5}$, a single path of speed at most 1 lands exactly on the Snitch, whatever its starting direction, by time $10.13\,d$.
+> **Corollary (exact capture).** If $v \le 5.8\cdot 10^{-3}$, a single path of speed at most 1 lands exactly on the Snitch, whatever its starting direction, by time $13.1\,d$.
 
 Neither the speed limit nor the time depends on $\varepsilon$, and that is what makes the corollary work. Paths that see everything by a fixed time, for vision radii shrinking to 0, converge to a path that catches everything exactly.
 
-The speed limit is tiny because the proof is wasteful, not because the path stops working. In simulations the same path sweeps the front, in a time that does not depend on $\varepsilon$, up to about $v = 0.2$.
+The speed limit is small because the proof is still conservative, not because the path stops working. In simulations the same path sweeps the front, in a time that does not depend on $\varepsilon$, up to about $v = 0.2$.
 
 ## How the path works
 
@@ -51,7 +51,7 @@ The difficulty is near Harry. As he approaches a piece of the front, the Snitche
 | Touch-down data | The two straight runs have exact formulas, so the front at touch-down is known exactly. Its tilt shrinks at small scales, both ahead of Harry and at the end he leaves behind. | §6–7 |
 | End theorem | Walking the front in steps of $\varepsilon$, the arc-versus-chord gap of every pair stays bounded at every scale, right up to the last end. | §3–4 |
 | Departure | The end left behind at touch-down keeps its shape while Harry walks away from it, then rejoins the main argument. | §5 |
-| Assembly | For every $\varepsilon$ and $v \le 6\cdot10^{-5}$, every direction is seen by time 10.13. | §8 |
+| Assembly | For every $\varepsilon$ and $v \le 5.8\cdot10^{-3}$, every direction is seen by time 13.1. | §8 |
 | Exact capture | A time bound independent of $\varepsilon$ passes to the limit $\varepsilon \to 0$. | §2, Cor. 1.2 |
 
 A longer plain-language walkthrough is in **[docs/PROOF_OVERVIEW.md](docs/PROOF_OVERVIEW.md)**.
@@ -60,8 +60,9 @@ A longer plain-language walkthrough is in **[docs/PROOF_OVERVIEW.md](docs/PROOF_
 
 | Path | What it is |
 |---|---|
-| [`paper/snitch.pdf`](paper/snitch.pdf) | **The proof**: a 43-page standalone paper proving the theorem and the corollary. Start here. |
-| [`paper/verify_constants.py`](paper/verify_constants.py) | Checks all 201 numerical conditions the proof relies on, in 50-digit arithmetic. |
+| [`paper/snitch.pdf`](paper/snitch.pdf) | **The proof**: a 49-page standalone paper proving the theorem and the corollary. Start here. |
+| [`paper/verify_constants.py`](paper/verify_constants.py) | Checks all 218 numerical conditions the proof relies on, in 50-digit arithmetic. |
+| [`record/short-paper-v1.pdf`](record/short-paper-v1.pdf) | The first version of the short paper (43 pages, $v_0 = 6\cdot10^{-5}$). Version 2 sharpened three estimates (tilts, near pairs, far pairs and length) to reach $5.8\cdot10^{-3}$. |
 | [`record/research-record.pdf`](record/research-record.pdf) | The full 163-page research record. It covers everything else that was found: weaker theorems for $\varepsilon>0$, lower bounds on the capture time, conditional results up to $v \approx 0.47$, refuted conjectures, and numerics. |
 | [`record/reports/`](record/reports) | The research reports, referee reports and audits behind the record. |
 | [`viz/index.html`](viz/index.html) | The interactive simulation. |
@@ -72,7 +73,7 @@ A longer plain-language walkthrough is in **[docs/PROOF_OVERVIEW.md](docs/PROOF_
 
 ```bash
 pip install mpmath
-python paper/verify_constants.py          # ends with: ALL 201 CONDITIONS HOLD
+python paper/verify_constants.py          # ends with: ALL 218 CONDITIONS HOLD
 
 pip install numpy matplotlib pillow
 python numerics/simulate_design_T.py --v 0.1 --eps 0.03
@@ -83,8 +84,8 @@ To rebuild the paper, run `pdflatex snitch.tex` twice in `paper/`.
 ## Status: please read
 
 - **Not yet checked by a human.** Every proof was checked by independent AI referees (two per piece) and by two end-to-end audits of the assembled argument. No human mathematician has verified it. Treat it as a detailed, carefully checked claim, not an established theorem.
-- **The constants are tight by design.** Several of the 201 conditions hold with margins of a few parts per million. They are checked exactly, but they leave no room for slips.
-- **Simulation is evidence, not proof.** Nothing is claimed for $v > 6\cdot10^{-5}$. With this method the ceiling looks like about $10^{-4}$; reaching the $v \approx 0.2$ that simulations suggest needs a new idea.
+- **The constants are tight by design.** Several of the 218 conditions hold with margins below 0.1%. They are checked exactly, but they leave no room for slips.
+- **Simulation is evidence, not proof.** Nothing is claimed for $v > 5.8\cdot10^{-3}$. The framework of the proof assumes the front is nearly straight at every scale, which stops being true somewhere around $v \approx 0.05$; reaching the $v \approx 0.2$ that simulations suggest needs a different kind of argument.
 - **Still open:** whether Harry wins for every $v < 1$ (the author's conjecture), or whether there is a threshold.
 
 Details, including what was refuted and what was corrected along the way, are in **[docs/STATUS.md](docs/STATUS.md)**.
