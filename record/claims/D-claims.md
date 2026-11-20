@@ -1,0 +1,208 @@
+## Result in one paragraph
+
+**Theorem D1 (PROVED here, pending referee).** Let d = 1, 0 < ε < 1 and
+v ≤ v_D(ε) := min{ 10^{-4}, ( ε / (403 + 210 log(3.34/ε)) )^{1/2} }.
+Then there is an explicit path of speed exactly 1 (one straight run, then finitely many "windows", each a straight
+connector followed by a walk along an explicit C^1 curve) along which every candidate is seen by time 8.
+By scaling, for general d: if v ≤ v_D(ε/d), all candidates are seen by time 8d.
+Asymptotically this is v ≍ (ε/(d log(d/ε)))^{1/2}, against v ≤ ε/((1+2π)d) for Theorem A; it beats Theorem A
+for every ε/d < 7.3·10^{-4} (e.g. at ε/d = 10^{-6} it allows v ≤ 1.7·10^{-5}, Theorem A allows 1.4·10^{-7}).
+The proof is a finite recursion with elementary estimates; no compactness or limits. The key new idea is a
+*first-order prediction* Q_α(t) of each candidate computed from Harry's own past path and the *initial* circle
+(Lemma D2), whose error is controlled by the distance from Harry to the initial point e^{iα} rather than to the
+Snitch itself, so the near-field singularity never enters.
+
+Also PROVED: Lemma D5 (exact seen set of one straight leg, §2) and Prop. D6 (finite-step reduction of the ε > 0 problem to a bound K ≤ K* on a weighted angle, §3). An ε-uniform range is only NUMERICAL/CONJECTURE (§4–5).
+
+## 1. Proof of Theorem D1
+
+Normalise d = 1, write points of R^2 as complex numbers, unit(w) = w/|w|. If v < ε/8 then v < ε/(1+2π) and
+Theorem A applies (time 1+2π < 8). So assume throughout
+
+  (A0)  ε/8 ≤ v ≤ 10^{-4},   v^2 ≤ ε/(403 + 210 log(3.34/ε)).
+
+Note (A0) gives ε ≤ 8v ≤ 8·10^{-4}, v^2/ε ≤ 1/403, and ε ≥ 403 v^2.
+Let P(s) denote Harry's path (to be constructed), T* := 8 (a priori time horizon, verified at the end).
+
+### 1.1 Two elementary lemmas (PROVED)
+
+**Lemma D1 (unit vectors).** For a, b ≠ 0: |unit(a) − unit(b)| ≤ min(2, 2|a−b|/|b|).
+*Proof.* |a/|a| − b/|b|| ≤ |a−b|/|b| + |a| |1/|a| − 1/|b|| = |a−b|/|b| + ||b|−|a||/|b| ≤ 2|a−b|/|b|. ∎
+
+**Lemma D2 (first-order prediction).** For any path P with |P'| ≤ 1 define, for each direction θ,
+  D_θ(s) := |e^{iθ} − P(s)|,  Q_θ(t) := e^{iθ} + v ∫_0^t unit(e^{iθ} − P(s)) ds
+(the integrand is defined for a.e. s whenever {s: D_θ(s)=0} is null). If candidate θ is not seen on [0,t] then
+  E_θ(t) := |S_θ(t) − Q_θ(t)| ≤ 2v ∫_0^t min(1, v s / D_θ(s)) ds.
+*Proof.* Unseen means |S_θ − P| > ε > 0, so S_θ is C^1 and S_θ(t) − Q_θ(t) = v∫_0^t [unit(S_θ(s) − P(s)) − unit(e^{iθ} − P(s))] ds.
+Apply Lemma D1 with a = S_θ(s) − P(s), b = e^{iθ} − P(s): |a − b| = |S_θ(s) − S_θ(0)| ≤ v s. ∎
+
+Further facts used (all immediate): |Q_θ(t) − e^{iθ}| ≤ vt; |∂_t Q_θ| = v; and if ∫_0^t ds/D_{θ'}(s) is bounded for
+θ' near θ, then Q_θ(t) is C^1 in θ with |∂_θ Q_θ(t) − i e^{iθ}| ≤ v ∫_0^t ds/D_θ(s), because
+∂_θ unit(e^{iθ} − P) = (I − ww^T) i e^{iθ}/D_θ with w = unit(e^{iθ} − P), of norm ≤ 1/D_θ. Finally
+  e^{iθ}·Q_θ(t) = 1 + v ∫_0^t c_θ(s) ds,  c_θ(s) := e^{iθ}·unit(e^{iθ} − P(s)) = D_θ/2 + (1 − |P|^2)/(2 D_θ)   (*)
+(the identity follows from D_θ^2 = 1 − 2 e^{iθ}·P + |P|^2), and |Q_θ(t)| ≥ e^{iθ}·Q_θ(t).
+
+### 1.2 Phase 1: one straight run (PROVED)
+
+P(s) = (s, 0) for 0 ≤ s ≤ t_1 := 1 + 2v.
+
+**Lemma D3 (the tip is seen).** Every α with |α| ≤ δ_1 := (0.3 ε)^{1/(1−v)} is seen during Phase 1.
+*Proof.* α = 0 lies on the forward ray; at time t_0 := (1 − ε/2)/(1−v) ≤ 1/(1−v) ≤ t_1 it is at distance ε/2.
+Let 0 < α ≤ δ_1 (α < 0 by reflection). Initially ρ = 1, β = α, so C = g(α), h(0) = cos α + v, and at t_0,
+h(t_0) = (1+v)ε/2 − (1 − cos α). Since α ≤ 0.3ε, 1 − cos α ≤ α²/2 ≤ ε/4, so (1+v)ε/4 ≤ h(t_0) ≤ (1+v)ε/2.
+Let β_c := arccos((1−v)/2) ∈ (π/3, π/2]; then sin β_c ≥ √3/2 and tan(β_c/2) ≤ 1, so g(β_c) ≥ √3/2.
+Also g(α) ≤ α/(α/2)^v = 2^v α^{1−v} ≤ √2 α^{1−v} ≤ √2 · 0.3 ε < (√3/4) ε ≤ ε g(β_c)/2.
+Hence h(t_0)/C ≥ (1+v)ε/(4 g(α)) ≥ (1+v)/(2 g(β_c)) = k(β_c). Since k is decreasing (Lemma 1 of snitch_proved),
+the bearing β(t_0) = k^{-1}(h/C) ≤ β_c, so cos β(t_0) + v ≥ (1+v)/2 and ρ(t_0) = h(t_0)/(cos β(t_0) + v) ≤ ε. ∎
+
+**Phase-1 integrals.** For s ≤ 1, (*) and AM–GM give c_θ(s) ≥ (1 − s²)^{1/2}; for s ∈ [1, t_1], c_θ ≥ −1. So
+  ∫_0^{t_1} c_θ(s) ds ≥ π/4 − 2v  for every θ.                                  (P1a)
+For |θ| ≤ π/2, D_θ(s) ≥ max(|sin θ|, |s − cos θ|) and |sin θ| ≥ 2|θ|/π; for |θ| ≥ π/2, D_θ ≥ 1. Since
+∫_0^{t_1} ds / max(a, |s−b|) ≤ 2 + 2 log(t_1/a), for δ_1 ≤ |θ| ≤ π (angles mod 2π):
+  J_1(θ) := ∫_0^{t_1} ds/D_θ(s) ≤ 2 + 2 log(π t_1/(2δ_1)) ≤ 2.91 + 2.0004 log(3.334/ε).   (P1b)
+(using log(1/δ_1) = log(1/(0.3ε))/(1−v) and v ≤ 10^{-4}). With ε ≥ 403 v² this gives v J_1 ≤ 0.005.
+
+### 1.3 Phase 2: windows (construction)
+
+Let ℓ := ε/(2v) (walking length per window). Set a_1 := δ_1, τ_1 := t_1, X_1 := (t_1, 0). For k = 1, 2, …:
+  * Γ_k(θ) := Q_θ(τ_k) for θ ∈ [a_k, 2π − δ_1]; this depends only on P restricted to [0, τ_k].
+  * Connector: Harry runs straight from X_k to Γ_k(a_k); length c_k.
+  * Walk: Harry walks along the C^1 curve Γ_k at unit speed, starting at θ = a_k, for arclength ℓ or until
+    θ = 2π − δ_1, whichever is first. Let a_{k+1} be where he stops, X_{k+1} := Γ_k(a_{k+1}),
+    ℓ_k ≤ ℓ the length walked, τ_{k+1} := τ_k + c_k + ℓ_k. Stop after the window that reaches 2π − δ_1.
+Every θ ∈ [δ_1, 2π−δ_1] is passed by exactly one walk, at a time s_θ ∈ [τ_k, τ_{k+1}] with P(s_θ) = Q_θ(τ_k).
+
+Bootstrap claims, proved by induction on k (for the path up to τ_k), with Λ := sup over windows so far of
+sup_θ |∂_θ Γ_j(θ)|:
+  (H1) |P(s)| ≥ 1 + 0.48 v for all s ∈ [t_1, τ_k];  (H2) 0.97 ≤ |∂_θ Γ_j| ≤ 1.03 for j ≤ k;  (H3) τ_k ≤ 7.5.
+
+**Connector lengths.** c_1 ≤ |Q_{δ_1}(t_1) − e^{iδ_1}| + |e^{iδ_1} − 1| + |1 − t_1| ≤ 3.0002 v + δ_1, and for k ≥ 2,
+X_k = Q_{a_k}(τ_{k−1}), so c_k ≤ |Q_{a_k}(τ_k) − Q_{a_k}(τ_{k−1})| ≤ v(c_{k−1} + ℓ). By induction
+c_k ≤ M := max(c_1, ε/(2(1−v))) ≤ 5.41 v (using δ_1 ≤ 0.3ε ≤ 2.4v and ε ≤ 8v).
+
+**Upper radius.** On walks |P| = |Q_θ(τ_k)| ≤ 1 + vτ_k; connectors are segments, so |P(s)| ≤ max(1 + 2v, 1 + v s)
+≤ 1 + 10v and |P|² − 1 ≤ 20.01 v.
+
+**Lemma D4 (time spent near a point).** Assume (H2) up to the current time t ≤ 8. For every θ and 0 < r ≤ 1.9,
+  τ_θ(r) := |{ s ∈ [t_1, t] : D_θ(s) < r }| ≤ 6.29 r + 61.2 v.
+*Proof.* Walking at time s, P(s) = Q_{θ'}(τ_j) with |Q_{θ'}(τ_j) − e^{iθ'}| ≤ 8v; so D_θ(s) < r forces
+|e^{iθ'} − e^{iθ}| < r + 8v ≤ 2, hence θ' lies in an arc I of length ≤ π(r + 8v). Distinct windows walk disjoint
+θ'-intervals and the walking time over I is ∫_I |∂_θ Γ_j| ≤ 1.03 |I| ≤ 3.236 (r + 8v). Connectors: a connector
+meeting B(e^{iθ}, r) starts within r + M of e^{iθ}; its start X_k (k ≥ 2) is within 8v of e^{ia_k}, so a_k lies in an
+arc of length π(r + M + 8v). Consecutive a_k are ≥ ℓ/1.03 apart in θ (each non-final walk has length exactly ℓ), so
+there are at most 1 + 1.03π(r + M + 8v)/ℓ such k, plus k = 1. Each connector has length ≤ M, and
+M/ℓ = 2vM/ε ≤ 10.82 v²/ε ≤ 0.027. Total ≤ 3.236(r + 8v) + 2M + 0.027·3.236·(r + 13.41v)
+≤ 3.33 r + 37.9 v ≤ 6.29 r + 61.2 v. ∎
+
+(Only the generous form 6.29 r + 61.2 v is used below.)
+
+### 1.4 Phase 2: the bootstrap estimates (PROVED)
+
+Fix k and assume (H1)–(H3) for the path up to τ_k (true for k = 1: the path is Phase 1 only).
+
+**(H1) for window k and connector k+1.** For θ in window k, by (*), (P1a) and since in Phase 2 c_θ(s) < 0 only
+when D_θ(s)² < |P(s)|² − 1 ≤ 20.01 v, i.e. D_θ < 4.474 v^{1/2}, and then c_θ ≥ −1, Lemma D4 gives
+  |Γ_k(θ)| ≥ 1 + v[π/4 − 2v − τ_θ(4.474 v^{1/2})] ≥ 1 + v[0.7854 − 0.0002 − 28.15·0.01 − 0.0062] ≥ 1 + 0.497 v.
+(Lemma D4 uses only (H2) for earlier walks and the bound c_j ≤ M; no circularity.) A segment of length ≤ M ≤ 5.41v
+whose endpoints have norm ≥ A := 1 + 0.497v stays at norm ≥ (A² − M²/4)^{1/2} ≥ A − M²/(4A) ≥ 1 + 0.496v.
+Connector 1 starts at (1 + 2v, 0). So (H1) holds up to τ_{k+1}.
+
+**(H2).** D_θ(s) ≥ |P(s)| − 1 ≥ 0.48v on Phase 2. By layer-cake (1/D = ∫_D^∞ r^{-2} dr), Lemma D4 for r ≤ 1.9 and
+|{D_θ < r}| ≤ 8 always,
+  J_2(θ) := ∫_{t_1}^{τ_k} ds/D_θ(s) ≤ ∫_{0.48v}^{1.9} (6.29 r + 61.2 v) r^{-2} dr + 8/1.9 ≤ 6.29 log(3.96/v) + 131.8.
+At v ≤ 10^{-4} (the function v log(1/v) is increasing on (0, 1/e)): v J_2 ≤ 0.0199. With v J_1 ≤ 0.004
+(from (P1b) and ε ≥ 403 v²: log(3.334/ε) ≤ 2 log(1/v) − 4.79), |∂_θ Γ_k − i e^{iθ}| ≤ v(J_1 + J_2) ≤ 0.024.
+So 0.976 ≤ |∂_θ Γ_k| ≤ 1.024: (H2). (Differentiation under the integral is justified since 1/D_{θ'} is bounded
+uniformly for θ' near θ ∈ [δ_1, 2π − δ_1].)
+
+**(H3).** Total walked length Σ ℓ_k = ∫_{δ_1}^{2π−δ_1} |∂_θ Γ_{k(θ)}| dθ ≤ 1.024·2π ≤ 6.44. From c_k ≤ v(c_{k−1} + ℓ_{k−1}),
+Σ c_k ≤ (c_1 + v Σ ℓ_k)/(1 − v) ≤ 0.0012. Hence every τ_k ≤ t_1 + 6.44 + 0.0012 ≤ 7.45, and there are at most
+1 + 6.44/ℓ windows (finitely many).
+
+**Error at the window start.** For θ in window k, unseen up to τ_k, Lemma D2 with s ≤ 8 gives
+  E_θ(τ_k) ≤ 2v[ v t_1 J_1(θ) + ∫_{t_1}^{τ_k} min(1, 8v/D_θ(s)) ds ].
+Layer-cake with φ(r) = min(1, 8v/r) (−φ' = 8v/r² on r > 8v):
+  ∫_{t_1}^{τ_k} φ(D_θ) ds ≤ 8v[ ∫_{8v}^{1.9} (6.29 r + 61.2v) r^{-2} dr + 8/1.9 ] ≤ 8v[ 6.29 log(0.2375/v) + 11.87 ].
+With v ≥ ε/8 (so log(0.2375/v) ≤ log(1.9/ε) ≤ L := log(3.334/ε)) and (P1b):
+  E_θ(τ_k) ≤ 2v² [ 97.88 + 52.33 L ].
+
+**Seeing.** Let θ ∈ [δ_1, 2π − δ_1], in window k, and suppose θ is unseen before s_θ. Then
+  |S_θ(s_θ) − P(s_θ)| ≤ |S_θ(s_θ) − S_θ(τ_k)| + |S_θ(τ_k) − Q_θ(τ_k)| ≤ v(c_k + ℓ) + E_θ(τ_k)
+  ≤ 5.41 v² + ε/2 + 2v²(97.88 + 52.33 L) ≤ ε,
+the last step being exactly v² ≤ ε/(402.4 + 209.4 L), implied by (A0). Directions with |θ| < δ_1 were seen in
+Phase 1 (Lemma D3). All directions are seen by time 7.45 < 8. ∎
+
+**Remarks.** (i) Harry's path is fixed in advance and computed from his own past only (Q never uses the Snitch).
+(ii) Speed is exactly 1 throughout. (iii) The cap v ≤ 10^{-4} comes only from the crude margin estimate
+28.15 v^{1/2} ≤ 0.29 in (H1); the ε-dependence v ≲ (ε/log(1/ε))^{1/2} comes from E ≈ v²·(time)·log.
+(iv) Where the law is used: in the radial-margin estimate (*) (the Snitch is pushed *outward* while Harry is
+inside, so Harry, riding the predicted front, stays a distance ≳ v outside every initial point e^{iα}), and in
+Lemma D3. Theorem A by contrast uses only |S'| ≤ v.
+
+## 2. Exact description of what one straight leg sees (PROVED)
+
+Signed coordinates: for a candidate at (ρ, β) relative to Harry and his heading, β ∈ (−π, π], put
+F(ρ, β) := (sgn(β) ρ g(|β|), ρ(cos β + v)) =: (C, h), with C := 0 on the two rays β ∈ {0, π}.
+
+**Lemma D5.** F is a homeomorphism of R²∖{0} onto itself, positively homogeneous of degree 1; it maps the forward
+ray onto {C = 0, h > 0} and the backward ray onto {C = 0, h < 0}. A unit-speed straight leg of duration τ acts as
+the translation (C, h) ↦ (C, h − (1−v²)τ). Consequently, with V_ε := F({0 < ρ ≤ ε}) ∪ {0} (a compact set,
+star-shaped about 0, with boundary ε(±g(β), cos β + v), β ∈ [0, π]):
+a candidate is seen during the leg iff (C, h − σ) ∈ V_ε for some σ ∈ [0, (1−v²)τ], (C, h) taken at the leg start.
+For τ → ∞ this is: |C| ≤ ε g_max and h ≥ h_low(C) (the lower boundary of V_ε), i.e. ρ g(|β|) ≤ ε g_max with
+|β| ≤ β_m := arccos v, or ρ ≤ ε already; here g_max = g(β_m).
+
+*Proof.* On each open half-plane F is the (C, h) chart of the Remark after Lemma 1 of snitch_proved (bijective
+onto {±C > 0} with inverse β = k^{-1}(h/|C|), ρ = |C|/g(β)). As β → 0, g → 0 so C → 0 and h → ρ(1+v); as β → π,
+h → −ρ(1−v); conversely C → 0 with h → h_0 > 0 forces h/|C| → +∞, β → 0, ρ = h/(cos β + v) → h_0/(1+v), and
+similarly for h_0 < 0. Since g(β) and |cos β + v| never vanish together, m := min_β max(g, |cos β + v|) > 0 and
+ρ ≤ |(C,h)|/m, so F^{-1} is continuous at 0 too. Homogeneity is clear. The translation is Prop. 1 of
+snitch_proved (on the forward ray, h = ρ(1+v) decreases at rate (1+v)(1−v) as well). The seen criterion follows
+because seen ⇔ ρ ≤ ε at some time ⇔ the translated point lies in V_ε. The long-leg form uses that ρ = C/g(β)
+is minimised over the leg at β = β_m (g increasing on (0, β_m), decreasing after) and β increases along a leg. ∎
+
+**Corollary (needle).** Since g(β) ≤ 2^v β^{1−v}, a long leg sees every candidate ahead with
+β ≤ (ε g_max /(2^v ρ))^{1/(1−v)}, i.e. lateral half-width ≈ ε^{1/(1−v)} ρ^{−v/(1−v)} at distance ρ (and, up to
+constants, only those). So a leg crossing the front transversally sees an arc of length O(ε^{1/(1−v)}); a leg
+must run *along* the front to be efficient, and then the front's curvature limits the useful leg length to
+O((ε/κ)^{1/2}). This is why the proof of Theorem D1 walks along a (predicted) front rather than using spokes.
+(The corner map at a turn by angle χ is F∘R_χ∘F^{-1}, again homogeneous of degree 1, so the near-Harry picture
+at scale ε is scale-free; I did not find an inductive invariant using this — see §5.)
+
+## 3. The leg-greedy chase and a conditional ε-uniform range
+
+**Strategy LG (finite-step).** Run straight at α = 0 until it is at distance ε/2 (time t_0 = (1−ε/2)/(1−v)).
+Then repeat: let U(t) be the set of unseen directions in (0, 2π) and α* := inf U(t); run straight at S_{α*}
+until ρ_{α*} = ε/2. Stop when U = ∅.
+
+**Proposition D6 (PROVED; conditional reduction).**
+(a) U(t) is open; at each switch ρ_{α*} ≥ ε, so every leg lasts ≥ ε/(2(1−v)) and at most 2(1−v)T/ε legs occur
+before time T (finite-step, no Zeno).
+(b) Let Ψ(t) := ρ_target(t) + Λ(t), Λ(t) := length of the arc {S_α(t) : α_target ≤ α < 2π}. Ψ does not increase
+at switches, and between switches Ψ' = −(1−v) + v K(t), where K(t) := ∫_{remaining arc} sin²φ / ρ ds
+(φ = angle between the arc's tangent and the direction from Harry), and K ≤ total variation of the bearing of
+the remaining arc as seen from Harry.
+(c) Hence, if K(t) ≤ K* for all t and v(1 + K*) < 1, every candidate is seen by
+  T ≤ t_0 + Ψ(t_0)/(1 − v(1+K*)),  Ψ(t_0) ≤ ε/2 + 2π d(1 + v t_0)  (d = 1 here).
+*Proof.* (a) If α_n → α with α_n seen by t but α unseen on [0, t], then ρ_α > ε on [0, t] and by continuous
+dependence (Claim in Lemma 4 of snitch_proved) ρ_{α_n} > ε on [0, t] for large n — contradiction; so the seen
+set is closed. α* ∉ U but points of U accumulate at α*, all with ρ > ε, so ρ_{α*} ≥ ε by continuity.
+At the end of a leg B(H, ε) ⊇ B(S_{α*}, ε/2), so the new α** > α* and |S_{α**} − S_{α*}| ≥ ε/2 (since
+ρ_{α**} ≥ ε). (b) Ψ_old = ε/2 + |arc(α*, α**)| + Λ_new ≥ |H − S_{α*}| + |S_{α*} − S_{α**}| + Λ_new ≥ Ψ_new.
+Along a leg the target is on the forward ray, so ρ_target' = −(1−v); Λ' = v∫ sin²φ ρ^{-1} |∂_α S| dα by the
+stretching formula in the proof of Prop. 6(2) of snitch_proved, and sin²φ ds/ρ = |sin φ| |dθ| ≤ |dθ|.
+(c) Integrate; Ψ ≥ 0. Ψ(t_0) ≤ ε/2 + L(t_0) and L(t_0) ≤ 2π + 2πv t_0 by Prop. 6(2) (no contact before t_0). ∎
+
+So for ε > 0 the whole problem reduces, with no compactness, to a bound on the *weighted* angle K — the
+continuous analogue of hypothesis (H) of Theorem B (K plays the role of W ≤ A, and is ≤ π-ish numerically).
+The bound "K ≤ total bearing variation" is weak: numerically TV(bearing) reaches 4.8 at v = 0.2 while K ≤ 2.95.
+
+## 9. For the referee: statements claimed PROVED
+
+* Theorem D1 (§1; statement in "Result in one paragraph"), via Lemmas D1, D2 (§1.1), D3 and (P1a), (P1b) (§1.2),
+  Lemma D4 (§1.3) and the bootstrap (H1)–(H3) with the error and seeing estimates (§1.4).
+  Points to attack: the layer-cake bounds in §1.4, the connector count in Lemma D4, the margin bootstrap
+  (no circularity: Lemma D4 needs only (H2) for earlier walks and c_k ≤ M), and Lemma D3 (uses k decreasing).
+* Lemma D5 (§2): exact seen set of a straight leg; (C,h) is a homeomorphism of the punctured plane.
+* Proposition D6 (§3): finite-step reduction of the ε > 0 problem to a bound on K. (Ψ' formula holds wherever
+  K(t) < ∞; part (c) is conditional on K ≤ K*.)

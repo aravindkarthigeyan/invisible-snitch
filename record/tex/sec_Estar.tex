@@ -1,0 +1,797 @@
+% sec_Estar.tex -- The end theorem with optimised constants: Theorem End* (every threshold of the proof of Theorem E a
+% parameter), Corollary End*, the structural Lemmas L1--L4, status.
+% Source: referee/Q1-claims.md, version 2 (stream Q1), which applies the fixes of reports/referee-RQ1-1.md and
+% reports/referee-RQ1-2.md (version 1 kept as referee/Q1-claims-v1.md). Doubly refereed. Interface: reports/Q4-1.md.
+% Changes of notation against Q1-claims (clashes with sec_B.tex / sec_E.tex):
+%   leg-duration majorant d -> d_L (d = 1 is the vision distance);  chi = kappa_1 d -> chi_g (chi is used in
+%   lem:E-facts(c));  chain ratio q -> q_c (q = e^perp.Ae);  far factor f -> f_F (f is the field profile, lem:B-C(2));
+%   constant Psi -> Psi_I (Psi_tau is a function);  G of Lemma 4.3 -> G_3;  G of Lemma 4.2(ii) -> \bar g;
+%   theta of (Imp*) -> \bar\theta;  Lemmas 4.1-4.3 -> lem:Estar-duh, lem:Estar-gap, lem:Estar-int;
+%   Q1.L1-L4 -> lem:Estar-L1 ... lem:Estar-L4;  B_2U, B_2eta -> B_{2U}, B_{2\eta}.
+% Uses the macros \Bjs, \Bts, \BF of sec_B.tex and \EbE, \ETL of sec_E.tex.
+
+\newcommand{\ESd}{d_{\mathrm L}}
+\newcommand{\ESchi}{\chi_{\mathrm g}}
+\newcommand{\ESq}{q_{\mathrm c}}
+\newcommand{\ESf}{f_{\mathrm F}}
+\newcommand{\ESct}{c_{\mathrm t}}
+\newcommand{\EScamp}{c_{\mathrm{amp}}}
+\newcommand{\ESCmu}{C_{\mu\mathrm A}}
+\newcommand{\ESCone}{C_{1\mathrm A}}
+\newcommand{\ESDI}{D_{\mathrm I}}
+\newcommand{\ESDs}{D_{\mathrm{IIs}}}
+\newcommand{\ESDl}{D_{\mathrm{IIl}}}
+\newcommand{\ESX}{X_{\mathrm{far}}}
+\newcommand{\ESPsi}{\Psi_{\mathrm I}}
+\newcommand{\ESs}{^{*}}
+
+\section{The end theorem with optimised constants}\label{sec:Estar}
+
+Theorem~\ref{thm:End} fixes every threshold of its proof by a number (normalisation $m=\gamma/50$, far iff $g\ge64\lambda$,
+$l\le\frac98\lambda$, separation $\frac12\min(\lambda,32R)$, \dots) and pays for this with $\gamma\le1/4$ and
+$v\le2\cdot10^{-11}\gamma^2$. This section keeps the construction, the family and the method of Theorem~\ref{thm:End} and makes
+every threshold a parameter. The side conditions \textup{(P0)}--\textup{(P7)} below are exactly what the steps of the proof need.
+With the values in the last column of Table~\ref{tab:Estar-par}, except $\delta_1:=e^{2v/(1-v)}$ in place of $2$, the side
+conditions \textup{(P0)}--\textup{(P7)}, \textup{(Pc)} hold under the hypotheses of Theorem~\ref{thm:End}, and
+Theorem~\ref{thm:Estar} gives the conclusions of Theorem~\ref{thm:End} (for (c): $\tilde K\le16.001+5.3\,U/R$); with $\delta_1=2$
+itself, (c) gives only $\tilde K\le32.0003+10.9\,U/R$, which is weaker than $17+19\,U/R$ when $U/R<1.85$ (numerical comparison, not
+refereed; checked in audit~D). Theorem~\ref{thm:End} is proved in Section~\ref{sec:end} with coarser constants, and the proof below
+follows that proof step by step. Three
+estimates are written with finer bookkeeping: the frozen-direction identity of Lemma~\ref{lem:E-facts}(b) replaces
+$2N^2+2l|\Delta e|^2$ in \eqref{eq:E-mu}; the far forcing for $g>\eta R$ is integrated against the gap instead of over the
+whole time $T_B$; and Term~II of the near step is split into a part from the sub-arc and a part from the base point. The cap
+$\gamma\le1/4$ and the exponent halving of Corollary~\ref{cor:End} are removed: only $\gamma+\nu\le a'$ and $\gamma+\nu<1$ are
+used. For the data of the paper the side conditions hold up to $v\approx6\cdot10^{-5}$ (Remark~\ref{rem:Estar-status}).
+
+Setting, notation and construction are exactly those of Section~\ref{sec:end}, subsection ``The bulk bootstrap on an arc that
+ends'': $d=1$, the field $F$, $A=DF$, $a^*$, the virtual candidates $x_\theta$, $r=x-P$, $\rho=|r|$, the quantities $l,c,e,E,N$,
+$\mu=v/(1-v)$; Construction~C from $(\Bts,a_{\mathrm s})$, cut at $\EbE$ ($\EbE-a_{\mathrm s}<2\pi$,
+$P(\Bts)=x_{a_{\mathrm s}}(\Bts)$, $P(0)=0$); the labels $u\in[0,U]$, $U:=l_{\Bts}(a_{\mathrm s},\EbE)$, and the label length
+$\lambda:=u_b-u_a$. All new labels of this section carry the prefix \texttt{Estar-}.
+
+\subsection{Parameters, derived constants and hypotheses}
+
+The free parameters are listed in Table~\ref{tab:Estar-par}, with the values that Theorem~\ref{thm:End} uses.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}llp{6.3cm}l@{}}
+\toprule
+parameter & range & role & in Thm.~\ref{thm:End}\\
+\midrule
+$\gamma$ & $\gamma>0$, $\gamma+\nu<1$ & invariant exponent, $N\le M\lambda^{1/2+\gamma}$ & $\le1/4$\\
+$R$ & $(0,1]$ & largest scale of the family & $R$\\
+$m$ & $m>0$ & normalisation, $M:=mR^{-\gamma}$ & $\gamma/50$\\
+$s_0$, $\ESf$ & $0<s_0\le\ESf<1$ & start factor in (S2$\ESs$); far-pair factor & $1/8$, $3/8$\\
+$\kappa_1$ & $(1,4/3]$ & (J1$\ESs$): $l\le\kappa_1\lambda$ & $9/8$\\
+$c_A$ & $(0,1]$ & chord constant in (S1$\ESs$), \eqref{eq:Estar-CA} & $1/2$\\
+$K_R$ & $\ge1$ & separation scale $K_RR$ in (S1$\ESs$) & $32$\\
+$K_f$ & $\ge3$ & a pair is far iff $g\ge K_f\lambda$ & $64$\\
+$K_\varepsilon$ & $\ge3/2$ & (S3$\ESs$): $\varepsilon\le R/K_\varepsilon$ & $64$\\
+$\eta$ & $(0,K_f/(K_f+1)]$ & far forcing through tilts iff $g\le\eta R$ & $1/2$\\
+$\ESq$ & $>1$ & ratio of the chains of the tilt lemma & $2$ (and $3$)\\
+$\nu$ & $\ge0$ & amplification exponent & $22v$\\
+$\ESd$, $\delta_1$, $A_0$ & $\ge1$ & leg duration $\le\ESd\varepsilon$; $e^{2\mu}\le\delta_1$; far prefactor & $2$, $2$, $2$\\
+\bottomrule
+\end{tabular}
+\caption{Free parameters of Theorem~\ref{thm:Estar}, and the values used in Theorem~\ref{thm:End}.}\label{tab:Estar-par}
+\end{table}
+
+\noindent\textbf{Derived constants.} All are explicit functions of the free parameters (and of $v$, $U$ where indicated):
+\begingroup\allowdisplaybreaks
+\begin{align*}
+&M:=mR^{-\gamma},\qquad \ESchi:=\kappa_1\ESd,\qquad c_6:=\frac{1+\delta_1}{c_A},\qquad
+\ESct(r):=\frac{\kappa_1^{1/2}r^{1/2+\gamma}+m/2}{c_A}\ \ (r\ge1),\\
+&S_q:=\frac1{1-\ESq^{-\gamma}},\qquad C_A:=S_q\,\ESct(\ESq),\qquad C_B:=C_A+\ESct(3),\qquad \ETL:=C_A+C_B,\\
+&\ESCmu:=1+\kappa_1C_A^2,\qquad \ESCone:=(\kappa_1\ESCmu)^{1/2},\qquad
+c_\rho:=c_A-\frac{2\delta_1+\kappa_1}{K_f},\qquad c_R:=c_AK_R-\frac{\delta_1}{K_\varepsilon}-\kappa_1,\\
+&K_1:=\frac{c_\rho K_f}{\kappa_1},\qquad K_2:=\frac{c_R}{\kappa_1},\qquad a_i:=1+\frac1{K_i}+\frac2{K_i^2}\ \ (i=1,2),\qquad
+\EScamp:=\frac{a_1\ESchi}{c_\rho},\\
+&B_{2U}:=\frac{2\kappa_1^{3/2}(1+1/K_2)}{c_R^2},\qquad
+B_{2\eta}:=\frac{2\kappa_1^{3/2}(1+1/K_1)}{c_\rho^2}\Bigl(\frac{\ESchi}\eta+\frac{\ESd}{K_\varepsilon\eta^2}\Bigr),\\
+&r_f:=1+\frac1{K_f-2},\qquad C_p:=\kappa_1\bigl[\ESct(r_f)+C_B(1+1/K_f)^\gamma\bigr],\qquad B_3:=\frac{2\kappa_1^{3/2}C_p}{c_\rho^3},\\
+&\ESPsi:=2+\log\min(K_f,K_R)+\frac{(K_f-K_R)^+}{K_R},\qquad \tau_{\mathrm I}:=\ESd(\kappa_1c_6+2)+c_6\ESchi\ESPsi,\\
+&\tau_\alpha:=\frac{\ESd}{c_6}+\ESchi(2+\log K_f),\qquad
+\tau_\beta:=2^\gamma\Bigl[2\ESd+\ESchi\Bigl(\frac34+\frac{K_f^\gamma-1}{2\gamma}\Bigr)\Bigr],\qquad
+\tau_n:=\ESchi K_f+2\ESd,\\
+&k_0:=\max(\ESCone,\kappa_12^\gamma C_A),\qquad
+\iota:=1\ \text{if }K_f+1>K_R,\quad\iota:=0\ \text{otherwise},\qquad \ESDI:=\ESCmu\tau_{\mathrm I},\\
+&\ESDs:=c_6^2\ESCone^2\tau_\alpha+2c_6^2\kappa_1\ETL\ESCone\tau_\beta+4\ESd c_6\ESCone k_0,\qquad
+\ESDl:=\frac{c_6(K_f+1)^\gamma}m\Bigl[\ESCone\tau_\alpha+\frac{\iota\,\kappa_1^{1/2}\tau_n}{K_R}\Bigr],\\
+&B_5:=\frac2{c_\rho}\Bigl[\frac{(C_p+\kappa_1^{1/2}K_f^{-1-\gamma})^2}{c_\rho^2}+K_f^{-2\gamma}\Bigr],\qquad
+I_5:=\frac{\ESchi(\eta+1/K_\varepsilon)^{2\gamma}}{2\gamma}+\ESd\max\bigl(1,(2/K_f)^{1-2\gamma}\bigr)K_\varepsilon^{-2\gamma},\\
+&\ESX:=v\Bigl[\frac{\ESchi U}{c_RR}+\frac1{c_\rho}\Bigl(\frac{\ESd}{K_\varepsilon\eta}+\ESchi\log\frac{K_R}\eta\Bigr)\Bigr],\qquad
+L_J:=\exp\bigl(\ESX+B_5I_5vm^2\bigr)+v\kappa_1\tau_{\mathrm I},\\
+&r_1:=R\Bigl(\frac{c_A}{\kappa_1}-\frac{\delta_1}{K_\varepsilon}\Bigr).
+\end{align*}
+\endgroup
+
+\medskip\noindent\textbf{Start hypothesis (ST$\ESs$)} at $\Bts$:
+\begin{itemize}
+\item[(S1$\ESs$)] $c(a,b;\Bts)\ge c_A\min(\lambda,K_RR)$ for all pairs in $[a_{\mathrm s},\EbE]$ with $\lambda\ge\varepsilon/2$;
+\item[(S2$\ESs$)] $N(a,b;\Bts)\le s_0M\lambda^{1/2+\gamma}\min\bigl(1,K_f\lambda/\min(u_a,K_RR)\bigr)^\nu$ for all pairs with
+$\varepsilon/2\le\lambda\le R$ (the last factor is $1$ when $u_a=0$);
+\item[(S3$\ESs$)] $\varepsilon\le R/K_\varepsilon$.
+\end{itemize}
+
+\noindent\textbf{Side conditions.}
+\begin{itemize}
+\item[(P0)] the ranges of Table~\ref{tab:Estar-par}, and $0<v<1$;
+\item[(P1)] $1/(1-v)\le\ESd$ and $e^{2v/(1-v)}\le\delta_1$;
+\item[(P2)] $c_\rho K_f\ge2$, $c_RK_\varepsilon\ge1$, $c_6\le K_RK_\varepsilon$;
+\item[(P3)] $\EScamp v\le\nu$;
+\item[(P4)] $v\bigl[2a_1\ESd/(c_\rho K_f)+a_2\ESchi U/(c_RR)\bigr]\le\log A_0$;
+\item[(P5)] $A_0\Bigl[s_0+\max(1,K_R/K_f)^\nu\,\dfrac vm\Bigl(\dfrac{B_{2U}\ESchi U}R+B_{2\eta}\Bigr)
++B_3K_f^{\gamma-1}\Bigl(\dfrac{2\ESd}{K_f}+\dfrac{\ESchi}{1-\gamma-\nu}\Bigr)v\Bigr]\le\ESf$;
+\item[(P6)] $\ESf^2+2v\bigl[\ESDI+\max(\ESDs,\ESDl)\bigr]<1$;
+\item[(P7)] $L_J<\kappa_1$, i.e.\ $\exp\bigl(\ESX+B_5I_5vm^2\bigr)+v\kappa_1\tau_{\mathrm I}<\kappa_1$;
+\item[(Pc)] (only for conclusion (c)) $m^2\le1/2$ and $r_1>0$.
+\end{itemize}
+\emph{Monotonicity.} With the free parameters other than $v$ fixed, every left side is non-decreasing in $v$ and in $U$ ($v$ and $U$
+enter only as positive factors, through $\exp$, or through $1/(1-v)$); $\varepsilon$ enters only through (S3$\ESs$). So
+\textup{(P0)}--\textup{(P7)} for $(v_0,U_{\max})$ imply them for all $v\le v_0$, $U\le U_{\max}$.
+
+\subsection{Statements}
+
+\begin{theorem}[End$\ESs$: the end theorem with parametric constants]\label{thm:Estar}
+Assume \textup{(ST$\ESs$)} and \textup{(P0)}--\textup{(P7)}. Then:
+\begin{enumerate}
+\item[(a)] \emph{Invariants.} For every $t$ from $\Bts$ until the construction stops and every pair of $\BF(t)$:
+\begin{equation}\label{eq:Estar-J}
+\textup{(J1$\ESs$)}\ \ l_t(a,b)\le\kappa_1\lambda\ \ (\text{in fact}\le L_J\lambda);\qquad
+\textup{(J2$\ESs$)}\ \ N(a,b;t)\le M\lambda^{1/2+\gamma}.
+\end{equation}
+Moreover $c(a,b;t)\ge c_A\min(\lambda,K_RR)$ for all pairs with $\lambda\ge\varepsilon/2$ and all $t\ge\Bts$.
+\item[(b)] \emph{The end.} Every non-final leg advances the base label by $u_{a_{j+1}}-u_{a_j}\in[\varepsilon/\kappa_1,\varepsilon]$.
+The construction stops, at a leg start $T_{\mathrm{stop}}=t_J$ with $J-\Bjs\le\kappa_1U/\varepsilon$ and
+$T_{\mathrm{stop}}\le\Bts+\kappa_1U/(1-v)$; $l_{T_{\mathrm{stop}}}(a_J,\EbE)\le\varepsilon$; every label of
+$[a_{\mathrm s},\EbE]$ has been seen by $T_{\mathrm{stop}}$; and $|P(T_{\mathrm{stop}})-x_{\EbE}(T_{\mathrm{stop}})|\le\varepsilon$.
+\item[(c)] \emph{Flatness, separation, $\tilde K$.} If also \textup{(Pc)} holds: for every non-final leg $j+1>\Bjs$ and every $t$ in
+it, \textup{(F$_b$)} and \textup{(S)} of Theorem~\ref{thm:R} hold with $b^*=\EbE$, $\gamma$, $r_0=R$, $c_0=m^2/2$, $c_1=0$ and
+$r_1$; and
+\[
+\tilde K(t):=\int_{a_{j+1}}^{\EbE}T\cdot AT\,ds\le16\delta_1+2m^2(1+1/\gamma)+2\delta_1\kappa_1U/r_1 .
+\]
+\item[(d)] \emph{Tilts.} At any time $t\le T_{\mathrm{stop}}$, for pairs $J\subset I$ of $\BF(t)$:
+$|e_J-e_I|\le\ETL M\lambda_I^\gamma=\ETL m(\lambda_I/R)^\gamma$, with $C_A$ (resp.\ $C_B$) in place of $\ETL$ if $J$ and $I$ have
+the same left (resp.\ right) end.
+\item[(e)] \emph{Distance from the base.} For $t$ in leg $j+1$ and a label $s$ with $w_s:=u_s-u_{a_j}\ge0$:
+$\rho_s\ge c_A\min(w_s,K_RR)-\delta_1\varepsilon$, and $\max(\rho_s,\varepsilon)\ge\min(w_s,K_RR)/c_6$.
+\end{enumerate}
+No constant depends on $\varepsilon$. The invariants at a time $t$ depend only on $P|_{[0,t]}$ (Remark~\ref{rem:E-B}(4) applies
+verbatim).
+\end{theorem}
+
+\begin{remark}[Conclusions (c) and (d) at the optimum]\label{rem:Estar-cd}
+(1) At the optimised parameters for the data $(a',C_0,\lambda_0,c_{\mathrm{sep}},U_{\max})=(1/2,0.86,1/40,0.024,6.5)$ the bound of
+(c) is $\approx1.9\cdot10^4$ and $\mu\tilde K\approx1.11>1$, so Theorem~\ref{thm:R} cannot be invoked with these values. (c) is
+stated for use with other parameter choices; it is not used in (a), (b), (d), (e), nor in the assembly of the main theorem. A
+consumer that wants Theorem~\ref{thm:R} must add $\mu K^*<1$ as a further side condition.
+
+(2) At the same optimum $\ETL m\approx2.67>2$, so (d) is informative only for $\lambda_I\ll R$ (for
+$\lambda_I/R<(2/2.675)^{1/\gamma}\approx0.56$). No step of the proof needs $\ETL M\lambda^\gamma<1$: tilts enter only through
+$|e\times e'|\le|e-e'|$, the identity of Lemma~\ref{lem:E-facts}(b) and the inequality of Lemma~\ref{lem:B-4}(a). A consumer that
+needs small tilts must impose a cap such as $\ETL m\le0.33$.
+\end{remark}
+
+\begin{corollary}[End$\ESs$: final approach with parametric constants]\label{cor:Estar}
+Let $(a',C_0,\lambda_0,c_{\mathrm{sep}})$ with $a'\in(0,1]$, $C_0>0$, $\lambda_0\in(0,1]$, $c_{\mathrm{sep}}>0$ be data for
+which hypothesis \textup{(ST$_{\mathrm{end}}$)} of Section~\ref{sec:end} (\textup{(E1)}, \textup{(E2)}) holds at a leg start $\Bts$
+with $P(\Bts)=x_{a_{\mathrm s}}(\Bts)$, $\EbE-a_{\mathrm s}<2\pi$, and let $U\le U_{\max}$. If the parameters satisfy
+\textup{(P0)}--\textup{(P7)} with $U=U_{\max}$ and
+\begin{itemize}
+\item[(C0)] $C_0\lambda_0^{a'}\le1$;\qquad (C1) $R\le\lambda_0$;
+\item[(C2)] $1-\frac12\bigl(C_0\min(K_RR,\lambda_0)^{a'}\bigr)^2\ge c_A$;
+\item[(C3)] if $K_RR<\lambda_0$: $\lambda_0\bigl(1-\frac12(C_0\lambda_0^{a'})^2\bigr)\ge c_AK_RR$;
+\item[(C4)] $c_{\mathrm{sep}}\ge c_AK_RR$;\qquad (C5) $\gamma+\nu\le a'$;
+\item[(C6)] $C_0R^{a'}\le s_0m\min(1,K_f/K_R)^\nu$,
+\end{itemize}
+and $\varepsilon\le R/K_\varepsilon$, then \textup{(ST$\ESs$)} holds; hence \textup{(a)}, \textup{(b)}, \textup{(d)}, \textup{(e)} of
+Theorem~\ref{thm:Estar} hold, and \textup{(c)} if also \textup{(Pc)} holds.
+\end{corollary}
+
+Against Corollary~\ref{cor:End}: no relation $\gamma=\min(a'/2,1/4)$, and $K_RR\le\lambda_0$ is not required ((C1)--(C3) only
+ask $R\le\lambda_0$). (C0) is part of \textup{(ST$_{\mathrm{end}}$)} and is not used in the proof below.
+
+\subsection{Proof of Theorem~\ref{thm:Estar}}
+
+\noindent\textbf{Unchanged steps.} The items of Table~\ref{tab:Estar-unch} are used verbatim (with the indicated replacement of
+numerical constants by parameters, which does not touch their proofs). Every other step of the proofs of
+Theorem~\ref{thm:End} and of the quoted parts of Theorem~\ref{thm:Bulk} is rewritten in full below.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}p{5.4cm}p{3.6cm}p{6.2cm}@{}}
+\toprule
+item (source) & used in & replacement / hypothesis check\\
+\midrule
+Lemma~\ref{lem:B-V}(i)--(iii) & throughout & none\\
+Lemma~\ref{lem:B-VC}(a)--(c) & monotonicity of $l$, $c$; ``seen'' & (c): $P(0)=0$\\
+Lemma~\ref{lem:B-1}(i), Lemma~\ref{lem:B-2}(i)--(iii) & $l'$, $E'$ & none\\
+Lemma~\ref{lem:B-3}(a), (c) & Steps 3--5 & (c): $\rho_m\ge\varepsilon$, checked in Step~3\\
+Lemma~\ref{lem:B-4}(a), (b) & tilt lemma; Claim of Thm.~\ref{thm:R} & none\\
+Lemma~\ref{lem:B-C}(0), (2), (3), (4) for Construction~C cut at $\EbE$ & legs & as in Section~\ref{sec:end} (verbatim)\\
+Lemma~\ref{lem:E-facts}(a), (b) & \eqref{eq:Estar-mu}, Term~II & none\\
+Family $\BF(t)$, switching-time convention, gap $g$; $\BF$ shrinks, $g$ non-increasing (Section~\ref{sec:end}, before
+Thm.~\ref{thm:End}) & throughout & $64\mapsto K_f$ in ``far''\\
+Continuity scheme of the proof of Thm.~\ref{thm:End}(a) & Step~0 & bounds of (Imp$\ESs$); $\delta$ depends on
+$(v,\varepsilon,M,\gamma,\kappa_1,\bar\theta,L_J)$\\
+Start value of near pairs, continuity of $E$ at switches (Step~4 of the proof of Thm.~\ref{thm:End}) & Step~4 & $3/8\mapsto\ESf$,
+$1/8\mapsto s_0$\\
+Proof of Thm.~\ref{thm:End}(b) & (b) & $2U/\varepsilon\mapsto\kappa_1U/\varepsilon$\\
+Proof of Thm.~\ref{thm:End}(c): Claim in the proof of Thm.~\ref{thm:R} with $b^*=\EbE$, $K_T=0$, $2\pi\mapsto\EbE$; covering of
+$[a_j,\EbE]$ & (c) & $\BLs=\kappa_1U$; $\frac98\mapsto\kappa_1$\\
+Remark~\ref{rem:E-B}(4) (causality) & scope & none\\
+\bottomrule
+\end{tabular}
+\caption{Unchanged steps: items of Sections~\ref{sec:bulk} and~\ref{sec:end} used verbatim in the proof of
+Theorem~\ref{thm:Estar}.}\label{tab:Estar-unch}
+\end{table}
+
+\paragraph{Three auxiliary lemmas.}
+
+\begin{lemma}[Duhamel form of Lemma~\ref{lem:B-3}(c), general ratio]\label{lem:Estar-duh}
+Fix labels $a<b$. If on $[t_1,t_2]$ the convex hull of the arc stays at distance $\rho_m(t)\ge\varepsilon$ from $P$, then with
+$\alpha:=(v/\rho_m)(1+l/\rho_m+2l^2/\rho_m^2)$ and $\beta:=2v\,l^{3/2}|p_a|/\rho_m^3$,
+\[
+N(t_2)\le\exp\Bigl(\int_{t_1}^{t_2}\alpha\Bigr)N(t_1)+\int_{t_1}^{t_2}\exp\Bigl(\int_t^{t_2}\alpha\Bigr)\beta(t)\,dt .
+\]
+If moreover $\rho_m\ge Kl$, then $\alpha\le(1+1/K+2/K^2)\,v/\rho_m$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:B-3}(c), $E'\le\alpha N^2+\beta N$. With $N_\eta:=(N^2+\eta^2)^{1/2}$, $\eta>0$:
+$N_\eta N_\eta'=E'\le\alpha N_\eta^2+\beta N_\eta$, so $N_\eta'\le\alpha N_\eta+\beta$; variation of constants, then $\eta\to0$.
+This is the proof of Lemma~\ref{lem:B-3}(e) without inserting $l/\rho_m\le1/4$.
+\end{proof}
+
+\begin{lemma}[Gap--time integrals; replaces \eqref{eq:E-1c}]\label{lem:Estar-gap}
+Assume that every non-final leg advances the base label by at least $\varepsilon/\kappa_1$ and lasts at most $\ESd\varepsilon$. Fix a
+label $a$ and a set of times $\mathcal T$ on which the pair under consideration is in the family; the gap
+$g(t)=u_a-u_{a_{j(t)}}$ is constant on each leg, and its attained values (one per leg) are spaced by at least $\varepsilon/\kappa_1$.
+\begin{enumerate}
+\item[(i)] If $h\ge0$ is non-increasing on $[g_{\min},\infty)$, where $g_{\min}$ is the smallest attained gap $\ge g_0$ in
+$\mathcal T$, then
+$\displaystyle\int_{\{t\in\mathcal T:\,g(t)\ge g_0\}}h(g(t))\,dt\le\ESd\varepsilon\,h(g_{\min})+\ESchi\int_{g_{\min}}^\infty h(g)\,dg$.
+\item[(ii)] If $h\ge0$ is non-decreasing on $[0,\bar g+\varepsilon/\kappa_1]$ and all attained gaps in $\mathcal T$ are
+$\le\bar g$, then $\displaystyle\int_{\mathcal T}h(g(t))\,dt\le\ESchi\int_0^{\bar g+\varepsilon/\kappa_1}h(g)\,dg$.
+\item[(iii)] The number of legs of $\mathcal T$ with gap in $[0,x)$ is at most $\kappa_1x/\varepsilon+1$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) Order the attained gaps $\ge g_0$ as $g_1>g_2>\dots>g_n=g_{\min}$. For $i<n$, $g_i-\varepsilon/\kappa_1\ge g_{i+1}\ge g_{\min}$
+and $h(g_i)\le(\kappa_1/\varepsilon)\int_{g_i-\varepsilon/\kappa_1}^{g_i}h$, since $h$ is non-increasing; the intervals
+$(g_i-\varepsilon/\kappa_1,g_i]$ are disjoint and lie in $[g_{\min},\infty)$. Each leg lasts at most $\ESd\varepsilon$, so the integral
+is $\le\ESd\varepsilon\sum_ih(g_i)\le\ESd\varepsilon\,h(g_{\min})+\ESd\kappa_1\int_{g_{\min}}^\infty h$.
+(ii) In the same way, $h(g_i)\le(\kappa_1/\varepsilon)\int_{g_i}^{g_i+\varepsilon/\kappa_1}h$ for every attained gap, since $h$ is
+non-decreasing on $[0,\bar g+\varepsilon/\kappa_1]$; the intervals $[g_i,g_i+\varepsilon/\kappa_1)$ are disjoint and lie in
+$[0,\bar g+\varepsilon/\kappa_1]$. (iii) The attained gaps in $[0,x)$ are spaced by $\ge\varepsilon/\kappa_1$.
+\end{proof}
+
+\begin{lemma}[Two elementary integrals]\label{lem:Estar-int}
+For $\lambda>0$ put $h_1(z):=\int_z^\infty\min(\lambda,y)y^{-2}dy$ and $h_3(z):=\int_z^\infty\min(\lambda,y)y^{-3}dy$ ($z>0$). Then
+$h_1(z)=1+\log(\lambda/z)$ for $z\le\lambda$ and $h_1(z)=\lambda/z$ for $z>\lambda$; $h_3(z)=1/z-1/(2\lambda)$ for $z\le\lambda$ and
+$h_3(z)=\lambda/(2z^2)$ for $z>\lambda$. Both are non-increasing; $z\,h_1(z)\le\lambda$ for all $z>0$;
+$\int_0^{K\lambda}h_1=\lambda(2+\log K)$ for $K\ge1$; and $z\,h_3(z)=G_3(z/\lambda)$ with $G_3(x)=1-x/2$ for $x\le1$,
+$G_3(x)=1/(2x)$ for $x>1$.
+\end{lemma}
+\begin{proof}
+Direct integration. For $x=z/\lambda\le1$, $z\,h_1(z)=\lambda x(1-\log x)\le\lambda$, since $x(1-\log x)$ increases on $(0,1]$ to $1$;
+for $z>\lambda$, $z\,h_1(z)=\lambda$. Finally $\int_0^\lambda(1+\log(\lambda/z))\,dz=2\lambda$ and
+$\int_\lambda^{K\lambda}\lambda z^{-1}dz=\lambda\log K$.
+\end{proof}
+
+\begin{proof}[Proof of \textup{(a)}: Step~0, consequences of \textup{(P1)}, \textup{(S1$\ESs$)}; the continuity argument]
+\emph{Legs.} By Lemma~\ref{lem:B-C}(2) every non-final leg lasts at most $c(a_j,a_{j+1};t_j)/(1-v)\le\varepsilon/(1-v)\le\ESd\varepsilon$
+by \textup{(P1)}. By Lemma~\ref{lem:B-C}(4), for $t$ in leg $j+1$, $|P(t)-x_{a_j}(t)|\le e^{2\mu}\varepsilon\le\delta_1\varepsilon$
+(\textup{(P1)}), and $P(t)\in[x_{a_j}(t),x_{a_{j+1}}(t)]$ (Lemma~\ref{lem:B-C}(2)).
+
+\emph{Chords.} Chords are non-decreasing in $t$ (Lemma~\ref{lem:B-VC}(b)), so (S1$\ESs$) gives, for $t\ge\Bts$ and $\lambda\ge\varepsilon/2$,
+\begin{equation}\label{eq:Estar-CA}
+c(a,b;t)\ge c_A\min(\lambda,K_RR)\qquad\text{(CA$\ESs$)}.
+\end{equation}
+Lengths are non-decreasing: $l_t(a,b)\ge\lambda$.
+
+\emph{Family.} As in Section~\ref{sec:end}, with $64$ replaced by $K_f$: for $t$ in leg $j+1$, $\BF(t)$ consists of the pairs $(a,b)$
+with $u_b\le U$, $\varepsilon/2\le\lambda\le R$ and ($a=a_j$ or $a\ge a_{j+1}$); at a switching time $t_j$ ($j>\Bjs$), $\BF(t_j)$ is
+the family of leg $j$. The gap is $g:=u_a-u_{a_j}\ge0$; a pair is far if $g\ge K_f\lambda$ and near otherwise. $\BF(t)$ shrinks and
+$g$ is non-increasing in $t$.
+
+\emph{Continuity argument.} Let $T_{\mathrm{end}}$ be the stopping time (or $\infty$), and $t^*$ the supremum of the
+$t'\le T_{\mathrm{end}}$ such that (J1$\ESs$), (J2$\ESs$) hold for all $t\in[\Bts,t']$ and all pairs of $\BF(t)$. At $\Bts$,
+$l=\lambda<\kappa_1\lambda$ and $N\le s_0M\lambda^{1/2+\gamma}<M\lambda^{1/2+\gamma}$. Steps~1--5 below prove:
+\begin{quote}
+\textbf{(Imp$\ESs$)} if (J1$\ESs$), (J2$\ESs$) hold on $[\Bts,t^*)$, then for every $t\le t^*$ ($t<\infty$) and every pair of
+$\BF(t)$: $l_t\le L_J\lambda$ and $E\le\frac12\bar\theta M^2\lambda^{1+2\gamma}$, where $L_J<\kappa_1$ by \textup{(P7)} and
+$\bar\theta:=\max\bigl(\ESf^2,\ESf^2+2v[\ESDI+\max(\ESDs,\ESDl)]\bigr)<1$ by \textup{(P0)}, \textup{(P6)}.
+\end{quote}
+Given (Imp$\ESs$) we conclude exactly as in the proof of Theorem~\ref{thm:End}(a): the bounds hold at $t^*$ by continuity; for
+$t\in[t^*,t^*+\delta]$, $l_t\le e^{2v\delta/\varepsilon}l_{t^*}$ and $|E'|\le v\int|T-e||AT|\le(4v/\varepsilon)l$, so
+$E(t)\le\frac12\bar\theta M^2\lambda^{1+2\gamma}+\delta(4v/\varepsilon)\kappa_1\lambda e^{2v\delta/\varepsilon}$; both stay below
+$\kappa_1\lambda$ resp.\ $\frac12M^2\lambda^{1+2\gamma}$ for a $\delta>0$ that depends only on
+$(v,\varepsilon,M,\gamma,\kappa_1,\bar\theta,L_J)$, uniformly in the pair because $\lambda\ge\varepsilon/2$; and
+$\BF(t)\subset\BF(t^*)$. With Lemma~\ref{lem:B-C}(0), $t^*=T_{\mathrm{end}}$. Below, (J1$\ESs$), (J2$\ESs$) (``family bounds'') are
+assumed on $[\Bts,t^*)$ and, by continuity, at $t^*$; all times are $\le t^*$.
+\end{proof}
+
+\paragraph{Step 1 (legs, the end, times, distances).}
+(a) \emph{Dichotomy at a leg start $t_j$.} ($\alpha$) If $U-u_{a_j}\ge\varepsilon/2$, then leg $j+1$ is final or
+$u_{a_{j+1}}-u_{a_j}\in[\varepsilon/\kappa_1,\varepsilon]$. ($\beta$) If $U-u_{a_j}<\varepsilon/2$, then
+$l_{t_j}(a_j,\EbE)\le\varepsilon$, i.e.\ leg $j+1$ is final.
+
+\emph{Proof.} Always $u_{a_{j+1}}-u_{a_j}\le l_{t_j}(a_j,a_{j+1})\le\varepsilon$. ($\alpha$): the label $s$ with
+$u_s=u_{a_j}+\varepsilon/2$ is $\le U$; the pair $(a_j,s)$ has $\lambda=\varepsilon/2\le R$ ($K_\varepsilon\ge3/2$) and first point
+$a_j$, so it is in $\BF(t_j)$, and (J1$\ESs$) gives $l_{t_j}(a_j,s)\le\kappa_1\varepsilon/2\le\varepsilon$ ($\kappa_1\le2$); so
+$a_{j+1}\ge s$ by maximality. If leg $j+1$ is non-final, then $a_{j+1}<\EbE$ and, by maximality and continuity of $l$ in the label,
+$l_{t_j}(a_j,a_{j+1})=\varepsilon$; the pair $(a_j,a_{j+1})$ has $\varepsilon/2\le\lambda\le\varepsilon\le R$ and is in $\BF(t_j)$,
+so (J1$\ESs$) gives $\varepsilon\le\kappa_1\lambda$: the advance is $\ge\varepsilon/\kappa_1$.
+($\beta$): by induction on $j$. For $j=\Bjs$, $l_{\Bts}(a_{\mathrm s},\EbE)=U<\varepsilon/2$. For $j>\Bjs$: leg $j$ was not final, so
+($\beta$) did not apply at $t_{j-1}$ (it would have made leg $j$ final); so ($\alpha$) applied,
+$\lambda_1:=u_{a_j}-u_{a_{j-1}}\in[\varepsilon/\kappa_1,\varepsilon]$ and $l_{t_{j-1}}(a_{j-1},a_j)=\varepsilon$. With
+$\lambda_2:=U-u_{a_j}<\varepsilon/2$, the pair $(a_{j-1},\EbE)$ has label length
+$\lambda_1+\lambda_2\in[\varepsilon/2,3\varepsilon/2]\subset[\varepsilon/2,R]$ and belongs to $\BF(t_j)$ (family of leg $j$, first point
+$a_{j-1}$). By (J1$\ESs$) and $l_{t_j}(a_{j-1},a_j)\ge l_{t_{j-1}}(a_{j-1},a_j)=\varepsilon$ (lengths are non-decreasing),
+\[
+l_{t_j}(a_j,\EbE)\le\kappa_1(\lambda_1+\lambda_2)-\varepsilon<\kappa_1\cdot\tfrac32\varepsilon-\varepsilon\le\varepsilon,
+\qquad\text{as }\kappa_1\le4/3 .
+\]
+
+(b) Every non-final leg after $\Bjs$ advances the base by $\ge\varepsilon/\kappa_1$, and the advances sum to $\le U$; so there are at
+most $\kappa_1U/\varepsilon$ non-final legs after $\Bjs$, each lasting $\le\ESd\varepsilon$, and every time $t$ considered satisfies
+$t-\Bts\le\ESchi U=:T_B$ (also $\le\kappa_1U/(1-v)$).
+
+(c) Lemma~\ref{lem:Estar-gap} holds: its hypotheses are (b) and Step~0.
+
+(d) \emph{Distance from the base.} For $t$ in leg $j+1$ and a label $s$ with $w_s\ge0$,
+\begin{equation}\label{eq:Estar-star}
+\rho_s\ge c_A\min(w_s,K_RR)-\delta_1\varepsilon,\qquad\text{hence}\qquad\max(\rho_s,\varepsilon)\ge\min(w_s,K_RR)/c_6
+\qquad\text{(E-star$\ESs$)}.
+\end{equation}
+\emph{Proof.} If $w_s\ge\varepsilon/2$: $\rho_s\ge c(a_j,s;t)-|P-x_{a_j}|\ge c_A\min(w_s,K_RR)-\delta_1\varepsilon$ by
+\eqref{eq:Estar-CA} and Step~0. If $w_s<\varepsilon/2$ the right side is negative ($\delta_1\ge1>c_A/2$), so the bound is trivial.
+Second form: put $y:=\min(w_s,K_RR)$. If $c_Ay-\delta_1\varepsilon\ge y/c_6$ we are done. Otherwise $y(c_A-1/c_6)<\delta_1\varepsilon$;
+as $c_A-1/c_6=c_A\delta_1/(1+\delta_1)>0$, this gives $y<c_6\varepsilon$, i.e.\ $\varepsilon>y/c_6$. This is conclusion (e).
+
+\paragraph{Step 2 (tilt lemma); this is part (d).}
+\emph{One step.} Let $J_1\subset I_1$ be family pairs at the same time with $\lambda_{I_1}\le r\lambda_{J_1}$. By
+Lemma~\ref{lem:B-4}(a), (J1$\ESs$), (J2$\ESs$) and \eqref{eq:Estar-CA} ($c(J_1)\ge c_A\lambda_{J_1}$, since $\lambda_{J_1}\le R\le K_RR$):
+\[
+|e_{J_1}-e_{I_1}|\le\frac{(\kappa_1\lambda_{J_1})^{1/2}M(r\lambda_{J_1})^{1/2+\gamma}+\frac12M^2\lambda_{J_1}^{1+2\gamma}}{c_A\lambda_{J_1}}
+=\frac{M\lambda_{J_1}^\gamma\bigl[\kappa_1^{1/2}r^{1/2+\gamma}+\frac12M\lambda_{J_1}^\gamma\bigr]}{c_A}\le\ESct(r)M\lambda_{J_1}^\gamma,
+\]
+since $M\lambda_{J_1}^\gamma\le MR^\gamma=m$.
+
+\emph{Chains.} Let $J=(a',b')\subset I=(a,b)$ be family pairs at a time $t$ in leg $j+1$.
+(A) Put $b_k:=\min(u_{a'}+\ESq^k\lambda_J,u_b)$, $k=0,\dots,k_1$, with $b_{k_1}=b$. The arcs $(a',b_k)$ have the family first point
+$a'$ and label length in $[\lambda_J,\lambda_I]\subset[\varepsilon/2,R]$, so they are family pairs. For $k<k_1$,
+$\lambda(a',b_k)=\ESq^k\lambda_J\le\lambda_I$ and $\lambda(a',b_{k+1})\le\ESq\lambda(a',b_k)$. The one-step tilts sum to
+$\le\sum_{k<k_1}\ESct(\ESq)M(\ESq^k\lambda_J)^\gamma\le\ESct(\ESq)M\lambda_I^\gamma\sum_{i\ge0}\ESq^{-i\gamma}=C_AM\lambda_I^\gamma$.
+(B) If $a'>a$: let $a^\circ:=a$ if $a\ge a_{j+1}$, and $a^\circ:=a_{j+1}$ if $a=a_j$ (then $a'\ge a_{j+1}$); put
+$a'_k:=\max(u_b-\ESq^k\lambda(a',b),u_{a^\circ})$. The arcs $(a'_k,b)$ start at labels $\ge a_{j+1}$ (or $=a$), so they are family
+pairs; the same sum is $\le C_AM\lambda_I^\gamma$.
+(C) If $a=a_j\ne a^\circ$: $(a_{j+1},b)\subset(a_j,b)$ with $\lambda(a_j,b)\le\lambda(a_{j+1},b)+\varepsilon\le3\lambda(a_{j+1},b)$
+(the advance is $\le\varepsilon$ and $\lambda(a_{j+1},b)\ge\lambda_J\ge\varepsilon/2$): one step, $\le\ESct(3)M\lambda_I^\gamma$.
+
+If $J$, $I$ have the same left end, only (A) is needed: $C_A$. If they have the same right end, (B) and (C): $C_A+\ESct(3)=C_B$. In
+general $C_A+C_B=\ETL$. So
+\begin{equation}\label{eq:Estar-TL}
+|e_J-e_I|\le\ETL M\lambda_I^\gamma=\ETL m(\lambda_I/R)^\gamma ,
+\end{equation}
+which is (d). In contrast to Step~2 of the proof of Theorem~\ref{thm:End}, no smallness of $M\lambda^\gamma$ and no bound
+$\gamma\le1/4$ is used ($S_q$ is the exact geometric sum).
+
+\emph{Consequence.} Let $(a,b)\in\BF(t)$ and let $J\subset(a,b)$ be a family pair with the same left end $a$ and label length
+$\lambda_J$ (a shorter arc starting at $a$ is enlarged to label length $\varepsilon/2$ inside $(a,b)$ where this is used). By
+Lemma~\ref{lem:E-facts}(b) with $\hat u=e_{ab}$, (J2$\ESs$) for $J$, (J1$\ESs$) and (A),
+\begin{equation}\label{eq:Estar-mu}
+\int_J|T-e_{ab}|^2ds=N(J)^2+c(J)|e_J-e_{ab}|^2\le M^2\lambda_J^{1+2\gamma}+\kappa_1\lambda_JC_A^2M^2\lambda^{2\gamma}
+\le\ESCmu M^2\lambda^{2\gamma}\lambda_J\qquad\text{(E-mu$\ESs$)},
+\end{equation}
+and by Cauchy--Schwarz $\int_J|T-e_{ab}|\,ds\le(\kappa_1\lambda_J\cdot\ESCmu M^2\lambda^{2\gamma}\lambda_J)^{1/2}=\ESCone M\lambda^\gamma\lambda_J$.
+
+\paragraph{Step 3 (far pairs: $N\le\ESf M\lambda^{1/2+\gamma}$).}
+Let $(a,b)\in\BF(t)$ be far, $t$ in leg $j+1$: $g\ge K_f\lambda\ge K_f\varepsilon/2>\varepsilon\ge$ (advance), so $a>a_{j+1}$; since
+$g$ is non-increasing and $\BF$ shrinks, the pair has been in the family and far on all of $[\Bts,t]$. Put $\hat g:=\min(g,K_RR)$.
+
+\emph{Distance.} The hull of the arc lies in the ball $B(x_a,l)$ with $l\le\kappa_1\lambda$. By \eqref{eq:Estar-star} at $s=a$,
+$\rho_m\ge c_A\hat g-\delta_1\varepsilon-\kappa_1\lambda$.
+If $g\le K_RR$: with $\varepsilon\le2\lambda$ and $\lambda\le g/K_f$, $\rho_m\ge c_Ag-(2\delta_1+\kappa_1)\lambda\ge c_\rho g\ge c_\rho K_f\lambda$.
+If $g>K_RR$: with $\varepsilon\le R/K_\varepsilon$ and $\lambda\le R$, $\rho_m\ge c_AK_RR-\delta_1R/K_\varepsilon-\kappa_1R=c_RR\ge c_R\lambda$.
+In both cases $\rho_m\ge\varepsilon$ ($c_\rho K_f\ge2$ and $\varepsilon\le2\lambda$, resp.\ $c_RK_\varepsilon\ge1$; \textup{(P2)}), and
+$\rho_m\ge K_1l$, resp.\ $\rho_m\ge K_2l$. So Lemma~\ref{lem:Estar-duh} applies on $[\Bts,t]$, with $\alpha\le a_1v/(c_\rho g)$ while
+$g\le K_RR$ and $\alpha\le a_2v/(c_RR)$ while $g>K_RR$.
+
+\emph{Amplification.} For $\Bts\le\tau\le t$: $\exp\bigl(\int_\tau^t\alpha\bigr)\le A_0\bigl(\min(g(\tau),K_RR)/\hat g(t)\bigr)^\nu$.
+Indeed, the times with $g>K_RR$ form an initial segment ($g$ is non-increasing) of length $\le T_B=\ESchi U$, on which
+$\int\alpha\le a_2v\ESchi U/(c_RR)$. On the times of $[\tau,t]$ with $g\le K_RR$ (present only if $g(t)\le K_RR$),
+Lemma~\ref{lem:Estar-gap}(i) with $h(g)=g^{-1}\mathbf 1\{g\le\min(g(\tau),K_RR)\}$ (non-increasing; $g_{\min}=g(t)\ge K_f\lambda\ge
+K_f\varepsilon/2$) gives
+\[
+\int\alpha\le\frac{a_1v}{c_\rho}\Bigl[\frac{\ESd\varepsilon}{g(t)}+\ESchi\log\frac{\min(g(\tau),K_RR)}{g(t)}\Bigr]
+\le\frac{2a_1\ESd v}{c_\rho K_f}+\EScamp v\log\frac{\min(g(\tau),K_RR)}{g(t)} .
+\]
+By \textup{(P4)} and \textup{(P3)} (the ratio is $\ge1$) the claim follows.
+
+\emph{Forcing} $\beta=2v\,l^{3/2}|p_a|/\rho_m^3$, $|p_a|=\operatorname{dist}(P,\operatorname{line}(x_a,x_b))$.
+
+\emph{$g>\eta R$.} $|p_a|\le\rho_a\le\rho_m+l\le\rho_m(1+1/K_i)$. If $\eta R<g\le K_RR$:
+$\beta\le2v\kappa_1^{3/2}\lambda^{3/2}(1+1/K_1)/(c_\rho g)^2$; if $g>K_RR$: $\beta\le2v\kappa_1^{3/2}\lambda^{3/2}(1+1/K_2)/(c_RR)^2$.
+The second regime lasts $\le\ESchi U$. For the first, Lemma~\ref{lem:Estar-gap}(i) with $g_0=\eta R$,
+$h(g)=g^{-2}\mathbf 1\{g\le K_RR\}$ ($g_{\min}\ge\eta R$, $\varepsilon\le R/K_\varepsilon$) gives
+$\int g^{-2}dt\le\ESd\varepsilon/(\eta R)^2+\ESchi/(\eta R)\le(\ESd/(K_\varepsilon\eta^2)+\ESchi/\eta)/R$. Hence
+\[
+\int_{\{g>\eta R\}}\beta\,dt\le v\lambda^{3/2}\bigl[B_{2U}\ESchi U/R^2+B_{2\eta}/R\bigr].
+\]
+
+\emph{$g\le\eta R$.} $P\in[x_{a_j},x_{a_{j+1}}]$, so
+$|p_a|\le\max_{a'\in\{a_j,a_{j+1}\}}\operatorname{dist}(x_{a'},\operatorname{line}(x_a,x_b))=c(a',a)|e_{a'a}\times e_{ab}|
+\le c(a',a)\bigl(|e_{a'a}-e_{a'b}|+|e_{a'b}-e_{ab}|\bigr)$. The pairs $(a',a)$, $(a',b)$, $(a,b)$ are family pairs (first points
+$a'$ and $a$; $\lambda(a',a)\ge g-\varepsilon\ge(K_f/2-1)\varepsilon\ge\varepsilon/2$ as $K_f\ge3$;
+$\lambda(a',b)\le g+\lambda\le\eta R(1+1/K_f)\le R$ as $\eta\le K_f/(K_f+1)$). Since $\lambda(a',b)=\lambda(a',a)+\lambda$ and
+$\lambda(a',a)\ge g-\varepsilon\ge(K_f-2)\lambda$, the ratio is $\lambda(a',b)/\lambda(a',a)\le r_f$: one step gives
+$|e_{a'a}-e_{a'b}|\le\ESct(r_f)M\lambda(a',a)^\gamma\le\ESct(r_f)Mg^\gamma$. The pairs $(a,b)\subset(a',b)$ have the same right end:
+$|e_{a'b}-e_{ab}|\le C_BM(g+\lambda)^\gamma\le C_B(1+1/K_f)^\gamma Mg^\gamma$. And $c(a',a)\le\kappa_1\lambda(a',a)\le\kappa_1g$. So
+$|p_a|\le C_pMg^{1+\gamma}$, and with $\rho_m\ge c_\rho g$ ($g\le\eta R\le K_RR$):
+$\beta\le2v(\kappa_1\lambda)^{3/2}C_pMg^{1+\gamma}/(c_\rho g)^3=B_3vM\lambda^{3/2}g^{\gamma-2}$.
+
+\emph{Result.} Let $g_2:=g(t)$, $\hat g_2:=\min(g_2,K_RR)$, and $g_{\mathrm s}:=u_a$ (the gap at $\Bts$). By
+Lemma~\ref{lem:Estar-duh} and the amplification bound,
+\[
+N(t)\le A_0\Bigl(\frac{\min(g_{\mathrm s},K_RR)}{\hat g_2}\Bigr)^{\!\nu}N(\Bts)+A_0\Bigl(\frac{K_RR}{\hat g_2}\Bigr)^{\!\nu}
+\int_{\{g>\eta R\}}\beta+A_0\int_{\{g\le\eta R\}}\Bigl(\frac{g(\tau)}{g_2}\Bigr)^{\!\nu}\beta(\tau)\,d\tau .
+\]
+\emph{First term.} If $g_2\le K_RR$: by (S2$\ESs$), the factor of $s_0M\lambda^{1/2+\gamma}$ is
+\[
+\Bigl(\frac{\min(g_{\mathrm s},K_RR)}{g_2}\Bigr)^{\!\nu}\min\Bigl(1,\frac{K_f\lambda}{\min(g_{\mathrm s},K_RR)}\Bigr)^{\!\nu}
+=\Bigl(\frac{\min(g_{\mathrm s},K_RR,K_f\lambda)}{g_2}\Bigr)^{\!\nu}\le\Bigl(\frac{K_f\lambda}{g_2}\Bigr)^{\!\nu}\le1;
+\]
+if $g_2>K_RR$ the ratio is $1$ and the weight is $\le1$. So the term is $\le A_0s_0M\lambda^{1/2+\gamma}$.
+
+\emph{Second term.} $(K_RR/\hat g_2)^\nu\le\max(1,K_R/K_f)^\nu(R/\lambda)^\nu$ (if $g_2\le K_RR$, $K_RR/g_2\le(K_R/K_f)(R/\lambda)$,
+and both $K_RR/g_2\ge1$ and $R/\lambda\ge1$; if $g_2>K_RR$ the left side is $1$). Moreover
+$\lambda^{3/2}(R/\lambda)^\nu=\lambda^{1/2+\gamma}\lambda^{1-\gamma-\nu}R^\nu\le\lambda^{1/2+\gamma}R^{1-\gamma}$ ($\gamma+\nu<1$,
+$\lambda\le R$). So, with $R^{-\gamma}=M/m$, the term is
+$\le A_0\max(1,K_R/K_f)^\nu(v/m)\bigl(B_{2U}\ESchi U/R+B_{2\eta}\bigr)M\lambda^{1/2+\gamma}$.
+
+\emph{Third term} (present only if $g_2\le\eta R$; then $g(\tau)\le\eta R$ on the integration set). It is
+$\le A_0B_3vM\lambda^{3/2}g_2^{-\nu}\int g^{\nu+\gamma-2}dt$; $h(g)=g^{\nu+\gamma-2}$ is non-increasing, and
+Lemma~\ref{lem:Estar-gap}(i) ($g_{\min}=g_2$) gives $\int\le\ESd\varepsilon g_2^{\nu+\gamma-2}+\ESchi g_2^{\nu+\gamma-1}/(1-\gamma-\nu)$.
+So the term is
+\[
+\le A_0B_3vM\lambda^{3/2}g_2^{\gamma-1}\Bigl[\frac{\ESd\varepsilon}{g_2}+\frac{\ESchi}{1-\gamma-\nu}\Bigr]
+\le A_0B_3K_f^{\gamma-1}\Bigl(\frac{2\ESd}{K_f}+\frac{\ESchi}{1-\gamma-\nu}\Bigr)vM\lambda^{1/2+\gamma}
+\]
+($g_2\ge K_f\lambda$, $\varepsilon\le2\lambda$, $\gamma<1$). By \textup{(P5)}, $N\le\ESf M\lambda^{1/2+\gamma}$, i.e.\
+$E\le\frac12\ESf^2M^2\lambda^{1+2\gamma}$ for far pairs.
+
+\paragraph{Step 4 (near pairs: $E\le\frac12\bar\theta M^2\lambda^{1+2\gamma}$).}
+Let $(a,b)\in\BF(t)$ be near ($g<K_f\lambda$). When it becomes near (at the switching time at which its gap drops below $K_f\lambda$,
+where Step~3 applies to it as a far pair of the family of the previous leg), or at $\Bts$ if it is near there
+($E(\Bts)\le\frac12s_0^2M^2\lambda^{1+2\gamma}$), $E\le\frac12\ESf^2M^2\lambda^{1+2\gamma}$; $E$ is continuous at switches. The near
+period is a final segment of $[\Bts,t]$. We bound the increase of $E$ while near by integrating Lemma~\ref{lem:B-3}(a) with $\bar q=0$:
+$E'\le\mathrm I+\mathrm{II}$, $\mathrm I:=v\int_a^ba^*(\rho)|T-e|^2ds$, $\mathrm{II}:=v\int_a^b|\tau||q|\,ds$, $e:=e_{ab}$,
+$\tau=T\cdot e^\perp$, $q=e^\perp\cdot Ae$. Notation: $\sigma_s:=u_s-u_a$, $w_s=g+\sigma_s$, $D(s):=\max(\rho_s,\varepsilon)$.
+
+\emph{Term \textup{I}.} Since $a^*(\rho)=\varepsilon^{-1}\mathbf 1\{\rho<\varepsilon\}+\int_{\max(\rho,\varepsilon)}^\infty y^{-2}dy$,
+$\mathrm I=v\bigl[\omega(\varepsilon)/\varepsilon+\int_\varepsilon^\infty\omega(y)y^{-2}dy\bigr]$ with
+$\omega(y):=\int_{\{s\in(a,b):\,\rho_s<y\}}|T-e|^2ds$. Let $y\ge\varepsilon$. If $(y+\delta_1\varepsilon)/c_A\le K_RR$, then by
+\eqref{eq:Estar-star} $\rho_s<y$ forces $w_s<(y+\delta_1\varepsilon)/c_A\le c_6y$; so these $s$ lie in the sub-arc $J_y$ of $(a,b)$
+starting at $a$ with label length $\max(\min(\lambda,(y+\delta_1\varepsilon)/c_A-g),\varepsilon/2)\le\min(\lambda,c_6y)$, a family
+pair with left end $a$, and by \eqref{eq:Estar-mu} $\omega(y)\le\ESCmu M^2\lambda^{2\gamma}\min(\lambda,c_6y)$. If
+$(y+\delta_1\varepsilon)/c_A>K_RR$, then $c_6y>K_RR\ge\lambda$ and trivially
+$\omega(y)\le N^2\le M^2\lambda^{1+2\gamma}\le\ESCmu M^2\lambda^{2\gamma}\min(\lambda,c_6y)$. Also $\omega(y)=0$ for $y\le\min\rho$.
+
+\emph{The piece $\omega(\varepsilon)/\varepsilon$} is non-zero only if $\min_{[a,b]}\rho<\varepsilon$; then for some $s$,
+$c_A\min(w_s,K_RR)-\delta_1\varepsilon<\varepsilon$, i.e.\ $\min(w_s,K_RR)<c_6\varepsilon\le K_RR$ (\textup{(P2)} and
+$\varepsilon\le R/K_\varepsilon$), so $g\le w_s<c_6\varepsilon$. It is $\le\ESCmu M^2\lambda^{2\gamma}\min(\lambda,c_6\varepsilon)/\varepsilon$.
+
+\emph{The integral piece.} With $\bar\rho:=\max(\varepsilon,\min\rho)$ it is
+$\int_{\bar\rho}^\infty\omega y^{-2}dy\le\ESCmu M^2\lambda^{2\gamma}\int_{\bar\rho}^\infty\min(\lambda,c_6y)y^{-2}dy
+=\ESCmu M^2\lambda^{2\gamma}c_6h_1(c_6\bar\rho)$ (substitute $z=c_6y$). Now $c_6\bar\rho\ge c_6\varepsilon$ and, by
+\eqref{eq:Estar-star} for $s\in[a,b]$ ($w_s\ge g$), $c_6\bar\rho\ge\min(g,K_RR)\ge\min(g,K_R\lambda)$. So
+$c_6\bar\rho\ge z(g):=\max(c_6\varepsilon,\min(g,K_R\lambda))$, which is non-decreasing in $g$, and
+$h_1(c_6\bar\rho)\le h_1(z(g))=:\bar h(g)$, non-increasing in $g$.
+
+\emph{Time integral of \textup{I}.} The first piece: by Lemma~\ref{lem:Estar-gap}(iii) at most $\kappa_1c_6+1$ legs have
+$g<c_6\varepsilon$, each lasting $\le\ESd\varepsilon$; the contribution is
+$\le(\kappa_1c_6+1)\ESd\varepsilon\min(\lambda,c_6\varepsilon)/\varepsilon\le\ESd(\kappa_1c_6+1)\lambda$ (in units of
+$v\ESCmu M^2\lambda^{2\gamma}$). The second piece: Lemma~\ref{lem:Estar-gap}(i) ($g_0=0$; $h=c_6\bar h\cdot\mathbf 1\{g<K_f\lambda\}$,
+non-increasing) gives
+\[
+\le c_6\Bigl[\ESd\varepsilon\,\bar h(g_{\min})+\ESchi\int_0^{K_f\lambda}\bar h\Bigr]
+\le c_6\ESd\varepsilon\,h_1(c_6\varepsilon)+c_6\ESchi\int_0^{K_f\lambda}h_1(\min(g,K_R\lambda))\,dg\le\ESd\lambda+c_6\ESchi\lambda\ESPsi,
+\]
+by Lemma~\ref{lem:Estar-int}: $c_6\varepsilon h_1(c_6\varepsilon)\le\lambda$;
+$\int_0^{\min(K_f,K_R)\lambda}h_1=\lambda(2+\log\min(K_f,K_R))$; and on $[K_R\lambda,K_f\lambda]$ (if $K_f>K_R$) the integrand is
+$h_1(K_R\lambda)=1/K_R$. In total
+\[
+\int_{\mathrm{near}}\mathrm I\,dt\le v\ESCmu\tau_{\mathrm I}M^2\lambda^{1+2\gamma}=v\ESDI M^2\lambda^{1+2\gamma}.
+\]
+
+\emph{Term \textup{II}.} By Lemma~\ref{lem:B-V}(iii), $|q(s)|\le|p(s)|/D(s)^2$ with $p(s):=(x_s-P)\times e$. Write
+$p(s)=(x_s-x_a)\times e+p_a$, $p_a:=(x_a-P)\times e$. Since $x_s-x_a=\int_a^sT$ and $e\times e=0$,
+$|(x_s-x_a)\times e|\le\int_{(a,s)}|T-e|\le\ESCone M\lambda^\gamma\max(\sigma_s,\varepsilon/2)$ by \eqref{eq:Estar-mu}. Since $P$ is a
+convex combination of $x_{a_j}$, $x_{a_{j+1}}$, $|p_a|\le\max_{a'\in\{a_j,a_{j+1}\}}|(x_a-x_{a'})\times e|$. Let
+$\Psi_\tau(y):=\int_{\{s\in(a,b):\,w_s<y\}}|\tau|\,ds$. For $y\le g$ it is $0$; for $y>g$, $\{w_s<y\}$ is the sub-arc from $a$ of
+label length $\min(\lambda,y-g)$, so by \eqref{eq:Estar-mu} ($|\tau|\le|T-e|$),
+$\Psi_\tau(y)\le\ESCone M\lambda^\gamma\min(\lambda,\max(y-g,\varepsilon/2))\le\ESCone M\lambda^\gamma\min(\lambda,y)$ for
+$y\ge\varepsilon/2$.
+
+\emph{Short case: $(K_f+1)\lambda\le R$.} Then $w_s\le g+\lambda<(K_f+1)\lambda\le R\le K_RR$, so $D(s)\ge\max(w_s/c_6,\varepsilon)$
+by \eqref{eq:Estar-star}.
+
+(i) \emph{The base-point offset $|p_a|$.} \emph{$g=0$} ($a=a_j$): $x_{a_j}=x_a$ lies on the line. If $a_{j+1}\le b$,
+$|(x_{a_{j+1}}-x_a)\times e|\le\int_{(a,a_{j+1})}|T-e|\le\ESCone M\lambda^\gamma\max(u_{a_{j+1}}-u_{a_j},\varepsilon/2)
+\le\ESCone M\lambda^\gamma\varepsilon$. If $a_{j+1}>b$, $I_0:=(a_j,a_{j+1})$ is a family pair
+($\varepsilon/\kappa_1\le\lambda_{I_0}\le\varepsilon\le R$) containing $(a,b)$ with the same left end, and
+$|(x_{a_{j+1}}-x_a)\times e|=c(I_0)|e_{I_0}\times e_{ab}|\le c(I_0)|e_{I_0}-e_{ab}|\le\kappa_1\varepsilon\cdot C_AM\varepsilon^\gamma
+\le\kappa_12^\gamma C_AM\lambda^\gamma\varepsilon$ ($\varepsilon\le2\lambda$). So $|p_a|\le k_0M\lambda^\gamma\varepsilon$.
+
+\emph{$g>0$} ($a\ge a_{j+1}$; $g\ge$ advance $\ge\varepsilon/\kappa_1\ge\varepsilon/2$). For $a'\in\{a_j,a_{j+1}\}$ let
+$g':=u_a-u_{a'}\le g$. If $g'=0$ the term is $0$. If $g'\ge\varepsilon/2$: $(a',a)$, $(a',b)$, $(a,b)$ are family pairs
+($\lambda(a',b)=g'+\lambda\le g+\lambda<(K_f+1)\lambda\le R$), and
+$|(x_a-x_{a'})\times e|=c(a',a)|e_{a'a}\times e_{ab}|\le\kappa_1g'(|e_{a'a}-e_{a'b}|+|e_{a'b}-e_{ab}|)\le\kappa_1g(C_A+C_B)M(g+\lambda)^\gamma$.
+If $0<g'<\varepsilon/2$ (then $a'=a_{j+1}$): $J_0:=(a',\text{label }u_{a'}+\varepsilon/2)\subset(a',b)$ is a family pair,
+$(a',a)\subset J_0$, and by Cauchy--Schwarz and Lemma~\ref{lem:E-facts}(b),
+\begin{align*}
+|(x_a-x_{a'})\times e|&\le l(J_0)^{1/2}\bigl(N(J_0)^2+c(J_0)|e_{J_0}-e_{ab}|^2\bigr)^{1/2}\\
+&\le\bigl(\tfrac{\kappa_1\varepsilon}2\bigr)^{1/2}\bigl(\tfrac\varepsilon2\bigr)^{1/2}M\bigl[(\varepsilon/2)^{2\gamma}
++\kappa_1\ETL^2(g+\lambda)^{2\gamma}\bigr]^{1/2}\\
+&\le\tfrac12\kappa_1^{1/2}\varepsilon\,(1+\kappa_1\ETL^2)^{1/2}M(g+\lambda)^\gamma
+\end{align*}
+($|e_{J_0}-e_{ab}|\le|e_{J_0}-e_{a'b}|+|e_{a'b}-e_{ab}|\le\ETL M(g'+\lambda)^\gamma$; $\varepsilon/2\le\lambda$). Since
+$\varepsilon\le\kappa_1g$ and $\frac12\kappa_1^{1/2}(1+\kappa_1\ETL^2)^{1/2}\le\ETL$ (equivalently $\kappa_1\le\ETL^2(4-\kappa_1^2)$, true
+as $\kappa_1\le4/3$ and $\ETL\ge\ESct(3)\ge3^{1/2}$), this is $\le\kappa_1\ETL M(g+\lambda)^\gamma g$. So in all cases with $g>0$,
+$|p_a|\le\kappa_1\ETL M(g+\lambda)^\gamma g$.
+
+(ii) \emph{Split.} With $\max(\sigma_s,\varepsilon/2)\le c_6D(s)$ ($\sigma_s\le w_s\le c_6D$, $\varepsilon/2\le D$):
+\[
+\mathrm{II}\le v\ESCone M\lambda^\gamma c_6\int_a^b\frac{|\tau|}D\,ds+v|p_a|\int_a^b\frac{|\tau|}{D^2}\,ds=:\mathrm{II}_\alpha+\mathrm{II}_\beta .
+\]
+Here $1/D\le\varphi_1(w_s)$ with $\varphi_1(w):=c_6/\max(w,c_6\varepsilon)=\int_{\max(w,c_6\varepsilon)}^\infty c_6y^{-2}dy$, and
+$1/D^2\le\varphi_2(w):=\varphi_1(w)^2=\int_{\max(w,c_6\varepsilon)}^\infty2c_6^2y^{-3}dy$. By Fubini,
+$\int|\tau|\varphi_1(w_s)\,ds=\int_{c_6\varepsilon}^\infty c_6y^{-2}\Psi_\tau(y)\,dy$, and similarly for $\varphi_2$. Put
+$y_0:=\max(c_6\varepsilon,g)$.
+\begin{itemize}
+\item $\displaystyle\mathrm{II}_\alpha\le v\ESCone M\lambda^\gamma c_6\cdot c_6\ESCone M\lambda^\gamma\int_{y_0}^\infty\frac{\min(\lambda,y)}{y^2}\,dy
+=vc_6^2\ESCone^2M^2\lambda^{2\gamma}h_1(y_0)=vc_6^2\ESCone^2M^2\lambda^{2\gamma}h_2(g)$,\\
+with $h_2(g):=h_1(\max(c_6\varepsilon,g))$, non-increasing.
+\item $\mathrm{II}_\beta$, $g=0$: $\Psi_\tau(y)\le\ESCone M\lambda^\gamma y$ ($y\ge c_6\varepsilon\ge\varepsilon/2$) and
+$\int_{c_6\varepsilon}^\infty2c_6^2y^{-2}dy=2c_6/\varepsilon$, so
+$\mathrm{II}_\beta\le vk_0M\lambda^\gamma\varepsilon\cdot2c_6\ESCone M\lambda^\gamma/\varepsilon=2c_6\ESCone k_0vM^2\lambda^{2\gamma}$.
+\item $\mathrm{II}_\beta$, $g>0$: $\int_{y_0}^\infty2c_6^2y^{-3}\ESCone M\lambda^\gamma\min(\lambda,y)\,dy=2c_6^2\ESCone M\lambda^\gamma
+h_3(y_0)\le2c_6^2\ESCone M\lambda^\gamma h_3(g)$; with (i) and Lemma~\ref{lem:Estar-int},
+$\mathrm{II}_\beta\le2c_6^2\kappa_1\ETL\ESCone vM^2\lambda^\gamma(g+\lambda)^\gamma g\,h_3(g)
+=2c_6^2\kappa_1\ETL\ESCone vM^2\lambda^{2\gamma}(1+x)^\gamma G_3(x)$, $x:=g/\lambda$. Majorant:
+$(1+x)^\gamma G_3(x)\le H(x)$, where $H(x):=2^\gamma(1-x/2)$ for $x\le1$ and $H(x):=(1+x)^\gamma/(2x)$ for $x>1$; $H$ is
+non-increasing (on $x>1$, $(1+x)^\gamma/x$ is decreasing as $\gamma<1$; $H$ is continuous at $1$) and $H(0)=2^\gamma$.
+\end{itemize}
+\emph{Time integrals (short case).} $\mathrm{II}_\alpha$: Lemma~\ref{lem:Estar-gap}(i) ($g_0=0$,
+$h=h_2\mathbf 1\{g<K_f\lambda\}$) gives $\le\ESd\varepsilon h_1(c_6\varepsilon)+\ESchi\int_0^{K_f\lambda}h_1\le\ESd\lambda/c_6+\ESchi\lambda(2+\log K_f)
+=\tau_\alpha\lambda$ (Lemma~\ref{lem:Estar-int}). $\mathrm{II}_\beta$ with $g=0$: one leg, $\le\ESd\varepsilon\le2\ESd\lambda$.
+$\mathrm{II}_\beta$ with $g>0$: Lemma~\ref{lem:Estar-gap}(i) ($g_0\in(0,\varepsilon/\kappa_1]$, $h=H(g/\lambda)\mathbf 1\{g<K_f\lambda\}$)
+gives $\le\ESd\varepsilon2^\gamma+\ESchi\lambda\int_0^{K_f}H\le2^\gamma2\ESd\lambda+\ESchi\lambda2^\gamma[\frac34+(K_f^\gamma-1)/(2\gamma)]
+=\tau_\beta\lambda$, using $\int_0^12^\gamma(1-x/2)\,dx=\frac342^\gamma$ and $(1+x)^\gamma\le(2x)^\gamma$ on $[1,K_f]$:
+$\int_1^{K_f}(2x)^\gamma(2x)^{-1}dx=2^{\gamma-1}(K_f^\gamma-1)/\gamma$. In total
+\[
+\int_{\mathrm{near}}\mathrm{II}\,dt\le v\bigl[c_6^2\ESCone^2\tau_\alpha+2c_6^2\kappa_1\ETL\ESCone\tau_\beta+4\ESd c_6\ESCone k_0\bigr]
+M^2\lambda^{1+2\gamma}=v\ESDs M^2\lambda^{1+2\gamma}.
+\]
+
+\emph{Long case: $(K_f+1)\lambda>R$.} Use $|p(s)|\le\rho_s\le D(s)$, so $|q|\le1/D(s)$. For $w_s\le K_RR$, $1/D\le\varphi_1(w_s)$; for
+$w_s>K_RR$, $1/D\le c_6/(K_RR)$ by \eqref{eq:Estar-star}. Hence, with $\int_a^b|\tau|\le\int_a^b|T-e|\le(lN^2)^{1/2}\le\kappa_1^{1/2}
+M\lambda^{1+\gamma}$,
+\begin{align*}
+\mathrm{II}&\le v\!\int|\tau|\varphi_1(w_s)\,ds+\frac{vc_6}{K_RR}\int_{\{w_s>K_RR\}}|\tau|\,ds\\
+&\le vc_6\ESCone M\lambda^\gamma h_2(g)+\frac{vc_6}{K_RR}\kappa_1^{1/2}M\lambda^{1+\gamma}\mathbf 1\{g+\lambda>K_RR\}.
+\end{align*}
+The indicator vanishes unless $K_f+1>K_R$ (as $g+\lambda<(K_f+1)\lambda\le(K_f+1)R$), so it is $\le\iota$. Time integrals: the first
+term as $\mathrm{II}_\alpha$, $\le\tau_\alpha\lambda$; the second over the whole near period, whose duration is
+$\le\ESd\varepsilon(\kappa_1K_f\lambda/\varepsilon+1)\le\tau_n\lambda$ (Lemma~\ref{lem:Estar-gap}(iii), $\varepsilon\le2\lambda$), and
+$\lambda/(K_RR)\le1/K_R$. So $\int_{\mathrm{near}}\mathrm{II}\,dt\le vc_6M\lambda^{1+\gamma}[\ESCone\tau_\alpha+\iota\kappa_1^{1/2}\tau_n/K_R]$.
+Finally $M\lambda^\gamma=m(\lambda/R)^\gamma>m(K_f+1)^{-\gamma}$, so $M\lambda^{1+\gamma}\le((K_f+1)^\gamma/m)M^2\lambda^{1+2\gamma}$, and
+$\int_{\mathrm{near}}\mathrm{II}\,dt\le v\ESDl M^2\lambda^{1+2\gamma}$.
+
+\emph{Conclusion.} $E\le\frac12\ESf^2M^2\lambda^{1+2\gamma}+v[\ESDI+\max(\ESDs,\ESDl)]M^2\lambda^{1+2\gamma}
+\le\frac12\bar\theta M^2\lambda^{1+2\gamma}$ for near pairs. With Step~3 this is the $E$-part of (Imp$\ESs$).
+
+\paragraph{Step 5 ((J1$\ESs$): $l\le L_J\lambda$).}
+$l(\Bts)=\lambda$ and $l'=v\int T\cdot AT\le v\int a^*(\rho)$ (Lemma~\ref{lem:B-2}(i), Lemma~\ref{lem:B-V}(ii)).
+
+\emph{Far, $g>\eta R$:} $\rho\ge\rho_m\ge\varepsilon$ on the arc, so $(\log l)'\le v/\rho_m$, which is $\le v/(c_RR)$ while
+$g>K_RR$ and $\le v/(c_\rho g)$ while $\eta R<g\le K_RR$. The first regime lasts $\le\ESchi U$; for the second,
+Lemma~\ref{lem:Estar-gap}(i) with $g_0=\eta R$, $h=g^{-1}\mathbf 1\{g\le K_RR\}$, gives
+$\int dt/g\le\ESd\varepsilon/(\eta R)+\ESchi\log(K_R/\eta)\le\ESd/(K_\varepsilon\eta)+\ESchi\log(K_R/\eta)$. The total increase of
+$\log l$ is $\le\ESX$.
+
+\emph{Far, $g\le\eta R$:} by Lemma~\ref{lem:B-3}(c), $l'\le(2v/\rho_m)[l(|p_a|+l^{1/2}N)^2/\rho_m^2+N^2]$, with
+$|p_a|\le C_pMg^{1+\gamma}$ (Step~3), $l^{1/2}N\le\kappa_1^{1/2}M\lambda^{1+\gamma}\le\kappa_1^{1/2}K_f^{-1-\gamma}Mg^{1+\gamma}$,
+$\rho_m\ge c_\rho g$ and $N^2\le M^2\lambda^{1+2\gamma}\le lM^2(g/K_f)^{2\gamma}$. So $(\log l)'\le B_5vM^2g^{2\gamma-1}$. Integral
+over the times with $g\le\eta R$ (gaps $\ge K_f\lambda\ge K_f\varepsilon/2$): if $\gamma\le1/2$, Lemma~\ref{lem:Estar-gap}(i)
+($h=g^{2\gamma-1}\mathbf 1\{g\le\eta R\}$, non-increasing) gives
+$\le\ESd\varepsilon(K_f\varepsilon/2)^{2\gamma-1}+\ESchi(\eta R)^{2\gamma}/(2\gamma)
+=\ESd(2/K_f)^{1-2\gamma}\varepsilon^{2\gamma}+\ESchi\eta^{2\gamma}R^{2\gamma}/(2\gamma)$; if $\gamma>1/2$,
+Lemma~\ref{lem:Estar-gap}(ii) on the final segment $\{g\le\eta R\}$ ($\bar g=\eta R$; $h=g^{2\gamma-1}$ is non-decreasing on
+$[0,\infty)$) gives $\le\ESchi(\eta R+\varepsilon/\kappa_1)^{2\gamma}/(2\gamma)$. Both are $\le I_5R^{2\gamma}$ ($\varepsilon\le
+R/K_\varepsilon$). The total is $\le B_5I_5vM^2R^{2\gamma}=B_5I_5vm^2$.
+
+\emph{Near:} $l'\le v[\tilde m(\varepsilon)/\varepsilon+\int_\varepsilon^\infty\tilde m(y)y^{-2}dy]$ with
+$\tilde m(y):=|\{s\in(a,b):\rho_s<y\}|\le l(J_y)\le\kappa_1\min(\lambda,c_6y)$ ($J_y$ as in Term~I, (J1$\ESs$)), $\tilde m\le
+l\le\kappa_1\lambda$ for large $y$, and $\tilde m(\varepsilon)>0$ only if $g<c_6\varepsilon$. This is Term~I with
+$\ESCmu M^2\lambda^{2\gamma}$ replaced by $\kappa_1$, so the increase while near is $\le v\kappa_1\tau_{\mathrm I}\lambda$.
+
+The far phase precedes the near phase, so $l_t\le\lambda\exp(\ESX+B_5I_5vm^2)+v\kappa_1\tau_{\mathrm I}\lambda=L_J\lambda<\kappa_1\lambda$
+by \textup{(P7)}. This completes the proof of (Imp$\ESs$), hence of (a). \qed
+
+\begin{proof}[Proof of \textup{(b)}--\textup{(e)}]
+(b) As in the proof of Theorem~\ref{thm:End}(b): Step~1 is now valid up to $T_{\mathrm{end}}$, so there are at most
+$\kappa_1U/\varepsilon$ non-final legs after $\Bjs$, each of duration $\le\varepsilon/(1-v)$; the construction stops at a leg start
+$T_{\mathrm{stop}}=t_J\le\Bts+\kappa_1U/(1-v)$ with $a_{J+1}=\EbE$, i.e.\ $l_{T_{\mathrm{stop}}}(a_J,\EbE)\le\varepsilon$. By
+Lemma~\ref{lem:B-C}(3) (cut construction) every $\theta\in[a_j,a_{j+1}]$ is seen by $t_j$, $j\le J$, and these intervals cover
+$[a_{\mathrm s},\EbE]$. Finally $|P-x_{\EbE}|=c(a_J,\EbE)\le l\le\varepsilon$ at $T_{\mathrm{stop}}$.
+
+(c) Let leg $j+1>\Bjs$ be non-final, $t$ in it, $s\in(a_{j+1},\EbE]$. By Step~1, $\lambda(a_j,s)\ge\varepsilon/\kappa_1\ge\varepsilon/2$.
+If $l:=l_t(a_j,s)\le R$: $\lambda\le l\le R$, so $(a_j,s)\in\BF(t)$ and
+$E\le\frac12M^2\lambda^{1+2\gamma}\le\frac12m^2l(l/R)^{2\gamma}$: this is \textup{(F$_b$)} with $c_0=m^2/2$, $c_1=0$
+($c_0+c_1\le1/4$ by \textup{(Pc)}). If $l>R$: then $\lambda>R/\kappa_1$ (if $\lambda\le R$, (J1$\ESs$) gives $\lambda\ge l/\kappa_1$),
+and by \eqref{eq:Estar-star} ($\min(\lambda,K_RR)\ge R/\kappa_1$ as $K_R\ge1$) $\rho_s\ge c_AR/\kappa_1-\delta_1R/K_\varepsilon=r_1>0$:
+this is \textup{(S)}. The hypotheses of Theorem~\ref{thm:R} on the constants hold: $\gamma\in(0,1]$, $r_0=R\in(0,1]$,
+$r_1\in(0,1]$. For $\tilde K$ apply the Claim in the proof of Theorem~\ref{thm:R} exactly as in the proof of
+Theorem~\ref{thm:End}(c) ($b^*=\EbE$, $K_T=0$, $2\pi\mapsto\EbE$), now with $\BLs:=\kappa_1U$: $R_j:=l_{t_j}(a_j,\EbE)\le\kappa_1(U-u_{a_j})$,
+since for $j=\Bjs$ $R_j=U$, and for $j>\Bjs$ the covering of $[a_j,\EbE]$ by consecutive pairs of the family of leg $j+1$ used there
+(first pair $(a_j,a_{j+1})$, label length in $[\varepsilon/\kappa_1,\varepsilon]$; last piece merged, label length $<3\varepsilon/2\le R$)
+consists of pairs of $\BF(t_j)$, to which (J1$\ESs$) applies. With $e^{2\mu}\le\delta_1$ the Claim gives
+$\tilde K\le16\delta_1+4c_0(1+1/\gamma)+2\delta_1\kappa_1U/r_1=16\delta_1+2m^2(1+1/\gamma)+2\delta_1\kappa_1U/r_1$.
+
+(d) is Step~2 and (e) is Step~1(d), both valid up to $T_{\mathrm{end}}$.
+\end{proof}
+
+\subsection{Proof of Corollary~\ref{cor:Estar}}
+
+\begin{proof}
+(S3$\ESs$) is assumed. Since $U\le U_{\max}$ and \textup{(P0)}--\textup{(P7)} are monotone in $U$, they hold for $U$.
+
+(S2$\ESs$): let $\varepsilon/2\le\lambda\le R$ ($\le\lambda_0$ by (C1)). By (E1), (C6), (C5) and $\lambda/R\le1$,
+\begin{align*}
+N&\le C_0\lambda^{1/2+a'}=C_0R^{a'}(\lambda/R)^{a'}\lambda^{1/2}\le s_0m\min(1,K_f/K_R)^\nu(\lambda/R)^{\gamma+\nu}\lambda^{1/2}\\
+&=s_0M\lambda^{1/2+\gamma}\min(1,K_f/K_R)^\nu(\lambda/R)^\nu .
+\end{align*}
+Moreover
+\[
+\min(1,K_f/K_R)\,(\lambda/R)\le\min\bigl(1,(K_f/K_R)(\lambda/R)\bigr)\le\min\bigl(1,K_f\lambda/\min(u_a,K_RR)\bigr)
+\]
+(if $(K_f/K_R)(\lambda/R)\ge1$ the middle term is $1$; otherwise it equals $(K_f/K_R)(\lambda/R)$, which is
+$\ge\min(1,K_f/K_R)(\lambda/R)$; and $\min(u_a,K_RR)\le K_RR$). So (S2$\ESs$) holds, also when $u_a=0$.
+
+(S1$\ESs$): at $\Bts$, $l=\lambda$, so $c=\lambda-E$. For $\varepsilon/2\le\lambda\le\lambda_0$, (E1) gives
+$c\ge\varphi(\lambda):=\lambda\bigl(1-\frac12(C_0\lambda^{a'})^2\bigr)$.
+If $\lambda\le\min(K_RR,\lambda_0)$: $c\ge\lambda\bigl(1-\frac12(C_0\min(K_RR,\lambda_0)^{a'})^2\bigr)\ge c_A\lambda$ by (C2).
+If $K_RR<\lambda\le\lambda_0$ (only when $K_RR<\lambda_0$): $\varphi$ is concave on $[0,\infty)$
+($\varphi''=-\frac12C_0^2(1+2a')2a'\lambda^{2a'-1}\le0$), so on $[K_RR,\lambda_0]$ it is $\ge\min(\varphi(K_RR),\varphi(\lambda_0))\ge
+c_AK_RR$ by (C2) and (C3).
+If $\lambda>\lambda_0$: $c\ge c_{\mathrm{sep}}\ge c_AK_RR$ by (E2), (C4).
+In all cases $c\ge c_A\min(\lambda,K_RR)$. The choice of $\gamma$ enters only through (C5) and $\gamma+\nu<1$ \textup{(P0)}.
+\end{proof}
+
+\subsection{Structural lemmas}
+
+In the proof of (Imp$\ESs$) for a pair $(a,b)\in\BF(t)$ ($t$ in leg $j+1$), call a pair \emph{used} if a family bound (J1$\ESs$),
+(J2$\ESs$) or \eqref{eq:Estar-CA} of that pair is invoked. Write $j(\tau)$ for the index with $\tau$ in leg $j(\tau)+1$.
+
+\begin{lemma}[Uses of (S1$\ESs$)]\label{lem:Estar-L1}
+In the proofs of (a), (b), (d), (e) of Theorem~\ref{thm:Estar}, hypothesis (S1$\ESs$) enters only through \eqref{eq:Estar-CA} at
+times $\tau\in[\Bts,t]$, for: (i) family pairs of $\BF(\tau)$ contained in $[a_{j(\tau)},\max(b,a_{j(\tau)+1})]$ (one-step tilt,
+$c(J_1)\ge c_A\lambda_{J_1}$ with $\lambda_{J_1}\le R$); (ii) the pairs $(a_{j(\tau)},s)$, $s\in[a,b]$, through \eqref{eq:Estar-star}
+(Step~3 at $s=a$; Terms~I, II and Step~5 at $s\in(a,b)$); these pairs can be long ($w_s$ up to and beyond $K_RR$). In (c),
+additionally, the pairs $(a_j,s)$, $s\in(a_{j+1},\EbE]$.
+\end{lemma}
+\begin{proof}
+\eqref{eq:Estar-CA} is invoked exactly in: the one-step bound of Step~2 (pairs of the chains (A), (B), (C), all inside
+$[a^\circ,b]\subset[a_j,b]$, and, in Term~II, the pair $I_0=(a_j,a_{j+1})\subset[a_j,a_{j+1}]$); Step~1(d) for the pair $(a_j,s)$;
+and nowhere else (Step~1(a) uses (J1$\ESs$) only; Steps~3--5 use \eqref{eq:Estar-CA} only through Steps~1(d) and~2).
+\end{proof}
+
+\begin{lemma}[Localisation]\label{lem:Estar-L2}
+The bound (Imp$\ESs$) for $(a,b)$ at time $t$ uses family bounds only (i) at times $\tau\in[\Bts,t]$, for pairs of $\BF(\tau)$
+contained in $[a_{j(\tau)},\max(b,a_{j(\tau)+1})]$; (ii) at leg starts $t_i\le t$, for the base pairs $(a_i,a_{i+1})$, $(a_i,s_i)$
+($u_{s_i}=u_{a_i}+\varepsilon/2$) and $(a_{i-1},\EbE)$ of Step~1(a), which enter only through the leg structure (advances
+$\ge\varepsilon/\kappa_1$, the leg count, Lemma~\ref{lem:Estar-gap}, $T_B$).
+\end{lemma}
+\begin{proof}
+List of the used pairs: the chains of Step~2 (inside $[a_j,b]$); the sub-arcs of $(a,b)$ from $a$ in \eqref{eq:Estar-mu}; in Step~3,
+$(a',a)$, $(a',b)$ with $a'\in\{a_j,a_{j+1}\}$, $a'\le a$ (inside $[a_j,b]$); in Term~I, $J_y\subset(a,b)$; in Term~II, $(a',a)$,
+$(a',b)$, $J_0\subset[a_j,b]$ and, only when $a=a_j$ and $a_{j+1}>b$ (then $\lambda<\varepsilon$), $I_0=(a_j,a_{j+1})$; in Step~5,
+$J_y$. Step~1(a) uses exactly the base pairs of (ii).
+\end{proof}
+
+\begin{lemma}[Start data per pair; restart of a far pair]\label{lem:Estar-L3}
+(1) For a fixed pair $(a,b)$, data at $\Bts$ enter the proof of (Imp$\ESs$) for that pair directly only through $N(a,b;\Bts)$
+(first term of Step~3; initial value of Step~4 if the pair is near at $\Bts$), $l_{\Bts}(a,b)=\lambda$ (Step~5) and the labels and
+$U$ (all other start data enter only through the family bounds and \eqref{eq:Estar-CA} of the used pairs listed in
+Lemmas~\ref{lem:Estar-L1} and~\ref{lem:Estar-L2}); all three monotonically ($N(\Bts)$ linearly with coefficient $A_0(\cdot)^\nu$;
+$E(\Bts)$ additively; $l(\Bts)$ multiplicatively).
+
+(2) Let $t_w\ge\Bts$, suppose that $(a,b)$ is far at $t_w$ ($g_w:=g(t_w)\ge K_f\lambda$), that the used pairs satisfy the family
+bounds and \eqref{eq:Estar-CA} on $[t_w,t]$, and that
+$N(a,b;t_w)\le s_0M\lambda^{1/2+\gamma}\min(1,K_f\lambda/\min(g_w,K_RR))^\nu$ and $l_{t_w}(a,b)\le(1+\delta)\lambda$. Then for
+$t\ge t_w$ the conclusions of Steps~3--5 for $(a,b)$ hold under \textup{(P5)}, \textup{(P6)} and
+\[
+\textup{(P7$_\delta$)}\qquad(1+\delta)\exp\bigl(\ESX+B_5I_5vm^2\bigr)+v\kappa_1\tau_{\mathrm I}<\kappa_1 .
+\]
+\end{lemma}
+\begin{proof}
+(1) By inspection of Steps~3--5. (2) Lemma~\ref{lem:Estar-duh} on $[t_w,t]\subset[\Bts,t]$; the amplification bound holds for
+$t_w\le\tau\le t$ verbatim; first term:
+\[
+A_0\Bigl(\frac{\min(g_w,K_RR)}{\hat g_2}\Bigr)^{\!\nu}N(t_w)\le A_0s_0M\lambda^{1/2+\gamma}
+\Bigl(\frac{\min(g_w,K_RR,K_f\lambda)}{\hat g_2}\Bigr)^{\!\nu}\le A_0s_0M\lambda^{1/2+\gamma};
+\]
+the forcing integrals are over subsets of $[\Bts,t]$ and are bounded as before. Step~4 starts from Step~3. Step~5: $l(t_w)\le(1+\delta)\lambda$
+is multiplied by the far factors, and the near increase is added.
+\end{proof}
+
+\begin{lemma}[Room in (J1$\ESs$)]\label{lem:Estar-L4}
+(Imp$\ESs$) gives $l\le L_J\lambda$ with $L_J<\kappa_1$. A start stretch $l(t_w)\le(1+\delta_{\mathrm{tail}})\lambda$ in
+Lemma~\ref{lem:Estar-L3}(2) is admissible if \textup{(P7$_\delta$)} holds with $\delta=\delta_{\mathrm{tail}}$. Since $\kappa_1$ is a
+free parameter, room is bought by raising $\kappa_1$ (at the cost of larger $\ESct$, $\ESCone\propto\kappa_1^{1/2}$ and smaller $c_\rho$,
+$c_R$).
+\end{lemma}
+\begin{proof}
+Lemma~\ref{lem:Estar-L3}(2) and Step~5.
+\end{proof}
+
+At the unconstrained optimum of Remark~\ref{rem:Estar-status} \textup{(P7)} is binding, so the admissible $\delta_{\mathrm{tail}}$
+there is $<2.3\cdot10^{-8}$; with $\delta_{\mathrm{tail}}=2\cdot10^{-5}$ imposed through \textup{(P7$_\delta$)}, the optimiser's $v$ for the data
+$(1/2,0.70,1/40,0.024,6.5)$ and $(0.99,4.25,1/40,0.024,6.5)$ changes by less than $0.1\%$ (numerical, local optimisation; not
+refereed).
+
+\subsection{Status}
+
+\begin{remark}[Status]\label{rem:Estar-status}
+\emph{Refereed.} Theorem~\ref{thm:Estar}, Corollary~\ref{cor:Estar}, Lemmas~\ref{lem:Estar-duh}--\ref{lem:Estar-int} and
+Lemmas~\ref{lem:Estar-L1}--\ref{lem:Estar-L4} were checked, in the form of version~1 of the claims, by two independent referees. The
+first report, \texttt{referee-RQ1-1.md}, compared every step, step by step, with the proof of Theorem~\ref{thm:End} and the quoted parts of
+the proof of Theorem~\ref{thm:Bulk}, located every implicit use of $\gamma\le1/4$ in the old proof and its replacement (the second report did the
+same for $K_f=64$, $K_R=32$, $m=\gamma/50$), and recomputed all constants and side conditions in independent $50$-digit code. The report
+\texttt{referee-RQ1-2.md} rebuilt the binding near-pair estimate (Step~4: $\ESDI$, $\ESDs$, $\ESDl$, \textup{(P6)}) independently from
+Lemmas~\ref{lem:B-V}, \ref{lem:E-facts}(b), \eqref{eq:Estar-star}, \eqref{eq:Estar-mu} and Lemma~\ref{lem:Estar-gap}, obtaining the
+same constants, recomputed the side conditions, and simulated Construction~C at saturated start data: no violation of
+(J1$\ESs$), (J2$\ESs$), \eqref{eq:Estar-CA}, \eqref{eq:Estar-star} or of the advance $\ge\varepsilon/\kappa_1$ at
+$v=5\cdot10^{-5}$, $5\cdot10^{-4}$, $5\cdot10^{-3}$ on test arcs of length $U=40R$ (with $2560$--$5120$ legs). Neither report found a
+false claim or a gap. Their corrections are incorporated (version~2 of the claims): the monotonicity range in
+Lemma~\ref{lem:Estar-gap}(ii), the wording of Lemma~\ref{lem:Estar-L3}(1), ``if'' in Lemma~\ref{lem:Estar-L4}, the list of binding
+conditions below, Remark~\ref{rem:Estar-cd}, and the rounding of the saturated $R$ (below). They change no constant and no
+side condition. The typeset text differs from version~2 of the claims only by notation (d$\to\ESd$, $\chi\to\ESchi$, $q\to\ESq$,
+$f\to\ESf$, $\Psi\to\ESPsi$, $\theta\to\bar\theta$, $G\to G_3$, $\bar g$) and by the unrefereed remarks marked as such (the comparison
+with Theorem~\ref{thm:End}, the values from \texttt{Q4-1.md}, the ceiling, the $\delta_{\mathrm{tail}}$ cost); this was checked in
+report \texttt{audit-D.md}.
+
+\emph{Range} (numerical: explicit inequalities in $50$-digit arithmetic; the value for $(1/2,\allowbreak0.86,\allowbreak1/40,\allowbreak0.024,\allowbreak6.5)$ was reproduced by
+both referees, the four data sets by \texttt{referee-RQ1-2.md}). For the data of the paper
+the optimised range is about $6\cdot10^{-5}$: $v=5.83\cdot10^{-5}$ for $(a',C_0,\lambda_0,c_{\mathrm{sep}},U_{\max})=
+(1/2,0.86,1/40,0.024,6.5)$ and $5.8$--$6.5\cdot10^{-5}$ over the four data sets examined (against $4.7\cdot10^{-15}$ from
+Corollary~\ref{cor:End}). At this optimum the binding conditions are \textup{(P2)} ($c_\rho K_f\ge2$), \textup{(P6)}, \textup{(P7)},
+(C2), (C5) and (C6), not \textup{(P6)} alone; the conditions were verified at $v(1-10^{-6})$, with $R$ rounded down by a relative
+$10^{-12}$ (with the saturated value, (C4) resp.\ (C6) fail by one unit in the last place). (P6) carries the constant:
+$2v\ESDs\approx0.885$ of the budget, $80\%$ of it from the base-point part $\mathrm{II}_\beta$ ($g>0$).
+
+\emph{The near-pair bound is safe but loose.} In the simulations the observed growth constant of near pairs,
+$\max\Delta E_{\mathrm{near}}/(vM^2\lambda^{1+2\gamma})$, is $\approx0.005$--$0.06$, against $D=\ESDI+\max(\ESDs,\ESDl)\approx8\cdot10^3$.
+In the simulations (J1$\ESs$) was violated only at the largest tested value $v=5\cdot10^{-2}$.
+
+\emph{Ceiling of the method.} Within these estimates $c_6\ge2$ (the distance bound at scale $\varepsilon$), $C_A\ge
+\min_{\ESq}\ESq^{1/2+\gamma}/(1-\ESq^{-\gamma})\approx6.75$ at $\gamma=1/2$ (the chain of the tilt lemma), and $K_f\gtrsim5$
+($c_\rho K_f\ge2$); hence $D\gtrsim5\cdot10^3$ and $v\lesssim10^{-4}$ for every parameter choice. Going beyond needs a different
+near-pair estimate, not different bookkeeping. (Heuristic bound from \texttt{Q1-1.md}, not refereed by RQ1-1/RQ1-2; audit~D
+checks $D\ge\ESDI+\ESDs\ge6.2\cdot10^3$, hence $v<8.1\cdot10^{-5}$ from \textup{(P6)}, for every admissible parameter choice.)
+
+\emph{What is not provided at the optimum.} Conclusion (c) holds but cannot be fed into Theorem~\ref{thm:R} there
+($\mu\tilde K\approx1.11$), and the tilt bound (d) is vacuous at scale $R$ ($\ETL m\approx2.7$); see Remark~\ref{rem:Estar-cd}.
+Neither is used by the main theorem. (At the rounded parameters of the assembled chain, $v_0=6\cdot10^{-5}$, these quantities are
+$\mu\tilde K=0.77$ and $\ETL m=0.91$; report \texttt{Q4-1.md}, not refereed; recomputed in audit~D.)
+
+\emph{Use.} The assembly of the main theorem with optimised constants uses from this section Theorem~\ref{thm:Estar}(a), (b), (d),
+(e) with \eqref{eq:Estar-CA}, Corollary~\ref{cor:Estar}, Lemmas~\ref{lem:Estar-L1}--\ref{lem:Estar-L4} (with \textup{(P7$_\delta$)}
+implied by its stronger condition (PT)); it uses neither (c) nor Theorem~\ref{thm:R}, and no cap on $\ETL m$ (reports
+\texttt{Q4-1.md}, interface check, and \texttt{audit-C.md}; not refereed; see Section~\ref{sec:main2}).
+\end{remark}
+

@@ -1,0 +1,883 @@
+% sec_T3.tex -- The main theorem with an improved constant: v <= 6e-5, T0 = 10.13.
+% Source: referee/Q2-claims.md, version 2 (stream Q2, round 7; version 1 kept as referee/Q2-claims-v1.md), which applies
+% the fixes of reports/referee-RQ2-1.md ((F-H), (F-D), (F-A)) and reports/referee-RQ2-2.md ((M1), (M2), 2.2; 5.3 moot here;
+% 6(a) as rem:T3-status; 6(b) not applied: Q2.E' stated for End*) and
+% the interface amendments (A1)-(A4) of reports/Q4-1.md. Constants: code/Q4/final.py (output code/Q4/out/final.txt).
+% Uses: Section sec:Estar (thm:Estar, cor:Estar, lem:Estar-L1..L4), Section sec:HTp (thm:HTp, cor:HTp-used),
+%       Section sec:main (lem:T2-W, hyp:HT, def. of the path, thm:Main, cor:Exact), Sections sec:bulk, sec:end, lem:A41.
+% Changes of notation against Q2-claims v2:
+%   t_w, j_w (base reaches W_1) -> t_W, j_W  (t_w = \Mtw is the start of a working front in sec_T2);
+%   Q1's far-forcing parameter eta -> \eta_1;  departure eta = v/zeta -> \eta_{\mathrm D};  core = old dropped (remark);
+%   Q2.E' -> thm:T3-E, Q2.H -> lem:T3-H, Q2.D -> thm:T3-D, Q2.M -> prop:T3-cond, Q2.M-final -> thm:Main2, Q2.X -> cor:Exact2.
+% All new labels have the prefix T3-, except sec:main2, thm:Main2, cor:Exact2.
+
+\newcommand{\TzW}{W_1}
+\newcommand{\TzjW}{j_W}
+\newcommand{\TztW}{t_W}
+\newcommand{\TzLJ}{L_J}
+% notation of sec_Estar.tex (provided here only if that file is absent)
+\providecommand{\ESf}{f_{\mathrm F}}\providecommand{\ESd}{d_{\mathrm L}}\providecommand{\ESq}{q_{\mathrm c}}
+\providecommand{\ESchi}{\chi_{\mathrm g}}\providecommand{\ESX}{X_{\mathrm{far}}}\providecommand{\EScamp}{c_{\mathrm{amp}}}
+\providecommand{\ESCone}{C_{1\mathrm A}}\providecommand{\ESDI}{D_{\mathrm I}}\providecommand{\ESDs}{D_{\mathrm{IIs}}}
+\providecommand{\ESDl}{D_{\mathrm{IIl}}}
+\newcommand{\TzDb}{\bar D}
+\newcommand{\Tzgd}{\gamma_{\mathrm D}}
+\newcommand{\TzetD}{\eta_{\mathrm D}}
+\newcommand{\TzetN}{\eta_{\mathrm N}}
+\newcommand{\TzFb}{\BF_{\mathrm b}}
+\newcommand{\TzHT}{\textup{(H$_{\mathrm T}'$)}}
+\newcommand{\TzUmin}{U_{\min}}
+\newcommand{\Tzkt}{\kappa_2}
+
+\section{The main theorem with an improved constant}\label{sec:main2}
+
+This section proves the main result of these notes with a much better range of $v$: Theorem~\ref{thm:Main2} below gives an
+$\varepsilon$-independent sweep for $v\le v_0:=6\cdot10^{-5}$ in time $10.13\,d$, and Corollary~\ref{cor:Exact2} gives exact
+capture for these $v$. \textbf{Theorem~\ref{thm:Main2} supersedes Theorem~\ref{thm:Main}}, which remains valid (its proof in
+Section~\ref{sec:main} does not use this section); the path is the same, only the cap on the vision radius differs.
+
+Three things change against Section~\ref{sec:main}.
+\emph{(1) The core.} Theorem~\ref{thm:End} is replaced by Theorem~\ref{thm:Estar} and Corollary~\ref{cor:Estar}
+(Section~\ref{sec:Estar}), the same end theorem with every numerical threshold of the proof turned into a parameter, the cap
+$\gamma\le\frac14$ removed and some estimates sharpened.
+\emph{(2) The touch-down data.} Theorem~\ref{thm:HT} is replaced by Theorem~\ref{thm:HTp} (Section~\ref{sec:HTp}), whose
+constants are explicit functions of a bound $\bar v$ for $v$; we use it at $\bar v=6\cdot10^{-5}$.
+\emph{(3) The assembly.} In Section~\ref{sec:main} the end theorem is applied twice, before and after a hand-over
+(Proposition~\ref{prop:T2-I}), and the output of the first application enters the second through an eighth power; this costs
+about $36$ orders of magnitude ($v_0\approx4\cdot10^{-51}$ against $4.7\cdot10^{-15}$ for the same core and data). Here the core is applied \emph{once}, from the touch-down on, to the whole arc. Its separation
+hypothesis fails at $\Mtd$ only for pairs with one point just ahead of Harry and the other next to the end $E_Y$; these pairs
+are \emph{excused} (nothing is claimed or used about them) until the base has advanced by a fixed length $\TzW$, and they are
+then fed into the bootstrap as far pairs, with start data provided by a departure theorem (Theorem~\ref{thm:T3-D}). A second,
+independent application of the core to a short initial arc (\emph{stage~A}) is kept, but only to control the heading of the
+first legs (Lemma~\ref{lem:T3-H}).
+
+\emph{Notation} is that of Sections~\ref{sec:bulk}, \ref{sec:end} and~\ref{sec:main}, with $d=1$ except in
+Theorem~\ref{thm:Main2} and Corollary~\ref{cor:Exact2}. The parameters of Theorem~\ref{thm:Estar} are
+$(\gamma,R,m,s_0,\ESf,\kappa_1,c_A,K_R,K_f,K_\varepsilon,\eta_1,\ESq,\nu,\ESd,\delta_1,A_0)$, $M:=mR^{-\gamma}$ (we write
+$\eta_1$ for its far-forcing parameter $\eta$, and keep $\eta$ for the window parameter of Section~\ref{sec:HTp}), with the
+derived constants $C_A,C_B,\ETL,c_6,c_\rho,c_R,\ESchi,\ESX,B_5,I_5,\tau_{\mathrm I},\dots$ of Section~\ref{sec:Estar}; its
+hypotheses are (S1$^*$)--(S3$^*$) and the side conditions (P0)--(P7), those of Corollary~\ref{cor:Estar} are (C0)--(C6); its
+conclusions are (a) the family bounds (J1$^*$) $l_t(a,b)\le\kappa_1\lambda$, (J2$^*$) $N(a,b;t)\le M\lambda^{1/2+\gamma}$ and
+\eqref{eq:Estar-CA} (written (CA$^*$) below), (b) the legs, (d) the tilts, (e) \eqref{eq:Estar-star} (written (E-star$^*$)). We use
+the constant of Section~\ref{sec:Estar}
+\begin{equation}\label{eq:T3-LJ}
+\TzLJ=\exp\bigl(\ESX+B_5I_5vm^2\bigr)+v\kappa_1\tau_{\mathrm I},
+\end{equation}
+the left side of (P7), with the final $\ESX$ of that section; the proof of Theorem~\ref{thm:Estar} gives $l_t(a,b)\le\TzLJ\lambda$ for family pairs. The family $\BF(t)$,
+the gap $g=u_a-u_{a_j}$ and ``far'' ($g\ge K_f\lambda$) are as in Section~\ref{sec:Estar}. For labels $u_a<u_b$ we write
+$\lambda:=u_b-u_a$ and $u':=U-u$.
+
+\subsection{The core on working fronts}
+
+\begin{lemma}[Theorem~\ref{thm:Estar} on working fronts]\label{lem:T3-W}
+Theorem~\ref{thm:Estar} and Corollary~\ref{cor:Estar} hold for Construction~C on a working front (Section~\ref{sec:main}), with
+``every label of $[a_{\mathrm s},\EbE]$ has been seen'' replaced by ``the direction of every true label of $[a_{\mathrm s},\EbE]$ has
+been seen'', and without the hypotheses $P(0)=0$, $\EbE-a_{\mathrm s}<2\pi$. Under \textup{(S1$^*$)} the proviso of
+Lemma~\ref{lem:T2-W}(c) holds at every leg start reached: a non-final leg has label advance $\lambda\in[\varepsilon/\kappa_1,\varepsilon]$
+and $c(a_j,a_{j+1};t_j)\ge c_A\min(\lambda,K_RR)>0$.
+\end{lemma}
+\begin{proof}
+This is the argument of Lemma~\ref{lem:T2-W}(d). The proof of Theorem~\ref{thm:Estar} cites, besides its own auxiliary lemmas
+(which are computations with the family bounds, the leg structure and Lemma~\ref{lem:B-3}) and the pieces of the proof of
+Theorem~\ref{thm:End} used verbatim (Table~\ref{tab:Estar-unch}: the continuity scheme, the start value of near pairs, the proof of
+Theorem~\ref{thm:End}(b), with the computations of the proof of Theorem~\ref{thm:Bulk} that they quote; these hold on a working
+front by the argument of Lemma~\ref{lem:T2-W}(d)), only Lemmas~\ref{lem:B-V},
+\ref{lem:B-VC}(a),(b),(c), \ref{lem:B-1}(i), \ref{lem:B-2}, \ref{lem:B-3}(a),(c), \ref{lem:B-4}, \ref{lem:B-C}(0),(2),(3),(4),
+\ref{lem:E-facts}(a),(b), Remark~\ref{rem:E-B}(4), and (for its part (c) only, which is not used below) the Claim in the proof of
+Theorem~\ref{thm:R}. By Lemma~\ref{lem:T2-W}(a),(c) all of these hold on a working front, with Lemma~\ref{lem:B-C}(3) replaced by
+\textup{($3'$)} and Lemma~\ref{lem:B-VC}(c) (``seen'') by Lemma~\ref{lem:T2-W}(b); Remark~\ref{rem:E-B}(4) holds because
+$x(\cdot,t)$ is determined by $x^0$ and $P|_{[\Mtw,t]}$; ``seen'' enters only through
+Lemma~\ref{lem:B-C}(3). The hypotheses $P(0)=0$ and $\EbE-a_{\mathrm s}<2\pi$ serve only Lemma~\ref{lem:B-VC}(c) and $c>0$.
+Corollary~\ref{cor:Estar} only verifies (ST$^*$) at $\Bts$ and adds nothing else. The proviso: let $t_j\le t^*$ be a leg start inside
+the continuity argument, so that (J1$^*$) holds at $t_j$ (by continuity if $t_j=t^*$). Step~1(a) of the proof of Theorem~\ref{thm:Estar} uses only (J1$^*$) at
+$t_j$ and the maximality rule; it gives that leg $j+1$ is final or has advance $\lambda\in[\varepsilon/\kappa_1,\varepsilon]\subset
+[\varepsilon/2,R]$ ($\kappa_1\le\frac43$, $\varepsilon\le R/K_\varepsilon$); then (S1$^*$) and the monotonicity of chords give
+$c(a_j,a_{j+1};t_j)\ge c_A\min(\lambda,K_RR)>0$, so the leg is defined. The proviso uses (S1$^*$) only through
+\eqref{eq:Estar-CA} for the pair $(a_j,a_{j+1})$ (label length $\le\varepsilon\le R$); so it holds whenever \eqref{eq:Estar-CA}
+holds for the family pairs, as in Theorem~\ref{thm:T3-E}, where (CA$'$) gives it.
+\end{proof}
+
+\subsection{The end theorem with an excused tail}
+
+\noindent\textbf{Setting.} A working front, Construction~C from a leg start $(\Bts,a_{\mathrm s})$ cut at $\EbE$, labels
+$u\in[0,U]$ (arclength at $\Bts$ from $x_{a_{\mathrm s}}$). Fix $\TzW\ge0$ with $U\ge2\TzW+R+\varepsilon$. A pair $(a,b)$ is a
+\emph{body pair} if $u_b'\ge\TzW$ and a \emph{tail pair} if $u_b'<\TzW$; it is \emph{bad} if $u_a<\TzW$ and $u_b'<\TzW$, and
+\emph{good} otherwise. A bad pair has $\lambda>U-2\TzW\ge R$; so every pair with $\lambda\le R$, in particular every family pair,
+is good. Let $\TzjW$ be the first index $j\ge\Bjs$ with $u_{a_j}\ge\TzW$, and $\TztW:=t_{\TzjW}$ (if the construction reaches it).
+
+\medskip\noindent\textbf{Hypotheses.} The parameters satisfy (P0)--(P7) of Theorem~\ref{thm:Estar} with this $U$, and
+\begin{itemize}
+\item[(S1$'$)] $c(a,b;\Bts)\ge c_A\min(\lambda,K_RR)$ for all \emph{good} pairs with $\lambda\ge\varepsilon/2$;
+\item[(S2$'$)] (S2$^*$) for all \emph{body} pairs with $\varepsilon/2\le\lambda\le R$;
+\item[(S3$^*$)] $\varepsilon\le R/K_\varepsilon$;
+\item[(TW)] if $\TztW$ exists: every tail pair with $\varepsilon/2\le\lambda\le R$ satisfies, with $g_W:=u_a-u_{a_{\TzjW}}$,
+\[
+g_W\ge K_f\lambda,\qquad l_{\TztW}(a,b)\le(1+\delta_T)\lambda,\qquad
+N(a,b;\TztW)\le s_0M\lambda^{1/2+\gamma}\min\Bigl(1,\frac{K_f\lambda}{\min(g_W,K_RR)}\Bigr)^{\nu};
+\]
+\item[(PT)] $(1+\delta_T)\,\TzLJ<\kappa_1$.
+\end{itemize}
+(PT) implies the condition (P7$_\delta$) $(1+\delta)\exp(\ESX+B_5I_5vm^2)+v\kappa_1\tau_{\mathrm I}<\kappa_1$ of
+Lemma~\ref{lem:Estar-L3} with $\delta=\delta_T$.
+
+\begin{theorem}[End theorem with an excused tail]\label{thm:T3-E}
+Under these hypotheses:
+\begin{enumerate}
+\item[(a$'$)] For every $t$ from $\Bts$ until the construction stops, \textup{(J1$^*$)} and \textup{(J2$^*$)} hold for all body
+pairs of $\BF(t)$; $\TztW$ exists, and for $t\ge\TztW$ \textup{(J1$^*$)}, \textup{(J2$^*$)} hold for all pairs of $\BF(t)$.
+\textup{(CA$'$)}: $c(a,b;t)\ge c_A\min(\lambda,K_RR)$ for all good pairs with $\lambda\ge\varepsilon/2$ and all $t\ge\Bts$.
+\item[(b$'$)] Theorem~\ref{thm:Estar}\textup{(b)} holds: every non-final leg advances the base by a label length in
+$[\varepsilon/\kappa_1,\varepsilon]$; the construction stops at a leg start $T_{\mathrm{stop}}\le\Bts+\kappa_1U/(1-v)$ with
+$l_{T_{\mathrm{stop}}}(a_J,\EbE)\le\varepsilon$; the direction of every true label of $[a_{\mathrm s},\EbE]$ is seen by
+$T_{\mathrm{stop}}$.
+\item[(d$'$)] Theorem~\ref{thm:Estar}\textup{(d)} (tilts) holds at time $t$ for family pairs $J\subset I$ with $I$ a body pair,
+and for all family pairs $J\subset I$ if $t\ge\TztW$.
+\item[(e$'$)] For $t$ in leg $j+1$ and every label $s$ with $w_s:=u_s-u_{a_j}\ge0$ and ($u_s'\ge\TzW$ or $u_{a_j}\ge\TzW$):
+$\rho_s\ge c_A\min(w_s,K_RR)-\delta_1\varepsilon$.
+\end{enumerate}
+\end{theorem}
+For $\TzW=0$ there are no tail pairs, and Theorem~\ref{thm:T3-E} is Theorem~\ref{thm:Estar}(a),(b),(d),(e).
+
+\medskip\noindent\textbf{Structural facts.} The proof rests on four facts about the proof of Theorem~\ref{thm:Estar}, proved in
+Section~\ref{sec:Estar} as Lemmas~\ref{lem:Estar-L1}--\ref{lem:Estar-L4}. Let $(a,b)\in\BF(t)$, $t$ in leg $j+1$, and let
+$t'\le t$ have base $a_{j(t')}$.
+\begin{itemize}
+\item[(F1)] \emph{Locality} (Lemmas~\ref{lem:Estar-L1}, \ref{lem:Estar-L2}(i)). The proof of the bounds (Imp$^*$) for $(a,b)$ at
+$t$ uses: (i) the family bounds of pairs of $\BF(t')$ contained in $[a_{j(t')},\max(b,a_{j(t')+1})]$; (ii) (CA$^*$) for these
+pairs and for the pairs $(a_{j(t')},s)$, $s\in[a,b]$, through (E-star$^*$) at the labels of $[a,b]$ (the latter pairs may be
+long); (iii) Lemmas~\ref{lem:B-C}(2),(4), \ref{lem:B-3}, \ref{lem:B-4}, \ref{lem:E-facts} and plane geometry; (iv) the start data
+$N(a,b;\Bts)$, $E(a,b;\Bts)$ (if near at $\Bts$) and $l_{\Bts}(a,b)=\lambda$ of the pair itself
+(Lemma~\ref{lem:Estar-L3}(1)). Nothing else about other pairs or labels enters.
+\item[(F2)] \emph{Far pairs with a later start} (Lemma~\ref{lem:Estar-L3}(2)). If $(a,b)$ is far at a leg start $t'\ge\Bts$, the
+pairs of (F1)(i) satisfy the family bounds and (CA$^*$) on $[t',t]$, and
+\[
+N(a,b;t')\le s_0M\lambda^{1/2+\gamma}\min\bigl(1,K_f\lambda/\min(g(t'),K_RR)\bigr)^\nu,
+\]
+then the far-pair and near-pair steps of the proof give the bounds of (Imp$^*$) for $(a,b)$ on $[t',t]$.
+\item[(F3)] \emph{Length with a later start} (Lemmas~\ref{lem:Estar-L3}(2), \ref{lem:Estar-L4}). If moreover
+$l_{t'}(a,b)\le(1+\delta)\lambda$, then $l_t(a,b)\le(1+\delta)\exp(\ESX+B_5I_5vm^2)\lambda+v\kappa_1\tau_{\mathrm I}\lambda$, which is
+$<\kappa_1\lambda$ under (P7$_\delta$).
+\item[(F4)] \emph{Leg starts} (Lemma~\ref{lem:Estar-L2}(ii)). Step~1(a) uses the family bound (J1$^*$) at a leg start $t_i$ only for
+$(a_i,s_i)$ with $u_{s_i}=u_{a_i}+\varepsilon/2$, for $(a_i,a_{i+1})$, and, in its case ($\beta$) ($U-u_{a_i}<\varepsilon/2$), for
+$(a_{i-1},\EbE)$; these enter only through the leg structure (advances, leg count, gap--time integrals, total time).
+\end{itemize}
+Table~\ref{tab:T3-reuse} lists which parts of the proof of Theorem~\ref{thm:Estar} (steps numbered as there) are used, for which
+pairs, and on which time interval.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}p{0.27\textwidth}p{0.2\textwidth}p{0.2\textwidth}p{0.25\textwidth}@{}}
+\toprule
+part of the proof of Thm.~\ref{thm:Estar} & Part 1: body pairs on $[\Bts,\TztW]$ & Part 2: all pairs on $[\TztW,T_{\mathrm{stop}}]$ & tail pairs entering at $\TztW$\\
+\midrule
+Step 0: legs, (CA$^*$), family, continuity scheme & verbatim, family $\TzFb$ & verbatim & strict start bounds from (TW), (PT)\\
+Step 1(a) dichotomy & pairs $(a_j,s)$, $(a_j,a_{j+1})$ are body pairs; ($\beta$) cannot occur (F4) & verbatim & ---\\
+Step 1(b),(c): leg count, gap--time integrals & verbatim & verbatim & over $[\TztW,t]$ (subinterval)\\
+Step 1(d): (E-star$^*$) & at labels with $u_s'\ge\TzW$ (good pairs) & base $\ge\TzW$: all labels & base $\ge\TzW$\\
+Step 2: tilt lemma, (E-mu$^*$) & sub-pairs of body pairs are body pairs (F1) & verbatim & verbatim\\
+Step 3: far pairs & verbatim, start (S2$'$) & verbatim & (F2) from $t'=\TztW$, start (TW)\\
+Step 4: near pairs & verbatim & verbatim & start = Step~3 value when the pair becomes near\\
+Step 5: length & verbatim, $l(\Bts)=\lambda$ & verbatim & (F3) from $\TztW$, $\delta=\delta_T$\\
+closing argument & $\TzFb(t)$ shrinks & $\BF(t)$ shrinks & ---\\
+\midrule
+structural lemmas & \ref{lem:Estar-L1}, \ref{lem:Estar-L2} & \ref{lem:Estar-L1}, \ref{lem:Estar-L2} & \ref{lem:Estar-L3}, \ref{lem:Estar-L4}\\
+\bottomrule
+\end{tabular}
+\caption{Reuse of the proof of Theorem~\ref{thm:Estar} in the proof of Theorem~\ref{thm:T3-E}.}\label{tab:T3-reuse}
+\end{table}
+
+\begin{proof}[Proof of Theorem~\ref{thm:T3-E}]
+\emph{Step 0 (separation).} By (S1$'$) and the monotonicity of chords (Lemma~\ref{lem:T2-W}(a)), (CA$'$) holds; all family pairs
+are good, so (CA$^*$) holds for every family pair. For $t$ in leg $j+1$ and a label $s$ with $w_s\ge0$: if
+$w_s<\varepsilon/2$ the bound (e$'$) is negative ($\delta_1\ge1>c_A/2$); otherwise, if $u_s'\ge\TzW$ or $u_{a_j}\ge\TzW$, the
+pair $(a_j,s)$ is good, and Lemma~\ref{lem:B-C}(4) ($|P-x_{a_j}|\le\delta_1\varepsilon$) gives
+$\rho_s\ge c(a_j,s;t)-\delta_1\varepsilon\ge c_A\min(w_s,K_RR)-\delta_1\varepsilon$. This is (e$'$); it is Step~1(d) of the proof
+of Theorem~\ref{thm:Estar} for these labels.
+
+\emph{Part 1: $t\in[\Bts,\TztW]$.} Let $T_1$ be the supremum of the $t'\le T_{\mathrm{end}}$ such that $u_{a_j}<\TzW$ for every
+leg start $t_j\le t'$. Run the continuity argument of Theorem~\ref{thm:Estar}(a) on $[\Bts,T_1]$ with the family $\BF(t)$ replaced
+by the body family $\TzFb(t):=\{(a,b)\in\BF(t):u_b'\ge\TzW\}$, which shrinks in $t$ like $\BF(t)$. Let $(a,b)\in\TzFb(t)$ and
+$t'\le t$ in Part~1. Then $u_{a_{j(t')+1}}\le u_{a_{j(t')}}+\varepsilon<\TzW+\varepsilon$, so
+$u'_{a_{j(t')+1}}\ge U-\TzW-\varepsilon\ge\TzW$, and every pair $[a'',b'']\subset[a_{j(t')},\max(b,a_{j(t')+1})]$ has
+$u'_{b''}\ge\min(u_b',u'_{a_{j(t')+1}})\ge\TzW$: it is a body pair. So the family bounds required by (F1)(i) are the bounds
+assumed for $\TzFb$ in the continuity argument. Every label $s\in[a,b]$ has $u_s'\ge u_b'\ge\TzW$, so (E-star$^*$) holds at $s$
+by Step~0, and (CA$^*$) holds for all family pairs: this is (F1)(ii). The start data (F1)(iv) are given by (S2$'$) and
+$l_{\Bts}=\lambda$. Hence the proof of (Imp$^*$) of Theorem~\ref{thm:Estar} applies verbatim to $(a,b)$, and the closing argument of
+Theorem~\ref{thm:Estar}(a), which uses only $|E'|\le(4v/\varepsilon)l$, $l'\le(2v/\varepsilon)l$ for the pair itself and the
+bounds (Imp$^*$) at $t^*$, gives (J1$^*$), (J2$^*$) for $\TzFb(t)$ on $[\Bts,T_1]$.
+
+\emph{Legs in Part~1.} At a leg start $t_j<T_1$ ($u_{a_j}<\TzW$), Step~1(a) uses (F4) the pairs $(a_j,s)$ with
+$u_s=u_{a_j}+\varepsilon/2$ and $(a_j,a_{j+1})$; they have $u_s'\ge U-\TzW-\varepsilon/2\ge\TzW$ and
+$u'_{a_{j+1}}\ge U-\TzW-\varepsilon\ge\TzW$, so they are body pairs. Its case ($\beta$), $U-u_{a_j}<\varepsilon/2$, is impossible since
+$u_{a_j}<\TzW$. So leg $j+1$ is final or advances the base by $[\varepsilon/\kappa_1,\varepsilon]$, and it is not final: a final leg
+needs $l_{t_j}(a_j,\EbE)\le\varepsilon$, hence $U-u_{a_j}\le\varepsilon$, contradicting $u_{a_j}<\TzW\le U-\TzW-\varepsilon$. The
+proviso of Lemma~\ref{lem:T2-W}(c) holds: $(a_j,a_{j+1})$ has $\lambda\ge\varepsilon/\kappa_1\ge\varepsilon/2$ and is good, so
+$c>0$ by (CA$'$). Since every leg advances the base by at least $\varepsilon/\kappa_1$, the base reaches $\TzW$ after finitely many
+legs: $\TztW$ exists and $T_1=\TztW$. Moreover the family $\BF(\TztW)$ is that of leg $\TzjW$; its pairs with first point
+$a_{\TzjW-1}$ are body pairs ($u_{a_{\TzjW-1}}<\TzW$ and $\lambda\le R$ give $u_b'>U-\TzW-R\ge\TzW$), so (J1$^*$), (J2$^*$), with
+the strict bounds of (Imp$^*$), hold at $\TztW$ for them, and every tail pair of $\BF(\TztW)$ has first point $\ge a_{\TzjW}$; its
+gap in the family of leg $\TzjW+1$ is $g_W$.
+
+\emph{Part 2: $t\ge\TztW$.} At $\TztW$ every pair of $\BF(\TztW)$ satisfies strict bounds: body pairs by Part~1, tail pairs by (TW)
+($s_0\le\ESf<1$, so $N<M\lambda^{1/2+\gamma}$; and $1+\delta_T<\kappa_1$ by (PT), as $\TzLJ\ge1$). Run the continuity argument of
+Theorem~\ref{thm:Estar}(a) on $[\TztW,T_{\mathrm{end}}]$ for the whole family $\BF(t)$. Legs stay defined: for $u_{a_j}\ge\TzW$
+the pair $(a_j,a_{j+1})$ is good, so $c>0$ by (CA$'$) (the proviso of Lemma~\ref{lem:T3-W}). Let $t\in[\TztW,t^*]$, $(a,b)\in\BF(t)$;
+for $t'\ge\TztW$ the base has $u_{a_{j(t')}}\ge\TzW$.
+\begin{itemize}
+\item \emph{Body pair.} On $[\Bts,\TztW]$ its history satisfies all that (F1) asks, by Part~1 (the pairs used there are body pairs
+and the labels used have $u_s'\ge\TzW$). On $[\TztW,t]$ the family bounds of (F1)(i) are the continuity hypothesis, and
+(E-star$^*$) holds at every label $s\ge a_{j(t')}$ by Step~0. The proof of (Imp$^*$) applies verbatim.
+\item \emph{Tail pair.} By (TW) it is far at $\TztW$; since gaps are non-increasing it is far on $[\TztW,t_n)$, where $t_n$ is
+the time at which it becomes near (if any), and near afterwards. On the far part, (F2) with $t'=\TztW$ and $g(t')$ the gap in the family of leg $\TzjW+1$, i.e.\ $g_W$, and the start bound of (TW)
+gives the far bound of Step~3. When the pair becomes near, Step~4 applies verbatim with the start value given by Step~3 at that
+time; the start datum $E(\Bts)$ of (F1)(iv) is not needed, as the pair was far at $\TztW$. The length: (F3) with $t'=\TztW$,
+$\delta=\delta_T$, and (PT). (E-star$^*$) at its labels holds by Step~0 ($u_{a_{j(t')}}\ge\TzW$); the family bounds of its
+sub-pairs are the continuity hypothesis.
+\end{itemize}
+Hence (Imp$^*$) holds on $[\TztW,t^*]$, and the closing argument gives (J1$^*$), (J2$^*$) for $\BF(t)$ up to $T_{\mathrm{end}}$. Every
+tail pair of $\BF(t)$, $t\ge\TztW$, belongs to $\BF(\TztW)$ (families shrink) and is covered by (TW). Step~1(a), including its case
+($\beta$) with the pair $(a_{j-1},\EbE)$ (a tail pair, now under the continuity hypothesis), holds as in
+Theorem~\ref{thm:Estar}, so (b$'$) follows exactly as Theorem~\ref{thm:Estar}(b), with Lemma~\ref{lem:T2-W}(c)\textup{($3'$)} for
+``seen'' (Lemma~\ref{lem:T3-W}). Finally (d$'$) is Step~2 at time $t$ for pairs with family bounds.
+\end{proof}
+
+\noindent\emph{No circularity.} Part~1 does not use (TW). (TW) is a statement about the configuration at $\TztW$, which depends
+only on $P|_{[0,\TztW]}$ (Remark~\ref{rem:E-B}(4)); in the assembly it is proved from Lemma~\ref{lem:T3-H} and
+Theorem~\ref{thm:T3-D}, which use stage~A (a separate application of Corollary~\ref{cor:Estar}) and the touch-down data, never
+Theorem~\ref{thm:T3-E}.
+
+\medskip
+Table~\ref{tab:T3-cover} (from the second referee's report) lists every class of pairs and labels that occurs and how it is
+covered; no pair and no time is uncovered.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}p{0.3\textwidth}p{0.3\textwidth}p{0.11\textwidth}p{0.22\textwidth}@{}}
+\toprule
+class (labels at $\Bts$) & Part 1 $[\Bts,\TztW]$ & at $\TztW$ & Part 2 $[\TztW,T_{\mathrm{stop}}]$\\
+\midrule
+body pairs, $u_a'>u_b'\ge\TzW$ & bootstrap on $\TzFb$ (sub-pairs used are body pairs; (E-star$^*$) at $s\in[a,b]$) & strict, Part 1 & continuity\\
+tail pairs straddling $\TzW$ ($u_a'\ge\TzW>u_b'$) & excused & (TW) & (F2), then Step 4, (F3)\\
+tail pairs $u_a'<\TzW$ & excused & (TW) & as above\\
+base pairs $(a_j,b)$, $u_{a_j}<\TzW$ & body ($u_b'\ge U-\TzW-R\ge\TzW$) & body & ---\\
+$(a_{\TzjW-1},b)\in\BF(\TztW)$ & body & body & ---\\
+$(a_j,b)$, $u_{a_j}\ge\TzW$, $b$ in the tail & --- & --- & far at $\TztW$; Step 3, then Step 4\\
+$(a_{j-1},\EbE)$ of Step 1(a)($\beta$) & cannot occur & --- & continuity\\
+$(a_j,s_j)$, $(a_j,a_{j+1})$ of Step 1(a) & body & body & continuity\\
+$(a_j,s)$ for (E-star$^*$), $s$ in the body & good: (CA$'$) & good & good\\
+$(a_j,s)$ for (E-star$^*$), $s$ in the tail, $u_{a_j}<\TzW$ & bad, never used & --- & base $\ge\TzW$: good\\
+bad pairs & $\lambda>U-2\TzW\ge R$: in no family & --- & ---\\
+\bottomrule
+\end{tabular}
+\caption{Coverage of pairs and labels in Theorem~\ref{thm:T3-E}.}\label{tab:T3-cover}
+\end{table}
+
+\subsection{Heading of the first legs}
+
+\noindent\textbf{Setting.} A working front and Construction~C from $(\Bts,a_{\mathrm s})$ cut at a label $\MbA$, with labels
+$u\in[0,\MUA]$. Assume that the conclusions (a), (b), (d), (e) of Theorem~\ref{thm:Estar} hold for this construction on
+$[\Bts,t_j]$ for the leg starts $t_j$ considered (by causality, Remark~\ref{rem:E-B}(4), it suffices that they hold for the
+construction cut at $\MbA$ while $P$ follows it), with parameters $(\gamma_1,R_1,m_1,c_{A1},K_{R1},\delta_1,\kappa_1)$,
+$M_1=m_1R_1^{-\gamma_1}$, $\kappa_1\le2$, $K_{R1}\ge1$, and tilt bounds
+$|e_J-e_I|\le C_{A1}m_1(\lambda_I/R_1)^{\gamma_1}$ for family pairs $J\subset I$ with the same left end and
+$C_{B1}m_1(\lambda_I/R_1)^{\gamma_1}$ with the same right end. Let $\Mn$ be a unit vector, $0<\gamma_h\le\gamma_1$,
+$\varepsilon\le\delta_0\le R_1/2$, $\TzW>0$, $G_f$ with $\TzW+\varepsilon+\delta_0\le G_f\le\MUA-\varepsilon$, and assume
+\[
+\textup{(F1$^*$)}\qquad|T(u,\Bts)-\Mn|\le K_{\mathrm{fw}}u^{1-\mu}\quad(u\le G_f),\qquad
+\bar\sigma:=K_{\mathrm{fw}}G_f^{1-\mu}\le\tfrac12,\qquad\gamma_h\le1-\mu .
+\]
+Put $\theta_f:=K_{\mathrm{fw}}G_f^{1-\mu-\gamma_h}$, $k_\sigma:=(1+\bar\sigma/2)/(1-\bar\sigma^2/2)$,
+$C_3:=2C_{B1}+C_{A1}$, $c_\tau:=1/(1-m_1^2/2)$ (assume $m_1^2<2$),
+$\rho_*$ with $\varepsilon\le\rho_*\le c_{A1}(R_1-\delta_0-\varepsilon)-\delta_1\varepsilon$, and
+\begin{gather*}
+K_{\mathrm{rot}}:=\frac{\kappa_1}{1-v}\Bigl[\frac{2R_1}{c_{A1}\delta_0}+\frac{\TzW+\varepsilon}{\rho_*}\Bigr],\qquad
+\omega_0:=C_{A1}m_1\Bigl(\frac{\delta_0}{R_1}\Bigr)^{\gamma_1}+k_\sigma\bar\sigma+vK_{\mathrm{rot}},\\
+\theta_{h1}:=C_{A1}m_1R_1^{-\gamma_1}\delta_0^{\gamma_1-\gamma_h}+2^{\gamma_h}k_\sigma\theta_f
++v\,\frac{4\kappa_1C_3m_1}{c_{A1}(1-v)}\,2^{\gamma_1}R_1^{-\gamma_1}\delta_0^{\gamma_1-\gamma_h},\qquad
+\vartheta_h:=c_\tau^{\gamma_h}\max\bigl(\theta_{h1},\,\omega_0\delta_0^{-\gamma_h}\bigr).
+\end{gather*}
+
+\begin{lemma}[Heading up to base label $\TzW$]\label{lem:T3-H}
+Let $j\ge\Bjs$ with $u_{a_j}<\TzW$ and leg $j+1$ non-final, with direction $\hat u_{j+1}$. Then for all $t$ in leg $j+1$, with
+$\tau:=t-\Bts$,
+\[
+|\hat u_{j+1}-\Mn|\le h(\tau):=\min\bigl(\vartheta_h(\tau+\varepsilon)^{\gamma_h},\,\omega_0\bigr).
+\]
+\end{lemma}
+\begin{proof}
+Let $\Lambda:=u_{a_j}+\varepsilon<\TzW+\varepsilon$, $\lambda_I:=\min(\Lambda,\delta_0)\in[\varepsilon,\delta_0]$ (here
+$\varepsilon\le\delta_0$ is used), $b$ the label with $u_b=u_{a_j}+\lambda_I\le G_f\le\MUA$, and $I:=(a_j,b)$. As
+$\varepsilon/2\le\lambda_I\le R_1$ and its first point is the base, $I$ belongs to the family.
+
+\emph{Step 1 (time $t_j$).} $J:=(a_j,a_{j+1})$ is a family pair (advance in $[\varepsilon/\kappa_1,\varepsilon]\subset[\varepsilon/2,R_1]$),
+$J\subset I$ with the same left end, and $e_J(t_j)=\hat u_{j+1}$ (Lemma~\ref{lem:B-C}(2)). So
+$|\hat u_{j+1}-e_I(t_j)|\le C_{A1}m_1(\lambda_I/R_1)^{\gamma_1}$.
+
+\emph{Step 2 (time $\Bts$).} Let $\sigma:=\sup_I|T(\cdot,\Bts)-\Mn|\le K_{\mathrm{fw}}u_b^{1-\mu}\le\bar\sigma$. At $\Bts$, $l=\lambda_I$,
+$c\,e_I-l\,\Mn=\int_I(T-\Mn)\,ds$ and $c\ge\int_IT\cdot\Mn\,ds\ge l(1-\sigma^2/2)$, so
+$|e_I-\Mn|\le(l/c)\sigma+(l-c)/c\le\sigma(1+\sigma/2)/(1-\sigma^2/2)\le k_\sigma\sigma$. Moreover
+$\sigma\le\theta_fu_b^{\gamma_h}$ (as $u_b\le G_f$, $\gamma_h\le1-\mu$) and $u_b\le u_{a_j}+\Lambda\le2\Lambda$.
+
+\emph{Step 3 (rotation of $e_I$ on $[\Bts,t_j]$).} From $c_Ie_I=x_b-x_a$ and $x'=vF(r)$,
+$c_I|e_I'|\le v(|e_I\times F(r_a)|+|e_I\times F(r_b)|)$ with $a:=a_j$, and $|e\times F(r)|=f(\rho)|e\times\rhat|\le|e\times\rhat|$. Let
+$t$ be in leg $i+1$, $\Bjs\le i\le j-1$. By Lemma~\ref{lem:B-C}(2), $P=x_{a_{i+1}}-\rho'\hat u_{i+1}$ with $\rho'\ge0$ and
+$\hat u_{i+1}=e_{(a_i,a_{i+1})}(t)$. Put $W:=u_{a_j}-u_{a_{i+1}}\ge0$, $\kappa_W:=m_1((W+\lambda_I+\varepsilon)/R_1)^{\gamma_1}$, and
+\[
+\psi(x):=\min\Bigl(1,\frac x{1-x^2/2}\Bigr)\ (0\le x\le1),\qquad\psi(x):=1\ (x>1);\qquad\text{then }\psi(x)\le\min(1,2x)\ \ (x\ge0).
+\]
+\emph{($\alpha$) Close case, $W+\lambda_I+\varepsilon\le R_1$.} If $i\le j-2$: $K_1:=(a_{i+1},a_j)$, $K_2:=(a_{i+1},b)$,
+$K_3:=(a_i,a_{i+1})$, $K_4:=(a_i,b)$ and $I$ are family pairs at $t$ (first points $a_i$ or $\ge a_{i+1}$; label lengths
+$\ge\varepsilon/\kappa_1\ge\varepsilon/2$ and $\le W+\lambda_I+\varepsilon\le R_1$). $I\subset K_2\subset K_4$ share the right end,
+$K_1\subset K_2$ and $K_3\subset K_4$ share the left end, so with $x:=C_3\kappa_W$:
+$|e_I-e_{K_2}|\le C_{B1}\kappa_W$, $|e_I-e_{K_1}|\le(C_{A1}+C_{B1})\kappa_W\le x$, and
+$|e_I-\hat u_{i+1}|=|e_I-e_{K_3}|\le|e_I-e_{K_4}|+|e_{K_4}-e_{K_3}|\le(C_{B1}+C_{A1})\kappa_W\le x$. Now
+$r_a=c(K_1)e_{K_1}+\rho'\hat u_{i+1}$, $r_b=c(K_2)e_{K_2}+\rho'\hat u_{i+1}$ with non-negative coefficients, and
+$|e\times e'|\le|e-e'|$ gives $|e_I\times r_a|\le x\,(c(K_1)+\rho')$; if $x\le1$, also
+$\rho_a\ge r_a\cdot e_I\ge(1-x^2/2)(c(K_1)+\rho')$; likewise for $b$. If $i=j-1$: $r_a=\rho'\hat u_j$, the pairs
+$(a_{j-1},a_j)$, $(a_{j-1},b)$, $I$ are family pairs (lengths $\le\varepsilon+\lambda_I\le R_1$),
+$|e_I-\hat u_j|\le|e_I-e_{(a_{j-1},b)}|+|e_{(a_{j-1},b)}-e_{(a_{j-1},a_j)}|\le x$, and $r_b=c_Ie_I+\rho'\hat u_j$. In both cases
+$|e_I\times\rhat_a|,|e_I\times\rhat_b|\le\psi(x)$ (for $x\le1$ by the bounds just shown, and $|e\times\rhat|\le1$ always). As
+$c_I\ge c_{A1}\lambda_I$ ((CA$^*$), $\lambda_I\le R_1$): $|e_I'|\le2v\,\psi(C_3\kappa_W)/(c_{A1}\lambda_I)$.
+
+\emph{($\beta$) Far case, $W+\lambda_I+\varepsilon>R_1$.} Then $w_{a_j}=u_{a_j}-u_{a_i}\ge W>R_1-\delta_0-\varepsilon$ and $w_b\ge w_{a_j}$;
+(E-star$^*$) gives $\rho_a,\rho_b\ge c_{A1}\min(R_1-\delta_0-\varepsilon,K_{R1}R_1)-\delta_1\varepsilon\ge\rho_*\ge\varepsilon$. So
+$F(r)=\rhat$ at $a$ and $b$ (Lemma~\ref{lem:B-V}(i)); with $p:=e_I\times r_a=e_I\times r_b$ ($r_b-r_a=c_Ie_I$),
+$|e_I\times(\rhat_b-\rhat_a)|=|p|\,|1/\rho_b-1/\rho_a|\le|p|c_I/(\rho_a\rho_b)\le c_I/\max(\rho_a,\rho_b)$, as
+$|p|\le\min(\rho_a,\rho_b)$. Hence $|e_I'|\le v/\rho_*$.
+
+\emph{Durations.} Each non-final leg lasts at most $\varepsilon/(1-v)$ and advances the base by at least $\varepsilon/\kappa_1$, so
+all legs $i+1\le j$ together last at most $\kappa_1u_{a_j}/(1-v)\le\kappa_1\Lambda/(1-v)$. The close-case legs have
+$u_{a_{i+1}}\in[u_{a_j}-(R_1-\lambda_I-\varepsilon),u_{a_j}]$, so there are at most $\kappa_1(R_1-\lambda_I-\varepsilon)/\varepsilon+1$
+of them, lasting at most $\kappa_1R_1/(1-v)$ ($\kappa_1\ge1$); so the close-case time is $\le\kappa_1\min(\Lambda,R_1)/(1-v)$. And
+$W+\lambda_I+\varepsilon\le u_{a_j}+\lambda_I+\varepsilon\le2\Lambda$, so $\kappa_W\le m_1\min(1,2\Lambda/R_1)^{\gamma_1}$.
+
+\emph{Rotation bound.} If $\Lambda\le\delta_0$ ($\le R_1/2$): $\lambda_I=\Lambda$, $W+\lambda_I+\varepsilon\le2\Lambda\le R_1$, only
+the close case occurs, and with $\psi(x)\le2x$
+\[
+|e_I(t_j)-e_I(\Bts)|\le\frac{2v\cdot2C_3m_1(2\Lambda/R_1)^{\gamma_1}}{c_{A1}\Lambda}\cdot\frac{\kappa_1\Lambda}{1-v}
+=v\,\frac{4\kappa_1C_3m_1}{c_{A1}(1-v)}\Bigl(\frac{2\Lambda}{R_1}\Bigr)^{\gamma_1}.
+\]
+In all cases, with $\psi\le1$, $\min(\Lambda,R_1)/\lambda_I\le R_1/\delta_0$ and far time $\le\kappa_1(\TzW+\varepsilon)/(1-v)$:
+$|e_I(t_j)-e_I(\Bts)|\le vK_{\mathrm{rot}}$.
+
+\emph{Step 4 (sum).} $|\hat u_{j+1}-\Mn|\le C_{A1}m_1(\lambda_I/R_1)^{\gamma_1}+k_\sigma\sigma+|e_I(t_j)-e_I(\Bts)|$.
+(i) Always this is $\le C_{A1}m_1(\delta_0/R_1)^{\gamma_1}+k_\sigma\bar\sigma+vK_{\mathrm{rot}}=\omega_0$.
+(ii) If $\Lambda\le\delta_0$: with $\Lambda^{\gamma_1}\le\delta_0^{\gamma_1-\gamma_h}\Lambda^{\gamma_h}$ and
+$\sigma\le\theta_f(2\Lambda)^{\gamma_h}$ it is $\le\theta_{h1}\Lambda^{\gamma_h}$. (iii) If $\Lambda>\delta_0$:
+$\omega_0\le\omega_0\delta_0^{-\gamma_h}\Lambda^{\gamma_h}$. So $|\hat u_{j+1}-\Mn|\le\max(\theta_{h1},\omega_0\delta_0^{-\gamma_h})\Lambda^{\gamma_h}$.
+
+\emph{Time.} Each leg $i+1$ lasts at least $c(a_i,a_{i+1};t_i)$ (by Lemma~\ref{lem:B-C}(2), $\rho'=-1+vf\ge-1$), and by
+(J2$^*$), with $\lambda\le\varepsilon\le R_1$, $c=l-E\ge\lambda-\frac12M_1^2\lambda^{1+2\gamma_1}\ge\lambda(1-m_1^2/2)$. So
+$t_j-\Bts\ge(1-m_1^2/2)u_{a_j}$ and, for $\tau\ge t_j-\Bts$, $\Lambda\le c_\tau\tau+\varepsilon\le c_\tau(\tau+\varepsilon)$. Hence
+$|\hat u_{j+1}-\Mn|\le\vartheta_h(\tau+\varepsilon)^{\gamma_h}$, and $\le\omega_0$ by (i).
+\end{proof}
+
+\subsection{Departure from near an end, with shifted data}
+
+\noindent\textbf{Setting.} As in Theorem~\ref{thm:T2-D}: a working front, a time $\EtE$, an end label $\Ee$, a unit vector $\Eu$,
+a duration $D>0$ and $\tau:=t-\EtE\in[0,D]$; labels $u\in[0,\EUE]$ (arclength at $\EtE$ from $x_{\Ee}$), $T$ the unit tangent
+in the direction of increasing $u$, $\tilde w:=|\partial_ux|$, and for a label $s$: $r_s=x_s-P=z_s\Eu+y_s\Eu^\perp$,
+$X_s(\tau):=u_s+z_0+\tau$. Parameters: $\gamma\in(0,1)$, $\theta_0,\theta_y,\theta_h\ge0$, $\bar\omega\in(0,\frac12]$,
+$\omega_0\le\bar\omega$, $k>0$, and a \emph{duration bound} $\TzDb\ge D$; all constants are computed with $\TzDb$.
+\begin{itemize}
+\item[(D0)] $x_{\Ee}(\EtE)-P(\EtE)=z_0\Eu+y_0\Eu^\perp$ with $z_0\ge\varepsilon/\zeta$ and $|y_0|\le\theta_yz_0^{1+\gamma}$;
+\item[(D1)] $|T(u,\EtE)-\Eu|\le\theta_0(u+z_0)^\gamma$ for $u\in[0,\EUE]$;
+\item[(D2)] for a.e.\ $\tau\in[0,D]$: $|P'|=1$, $P'\cdot\Eu<0$ and $|\Eu\times P'|\le h(\tau):=\min(\vartheta_h(\tau+\varepsilon)^\gamma,\omega_0)$;
+\item[(D3)] with $X_*\ge\EUE+z_0+\TzDb$: $\theta_0X_*^\gamma\le\bar\omega$, $\bar\omega_y:=\theta_yX_*^\gamma\le\bar\omega$,
+$\zeta:=(1-\bar\omega^2)^{1/2}-v>0$, $\TzetD:=v/\zeta\le\gamma/2$, $\omega_T:=\Theta_0X_*^\gamma\le\frac12$ and
+$k\ge4(1+\delta_t)/\zeta$.
+\end{itemize}
+Put $\theta_{0y}:=\max(\theta_0,\theta_y)$, $\TzetN:=1.375\,v/\zeta$, $x_c:=(\omega_0/\vartheta_h)^{1/\gamma}$,
+$L_h:=\frac1{2\gamma}+\log^+\frac{\TzDb+\varepsilon}{x_c}$, and
+\begin{gather*}
+\Theta_0:=\theta_0+\frac{v\theta_{0y}}{\zeta^2}+\frac{v\vartheta_h}{\zeta^2(1-\TzetD)(\gamma-\TzetD)},\qquad
+\Theta_b:=\Theta_0+\frac{\theta_{0y}}\zeta+\frac{\vartheta_h}{\zeta(1-\TzetD)},\\
+K_w:=\frac{(\Theta_0+\theta_{0y}/\zeta)^2X_*^{2\gamma}}{\gamma\zeta}+\frac{2\omega_0^2L_h}{\zeta^3(1-\TzetD)^2},\qquad
+\delta_t:=e^{vK_w}-1,\\
+\Theta_{\mathrm p}:=\frac{(1+\bar\omega_y+v)(1+1/k)^\gamma\Theta_0}{1-\omega_T^2/2}+\theta_{0y}+\frac{\vartheta_h}{1-\TzetD},\\
+c_n:=\frac{(1+\delta_t)^{1/2}k^\gamma}{\gamma\zeta},\qquad c_\beta:=\frac{2(1+\delta_t)^{3/2}k^{\gamma-1}}{\zeta^3(1-\gamma)} .
+\end{gather*}
+
+\begin{theorem}[Departure with shifted data]\label{thm:T3-D}
+Assume \textup{(D0)--(D3)}. For $\tau\in[0,D]$, $t=\EtE+\tau$, and every label $s$ of the arc:
+\begin{enumerate}
+\item[(i)] $z_s\ge\zeta X_s(\tau)$ and $\rho_s\ge\zeta X_s(\tau)\ge\varepsilon$; hence $a^*(\rho_s)\le1/(\zeta X_s)$, and
+$\exp\bigl(v\int_{\tau'}^\tau a^*(\rho_s)\bigr)\le\bigl(X_s(\tau)/X_s(\tau')\bigr)^{\TzetD}$ for $0\le\tau'\le\tau$;
+\item[(ii)] $|y_s(\tau)|\le X_s(\tau)\bigl[\theta_{0y}X_s(0)^\gamma+h(\tau)/(1-\TzetD)\bigr]$;
+\item[(iii)] $|T(u_s,t)-\Eu|\le\Theta_0X_s(\tau)^\gamma\le\omega_T$;
+\item[(iv)] $1\le\tilde w\le1+\delta_t$; hence $\lambda\le l_t(a,b)\le(1+\delta_t)\lambda$ for all pairs;
+\item[(v)] for every pair with $\lambda\ge\varepsilon/2$: $c(a,b;t)\ge(1-\omega_T^2/2)\,l_t(a,b)$ and
+\[
+N(a,b;t)\le\Bigl(1+\frac\tau{k\lambda}\Bigr)^{\TzetN}\Bigl[N(a,b;\EtE)+v\,(c_n\Theta_b+c_\beta\Theta_{\mathrm p})\,\lambda^{1/2+\gamma}\Bigr].
+\]
+\end{enumerate}
+No constant depends on $\varepsilon$ except through $\TzDb+\varepsilon$ in $L_h$.
+\end{theorem}
+\begin{proof}
+$D$ enters only through $\tau\le D\le\TzDb$ and $X_s(\tau)\le X_*$. Write $X:=X_s$, $X_0:=X_s(0)$.
+
+\textbf{(i)} $z_s'=vf(\rho_s)z_s/\rho_s-P'\cdot\Eu\ge-v+(1-h^2)^{1/2}\ge\zeta$ a.e., since $|z|\le\rho$, $f\le1$, $P'\cdot\Eu<0$,
+$|P'|=1$ and $h\le\bar\omega$. At $\EtE$, $z_s=z_0+\int_0^{u_s}T\cdot\Eu\,du\ge z_0+(1-\bar\omega^2/2)u_s$, as
+$T\cdot\Eu=1-\frac12|T-\Eu|^2$ and $\theta_0(u+z_0)^\gamma\le\theta_0X_*^\gamma\le\bar\omega$; and $1-\bar\omega^2/2\ge\zeta$. So
+$z_s\ge\zeta X\ge\zeta z_0\ge\varepsilon$, $\rho_s\ge z_s$, $a^*(\rho_s)=1/\rho_s\le1/(\zeta X)$, and
+$\int_{\tau'}^\tau v/(\zeta X)=\TzetD\log(X(\tau)/X(\tau'))$.
+
+\textbf{(ii)} As $\rho_s\ge\varepsilon$, $F(r_s)=r_s/\rho_s$ and $y_s'=(v/\rho_s)y_s-\Eu\times P'$, so $|y_s|'\le va^*|y_s|+h$ a.e., and by (i)
+$|y_s(\tau)|\le(X(\tau)/X_0)^{\TzetD}|y_s(0)|+\int_0^\tau(X(\tau)/X(\tau'))^{\TzetD}h(\tau')\,d\tau'$. At $\EtE$,
+$y_s(0)=\int_0^{u_s}\Eu\times(T-\Eu)\,du+y_0$, so $|y_s(0)|\le\theta_0u_sX_0^\gamma+\theta_yz_0^{1+\gamma}\le\theta_{0y}X_0^{1+\gamma}$. In the
+integral $X(\tau')\ge\tau'+z_0$ and $h$ is non-decreasing, so it is
+$\le X(\tau)^{\TzetD}h(\tau)\int_0^\tau(\tau'+z_0)^{-\TzetD}d\tau'\le X(\tau)^{\TzetD}h(\tau)(\tau+z_0)^{1-\TzetD}/(1-\TzetD)\le X(\tau)h(\tau)/(1-\TzetD)$;
+and $(X/X_0)^{\TzetD}X_0^{1+\gamma}\le X\,X_0^\gamma$. This is (ii); more precisely, for $0\le\tau'\le\tau$,
+\begin{equation}\label{eq:T3-y}
+|y_s(\tau')|\le\Bigl(\frac{X(\tau')}{X_0}\Bigr)^{\TzetD}\theta_{0y}X_0^{1+\gamma}+\frac{X(\tau')^{\TzetD}(\tau'+z_0)^{1-\TzetD}h(\tau')}{1-\TzetD}.
+\end{equation}
+
+\textbf{(iii)} By Lemma~\ref{lem:B-1}(ii), $T_t=v(AT-(T\cdot AT)T)$, so $\mathfrak p:=1-T\cdot\Eu$ satisfies
+$\partial_t\mathfrak p=v[(T-\Eu)\cdot AT-(T\cdot AT)\mathfrak p]\le v(T-\Eu)\cdot AT\le v[a^*\delta^2+\delta|q_{\Eu}|]$, with
+$\delta:=|T-\Eu|$ and $|q_{\Eu}|\le|y_s|/\rho_s^2\le|y_s|/(\zeta X)^2$ (Lemma~\ref{lem:B-V}(iii), as in the proof of
+Lemma~\ref{lem:E-facts}(c)). Regularising with $\delta_\kappa:=(2\mathfrak p+\kappa^2)^{1/2}$ and by variation of constants
+($\kappa\to0$),
+\[
+\delta(\tau)\le\Bigl(\frac X{X_0}\Bigr)^{\TzetD}\delta(0)+\frac v{\zeta^2}\int_0^\tau\Bigl(\frac{X(\tau)}{X(\tau')}\Bigr)^{\TzetD}\frac{|y_s(\tau')|}{X(\tau')^2}\,d\tau'.
+\]
+Insert \eqref{eq:T3-y}. The first part contributes
+$\le(v/\zeta^2)\theta_{0y}X_0^{1+\gamma}(X/X_0)^{\TzetD}\int_0^\infty(X_0+\tau')^{-2}d\tau'\le(v\theta_{0y}/\zeta^2)X^\gamma$; the second
+\begin{align*}
+&\le\frac{v}{\zeta^2(1-\TzetD)}X^{\TzetD}\int_0^\tau(\tau'+z_0)^{-1-\TzetD}\vartheta_h(\tau'+\varepsilon)^\gamma d\tau'\\
+&\le\frac{v\vartheta_h}{\zeta^2(1-\TzetD)(\gamma-\TzetD)}X^{\TzetD}(\tau+z_0)^{\gamma-\TzetD}
+\le\frac{v\vartheta_h\,X^\gamma}{\zeta^2(1-\TzetD)(\gamma-\TzetD)},
+\end{align*}
+using $\varepsilon\le z_0$ and $\gamma>\TzetD$. With $\delta(0)\le\theta_0X_0^\gamma$ and $(X/X_0)^{\TzetD}X_0^\gamma\le X^\gamma$:
+$\delta\le\Theta_0X^\gamma\le\Theta_0X_*^\gamma=\omega_T$.
+
+\textbf{(iv)} $\tilde w_t=v\tilde w\,T\cdot AT$ (Lemma~\ref{lem:B-1}(i)) and $T\cdot AT=\sin^2\!\phi/\rho$ with
+$\sin\phi=|T\times\rhat|\le\delta+|y|/\rho\le(\Theta_0+\theta_{0y}/\zeta)X^\gamma+h/(\zeta(1-\TzetD))$ by (ii), (iii) and
+$\rho\ge\zeta X$. With $(a+b)^2\le2a^2+2b^2$ and $\rho\ge\zeta X\ge\zeta(\tau+\varepsilon)$:
+\[
+\int_0^\tau T\cdot AT\le\frac2\zeta\Bigl(\Theta_0+\frac{\theta_{0y}}\zeta\Bigr)^2\int_0^\tau X^{2\gamma-1}
++\frac2{\zeta^3(1-\TzetD)^2}\int_0^D\frac{h(\tau')^2}{\tau'+\varepsilon}d\tau'\le K_w,
+\]
+because $\int_0^D\min(\vartheta_h^2(\tau'+\varepsilon)^{2\gamma},\omega_0^2)(\tau'+\varepsilon)^{-1}d\tau'\le\int_0^{x_c}\vartheta_h^2y^{2\gamma-1}dy
++\int_{x_c}^{\TzDb+\varepsilon}\omega_0^2y^{-1}dy\le\omega_0^2L_h$. So $\tilde w\le e^{vK_w}$; $\tilde w\ge1$ by Lemma~\ref{lem:T2-W}(a).
+
+\textbf{(v)} \emph{Chord:} $c\ge(x_b-x_a)\cdot\Eu=\int T\cdot\Eu\,ds\ge(1-\omega_T^2/2)\,l$. Let $\tilde g:=u_a+z_0$ and
+$\tau_0:=\max(0,k\lambda-\tilde g)$.
+
+\emph{Phase $\tau\le\tau_0$.} By Lemma~\ref{lem:B-3}(b), $E'\le vN\|AT\|_{L^2(ds)}$; with $N_\kappa:=(N^2+\kappa^2)^{1/2}$,
+$N_\kappa'\le v\|AT\|$, and $\kappa\to0$. On the arc $\rho\ge\varepsilon$ and
+$|AT|=\sin\phi/\rho\le[(\Theta_0+\theta_{0y}/\zeta)X^\gamma+\vartheta_h(\tau+\varepsilon)^\gamma/(\zeta(1-\TzetD))]/(\zeta X)
+\le\Theta_bX_s^{\gamma-1}/\zeta\le\Theta_b(\tilde g+\tau)^{\gamma-1}/\zeta$ (as $X_s\ge\tilde g+\tau\ge\tau+\varepsilon$, $\gamma<1$). So
+$\|AT\|\le(1+\delta_t)^{1/2}\lambda^{1/2}\Theta_b(\tilde g+\tau)^{\gamma-1}/\zeta$ and
+$N(\tau_0)\le N(0)+v(1+\delta_t)^{1/2}(\Theta_b/\zeta)\lambda^{1/2}(\tilde g+\tau_0)^\gamma/\gamma=N(0)+vc_n\Theta_b\lambda^{1/2+\gamma}$
+(if $\tau_0>0$ then $\tilde g+\tau_0=k\lambda$).
+
+\emph{Phase $\tau\ge\tau_0$.} The hull of the arc of $(a,b)$ lies in $\{x:(x-P)\cdot\Eu\ge\min_sz_s\}$, so by (i)
+$\rho_m\ge\zeta(\tilde g+\tau)\ge\zeta k\lambda\ge4(1+\delta_t)\lambda\ge4l$, and $\rho_m\ge\zeta z_0\ge\varepsilon$.
+Lemma~\ref{lem:B-3}(e) applies on $[\tau_0,\tau]$ with $\alpha\le1.375\,v/\rho_m\le\TzetN/(\tilde g+\tau')$ and
+$\beta=2vl^{3/2}|p_a|/\rho_m^3$, where $p_a=r_a\times e_{ab}=z_a(\Eu\times e_{ab})+y_a(\Eu^\perp\times e_{ab})$, so
+$|p_a|\le\rho_a|\Eu\times e_{ab}|+|y_a|$, and:
+$|\Eu\times e_{ab}|\le(l/c)\sup\delta\le\Theta_0X_b^\gamma/(1-\omega_T^2/2)$ with $X_b=\tilde g+\lambda+\tau'\le(1+1/k)(\tilde g+\tau')$;
+$\rho_a(\tau')\le u_a+z_0+|y_0|+(1+v)\tau'\le(1+\bar\omega_y+v)(\tilde g+\tau')$ (as $|y_0|\le\theta_yz_0^{1+\gamma}\le\bar\omega_yz_0$);
+$|y_a|\le(\tilde g+\tau')^{1+\gamma}(\theta_{0y}+\vartheta_h/(1-\TzetD))$ by (ii) ($X_a=\tilde g+\tau'$,
+$h\le\vartheta_h(\tau'+\varepsilon)^\gamma$, $\varepsilon\le\tilde g$). So $|p_a|\le\Theta_{\mathrm p}(\tilde g+\tau')^{1+\gamma}$ and
+$\beta\le2v(1+\delta_t)^{3/2}\lambda^{3/2}\Theta_{\mathrm p}(\tilde g+\tau')^{\gamma-2}/\zeta^3$. Lemma~\ref{lem:B-3}(e) and
+$\int_{\tau_0}^\infty(\tilde g+\tau')^{\gamma-2}d\tau'\le(k\lambda)^{\gamma-1}/(1-\gamma)$ give
+$N(\tau)\le((\tilde g+\tau)/(\tilde g+\tau_0))^{\TzetN}[N(\tau_0)+vc_\beta\Theta_{\mathrm p}\lambda^{1/2+\gamma}]$, and
+$(\tilde g+\tau)/(\tilde g+\tau_0)\le1+\tau/(k\lambda)$.
+\end{proof}
+
+\begin{remark}\label{rem:T3-D}
+Against Theorem~\ref{thm:T2-D}: the data (D1) are shifted (no $\varepsilon/2$-floor; this is the form proved in
+Sections~\ref{sec:touch} and~\ref{sec:HTp}); $\gamma<1$ is general; the heading bound is only $\min(\cdot,\omega_0)$ for large
+$\tau$; and in (v) $N(\EtE)$ enters with factor $1$ and the growth is $O(v)\lambda^{1/2+\gamma}$ (the bound
+$1.9\,\Theta_0\lambda^{1/2+\gamma}$ of Theorem~\ref{thm:T2-D} cost a factor $\approx4$ and forced $\gamma\le\frac14$). The duration
+bound $\TzDb$ is needed because (D2) will be known only on $[0,\TztW-\Mtd]$, while the constants are computed with an a priori
+bound for $\TztW-\Mtd$.
+\end{remark}
+
+\subsection{The assembly}
+
+\noindent{\makeatletter\def\@currentlabel{(H$_{\mathrm T}'$)}\makeatother\phantomsection\label{hyp:T3-HT}}%
+\textbf{Touch-down data \TzHT.} Design~T with $D_1=1$ and the curve $x^0$, the ghost set $\MG$ and the unit vector $\Mn$ of
+Section~\ref{sec:HTp} (equivalently, of Section~\ref{sec:touch}). There are constants $\bar v,\bar\varepsilon\in(0,1)$, $T_2$, $U_{\max}\ge\TzUmin=1$, $\lambda_0$,
+$c_{\mathrm{sep}}$, $\Tzkt$, $c_N$, $\theta_v$, $c_{T4}$, $c_{\mathrm{zlo}}$, $c_{\mathrm{zhi}}$, $c_y$, $G_{\mathrm T}$, and with
+$\bar\mu:=\bar v/(1-\bar v)$, $\bar\mu_{\mathrm T}:=3\bar v/(1+\bar v)$, such that for all $v\in(0,\bar v]$ and
+$\varepsilon\in(0,\bar\varepsilon]$: $\Mtd\le T_2$, $1\le U\le U_{\max}$, (T0) of \MHT\ holds, and at $\Mtd$
+\begin{itemize}
+\item[(T1$'$)] $N(a,b)\le c_N\lambda^{3/2-\bar\mu_{\mathrm T}}$ for $\varepsilon/2\le\lambda\le\lambda_0$;
+\item[(T2$'$)] $c(a,b)\ge\min\bigl(c_{\mathrm{sep}},\Tzkt(u_a+u_b')\bigr)$ for $\lambda>\lambda_0$;
+\item[(T3$'$)] $|T(u)-\Mn|\le\theta_vu^{1-\bar\mu}$ for $u\le G_{\mathrm T}$;
+\item[(T4$'$)] $|T(u)-\Mn|\le c_{T4}(u'+z_0)^{1-\bar\mu_{\mathrm T}}$ for $u'\le G_{\mathrm T}$;
+\item[(T5$'$)] $P(\Mtd)-x^0(U)=z_0\Mn+y_0\Mn^\perp$ with $c_{\mathrm{zlo}}\varepsilon^{1/(2-2v)}\le z_0\le c_{\mathrm{zhi}}\varepsilon^{1/2}$ and
+$|y_0|\le c_y(z_0+\varepsilon)^{2-\bar\mu_{\mathrm T}}$.
+\end{itemize}
+By Theorem~\ref{thm:HTp} (in the form of Corollary~\ref{cor:HTp-used}), \TzHT\ holds with the constants of
+Corollary~\ref{cor:HTp-used} (column $\bar v=6\cdot10^{-5}$, window $\eta=0.1$, $\bar\varepsilon=10^{-3}$), which
+Table~\ref{tab:T3-const} repeats with the same rounding in the safe direction; so \TzHT\ holds with the constants of
+Table~\ref{tab:T3-const}. The checks of the side conditions below use their $50$-digit values and also pass with the displayed
+ones. We put
+$a':=1-\bar\mu_{\mathrm T}$ and $C_0:=c_N$, so that (T1$'$) is (T1) of \MHT\ with these $(a',C_0)$.
+
+\medskip\noindent\textbf{The path.} $P=P_{v,\varepsilon}$ is the path of Section~\ref{sec:main}: design~T on $[0,\Mtd]$, then
+Construction~C on the working front started from $x^0$ at $\Mtw:=\Mtd$, from the leg start $(\Mtd,\text{label }0)$ cut at
+$\EbE:=$ the label $U$, constant after it stops. It depends only on $(v,\varepsilon)$. Here $x^0$ is the curve of
+Subsection~\ref{sec:HTp-curve} with $\xi_1=1.007$; it coincides with the curve of Section~\ref{sec:touch} (threshold
+$1.02\,\varepsilon$), and the ghost sets coincide, because the labels with $\xi\in[\xi_1\varepsilon,1.02\,\varepsilon]$ are never within
+$\varepsilon$ of Harry before $\Mtd$, so their virtual and true positions agree (Lemma~\ref{lem:HTp-fwd}(d)).
+
+\medskip\noindent\textbf{Parameters and derived constants.} Fix $v_0\le\bar v$ and the core parameters of
+Theorem~\ref{thm:Estar} (the dependent ones $\ESd,\delta_1,\nu,A_0,\ESf$ chosen to satisfy (P1), (P3), (P4), (P5) at $v_0$), and
+$\bar\omega\in(0,\frac12]$, $k_{\mathrm{fac}}\ge1$, $\delta_0>0$. Put
+\begin{equation}\label{eq:T3-const}
+\begin{gathered}
+\zeta:=(1-\bar\omega^2)^{1/2}-v_0,\qquad\TzetN:=1.375\,v_0/\zeta,\qquad\Tzgd\ge\gamma+\nu+\TzetN,\qquad
+\TzW:=c_AK_RR/\Tzkt,\\
+\MUA:=\TzW+\delta_0+R,\qquad\EUE:=\TzW+R,\qquad\TzDb:=\frac{\kappa_1\TzW+\varepsilon_*}{1-v_0},\qquad
+\varepsilon_*\le\min\Bigl(\bar\varepsilon,\frac R{K_\varepsilon},\Bigl(\frac R{100\,c_{\mathrm{zhi}}}\Bigr)^2\Bigr),\\
+z_0^{\max}:=c_{\mathrm{zhi}}\varepsilon_*^{1/2},\qquad X_*:=\EUE+z_0^{\max}+\TzDb,\qquad G_f:=\TzW+\varepsilon_*+\delta_0,\\
+c_{\mathrm{sep}}^{\mathsf A}:=\min\bigl(c_{\mathrm{sep}},\Tzkt(1-\MUA)\bigr),\\
+\theta_0:=c_{T4}X_*^{1-\bar\mu_{\mathrm T}-\Tzgd},\qquad\theta_y:=c_y2^{2-\bar\mu_{\mathrm T}}(z_0^{\max})^{1-\bar\mu_{\mathrm T}-\Tzgd},\\
+T_0:=T_2+\frac{\kappa_1U_{\max}}{1-v_0} .
+\end{gathered}
+\end{equation}
+The value used below (Table~\ref{tab:T3-const}) is the number $\varepsilon_*=4\cdot10^{-11}$; the minimum in
+\eqref{eq:T3-const} is $4.19\cdot10^{-11}$ there.
+\emph{Stage~A} uses the core parameters $p_{\mathsf A}$: those of the main application with $\gamma$ replaced by $\Tzgd$ (same $R$,
+$m$, $A_0$, $\ESf$, $\nu$), so $M_{\mathsf A}=mR^{-\Tzgd}$; its tilt constants $C_A^{\mathsf A}$, $C_B^{\mathsf A}$ are those of
+Section~\ref{sec:Estar} for $p_{\mathsf A}$. The constants of Lemma~\ref{lem:T3-H} are taken with
+$(\gamma_1,R_1,m_1,c_{A1},K_{R1},C_{A1},C_{B1}):=(\Tzgd,R,m,c_A,K_R,C_A^{\mathsf A},C_B^{\mathsf A})$, $\gamma_h:=\Tzgd$,
+$K_{\mathrm{fw}}:=\theta_v$, $\mu:=\bar\mu$, $\varepsilon:=\varepsilon_*$; those of Theorem~\ref{thm:T3-D} with $\gamma:=\Tzgd$,
+$v:=v_0$, $\varepsilon:=\varepsilon_*$, the $\TzDb$, $X_*$, $\theta_0$, $\theta_y$ above, $\vartheta_h$, $\omega_0$ of
+Lemma~\ref{lem:T3-H} and $k:=k_{\mathrm{fac}}\cdot4(1+\delta_t)/\zeta$. Finally
+\begin{equation}\label{eq:T3-TS}
+\textup{(TS)}:=\Bigl(1+\frac{\TzDb}{kR}\Bigr)^{\TzetN}\Bigl[C_0R^{a'}+v_0\,(c_n\Theta_b+c_\beta\Theta_{\mathrm p})\,R^{\Tzgd}\Bigr].
+\end{equation}
+
+\noindent\textbf{Side conditions}, at $(v,\varepsilon)=(v_0,\varepsilon_*)$:
+\begin{enumerate}
+\item[(i)] \emph{main core:} (P0)--(P7) of Theorem~\ref{thm:Estar} with $U=U_{\max}$, and (C0)--(C6) of Corollary~\ref{cor:Estar}
+with $(a',C_0,\lambda_0,c_{\mathrm{sep}})$;
+\item[(ii)] \emph{stage A:} the same for $p_{\mathsf A}$ with $U=\MUA$ and $(a',C_0,\lambda_0,c_{\mathrm{sep}}^{\mathsf A})$;
+$1-\MUA\ge\TzW$;
+\item[(iii)] \emph{heading:} $G_f\le G_{\mathrm T}$, $\varepsilon_*\le\delta_0\le R/2$, $\bar\sigma\le\frac12$, $\rho_*\ge\varepsilon_*$,
+$m^2<2$, $\Tzgd\le1-\bar\mu$, $\MUA\ge\TzW+2\varepsilon_*+\delta_0$, $\kappa_1\le2$, $K_R\ge1$;
+\item[(iv)] \emph{departure:} $X_*\le1$, $\zeta>0$, $\bar\omega\le\frac12$, $k_{\mathrm{fac}}\ge1$, $\theta_0X_*^{\Tzgd}\le\bar\omega$,
+$\theta_yX_*^{\Tzgd}\le\bar\omega$, $\omega_0\le\bar\omega$, $\omega_T\le\frac12$, $v_0/\zeta\le\Tzgd/2$,
+$\Tzgd\le1-\bar\mu_{\mathrm T}$, $\Tzgd<1$, $z_0^{\max}\le1$, $c_{\mathrm{zlo}}\varepsilon_*^{1/(2-2v_0)}\ge\varepsilon_*/\zeta$,
+$\EUE\le G_{\mathrm T}$;
+\item[(v)] \emph{tail start:} $\Tzgd+\nu\le a'$; $\textup{(TS)}\le s_0m\min(1,K_f/K_R)^\nu$;
+$\max(K_f,K_R)R\le1-\EUE-\TzW-\varepsilon_*$; \textup{(PT)} $(1+\delta_t)\TzLJ<\kappa_1$;
+\item[(vi)] $v_0\le\bar v$, $\varepsilon_*\le\bar\varepsilon$, $\varepsilon_*\le R/K_\varepsilon$, $1\ge2\TzW+R+\varepsilon_*$.
+\end{enumerate}
+\emph{Monotonicity.} With the parameters fixed, every left side is non-decreasing and every right side non-increasing in $v\le v_0$
+and in $\varepsilon\le\varepsilon_*$, and in $U\le U_{\max}$, provided $k$, $\vartheta_h$, $\omega_0$ and $\rho_*$ are kept at their
+values at $(v_0,\varepsilon_*)$ (by inspection: with these fixed, $v$, $\varepsilon$, $U$ enter only as positive factors, through
+$\exp$, $1/(1-v)$, $1/\zeta$, or through $\varepsilon^{1/(2-2v)}/\varepsilon$, which is non-increasing in $\varepsilon$ and in $v$; $k$
+itself, which enters $c_\beta$ with a negative power, is not such a factor, but the fixed value still satisfies
+$k\ge4(1+\delta_t)/\zeta$ for $v\le v_0$, as $4(1+\delta_t)/\zeta$ is increasing in $v$). So the side conditions at $(v_0,\varepsilon_*)$
+give them at every $(v,\varepsilon)$ with $v\le v_0$, $\varepsilon\le\varepsilon_*$, with $\varepsilon_*$, $\TzDb$, $X_*$,
+$z_0^{\max}$, $k$, $\vartheta_h$, $\omega_0$ and $\rho_*$ still computed at $(v_0,\varepsilon_*)$.
+
+\begin{proposition}[Conditional form]\label{prop:T3-cond}
+Assume \TzHT\ and side conditions \textup{(i)--(vi)}. Let $d=1$. For every $v\in(0,v_0]$ and $\varepsilon\in(0,1)$ the path
+$P_{v,\min(\varepsilon,\varepsilon_*)}$ is well defined, depends only on $(v,\varepsilon)$, starts at $0$, has speed at most $1$, and
+every direction is seen by time $T_0$. More precisely, the construction stops at
+$T_{\mathrm{stop}}\le\Mtd+\kappa_1U/(1-v)\le T_0$.
+\end{proposition}
+\begin{proof}
+The true candidates do not depend on $\varepsilon$, so a path that sees every direction with vision radius $\varepsilon_*$ does so with
+every larger radius; let $\varepsilon\le\varepsilon_*$ and $v\le v_0$. By monotonicity all side conditions hold. Labels $u$, $u'$,
+$\lambda$ refer to $\Mtd$; $\MbA$ is the label $\MUA$.
+
+\emph{Step 1 (stage A).} On $[0,\MUA]$: (T1$'$) gives (E1) with $(a',C_0,\lambda_0)$. A pair in $[0,\MUA]$ with $\lambda>\lambda_0$
+has $u_b'\ge U-\MUA\ge1-\MUA$, so by (T2$'$) $c\ge c_{\mathrm{sep}}^{\mathsf A}$: this is (E2). By Corollary~\ref{cor:Estar} with
+parameters $p_{\mathsf A}$ and $U=\MUA$ (side condition (ii); (C5) for $p_{\mathsf A}$ is $\Tzgd+\nu\le a'$), on the working front
+(Lemma~\ref{lem:T3-W}), Theorem~\ref{thm:Estar}(a), (b), (d), (e) hold for Construction~C from $(\Mtd,0)$ cut at $\MbA$.
+
+\emph{Step 2 (common legs, $\TztW$, duration).} While $u_{a_j}<\TzW$:
+$l_{t_j}(a_j,\MbA)\ge\MUA-u_{a_j}>\delta_0+R>\varepsilon$, so the maximality rule gives the same $a_{j+1}$ for the cuts at $\MbA$ and
+at $\EbE$, and the leg is non-final in both (as in Lemma~\ref{lem:T2-StA}(b)). Each such leg advances the base by at least
+$\varepsilon/\kappa_1$ (Step~1); so $\TzjW$ exists, $u_{a_{\TzjW}}\in[\TzW,\TzW+\varepsilon]$, there are at most
+$\kappa_1\TzW/\varepsilon+1$ legs before $\TztW$, each of duration $\le\varepsilon/(1-v)$, and
+$D:=\TztW-\Mtd\le(\kappa_1\TzW+\varepsilon)/(1-v)\le\TzDb$. By causality (Remark~\ref{rem:E-B}(4)) $P$ coincides on
+$[\Mtd,\TztW]$ with the path of the construction cut at $\MbA$.
+
+\emph{Step 3 (heading).} Lemma~\ref{lem:T3-H} applies to the construction cut at $\MbA$ with $\Bts=\Mtd$, $\Mn$ of \TzHT,
+(F1$^*$) from (T3$'$) (with $K_{\mathrm{fw}}=\theta_v$, $\mu=\bar\mu$, and $G_f\le G_{\mathrm T}$), the conclusions of Step~1, and side
+condition (iii); its constants, computed with $\varepsilon_*$, bound those for $\varepsilon$ (monotonicity). For the legs $j+1\le\TzjW$ ($u_{a_j}<\TzW$, non-final, speed $1$):
+$|P'-\Mn|\le h(t-\Mtd)$ a.e.\ on $[\Mtd,\TztW]$.
+
+\emph{Step 4 (departure).} Apply Theorem~\ref{thm:T3-D} with the actual duration $D=\TztW-\Mtd$ and the bound $\TzDb$, to the tail
+arc $\{u'\le\EUE\}$ labelled by $u'$, with $\EtE:=\Mtd$, $\Ee:=$ the label $U$, $\Eu:=-\Mn$, $z_0$, $y_0$ of (T5$'$)
+($x_{\Ee}-P=-(z_0\Mn+y_0\Mn^\perp)=z_0\Eu+y_0\Eu^\perp$), $\gamma:=\Tzgd$, and $\theta_0$, $\theta_y$ of \eqref{eq:T3-const}.
+(D0): $z_0\ge c_{\mathrm{zlo}}\varepsilon^{1/(2-2v)}\ge\varepsilon/\zeta$ (side condition (iv)); in particular $\varepsilon\le z_0$, so
+$|y_0|\le c_y(2z_0)^{2-\bar\mu_{\mathrm T}}\le\theta_yz_0^{1+\Tzgd}$, as $z_0\le z_0^{\max}$ and $1+\Tzgd\le2-\bar\mu_{\mathrm T}$.
+(D1): the tangent in the direction of increasing $u'$ is $-T$ and $|-T-\Eu|=|T-\Mn|$; by (T4$'$) ($\EUE\le G_{\mathrm T}$) and
+$u'+z_0\le X_*$, $|T-\Mn|\le c_{T4}(u'+z_0)^{1-\bar\mu_{\mathrm T}}\le\theta_0(u'+z_0)^{\Tzgd}$. (D2) on $[0,D]$ by Step~3:
+$|\Eu\times P'|=|\Mn\times(P'-\Mn)|\le h$ and $P'\cdot\Eu=-1+|P'-\Mn|^2/2<0$ ($h\le\omega_0\le\bar\omega\le\frac12$). (D3): side
+condition (iv), with $X_*\ge\EUE+z_0+\TzDb$.
+
+\emph{Step 5 ((TW) and (PT)).} Let $(a,b)$ be a tail pair of Theorem~\ref{thm:T3-E} ($u_b'<\TzW$, $\varepsilon/2\le\lambda\le R$). Then
+$u_a'<\TzW+R=\EUE$: the pair lies in the departure arc, where its first point is $b$ and $\tilde g=u_b'+z_0$. At $\TztW$
+($\tau=D$): $l_{\TztW}(a,b)\le(1+\delta_t)\lambda$ by Theorem~\ref{thm:T3-D}(iv); and
+$g_W=u_a-u_{a_{\TzjW}}\ge(U-\EUE)-(\TzW+\varepsilon)\ge\max(K_f,K_R)R\ge K_f\lambda$, so $\min(g_W,K_RR)=K_RR$. By
+Theorem~\ref{thm:T3-D}(v) with $N(a,b;\Mtd)\le C_0\lambda^{1/2+a'}$ (T1$'$) and
+$1+D/(k\lambda)\le(R/\lambda)(1+\TzDb/(kR))$ ($\lambda\le R$, $D\le\TzDb$), and with $K:=c_n\Theta_b+c_\beta\Theta_{\mathrm p}$,
+\[
+N(a,b;\TztW)\le\Bigl(1+\frac{\TzDb}{kR}\Bigr)^{\TzetN}\Bigl(\frac R\lambda\Bigr)^{\TzetN}\lambda^{1/2}\bigl[C_0\lambda^{a'}+vK\lambda^{\Tzgd}\bigr].
+\]
+The target of (TW) is $s_0M\lambda^{1/2+\gamma}\min(1,K_f\lambda/(K_RR))^\nu\ge s_0mR^{-\gamma}\lambda^{1/2+\gamma}\min(1,K_f/K_R)^\nu(\lambda/R)^\nu$.
+The ratio of the bound to this target is at most
+\[
+\frac{(1+\TzDb/(kR))^{\TzetN}}{s_0m\min(1,K_f/K_R)^\nu}\Bigl[C_0R^{a'}\Bigl(\frac\lambda R\Bigr)^{a'-\TzetN-\gamma-\nu}
++vKR^{\Tzgd}\Bigl(\frac\lambda R\Bigr)^{\Tzgd-\TzetN-\gamma-\nu}\Bigr]\le\frac{\textup{(TS)}}{s_0m\min(1,K_f/K_R)^\nu}\le1,
+\]
+since both exponents are $\ge0$ ($\gamma+\nu+\TzetN\le\Tzgd\le a'$, with $\TzetN$ and the constants at $v\le v_0$ bounded by their
+values at $v_0$) and $\lambda\le R$. So (TW) holds with $\delta_T:=\delta_t$, and (PT) is side condition (v).
+
+\emph{Step 6 (Theorem~\ref{thm:T3-E} on the whole arc).} Take $\Bts=\Mtd$, $a_{\mathrm s}=0$, $\EbE=U$. (S1$'$): let $(a,b)$ be good
+with $\lambda\ge\varepsilon/2$. If $\lambda\le\lambda_0$, $c=\lambda-E\ge\lambda(1-\frac12(C_0\lambda^{a'})^2)\ge c_A\min(\lambda,K_RR)$ by
+(C2), (C3) as in the proof of Corollary~\ref{cor:Estar} ($\lambda\mapsto\lambda-\frac12C_0^2\lambda^{1+2a'}$ is concave). If
+$\lambda>\lambda_0$: a good pair has $u_a\ge\TzW$ or $u_b'\ge\TzW$, so by (T2$'$) and (C4)
+$c\ge\min(c_{\mathrm{sep}},\Tzkt\TzW)=\min(c_{\mathrm{sep}},c_AK_RR)=c_AK_RR$. (S2$'$) for all pairs with $\varepsilon/2\le\lambda\le R$:
+from (T1$'$), (C1), (C5), (C6) exactly as in the proof of Corollary~\ref{cor:Estar}. (S3$^*$), (P0)--(P7) with $U\le U_{\max}$, and
+$U\ge1\ge2\TzW+R+\varepsilon$: side conditions (i), (vi). With Step~5 and Lemma~\ref{lem:T3-W}, Theorem~\ref{thm:T3-E} applies: all
+legs are defined, the construction stops at $T_{\mathrm{stop}}\le\Mtd+\kappa_1U/(1-v)\le T_2+\kappa_1U_{\max}/(1-v_0)=T_0$, and the
+direction of every true label of $[0,U]$ is seen by then.
+
+\emph{Step 7 (all directions; the path).} By (T0) every other direction is seen during $[0,\Mtd]$. $P$ is design~T on $[0,\Mtd]$,
+$1$-Lipschitz afterwards (Lemma~\ref{lem:B-C}(0)), constant after $T_{\mathrm{stop}}$, starts at $0$, and each leg is determined
+by $P$ on earlier times and by $x^0$; so it depends only on $(v,\varepsilon)$.
+\end{proof}
+
+\subsection{The constants and the main theorem}
+
+The parameters were found by a (local) numerical optimisation and then rounded; Tables~\ref{tab:T3-const}--\ref{tab:T3-side} list
+them at the stated values. They are computed, and every side condition is checked, by \texttt{code/Q4/final.py} in the project
+archive, in $50$-digit arithmetic at \emph{exactly} the stated inputs (free parameters as printed, dependent quantities
+$\ESd,\delta_1,\nu,\Tzgd,A_0,\ESf$ rounded up, $R$ and $\varepsilon_*$ rounded down); the script imports the formulas of the core and of the
+touch-down theorem unchanged from \texttt{code/Q1/q1const.py} and \texttt{code/Q3/constants.py}.
+
+\begin{table}[p]
+\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\multicolumn{4}{@{}l}{\emph{Touch-down} (Theorem~\ref{thm:HTp}, $\bar v=6\cdot10^{-5}$, $\eta=0.1$, $\bar\varepsilon=10^{-3}$, $x_1=1.007$)}\\
+\midrule
+$T_2$ & $3.73247$ & $U_{\max}$, $\TzUmin$ & $6.29320$, $1$\\
+$\lambda_0$ & $0.0333$ & $c_{\mathrm{sep}}$ & $0.0330591$\\
+$\Tzkt$ & $0.988089$ & $c_N=C_0$ & $2.72160$\\
+$\bar\mu_{\mathrm T}$ & $1.79990\cdot10^{-4}$ & $a'=1-\bar\mu_{\mathrm T}$ & $0.99982$\\
+$\theta_v$ & $1.07003$ & $c_{T4}$ & $1.04263$\\
+$c_{\mathrm{zlo}}$, $c_{\mathrm{zhi}}$ & $1.27025$, $1.56563$ & $c_y$ & $0.619797$\\
+$G_{\mathrm T}$ & $0.05$ & $\vartheta_{\mathrm T}$, $C_z$, $\gamma_{\mathrm T}$ & $1.15397$, $0.278412$, $1/4$\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Core} (Theorem~\ref{thm:Estar}), main application, $U=U_{\max}$: free parameters}\\
+\midrule
+$\gamma$ & $0.614267$ & $R$ & $0.001014$\\
+$m$ ($M=mR^{-\gamma}$) & $0.0561202$ ($3.87446$) & $s_0$ & $0.0543222$\\
+$\kappa_1$ & $1.01594$ & $c_A$ & $0.996095$\\
+$K_R$, $K_f$ & $31.9496$, $5.03588$ & $K_\varepsilon$ & $999.98$\\
+$\eta_1$ & $0.834088$ & $\ESq$ & $2.05829$\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Core}: dependent (rounded up) and derived}\\
+\midrule
+$\ESd$, $\delta_1$ & $1.0000602$, $1.0001202$ & $\nu$ & $3.10668\cdot10^{-4}$\\
+$A_0$, $\ESf$ & $1.01292$, $0.136962$ & $\ESchi$, $c_6$ & $1.016$, $2.00796$\\
+$C_A$, $C_B$, $\ETL$ & $6.39375$, $9.86362$, $16.2574$ & $\ESCone$ & $6.5734$\\
+$c_\rho$, $c_R$, $\EScamp$ & $0.397157$, $30.8079$, $5.17779$ & $C_p$, $B_3$ & $12.6407$, $413.253$\\
+$B_{2U}$, $B_{2\eta}$ & $2.229\cdot10^{-3}$, $23.8777$ & $B_5$, $I_5$ & $5162.04$, $0.663009$\\
+$\tau_{\mathrm I}$, $\tau_\alpha$, $\tau_\beta$ & $11.4184$, $4.17251$, $6.37953$ & $\ESDI$ & $485.642$\\
+$\ESDs$, $\ESDl$ & $6837.12$, $2960.78$ & $\ESX$ & $0.0128403$\\
+$\TzLJ$ & $1.014274$ & $\ETL m$ & $0.912367$\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Stage A} ($\gamma\mapsto\Tzgd$, $U=\MUA$)}\\
+\midrule
+$\Tzgd$ & $0.614666$ & $C_A^{\mathsf A}$, $C_B^{\mathsf A}$ & $6.39227$, $9.86365$\\
+$\ESDs^{\mathsf A}$ & $6837.18$ & $c_{\mathrm{sep}}^{\mathsf A}$ & $0.0330591$\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Assembly}: free $\bar\omega=0.338254$, $k_{\mathrm{fac}}=1.21399$, $\delta_0/R=0.149785$; derived}\\
+\midrule
+$\TzW$, $\delta_0$ & $0.0326594$, $1.51882\cdot10^{-4}$ & $\MUA$, $\EUE$ & $0.0338253$, $0.0336734$\\
+$\TzDb$, $X_*$ & $0.033182$, $0.0668653$ & $G_f$, $z_0^{\max}$ & $0.0328113$, $9.90187\cdot10^{-6}$\\
+$\zeta$, $\TzetN$ & $0.940995$, $8.76732\cdot10^{-5}$ & $\varepsilon_*$ & $4\cdot10^{-11}$\\
+\emph{heading:} $\bar\sigma$, $\rho_*$ & $0.035116$, $8.58751\cdot10^{-4}$ & $K_{\mathrm{rot}}$, $\omega_0$, $\vartheta_h$ & $52.2591$, $0.150567$, $33.5157$\\
+\emph{departure:} $\theta_0$, $\theta_y$ & $0.367832$, $0.0292978$ & $\Theta_0$, $\omega_T$, $\bar\omega_y$ & $0.371552$, $0.0704548$, $0.00555554$\\
+$K_w$, $\delta_t$ & $0.373653$, $2.24194\cdot10^{-5}$ & $k$, $\Theta_b$, $\Theta_{\mathrm p}$ & $5.16057$, $36.382$, $34.3033$\\
+$c_n$, $c_\beta$ & $4.74078$, $3.30993$ & $K=c_n\Theta_b+c_\beta\Theta_{\mathrm p}$ & $286.021$\\
+\emph{tail start:} $C_0R^{a'}$ & $2.76312\cdot10^{-3}$ & (TS), $s_0m\min(1,K_f/K_R)^\nu$ & $3.01154\cdot10^{-3}$, $3.04682\cdot10^{-3}$\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Theorem}: $v_0=6\cdot10^{-5}$, $\varepsilon_*=4\cdot10^{-11}$, $T_0=T_2+\kappa_1U_{\max}/(1-v_0)\le10.12637\le10.13$}\\
+\bottomrule
+\end{tabular}
+\caption{The constants of Proposition~\ref{prop:T3-cond} at the stated values (six significant digits for reading; the verification
+uses the exact inputs). The touch-down constants are printed exactly as in Corollary~\ref{cor:HTp-used}, i.e.\ their $50$-digit
+values rounded in the safe direction (upper constants up, lower constants down, $a'$ down), so \TzHT\ holds with the printed values.
+The derived core and assembly quantities and Table~\ref{tab:T3-side} are computed from the $50$-digit touch-down values
+($T_2=3.7324640$, $U_{\max}=6.2931948$, $C_0=c_N=2.7215935$, \dots; then $T_2+\kappa_1U_{\max}/(1-v_0)=10.12636$). All $114$
+conditions also hold, in the same $50$-digit check, with the printed (outward-rounded) touch-down values and $a'=0.99982$ (then
+$T_2+\kappa_1U_{\max}/(1-v_0)=10.12637$, and the relative slack of (P5) drops from $8.7\cdot10^{-7}$ to $7.8\cdot10^{-7}$).
+Above, $a'=1-\bar\mu_{\mathrm T}=0.99982001\ldots$ ($50$-digit value), which (T1$'$) allows; $a'=0.99982$ is allowed as well.}\label{tab:T3-const}
+\end{table}
+
+\begin{table}[p]
+\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llll@{}}
+\toprule
+condition & left side & right side & rel.\ slack\\
+\midrule
+(P1) $1/(1-v)\le\ESd$ & $1.0000600$ & $1.0000602$ & $2.0\cdot10^{-7}$\\
+(P1) $e^{2v/(1-v)}\le\delta_1$ & $1.0001200$ & $1.0001202$ & $1.9\cdot10^{-7}$\\
+(P2) $c_\rho K_f\ge2$ & $2$ & $2.0000345$ & $1.7\cdot10^{-5}$\\
+(P2) $c_RK_\varepsilon\ge1$, $c_6\le K_RK_\varepsilon$ & $1$, $2.008$ & $30807$, $31949$ & $\approx1$\\
+(P3) $\EScamp v\le\nu$ & $3.106677\cdot10^{-4}$ & $3.10668\cdot10^{-4}$ & $9.7\cdot10^{-7}$\\
+(P4) main & $0.0128336$ & $\log A_0=0.0128372$ & $2.8\cdot10^{-4}$\\
+(P4) stage A & $1.90\cdot10^{-4}$ & $0.0128372$ & $0.985$\\
+(P5) main & $0.1369619$ & $\ESf=0.136962$ & $8.7\cdot10^{-7}$\\
+(P5) stage A & $0.121881$ & $0.136962$ & $0.110$\\
+(P6) main / stage A & $0.897490$ / $0.897471$ & $1$ & $0.103$\\
+(P7) main & $1.014274$ & $\kappa_1=1.01594$ & $1.64\cdot10^{-3}$\\
+(P7) stage A & $1.001969$ & $1.01594$ & $0.0138$\\
+(P0) $\eta_1\le K_f/(K_f+1)$ & $0.834088$ & $0.834324$ & $2.8\cdot10^{-4}$\\
+(P0) $c_A\le1$ & $0.996095$ & $1$ & $3.9\cdot10^{-3}$\\
+(P0) other ranges & & & $\ge0.0128$\\
+(C0) $C_0\lambda_0^{a'}\le1$ & $0.0907$ & $1$ & $0.909$\\
+(C1) $R\le\lambda_0$ & $0.001014$ & $0.0333$ & $0.970$\\
+(C2) & $0.996095$ & $0.996108$ & $1.3\cdot10^{-5}$\\
+(C3) & $0.0322704$ & $0.0331631$ & $0.0269$\\
+(C4) & $0.0322704$ & $0.0330591$ & $0.0239$\\
+(C5) main / stage A & $0.614578$ / $0.614977$ & $a'=0.99982$ & $0.385$\\
+(C6) & $2.76312\cdot10^{-3}$ & $3.04682\cdot10^{-3}$ & $0.0931$\\
+\midrule
+(ii) $1-\MUA\ge\TzW$ & $0.032659$ & $0.966175$ & $0.966$\\
+$\Tzgd\ge\gamma+\nu+\TzetN$ & $0.6146653$ & $0.614666$ & $1.1\cdot10^{-6}$\\
+(iii) $G_f\le G_{\mathrm T}$ & $0.032811$ & $0.05$ & $0.344$\\
+(iii) $\delta_0\le R/2$ & $1.519\cdot10^{-4}$ & $5.07\cdot10^{-4}$ & $0.700$\\
+(iii) $\varepsilon_*\le\delta_0$, $\varepsilon_*\le\rho_*$ & $4\cdot10^{-11}$ & $1.519\cdot10^{-4}$, $8.59\cdot10^{-4}$ & $\approx1$\\
+(iii) $\bar\sigma\le\frac12$ & $0.035116$ & $0.5$ & $0.930$\\
+(iii) $m^2<2$ & $0.00315$ & $2$ & $0.998$\\
+(iii) $\MUA\ge\TzW+2\varepsilon_*+\delta_0$ & $0.032811$ & $0.033825$ & $0.030$\\
+(iii) $\kappa_1\le2$ & $1.01594$ & $2$ & $0.492$\\
+(iii) $\Tzgd\le1-\bar\mu$ & $0.614666$ & $0.99994$ & $0.385$\\
+(iv) $X_*\le1$ & $0.066865$ & $1$ & $0.933$\\
+(iv) $\theta_0X_*^{\Tzgd}\le\bar\omega$ & $0.069749$ & $0.338254$ & $0.794$\\
+(iv) $\theta_yX_*^{\Tzgd}\le\bar\omega$ & $0.005556$ & $0.338254$ & $0.984$\\
+(iv) $\omega_0\le\bar\omega$ & $0.150567$ & $0.338254$ & $0.555$\\
+(iv) $\omega_T\le\frac12$ & $0.070455$ & $0.5$ & $0.859$\\
+(iv) $v_0/\zeta\le\Tzgd/2$ & $6.38\cdot10^{-5}$ & $0.307333$ & $\approx1$\\
+(iv) $\Tzgd\le1-\bar\mu_{\mathrm T}$ & $0.614666$ & $0.99982$ & $0.385$\\
+(iv) $1+\Tzgd\le2-\bar\mu_{\mathrm T}$ & $1.614666$ & $1.99982$ & $0.193$\\
+(iv) $\bar\omega\le\frac12$, $k_{\mathrm{fac}}\ge1$ & $0.338254$, $1$ & $0.5$, $1.21399$ & $0.323$, $0.176$\\
+(iv) $\varepsilon_*/\zeta\le c_{\mathrm{zlo}}\varepsilon_*^{1/(2-2v_0)}$ & $4.25\cdot10^{-11}$ & $8.03\cdot10^{-6}$ & $\approx1$\\
+(iv) $\EUE\le G_{\mathrm T}$ & $0.033673$ & $0.05$ & $0.327$\\
+(v) $\Tzgd+\nu\le a'$ & $0.614977$ & $0.99982$ & $0.385$\\
+(v) (TS) $\le s_0m\min(1,K_f/K_R)^\nu$ & $3.01154\cdot10^{-3}$ & $3.04682\cdot10^{-3}$ & $0.0116$\\
+(v) $\max(K_f,K_R)R\le1-\EUE-\TzW-\varepsilon_*$ & $0.032397$ & $0.933667$ & $0.965$\\
+(v) (PT) $(1+\delta_t)\TzLJ<\kappa_1$ & $1.0142971$ & $1.01594$ & $1.62\cdot10^{-3}$\\
+(vi) $v_0\le\bar v$ & $6\cdot10^{-5}$ & $6\cdot10^{-5}$ & $0$\\
+(vi) $2\TzW+R+\varepsilon_*\le1$ & $0.066333$ & $1$ & $0.934$\\
+(vi) $\varepsilon_*\le R/K_\varepsilon$, $\varepsilon_*\le\bar\varepsilon$ & $4\cdot10^{-11}$ & $1.01\cdot10^{-6}$, $10^{-3}$ & $\approx1$\\
+\bottomrule
+\end{tabular}
+\caption{Side conditions at the stated values $v_0=6\cdot10^{-5}$, $\varepsilon_*=4\cdot10^{-11}$ (from
+\texttt{code/Q4/out/final.txt}, $50$-digit touch-down values; all also hold with those printed in Table~\ref{tab:T3-const}; (P0)--(P3), (C0)--(C4), (C6) are the same for the main application and stage~A). In addition the
+$52$ side conditions (SC1)--(SC51) of the touch-down theorem hold for the column used.}\label{tab:T3-side}
+\end{table}
+
+\noindent\emph{Margins.} Among the conditions that bind at the optimum ((P2), (P6), (P7) for the main application and stage~A,
+(TS) and (PT); they fail at $1.02$ times the optimum $6.68\cdot10^{-5}$), the tightest margin at the stated values is $0.16\%$
+((P7) and (PT)); (TS) has $1.2\%$, (P6) $10.3\%$. Some conditions have smaller relative slack for structural reasons: (P1), (P3),
+(P5) and $\Tzgd\ge\gamma+\nu+\TzetN$ define the dependent quantities and hold up to their rounding ($\le10^{-6}$); (C2) and
+(P2) are saturated by the choice of $c_A$ and $K_f$ ($1.3\cdot10^{-5}$, $1.7\cdot10^{-5}$); (P4) and $\eta_1\le K_f/(K_f+1)$ have
+$2.8\cdot10^{-4}$; $v_0=\bar v$ by choice. All of these hold in $50$-digit arithmetic at the exact inputs, and spot checks at
+$(v,\varepsilon)=(3\cdot10^{-5},4\cdot10^{-11})$ and $(6\cdot10^{-8},4\cdot10^{-14})$ also pass.
+
+\begin{theorem}[Main theorem with an improved constant]\label{thm:Main2}
+Put $v_0:=6\cdot10^{-5}$ and $T_0:=10.13$. For every $d>0$, every $\varepsilon\in(0,d)$ and every $v\in(0,v_0]$, the path of
+design~T (Definition~\ref{def:T} with $D_1=1$, scaled to distance $d$), continued from the touch-down by Construction~C on the
+working front for the vision radius $\min(\varepsilon,4\cdot10^{-11}d)$, is fixed in advance (it depends only on $v$, $\varepsilon$
+and $d$), starts at $0$, has speed at most $1$, and sees every direction $\alpha\in[0,2\pi)$ by time $T_0\,d$. Neither $v_0$ nor
+$T_0$ depends on $\varepsilon$.
+\end{theorem}
+\begin{proof}
+Let $d=1$. By Theorem~\ref{thm:HTp} (Corollary~\ref{cor:HTp-used}) \TzHT\ holds with the touch-down constants of
+Corollary~\ref{cor:HTp-used}, which Table~\ref{tab:T3-const} repeats (rounded in the safe direction; the check uses their
+$50$-digit values and also passes with the displayed ones); with the parameters of that table all side conditions (i)--(vi) hold
+at $(v_0,\varepsilon_*)=(6\cdot10^{-5},4\cdot10^{-11})$ (Table~\ref{tab:T3-side}), and $T_2+\kappa_1U_{\max}/(1-v_0)\le10.12637\le10.13$. Proposition~\ref{prop:T3-cond}
+gives the statement for $d=1$ (its $T_0$ is replaced by the larger $10.13$). The case of general $d$ follows from the invariance
+of \eqref{eq:snitch} under $(S,H,t)\mapsto(dS,dH,dt)$, exactly as in the proof of Theorem~\ref{thm:Main}: the path for $(v,\varepsilon)$
+at distance $d$ is $t\mapsto dP(t/d)$ with $P$ the path for $(v,\varepsilon/d)$ at distance $1$, whose vision radius is
+$\min(\varepsilon/d,4\cdot10^{-11})$.
+\end{proof}
+
+\begin{corollary}[Exact capture for $v\le6\cdot10^{-5}$]\label{cor:Exact2}
+Let $d>0$. For every $v\in(0,6\cdot10^{-5}]$ there is a single path $H$ with $H(0)=0$ and $|H'|\le1$ that catches every direction
+exactly by time $10.13\,d$: for every $\alpha\in[0,2\pi)$ there is $t\le10.13\,d$ with $S_\alpha(t)=H(t)$. So for these $v$ Harry
+wins with vision radius $\varepsilon=0$.
+\end{corollary}
+\begin{proof}
+By scaling let $d=1$; fix $v\in(0,6\cdot10^{-5}]$. We verify the hypotheses of Lemma~\ref{lem:A41}, as in the proof of
+Corollary~\ref{cor:Exact}.
+\emph{Direction sets:} $D_N:=\{2\pi i/2^N:0\le i<2^N\}$, $N\ge1$, finite, nested, with dense union.
+\emph{Radii:} $\varepsilon_N:=2^{-N}\cdot4\cdot10^{-11}\in(0,1)$, $\varepsilon_N\to0$.
+\emph{Paths:} $H_N:=P_{v,\varepsilon_N}$, the path of Theorem~\ref{thm:Main2} for $(v,\varepsilon_N)$ (same $v$ for all $N$), defined on
+$[0,\infty)$ and in particular on $[0,T]$ with $T:=10.13$; $H_N(0)=0$ and $|H_N'|\le1$.
+\emph{Proximity with the same $T$:} by Theorem~\ref{thm:Main2}, every true candidate $S_\alpha$, in particular every
+$\alpha\in D_N$, comes within $\varepsilon_N$ of $H_N$ at some time $\le10.13$, which does not depend on $N$.
+Lemma~\ref{lem:A41} gives a path $H$ with $|H'|\le1$ that catches every direction exactly by time $10.13$; $H(0)=0$ because $H$ is
+a uniform limit of a subsequence of the $H_N$ (proof of Lemma~\ref{lem:limit}) and $H_N(0)=0$.
+\end{proof}
+
+\begin{remark}[Status and scope]\label{rem:T3-status}
+\emph{What is new and what is refereed.} The core with optimised constants (Theorem~\ref{thm:Estar}, Section~\ref{sec:Estar}) and the
+extension of the touch-down data (Theorem~\ref{thm:HTp}, Section~\ref{sec:HTp}) were each checked by two independent referees. The
+assembly of this section was checked by two independent referees with the earlier core theorem (Theorem~\ref{thm:End}); its use of
+Theorem~\ref{thm:Estar} and its new Lemma~\ref{lem:T3-W} were checked by two audits (\texttt{audit-C.md}: chain closed, all $130$
+numerical conditions verified at the printed digits by independent code; \texttt{audit-D.md}: every difference between the typeset
+text and the refereed claims refereed, Lemma~\ref{lem:T3-W} in full), which are not referee reports. The pieces of the chain behind
+Theorem~\ref{thm:Main2} and their refereeing status are as follows (reports in the project archive):
+\begin{center}\small
+\begin{tabular}{@{}p{0.48\textwidth}p{0.42\textwidth}@{}}
+\toprule
+piece & reports\\
+\midrule
+Theorem~\ref{thm:Estar}, Corollary~\ref{cor:Estar}, Lemmas~\ref{lem:Estar-L1}--\ref{lem:Estar-L4} (core) & \texttt{referee-RQ1-1.md}, \texttt{referee-RQ1-2.md}\\
+Theorem~\ref{thm:HTp} (version~1 statements; (SC51) added after the reports at RQ3-1's request, not itself re-refereed) & \texttt{referee-RQ3-1.md}, \texttt{referee-RQ3-2.md}\\
+this section: Theorems~\ref{thm:T3-E}, \ref{thm:T3-D}, Lemma~\ref{lem:T3-H}, Proposition~\ref{prop:T3-cond} & \texttt{referee-RQ2-1.md}, \texttt{referee-RQ2-2.md}, with the \emph{old} core\\
+Lemma~\ref{lem:T3-W}; the End$^*$ form of Theorem~\ref{thm:T3-E}; Corollary~\ref{cor:HTp-used} (the column $\bar v=6\cdot10^{-5}$) and (SC51) & not refereed; audited (\texttt{audit-C.md}, \texttt{audit-D.md})\\
+interface of this section with Theorem~\ref{thm:Estar}; final constants & \texttt{Q4-1.md}, \texttt{audit-C.md} (not referee reports)\\
+Sections~\ref{sec:bulk}, \ref{sec:end}, Lemma~\ref{lem:T2-W}, Lemma~\ref{lem:A41} & as in Remark~\ref{rem:T2-status}\\
+\bottomrule
+\end{tabular}
+\end{center}
+The referees of this section checked the assembly with Theorem~\ref{thm:End} as its core (claims file
+\texttt{referee/\allowbreak Q2-claims-v1.md}; both found no false statement and no gap, and their corrections are incorporated: $\delta_0\ge\varepsilon$
+in Lemma~\ref{lem:T3-H}, Theorem~\ref{thm:T3-D} applied with the actual duration and a duration bound, the wording on the pairs of
+$\BF(\TztW)$, the coverage table). Its use of Theorem~\ref{thm:Estar} in place of Theorem~\ref{thm:End} rests on the structural facts
+(F1)--(F4), which are Lemmas~\ref{lem:Estar-L1}--\ref{lem:Estar-L4} of Section~\ref{sec:Estar}, and on the item-by-item interface check
+of \texttt{reports/\allowbreak Q4-1.md}, \S2 (no mismatch requiring a change of any proof; text amendments incorporated: the left side of (P7) is
+$\TzLJ$ with the final $\ESX$; (F4) includes the pair $(a_j,a_{j+1})$; the definition of $\psi$ in Lemma~\ref{lem:T3-H},
+where we keep the cap $\min(1,\cdot)$ on $[0,1]$ so that $\psi\le\min(1,2x)$ holds; the definition in version~1, read by both
+referees, was negative for $x>\sqrt2$). This substitution, the typeset text of this section and the interface with
+Sections~\ref{sec:Estar} and~\ref{sec:HTp} have not been refereed; they were audited end to end afterwards (report
+\texttt{audit-C.md}: chain closed; all side conditions re-verified at the printed digits by independent code in
+\texttt{code/audit/C/}; report \texttt{audit-D.md} checked them against the refereed claims). Version~2 of the claims (\texttt{referee/\allowbreak Q2-claims.md}) lists every change.
+
+\emph{Constants.} All side conditions are verified in $50$-digit arithmetic at exactly the stated values
+(\texttt{code/Q4/final.py}; recomputed independently in \texttt{code/audit/C/} and \texttt{code/audit/D/}); the tightest margin among the binding conditions is $0.16\%$, for (PT) and (P7); see the paragraph on margins. The
+optimiser (Nelder--Mead and differential evolution) is local: $6\cdot10^{-5}$ is verified feasible, not proven to be the best value
+of this method; a ceiling argument for the core (numerical, not refereed, not a proof; checked in audit D) indicates that the
+method cannot go much beyond $v\approx10^{-4}$. The cap $\ETL m\le0.33$ of Section~\ref{sec:main} is not needed (here
+$\ETL m=0.91$): the tilt constants of stage~A enter only Lemma~\ref{lem:T3-H}, through $\omega_0$ and $\vartheta_h$ (and from there
+the constants of Theorem~\ref{thm:T3-D}); no smallness of $\ETL m$ is used, since $\psi\le\min(1,2x)$ for all $x\ge0$.
+
+\emph{Numerical evidence (not proof).} The simulations reported in Remark~\ref{rem:T2-status} suggest that design~T works up to
+$v\approx0.2$. \textbf{Nothing is claimed for $v>6\cdot10^{-5}$.}
+
+\emph{Scope.} Theorem~\ref{thm:Main2} and Corollary~\ref{cor:Exact2} supersede Theorem~\ref{thm:Main} and Corollary~\ref{cor:Exact},
+which remain valid; the path is the same, with vision radius $\min(\varepsilon,4\cdot10^{-11}d)$ instead of
+$\min(\varepsilon,2\cdot10^{-44}d)$. Not used here: Lemma~\ref{lem:T2-A}, Proposition~\ref{prop:T2-I}, Lemma~\ref{lem:T2-StA} (except
+the argument of its part (b), repeated in Step~2), Theorem~\ref{thm:T2-D}, Lemma~\ref{lem:T2-H}, the constants \eqref{eq:T2-const},
+Theorem~\ref{thm:End}(c), Theorem~\ref{thm:Estar}(c) and Theorem~\ref{thm:R}.
+\end{remark}
+

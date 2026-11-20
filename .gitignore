@@ -1,0 +1,9 @@
+*.aux
+*.log
+*.out
+!paper/verify_constants.out
+*.toc
+*.synctex.gz
+__pycache__/
+*.pyc
+build_*

@@ -1,0 +1,635 @@
+% sec_ST.tex -- The start: the front at exact first contact, and the start hypothesis (ST) for the start S.
+% Sources: referee/P6c-claims.md, Claim 1 parts (a),(b),(e),(f),(g); referee/P6d-claims.md (Lemma D0, Claims D1-D3,
+% Theorem D = Theorem ST here, Corollary D = Corollary ST here), with the fixes F1-F3 of reports/referee-RP6d-1.md and
+% F1-F6 of reports/referee-RP6d-2.md. Doubly refereed.
+% Corollary ST is CONDITIONAL: the tip hypothesis (T) is not proved.
+% OMITTED on purpose: Remark (1) of P6d-claims ((ST+)/Theorem F/C_cut) -- RP6d-1 calls it a gap (G1), RP6d-2 did not referee
+% it. For the same reason the option "end label 2pi - alpha_s (C_cut)" in the definition of the start S is dropped: the end
+% label is 2pi throughout.
+%
+% Notation changes against the sources (no change of mathematics), forced by clashes with sec_B.tex / main.tex:
+%   curvature kappa -> k (kappa is the (ST) constant);  A := rho_alpha, B := rho beta_alpha -> \STA, \STB (A is DF);
+%   m = B/A -> \STm;  m(rho) = max(rho,eps) -> m_eps(rho);  Gamma(rho) -> Gamma_eps(rho);  h(s) of Claim D3 -> eta(s)
+%   (h is the straight-run integral);  S(t), \bar S of Claim D3 -> Sigma(t), \bar Sigma;  d(t) on the connector -> D(t);
+%   the times tau, tau^* of Claim D3 -> t_1, t^*, integration variable xi (tau = tan(alpha/2));  T1..T5 -> Y_1..Y_5.
+% Fixes of the two reports that touch the same sentence: RP6d-1 quotes "t_s <= 1.001001 + 2.8e-5", RP6d-2 (F3) asks for
+% "t_0 <= 1.001002 and 1.402 eps <= 1.402/50688 < 2.8e-5 (eps <= R/64)". The second is the more careful rounding and is used.
+
+\newcommand{\STas}{\alpha_{\mathrm s}}
+\newcommand{\STrs}{\rho_{\mathrm s}}
+\newcommand{\STps}{\phi_{\mathrm s}}
+\newcommand{\STA}{\mathsf A}
+\newcommand{\STB}{\mathsf B}
+\newcommand{\STm}{\mathsf m}
+\newcommand{\STcA}{\mathcal A}
+\newcommand{\STme}{m_\varepsilon}
+\newcommand{\STG}{\Gamma_{\!\varepsilon}}
+
+\section{The start: the front at first contact and the start condition}\label{sec:start}
+
+Corollary~\ref{cor:M} needs two hypotheses, \textup{(ST)} and \textup{(T)}. For construction C itself, \textup{(ST)} at a fixed leg
+is not uniform in $\varepsilon$ (Remark~\ref{rem:B-status}, (N2)): leg $0$ of construction C ends when Harry meets the
+\emph{virtual} candidate $0$, and this leaves a corner of width $\sim\varepsilon$ ahead of the base. This section changes the start.
+Harry runs straight until the \emph{exact} time $1/(1-v)$ at which the true candidate $0$ is caught, then straight at the first
+virtual candidate that has not been seen, and only then follows the legs of construction C. For this start, called S below,
+we prove \textup{(ST)} with $\kappa=1/2$ and $R=\min(1/792,\delta/100)$, uniformly in $\varepsilon$ (Theorem~\ref{thm:ST}). Corollary~\ref{cor:M}
+then has a single hypothesis left, the tip hypothesis \textup{(T)} (Corollary~\ref{cor:ST}). \textbf{That corollary is still
+conditional}: \textup{(T)} is not proved, and nothing is proved here about the arm left behind beyond its state at first contact.
+The main theorems (Theorems~\ref{thm:Main} and~\ref{thm:Main2}) do not use the start S; from this section they use only Lemma~\ref{lem:ST-D0}(a) and
+the bound $g_{\max}\le e^{v^2}$.
+
+The setting, the field $F$, $f$, $A=DF$, $a^*$, the virtual candidates $x_\theta$ with $r=x-P$, $\rho=|r|$, the quantities $l$, $c$,
+$E$, the tangent $T=e^{i\psi}$ and the angle $\phi$ ($\cos\phi=T\cdot\rhat$, $\sin\phi=T\times\rhat$, i.e.\ $\phi=\arg r-\psi$) are those
+of Section~\ref{sec:bulk}; $S_\theta$ denotes the true candidate. As there, the curvature of a front is written $k=\partial_s\psi$, and
+$\kappa$ is the constant of \textup{(ST)}. Further inputs: Proposition~\ref{prop:integrals} and Lemma~\ref{lem:k} for a straight run;
+and the standard fact that a field which is $C^1$ in $x$ with globally Lipschitz derivative has a flow whose $x$-derivative is locally
+Lipschitz in the initial point. In addition
+\[
+\STme(\rho):=\max(\rho,\varepsilon),\qquad\STG(\rho):=\frac\rho{\STme(\rho)^2},\qquad p:=T\times r=T^\perp\cdot r=\rho\sin\phi .
+\]
+
+\subsection{The straight run and the front at exact first contact}
+
+Recall $g(\beta)=\sin\beta/\tan^v(\beta/2)$ and $g'/g=(\cos\beta-v)/\sin\beta$ (Lemma~\ref{lem:k}). Since
+$\sin\beta=(1+\cos\beta)^{1/2}(1-\cos\beta)^{1/2}$ and $\tan(\beta/2)=((1-\cos\beta)/(1+\cos\beta))^{1/2}$,
+\[
+g(\beta)=(1+\cos\beta)^{(1+v)/2}(1-\cos\beta)^{(1-v)/2}=(1+\cos\beta)\tan^{1-v}(\beta/2).
+\]
+$g$ increases on $(0,\arccos v]$ and decreases on $[\arccos v,\pi)$, with $g(0+)=g(\pi-)=0$. Put
+\begin{gather*}
+g_{\max}:=g(\arccos v)=(1+v)^{(1+v)/2}(1-v)^{(1-v)/2},\\
+\theta^*:=\arccos(-v),\qquad g(\theta^*)=(1-v)^{(1+v)/2}(1+v)^{(1-v)/2}\le1,
+\end{gather*}
+the last because $\log g(\theta^*)=\frac{1+v}2\log(1-v)+\frac{1-v}2\log(1+v)\le-v^2$. Likewise $\log g_{\max}\le v^2$.
+
+While Harry runs with constant unit velocity $u$, a true candidate with $\rho>0$ has ordinate $y:=u\times r$ relative to Harry's line
+satisfying $y'=vy/\rho$ (as $r'=v\rhat-u$). So a candidate off Harry's line stays strictly on its side, its bearing $\beta$ stays in
+$(0,\pi)$ after a reflection, $C=\rho g(\beta)$ is constant and $h=\rho(\cos\beta+v)$ has $h'=-(1-v^2)$
+(Proposition~\ref{prop:integrals}); in particular $\rho\ge C/g_{\max}>0$ during the run.
+
+\medskip\noindent\textbf{Phase 1.} $P(t):=t$ (real axis) for $0\le t\le t_0$, where \emph{throughout this section}
+\[
+t_0:=\frac1{1-v}\qquad\text{and}\qquad O:=P(t_0).
+\]
+This is \textbf{not} the time $t_0$ of leg $0$ of construction C, which satisfies only $t_0\le1/(1-v)$ (Lemma~\ref{lem:B-C}(1)). The
+true candidate $0$ is caught exactly at $t_0$. Phase 1 is symmetric under reflection in the real axis, which exchanges the labels
+$\alpha$ and $2\pi-\alpha$; ``$|\alpha|\le\alpha_1$'' means $\alpha\in[0,\alpha_1]\cup[2\pi-\alpha_1,2\pi]$.
+
+\begin{lemma}[The front at exact first contact]\label{lem:ST-front}
+For $\alpha\in(0,\pi)$ let $(\rho,\beta)=(\rho(\alpha),\beta(\alpha))$ be the polar coordinates of $S_\alpha(t_0)-O$ (bearing measured from
+the positive real axis), and put $\tau:=\tan(\alpha/2)$,
+\[
+\STA:=\partial_\alpha\rho,\qquad\STB:=\rho\,\partial_\alpha\beta .
+\]
+\begin{enumerate}
+\item[(a)] $\rho(\cos\beta+v)=-(1-\cos\alpha)$ and $\rho\,g(\beta)=g(\alpha)$. Hence $\beta\in(\theta^*,\pi)$ and
+$\rho\ge g(\alpha)/g(\theta^*)\ge g(\alpha)$.
+\item[(b)] $\displaystyle\STB=\frac{\sin\beta\,\tau}{1-v}>0,\qquad\STA=\frac{\rho(\cos\alpha-v)}{\sin\alpha}+\frac{(v-\cos\beta)\,\tau}{1-v}$.
+In particular $\partial_\alpha\beta>0$ on $(0,\pi)$, and both terms of $\STA$ are positive when $\cos\alpha>v$.
+\item[(e)] \emph{(Seen set.)} Let $\STas\in(0,\arccos v)$ be defined by $g(\STas)=\varepsilon g_{\max}$. Every $\alpha$ with
+$|\alpha|\le\STas$ is seen during $[0,t_0]$. For $\alpha\in[\STas,2\pi-\STas]$: $|S_\alpha(t)-P(t)|\ge\varepsilon$ for all
+$t\in[0,t_0]$. Consequently, for these $\alpha$, $x_\alpha=S_\alpha$ on $[0,t_0]$; this conclusion holds for the virtual candidates
+of \emph{every} Lipschitz field that equals $x/|x|$ on $\{|x|\ge\varepsilon\}$, in particular for both the field $x/\max(|x|,\varepsilon)$
+of Lemma~\ref{lem:D2-field} and the $C^1$ field $F$ of Section~\ref{sec:bulk}.
+\item[(f)] $\STrs:=\rho(\STas)$ satisfies
+\[
+\varepsilon<\STrs\le\varepsilon\,(1+v)^v(1-v)^{(1-v)/2}\bigl(1-v-2g_{\max}^2\varepsilon\bigr)^{-(1+v)/2}
+\]
+whenever $v+2g_{\max}^2\varepsilon<1$ and $\varepsilon g_{\max}\le1$; for $v\le1/4$, $\varepsilon\le1/20$ this gives
+$\STrs\le1.4\,\varepsilon$.
+\item[(g)] \emph{(Order.)} On the arc $[\STas,2\pi-\STas]$ the bearing of $S_\alpha(t_0)$ from $O$ is strictly monotone, with total
+variation $<2(\pi-\theta^*)=\pi-2\arcsin v$, and no point of the arc is within distance $\varepsilon$ of $O$.
+\end{enumerate}
+\end{lemma}
+% Parts (c),(d) of Claim 1 of P6c-claims (radial flatness, stretch) are not needed and are not reproduced; the lettering
+% (a),(b),(e),(f),(g) of the source is kept. The proof of (g) in the source cites (d) for the limit beta -> theta^* as
+% alpha -> 0; that limit is not needed for (g) (the range of beta from (a) suffices), and its one-line proof from (a) is given.
+\begin{proof}
+A candidate $\alpha\in(0,\pi)$ stays in the open upper half-plane with $\rho>0$ on $[0,t_0]$ (above), so the flow is $C^1$ in
+$\alpha$ there and $\rho,\beta$ are $C^1$ functions of $\alpha$.
+
+(a) At $t=0$: $\rho=1$ and the bearing is $\alpha$, so $C=g(\alpha)$ and $h(0)=\cos\alpha+v$. Since $(1-v^2)t_0=1+v$,
+$h(t_0)=\cos\alpha+v-(1+v)=-(1-\cos\alpha)<0$. Thus $\cos\beta<-v$, i.e.\ $\beta\in(\theta^*,\pi)$; $g$ is decreasing on
+$[\arccos v,\pi)\ni\theta^*$, so $g(\beta)\le g(\theta^*)\le1$ and $\rho=g(\alpha)/g(\beta)\ge g(\alpha)/g(\theta^*)$.
+
+(b) Differentiate the two identities of (a) in $\alpha$. The second, divided by $g(\beta)$, reads (using $g'/g$ and
+$g(\alpha)/g(\beta)=\rho$)
+\begin{equation}\label{eq:ST-1}
+\STA+\STB\,\frac{\cos\beta-v}{\sin\beta}=\frac{\rho(\cos\alpha-v)}{\sin\alpha}.
+\end{equation}
+The first reads $\STA(\cos\beta+v)-\STB\sin\beta=-\sin\alpha$. Substituting $\STA$ from \eqref{eq:ST-1} and using
+$(\cos\beta-v)(\cos\beta+v)/\sin\beta+\sin\beta=(1-v^2)/\sin\beta$:
+\[
+\STB\,\frac{1-v^2}{\sin\beta}=\sin\alpha+\frac{\rho(\cos\beta+v)(\cos\alpha-v)}{\sin\alpha}
+=\frac{\sin^2\!\alpha-(1-\cos\alpha)(\cos\alpha-v)}{\sin\alpha}=\frac{(1-\cos\alpha)(1+v)}{\sin\alpha},
+\]
+because $\rho(\cos\beta+v)=-(1-\cos\alpha)$ and $\sin^2\!\alpha-(1-\cos\alpha)(\cos\alpha-v)=(1-\cos\alpha)(1+\cos\alpha-\cos\alpha+v)$.
+As $(1-\cos\alpha)/\sin\alpha=\tau$, this gives $\STB$; then \eqref{eq:ST-1} gives $\STA$. Since $\cos\beta<-v$, we have
+$v-\cos\beta>2v\ge0$, so both terms of $\STA$ are positive when $\cos\alpha>v$.
+
+(e) $\alpha=0$: $\rho=1-(1-v)t$ reaches $\varepsilon$ before $t_0$. Let $0<\alpha\le\STas$. The bearing is continuous in $t$, equals
+$\alpha<\arccos v$ at $t=0$ and $\beta(\alpha)>\theta^*>\arccos v$ at $t_0$, so at some time it equals $\arccos v$, and there
+$\rho=C/g_{\max}=g(\alpha)/g_{\max}\le g(\STas)/g_{\max}=\varepsilon$ ($g$ is increasing on $(0,\arccos v]$). Negative $\alpha$:
+reflection. Now let $\alpha\in[\STas,\pi)$. The bearing is increasing in $t$ ($\rho\beta'=\sin\beta>0$). If $\alpha\ge\arccos v$, then
+$\cos\beta\le v$ throughout, $\rho'=v-\cos\beta\ge0$ and $\rho\ge1>\varepsilon$. If $\STas\le\alpha<\arccos v$, then at every time
+$\rho=g(\alpha)/g(\beta)\ge g(\alpha)/g_{\max}\ge g(\STas)/g_{\max}=\varepsilon$. For $\alpha=\pi$: $\rho=1+(1+v)t$. For
+$\alpha\in(\pi,2\pi-\STas]$: reflection. Finally, let $\tilde F$ be any Lipschitz field with $\tilde F(x)=x/|x|$ for $|x|\ge\varepsilon$.
+For $\alpha\in[\STas,2\pi-\STas]$ the true candidate stays in $\{\rho\ge\varepsilon\}$ on $[0,t_0]$, so it solves
+$x'=v\tilde F(x-P)$ there, and by uniqueness it is the virtual candidate of $\tilde F$ on $[0,t_0]$.
+
+(f) $\STrs=\varepsilon g_{\max}/g(\beta_{\mathrm s})$ with $\beta_{\mathrm s}:=\beta(\STas)>\theta^*>\arccos v$, so
+$g(\beta_{\mathrm s})<g_{\max}$ and $\STrs>\varepsilon$. Since $\STas<\pi/2$,
+$\tan^{1-v}(\STas/2)=g(\STas)/(1+\cos\STas)\le\varepsilon g_{\max}\le1$, so $\tan(\STas/2)\le\varepsilon g_{\max}$ and
+$1-\cos\STas=2\sin^2(\STas/2)\le2\varepsilon^2g_{\max}^2$. By (a),
+$-\cos\beta_{\mathrm s}-v=(1-\cos\STas)/\STrs\le2\varepsilon g_{\max}^2$, i.e.\ $\cos\beta_{\mathrm s}\ge-c_{\mathrm s}$ with
+$c_{\mathrm s}:=v+2g_{\max}^2\varepsilon<1$. As $1-\cos\beta_{\mathrm s}\ge1+v$,
+\[
+g(\beta_{\mathrm s})=(1+\cos\beta_{\mathrm s})^{(1+v)/2}(1-\cos\beta_{\mathrm s})^{(1-v)/2}\ge(1-c_{\mathrm s})^{(1+v)/2}(1+v)^{(1-v)/2},
+\]
+and $\STrs/\varepsilon=g_{\max}/g(\beta_{\mathrm s})\le(1+v)^v(1-v)^{(1-v)/2}(1-c_{\mathrm s})^{-(1+v)/2}$. For $v\le1/4$,
+$\varepsilon\le1/20$: $g_{\max}^2=\exp((1+v)\log(1+v)+(1-v)\log(1-v))$ is increasing in $v$ (its logarithm has derivative
+$\log((1+v)/(1-v))\ge0$), so $g_{\max}^2\le1.25^{1.25}\cdot0.75^{0.75}<1.07$, $\varepsilon g_{\max}\le1$, $c_{\mathrm s}\le0.357$,
+$(1+v)^v\le1.25^{0.25}<1.058$, $(1-v)^{(1-v)/2}\le1$ and $(1-c_{\mathrm s})^{-(1+v)/2}\le0.643^{-0.625}<1.32$; the product is $<1.4$.
+
+(g) By (b), $\beta$ is strictly increasing on $(0,\pi)$, and by (a) its values lie in $(\theta^*,\pi)$. (In fact $\beta\to\theta^*$ as
+$\alpha\to0$: by (a), $0<-(\cos\beta+v)=(1-\cos\alpha)/\rho=g(\beta)\,\tau^{1+v}\to0$, because
+$(1-\cos\alpha)/g(\alpha)=\tau^{1+v}$.) Reflection gives monotonicity on $(\pi,2\pi)$ with values in $(\pi,2\pi-\theta^*)$, and
+$\beta(\pi)=\pi$. So the total variation on $[\STas,2\pi-\STas]$ is $<2\pi-2\theta^*$. For $\alpha\in[\STas,\arccos v]$:
+$\rho(\alpha)=g(\alpha)/g(\beta)>g(\alpha)/g_{\max}\ge\varepsilon$; for $\alpha\ge\arccos v$, $\rho\ge1$ by the proof of (e).
+\end{proof}
+
+Elementary identities used below: $g(\alpha)=(1+\cos\alpha)\tau^{1-v}$, $\sin\alpha=\tau(1+\cos\alpha)$ and
+$d\tau/d\alpha=(1+\tau^2)/2=1/(1+\cos\alpha)$.
+
+\subsection{The start S and the tangent law}
+
+\noindent\textbf{Start S.}
+\begin{itemize}
+\item \emph{Phase 1.} $P(t)=t$ for $0\le t\le t_0=1/(1-v)$ \textbf{exactly} (not ``until the virtual candidate $0$ is met'').
+\item \emph{Connector.} Let $u:=(x_{\STas}(t_0)-O)/\STrs$, where $\STas$, $\STrs$ are those of Lemma~\ref{lem:ST-front}(e),(f)
+(recall $x_{\STas}(t_0)=S_{\STas}(t_0)$). $P(t):=O+(t-t_0)u$ until $P$ meets the virtual candidate $x_{\STas}$, at time $\Bts$.
+\item \emph{Legs.} From $\Bts$ on, $P$ follows the legs of construction C with first base $a_{\Bjs}:=\STas$ at the leg start
+$t_{\Bjs}:=\Bts$ (the rule ``Leg $j+1$'' of construction C for $j\ge\Bjs$, with end label $2\pi$; the value of the index $\Bjs$ is
+immaterial).
+\end{itemize}
+Here $x_\theta$ are the virtual candidates of Section~\ref{sec:bulk} for this path $P$. The numbers $t_0$, $\STas$, $u$, $\Bts$ are
+determined by $(v,\varepsilon)$, each leg is computed from $P$ on earlier times, and all pieces have speed $\le1$; so $P$ is a
+$1$-Lipschitz path fixed in advance.
+
+For a set $\STcA$ of consecutive labels and a time $t$ let
+\[
+k_{\STcA}(t):=\sup_{a<b\ \text{in}\ \STcA}\frac{|\psi_b-\psi_a|}{l_t(a,b)}
+\]
+($\psi$ a continuous lift of the tangent angle along the front): the Lipschitz constant of the tangent angle in arclength.
+
+\begin{lemma}[Tangent law; finiteness]\label{lem:ST-D0}
+Let $P$ be any $1$-Lipschitz path and $x_\theta$ its virtual candidates.
+\begin{enumerate}
+\item[(a)] For every label and time: $\psi_t=-v\,\STG(\rho)\sin\phi\cos\phi$ (\,$:=0$ if $\rho=0$), and
+$|\psi_t|\le v|p|/\STme(\rho)^2\le v/\STme(\rho)$.
+\item[(b)] $k_{\STcA}(t)<\infty$ for every compact label set $\STcA$, locally uniformly in $t$.
+\item[(c)] If $k:=k_{\STcA}(t)<\infty$ and $a<b$ in $\STcA$ satisfy $k\,l_t(a,b)\le\pi$, then
+\[
+c(a,b;t)\ge\frac2k\sin\frac{k\,l_t(a,b)}2\ge\max\Bigl(\frac2\pi\,l_t,\ l_t-\frac{k^2l_t^3}{24}\Bigr),\qquad\text{i.e.}\qquad
+E(a,b;t)\le\frac{k^2}{24}\,l_t(a,b)^3 .
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) By Lemma~\ref{lem:B-1}(ii), $T_t=v(AT-(T\cdot AT)T)=v(T^\perp\cdot AT)\,T^\perp$, and by Lemma~\ref{lem:B-V}(ii),
+$A=(f/\rho)I-(f/\rho-f')\rhat\rhat^{\mathsf T}$ with $f/\rho-f'=\rho/\STme(\rho)^2$ ($=\rho/\varepsilon^2$ inside the disc, $1/\rho$
+outside; proof of Lemma~\ref{lem:B-V}(iii)). So $T^\perp\cdot AT=-\STG(\rho)(T^\perp\cdot\rhat)(T\cdot\rhat)=-\STG(\rho)\sin\phi\cos\phi$.
+At $\rho=0$, $A=(2/\varepsilon)I$ and $T^\perp\cdot AT=0$. Finally $\STG|\sin\phi\cos\phi|\le|p|/\STme^2$ and $\STG\le1/\STme$.
+
+(b) $DF$ is globally Lipschitz: inside the disc $DF=(2\varepsilon-|x|)I/\varepsilon^2-xx^{\mathsf T}/(|x|\varepsilon^2)$ (and
+$xx^{\mathsf T}/|x|$ is homogeneous of degree $1$), outside $DF=\Pi/\rho$ with $\rho\ge\varepsilon$, and $DF$ is continuous across
+$\rho=\varepsilon$. So $\partial_\theta x$ is Lipschitz in $\theta$ on compact label sets, uniformly for $t$ in compact sets (Gronwall
+for the second variation: for two labels, $\Delta:=\partial_\theta x_\theta-\partial_\theta x_{\theta'}$ satisfies
+$|\Delta'|\le v\|A\|\,|\Delta|+v\operatorname{Lip}(A)\,|x_\theta-x_{\theta'}|\,|\partial_\theta x_{\theta'}|$), and
+$|\partial_\theta x|\ge1$ (Lemma~\ref{lem:B-VC}(a)). Hence $\psi$ is Lipschitz in $\theta$ and in arclength, with the same uniformity.
+
+(c) Parametrise the arc by arclength $s\in[-l/2,l/2]$, $l:=l_t(a,b)$, and let $e_0:=T(0)$ be the tangent at the arclength midpoint.
+Then $|\psi(s)-\psi(0)|\le k|s|\le\pi/2$, so
+\[
+c\ge(x_b-x_a)\cdot e_0=\int_{-l/2}^{l/2}\cos(\psi(s)-\psi(0))\,ds\ge\int_{-l/2}^{l/2}\cos(ks)\,ds=\frac2k\sin\frac{kl}2,
+\]
+and $\sin x\ge2x/\pi$, $\sin x\ge x-x^3/6$ on $[0,\pi/2]$.
+\end{proof}
+
+\subsection{Curvature and global geometry at first contact}
+
+\begin{lemma}[The front at exact first contact has curvature $\le2.2$]\label{lem:ST-D1}
+Let $v\le10^{-2}$ and consider the true front $\alpha\mapsto S_\alpha(t_0)$, $\alpha\in(0,2\pi)$, of Phase 1. It is a $C^\infty$ curve,
+and its curvature satisfies $|k|\le2.2$ everywhere; more precisely
+\[
+|k|\le2.2\ \text{ for }\alpha\in(0,\tfrac12]\cup[2\pi-\tfrac12,2\pi),\qquad|k|\le1.1\ \text{ for }\alpha\in[\tfrac12,2\pi-\tfrac12].
+\]
+Moreover, for $\alpha\in(0,\frac12]$, with $\STA,\STB$ of Lemma~\ref{lem:ST-front}:
+\[
+\tan(\psi-\beta)=\STB/\STA=:\STm\in(0,\,0.63\,\rho\,].
+\]
+Consequently $k_{\STcA}(t_0)\le2.2$ for every compact $\STcA\subset(0,2\pi)$ for the true front; and the same holds for the
+\emph{virtual} front on $\STcA\subset[\STas,2\pi-\STas]$, because at $t_0$ the virtual and the true front coincide on
+$[\STas,2\pi-\STas]$ together with the tangent vector $\partial_\theta x$ (as $A=\Pi/\rho$ along a trajectory with
+$\rho\ge\varepsilon$).
+\end{lemma}
+\begin{proof}
+\emph{Smoothness.} For $\alpha\in(0,2\pi)$ the true candidate stays at positive distance from Harry on $[0,t_0]$ (off the axis by
+$y'=vy/\rho$; $\alpha=\pi$ moves away), and the flow of the field $(x-P(t))/|x-P(t)|$ is $C^\infty$ there. By the reflection symmetry
+it suffices to treat $\alpha\in(0,\pi]$.
+
+\emph{Virtual front.} By Lemma~\ref{lem:ST-front}(e), $x_\alpha=S_\alpha$ on $[0,t_0]$ for $\alpha\in[\STas,2\pi-\STas]$, and for
+$\alpha$ in the open interval the trajectory stays in $\{\rho>\varepsilon\}$ (proof of Lemma~\ref{lem:ST-front}(e): the inequalities
+are strict for $\alpha\ne\STas$), where $F$ is the unit field. So the two flows agree near these labels, and
+$\partial_\theta x=\partial_\alpha S_\alpha$ at $t_0$ on $(\STas,2\pi-\STas)$: both solve the variational equation with $A=\Pi/\rho$
+along the same trajectory. The virtual front is $C^1$ in the label, so at the end labels its tangent is the one-sided tangent of the
+true front.
+
+\emph{Arm, $\alpha\in(0,\frac12]$.} Numbers: $\tau\le\tan(1/4)<0.2554$, $\cos\alpha>0.8775$, $c':=\cos\alpha-v\ge0.8675$,
+$1-v\ge0.99$, $1+\cos\alpha\ge1.8775$, $\sin\alpha\le0.4795$, $\tau/\sin\alpha=1/(1+\cos\alpha)\le0.5327$, $1+\tau^2\le1.0653$.
+By Lemma~\ref{lem:ST-front}(a), $g(\beta)\le g(\theta^*)\le1$, so
+\[
+\rho\ge g(\alpha)=(1+\cos\alpha)\,\tau^{1-v}.
+\]
+By Lemma~\ref{lem:ST-front}(b), $0<\STB\le\tau/(1-v)$, $0<v-\cos\beta<1+v$, and
+\[
+\textup{(L1)}\quad\STA\ge\frac{\rho c'}{\sin\alpha},\qquad\qquad
+\textup{(L2)}\quad\STA\ge\frac{g(\alpha)c'}{\sin\alpha}=c'\tau^{-v}\ge c'\ge0.8675 .
+\]
+The curve is $z(\alpha)=\rho e^{i\beta}$ (relative to $O$), with $\partial_\alpha z=(\STA+i\STB)e^{i\beta}$. So
+$\psi=\beta+\arctan\STm$ with $\STm=\STB/\STA>0$, $\partial_\alpha\psi=\partial_\alpha\beta+\partial_\alpha\STm/(1+\STm^2)$,
+$ds/d\alpha=(\STA^2+\STB^2)^{1/2}\ge\STA$, and $\partial_\alpha\beta=\STB/\rho$. Hence
+\begin{equation}\label{eq:ST-kappa}
+|k|\le\frac{\STB}{\rho\STA}+\frac{|\partial_\alpha\STm|}{\STA}
+\le\frac{\STm}\rho+\frac{|\partial_\alpha\STB|}{\STA^2}+\frac{\STB\,|\partial_\alpha\STA|}{\STA^3}.
+\end{equation}
+
+(1) By (L1) and $\sin\alpha=\tau(1+\cos\alpha)$, then $\rho\ge(1+\cos\alpha)\tau^{1-v}$:
+\[
+\frac{\STm}\rho=\frac{\STB}{\rho\STA}\le\frac{\tau\sin\alpha}{(1-v)c'\rho^2}=\frac{\tau^2(1+\cos\alpha)}{(1-v)c'\rho^2}
+\le\frac{\tau^{2v}}{(1-v)c'(1+\cos\alpha)}\le\frac1{0.99\cdot0.8675\cdot1.8775}<0.63 .
+\]
+(This also gives $\STm\le0.63\rho$.)
+
+(2) $\partial_\alpha\STB=\cos\beta\cdot\dfrac{\STB}\rho\cdot\dfrac\tau{1-v}+\sin\beta\,\dfrac{1+\tau^2}{2(1-v)}$. The first part,
+divided by $\STA^2$, is at most
+\begin{align*}
+\frac{\tau^2}{(1-v)^2\rho\STA^2}&\le\frac{\tau^2\sin^2\!\alpha}{(1-v)^2c'^2\rho^3}=\frac{\tau^4(1+\cos\alpha)^2}{(1-v)^2c'^2\rho^3}\\
+&\le\frac{\tau^{1+3v}}{(1-v)^2c'^2(1+\cos\alpha)}\le\frac{0.2554}{0.9801\cdot0.7525\cdot1.8775}<0.185 .
+\end{align*}
+The second part, divided by $\STA^2$, is at most $1.0653/(2\cdot0.99\cdot0.7525)<0.715$, by (L2).
+
+(3) $\partial_\alpha\STA$. With $(c'/\sin\alpha)'=-(1-v\cos\alpha)/\sin^2\!\alpha$ and $\partial_\alpha\rho=\STA$:
+\[
+\partial_\alpha\STA=\frac{\STA c'}{\sin\alpha}-\frac{\rho(1-v\cos\alpha)}{\sin^2\!\alpha}+\sin\beta\,\frac{\STB}\rho\,\frac\tau{1-v}
++(v-\cos\beta)\frac{1+\tau^2}{2(1-v)},
+\]
+and $\STA c'/\sin\alpha=\rho c'^2/\sin^2\!\alpha+(v-\cos\beta)\tau c'/((1-v)\sin\alpha)$, while
+$c'^2-1+v\cos\alpha=-\sin^2\!\alpha-vc'$. So
+\[
+\partial_\alpha\STA=-\rho-\frac{v\rho c'}{\sin^2\!\alpha}+\frac{(v-\cos\beta)\tau c'}{(1-v)\sin\alpha}
++\frac{\sin\beta\,\STB\,\tau}{(1-v)\rho}+\frac{(v-\cos\beta)(1+\tau^2)}{2(1-v)} .
+\]
+Call $Y_1,\dots,Y_5$ the absolute values of these five terms, each multiplied by $\STB/\STA^3$. Then
+\begin{align*}
+Y_1&=\frac{\rho\STB}{\STA^3}\le\frac{\sin\alpha}{c'}\cdot\frac{\STB}{\STA^2}\ \text{(L1)}\ \le\frac{\sin\alpha\,\tau}{(1-v)c'^3}
+\le\frac{0.4795\cdot0.2554}{0.99\cdot0.6528}<0.190;\\
+Y_2&=\frac{v\rho c'\STB}{\sin^2\!\alpha\,\STA^3}=v\cdot\frac{\rho c'}{\sin\alpha\,\STA}\cdot\frac{\STB}{\sin\alpha\,\STA^2}
+\le\frac{v\,(\tau/\sin\alpha)}{(1-v)c'^2}\le0.72\,v\le0.0072;\\
+Y_3&\le(1+v)\,\frac\tau{\sin\alpha}\cdot\frac{c'}{\STA}\cdot\frac{\STB}{(1-v)\STA^2}
+\le\frac{1.01\cdot0.5327\cdot0.2554}{0.99^2\cdot0.7525}<0.187;\\
+Y_4&\le\frac{\tau^3}{(1-v)^3\rho\STA^3}\le\frac{\tau^3\sin^3\!\alpha}{(1-v)^3c'^3\rho^4}=\frac{\tau^6(1+\cos\alpha)^3}{(1-v)^3c'^3\rho^4}\\
+&\le\frac{\tau^{2+4v}}{(1-v)^3c'^3(1+\cos\alpha)}\le\frac{0.0653}{0.9702\cdot0.6528\cdot1.8775}<0.055;\\
+Y_5&\le\frac{1.01\cdot1.0653\cdot0.2554}{2\cdot0.99^2\cdot0.6528}<0.215 .
+\end{align*}
+Summing in \eqref{eq:ST-kappa}: $|k|\le0.63+0.185+0.715+0.190+0.0072+0.187+0.055+0.215<2.2$.
+
+\emph{Middle, $\alpha\in[\frac12,\pi]$.} We claim that $|S_\alpha(t)-P(t)|\ge0.479$ on $[0,t_0]$. For $\alpha\in[\frac12,\frac\pi2]$:
+$y'=vy/\rho\ge0$, so $\rho\ge y\ge\sin\alpha\ge\sin\frac12$. For $\alpha\in[\frac\pi2,\pi]$: $X:=\operatorname{Re}S_\alpha$ satisfies
+$X'=v(X-t)/\rho\le0$ as long as $X\le t$, which holds initially ($X=\cos\alpha\le0$) and therefore always; so
+$X\le\cos\alpha\le0$, $|y|\ge\sin\alpha$, and $\rho^2=(t-X)^2+y^2\ge\cos^2\!\alpha+\sin^2\!\alpha=1$.
+At $t=0$ the front is the unit circle, $|k|=1$. The computation of Lemma~\ref{lem:B-1}(i),(iii) uses only $A=\Pi/\rho$, so it holds
+for the true flow wherever $\rho>0$ (there the true front is $C^\infty$, and the law is an identity):
+\[
+k_t=\frac v\rho(1-3\sin^2\!\phi)\,k+\frac v{\rho^2}\sin\phi\,(3\cos^2\!\phi-1),
+\]
+with $|1-3\sin^2\!\phi|\le2$ and $|\sin\phi\,(3\cos^2\!\phi-1)|=|\varsigma(2-3\varsigma^2)|\le1$ for
+$\varsigma=\sin\phi\in[-1,1]$. So $d|k|/dt\le4.18\,v|k|+4.36\,v$, and with $t_0\le1.0102$:
+\[
+|k(t_0)|\le(1+1.05)\,e^{4.23v}-1.05\le1.1 .
+\]
+
+\emph{Lipschitz constant.} A $C^2$ curve with $|k|\le2.2$ has $|\psi_b-\psi_a|\le2.2\,l(a,b)$.
+\end{proof}
+
+\begin{lemma}[Global geometry at $t_0$]\label{lem:ST-D2}
+Let $\delta\in(0,1]$, $v\le10^{-3}\delta$ and $\varepsilon\le1/20$. At time $t_0$, for the true front $\alpha\mapsto S_\alpha(t_0)$ of
+Phase 1 (lengths and chords in (b), (c) are those of this front):
+\begin{enumerate}
+\item[(a)] $\sigma(\alpha):=|\partial_\alpha S_\alpha(t_0)|\le1.52\,(\chi/2)^{-v}$ for all $\alpha\in(0,2\pi)$, where
+$\chi:=\min(\alpha,2\pi-\alpha)$; and $\sigma\le1.0022$ for $\chi\ge\frac12$.
+\item[(b)] $l_{t_0}(\STas,2\pi-\STas)\le6.82$.
+\item[(c)] For all labels $a<b$ in $[\STas,2\pi-\delta/2]$: $c(a,b;t_0)\ge\min\bigl(\tfrac2\pi\,l_{t_0}(a,b),\ 0.48\,\delta\bigr)$.
+\end{enumerate}
+Parts (a), (b) need only $v\le10^{-3}$ and their constants do not involve $\varepsilon$; the hypothesis $v\le10^{-3}\delta$ is used
+only in (c). By Lemma~\ref{lem:ST-front}(e), (b) is also a statement about the virtual front, and so is (c) whenever
+$\STas\le\delta/2$.
+\end{lemma}
+% The last sentence (which front) is a clarification added in typesetting: the source says "the front of Phase 1"; D1 and the
+% proof below are about the true front, and the transfer to the virtual front is Lemma ST-front(e) (see the report).
+\begin{proof}
+(a) For $\chi\ge\frac12$: by Lemma~\ref{lem:B-1}(i) for the true flow, with $w=|\partial_\alpha S_\alpha|$:
+$(\log w)_t=v\sin^2\!\phi/\rho\le v/0.479$ (proof of Lemma~\ref{lem:ST-D1}, middle) and $w(0)=1$, so
+$\sigma\le e^{1.0102v/0.479}\le1.0022\le1.52\,(\chi/2)^{-v}$. For $\alpha\in(0,\frac12]$: by Lemma~\ref{lem:ST-front}(a),
+$\cos\beta=-v-g(\beta)\tau^{1+v}\ge-10^{-3}-0.2554$ (as $g(\beta)\le1$), so $1+\cos\beta\ge0.7436$, $1-\cos\beta\ge1$ and
+$g(\beta)\ge0.7436^{(1+v)/2}\ge0.862$. Then
+\[
+\frac\rho{\sin\alpha}=\frac{g(\alpha)}{g(\beta)\sin\alpha}=\frac{\tau^{-v}}{g(\beta)}\le1.161\,\tau^{-v},\qquad
+\STA\le\frac\rho{\sin\alpha}+\frac{(1+v)\tau}{1-v}\le(1.161+0.257)\,\tau^{-v},
+\]
+$\rho\le2\tau^{1-v}/0.862\le0.594$, $\STm\le0.63\rho\le0.375$ (Lemma~\ref{lem:ST-D1}), and
+$\sigma=\STA(1+\STm^2)^{1/2}\le1.418\cdot1.068\,\tau^{-v}\le1.52\,(\alpha/2)^{-v}$, as $\tau\ge\alpha/2$.
+
+(b) Since $\int_0^\Delta1.52\,(\alpha/2)^{-v}d\alpha=1.52\cdot2^v\Delta^{1-v}/(1-v)\le1.523\,\Delta^{1-v}$,
+\[
+l_{t_0}(\STas,2\pi-\STas)\le2\int_0^{1/2}1.52\,(\alpha/2)^{-v}d\alpha+1.0022\,(2\pi-1)\le2\cdot1.523\cdot(1/2)^{1-v}+5.295\le6.82 .
+\]
+
+(c) Let $l:=l_{t_0}(a,b)$. The tangent angle is $2.2$-Lipschitz on $[a,b]$ (Lemma~\ref{lem:ST-D1}). If $l\le\pi/2.2$
+($=1.428\ldots$), Lemma~\ref{lem:ST-D0}(c) gives $c\ge(2/\pi)l$. If $l>\pi/2.2$, then $\Delta:=b-a\ge\frac12$. Indeed, if
+$\Delta<\frac12$, then either $[a,b]\subset(0,\pi]$ or $[a,b]\subset[\pi,2\pi)$, and since the bound in (a) is decreasing in $\chi$,
+$l\le\int_0^\Delta1.52\,(x/2)^{-v}dx\le1.523\cdot(1/2)^{1-v}<0.77$; or $\pi\in(a,b)$, where $\chi\ge\pi-\frac12$ and
+$l\le1.0022\cdot\frac12$; both are $<1.428$. Every candidate has speed $v$, so $|S_\alpha(t_0)-e^{i\alpha}|\le vt_0\le1.002\,v$ and
+\[
+c\ge|e^{ib}-e^{ia}|-2.004\,v=2\sin(\Delta/2)-2.004\,v\qquad\text{with }\tfrac12\le\Delta\le2\pi-\delta/2,
+\]
+i.e.\ $2\sin(\Delta/2)\ge2\sin(\delta/4)\ge0.4948\,\delta$ ($\delta/4\le\frac14$, and $\sin x\ge0.9896\,x$ there). With
+$v\le10^{-3}\delta$: $c\ge0.4948\,\delta-0.002004\,\delta\ge0.49\,\delta\ge0.48\,\delta$.
+\end{proof}
+
+\subsection{The connector creates no curvature ahead}
+
+\begin{lemma}[Connector]\label{lem:ST-D3}
+Let $\delta\in(0,1]$, $v\le10^{-3}\delta$, $\varepsilon\le\delta^2/6400$, consider the start S, and let
+$\STcA:=[\STas,2\pi-\delta/2]$ (labels). Then:
+\begin{enumerate}
+\item[(a)] $x_{\STas}(t)=P(t)+D(t)u$ on $[t_0,\Bts]$ with $D'=-1+vf(D)$, $D(t_0)=\STrs$;
+$\Bts-t_0\le\STrs/(1-v)\le1.402\,\varepsilon$; and $P(\Bts)=x_{\STas}(\Bts)$.
+\item[(b)] $l_t(a,b)\le e^{3v}\,l_{t_0}(a,b)$ for all labels $a<b$ and all $t\in[t_0,\Bts]$.
+\item[(c)] $k_{\STcA}(t)\le2.2+49\,v\le2.25$ for all $t\in[t_0,\Bts]$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\emph{Preliminary: $\STas\le2.1\,\varepsilon$.} Since $\STas<\pi/2$,
+$\tan^{1-v}(\STas/2)=g(\STas)/(1+\cos\STas)\le\varepsilon g_{\max}\le1$, so
+\begin{equation}\label{eq:ST-as}
+\STas\le2\tan(\STas/2)\le2(\varepsilon g_{\max})^{1/(1-v)}\le2\varepsilon g_{\max}\le2.1\,\varepsilon
+\end{equation}
+($\log g_{\max}\le v^2$). In particular $\STas\le\frac12$ and $\STas\le\delta/2$, so $\STcA\subset[\STas,2\pi-\STas]$, and on
+$\STcA$ the virtual front at $t_0$ is the true one, with its tangent (Lemma~\ref{lem:ST-D1}).
+% In the source this computation is in the proof of Theorem D, item 1. It is moved here because the proof of (c) already
+% needs alpha_s <= 1/2 (to use the bound on m at alpha_s) and alpha_s <= delta/2 (to have virtual = true on the arc A at t_0).
+
+(a) The ansatz solves $x'=vF(x-P)$ (as $F(Du)=f(D)u$ and $P'=u$) with the right initial value; conclude by uniqueness
+(Lemma~\ref{lem:B-VC}(a)). $D'\le-(1-v)$, so $D$ reaches $0$ at a time $\Bts\le t_0+\STrs/(1-v)$, and $\STrs\le1.4\,\varepsilon$ by
+Lemma~\ref{lem:ST-front}(f).
+
+(b) By Lemma~\ref{lem:B-2}(i) and Lemma~\ref{lem:B-V}(ii), $l'=v\int T\cdot AT\,ds\le(2v/\varepsilon)\,l$; and
+$2\cdot1.402\,v\le3v$.
+
+(c) \emph{Step 1: the pair inequality.} Fix $t\in[t_0,\Bts]$ and write $k:=k_{\STcA}(t)<\infty$ (Lemma~\ref{lem:ST-D0}(b)).
+Parametrise the arc by its arclength $s$ at time $t$. The function
+\[
+\eta(s):=\STG(\rho)\sin\phi\cos\phi=\frac{(T\times r)(T\cdot r)}{\rho\,\STme(\rho)^2}
+\]
+is Lipschitz in $s$: it is a Lipschitz function of $(r,T)$ (also through $\rho=0$, being homogeneous of degree $1$ in $r$ inside
+the disc, and through $\rho=\varepsilon$, where $\STG$ is Lipschitz), and $r$, $T$ are Lipschitz in $s$. By
+Lemma~\ref{lem:ST-D0}(a), $\psi_t=-v\eta$, and for a.e.\ $s$
+\[
+\partial_s\eta=\STG'(\rho)\cos\phi\cdot\sin\phi\cos\phi+\STG(\rho)\cos2\phi\cdot\Bigl(-\frac{\sin\phi}\rho-\partial_s\psi\Bigr),
+\]
+because $\partial_s\rho=T\cdot\rhat=\cos\phi$, $\partial_s\arg r=-\sin\phi/\rho$, and $\phi=\arg r-\psi$. (Justification at the
+exceptional points: the curve is injective by Lemma~\ref{lem:B-VC}(b), so $r(s)=0$ for at most one $s$; $\STG$ is $C^1$ except at
+$\rho=\varepsilon$, where it is Lipschitz; on the set $\{s:\rho(s)=\varepsilon\}$ the points with $\partial_s\rho\ne0$ are isolated,
+and at the others $\rho(s')-\varepsilon=o(|s'-s|)$, so $\STG(\rho(\cdot))$ has derivative $0=\STG'\cdot\partial_s\rho$ there for
+either one-sided value of $\STG'$.) Since $|\STG'|\le1/\STme^2$, $\STG/\rho=1/\STme^2$, $\STG\le1/\STme$ and
+$|\partial_s\psi|\le k$ a.e.,
+\[
+|\partial_s\eta|\le\frac{2|\sin\phi|}{\STme(\rho)^2}+\frac k{\STme(\rho)}\qquad\text{a.e.}
+\]
+Hence for labels $a<b$ in $\STcA$:
+\begin{gather*}
+\Bigl|\frac d{dt}(\psi_b-\psi_a)\Bigr|=v\,|\eta(b)-\eta(a)|\le v\,l_t(a,b)\,\Xi(t),\\
+\Xi(t):=2\Sigma(t)+\frac{k_{\STcA}(t)}\varepsilon,\qquad
+\Sigma(t):=\sup_{\STcA,\ \rho>0}\frac{|\sin\phi|}{\STme(\rho)^2}\le\frac1{\varepsilon^2}.
+\end{gather*}
+Let $K(t):=\sup_{[t_0,t]}k_{\STcA}$, which is non-decreasing, with $K(t_0)\le2.2$ by Lemma~\ref{lem:ST-D1}. Integrating, and using
+that $l$ is non-decreasing in time (Lemma~\ref{lem:B-VC}), for $t_0\le t'\le t\le\Bts$ and any bound $\bar\Sigma\ge\Sigma$:
+\begin{equation}\label{eq:ST-star}
+|\psi_b-\psi_a|(t)\le l_t(a,b)\Bigl[k_{\STcA}(t')+v\int_{t'}^t\Bigl(2\bar\Sigma(\xi)+\frac{K(\xi)}\varepsilon\Bigr)d\xi\Bigr].
+\end{equation}
+With $\bar\Sigma=1/\varepsilon^2$, \eqref{eq:ST-star} shows $K(t)\le K(t')+C_K(t-t')$ with
+$C_K:=v(2/\varepsilon^2+K(\Bts)/\varepsilon)$, which is finite by Lemma~\ref{lem:ST-D0}(b): $K$ is continuous.
+
+\emph{Step 2: a bound for $\Sigma$ while $K\le4$.} Let $t_1\in[t_0,\Bts]$ with $K(t_1)\le4$, and $D:=D(t_1)\le\STrs\le1.4\,\varepsilon$.
+Let $\STps(t):=\arg u-\psi_{\STas}(t)$ be the angle $\phi$ at the label $\STas$, where $\rhat=u$ is constant in time. It obeys
+$\STps'=-\psi_t=v\,\STG(D)\sin\STps\cos\STps$, so
+\[
+|\STps(t_1)|\le|\STps(t_0)|\,e^{1.402v}\qquad
+\bigl(\text{since }|\STps'|\le v\,\STG(D)\,|\STps|\le(v/\varepsilon)|\STps|\text{ and }t_1-t_0\le1.402\,\varepsilon\bigr),
+\]
+and $|\STps(t_0)|=\arctan\STm(\STas)\le0.63\,\STrs\le0.882\,\varepsilon$ (Lemma~\ref{lem:ST-D1}, as $\STas\le\frac12$). So
+$|\STps(t_1)|\le0.9\,\varepsilon\le\frac12$. Now let $a\in\STcA$, $a>\STas$, and $l:=l_{t_1}(\STas,a)$; all quantities are taken at time
+$t_1$ and $K:=K(t_1)$.
+
+\emph{Near, $l\le1/8$.} Every tangent $T_s$, $s\in[\STas,a]$, makes with $u$ an angle
+$\le|\psi_s-\psi_{\STas}|+|\STps|\le4l+\frac12\le1$. So
+\[
+(x_a-x_{\STas})\cdot u=\int_{\STas}^aT\cdot u\,ds\ge l\cos1\ge0.54\,l,
+\]
+and since $r_a=(x_a-x_{\STas})+Du$: $\rho_a\ge r_a\cdot u\ge D+0.54\,l$. Thus $D\le\rho_a$ and $l\le1.86\,\rho_a$. Further
+$p_a=T_a^\perp\cdot(x_a-x_{\STas})+D\,T_a^\perp\cdot u$ with
+\[
+|T_a^\perp\cdot(x_a-x_{\STas})|\le\int_{\STas}^a|\sin(\psi_a-\psi_s)|\,ds\le\frac{Kl^2}2\qquad\text{and}\qquad
+|T_a^\perp\cdot u|\le Kl+|\STps| .
+\]
+So
+\[
+|\sin\phi_a|=\frac{|p_a|}{\rho_a}\le K\Bigl(\frac{1.86^2}2+1.86\Bigr)\rho_a+|\STps|\le3.6\,K\rho_a+0.9\,\varepsilon
+\le(3.6K+0.9)\,\STme(\rho_a),
+\]
+and $|\sin\phi_a|/\STme(\rho_a)^2\le(3.6K+0.9)/\varepsilon$. The same bound holds at $a=\STas$ (if $\rho>0$ there:
+$|\sin\phi|\le0.9\,\varepsilon$).
+
+\emph{Far, $l>1/8$.} By (b), $l_{t_0}(\STas,a)\ge e^{-3v}/8\ge0.124$. By Lemma~\ref{lem:ST-D2}(c), the chord at $t_0$ satisfies
+$c(\STas,a;t_0)\ge\min(0.0789,\ 0.48\,\delta)\ge0.078\,\delta$, and chords do not decrease (Lemma~\ref{lem:B-VC}(b)). So
+\[
+\rho_a(t_1)\ge0.078\,\delta-D\ge0.078\,\delta-1.4\,\varepsilon\ge0.07\,\delta\qquad\text{and}\qquad
+\frac{|\sin\phi_a|}{\STme(\rho_a)^2}\le\frac{205}{\delta^2}.
+\]
+
+Hence
+\[
+\Sigma(t_1)\le\frac{3.6\,K(t_1)+0.9}\varepsilon+\frac{205}{\delta^2}\qquad\text{whenever }K(t_1)\le4 .
+\]
+
+\emph{Step 3: bootstrap.} Let $t^*:=\sup\{t_1\le\Bts:K(t_1)\le4\}$, which is $>t_0$ by continuity. For $t<t^*$, \eqref{eq:ST-star}
+with $t'=t_0$ and Step 2 give
+\[
+K(t)\le2.2+v(t-t_0)\Bigl[\frac{2(3.6\cdot4+0.9)+4}\varepsilon+\frac{410}{\delta^2}\Bigr]
+\le2.2+1.402\,v\cdot34.6+\frac{575\,v\varepsilon}{\delta^2}\le2.2+49\,v\le2.25
+\]
+(using $\varepsilon\le\delta^2/6400$ and $v\le10^{-3}$). By continuity $K(t^*)\le2.25<4$, so $t^*=\Bts$.
+\end{proof}
+
+\subsection{The start hypothesis holds for the start S}
+
+\begin{theorem}[ST: the start S satisfies \textup{(ST)}]\label{thm:ST}
+Let $\delta\in(0,1]$,
+\[
+R:=\min\Bigl(\frac1{792},\frac\delta{100}\Bigr),\qquad\kappa:=\frac12,\qquad v\le10^{-3}\delta,\qquad
+\varepsilon\le\varepsilon_0:=\min\Bigl(\frac{\delta^2}{6400},\frac R{64}\Bigr).
+\]
+For the start S:
+\begin{enumerate}
+\item[1.] \emph{(Seen.)} Every direction $\alpha$ with $|\alpha|\le\STas$ is seen by time $t_0$; and $\STas\le2.1\,\varepsilon$.
+\item[2.] \emph{(Leg start.)} $\Bts\le t_0+1.402\,\varepsilon\le1.0011$ and $P(\Bts)=x_{\STas}(\Bts)$;
+$|x_{\STas}(t_0)-P(t_0)|=\STrs\le1.4\,\varepsilon$. (The bound $\Bts\le1.0011$ uses $\varepsilon\le R/64$, not only
+$\varepsilon\le\delta^2/6400$.)
+\item[3.] \emph{\textup{(IC1)}.} At $\Bts$, on the arc $\STcA=[\STas,2\pi-\delta/2]$ the tangent angle of the virtual front is
+$2.25$-Lipschitz in arclength, and
+\[
+E(a,b;\Bts)\le\frac{2.25^2}{24}\,\lambda^3\le\kappa^2\lambda^3\qquad\text{for all pairs in $\STcA$ with }\lambda:=l_{\Bts}(a,b)\le1.39
+\]
+(in particular for $\lambda\le32R$).
+\item[4.] \emph{\textup{(IC2)}.} $c(a,b;\Bts)\ge16R$ for all pairs in $\STcA$ with $\lambda>32R$.
+\item[5.] \emph{\textup{(IC3)}.} $\kappa R\le1/1584$ and $\varepsilon\le R/64$.
+\item[6.] \emph{(Lengths.)} $l_{\Bts}(\STas,2\pi-\STas)\le6.85$ and $l_{\Bts}(\STas,2\pi)\le6.9$.
+\end{enumerate}
+Hence the start hypothesis \textup{(ST)} of Section~\ref{sec:bulk} holds at the leg start $\Bts=t_{\Bjs}$, with base $a_{\Bjs}=\STas$, on
+the arc $[\STas,2\pi-\delta/2]$, with constants that do not depend on $\varepsilon$.
+
+\emph{Labels not covered by \textup{(ST)}:} $[2\pi-\delta/2,2\pi]$. Of these, $(2\pi-\STas,2\pi]$ are already seen (item 1), and
+$[2\pi-\delta/2,2\pi-\STas]$ is the arm left behind, on which the front is the mirror image of the right arm \textbf{at time $t_0$}
+(Lemma~\ref{lem:ST-D1} and Lemma~\ref{lem:ST-front}(g): at time $t_0$, curvature $\le2.2$, $|\tan(\psi-\beta)|\le0.63\,\rho$, and no
+point within $\varepsilon$ of $O$). This is \textbf{not} claimed at $\Bts$: during the connector the inner end of the left arm
+acquires curvature $\approx v^2/(2\varepsilon)$, with total turning $O(v^2)$ (a numerical finding, Remark~\ref{rem:ST-status}).
+\end{theorem}
+\begin{proof}
+The hypotheses of Lemmas~\ref{lem:ST-front}(f), \ref{lem:ST-D1}, \ref{lem:ST-D2}, \ref{lem:ST-D3} hold ($v\le10^{-3}$,
+$\varepsilon\le R/64<1/20$).
+
+1. Lemma~\ref{lem:ST-front}(e) and \eqref{eq:ST-as}.
+
+2. Lemma~\ref{lem:ST-D3}(a) and Lemma~\ref{lem:ST-front}(f); $t_0\le1.001002$ and $1.402\,\varepsilon\le1.402/50688<2.8\cdot10^{-5}$
+(as $\varepsilon\le R/64\le1/50688$).
+
+3. Lemma~\ref{lem:ST-D3}(c) and Lemma~\ref{lem:ST-D0}(c): $2.25\,\lambda\le\pi$ for $\lambda\le1.39$, and
+$2.25^2/24<0.211\le\frac14$.
+
+4. Let $\lambda>32R$. By Lemma~\ref{lem:ST-D3}(b), $l_{t_0}(a,b)\ge e^{-3v}\lambda\ge0.997\cdot32R$; by Lemma~\ref{lem:B-VC}(b) and
+Lemma~\ref{lem:ST-D2}(c) (the virtual front at $t_0$ is the true one on $\STcA$, as $\STas\le\delta/2$),
+\[
+c(a,b;\Bts)\ge c(a,b;t_0)\ge\min(0.634\cdot0.997\cdot32R,\ 0.48\,\delta)\ge\min(20.2R,\ 48R)\ge16R .
+\]
+
+5. $R/2\le1/1584$.
+
+6. Lemma~\ref{lem:ST-D2}(b) and Lemma~\ref{lem:ST-D3}(b): $6.82\,e^{3v}\le6.85$. For labels $\theta\in(2\pi-\STas,2\pi)$: on
+$[0,t_\varepsilon]$, $t_\varepsilon=(1-\varepsilon)/(1-v)$, the candidate is the true one and $\rho_\theta\ge1-(1-v)t\ge\varepsilon$ (as in
+Lemma~\ref{lem:B-C}(1), whose argument holds for every $1$-Lipschitz path). By Lemma~\ref{lem:B-1}(i) and Lemma~\ref{lem:B-V}(ii),
+$(\log|\partial_\theta x|)_t\le v\,a^*(\rho)$, which integrates to $\le\mu\log(1/\varepsilon)$ on $[0,t_\varepsilon]$ ($\mu=v/(1-v)$) and
+to $\le(2v/\varepsilon)\cdot2.41\,\varepsilon$ on $[t_\varepsilon,\Bts]$ (as $\Bts-t_\varepsilon\le\varepsilon/(1-v)+1.402\,\varepsilon$).
+So, by \eqref{eq:ST-as},
+\[
+l_{\Bts}(2\pi-\STas,2\pi)\le\STas\,\varepsilon^{-\mu}e^{4.82v}\le2\,g_{\max}^{1/(1-v)}e^{4.82v}\,\varepsilon\le2.02\,\varepsilon ,
+\]
+and $6.85+2.02\,\varepsilon\le6.9$.
+
+\emph{\textup{(ST)}.} The base is $a_{\Bjs}=\STas$ with $P(\Bts)=x_{\STas}(\Bts)$ (item 2); the arc is $[a_{\Bjs},b^*]$ with
+$b^*=2\pi-\delta/2$, labelled by its arclength at $\Bts$, so that the label length of a pair is $\lambda=l_{\Bts}(a,b)$; (IC1) holds
+for all $\lambda\le1.39$, which contains $[\varepsilon/2,32R]$ (item 3); (IC2) and (IC3) are items 4 and 5.
+\end{proof}
+
+\begin{corollary}[Corollary~\ref{cor:M} with the start S; \textbf{conditional on \textup{(T)}}]\label{cor:ST}
+Let $\delta\in(0,1]$, $K_T\ge0$ and $v_1>0$ be absolute constants, $R:=\min(1/792,\delta/100)$ and
+$\varepsilon_0:=\min(\delta^2/6400,R/64)$. \textbf{Suppose} that for all $v\le v_1$ and $\varepsilon\le\varepsilon_0$ the tip
+hypothesis \textup{(T)} of Corollary~\ref{cor:M} holds for the path ``start S, then the legs of construction C from the base
+$\STas$'': for every leg $j+1>\Bjs$ and every $t$ in it,
+\[
+K_{\mathrm{tip}}(t)=\int_{\max(a_{j+1},\,2\pi-\delta)}^{2\pi}T\cdot AT\,ds\le K_T ,
+\]
+where $K_{\mathrm{tip}}$ is taken for the \emph{virtual} front of Section~\ref{sec:bulk} and all labels up to $2\pi$, i.e.\ including the
+already-seen labels $(2\pi-\STas,2\pi]$. Put
+\[
+\BLs:=6.9,\qquad K^*:=32+\frac1{1960}+\frac{32\BLs}R+K_T,\qquad
+v_0:=\min\Bigl(v_1,\ 10^{-12},\ \frac{10^{-6}R}{29.6},\ \frac1{2K^*}\Bigr).
+\]
+\textbf{Then} for $v\le v_0$ and $\varepsilon\le\varepsilon_0$ every direction is seen by time $1.0011+2.1\cdot6.9<15.5$, which does
+not depend on $\varepsilon$; and for these $v$ there is a path of speed at most $1$ that catches every direction exactly, by time
+$15.5$ (Lemma~\ref{lem:A41}).
+\end{corollary}
+\begin{proof}
+This is Corollary~\ref{cor:M} in its general-path form (its last clause: ``any $1$-Lipschitz path fixed in advance such that
+\dots''), with $\kappa=1/2$, $R$ as above, $\BTs=1.0011$ and $\BLs=6.9$. Theorems~\ref{thm:R} and~\ref{thm:Bulk} are stated for
+construction C, but their proofs use the path only on $[\Bts,\infty)$: Lemma~\ref{lem:B-VC}, Lemma~\ref{lem:B-C}(0),(2),(3),(4) for the
+legs after $\Bjs$, and \textup{(ST)} (Remark~\ref{rem:B-R}(2)). We check the hypotheses of that clause. The path has speed $\le1$, is
+fixed in advance, and follows the legs of construction C from the leg start $\Bts$ on, with $P(\Bts)=x_{\STas}(\Bts)$ and
+$\Bts\le\BTs$ (Theorem~\ref{thm:ST}, item 2). Every label in $[0,a_{\Bjs}]=[0,\STas]$ has been seen by $\Bts$ (item 1).
+$R_{\Bjs}=l_{\Bts}(\STas,2\pi)\le\BLs$ (item 6). \textup{(ST)} holds on $[a_{\Bjs},2\pi-\delta/2]$ (items 3--5).
+$a_{\Bjs}=\STas\le2.1\,\varepsilon<2\pi-\delta$, and $\varepsilon_0\le\min(\delta,R/64)$. Theorem~\ref{thm:ST} needs
+$v\le10^{-3}\delta$; this follows from $v\le10^{-6}R/29.6\le10^{-8}\delta/29.6$. Finally $4\BLs+2=29.6$, so $v_0$ and $K^*$ are those
+of Corollary~\ref{cor:M}, and $\BTs+2.1\BLs=15.491$.
+\end{proof}
+
+\begin{remark}\label{rem:ST-more}
+(1) Theorem~\ref{thm:ST} gives more than \textup{(ST)}: a pointwise bound on the Lipschitz constant of the tangent (hence (IC1) at all
+scales $\lambda\to0$, not only for $\lambda\ge\varepsilon/2$), on an arc that reaches to within $\delta/2$ of the tip.
+(2) The restriction $\varepsilon\le\delta^2/6400$ (instead of $\varepsilon\lesssim\delta$) is used only in the ``far'' case of Step 2
+in the proof of Lemma~\ref{lem:ST-D3}.
+(3) The start S has no hidden offset: $t_0=1/(1-v)$, $\STas$, $u$ and $\Bts$ are exact numbers determined by $(v,\varepsilon)$,
+Lemma~\ref{lem:ST-D1} is applied at exactly $t_0$, and Lemma~\ref{lem:ST-D3}(a) is an exact ansatz. The connector runs along the arm
+itself (aiming error $|\STps|\le0.9\,\varepsilon$), which is why it costs only $O(v)$ in the Lipschitz constant.
+\end{remark}
+
+\begin{remark}[Status]\label{rem:ST-status}
+\emph{Refereed.} Lemmas~\ref{lem:ST-front}--\ref{lem:ST-D3}, Theorem~\ref{thm:ST} and Corollary~\ref{cor:ST} (as a conditional
+statement) were checked by two independent referees; the reports are \texttt{referee-RP6d-1.md} and
+\texttt{referee-RP6d-2.md} (Lemma~\ref{lem:ST-front} was read in full by the first referee and in its parts (a), (b), (e), (f),
+(g) by the second). Neither found
+a false statement or a gap in them, and all their corrections are incorporated.
+A few passages were changed in typesetting and were seen by neither referee
+in this form (the proof of Lemma~\ref{lem:ST-front}(g), the paragraph `Virtual front' in the proof of
+Lemma~\ref{lem:ST-D1}, the last sentence of Lemma~\ref{lem:ST-D2}, the preliminary of the proof of
+Lemma~\ref{lem:ST-D3}, the wording of \textup{(T)} in Corollary~\ref{cor:ST}, Remark~\ref{rem:ST-more}(3), and one added line in
+the proof of Lemma~\ref{lem:ST-D0}(a)); they were checked in a
+separate audit of every difference between the typeset text and the refereed text (report \texttt{audit-B.md}: no difference is
+false or leaves a gap). The two items of this section that the main theorem uses, Lemma~\ref{lem:ST-D0}(a) and
+$g_{\max}\le e^{v^2}$, were also covered by the end-to-end audit of the typeset chain (report \texttt{audit-A.md}; see
+Remark~\ref{rem:T2-status}). The results on the arm left behind that appear in the
+team's reports were written for a different start and are not part of this paper.
+
+\emph{NUMERICAL (evidence only).} Both referees simulated the start S with independent codes, the closed forms and the connector
+being evaluated in $34$- to $40$-digit arithmetic (some runs of the second report with $\varepsilon\ge10^{-7}$ are in double precision),
+for $v$ from $10^{-13}$ to $10^{-2}$ and $\varepsilon$ from $10^{-2}$ down to $10^{-12}$; some of these values lie outside the
+hypotheses of Theorem~\ref{thm:ST} and were included for the trend. On the arc $[\STas,2\pi-\delta/2]$ at $\Bts$ they found: Lipschitz
+constant of the tangent between $0.991$ and $1.000$, against the proved bound $2.25$; $\sup E/\lambda^3\le0.0417$ (about $1/24$),
+against the proved $0.211$ and the required $\kappa^2=1/4$; chords $\ge32R$ for $\lambda>32R$, against the required $16R$; a change of
+the slope of $\psi$ against arclength during the connector of at most $0.5\,v$ (first report), against the proved $49\,v$; and no
+trend in $\varepsilon$.
+
+\emph{NUMERICAL finding on the arm left behind.} The second referee observed that after the connector the arm left behind has
+curvature $\approx v^2/(2\varepsilon)$ at its inner end (for example $413$ at $v=10^{-3}$, $\varepsilon=10^{-9}$), with total turning
+$O(v^2)$. So the Lipschitz constant of the tangent on the left arm at $\Bts$ is not uniform in $\varepsilon$; the bound $2.2$ of
+Lemma~\ref{lem:ST-D1} on that arm is a statement at time $t_0$ only. This does not affect \textup{(ST)}, whose arc ends at
+$2\pi-\delta/2$, but a proof of \textup{(T)} cannot start from a curvature bound on the left arm at $\Bts$.
+
+\emph{What remains for the route through Corollary~\ref{cor:ST}.} Exact capture at small $v$ is proved by a different route
+(Corollaries~\ref{cor:Exact} and~\ref{cor:Exact2}): the main theorems (Theorems~\ref{thm:Main} and~\ref{thm:Main2}) use the tangential start of Section~\ref{sec:touch}, not
+the head-on start S, so \textup{(T)} is no longer needed for them. For the head-on start, i.e.\ for Corollary~\ref{cor:ST}, only
+hypothesis \textup{(T)} remains, and it is still open: a bound, uniform in
+$\varepsilon$, for $K_{\mathrm{tip}}$ on the labels $[2\pi-\delta,2\pi]$ for all times after $\Bts$. This concerns the arm left behind,
+including the final stretch of the sweep, when the base itself is on that arm and $K_{\mathrm{tip}}$ is the full quantity
+$\tilde K$ of Theorem~\ref{thm:R}; and it includes the already-seen labels $(2\pi-\STas,2\pi]$ of the virtual front. \textup{(T)} is
+\textbf{not} proved, so Corollary~\ref{cor:ST} gives no unconditional range of $v$.
+\end{remark}

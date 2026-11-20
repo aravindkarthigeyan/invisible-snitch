@@ -1,0 +1,809 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,graphicx,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}\newtheorem{remark}{Remark}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\rhat}{\hat r}
+\title{The invisible Snitch: proved results}
+\author{Notes prepared with Claude (Anthropic)}
+\date{19 November 2026 (extends the notes of 18 November 2026)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+These notes collect what has been proved about the pursuit problem posed in the video
+\emph{The Invisible Golden Snitch Riddle} (channel DON'T PANIC MATH) and in the author's two notes
+\emph{Golden Snitch -- UNSOLVED} and \emph{Epsilon zero results}.
+The general question, whether a faster pursuer can always catch the Snitch (for every $v<1$, or only below some threshold),
+is still \textbf{open}.
+\emph{Main result:} for every vision radius $\varepsilon>0$ and every $v\le v_0=6\cdot10^{-5}$, an explicit path fixed in
+advance sees every direction by time $10.13\,d$; neither $v_0$ nor the time depends on $\varepsilon$
+(Theorem~\ref{thm:Main2}). Consequently, for every $v\le v_0$ a single path of speed at most $1$ catches every direction exactly
+($\varepsilon=0$) by time $10.13\,d$ (Corollary~\ref{cor:Exact2}). This improves the earlier range $v_0=4\cdot10^{-51}$, with time
+$19.69\,d$ (Theorem~\ref{thm:Main} and Corollary~\ref{cor:Exact}, the first unconditional exact-capture result for this problem in
+these notes), for the same path and by the same method, with optimised constants. The constant $v_0$ is small because the
+near-pair estimate of the proof is wasteful; the method cannot go much beyond $v\approx10^{-4}$ (a numerical estimate, not
+proved). Numerical experiments suggest that the same construction works up to $v\approx0.2$, but nothing is proved beyond $v_0$.
+\emph{Other unconditional results:} for vision radius $\varepsilon>0$, a finite explicit path of speed exactly $1$ sees every
+direction by time $8d$ whenever $v\le\min\{10^{-4},((\varepsilon/d)/(403+210\log(3.34d/\varepsilon)))^{1/2}\}$,
+improving the earlier range $v\lesssim\varepsilon$ to $v\lesssim\sqrt{\varepsilon}$ up to a logarithm (Theorem~\ref{thm:D1}); a path fixed in
+advance sees every direction by time $14.07d$ whenever $v\le1/(22\log(d/\varepsilon)+28)$, so the range shrinks only logarithmically
+and the time bound does not depend on $\varepsilon$ (Theorem~\ref{thm:D2}), while an independent construction allows
+$v\le0.115/(\log(d/\varepsilon)+7.5)$ for $\varepsilon\le0.1d$, by time $22.8d$ (Theorem~\ref{thm:D3}); and for every path of
+speed at most $1$, exact capture of every direction needs time at least
+$\max\{d/(1-v)+2\pi d/(1-v)^{3/2},\ (1+2\pi)d/(1-v)+2vd/(1-v)^2\}$, with an analogue for $\varepsilon>0$
+(Section~\ref{sec:constraints}). Also: no two candidates are ever caught at the same instant, the catchable set of starting points has zero
+area for every path, and a logarithmic spiral from the origin catches at most one direction.
+\emph{Conditional results:} exact capture for every $v<v_1\approx0.4748$ (beyond the range $v\le6\cdot10^{-5}$ of
+Corollary~\ref{cor:Exact2}), with an explicit time bound, provided one hypothesis on
+the end phase of a dyadic discrete chase holds (Theorems~\ref{thm:B2}, \ref{thm:A23}, \ref{thm:A35}); the earlier angle hypothesis (H) is
+proved up to that end phase and shown to be false for some finite direction sets. A linear analysis explains the numerical
+instabilities at $v=1/2$ and $v\approx0.78$ as properties of the discretisations.
+\emph{Checking:} every result added since the first version was checked by at least one independent referee or audit, and the
+main theorems by two referees; each link of the chain behind Theorem~\ref{thm:Main} was checked by two independent referees, and
+the chain as typeset by two further audits (Remark~\ref{rem:T2-status}). Each new piece of the chain behind
+Theorem~\ref{thm:Main2} (Sections~\ref{sec:Estar}, \ref{sec:HTp}, \ref{sec:main2}) was checked by two independent referees, the
+assembly with the older core; the assembly's use of the optimised core, its new lemma and the final constants were checked by two
+audits (Remark~\ref{rem:T3-status}). Section~\ref{sec:open} states what is missing.
+\end{abstract}
+
+\section{Formulation}
+We use the following normalisation (the author uses the reciprocal one).
+\begin{itemize}
+\item Harry's position is $H(t)\in\R^2$ with $H(0)=0$ and $|H'(t)|\le 1$.
+\item The Snitch has constant speed $v\in(0,1)$ and always moves directly away from Harry:
+\begin{equation}\label{eq:snitch}
+S'(t)=v\,\frac{S(t)-H(t)}{|S(t)-H(t)|},\qquad S(0)=d\,(\cos\alpha,\sin\alpha).
+\end{equation}
+\item Harry knows $d>0$ but not $\alpha\in[0,2\pi)$, and never sees the Snitch unless it is within his vision radius
+$\varepsilon\in[0,d)$. His path is therefore fixed in advance.
+\item Candidate $\alpha$ is \emph{caught} if $S_\alpha(t)=H(t)$ for some $t$, and \emph{seen} if
+$|S_\alpha(t)-H(t)|\le\varepsilon$ for some $t$. With $\varepsilon>0$ Harry wins once the Snitch is seen;
+with $\varepsilon=0$ he must catch it.
+\end{itemize}
+Write $r=S-H$, $\rho=|r|$, $\rhat=r/\rho$. If $H$ has heading $u=H'$ with $|u|=1$, let $\beta\in(-\pi,\pi]$ be the angle of
+$r$ measured from $u$. The \emph{wavefront} $\Gamma(t)$ is the set of positions $S_\alpha(t)$ of candidates not yet caught.
+Since \eqref{eq:snitch} is invariant under $(S,H,t)\mapsto(\lambda S,\lambda H,\lambda t)$, one may take $d=1$.
+
+\section{Exact integrals for a straight run}
+\begin{proposition}\label{prop:integrals}
+Suppose $H$ moves with constant unit velocity $u$ on a time interval, and a candidate satisfies $\rho>0$ there. Then
+\begin{align}
+\rho' &= v-\cos\beta,\qquad \rho\,\beta'=\sin\beta, \label{eq:polar}\\
+h&:=r\cdot u+v\rho=\rho(\cos\beta+v)\quad\text{satisfies}\quad h'=-(1-v^2), \label{eq:h}\\
+C&:=\frac{\rho\,\sin|\beta|}{\tan^{v}(|\beta|/2)}\quad\text{is constant, for } 0<|\beta|<\pi. \label{eq:C}
+\end{align}
+\end{proposition}
+\begin{proof}
+$r'=v\rhat-u$. Taking components along $\rhat$ and perpendicular to it gives \eqref{eq:polar}. Next,
+$\frac{d}{dt}(r\cdot u)=v\,\rhat\cdot u-1$ and $\frac{d}{dt}(v\rho)=v(v-u\cdot\rhat)$; adding gives \eqref{eq:h}.
+For $0<\beta<\pi$, \eqref{eq:polar} gives $d\rho/\rho=\frac{v-\cos\beta}{\sin\beta}\,d\beta
+=d\bigl(v\ln\tan(\beta/2)-\ln\sin\beta\bigr)$, which is \eqref{eq:C}; the case $\beta<0$ follows by reflection.
+\end{proof}
+
+Let $g(\beta)=\sin\beta/\tan^v(\beta/2)$ on $(0,\pi)$, so $C=\rho\,g(\beta)$, and let
+$k(\beta)=(\cos\beta+v)/g(\beta)$, so $h/C=k(\beta)$.
+
+\begin{lemma}\label{lem:k}
+$g$ is positive and bounded on $(0,\pi)$ with $g'/g=(\cos\beta-v)/\sin\beta$. For every constant $c$,
+\begin{equation}\label{eq:Fprime}
+\frac{d}{d\beta}\,\frac{\cos\beta+c}{g(\beta)}=-\frac{1-cv+(c-v)\cos\beta}{g(\beta)\,\sin\beta}.
+\end{equation}
+In particular $k$ is strictly decreasing, from $+\infty$ at $0$ to $-\infty$ at $\pi$, and $k(\beta)=0$ iff $\cos\beta=-v$.
+\end{lemma}
+\begin{proof}
+$\ln g=\ln\sin\beta-v\ln\tan(\beta/2)$ gives $g'/g=\cot\beta-v/\sin\beta$. Then
+\[
+\frac{d}{d\beta}\frac{\cos\beta+c}{g}=\frac{-\sin\beta-(\cos\beta+c)(\cos\beta-v)/\sin\beta}{g},
+\]
+and $\sin^2\beta+(\cos\beta+c)(\cos\beta-v)=1+(c-v)\cos\beta-cv$. With $c=v$ the numerator is $1-v^2>0$.
+As $\beta\to0$, $g\sim 2^{v}\beta^{1-v}\to0$ and $\cos\beta+v\to1+v>0$; as $\beta\to\pi$, $g\to0$ and
+$\cos\beta+v\to-(1-v)<0$. Boundedness of $g$ follows from these limits.
+\end{proof}
+
+\begin{remark}
+By Lemma~\ref{lem:k}, $(C,h)$ are coordinates on each open half-plane beside Harry's line of travel, and a straight run of
+duration $t$ is the translation $(C,h)\mapsto(C,h-(1-v^2)t)$. Position is recovered from $\beta=k^{-1}(h/C)$,
+$\rho=C/g(\beta)$. The level sets of $h$ are hyperbolas with a focus at Harry and eccentricity $1/v$.
+\end{remark}
+
+\begin{proposition}\label{prop:ray}
+During a straight run starting at time $t_1$, a candidate is caught at time $t\ge t_1$ if and only if at time $t_1$ it lies on
+the forward ray from $H(t_1)$ at distance exactly $(1-v)(t-t_1)$. Moreover $\rho'\ge-(1-v)$ always.
+\end{proposition}
+\begin{proof}
+If $0<|\beta|<\pi$ then $C>0$ is constant and $\rho=C/g(|\beta|)\ge C/\sup g>0$, so the candidate is never caught.
+If $\beta=\pi$ then $\rho'=v+1>0$. If $\beta=0$ then $\beta$ stays $0$ and $\rho'=-(1-v)$.
+The last claim holds for any path of Harry: $\rho'=\rhat\cdot(S'-H')=v-\rhat\cdot H'\ge v-1$.
+\end{proof}
+
+\section{The wavefront up to first contact}
+In this section Harry runs along the positive $x$-axis, $H(t)=(t,0)$, for $0\le t\le t_0:=d/(1-v)$.
+By Proposition~\ref{prop:ray} the candidate $\alpha=0$ is caught at time $t_0$ and no other candidate is caught on $[0,t_0]$.
+
+\begin{proposition}[Angle at first contact]\label{prop:V}
+As $\alpha\to0^{\pm}$, $S_\alpha(t_0)\to H(t_0)$ and its bearing tends to $\pm\theta^*$, where $\cos\theta^*=-v$.
+\end{proposition}
+\begin{proof}
+For $0<\alpha<\pi$, initially $h=d(\cos\alpha+v)$ and $C=d\,g(\alpha)$. By \eqref{eq:h}, at time $t_0$,
+$h=d(\cos\alpha+v)-(1+v)d=-d(1-\cos\alpha)$. Hence
+$h/C=-(1-\cos\alpha)/g(\alpha)\sim-\alpha^{1+v}/2^{1+v}\to0$. By Lemma~\ref{lem:k} the bearing
+$k^{-1}(h/C)$ tends to $\arccos(-v)$, where $g$ is positive, so $\rho=C/g(\beta)\to0$.
+\end{proof}
+
+\begin{proposition}[Bearings stay ordered]\label{prop:order}
+For each $t\in[0,t_0)$ the bearing $\beta(\alpha,t)$ of candidate $\alpha$ is a strictly increasing function of
+$\alpha\in(0,\pi)$, and by symmetry of $\alpha\in(\pi,2\pi)$. Hence the total variation of the bearing along $\Gamma(t)$ is $2\pi$.
+\end{proposition}
+\begin{proof}
+At time $t$, $h/C=(\cos\alpha+c)/g(\alpha)$ with $c=v-(1-v^2)t/d\in(-1,v]$. By \eqref{eq:Fprime} its derivative in $\alpha$
+has the sign of $-[1-cv+(c-v)x]$ with $x=\cos\alpha$. This bracket is linear in $x$, equals $(1-v)(1+c)>0$ at $x=1$
+and $(1+v)(1-c)>0$ at $x=-1$, so it is positive. Thus $h/C$ is strictly decreasing in $\alpha$, and since $k$ is
+strictly decreasing, $\beta=k^{-1}(h/C)$ is strictly increasing in $\alpha$.
+\end{proof}
+
+\begin{proposition}[Topology, length, area]\label{prop:length}
+For $t<t_0$:
+\begin{enumerate}
+\item $\Gamma(t)$ is a simple closed curve with winding number $1$ about $H(t)$.
+\item Its length satisfies $L(t)\le 2\pi d+2\pi v t$; in particular $L\le 2\pi d/(1-v)$ up to first contact.
+\item The area of the region $D(t)$ it encloses satisfies $\frac{d}{dt}|D|=v\int_{D}\frac{dA}{\rho}>0$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(1) For $t<t_0$ no candidate has been caught, and on $[0,t]$ the distance $\rho(\alpha,s)$ is jointly continuous and
+positive on a compact set, hence bounded below. The field is smooth away from Harry, so $\alpha\mapsto S_\alpha(t)$ is smooth,
+and it is injective by backward uniqueness: two candidates at the same point at time $t$ have the same past. Thus $\Gamma(t)$ is
+a Jordan curve. Its winding number about $H(t)$ is the degree of $\alpha\mapsto\beta(\alpha,t)$, which is $1$ by
+Proposition~\ref{prop:order}. (The flow of the relative field is \emph{not} an isotopy of the whole punctured plane, since
+points on the forward ray reach $0$; only the candidates matter.)
+
+(2) Differentiating \eqref{eq:snitch} in $\alpha$ removes $H'$:
+$\partial_t\partial_\alpha S=\frac{v}{\rho}(I-\rhat\rhat^{\!\top})\partial_\alpha S$. If $\phi$ is the angle between
+$\partial_\alpha S$ and $\rhat$, then $\partial_t|\partial_\alpha S|=\frac{v}{\rho}\sin^2\!\phi\,|\partial_\alpha S|$.
+Also $\rho\,|\partial_\alpha\beta|=|\partial_\alpha S|\,|\sin\phi|$. Therefore
+$L'=v\int\frac{\sin^2\phi}{\rho}|\partial_\alpha S|\,d\alpha\le v\int|\partial_\alpha\beta|\,d\alpha=2\pi v$
+by Proposition~\ref{prop:order}.
+
+(3) The velocity field of the candidates is $v\,(x-H)/|x-H|$, with divergence $v/|x-H|$, which is locally integrable.
+Apply the divergence theorem.
+\end{proof}
+\begin{remark}
+Item (3) holds for any closed curve of candidates and any position of Harry. It is not an obstruction to capture,
+because capture does not require covering area.
+\end{remark}
+
+\section{The discrete chase}
+Fix finitely many directions $0=\alpha_0<\alpha_1<\dots<\alpha_N<2\pi$. Harry runs straight as in the previous section,
+catching $\alpha_0$ at time $t_0$; then for $i=1,\dots,N$ he runs straight at the current position of candidate $\alpha_i$
+until he reaches it, skipping any candidate that has already been caught. (By Proposition~\ref{prop:ray} a later candidate is
+caught during the leg towards $S_j$ only if it lies on the segment from $H$ to $S_j$ when the leg starts; it is then deleted
+from the list at its catch time. After the last catch Harry stays put.) Let $S_i=S_{\alpha_i}$. While chasing $S_j$ define
+\[
+\Phi(t)=|S_j-H|+\sum_{i=j}^{N-1}|S_{i+1}-S_i| .
+\]
+For the leg from $S_i$ to $S_{i+1}$ let $a_i,b_i,c_i$ be the angles of the triangle $H S_i S_{i+1}$ at $H$, $S_i$, $S_{i+1}$,
+and let $A=\sum_{i\ge j}a_i$, the total angle the remaining polyline subtends at Harry.
+
+\begin{lemma}[Length identity]\label{lem:phi}
+The chase of $S_j$ takes time $|S_j-H|/(1-v)$ measured from its start. $\Phi$ is continuous, and between catches
+\[
+\Phi'=-(1-v)+v\,W,\qquad W=\sum_{i\ge j}(\cos b_i+\cos c_i)=\sum_{i\ge j}2\sin\frac{a_i}{2}\cos\frac{b_i-c_i}{2}\ \le\ A .
+\]
+\end{lemma}
+\begin{proof}
+Harry moves at unit speed towards $S_j$, which moves at speed $v$ directly away along the same line, so the direction is
+constant and $|S_j-H|'=-(1-v)$. For another leg, with $e=(S_{i+1}-S_i)/|S_{i+1}-S_i|$ and $\rhat_i$ the unit vector from $H$
+to $S_i$, $|S_{i+1}-S_i|'=v(\rhat_{i+1}-\rhat_i)\cdot e$. The angle at $S_i$ is between $-\rhat_i$ and $e$, so
+$-\rhat_i\cdot e=\cos b_i$; the angle at $S_{i+1}$ is between $-\rhat_{i+1}$ and $-e$, so $\rhat_{i+1}\cdot e=\cos c_i$.
+Since $b_i+c_i=\pi-a_i$, $\cos b_i+\cos c_i=2\sin\frac{a_i}{2}\cos\frac{b_i-c_i}{2}\le2\sin\frac{a_i}{2}\le a_i$.
+At a catch the first term is $0$ and the next leg becomes the first term, so $\Phi$ is continuous. Collinear (degenerate)
+triangles are harmless: $|S_{i+1}-S_i|$ stays differentiable because consecutive candidates never coincide (backward
+uniqueness), and $a_i+b_i+c_i=\pi$ still holds. If a later candidate $S_i$ is caught accidentally, then just before the catch
+$\rhat_i$ is constant, so the identity holds up to that time; deleting $S_i$ at the moment $S_i=H$ replaces
+$|S_i-S_{i-1}|+|S_{i+1}-S_i|$ by $|S_{i+1}-S_{i-1}|$, so $\Phi$ can only jump down.
+\end{proof}
+
+\begin{lemma}[Start of the chase]\label{lem:start}
+$\Phi(t_0)\le 2\pi d/(1-v)$.
+\end{lemma}
+\begin{proof}
+For $t<t_0$ the closed polygon through $S_0,\dots,S_N$ is inscribed in $\Gamma(t)$, so its perimeter is at most $L(t)\le2\pi d/(1-v)$
+by Proposition~\ref{prop:length}. Each $S_i(t)$ is continuous on $[0,t_0]$ and $S_0(t_0)=H(t_0)$, so $\Phi(t_0)$ is at most the limit of
+these perimeters.
+\end{proof}
+
+\section{From discrete chases to one path}
+\begin{lemma}[Compactness]\label{lem:limit}
+Let $D_1\subset D_2\subset\cdots$ be finite sets of directions whose union is dense in the circle. Suppose that for each $N$
+there is a path $H_N$ with $|H_N'|\le1$ on $[0,T]$ that catches every direction in $D_N$ by time $T$, with $T$ independent of $N$.
+Then there is a path $H$ with $|H'|\le1$ that catches every direction in $[0,2\pi)$ by time $T$.
+\end{lemma}
+\begin{proof}
+The $H_N$ are $1$-Lipschitz on $[0,T]$ with $H_N(0)=0$. By Arzel\`a--Ascoli a subsequence converges uniformly to a
+$1$-Lipschitz $H$. For a continuous path the right-hand side of \eqref{eq:snitch} is continuous in $t$ and locally Lipschitz in
+$S$ away from $H(t)$, so each candidate has a unique trajectory until $\rho\to0$. Since $|S'|=v$ and $|\rho'|\le1+v$, the maximal trajectory has a limit at the end of its interval, and that interval ends before $T$ only if $\rho\to0$ there, i.e.\ the candidate is caught; its catch time is the first zero of $\rho$.
+
+\emph{Claim.} If under $H$ a candidate $\alpha$ has $\rho\ge c>0$ on $[0,\tau]$, then there are a neighbourhood $U$ of $\alpha$,
+$\delta>0$ and $N_0$ such that for $\alpha'\in U$ and $N\ge N_0$, the trajectory of $\alpha'$ under $H_N$ (and under $H$) has
+$\rho\ge c/4$ on $[0,\min(\tau+\delta,T)]$.
+Indeed, since $|\rho'|\le1+v$, $\rho\ge c/2$ on $[0,\tau+\delta]$ for $\delta=c/(2(1+v))$. On the set where both distances are at
+least $c/4$, the map $(S,H)\mapsto v(S-H)/|S-H|$ is Lipschitz with constant $8v/c$ in each argument. Gr\"onwall's inequality
+bounds the difference of the two trajectories by $(|S_{\alpha'}(0)-S_\alpha(0)|+\tfrac{8v}{c}T\|H_N-H\|_\infty)e^{8vT/c}$ for as
+long as both stay in that set. Choose $U$ and $N_0$ so that this bound $e$ satisfies $e+\|H_N-H\|_\infty<c/4$. Then
+$\rho_N\ge|S_\alpha-H|-e-\|H_N-H\|_\infty>c/4$ wherever the bound applies, so the set of $s\le\min(\tau+\delta,T)$ such that
+$\rho_N\ge c/4$ on $[0,s]$ is closed and also relatively open; hence it is the whole interval.
+
+Now fix $\alpha\in D_M$. By nestedness, for every $N\ge M$ in the subsequence it is caught by $H_N$ at a time $t_N\le T$; pass to a subsequence with $t_N\to t^*\le T$.
+If $H$ did not catch $\alpha$ on $[0,t^*]$, its trajectory would be defined on $[0,t^*]$ with $\rho>0$, hence $\rho\ge c$ for some $c>0$ by compactness, and the Claim (with $\alpha'=\alpha$, $\tau=t^*$) would give $\rho\ge c/4$ under $H_N$ on
+$[0,t^*+\delta]$ for large $N$, contradicting $t_N\to t^*$. So $H$ catches every direction in $\bigcup D_N$ by time $T$.
+Finally, applying the Claim with $H_N=H$ shows that the set of directions not caught by $H$ on $[0,T]$ is open. Its complement
+is closed and contains a dense set, so it is the whole circle.
+\end{proof}
+\begin{remark}
+The limit path has speed at most $1$, which is what the author's formulation allows. If speed exactly $1$ is required,
+this lemma is not enough: one would also need, for example, a uniform bound on the total turning of the $H_N$.
+\end{remark}
+
+\begin{lemma}[Vanishing vision radius]\label{lem:A41}
+Let $D_1\subset D_2\subset\cdots$ be finite sets of directions with dense union, and $\varepsilon_N\to0$. Suppose that for each $N$ there is
+a path $H_N$ with $|H_N'|\le1$ on $[0,T]$ that comes within $\varepsilon_N$ of every direction in $D_N$ by time $T$. Then there is a path $H$
+with $|H'|\le1$ that catches every direction in $[0,2\pi)$ exactly by time $T$.
+\end{lemma}
+\begin{proof}
+Repeat the proof of Lemma~\ref{lem:limit} with ``caught by $H_N$ at $t_N$'' replaced by ``$\rho\le\varepsilon_N$ under $H_N$ at $t_N$'', where $t_N\le T$ is the first such time (the
+trajectory under $H_N$ is defined on $[0,t_N]$, since a catch is itself such a time). If $H$
+did not catch $\alpha\in D_M$ on $[0,t^*]$, the Claim gives $\rho\ge c/4$ under $H_N$ on $[0,t^*+\delta]$ for large $N$, contradicting
+$\rho(t_N)\le\varepsilon_N\to0$ with $t_N\to t^*$. The rest is unchanged. Nestedness is needed: it puts each fixed $\alpha$ in every later
+$D_N$ (with $D_N=\{\alpha_N\}$ for a dense sequence $(\alpha_N)$ and $H_N$ the straight run at $\alpha_N$, all other hypotheses hold with $\varepsilon_N=0$ and $T=d/(1-v)$, yet no path catches two directions by time $d/(1-v)$: by \eqref{eq:P0} that would force $H'=\rhat_\alpha$ a.e.\ for both directions, and these differ near $t=0$; compare Theorem~\ref{thm:E5}).
+\end{proof}
+\begin{remark}
+So exact capture follows from any $\varepsilon>0$ strategy whose time stays bounded as $\varepsilon\to0$; the unstable exact-contact chase is not
+needed. Such a uniform bound is proved in Section~\ref{sec:main2} for $v\le6\cdot10^{-5}$ (Theorem~\ref{thm:Main2};
+Section~\ref{sec:main} had $v\le4\cdot10^{-51}$), which gives Corollary~\ref{cor:Exact2}. For larger $v$ no uniform bound is proved: numerically the greedy $\varepsilon$-sweep times converge as
+$\varepsilon\to0$ (Section~\ref{sec:numerics}), and the greedy controller is linearly stable for $v<0.78$
+(Section~\ref{sec:linear}).
+\end{remark}
+
+\section{Capture theorems}
+\paragraph{The main theorem and where it is proved.} The main result of these notes, Theorem~\ref{thm:Main2} with
+Corollary~\ref{cor:Exact2}, is proved in Sections~\ref{sec:bulk}--\ref{sec:main2}; the two theorems of the present section are older:
+the first has a range of $v$ proportional to $\varepsilon$, the second is conditional. The route is as follows. Section~\ref{sec:bulk} replaces the candidates inside the vision disc
+by \emph{virtual candidates}, which move in a smoothed field and form a curve that Harry can follow, and defines Construction~C, a
+greedy chase of that curve in straight legs of step $\varepsilon$. Its tool is an \emph{excess calculus}: for two labels, the
+excess of arc length over chord, $E=l-c$, measures how far the arc between them is from straight, and its growth along the chase
+is controlled. The bulk theorem (Theorem~\ref{thm:Bulk}) shows that, for small $v$, a start condition on the excess propagates
+along the sweep, away from its two ends, with constants that do not depend on $\varepsilon$. The end theorem
+(Theorem~\ref{thm:End}, Section~\ref{sec:end}) does the same on an arc that ends: Construction~C walks into the end of the unseen
+set, sees every label and stops, in a time that does not depend on $\varepsilon$. Section~\ref{sec:start} proves the start
+condition for a head-on start, whose closing phase remains open; the main theorem uses instead \emph{design~T}
+(Definition~\ref{def:T}, Section~\ref{sec:touch}): Harry runs straight through the front, makes a second straight run that
+touches down on the front tangentially, and then walks all the way round it by Construction~C. Theorem~\ref{thm:HT} proves the
+estimates needed at the touch-down, and Section~\ref{sec:main} assembles the sweep. Finally Lemma~\ref{lem:A41} lets
+$\varepsilon\to0$ at fixed $v$ and turns the $\varepsilon$-independent sweep into exact capture. Sections~\ref{sec:Estar},
+\ref{sec:HTp} and~\ref{sec:main2} make every threshold of the end theorem a parameter (Theorem~\ref{thm:Estar}), extend the
+touch-down estimates to larger $v$ (Theorem~\ref{thm:HTp}), and apply the core once to the whole arc, which raises the range from
+$4\cdot10^{-51}$ (Theorem~\ref{thm:Main}) to $6\cdot10^{-5}$ (Theorem~\ref{thm:Main2}).
+
+\begin{theorem}[Unconditional, positive vision radius]\label{thm:A}
+If $\varepsilon>0$ and $v\le\varepsilon/((1+2\pi)d)$, there is a path of speed $1$ along which every candidate is seen by
+time $(1+2\pi)d$.
+\end{theorem}
+\begin{proof}
+Harry runs from $0$ to $(d,0)$ and then once around the circle of radius $d$, so $H(d(1+\alpha))=S_\alpha(0)$.
+The Snitch has speed $v$, so $|S_\alpha(t)-S_\alpha(0)|\le vt\le v d(1+2\pi)\le\varepsilon$ at $t=d(1+\alpha)$.
+\end{proof}
+This uses only the Snitch's speed, not the law \eqref{eq:snitch}, which is why its range is small.
+
+\begin{theorem}[Conditional, exact capture]\label{thm:B}
+Assume the following hypothesis.
+\begin{quote}
+\textbf{(H)} For the dyadic sets $D_k=\{2\pi i/2^k:0\le i<2^k\}$, $k\ge1$ (or for some other nested family of finite sets
+containing $0$ with dense union), at every time $t\ge t_0$ of the discrete chase of Section~4, the remaining polyline subtends
+a total angle $A\le\pi$ at Harry.
+\end{quote}
+Then for every $v<1/(1+\pi)\approx0.2415$ there is a path with $|H'|\le1$ that catches every candidate (so $\varepsilon=0$, and
+a fortiori every $\varepsilon>0$) by time
+\[
+T=\frac{d}{1-v}+\frac{2\pi d}{(1-v)\bigl(1-v(1+\pi)\bigr)} .
+\]
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:phi} and (H), $\Phi'\le-(1-v)+\pi v=-(1-v(1+\pi))<0$ between catches, and $\Phi$ is continuous. The chase is
+over when $\Phi=0$; accidental catches only make $\Phi$ jump down. With Lemma~\ref{lem:start}, every discrete chase ends by
+time $T$, and after its last catch $H_N$ stays put, so it is defined and $1$-Lipschitz on $[0,T]$. Apply
+Lemma~\ref{lem:limit} to the nested family in (H).
+\end{proof}
+\begin{remark}
+Hypothesis (H) is \emph{not proved}. Section~\ref{sec:angle} proves it up to the first time the bearings of the remaining
+candidates lose their order, and shows that it is false for some (non-dyadic) finite sets; this is why (H) is now stated for one
+family only. (Before $t_0$, $A$ can exceed $\pi$ for almost every set, but the proof uses (H) only after $t_0$.)
+\end{remark}
+
+\section{The angle hypothesis}\label{sec:angle}
+During the chase of $S_j$ Harry's heading $u_j$ is constant; bearings $\beta_i\in(-\pi,\pi]$ are measured from $u_j$, so $\beta_j=0$.
+The chain is \emph{ordered} at a time of leg $j$ if $0=\beta_j\le\beta_{j+1}\le\dots\le\beta_N\le\pi$.
+
+\begin{lemma}[First instant]\label{lem:A1}
+For every finite set $0=\alpha_0<\dots<\alpha_N<2\pi$, the bearings $\theta_i$ of $S_i(t_0)$ measured from the initial heading satisfy
+$\theta^*<\theta_1<\dots<\theta_N<2\pi-\theta^*$. Hence the chain is ordered at the start of the chase of $S_1$, and
+$A(t_0)=\theta_N-\theta_1<2\arccos v<\pi$; $A(t_0)\to2\arccos v$ if $\alpha_1\to0^+$ and $\alpha_N\to2\pi^-$.
+\end{lemma}
+\begin{proof}
+For $\alpha\in(0,\pi)$, at $t_0$ we have $h=-d(1-\cos\alpha)<0$ and $C=d\,g(\alpha)>0$ (proof of Proposition~\ref{prop:V}), so
+$h/C<0=k(\theta^*)$ and the bearing $k^{-1}(h/C)$ lies in $(\theta^*,\pi)$; it is strictly increasing in $\alpha$ by
+Proposition~\ref{prop:order} (with $c=-1$ the bracket there is $(1+v)(1-\cos\alpha)>0$). The candidate $\alpha=\pi$ stays on the
+backward ray, and $(\pi,2\pi)$ follows by reflection. The interval $(\theta^*,2\pi-\theta^*)$ has length $2\arccos v<\pi$, so
+consecutive unsigned angles telescope. The limit is Proposition~\ref{prop:V}.
+\end{proof}
+
+\begin{lemma}[Half-plane persistence]\label{lem:A2}
+On a straight run, a candidate with bearing in $(0,\pi)$ keeps a bearing in $(0,\pi)$, strictly increasing, and is not caught;
+candidates on the forward or backward ray stay there. The same holds for $(-\pi,0)$ with ``decreasing''.
+\end{lemma}
+\begin{proof}
+The two rays are invariant since there the relative velocity is parallel to $r$. For $\beta\in(0,\pi)$, $C>0$ is constant and $h$
+strictly decreases, so $h/C$ decreases and $\beta=k^{-1}(h/C)$ increases within $(0,\pi)$ (Lemma~\ref{lem:k}); it is not caught by
+Proposition~\ref{prop:ray}.
+\end{proof}
+
+\begin{lemma}[Ordered phase]\label{lem:A3}
+(a) If the chain is ordered, then $A=\beta_N\le\pi$, and so $W\le A=|\beta_N|$.
+(b) If at the end of leg $j$ the bearings of $S_{j+1},\dots,S_N$ (measured from $u_j$) satisfy $0\le\beta_{j+1}\le\dots\le\beta_N\le\pi$, the
+chain is ordered at the start of leg $j+1$.
+(c) Consequently $A\le\pi$ at every time $t\ge t_0$ of the chase, for every finite set, up to the first time at which, inside some leg,
+two consecutive candidates have bearings in the wrong order.
+\end{lemma}
+\begin{proof}
+(a) All bearings lie in $[0,\pi]$, so consecutive unsigned angles are $\beta_{i+1}-\beta_i$ and telescope. (b) The new bearings are
+$\beta_i-\beta_{j+1}\in[0,\pi-\beta_{j+1}]$, still non-decreasing. Accidental catches delete points at bearing $0$, which keeps the order.
+(c) The chain is ordered at the start (Lemma~\ref{lem:A1}); within a leg every non-target candidate stays in $[0,\pi]$
+(Lemma~\ref{lem:A2}), so order can only be lost by a consecutive pair reversing; at switches it is preserved by (b). Order is a
+closed condition and bearings are continuous within a leg.
+\end{proof}
+
+\begin{lemma}[How order is lost]\label{lem:A4}
+During a straight run let $P,Q$ be candidates with bearings in $(0,\pi)$. Then $k(\beta_P(s))-k(\beta_Q(s))=
+h_P(0)/C_P-h_Q(0)/C_Q-(1-v^2)s(1/C_P-1/C_Q)$ is affine in $s$, so their order changes at most once per run, and if $\beta_P<\beta_Q$
+and later $\beta_P>\beta_Q$, then at the crossing $\rho_P<\rho_Q$: the closer point overtakes. Hence, if the chain is ordered at the
+start of a leg and not ordered later in it, then at the first failure some consecutive pair $S_i,S_{i+1}$ ($i>j$) has equal bearing
+in $(0,\pi)$ with $\rho_i<\rho_{i+1}$: the edge $S_iS_{i+1}$ points radially away from Harry.
+\end{lemma}
+\begin{proof}
+The formula is Proposition~\ref{prop:integrals}, and $\beta_P<\beta_Q$ iff the expression is positive since $k$ is decreasing.
+At a crossing $\beta_P=\beta_Q=b$, so $C_P/C_Q=\rho_P/\rho_Q$, and a sign change from $+$ to $-$ needs $1/C_P>1/C_Q$. For the last
+claim take the infimum $s^*$ of the failure set; some consecutive pair is reversed at times $s_n\downarrow s^*$ and tied at $s^*$, and
+tied points on the rays $\beta=0,\pi$ never separate.
+\end{proof}
+
+\begin{proposition}[(H) fails for some finite sets]\label{prop:A9}
+Let $v=1/10$ and take $\alpha_0=0$ and the six directions $1.278182093392$, $1.288182093392$, $1.38054291417$, $6.253166882374$,
+$6.263185307163$, $6.273185307179$ (all gaps at least $0.01$). At time $t_0+0.999999\,\tau_1$, where $\tau_1=\rho_1(t_0)/(1-v)$ is the
+duration of the first leg, $A\in[3.29145272139670,\,3.29145272139670]$ (width below $10^{-40}$), so $A>\pi+0.149$.
+\end{proposition}
+\begin{proof}[Proof (computer-assisted)]
+Outward-rounded interval arithmetic at 60 digits (\texttt{code/A/certify.py}). Each straight run uses the exact map of
+Proposition~\ref{prop:integrals}; each bearing is enclosed by certifying the sign of $k-h/C$ at both ends of a bracket ($k$ is strictly
+decreasing); the catch times and the absence of accidental catches are certified. An independent polar-form certifier written by
+the referee agrees to every printed digit, and a direct ODE integration gives $A=3.291452721343$.
+\end{proof}
+\begin{remark}
+The mechanism is a pair of nearly equal directions: just before the first of them is caught, the second sits very close to Harry at
+a bearing determined by the tangent of the wavefront, which can exceed the bearing of the next candidate. With a pair $10^{-12}$
+apart, even $W>\pi$ occurs at $v=0.24$ (certified the same way), for the last $10^{-9}$ of a leg. For the dyadic sets, numerically
+(up to $4095$ directions, $v\le0.24$) $\sup A<\pi$, attained early in the ordered phase, and $\sup W\le2.09$; order is lost at a
+definite end phase whose onset converges as $N\to\infty$, after which $A\le0.30$ and $W\le0.034$.
+\end{remark}
+
+\subsection*{A second functional}
+Let $S_{N(t)}$ be the last candidate not yet caught, $\rho_{N(t)}$ its distance from Harry and $\beta_{N(t)}$ its bearing. For $0\le\lambda<1$
+put $\Psi=\Phi-\lambda\rho_{N(t)}$.
+
+\begin{lemma}\label{lem:B1}
+$(1-\lambda)\Phi\le\Psi\le\Phi$; $\Psi$ is continuous except for downward jumps at accidental catches; and on each leg
+$\Psi'=-(1-\lambda)(1-v)+vW-\lambda(1-\cos\beta_{N(t)})$.
+\end{lemma}
+\begin{proof}
+$\Phi$ is the length of a polyline from $H$ to $S_{N(t)}$, so $\Phi\ge\rho_{N(t)}$. If $S_{N(t)}$ itself is caught accidentally, $\Phi$
+does not increase and $\rho_{N(t)}$ jumps up from $0$, so $\Psi$ jumps down. On a leg, $\rho_{N}'=v-\cos\beta_N$ by \eqref{eq:polar},
+and $\Phi'=-(1-v)+vW$ by Lemma~\ref{lem:phi}.
+\end{proof}
+
+\begin{theorem}[Conditional, exact capture up to $v_1\approx0.4748$]\label{thm:B2}
+Let $w_0=0.3$ and assume
+\begin{quote}
+\textbf{(K)} for the sets of a nested family as in (H), at every time $t\ge t_0$ of the discrete chase other than a catch time,
+$W\le\max(|\beta_{N(t)}|,w_0)$.
+\end{quote}
+Let $m(v,\lambda)=\min_{0\le x\le\pi}[(1-\lambda)(1-v)+\lambda(1-\cos x)-vx]$, let $v_1=0.47475263829\ldots$ be the root of
+$\max_\lambda m(v,\lambda)=0$ and $\lambda^*=0.655182444791\ldots$ the maximiser there. For $\lambda\in[0,1)$ put
+$c(\lambda)=\min\bigl(m(v,\lambda),\,(1-\lambda)(1-v)-vw_0\bigr)$. For every $v<v_1$ we have $c(\lambda^*)>0$, and for every $\lambda$ with
+$c(\lambda)>0$ there is a path with $|H'|\le1$ catching every direction by time $T=d/(1-v)+2\pi d/((1-v)c(\lambda))$.
+\end{theorem}
+\begin{proof}
+If $W\le|\beta_N|=:x\le\pi$, Lemma~\ref{lem:B1} gives $\Psi'\le-[(1-\lambda)(1-v)+\lambda(1-\cos x)-vx]\le-m(v,\lambda)$. If $W\le w_0$, then
+$\Psi'\le-(1-\lambda)(1-v)+vw_0$. So $\Psi'\le-c(\lambda)$ on every leg. Since $m(v,\lambda^*)$ decreases in $v$ and vanishes at $v_1$, and
+$(1-\lambda^*)(1-v)-vw_0>0$ for $v<0.5348$, $c(\lambda^*)>0$ for $v<v_1$. (Choosing $\lambda$ for each $v$ to maximise $c(\lambda)$
+gives the best bound, e.g.\ $T\approx16.9d$ at $v=0.2$ against $37.6d$ with $\lambda=\lambda^*$.) As $\Psi\ge0$ and $\Psi(t_0)\le\Phi(t_0)\le2\pi d/(1-v)$ (Lemma~\ref{lem:start}),
+every chase ends by $T$; conclude with Lemma~\ref{lem:limit}.
+\end{proof}
+\begin{remark}
+By Lemma~\ref{lem:A3}(a), (K) holds automatically up to the first loss of order, for every finite set; only the end phase is open.
+The argument cannot go beyond $v_1$: there are polyline states with $W\to|\beta_N|=x$ for every $x\in(0,\pi]$ (points on a circle about
+Harry). And with (H) alone no functional $\Phi+\kappa\rho_N$ can be certified beyond $1/(1+\pi)$. Numerically, (K) holds along dyadic
+chases with roughly 30-fold room for $v\le0.5$, but both (H) and (K) fail for $v$ slightly above $1/2$, where the chase itself
+develops a period-two zigzag (Section~\ref{sec:numerics}).
+\end{remark}
+
+\subsection*{Reduction to the end phase}
+For a chase, let $t_f=\inf\{t\ge t_0:\text{the chain is not ordered}\}$ (or the end time $T_{\rm end}$ of the chase if order is never
+lost). Order may be regained and lost again after $t_f$; the hypotheses below cover all of $[t_f,T_{\rm end})$.
+\begin{quote}
+\textbf{(E$_\gamma$)} at every $t\in[t_f,T_{\rm end})$ off the catch times, every remaining candidate has $|\beta_i(t)|\le\gamma$;\\
+\textbf{(E$_K$)} at every $t\in[t_f,T_{\rm end})$ off the catch times, $W(t)\le K$.
+\end{quote}
+
+\begin{lemma}[Cone facts]\label{lem:A21}
+For every finite set and every time of the chase: (a) every remaining candidate has $|\beta_i|\le A$; (b) within a leg every
+$|\beta_i|$ ($i\neq j$) is non-decreasing; (c) $D(t):=\max_i\rho_i(t)$ over remaining candidates never jumps up, and if on a leg
+interval $(s_1,s_2)$ all remaining $|\beta_i|\le\gamma$, then $D(s_2^-)\le D(s_1)-(\cos\gamma-v)(s_2-s_1)$; (d) $D\le\Phi$.
+\end{lemma}
+\begin{proof}
+(a) $|\beta_i|$ is the angular distance between $u=\rhat_j$ and $\rhat_i$, at most $\sum_{k<i}a_k\le A$. (b) Lemma~\ref{lem:A2}.
+(c) For $s_1<s<s_2$ pick $i$ with $D(s)=\rho_i(s)$; since $\rho_i'=v-\cos\beta_i\le v-\cos\gamma$,
+$D(s)\le\rho_i(s_1)-(\cos\gamma-v)(s-s_1)\le D(s_1)-(\cos\gamma-v)(s-s_1)$. At a catch a candidate at distance $0$ is removed.
+(d) Triangle inequality along the polyline.
+\end{proof}
+
+\begin{theorem}[Capture conditional on the end phase only]\label{thm:A23}
+Let $D_1\subset D_2\subset\cdots$ be finite direction sets containing $0$ with dense union (e.g.\ dyadic) and $v<v_1$.
+\begin{enumerate}
+\item[(i)] If there is $\gamma$ with $\cos\gamma>v$ such that (E$_\gamma$) holds for the chase of every $D_k$, there is a path with
+$|H'|\le1$ catching every direction by $T=d/(1-v)+2\pi d/((1-v)M_1)$, where
+$M_1=\sup_{0\le\lambda<1}\min\{m(v,\lambda),(1-\lambda)(\cos\gamma-v)\}>0$.
+\item[(ii)] If there is $K<(1-v)/v$ such that (E$_K$) holds for every $D_k$, the same holds with
+$M_2=\sup_{0\le\lambda<1}\min\{m(v,\lambda),(1-\lambda)(1-v-vK)\}>0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Fix $k$ and $\lambda$ with $m(v,\lambda)>0$. On $[t_0,t_f]$ the chain is ordered, so by Lemma~\ref{lem:A3}(a) and Lemma~\ref{lem:B1},
+$\Psi'\le-m(v,\lambda)$ on each leg, with only downward jumps; hence $\Psi(t_f)\le\Psi(t_0)-m\,(t_f-t_0)$ and
+$\Psi(t_0)\le\Phi(t_0)\le2\pi d/(1-v)$. On $[t_f,T_{\rm end})$: in case (i), $0<D(t)\le D(t_f)-(\cos\gamma-v)(t-t_f)$ by
+Lemma~\ref{lem:A21}(c); in case (ii), $\Phi'\le-(1-v-vK)$ between catches by Lemma~\ref{lem:phi}. Either way
+$T_{\rm end}-t_f\le\Phi(t_f)/c_E\le\Psi(t_f)/((1-\lambda)c_E)$, with $c_E=\cos\gamma-v$ or $1-v-vK$, using Lemma~\ref{lem:A21}(d) and
+$(1-\lambda)\Phi\le\Psi$. With $\mu=\min\{m,(1-\lambda)c_E\}$, $T_{\rm end}-t_0\le(\Psi(t_0)-\Psi(t_f))/m+\Psi(t_f)/((1-\lambda)c_E)\le\Psi(t_0)/\mu$.
+Each $H_k$ stays put after its last catch; apply Lemma~\ref{lem:limit} and optimise over $\lambda$.
+\end{proof}
+\begin{remark}
+So Theorems~\ref{thm:B} and~\ref{thm:B2} need their hypotheses only after $t_f$. Numerically, for dyadic chases, the end phase
+is reached only slowly as $N\to\infty$ (the onset converges like $N^{-\kappa}$ with $\kappa\approx v/(3(1-v))$); multiprecision
+estimates of the limit give $\sup_{t\ge t_f}W\approx0.82,0.70,0.45,0.28,0.11$ for $v=0.05,0.1,0.2,0.3,0.45$, far below $(1-v)/v$,
+so (E$_K$) appears to hold with a wide margin (NUMERICAL); see also Theorem~\ref{thm:A35} below. With such $K$ the bound of (ii) is essentially that of
+Theorem~\ref{thm:B2}, e.g.\ $T\approx16.9d$ at $v=0.2$. Numerically the cone condition fails for some non-dyadic sets (at $v=0.5$, a uniform set plus a geometric tail cluster opens the cone to $1.26>\arccos0.5$; report A-2, \S3, \texttt{code/A2/cone\_any.py}), so any proof
+must use the structure of the family.
+\end{remark}
+
+\begin{lemma}[Hull perimeter]\label{lem:A34}
+In any chase in which, on each leg, Harry moves with constant unit velocity pointing at a remaining candidate, let $P(t)$ be the
+perimeter of the convex hull of $\{H(t)\}$ and the remaining candidates ($P=2\cdot$length for a segment), and let $B_H\in[0,\pi]$ be
+the opening of the smallest closed sector with apex $H$ containing the remaining candidates ($B_H=\pi$ if there is none of opening
+$<\pi$). Then $P$ is Lipschitz and continuous at catches, $2\max_i\rho_i\le P\le2\Phi$, and for a.e.\ $t$,
+$P'\le-(1+\cos B_H)+v(\pi+B_H)$.
+\end{lemma}
+\begin{proof}
+A candidate is removed only when it coincides with $H$, which leaves the hull unchanged. By Cauchy's formula $P=\int_0^{2\pi}h(\theta,t)\,d\theta$,
+$h$ the support function, a maximum of finitely many $C^1$ functions; by Danskin's theorem and dominated convergence
+$P'^+=\sum_V2\sin(\varepsilon_V/2)\langle V',n_V\rangle$ over hull vertices $V$, with exterior angles $\varepsilon_V$ ($\sum\varepsilon_V=2\pi$)
+and outer bisectors $n_V$. A candidate vertex has $V'=v\rhat_V$ and contributes at most $v\varepsilon_V$. If $H$ is a vertex, its
+interior angle is $B_H<\pi$ and $u$ lies in the interior sector at angle $x\le B_H/2$ from $-n_H$, so $H$ contributes
+$-2\sin((\pi-B_H)/2)\cos x\le-(1+\cos B_H)$, and the candidates contribute at most $v(2\pi-\varepsilon_H)=v(\pi+B_H)$. If $H$ is not a vertex the
+bound holds with $B_H=\pi$. The width of the hull in each direction is at most the sum of the projections of the polyline's edges,
+which gives $P\le2\Phi$; and $P\ge2\operatorname{diam}\ge2\max\rho_i$.
+\end{proof}
+
+\begin{theorem}[Capture conditional on an end-phase sector condition]\label{thm:A35}
+Let the family and $v<v_1$ be as in Theorem~\ref{thm:A23}, and suppose there is $\gamma\in[0,\pi]$ with
+$c_H:=1+\cos\gamma-v(\pi+\gamma)>0$ such that, for the chase of every $D_k$ and every $t\in[t_f,T_{\rm end})$, the remaining candidates
+lie in a closed sector with apex $H(t)$ and opening at most $\gamma$. Then there is a path with $|H'|\le1$ catching every direction
+by $T=d/(1-v)+2\pi d/((1-v)\mu)$, $\mu=\sup_{0\le\lambda<1}\min\{m(v,\lambda),(1-\lambda)c_H/2\}>0$.
+\end{theorem}
+\begin{proof}
+As in Theorem~\ref{thm:A23} on $[t_0,t_f]$. Afterwards Lemma~\ref{lem:A34} gives $P'\le-c_H$ (the bound is increasing in $B_H$),
+so $T_{\rm end}-t_f\le P(t_f)/c_H\le2\Phi(t_f)/c_H\le2\Psi(t_f)/((1-\lambda)c_H)$; add the two phases as before.
+\end{proof}
+\begin{remark}
+Since Harry heads at a remaining candidate, the sector condition with opening $\gamma$ implies (E$_\gamma$), so for $v\ge0.2928$
+Theorem~\ref{thm:A23}(i) is at least as good. For small $v$ the sector condition is far weaker: the allowed opening $\gamma_H(v)$
+(root of $1+\cos\gamma=v(\pi+\gamma)$) satisfies $\pi-\gamma_H\approx2\sqrt{\pi v}$, e.g.\ $\gamma_H=2.07$ at $v=0.1$, while the measured
+opening after $t_f$ in deep-tail dyadic simulations is at most $0.92$--$1.02$ for $0.1\le v\le0.24$ (NUMERICAL). The total-curvature
+route ($W\le2+$ total absolute curvature of the remaining wavefront arc, which holds) does not close the gap: numerically the
+total curvature exceeds $2\pi$ in the limit $N\to\infty$ (a hook forms at the tail during the first leg).
+\end{remark}
+
+\section{A completely unknown starting point}
+\begin{proposition}\label{prop:null}
+Let $\varepsilon=0$ and let Harry's path consist of locally finitely many straight pieces of unit speed. Then the set of starting
+points $S(0)\in\R^2$ from which the Snitch is eventually caught has zero area.
+\end{proposition}
+\begin{proof}
+Let the $k$-th piece start at time $t_k$. Let $U_k$ be the open set of starting points not caught on $[0,t_k]$; the flow
+$\Psi_k:U_k\to\R^2$ from time $0$ to $t_k$ is a composition of flows of smooth fields, hence a diffeomorphism onto its image.
+By Proposition~\ref{prop:ray} the starting points caught during the $k$-th piece are $\Psi_k^{-1}$ of a segment of the forward
+ray from $H(t_k)$, a smooth arc. A countable union of smooth arcs has zero area.
+\end{proof}
+\begin{remark}
+By the same proposition, a piecewise straight path catches a whole interval of directions during one piece only if the
+wavefront contains a straight radial segment ahead of Harry at the start of that piece.
+\end{remark}
+
+\section{Constraints on every path}\label{sec:constraints}
+In this section $H$ is an arbitrary path with $H(0)=0$ and $|H'|\le1$ almost everywhere (speed at most $1$, not necessarily
+equal to $1$). A \emph{candidate} is any initial point $P\neq0$; write $S_P$ for its trajectory, $r_P=S_P-H$, $\rho_P=|r_P|$, and
+$\tau(P)$ for its capture time (the first $t$ with $S_P(t)=H(t)$), if any. The field $(S,t)\mapsto v(S-H(t))/|S-H(t)|$ is continuous,
+and smooth in $S$ away from $H(t)$, so trajectories exist and are unique, forwards and backwards, while $\rho_P>0$; since $|S_P'|=v$,
+$S_P$ has a limit at the end of its maximal interval. Along any path, $\rho_P$ is absolutely continuous while positive and
+\begin{equation}\label{eq:P0}
+\rho_P'=v-\rhat_P\cdot H'\ \ge\ -(1-v)\qquad\text{a.e.}
+\end{equation}
+
+\begin{lemma}[Candidates never approach each other]\label{lem:E1}
+Let $P\neq Q$ with $\rho_P,\rho_Q>0$ on an interval $I$. Then on $I$
+\[
+\frac{d}{dt}|S_P-S_Q|=\frac{v(\rho_P+\rho_Q)(1-\cos\psi)}{|S_P-S_Q|}\ \ge 0,
+\]
+where $\psi$ is the angle between $r_P$ and $r_Q$. In particular $|S_P(t)-S_Q(t)|\ge|P-Q|$.
+\end{lemma}
+\begin{proof}
+$S_P(t)=S_Q(t)$ is impossible, since by uniqueness backwards in time the two trajectories would coincide at time $0$. So
+$f=|S_P-S_Q|>0$ is $C^1$ and $f'=v(\rhat_P-\rhat_Q)\cdot(r_P-r_Q)/f$, because $S_P-S_Q=r_P-r_Q$; and
+$(\rhat_P-\rhat_Q)\cdot(\rho_P\rhat_P-\rho_Q\rhat_Q)=(\rho_P+\rho_Q)(1-\rhat_P\cdot\rhat_Q)$. Harry's velocity does not enter.
+\end{proof}
+
+\begin{corollary}[Separated capture times]\label{cor:E2}
+If $P\ne Q$ are both caught and $t\le\tau(P)\le\tau(Q)$, then $\tau(Q)-\tau(P)\ge|S_P(t)-S_Q(t)|/(1-v)\ge|P-Q|/(1-v)$.
+In particular no two candidates are caught at the same instant, whatever the path.
+\end{corollary}
+\begin{proof}
+By Lemma~\ref{lem:E1} and continuity, $\rho_Q(\tau(P))=|S_Q(\tau(P))-S_P(\tau(P))|\ge|S_Q(t)-S_P(t)|$, and by \eqref{eq:P0} $\rho_Q$
+decreases at rate at most $1-v$ until it vanishes at $\tau(Q)$.
+\end{proof}
+
+\begin{theorem}[The catch curve is $(1-v)$-Lipschitz]\label{thm:E3}
+Fix $t\le T$. Let $K_t$ be the set of candidates uncaught at time $t$ and caught by time $T$. There is a $(1-v)$-Lipschitz curve
+$c_t:[t,T]\to\R^2$ with $c_t(t)=H(t)$ and $c_t(\tau(P))=S_P(t)$ for all $P\in K_t$. Consequently:
+\begin{enumerate}
+\item[(a)] the current positions of the candidates in $K_t$ lie on a curve from $H(t)$ of length at most $(1-v)(T-t)$;
+\item[(b)] for any path of speed at most $1$ on $[0,\infty)$, the set of starting points in $\R^2$ that are ever caught has zero area;
+\item[(c)] if every direction is caught by time $T$ and $t<d/(1-v)$, then $T-t\ge(\rho_{\min}(t)+L(t))/(1-v)$, where
+$\rho_{\min}(t)=\operatorname{dist}(H(t),\Gamma(t))$ and $L(t)$ is the length of the wavefront $\Gamma(t)$;
+\item[(d)] in particular every path that catches every direction needs time $T\ge(1+2\pi)d/(1-v)$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Define $c_t$ on $E=\{t\}\cup\tau(K_t)$; it is well defined because $\tau$ is injective (Corollary~\ref{cor:E2}). For
+$P,Q\in K_t$ with $\tau(P)<\tau(Q)$, Lemma~\ref{lem:E1} on $[t,\tau(P)]$ and then \eqref{eq:P0} give
+$|S_P(t)-S_Q(t)|\le\rho_Q(\tau(P))\le(1-v)(\tau(Q)-\tau(P))$; and $|S_P(t)-H(t)|=\rho_P(t)\le(1-v)(\tau(P)-t)$ by \eqref{eq:P0}. So
+$c_t$ is $(1-v)$-Lipschitz on $E$. It extends to $\overline E$ by uniform continuity and then to $[t,T]$ by linear interpolation on
+the complementary open intervals (constant after $\sup E$); splitting any $[x,y]$ at the nearest points of $\overline E$ shows the
+constant is preserved. Then (a) holds because the image has length at most $(1-v)(T-t)$. For (b), apply (a) with $t=0$ and
+$T=1,2,\dots$: the caught set is a countable union of sets of finite one-dimensional Hausdorff measure. For (c): before
+$d/(1-v)$ no candidate is caught, by \eqref{eq:P0}, and $\Gamma(t)$ is a $C^1$ Jordan curve; the image of $c_t$ contains $\Gamma(t)$.
+Let $t'$ be the first time at which $c_t$ meets $\Gamma(t)$; the piece on $[t,t']$ has length at least $\rho_{\min}(t)$, and the
+image of $[t',T]$ contains $\Gamma(t)$, so that piece has length at least $L(t)$. (d) is (c) at $t=0$.
+\end{proof}
+\begin{remark}
+Theorem~\ref{thm:E3}(b) extends Proposition~\ref{prop:null} from piecewise straight paths to all paths of speed at most $1$.
+\end{remark}
+
+\begin{theorem}[Lower bound on capture time, $\varepsilon=0$]\label{thm:E5}
+If a path with $|H'|\le1$ catches every direction (or only a dense set of directions) by time $T$, then
+\[
+T\ \ge\ \frac{d}{1-v}+\frac{2\pi d}{(1-v)^{3/2}} .
+\]
+\end{theorem}
+\begin{proof}
+Let $t_1=d/(1-v)$. By \eqref{eq:P0}, $\rho\ge d-(1-v)t>0$ for every candidate and $t<t_1$, so nothing is caught before $t_1$,
+$\rho_{\min}(t)\ge d-(1-v)t$, and $(\alpha,s)\mapsto S_\alpha(s)-H(s)$ is continuous and non-zero on the circle times $[0,t]$; hence the
+winding number of $\Gamma(t)$ about $H(t)$ is $1$. As in Proposition~\ref{prop:length}(2), $\partial_t\partial_\alpha S=
+\frac{v}{\rho}(I-\rhat\rhat^{\!\top})\partial_\alpha S$, so $L$ is $C^1$ on $[0,t_1)$ with $L'=v\int\sin^2\!\phi\,|\partial_\alpha S|/\rho\,d\alpha$,
+$\phi$ the angle between $\partial_\alpha S$ and $\rhat$. With $\beta$ a continuous lift of $\arg(S-H)$, $\rho|\partial_\alpha\beta|=|\sin\phi|\,|\partial_\alpha S|$,
+and $\int|\partial_\alpha\beta|\,d\alpha\ge2\pi$ by the winding number. By Cauchy--Schwarz,
+\[
+4\pi^2\le\Bigl(\int\frac{\sin^2\phi\,|\partial_\alpha S|}{\rho}\,d\alpha\Bigr)\Bigl(\int\frac{|\partial_\alpha S|}{\rho}\,d\alpha\Bigr)
+\le\frac{L'}{v}\cdot\frac{L}{\rho_{\min}},
+\]
+so $(L^2)'\ge8\pi^2v\,(d-(1-v)t)$. Integrating from $L(0)=2\pi d$,
+$L(t)^2\ge4\pi^2d^2+8\pi^2v\bigl(dt-\tfrac12(1-v)t^2\bigr)\to4\pi^2d^2/(1-v)$ as $t\uparrow t_1$. Finally, by
+Theorem~\ref{thm:E3}(c), $T\ge t+(d-(1-v)t+L(t))/(1-v)=d/(1-v)+L(t)/(1-v)$ for every $t<t_1$. (If only a dense set of directions is
+caught, the image of the closed set $c_t([t,T])$ still contains $\Gamma(t)$.)
+\end{proof}
+\begin{remark}
+At $v\to0$ all bounds, including the conditional upper bound of Theorem~\ref{thm:B}, equal $(1+2\pi)d+O(v)$; the first-order
+coefficients are $(1+3\pi)d$ here and $(1+4\pi+2\pi^2)d$ in Theorem~\ref{thm:B}. Numerically the greedy sweep takes about
+$6d/(1-v)^3$ (Section~\ref{sec:numerics}); whether the true optimal time grows like $(1-v)^{-3/2}$, $(1-v)^{-2}$ or faster is open.
+\end{remark}
+
+\begin{proposition}[Positive vision radius]\label{prop:E3eps}
+Let $\varepsilon>0$ and let $\tau(P)$ be the first time with $\rho_P\le\varepsilon$. Then $|P-Q|\le(1-v)|\tau(P)-\tau(Q)|+2\varepsilon$.
+Consequently, if every direction is seen by time $T$, then for every $\delta>0$ with $D:=(1-v)\delta+2\varepsilon<d$,
+\[
+T\ge\frac{d-\varepsilon}{1-v}+\delta\Bigl(\frac{\pi}{\arcsin(D/2d)}-1\Bigr).
+\]
+\end{proposition}
+\begin{proof}
+Say $\tau(P)\le\tau(Q)$. By Lemma~\ref{lem:E1}, $|P-Q|\le|S_P(\tau(P))-S_Q(\tau(P))|\le\varepsilon+\rho_Q(\tau(P))\le
+2\varepsilon+(1-v)(\tau(Q)-\tau(P))$, using \eqref{eq:P0} for the last step. Every sighting time is at least $(d-\varepsilon)/(1-v)$.
+Cover $[(d-\varepsilon)/(1-v),T]$ by $k\le(T-(d-\varepsilon)/(1-v))/\delta+1$ intervals of length $\delta$. The directions seen during one interval
+form a subset of the circle of chord-diameter at most $D<d$; any two of its points are less than $60^\circ$ apart, so the set lies in
+an arc of angle $2\arcsin(D/2d)$. These arcs cover the circle, so $2k\arcsin(D/2d)\ge2\pi$.
+\end{proof}
+
+\begin{proposition}[Logarithmic spirals]\label{prop:E7}
+For $a>0$, $a^2+b^2=1$, the unit-speed spiral $H(t)=(at)^{1+ib/a}$ (complex notation) catches at most one direction on the
+circle $|P|=d$.
+\end{proposition}
+\begin{proof}
+With $\mu_c=e^{(a+ib)c}$ and $\lambda=e^{ac}$, $H(\lambda t)=\mu_cH(t)$. The Snitch law is invariant under rotations and under
+scaling space and time by the same factor, so if $P$ is caught at $\tau$ then $\mu_cP$ is caught at $\lambda\tau$. Given catches
+$(P_1,\tau_1)$ and $(P_2,\tau_2)$, choose $c$ with $\lambda\tau_1=\tau_2$; by Corollary~\ref{cor:E2} only one point is caught at $\tau_2$,
+so $P_2=\mu_cP_1$. Since $|\mu_cP_1|=e^{ac}|P_1|$ is strictly monotone in $c$, at most one of these points has modulus $d$.
+\end{proof}
+
+\begin{remark}[Bisection orders]
+Theorem~\ref{thm:E3} rules out catching directions in dyadic bisection order with a time bound uniform in $N$: by
+Corollary~\ref{cor:E2}, the catch time is at least $(d+\sum_{j=1}^{k-1}(2^j-1)\,2d\sin(\pi/2^j))/(1-v)\ge(d+2d(k-1))/(1-v)\to\infty$
+for $N=2^k$ directions, if all points of each dyadic level are caught before the next level starts (in any order within a
+level): the $2^j$ new points of level $j+1$ are pairwise at least $2d\sin(\pi/2^j)$ apart. So Lemma~\ref{lem:limit} can never be
+applied to such orders.
+\end{remark}
+
+\input{sec_G}
+
+\input{sec_D1}
+\input{sec_D2}
+\input{sec_D3}
+\input{sec_B}
+\input{sec_ST}
+\input{sec_E}
+\IfFileExists{sec_T1.tex}{\input{sec_T1}}{}
+\IfFileExists{sec_T2.tex}{\input{sec_T2}}{}
+\IfFileExists{sec_Estar.tex}{\input{sec_Estar}}{}
+\IfFileExists{sec_HTp.tex}{\input{sec_HTp}}{}
+\IfFileExists{sec_T3.tex}{\input{sec_T3}}{}
+
+\section{The linearised chase and the threshold $v=1/2$}\label{sec:linear}
+Three independent derivations (reports B-1 \S7, C-1 \S3, H-1 \S3--4 in the project archive, refereed in referee-RB, -RC, -RH)
+lead to the same linear model. The statements below are \emph{about the model}; that the model governs the true nonlinear chase
+is supported numerically (agreement to $10^{-10}$ about an equally spaced radial chain, and to $1$--$5\%$ for growth rates in full
+chases) but not proved.
+\begin{itemize}
+\item Linearising the continuous sweep about a straight stretch gives a first-kind Abel equation of order $a=1/(1-v)$,
+$\tau^{\mu}F((1-v)\tau)=\int_0^\tau(\tau-s)^\mu\theta(s)\,ds$, $\mu=v/(1-v)$, linking Harry's heading $\theta$ to the sideways offset $F$
+of the wavefront ahead of him: the heading is a derivative of order exactly $1/(1-v)$ of the wavefront's shape. This is a finite
+loss of derivatives; the linear problem is well posed in analytic classes for every $v<1$.
+\item The exact-contact discrete chase is piecewise-constant collocation of this equation. Its characteristic function
+$(1-z)\mathrm{Li}_{-a}(z)/(az)$ has exactly $\lfloor a/2\rfloor$ zeros in the unit disk ($a$ not an even integer). Hence the
+linearised chase is stable for $v<1/2$ (perturbations decay like $n^{-1-a}$), marginal at $v=1/2$ (an undamped period-two mode,
+$\delta_n=8(-1)^n$), and unstable for $1/2<v<3/4$, with growth factor $1/|z_0|$ per step independent of the step size
+($1.42$, $2.08$, $3.73$, $5.28$ at $v=0.55$, $0.6$, $2/3$, $0.7$).
+\item The greedy controller for $\varepsilon>0$ (head for the first unseen candidate) is linearly unstable if the incomplete gamma
+function $\Gamma(a+1,s)$ has a zero with $\operatorname{Re}s>0$; this happens for $v>v^*=0.7799968$, with growth rate proportional
+to $1/\varepsilon$. Routh--Hurwitz: stable at $v=1/2,2/3,3/4$, unstable at $4/5,5/6,6/7$.
+\end{itemize}
+This explains both numerical failures reported in the earlier notes: the instability of the exact-contact chase above $v=1/2$ and
+the loss of the wavefront at $v=0.8$ are properties of those discretisations, not evidence about capture. It also explains why
+(H) and (K) fail for $v$ slightly above $1/2$ and why no argument along the discrete chase can pass $v=1/2$.
+
+\section{What is not proved}\label{sec:open}
+\begin{enumerate}
+\item \textbf{Unconditional exact capture for any $v>6\cdot10^{-5}$.} Exact capture is proved for $v\le6\cdot10^{-5}$
+(Corollary~\ref{cor:Exact2}). Open are: a non-negligible range of $v$ (the bootstrap in the proof of Theorem~\ref{thm:Main2} needs
+small $v$ and cannot go much beyond $v\approx10^{-4}$, Remark~\ref{rem:Estar-status}; numerics suggest that design~T works up to $v\approx0.2$, Remark~\ref{rem:T2-status}); $v$ up to $1/2$ and beyond, and
+all $v<1$ or a threshold (item~3); the version with speed exactly $1$ (item~5); and the endgame of the head-on start of
+Section~\ref{sec:start}, i.e.\ hypothesis \textup{(T)} of Corollary~\ref{cor:ST}, which the main theorem avoids (numerically the
+last stretch of that sweep is a self-tuned spiral whose measured quantities are uniform in $\varepsilon$, report N7-1; nothing is
+proved). For $v>6\cdot10^{-5}$ everything about exact capture is conditional:
+Theorems~\ref{thm:B}, \ref{thm:B2}, \ref{thm:A23}, \ref{thm:A35} are
+conditional on one statement about the end phase of the dyadic chase (after bearing order is first lost): a bound on $W$, a forward
+cone, or a sector. All are strongly supported numerically, with wide margins for small $v$. Every route tried (bearing order, total
+curvature, hull perimeter, bearing-sorted chase, perturbation in $v$) reduces to the same missing ingredient: stability of the chase
+near Harry at the scale of the gaps between candidates. Two refereed negative results constrain any proof (report A-4): a kink of
+angle $\kappa_0$ at distance $\rho_0$ in a radial chain reaches Harry with $\tan\kappa\ge\tan\kappa_0\,(\rho_0/\rho)^{v/(1-v)}$, so a near-field
+smoothness estimate must be weighted by distance and cannot hold with $N$-uniform constants in unweighted form; and the
+linearised catch map $T_\mu$ around the $v=0$ sweep satisfies $\|T_\mu-I\|\ge1$ with unbounded inverse in every fixed regularity class,
+so a plain implicit-function argument in $v$ fails (loss-tolerant, Nash--Moser-type methods are not excluded). By
+Lemma~\ref{lem:A41}, a bound on an $\varepsilon$-sweep time uniform as $\varepsilon\to0$ also suffices; this is how
+Corollaries~\ref{cor:Exact} and~\ref{cor:Exact2} are proved, and extending Theorem~\ref{thm:Main2} to a realistic range of $v$ (numerically the design
+works up to $v\approx0.2$, Remark~\ref{rem:T2-status}) is the most concrete open problem.
+\item For $\varepsilon>0$, a range of $v$ independent of $\varepsilon$ \emph{of reasonable size}. Theorem~\ref{thm:Main2} gives the
+$\varepsilon$-independent range $v\le6\cdot10^{-5}$; Theorem~\ref{thm:D2} needs $v\lesssim1/\log(d/\varepsilon)$, which is larger
+for every $\varepsilon\ge e^{-756}d$ (about $10^{-328}d$), and its method cannot do
+better without controlling the misalignment factor $\sin^2\phi$ (Remark~\ref{rem:D2}); Corollary~\ref{cor:D2-red} reduces the question to an
+$\varepsilon$-uniform Lipschitz bound on the walked fronts;
+numerically a weighted angle stays below $3.4$, which would give $v<0.227$ for every $\varepsilon$ (Proposition~\ref{prop:D6}).
+\item Capture for any $v\ge1/2$ by any method; the author's conjecture (every $v<1$); whether there is a threshold $v^*<1$.
+No obstruction was found: the lower bounds of Section~\ref{sec:constraints} grow like $(1-v)^{-2}$, while numerically the sweep time
+grows faster than any power of $1/(1-v)$ tried, roughly like $4.85(1-v)^{-1.81}e^{0.49/(1-v)}$ for $0.3\le v\le0.75$.
+\item The author's sufficient condition $|\partial_\alpha S(\theta(t),t)|\le C(1+t)$ is false as stated for every $v$ (the stretch is infinite at first
+contact); a weighted, Osgood-type form would suffice (report C-1, refereed), but it is not proved for any strategy.
+\item The version with speed exactly $1$ (see the remark after Lemma~\ref{lem:limit}). Theorem~\ref{thm:D1} uses speed exactly $1$;
+all $\varepsilon=0$ results give speed at most $1$ (including Corollaries~\ref{cor:Exact} and~\ref{cor:Exact2}; the path of Theorems~\ref{thm:Main} and~\ref{thm:Main2} has
+speed exactly $1$ until it stops).
+\end{enumerate}
+
+\section{Numerics (evidence, not proof)}\label{sec:numerics}
+With vision radius $\varepsilon>0$, Harry heading for the first unseen candidate, and every step computed with the exact map
+of Proposition~\ref{prop:integrals}, all directions were seen by the following times (units of $d$). The last column is the
+discrete chase of Section~4 extrapolated to $N\to\infty$ (with $N=2000$ the values are $13.21$, $18.97$, $28.81$, $47.04$).
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+$v$ & $\varepsilon=0.1d$ & $\varepsilon=0.05d$ & $\varepsilon=0.025d$ & $\varepsilon=0$\\
+\midrule
+0.2 & 12.78 & 13.01 & 13.13 & 13.24\\
+0.3 & 18.33 & 18.69 & 18.87 & 19.08\\
+0.4 & 27.86 & 28.48 & 28.82 & 29.24\\
+0.5 & 45.84 & 47.15 & 47.86 & 48.42\\
+0.6 & 86.35 & 89.51 & 90.89 & unstable\\
+0.7 & 213.96 & 222.77 & not run & unstable\\
+\bottomrule
+\end{tabular}
+\end{center}
+\paragraph{Method and convergence.} The $\varepsilon>0$ entries were reproduced independently (project archive, report F-1) with an
+adaptive simulator: every candidate is advanced by the exact straight-step map, new candidates are inserted by integrating them from
+$t=0$ along the recorded path when neighbours separate by more than a tolerance, and the exact map agrees with a high-accuracy ODE
+solve to $4\cdot10^{-14}$. Halving the step size changes the times by shrinking amounts (zero-step limits about $0.1$--$0.3$ above the
+finest values); changing the gap tolerance moves them by at most $0.13$. The $\varepsilon=0$ column was reproduced by four independent
+simulators.
+
+\paragraph{Growth with $v$.} Greedy sweep times at $\varepsilon=0.1d$ are $12.77$, $18.33$, $27.85$, $45.84$, $86.39$, $214.03$, $428.20$ for
+$v=0.2,\dots,0.7,0.75$. Neither a pure power of $1/(1-v)$ nor a pure exponential fits; the best fit over $0.3\le v\le0.75$ is
+$T\approx4.85(1-v)^{-1.81}e^{0.49/(1-v)}$ (Figure~\ref{fig:T}).
+
+\paragraph{$v\ge0.78$ (open).} The greedy controller fails from $v\approx0.78$, as predicted by the linear analysis of
+Section~\ref{sec:linear}: it zigzags with period $\approx14\varepsilon$ and errors grow until double precision is lost. A two-point
+controller that is linearly stable at $v=0.8$ removes the zigzag and sweeps about half of the directions, converged in step size
+and tolerance; then at $t\approx150$ (for $\varepsilon=0.1d$) the unseen front appears to split off a fast-growing tongue
+(Figure~\ref{fig:v08}). Report F2-1 shows this tongue is a \emph{double-precision artefact}: replaying the same Harry path in 30-digit
+arithmetic puts the tongue points back on the front (double-precision positions are off by up to $0.77$ against a tolerance of
+$0.01$), and a closed-loop run entirely in 30- and 50-digit arithmetic (agreeing exactly; halving the step moves Harry by $<10^{-5}$)
+passes $t=150$ without breakdown and continues to $t=178$. Whether this sweep completes is open: at the measured rate it would need
+$T\approx340$. The leg-greedy chase of Proposition~\ref{prop:D32} fails quickly at $v=0.8$ (the target runs away from $t\approx16$).
+No controller tested is linearly stable at $v\ge0.85$. These runs decide neither capture nor failure.
+
+\paragraph{Fixed $v$, $\varepsilon\to0$ (report F2-1).} For the greedy $\varepsilon$-chase of Proposition~\ref{prop:D6} the sweep
+time converges as $\varepsilon\to0$, to about $7.479$, $8.344$, $9.638$, $13.241$ for $v=0.01$, $0.05$, $0.1$, $0.2$ (step-halving,
+epoch and exact-replay checks agree to $\le4\cdot10^{-4}$ at $\varepsilon\le10^{-3}$; runs at $\varepsilon=10^{-5}$ did not finish in the
+time allowed). The weighted angle $K$ of Proposition~\ref{prop:D6} peaks at about $3.14$ at the first switch and stays at $1.97$--$2.07$
+afterwards, independent of $\varepsilon$ to three or four digits, and proviso (R) held in every run. If such bounds were proved,
+Proposition~\ref{prop:D6}(c) would give an $\varepsilon$-independent range of roughly $v<0.16$; they are not proved.
+(The only proved $\varepsilon$-independent range is $v\le6\cdot10^{-5}$, Theorem~\ref{thm:Main2}, by a different construction.)
+
+\paragraph{The end phase of the dyadic chase.} The quantities in the hypotheses of Theorems~\ref{thm:A23} and~\ref{thm:A35} converge
+slowly in $N$ (like $N^{-\kappa}$, $\kappa\approx v/(3(1-v))$); multiprecision runs with geometrically refined tails give
+$\sup_{t\ge t_f}W\approx0.82,0.70,0.45,0.28,0.11$ for $v=0.05,0.1,0.2,0.3,0.45$ and sector openings $\le0.92$--$1.02$ for $0.1\le v\le0.24$,
+all well inside what the theorems need.
+
+\begin{figure}[ht]\centering
+\IfFileExists{fig_paths.png}{\includegraphics[width=\textwidth]{fig_paths.png}}{}
+\caption{Greedy sweep at $v=0.5$, $\varepsilon=0.05d$ (numerical): the unseen part of the wavefront, Harry's path and Harry's position.}
+\label{fig:paths}
+\end{figure}
+\begin{figure}[ht]\centering
+\IfFileExists{fig_T.png}{\includegraphics[width=0.8\textwidth]{fig_T.png}}{}
+\caption{Sweep time against $1/(1-v)$: numerical greedy sweeps ($\varepsilon=0.1d$) and fit; the proved lower bounds of
+Theorem~\ref{thm:E5} and Section~\ref{sec:G}; and the conditional upper bound of Theorem~\ref{thm:B2}. The bounds are for $\varepsilon=0$, so
+the comparison is of orders of magnitude.}
+\label{fig:T}
+\end{figure}
+\begin{figure}[ht]\centering
+\IfFileExists{fig_v08.png}{\includegraphics[width=\textwidth]{fig_v08.png}}{}
+\caption{$v=0.8$ with a linearly stable two-point controller (numerical): unseen length against time, and the apparent breakdown at $t\approx150$, which extended-precision reruns show to be a double-precision artefact (report F2-1).}
+\label{fig:v08}
+\end{figure}
+\end{document}

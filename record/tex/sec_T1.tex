@@ -1,0 +1,1222 @@
+% sec_T1.tex -- A start with tangential first contact: design T and the touch-down data; hypothesis (H_T) holds.
+% Source: referee/P8a-claims.md, version 4 (= version 3, stream P8a, round 8, which reconciles the fixes of
+% reports/referee-RP8a-1.md (F1-F6, M1) and reports/referee-RP8a-2.md (F1-F4), doubly refereed; plus the repair of the (T1)
+% far case and of Prop. P8a.1(2) from referee/Q3-claims.md 10.2 and reports/referee-RQ3-1.md 6, referee-RQ3-2.md 4).
+% The hypothesis (H_T) itself is DEFINED in sec_T2.tex (label hyp:HT); Theorem thm:HT here proves it for design T, D_1 = 1.
+% Labels: all new labels have the prefix T1-, except sec:touch, def:T (design T) and thm:HT (main theorem of the section).
+% Labels referenced from sec_T2.tex: hyp:HT, thm:Main, cor:Exact.
+%
+% Notation changes against the source (no change of mathematics), forced by clashes with main.tex / sec_B.tex / sec_ST.tex:
+%   label offset x = |theta - alpha_0|, x_e -> xi, xi_e           (x_theta is the virtual candidate);
+%   x_theta := d/dtheta S_theta of Lemmas 2, 3 -> q;   S := I + vR_beta -> L        (S is the Snitch);
+%   a := d_theta h, c := d_theta C -> \TDa, \TDc (sans serif)     (a, b are labels, c is the chord);
+%   (r(theta), b(theta)), polar coordinates in the frame of run 2 -> \TDr, \TDb     (r = x - P, b a label);
+%   A(theta) := d_theta r -> \STA (as in sec_ST.tex; A is DF);    m(rho), Gamma(rho) -> \STme, \STG (sec_ST.tex);
+%   t_2 := t_1 + rho_0/(1-v) (true catch time of alpha_0) -> t_c  (sec_T2 / P8b call the touch-down time t_2);
+%   delta(t) := t_2 - t -> omega(t)                               (delta is the tilt of Lemma 4);
+%   the curve Y(alpha) of the source, section 9 -> Upsilon(alpha) (Y is an imaginary part);
+%   the items (T1), (T2) of the definition of design T -> run 1, run 2   ((T0)-(T5) are the items of (H_T)).
+% Uses the macros \STas, \STme, \STG of sec_ST.tex, \Bts of sec_B.tex and \Eu of sec_E.tex.
+
+\newcommand{\TDa}{\mathsf a}
+\newcommand{\TDc}{\mathsf c}
+\newcommand{\TDr}{\mathsf r}
+\newcommand{\TDb}{\mathsf b}
+\newcommand{\TDS}{\mathfrak S}
+\newcommand{\TDT}{\mathcal T}
+\newcommand{\TDta}{t_{\mathrm a}}
+\newcommand{\TDtc}{t_{\mathrm c}}
+\newcommand{\TDG}{\mathcal G}
+\newcommand{\TDbe}{b_{\mathrm e}}
+\newcommand{\TDxe}{\xi_{\mathrm e}}
+\newcommand{\TDmT}{\mu_{\mathrm T}}
+\newcommand{\TDY}{\Upsilon}
+\newcommand{\TDSz}{\mathcal S_0}
+{\theoremstyle{definition}\newtheorem{TDdefinition}{Definition}}
+
+\section{A start with tangential first contact: the touch-down data}\label{sec:touch}
+
+The start S of Section~\ref{sec:start} meets the unseen part of the front transversally. This section analyses a different start,
+\emph{design T}. Harry runs straight through the front, catching the candidate $0$, goes on for a fixed distance $D_1$, and then runs
+straight at the candidate $\alpha_0$ which at that moment lies on the silhouette of the front as seen from Harry
+(Definition~\ref{def:T}). The second run is therefore \emph{tangent} to the front, and Harry \emph{touches down} on the front at a time
+$\Bts$, at the point $X_0=P(\Bts)$. Everything about the front at $\Bts$ can be computed from the two integrals of
+Proposition~\ref{prop:integrals}, because each of the two runs is straight. The outcome is Theorem~\ref{thm:HT}: for $D_1=1$, every
+$v\le10^{-6}$ and every $\varepsilon\le10^{-3}$, the touch-down hypothesis, Hypothesis~\ref{hyp:HT} (stated in the next section,
+where it is the input of Theorem~\ref{thm:Main} and Corollary~\ref{cor:Exact}; Section~\ref{sec:HTp}
+proves it with sharper constants for $v\le2\cdot10^{-2}$, and its row $v\le6\cdot10^{-5}$ is the input of Theorem~\ref{thm:Main2}), holds with explicit absolute constants.
+\textbf{Nothing in this section concerns times after $\Bts$.} What is and is not proved is listed in Remark~\ref{rem:T1-status}.
+
+Three places of the front at $\Bts$ are singular, and the section is organised around them: the point $X_0$ and the end
+$E_Y$ of the unseen set behind Harry, where the curvature of the front grows like a small negative power of the distance
+(exponents $\mu=v/(1-v)$ and $\TDmT=3v/(1+v)$), and the \emph{hole}, the set of labels seen during the first run, in whose middle sits
+the label $0$, which has been caught and has no trajectory any more.
+
+\medskip\noindent\textbf{Setting and conventions.} The normalisation $d=1$, the field $F$, $f$, $A=DF$, $a^*$, the virtual candidates
+$x_\theta$ of a $1$-Lipschitz path $P$, $r=x-P$, $\rho=|r|$, $\rhat$, the quantities $l$, $c$, $E=l-c$, $N=(2E)^{1/2}$, the products
+$a\cdot b$, $a\times b$ and $a^\perp=ia$ are those of Section~\ref{sec:bulk}; $\STme(\rho)=\max(\rho,\varepsilon)$ and
+$p=T\times r$ are as in Section~\ref{sec:start}; $S_\theta$ is the true candidate. The plane is $\mathbb C$. For a front (a curve
+parametrised by the label), $T=e^{i\psi}$ is the unit tangent in the direction of increasing label, $w=|\partial_\theta x|$,
+$k=\partial_s\psi$ is the curvature ($k=1$ for the unit circle), and $\phi=\arg r-\psi$ is the angle from $T$ to $\rhat$.
+\begin{itemize}
+\item \emph{True front.} This is the curve $\theta\mapsto S_\theta(t)$ of true candidates, i.e.\ of solutions of \eqref{eq:snitch} with
+$H=P$. It is $C^\infty$ in $\theta$ near every label whose candidate has had $\rho>0$ on $[0,t]$. It coincides with the virtual front on
+every label that has had $\rho\ge\varepsilon$ up to that time (uniqueness, as in the proof of Lemma~\ref{lem:B-VC}(c)). The proofs of
+Lemma~\ref{lem:B-1}(i)--(iii) use the variational equation only through $A=\Pi/\rho$; hence for the true front, at every $\rho>0$,
+\begin{equation}\label{eq:T1-laws}
+\frac{w_t}w=\frac{v\sin^2\!\phi}\rho\ \ (\ge0),\qquad\psi_t=-\frac v\rho\sin\phi\cos\phi,\qquad
+k_t=\frac v\rho(1-3\sin^2\!\phi)\,k+\frac v{\rho^2}\sin\phi\,(3\cos^2\!\phi-1),
+\end{equation}
+and $w\ge1$ because $w=1$ at $t=0$.
+\item \emph{Heading frame.} While Harry runs with constant unit velocity (his \emph{heading}), coordinates are taken with Harry at the
+origin and the heading equal to $1\in\mathbb C$; a candidate is at $r=\rho e^{i\beta}=z+iy$.
+\item $\mu:=v/(1-v)$, $\TDmT:=3v/(1+v)$. As in Section~\ref{sec:start}, $g(\beta)=\sin\beta/\tan^v(\beta/2)$ and
+$g_{\max}=g(\arccos v)$, with $1=g(\pi/2)\le g_{\max}\le e^{v^2}$.
+\item \emph{Standing assumptions from Subsection~\ref{sec:T1-run1} on:}
+\[
+D_1=1,\qquad0<v\le10^{-6},\qquad0<\varepsilon\le10^{-3};\qquad\text{so }\mu\le1.000002\cdot10^{-6}.
+\]
+The lemmas of Subsection~\ref{sec:T1-exact} are exact and hold for all $v\in(0,1)$.
+\item All numerical constants are rounded in the safe direction; they are wasteful on purpose.
+\end{itemize}
+
+Two elementary facts about plane curves are used for curves which are not virtual fronts; they are Lemma~\ref{lem:ST-D0}(c) and the
+inequality $N^2\le\EV_{\Eu}$ of Lemma~\ref{lem:E-facts}(b), with the same proofs.
+
+\begin{lemma}\label{lem:T1-elem}
+Let $\gamma:[0,l]\to\R^2$ be a $C^1$ curve with $|\gamma'|\equiv1$, $c:=|\gamma(l)-\gamma(0)|$, $N:=(2(l-c))^{1/2}$.
+\begin{enumerate}
+\item[(a)] If the tangent angle of $\gamma$ is $K$-Lipschitz in arclength and $Kl\le\pi$, then $c\ge(2/K)\sin(Kl/2)\ge l-K^2l^3/24$,
+i.e.\ $N\le(K/\sqrt{12})\,l^{3/2}$.
+\item[(b)] For every unit vector $\Eu$: $N^2\le\int_0^l|\gamma'-\Eu|^2ds$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) Let $\psi$ be the tangent angle and $\psi_{\mathrm m}:=\psi(l/2)$. Then $|\psi(s)-\psi_{\mathrm m}|\le K|s-l/2|\le\pi/2$, so
+$c\ge(\gamma(l)-\gamma(0))\cdot e^{i\psi_{\mathrm m}}=\int_0^l\cos(\psi-\psi_{\mathrm m})\,ds\ge\int_0^l\cos(K|s-l/2|)\,ds=(2/K)\sin(Kl/2)$,
+and $\sin x\ge x-x^3/6$. (b) $|\gamma'-\Eu|^2=2(1-\gamma'\cdot\Eu)$, so the integral is
+$2[l-(\gamma(l)-\gamma(0))\cdot\Eu]\ge2(l-c)$.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Three exact lemmas on a straight run}\label{sec:T1-exact}
+
+Throughout this subsection $v\in(0,1)$ is arbitrary, Harry moves with constant unit velocity on a time interval, coordinates are
+those of the heading frame, a (true) candidate is at $r=\rho e^{i\beta}$ with $0<\beta<\pi$, and
+\[
+\tau:=\tan(\beta/2)\in(0,\infty).
+\]
+Recall the integrals $C=\rho\,g(\beta)$ (constant) and $h=\rho(\cos\beta+v)$, $h'=-(1-v^2)$, of Proposition~\ref{prop:integrals}.
+
+\begin{lemma}[Coordinates $(C,\tau)$]\label{lem:T1-coord}
+\begin{enumerate}
+\item[(a)] $g(\beta)=2\tau^{1-v}/(1+\tau^2)$, and
+\[
+\rho=\frac C2\bigl(\tau^{v-1}+\tau^{v+1}\bigr),\qquad y=\rho\sin\beta=C\tau^v,\qquad z=\rho\cos\beta=\frac C2\bigl(\tau^{v-1}-\tau^{v+1}\bigr),
+\]
+\[
+h=\frac C2\bigl[(1+v)\tau^{v-1}-(1-v)\tau^{1+v}\bigr].
+\]
+\item[(b)] $\tau\mapsto(1+v)\tau^{v-1}-(1-v)\tau^{1+v}$ is a strictly decreasing bijection $(0,\infty)\to\R$. Hence $\tau$ is strictly
+increasing in time, and the state at any time of the run is determined by $(C,h)$.
+\item[(c)] $\min_\tau\rho=C/g_{\max}$, attained at $\tau^2=(1-v)/(1+v)$, i.e.\ $\cos\beta=v$; $\rho$ is decreasing in time while
+$\cos\beta>v$.
+\item[(d)] If $h>0$: $\tau\le\bigl((1+v)C/(2h)\bigr)^{1/(1-v)}$. If $h<0$: $\tau\ge\bigl(2|h|/((1-v)C)\bigr)^{1/(1+v)}$, and
+\[
+\tau^{1+v}=\frac{2|h|}{(1-v)C}\Bigl[1+\frac{(1+v)C\tau^{v-1}}{2|h|}\Bigr].
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $\sin\beta=2\tau/(1+\tau^2)$ and $\cos\beta=(1-\tau^2)/(1+\tau^2)$, so $g=2\tau^{1-v}/(1+\tau^2)$, $\rho=C/g$, $y=\rho\sin\beta=C\tau^v$,
+$z=\rho\cos\beta=(C/2)\tau^{v-1}(1-\tau^2)$, and $h=z+v\rho$. (b) The derivative is $-(1-v^2)(\tau^{v-2}+\tau^v)<0$, and the limits are
+$\pm\infty$; $h'=-(1-v^2)<0$. (c) $\rho'=v-\cos\beta$ by \eqref{eq:polar}; $\frac d{d\tau}(\tau^{v-1}+\tau^{v+1})=\tau^{v-2}((1+v)\tau^2-(1-v))$;
+the minimum value is $C/g(\arccos v)$. (d) From (a): $(1+v)\tau^{v-1}=2h/C+(1-v)\tau^{1+v}\ge2h/C$, resp.\
+$(1-v)\tau^{1+v}=2|h|/C+(1+v)\tau^{v-1}\ge2|h|/C$.
+\end{proof}
+
+\begin{lemma}[First-order transport: the tangent]\label{lem:T1-first}
+Let $\theta\mapsto S_\theta$ be a $C^1$ family of true candidates, all with $0<\beta<\pi$ on the time interval. Put
+$q:=\partial_\theta S_\theta$ (heading frame) and
+\[
+\Xi:=q+v\,e^{i\beta}\,\bar q .
+\]
+Then
+\[
+\operatorname{Re}\Xi=\partial_\theta h=:\TDa,\qquad\operatorname{Im}\Xi=\tau^v\,\partial_\theta C=:\tau^v\,\TDc,
+\]
+and $\TDa(\theta)$, $\TDc(\theta)$ do not depend on time. Conversely $q=(\Xi-v\,e^{i\beta}\,\bar\Xi)/(1-v^2)$, and
+$(1-v)w\le|\Xi|\le(1+v)w$, where $w=|q|$. In particular, writing $q=we^{i\psi}$ and $\phi=\beta-\psi$:
+\[
+\TDa=w(\cos\psi+v\cos\phi),\qquad\TDc\,\tau^v=w(\sin\psi+v\sin\phi).
+\]
+\end{lemma}
+\begin{proof}
+Write $q=X+iY$. Since Harry's position does not depend on $\theta$: $\partial_\theta z=X$, $\partial_\theta y=Y$,
+$\partial_\theta\rho=X\cos\beta+Y\sin\beta$ and $\rho\,\partial_\theta\beta=-X\sin\beta+Y\cos\beta$. Then
+\[
+\partial_\theta h=X+v\,\partial_\theta\rho=X(1+v\cos\beta)+vY\sin\beta=\operatorname{Re}\Xi,
+\]
+because $v\,e^{i\beta}(X-iY)=v(X\cos\beta+Y\sin\beta)+iv(X\sin\beta-Y\cos\beta)$. By Lemma~\ref{lem:T1-coord}, $C=y\tau^{-v}$, and
+$\partial_\theta\log\tau=\partial_\theta\beta/\sin\beta$ (as $d\tau/d\beta=\tau/\sin\beta$), so
+\[
+\tau^v\partial_\theta C=Y-vy\,\frac{\partial_\theta\beta}{\sin\beta}=Y-v\rho\,\partial_\theta\beta=Y(1-v\cos\beta)+vX\sin\beta=\operatorname{Im}\Xi .
+\]
+$C$ and $h+(1-v^2)t$ are constants of the motion and smooth functions of the position, so $\TDc$ and $\TDa$ are independent of time.
+The map $x\mapsto x+v\,e^{i\beta}\bar x$ is $I+vR$ with $R$ a reflection: its inverse is $(I-vR)/(1-v^2)$ and its singular values are
+$1\pm v$.
+\end{proof}
+
+\begin{lemma}[Second-order transport: the curvature]\label{lem:T1-second}
+In the situation of Lemma~\ref{lem:T1-first} let the family be $C^2$. Then
+\[
+J:=\TDa\,\partial_\theta\TDc-\TDc\,\partial_\theta\TDa
+\]
+does not depend on time, and the curvature $k$ of the front satisfies, with $w,\psi,\phi,\rho,\beta,\tau$ at the time considered,
+\begin{equation}\label{eq:T1-k}
+k=\frac{\tau^vJ}{(1-v^2)\,w^3}-\TDS,\qquad
+\TDS:=\frac{v\sin\phi}{(1-v^2)\,\rho}\Bigl[\frac{\rho\,\TDa\,\partial_\theta(\log C)}{w^2}-v-\cos(\phi-\psi)\Bigr].
+\end{equation}
+Consequently, for two times $t'<t''$ of the run (data $'$ and $''$),
+\begin{equation}\label{eq:T1-k2}
+k''=\Bigl(\frac{\tau''}{\tau'}\Bigr)^v\Bigl(\frac{w'}{w''}\Bigr)^3\bigl(k'+\TDS'\bigr)-\TDS'',\qquad\frac{w'}{w''}\le1 .
+\end{equation}
+\end{lemma}
+\begin{proof}
+Put $V:=\Xi=\TDa+i\TDc\tau^v$, $L:=I+vR_\beta$ with $R_\beta x:=e^{i\beta}\bar x$, so that $q=L^{-1}V$. Differentiating in $\theta$:
+\[
+\partial_\theta V=\partial_\theta\TDa+i\Bigl(\tau^v\partial_\theta\TDc+v\,\TDc\,\tau^v\frac{\partial_\theta\beta}{\sin\beta}\Bigr),\qquad
+\partial_\beta(L^{-1})=-\frac{vR'_\beta}{1-v^2}\ \ \text{with }R'_\beta x:=ie^{i\beta}\bar x,
+\]
+and $\partial_\theta q=L^{-1}\partial_\theta V+\partial_\theta\beta\cdot\partial_\beta(L^{-1})V$. For a real $2\times2$ matrix $M$,
+$(Ma)\times(Mb)=\det M\,(a\times b)$, and $\det L^{-1}=1/(1-v^2)$. So
+\[
+kw^3=q\times\partial_\theta q=\frac{V\times\partial_\theta V}{1-v^2}-\frac{v\,\partial_\theta\beta}{1-v^2}\;q\times R'_\beta(Lq).
+\]
+Here $V\times\partial_\theta V=\tau^vJ+v(\TDa\TDc\tau^v)\,\partial_\theta\beta/\sin\beta$, and
+$\TDc\tau^v/\sin\beta=\partial_\theta C\cdot\tau^{v-1}(1+\tau^2)/2=\rho\,\partial_\theta C/C$ by Lemma~\ref{lem:T1-coord}(a). With
+$q=we^{i\psi}$: $Lq=w(e^{i\psi}+ve^{i\phi})$, $R'_\beta(Lq)=iw(e^{i\phi}+ve^{i\psi})$, and
+\[
+q\times R'_\beta(Lq)=w^2\operatorname{Im}\bigl(e^{-i\psi}\cdot i(e^{i\phi}+ve^{i\psi})\bigr)=w^2\bigl(\cos(\phi-\psi)+v\bigr);
+\]
+and $\partial_\theta\beta=-w\sin\phi/\rho$ (from $\rho\,\partial_\theta\beta=-X\sin\beta+Y\cos\beta=w\sin(\psi-\beta)$). Hence
+\[
+kw^3=\frac{\tau^vJ}{1-v^2}-\frac{v\,w\sin\phi}{(1-v^2)\rho}\Bigl[\rho\,\TDa\,\partial_\theta\log C-w^2\bigl(v+\cos(\phi-\psi)\bigr)\Bigr],
+\]
+which is \eqref{eq:T1-k}. $J$ is built from the time-independent $\TDa$, $\TDc$. Relation \eqref{eq:T1-k2} follows by eliminating
+$J$; $w$ is non-decreasing by \eqref{eq:T1-laws}.
+\end{proof}
+
+\begin{remark}\label{rem:T1-tilt}
+(i) Lemma~\ref{lem:T1-first} gives the tilt in closed form. If $\TDa>0$, put $Y_r:=\TDc\tau^v/\TDa=y\,\partial_\theta(\log C)/\TDa$. Taking
+real and imaginary parts of $(\Xi-ve^{i\beta}\bar\Xi)/(1-v^2)$ with $\Xi=\TDa(1+iY_r)$,
+\[
+\tan\psi=\frac{(1+v\cos\beta)Y_r-v\sin\beta}{1-v\cos\beta-v\sin\beta\,Y_r},\qquad
+w=\frac{\TDa}{1-v^2}\Bigl|\bigl(1-v\cos\beta-v\sin\beta\,Y_r\bigr)+i\bigl((1+v\cos\beta)Y_r-v\sin\beta\bigr)\Bigr| .
+\]
+(ii) NUMERICAL (not part of any proof). Lemmas~\ref{lem:T1-coord}--\ref{lem:T1-second} were checked by both referees against a direct
+integration of \eqref{eq:snitch} and of its first and second variational equations; see Remark~\ref{rem:T1-status}.
+\end{remark}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Design T; run 1 and the hole}\label{sec:T1-run1}
+
+\begin{TDdefinition}[Design T]\label{def:T}
+Let $D_1\in(0,1]$ be a fixed absolute constant (the overshoot; in these notes $D_1=1$) and put $t_1:=1/(1-v)+D_1$.
+\begin{itemize}
+\item \emph{Run 1.} $P(t):=t$ (real axis) for $0\le t\le t_1$. (The true candidate $0$ is caught at $t_0:=1/(1-v)<t_1$.)
+\item \emph{Run 2.} Let $\alpha_0:=\arccos(v+1/t_1)$, write $S_{\alpha_0}(t_1)-P(t_1)=:\rho_0e^{i\beta^*}$ in polar form ($\rho_0>0$) and put
+$\Eu:=e^{i\beta^*}$. Then $P(t):=P(t_1)+(t-t_1)\Eu$ for $t_1\le t\le\Bts$, where the \emph{touch-down time} is
+\[
+\Bts:=t_1+\frac{\rho_0-\varepsilon}{1-v}+\varepsilon\int_0^1\frac{d\sigma}{1-v\sigma(2-\sigma)} .
+\]
+\end{itemize}
+Further $\TDta:=t_1+(\rho_0-\varepsilon)/(1-v)$, $\TDtc:=t_1+\rho_0/(1-v)$ and $X_0:=P(\Bts)$.
+\end{TDdefinition}
+$P$ is $1$-Lipschitz and depends only on $(v,\varepsilon,D_1)$: $\Eu$ is computed at $t_1$ from the state of the true candidate
+$\alpha_0$, which is given by run 1. By Lemma~\ref{lem:T1-tang}, $\alpha_0$ is the label at which the front at $t_1$ is tangent to a ray
+from $P(t_1)$; the true candidate $\alpha_0$ is at distance $\varepsilon$ from Harry at $\TDta$ and would be caught at $\TDtc$; and
+$\Bts\in(\TDta,\TDtc)$ is \emph{the time at which the virtual candidate $\alpha_0$ is at distance $0$ from Harry}:
+$P(\Bts)=x_{\alpha_0}(\Bts)$ (Lemma~\ref{lem:T1-tang}(b)). So the touch-down time is defined through the virtual candidate $\alpha_0$, and
+at $\Bts$ the true candidate $\alpha_0$ is still at the positive distance $(1-v)(\TDtc-\Bts)$ ahead of Harry: in the curve of
+Theorem~\ref{thm:HT} the label of $X_0$ is a \emph{ghost label}. What follows $\Bts$ is not part of this section. \textbf{From now on
+$D_1=1$,} so $t_1=2+\mu$, and $0<v\le10^{-6}$, $0<\varepsilon\le10^{-3}$ (then $\rho_0>\varepsilon$, Lemma~\ref{lem:T1-tang}(b)).
+
+\medskip
+For $\alpha\in(0,\pi)$ let $(\rho_1(\alpha),\beta_1(\alpha))$ be the heading-frame polar coordinates of $S_\alpha(t_1)-P(t_1)$ for run 1,
+and $\tau_1:=\tan(\beta_1/2)$. The lower half is the mirror image: $S_{2\pi-\alpha}=\overline{S_\alpha}$ during run 1. In run 1, at
+$t=0$: $\rho=1$, $\beta=\alpha$, $\tau=\tau_\alpha:=\tan(\alpha/2)$; hence
+\[
+C=g(\alpha),\qquad h(t)=\cos\alpha+v-(1-v^2)t,\qquad h_1:=h(t_1)=-(1-v^2)-(1-\cos\alpha)<0,
+\]
+\[
+\TDa=-\sin\alpha,\qquad\TDc=g'(\alpha)=(\cos\alpha-v)\,\tau_\alpha^{-v}.
+\]
+We write $y(\alpha,t_1)=\operatorname{Im}S_\alpha(t_1)$.
+
+\begin{lemma}[Run 1]\label{lem:T1-run1}
+\begin{enumerate}
+\item[(a)] \emph{Seen.} Let $\STas\in(0,\arccos v)$ be defined by $g(\STas)=\varepsilon g_{\max}$. A true candidate
+$\alpha\in(-\pi,\pi]$ is seen during $[0,t_1]$ iff $|\alpha|\le\STas$. For $\alpha\in[\STas,2\pi-\STas]$: $\rho_\alpha\ge\varepsilon$
+on $[0,t_1]$, so virtual $=$ true on $[0,t_1]$. Moreover $\STas\le2.1\,\varepsilon$.
+\item[(b)] \emph{Middle.} For $\alpha\in[1/2,2\pi-1/2]$: $\rho_\alpha(t)\ge0.479$ on $[0,t_1]$; at $t_1$ the true front has
+\[
+1\le w_1\le1.0000042,\qquad\bigl|\arg\partial_\alpha S_\alpha(t_1)-(\alpha+\pi/2)\bigr|\le2.1\cdot10^{-6},\qquad|k_1-1|\le2\cdot10^{-5}.
+\]
+\item[(c)] \emph{Arm.} For $\alpha\in(0,\arccos v)$: $\rho_1\ge1+v$, $y(\alpha,t_1)\ge\sin\alpha$, and the true front at $t_1$ satisfies
+\[
+|k_1|\le\frac{1+v}{\cos\alpha-v}+2.0001\,v .
+\]
+For $\alpha\in(0,1/2]$: $|k_1|\le1.14$, the tangent is $e^{i(\pi/2+\delta)}$ with
+\[
+0\le\delta\le\tan\delta\le1.1396\,y(\alpha,t_1),\qquad\text{and}\qquad w_1\le1.0000015\,(2/\alpha)^{2v}.
+\]
+\item[(d)] \emph{Half-width of the hole.} $y_{\mathrm s}:=y(\STas,t_1)$ satisfies
+\[
+y_{\mathrm s}=(\varepsilon g_{\max})^{1/(1+v)}\bigl(2(1+v)\bigr)^{v/(1+v)}(1+\theta_{\mathrm s}),\qquad0\le\theta_{\mathrm s}\le0.51\,v\varepsilon .
+\]
+\item[(e)] $|k_1|\le1.14$ and $w_1\le1.0000052\,(2/\chi)^{2v}$, $\chi:=\min(\alpha,2\pi-\alpha)$, for all $\alpha\in(0,2\pi)$.
+\end{enumerate}
+\end{lemma}
+In (c)--(e) the true front is meant, also on the labels $0<|\alpha|<\STas$, which have been seen: a candidate that has been seen
+keeps moving by the true law.
+\begin{proof}
+(a) By Lemma~\ref{lem:T1-coord}(b),(c), $\tau$ increases from $\tau_\alpha$ to $\tau_1$, and $h_1<0$ means $\cos\beta_1<-v$, so
+$\tau_1^2>(1+v)/(1-v)>(1-v)/(1+v)$. If $\alpha\le\arccos v$, the minimum point is passed and $\min\rho=g(\alpha)/g_{\max}$, which is
+$\le\varepsilon$ iff $\alpha\le\STas$ ($g$ is increasing on $(0,\arccos v)$); if $\alpha>\arccos v$, $\rho$ is increasing and
+$\min\rho=1>\varepsilon$. Mirror for $\alpha<0$; $\alpha=0$ is caught at $1/(1-v)<t_1$, and $\alpha=\pi$ has $\rho\ge1$. For the bound on
+$\STas$ put $\tau_{\mathrm s}:=\tan(\STas/2)$ ($\le1$): $\tau_{\mathrm s}^{1-v}=\varepsilon g_{\max}(1+\tau_{\mathrm s}^2)/2\le\varepsilon g_{\max}$, so
+$\STas\le2\tau_{\mathrm s}\le2(\varepsilon g_{\max})^{1/(1-v)}\le2.1\,\varepsilon$.
+
+(b) For $\alpha\in[1/2,\pi/2]$: $y'=vy/\rho\ge0$ ($y=C\tau^v$, $\tau$ increasing), so $\rho\ge y\ge\sin\alpha\ge\sin(1/2)>0.479$. For
+$\alpha\in[\pi/2,\pi]$: $X:=\operatorname{Re}S_\alpha$ has $X'=v(X-t)/\rho$ and $(X-t)'\le v-1<0$, $X(0)-0=\cos\alpha\le0$; so $X-t\le0$,
+$X'\le0$, $X\le\cos\alpha\le0$, $|\operatorname{Im}S_\alpha|\ge\sin\alpha$, and $\rho^2\ge X^2+y^2\ge1$. Mirror for the lower half. Now use
+\eqref{eq:T1-laws} with $w(0)=1$, $k(0)=1$ and $t_1\le2.0000011$: $\log w_1\le vt_1/0.479\le4.18\cdot10^{-6}$;
+$|\psi_t|\le v/(2\cdot0.479)$, so the tangent angle moves by at most $2.09\cdot10^{-6}$; and $|1-3\sin^2\!\phi|\le2$,
+$|\sin\phi\,(3\cos^2\!\phi-1)|\le1$ give $\frac d{dt}|k-1|\le v\,[4.1754(|k-1|+1)+4.3585]$, hence
+$|k_1-1|\le8.534\,vt_1e^{4.1754vt_1}\le2\cdot10^{-5}$.
+
+(c) $h_1=\rho_1(\cos\beta_1+v)$ with $-(1-v)\le\cos\beta_1+v<0$ and $|h_1|\ge1-v^2$: $\rho_1\ge1+v$. $y=C\tau^v$ is non-decreasing and
+$y(0)=\sin\alpha$.
+
+\emph{Curvature.} Apply Lemma~\ref{lem:T1-second} with $t'=0$. There $w=1$, $k=1$, $\psi=\alpha+\pi/2$, $\phi=-\pi/2$, $\rho=1$ and
+$\TDa\,\partial_\theta\log C=-\sin\alpha\cdot(\cos\alpha-v)/\sin\alpha$, so
+\[
+\TDS'=-\frac v{1-v^2}\bigl[-(\cos\alpha-v)-v-\cos(-\pi-\alpha)\bigr]=0 ;
+\]
+hence
+\begin{equation}\label{eq:T1-k1}
+k_1=\frac{\TDT}{w_1^3}-\TDS_1,\qquad\TDT:=\Bigl(\frac{\tau_1}{\tau_\alpha}\Bigr)^v\ge1 .
+\end{equation}
+By Lemma~\ref{lem:T1-first}, $(1+v)w_1\ge|\Xi|\ge\operatorname{Im}\Xi=(\cos\alpha-v)\TDT>0$, and $w_1\ge1$, so
+$\TDT/w_1^3\le\TDT/w_1\le(1+v)/(\cos\alpha-v)$. And
+\[
+|\TDS_1|\le\frac v{(1-v^2)\rho_1}\Bigl[\frac{\rho_1(\cos\alpha-v)}{w_1^2}+v+1\Bigr]\le\frac v{1-v^2}+\frac v{(1-v)\rho_1}\le2.0001\,v .
+\]
+For $\alpha\le1/2$: $\cos\alpha-v\ge0.87758$, so $|k_1|\le1.13951+2.1\cdot10^{-6}<1.14$.
+
+\emph{Tilt.} By Lemma~\ref{lem:T1-first},
+\[
+(1-v^2)\,\partial_\alpha S_\alpha(t_1)=\TDa\bigl[(1-v\cos\beta_1)-iv\sin\beta_1\bigr]+\TDc\tau_1^v\bigl[-v\sin\beta_1+i(1+v\cos\beta_1)\bigr]
+\]
+with $\TDa=-\sin\alpha<0$ and $\TDc\tau_1^v=(\cos\alpha-v)\TDT>0$: the real part is $<0$ and the imaginary part is $>0$
+($1\pm v\cos\beta_1>0$), so the tangent is $e^{i(\pi/2+\delta)}$ with $\delta\in[0,\pi/2)$ and
+\begin{align*}
+\tan\delta&=\frac{\sin\alpha\,(1-v\cos\beta_1)+v\sin\beta_1(\cos\alpha-v)\TDT}{v\sin\alpha\sin\beta_1+(1+v\cos\beta_1)(\cos\alpha-v)\TDT}\\
+&\le\frac{(1+v)\sin\alpha}{(1-v)(\cos\alpha-v)\TDT}+\frac{v\sin\beta_1}{1-v}.
+\end{align*}
+Write $y=y(\alpha,t_1)$. With $\TDT\ge1$, $\sin\alpha\le y$ and $\sin\beta_1=y/\rho_1\le y/(1+v)$ this gives
+\[
+\tan\delta\le y\,[1.000002/0.87758+10^{-6}]\le1.1396\,y .
+\]
+
+\emph{Stretch.} $|\Xi|^2=\sin^2\!\alpha+(\cos\alpha-v)^2\TDT^2\le\TDT^2$, so $w_1\le\TDT/(1-v)$. By Lemma~\ref{lem:T1-coord}(d),
+$(1-v)\tau_1^{1+v}=2|h_1|/C+(1+v)\tau_1^{v-1}$ with $\tau_1\ge1$, $|h_1|\le1+0.12242$ ($\alpha\le1/2$),
+$C=2\tau_\alpha^{1-v}/(1+\tau_\alpha^2)\ge1.8776\,\tau_\alpha^{1-v}$ ($\tau_\alpha\le\tan(1/4)<0.25535$), and
+$1+v\le0.2554/\tau_\alpha^{1-v}$; so $\tau_1^{1+v}\le1.4512/\tau_\alpha^{1-v}$, $\tau_1/\tau_\alpha\le1.4512\,\tau_\alpha^{-2/(1+v)}$, and
+$\TDT\le1.4512^v\tau_\alpha^{-2v}\le1.0000004\,(2/\alpha)^{2v}$.
+
+(d) By Lemma~\ref{lem:T1-coord}(a),(d) with $C=\varepsilon g_{\max}$ and $|h_1|=(1-v^2)\bigl(1+(1-\cos\STas)/(1-v^2)\bigr)$:
+\[
+y_{\mathrm s}^{1+v}=C^{1+v}\bigl(\tau_1^{1+v}\bigr)^v=\varepsilon g_{\max}\bigl(2(1+v)\bigr)^v\cdot
+\Bigl[1+\frac{1-\cos\STas}{1-v^2}\Bigr]^v\cdot\Bigl[1+\frac{(1+v)C\tau_1^{v-1}}{2|h_1|}\Bigr]^v,
+\]
+i.e.\ $(1+\theta_{\mathrm s})^{1+v}$ is the $v$-th power of the product of the two brackets. Both brackets are $\ge1$. The first is
+$\le1+2.3\,\varepsilon^2\le1+0.0023\,\varepsilon$ (as $1-\cos\STas\le\STas^2/2\le2.205\,\varepsilon^2$ by $\STas\le2.1\varepsilon$). The second is
+$\le1+0.5001\,\varepsilon$: $C\le1.000001\,\varepsilon$, $\tau_1\ge1$ and $|h_1|\ge1-v^2$ give
+$(1+v)C\tau_1^{v-1}/(2|h_1|)\le1.000001\,\varepsilon/(2(1-v))$. Their product is $\le1+0.51\,\varepsilon$. So
+$1\le(1+\theta_{\mathrm s})^{1+v}\le(1+0.51\,\varepsilon)^v$, and
+$0\le\theta_{\mathrm s}\le(1+0.51\,\varepsilon)^{v/(1+v)}-1\le0.51\,v\varepsilon$.
+
+(e) follows from (b), (c) and the mirror symmetry; for $\chi\ge1/2$,
+$1.0000042\le1.0000052\,(2/\pi)^{2v}\le1.0000052\,(2/\chi)^{2v}$.
+\end{proof}
+
+\begin{remark}\label{rem:T1-hole}
+(i) \emph{Size of $\theta_{\mathrm s}$} (NUMERICAL, not part of any proof). The bound of (d) is wasteful: the first bracket is
+$\approx1+\varepsilon^2/2$ and, since $\tau_1^{v-1}\approx\varepsilon/2$, the second is $\approx1+\varepsilon^2/4$; both referees found
+$\theta_{\mathrm s}\approx0.75\,v\varepsilon^2$.
+
+(ii) \emph{What the front looks like at the hole.} By \eqref{eq:T1-k1}, $k_1=\TDT/w_1^3-\TDS_1$ with
+$\TDT/w_1^3\le(1+v)^3/((\cos\alpha-v)^3\TDT^2)$, and $\TDT=(\tau_1/\tau_\alpha)^v\to\infty$ only like $(y\alpha)^{-v}$ as $\alpha\to0$: the
+curvature tends to the value $v/(1-v^2)$ of a parabola only in the regime $(y\alpha)^{2v}\ll1$. For $v\le10^{-6}$ and any
+$\varepsilon\ge10^{-300}$ the front next to the hole is, to $10^{-3}$, the unit circle ($k\approx1$, $\delta\approx y$; numerical).
+Lemma~\ref{lem:T1-run1}(c) covers both regimes: the stretch $w_1$ is unbounded as $\alpha\to0$, but the curvature \emph{in arclength}
+is bounded, because \eqref{eq:T1-k1} contains a single power of $\TDT$ against $w_1^3\ge((\cos\alpha-v)\TDT/(1+v))^3$.
+\end{remark}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Tangency: the data at \texorpdfstring{$t_1$}{t1} in the frame of run 2}\label{sec:T1-tang}
+
+For $\theta\in(0,2\pi)$, $\theta\ne\alpha_0$, let $(\TDr(\theta),\TDb(\theta))$ be the polar coordinates of $S_\theta(t_1)-P(t_1)$
+about the direction $\Eu$ (the heading frame of run 2), $\tau_{\TDb}:=\tan(\TDb/2)$, and for run 2 (Lemma~\ref{lem:T1-first})
+\[
+C:=\TDr\,g(\TDb),\qquad\TDa:=\partial_\theta\bigl[\TDr(\cos\TDb+v)\bigr],\qquad\TDc:=\partial_\theta C,\qquad\STA(\theta):=\partial_\theta\TDr .
+\]
+From now on $C$, $\TDa$, $\TDc$, $h$ always refer to run 2. Further
+\[
+\eta:=0.1,\qquad I_\eta:=\{\theta:|\theta-\alpha_0|\le\eta\},\qquad\xi:=|\theta-\alpha_0| ,
+\]
+and $\beta^*=\beta_1(\alpha_0)$ (Definition~\ref{def:T}).
+
+\begin{lemma}[Tangency; local data at $t_1$]\label{lem:T1-tang}
+\begin{enumerate}
+\item[(a)] \emph{(Exact, all $v\in(0,1)$.)} For $\theta\in(0,\pi)$:
+\[
+\rho_1\,\partial_\theta\beta_1=\sin\beta_1\cdot\frac{t_1(\cos\alpha_0-\cos\theta)}{\sin\theta}.
+\]
+Hence $\beta_1$ has its unique minimum on $(0,\pi)$ at $\alpha_0$; there $\TDb=\beta_1(\theta)-\beta^*\in[0,\pi)$; on the lower half,
+$\TDb\in(0,\pi)$; and
+\[
+\partial_\theta\TDb=\Lambda(\theta)\sin\frac{\theta-\alpha_0}2,\qquad
+\Lambda(\theta):=\frac{2t_1\sin\beta_1\sin((\theta+\alpha_0)/2)}{\rho_1\sin\theta}>0\qquad(0<\theta<\pi).
+\]
+So $\TDb$ has a double zero at $\alpha_0$: the true front at $t_1$ is tangent at $S_{\alpha_0}(t_1)$ to the ray of run 2.
+\item[(b)] $0\le\pi/3-\alpha_0\le1.2\cdot10^{-6}$; $|\rho_0-\sqrt3|\le10^{-5}$; $\Bts\le\TDtc\le3.7321$ and
+$0<\TDtc-\Bts\le v\varepsilon/(3(1-v)^2)$; every virtual candidate has $|x_\theta(t)-e^{i\theta}|\le vt\le3.74\cdot10^{-6}$ for
+$t\le\Bts$, and so has every true candidate while it exists; $P([t_1,\Bts])$ lies within $5\cdot10^{-6}$ of the segment
+$\TDSz:=[2,e^{i\pi/3}]$. The virtual candidate $\alpha_0$ stays on the ray of run 2, $\rho_{\alpha_0}(\TDta)=\varepsilon$, and
+\[
+P(\Bts)=x_{\alpha_0}(\Bts).
+\]
+\item[(c)] On $I_\eta$ ($\subset[0.947,1.148]$):
+\begin{gather*}
+1.632\le\TDr\le1.832;\qquad1.001\le\Lambda\le1.337;\qquad0.994\le\STA\le1.00002;\\
+1\le w_1\le1.0000042;\qquad|k_1-1|\le2\cdot10^{-5};\\
+0.2501\,\xi^2\le\TDb\le0.33425\,\xi^2;\qquad\TDr\,|\partial_\theta\TDb|\le1.2247\,\xi;\\
+0.4081\,\xi^{2-2v}\le C\le0.6124\,\xi^{2-2v};\qquad0.9935\le\TDa\le1.00044;
+\end{gather*}
+for $\theta>\alpha_0$: $0<\partial_\theta\log C\le2.7327/\xi$; for $\theta<\alpha_0$: $-2.6714/\xi\le\partial_\theta\log C<0$ (so $C$ is
+strictly monotone on each side of $\alpha_0$); and the quantity $\TDS$ of Lemma~\ref{lem:T1-second} at $t_1$, in the frame of run 2,
+satisfies $|\TDS|\le3.42\,v$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) From $C=\rho g(\beta)$, $h=\rho(\cos\beta+v)$ and $g'/g=(\cos\beta-v)/\sin\beta$ (Lemma~\ref{lem:k}), for any straight run:
+\[
+(\cos\beta+v)\,\partial_\theta C-g\,\partial_\theta h=\rho\,\partial_\theta\beta\cdot\frac{g\,(1-v^2)}{\sin\beta}.
+\]
+In run 1, $\partial_\theta C=g(\theta)(\cos\theta-v)/\sin\theta$, $\partial_\theta h=-\sin\theta$, $g(\theta)/g(\beta_1)=\rho_1$ and
+$\rho_1(\cos\beta_1+v)=h_1$, so
+\[
+(1-v^2)\,\rho_1\partial_\theta\beta_1=\sin\beta_1\,\frac{h_1(\cos\theta-v)+\sin^2\!\theta}{\sin\theta},
+\]
+and $h_1(\cos\theta-v)+\sin^2\!\theta=(1-v^2)(1-t_1(\cos\theta-v))=(1-v^2)\,t_1(\cos\alpha_0-\cos\theta)$, because
+$t_1(\cos\alpha_0-v)=1$. The sign of $\partial_\theta\beta_1$ is that of $\theta-\alpha_0$. Since $h_1<0$,
+$\beta_1\in(\arccos(-v),\pi)$, so on the upper half $\TDb=\beta_1-\beta^*\in[0,\pi/2)$. The mirror point of $S_\alpha$ has polar angle
+$-\beta_1(\alpha)$ about the axis of run 1, i.e.\ $\TDb=2\pi-\beta_1(\alpha)-\beta^*\in(\pi-\beta^*,2\pi-2\beta^*]\subset(0,\pi)$, because
+$\beta_1\ge\beta^*>\pi/2$. The formula for $\partial_\theta\TDb$ is
+$\cos\alpha_0-\cos\theta=2\sin((\theta+\alpha_0)/2)\sin((\theta-\alpha_0)/2)$. Tangent at $\alpha_0$: in the frame of run 2,
+$\partial_\theta(S_\theta-P)(t_1)=(\STA+i\TDr\,\partial_\theta\TDb)e^{i\TDb}$, which is the real number $\STA$ at $\theta=\alpha_0$.
+
+(b) $1/t_1=1/(2+\mu)\in[1/2-\mu/4,1/2]$, so $\cos\alpha_0-1/2\in[v-\mu/4,v]\subset[0,10^{-6}]$ and $\sin\alpha_0\ge0.866$. Candidates, true
+or virtual, have speed $\le v$; so $|S_{\alpha_0}(t_1)-e^{i\alpha_0}|\le vt_1\le2.1\cdot10^{-6}$, and with
+$|e^{i\alpha_0}-e^{i\pi/3}|\le1.2\cdot10^{-6}$, $|P(t_1)-2|=\mu$, $|e^{i\pi/3}-2|=\sqrt3$: $|\rho_0-\sqrt3|\le4.5\cdot10^{-6}$. Then
+$\TDtc\le2.0000011+1.73206\cdot1.000002\le3.7321$. The true candidate $\alpha_0$ has $\TDb=0$: it stays on the ray, at distance
+$\rho_0-(1-v)(t-t_1)$ by \eqref{eq:polar}, which is $\varepsilon$ at $\TDta$; up to $\TDta$ it is also the virtual one. For $t\ge\TDta$ the
+ansatz $x_{\alpha_0}=P+\sigma\Eu$ solves $x'=vF(x-P)$ iff $\sigma'=-1+vf(\sigma)$, $\sigma(\TDta)=\varepsilon$; $\sigma$ reaches $0$ after the
+time
+\[
+\int_0^\varepsilon\frac{d\sigma}{1-vf(\sigma)}=\varepsilon\int_0^1\frac{d\sigma}{1-v\sigma(2-\sigma)}=\Bts-\TDta .
+\]
+And
+\begin{align*}
+\TDtc-\Bts&=\int_0^\varepsilon\Bigl[\frac1{1-v}-\frac1{1-vf}\Bigr]d\sigma=\int_0^\varepsilon\frac{v(1-f)}{(1-v)(1-vf)}\,d\sigma\\
+&\in\Bigl(0,\ \frac v{(1-v)^2}\int_0^\varepsilon(1-f)\,d\sigma\Bigr]=\Bigl(0,\ \frac{v\varepsilon}{3(1-v)^2}\Bigr]
+\end{align*}
+($f<1$ on $[0,\varepsilon)$). Finally $|P(t_1)-2|\le1.1\cdot10^{-6}$ and $|P(\Bts)-e^{i\pi/3}|\le3.74\cdot10^{-6}+1.2\cdot10^{-6}$, and
+$P([t_1,\Bts])$ is a segment: convexity.
+
+(c) $I_\eta\subset[\pi/3-0.1000012,\pi/3+0.1]\subset[1/2,\pi/2]$, so Lemma~\ref{lem:T1-run1}(b) applies and gives the bounds on $w_1$,
+$k_1$. Write
+\[
+\mathsf p:=S_\theta(t_1)-P(t_1)=e^{i\theta}-2+\mathsf d,\qquad|\mathsf d|\le vt_1+\mu\le3.1\cdot10^{-6}.
+\]
+Numbers: $\cos(\pi/3\mp0.1)=0.5839604,\ 0.4110438$; $\sin(\pi/3\mp0.1)=0.8117822,\ 0.9116156$;
+$\sin(\pi/3\mp0.05)=0.8399535,\ 0.8899327$.
+
+\emph{$\TDr$:} $|e^{i\theta}-2|^2=5-4\cos\theta\in[2.664154,3.355825]$, so $|e^{i\theta}-2|\in[1.632223,1.831892]$ and
+$\TDr\in[1.632,1.832]$.
+
+\emph{$\Lambda$:} $\sin\beta_1/\rho_1=\operatorname{Im}\mathsf p/\TDr^2$; $\operatorname{Im}\mathsf p/\sin\theta\in1\pm3.9\cdot10^{-6}$
+($\sin\theta\ge0.8117$); $\sin((\theta+\alpha_0)/2)\in[0.839952,0.889933]$; $\TDr^2\in[2.66414,3.35584]$
+(as $\TDr^2=|\mathsf p|^2\ge2.664154-2\cdot1.84\cdot3.1\cdot10^{-6}$); $t_1\in[2,2.0000011]$. So
+\[
+\Lambda\ge\frac{4\cdot0.999996\cdot0.839952}{3.35584}>1.001,\qquad\Lambda\le\frac{4.0000022\cdot1.0000039\cdot0.889933}{2.66414}<1.337 .
+\]
+
+\emph{$\STA$:} $\STA=\partial_\theta S_\theta\cdot\hat{\mathsf p}$ with $\hat{\mathsf p}:=\mathsf p/|\mathsf p|$. By
+Lemma~\ref{lem:T1-run1}(b), $|\partial_\theta S_\theta(t_1)-ie^{i\theta}|\le4.2\cdot10^{-6}+2.1\cdot10^{-6}$; with
+$\mathsf p_0:=e^{i\theta}-2$, $|\hat{\mathsf p}-\mathsf p_0/|\mathsf p_0||\le2|\mathsf d|/|\mathsf p_0|\le3.8\cdot10^{-6}$; and
+$\STA_0:=ie^{i\theta}\cdot\mathsf p_0/|\mathsf p_0|=2\sin\theta/(5-4\cos\theta)^{1/2}$ has
+\[
+\STA_0^2=1-\frac{(1-2\cos\theta)^2}{5-4\cos\theta}\in\Bigl[1-\frac{0.177913^2}{2.66415},\,1\Bigr]\subset[0.988118,1],\qquad\STA_0\ge0.99404 .
+\]
+So $|\STA-\STA_0|\le1.02\cdot10^{-5}$ and $0.994\le\STA\le1.00002$.
+
+\emph{$\TDb$:} $\TDb(\alpha_0\pm\xi)=\int_0^\xi\Lambda\sin(\xi'/2)\,d\xi'\in[\Lambda_{\min},\Lambda_{\max}]\cdot4\sin^2(\xi/4)$, and
+$(\xi^2/4)(1-\xi^2/48)\le4\sin^2(\xi/4)\le\xi^2/4$ with $\xi\le0.1$. Next $\TDr|\partial_\theta\TDb|\le1.832\cdot1.337\cdot\sin(\xi/2)\le1.2247\,\xi$.
+In particular $\TDb\le0.0033425$ and $\tau_{\TDb}\in[\TDb/2,(\TDb/2)(1+2.9\cdot10^{-6})]$.
+
+\emph{$C$:} $C=2\TDr\,\tau_{\TDb}^{1-v}/(1+\tau_{\TDb}^2)$, so
+$C\le2\cdot1.832\cdot1.000003\,(0.167125\,\xi^2)^{1-v}\le0.6124\,\xi^{2-2v}$ (as $0.167125^{-v}\le1.0000018$) and
+$C\ge2\cdot1.632\cdot0.999997\,(0.12505\,\xi^2)^{1-v}\ge0.4081\,\xi^{2-2v}$.
+
+\emph{$\TDa$:} $\TDa=\STA(\cos\TDb+v)-\TDr\sin\TDb\cdot\partial_\theta\TDb$, where
+$|\TDr\sin\TDb\,\partial_\theta\TDb|\le1.2247\,\xi\cdot0.33425\,\xi^2\le4.1\cdot10^{-4}$ and
+$\STA(\cos\TDb+v)\in[0.994(1-5.6\cdot10^{-6}),1.0000112]$.
+
+\emph{$\partial_\theta\log C$} $=\STA/\TDr+(\cos\TDb-v)\,\partial_\theta\TDb/\sin\TDb$. Here
+$|\partial_\theta\TDb|/\TDb=\Lambda(\theta)\sin(\xi/2)/\TDb\in[\Lambda_{\min}/\Lambda_{\max},\Lambda_{\max}/\Lambda_{\min}]\cdot\cot(\xi/4)/2$,
+with $(2/\xi)(1-\xi^2/32)\le\cot(\xi/4)/2\le2/\xi$, and
+$\cos\TDb-v\le(\cos\TDb-v)\,\TDb/\sin\TDb\le\TDb\cot\TDb\le1$. So
+$(\cos\TDb-v)|\partial_\theta\TDb|/\sin\TDb\in[1.4969/\xi,2.67133/\xi]$, while $0<\STA/\TDr\le1.00002/1.632<0.6128\le0.06128/\xi$. For
+$\theta>\alpha_0$ ($\partial_\theta\TDb>0$): $0<\partial_\theta\log C\le2.7327/\xi$. For $\theta<\alpha_0$ ($\partial_\theta\TDb<0$):
+$\partial_\theta\log C\le0.6128-14.969<0$ and $\ge-2.67133/\xi$.
+
+\emph{$\TDS$ at $t_1$:} in the frame of run 2 the tangent is the direction of $(\STA+i\TDr\,\partial_\theta\TDb)e^{i\TDb}$, so
+$\phi=\TDb-\psi$ has $|\sin\phi|=\TDr|\partial_\theta\TDb|/w_1\le1.832\cdot1.337\cdot\xi/2$, and
+\[
+|\TDS|\le\frac{v|\sin\phi|}{(1-v^2)\TDr}\Bigl[\frac{\TDr\,\TDa\,|\partial_\theta\log C|}{w_1^2}+1+v\Bigr]
+\le\frac{1.337\,v\,\xi}{2(1-v^2)}\Bigl[\frac{1.832\cdot1.00044\cdot2.7327}\xi+1.000001\Bigr],
+\]
+which is $\le v\cdot0.6685007\cdot(5.00851+0.1000001)\le3.42\,v$.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Run 2: the forward arc}\label{sec:T1-fwd}
+
+For $t\in[t_1,\TDtc]$ put $\omega(t):=\TDtc-t$; so $\omega(\TDta)=\varepsilon/(1-v)$ and $0<\omega(\Bts)\le v\varepsilon/(3(1-v)^2)$. In run
+2 a label has
+\begin{equation}\label{eq:T1-h}
+h(t)=\TDr(\cos\TDb+v)-(1-v^2)(t-t_1)=(1+v)(\TDr-\rho_0)-\TDr(1-\cos\TDb)+(1-v^2)\,\omega(t),
+\end{equation}
+because $(1-v^2)(\TDtc-t_1)=(1+v)\rho_0$. Coordinates in the frame of run 2 at time $t$: $S_\theta(t)-P(t)=(z+iy)\Eu=\rho e^{i\beta}\Eu$,
+and the tangent is $e^{i\psi}\Eu$ ($\psi$ is the angle against $\Eu$). The \emph{forward arc} consists of the labels
+$\theta=\alpha_0+\xi$, $0<\xi\le\eta$.
+
+\begin{lemma}[Forward arc; true flow]\label{lem:T1-fwd}
+Let $\theta=\alpha_0+\xi$, $0<\xi\le\eta$. For every $t\in[t_1,\TDtc)$ the true candidate $\theta$ has $\rho>0$, and:
+\begin{enumerate}
+\item[(a)] $h(t)\ge0.9938\,\xi+(1-v^2)\,\omega(t)>0$; $\rho\ge h/(1+v)\ge0.99379\,(\xi+\omega)$;
+\item[(b)] $0<y\le0.6124\,\xi^2\,\bigl(1.8435/(\xi+\omega)\bigr)^\mu$;
+\item[(c)] with $Y_r=y\,\partial_\theta\log C/\TDa$: $0<Y_r\le2.751\,y/\xi\le0.1685$, and
+$|\psi|\le1.685\,\xi\,\bigl(1.8435/(\xi+\omega)\bigr)^\mu$; $1\le w\le1.015$.
+\item[(d)] At $t=\Bts$, for $1.02\,\varepsilon\le\xi\le\eta$: $\tau\le0.3081\,\xi^{1-\mu}$, $0.99379\,\xi\le\rho\le1.00193\,\xi$,
+$\rho(t)\ge\rho(\Bts)\ge1.0136\,\varepsilon$ for all $t\in[t_1,\Bts]$ (so these labels are true up to $\Bts$ and the front is
+$C^\infty$ there), and
+\[
+|k|\le1.0001\,\xi^{-\mu}.
+\]
+\item[(e)] The true front at any $t\in[t_1,\TDtc)$ is tangent to $\Eu$ at the candidate $\alpha_0$ ($\psi\to0$ as $\xi\to0$).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $\TDr-\rho_0=\int_{\alpha_0}^\theta\STA\ge0.994\,\xi$ and
+$\TDr(1-\cos\TDb)\le1.832\cdot(0.33425\,\xi^2)^2/2\le0.10234\,\xi^4\le1.03\cdot10^{-4}\xi$ (Lemma~\ref{lem:T1-tang}(c)); insert into
+\eqref{eq:T1-h}. $h=\rho(\cos\beta+v)\le(1+v)\rho$. In particular $\rho>0$, and $0<\beta<\pi$ persists on $[t_1,\TDtc)$
+(Lemma~\ref{lem:T1-coord}).
+
+(b) By Lemma~\ref{lem:T1-coord}(d), $\tau\le((1+v)C/(2h))^{1/(1-v)}$, so $y=C\tau^v\le C^{1+\mu}((1+v)/(2h))^\mu$; and
+$C\le2\TDr\tau_{\TDb}^{1-v}$ gives $C^{1+\mu}\le(2\TDr)^{1+\mu}\tau_{\TDb}$. Hence
+\begin{equation}\label{eq:T1-tau}
+\tau\le\tau_{\TDb}\Bigl(\frac{(1+v)\TDr}h\Bigr)^{1+\mu}\qquad\text{and}\qquad y\le2\TDr\,\tau_{\TDb}\Bigl(\frac{(1+v)\TDr}h\Bigr)^{\mu}
+\end{equation}
+(valid whenever $h>0$). Now $2\TDr\tau_{\TDb}\le1.000003\cdot1.832\cdot0.33425\,\xi^2\le0.6124\,\xi^2$ and
+$(1+v)\TDr/h\le1.832002/(0.9938(\xi+\omega))\le1.8435/(\xi+\omega)$.
+
+(c) By Lemma~\ref{lem:T1-tang}(c), $0<\partial_\theta\log C\le2.7327/\xi$ and $\TDa\ge0.9935$, so $Y_r\in(0,2.751\,y/\xi]$, and
+$y/\xi\le0.6124\,\xi\,(1.8435/\xi)^\mu\le0.06125$. In Remark~\ref{rem:T1-tilt}(i) the denominator is
+$\ge1-v-vY_r\ge1-1.17\cdot10^{-6}$ and the numerator lies in $[-v\sin\beta,(1+v)Y_r]$, with $\sin\beta=y/\rho\le y/(0.99379\,\xi)$:
+\[
+|\psi|\le|\tan\psi|\le2.75101\,y/\xi\le1.685\,\xi\,\bigl(1.8435/(\xi+\omega)\bigr)^\mu .
+\]
+And $w\le1.00044\cdot[(1+v+vY_r)^2+((1+v)Y_r+v)^2]^{1/2}/(1-v^2)\le1.00044\cdot1.0141\le1.015$; $w\ge1$ by \eqref{eq:T1-laws}.
+
+(d) $\omega(\Bts)\le3.4\cdot10^{-7}\varepsilon\le3.3\cdot10^{-7}\xi$. By \eqref{eq:T1-tau},
+$\tau\le1.000003\cdot0.167125\,\xi^2\cdot(1.84343/\xi)^{1+\mu}\le0.3081\,\xi^{1-\mu}\le0.0309$, so $\beta\le2\tau$ and
+$\cos\beta\ge1-2\tau^2\ge0.9981>v$. Since $\tau(t)\le\tau(\Bts)$ on $[t_1,\Bts]$, $\cos\beta(t)>v$ there and $\rho$ is decreasing
+(Lemma~\ref{lem:T1-coord}(c)): $\rho(t)\ge\rho(\Bts)\ge0.99379\cdot1.02\,\varepsilon$. Upper bound: $\rho=h/(\cos\beta+v)\le h/0.9981$ and
+$h\le(1+v)\cdot1.0000102\,\xi+3.3\cdot10^{-7}\xi$.
+
+\emph{Curvature.} Apply \eqref{eq:T1-k2} with $t'=t_1$, $t''=\Bts$:
+$k=(\tau/\tau_{\TDb})^v(w_1/w)^3(k_1+\TDS')-\TDS''$, with
+$(\tau/\tau_{\TDb})^v\le((1+v)\TDr/h)^{v(1+\mu)}=((1+v)\TDr/h)^\mu\le(1.84343/\xi)^\mu\le1.0000007\,\xi^{-\mu}$, $|k_1|\le1.00002$,
+$|\TDS'|\le3.42\,v$ (Lemma~\ref{lem:T1-tang}(c)), and
+\[
+|\TDS''|\le\frac{v|\sin\phi|}{(1-v^2)\rho}\Bigl[\frac{\rho\,\TDa\,\partial_\theta\log C}{w^2}+1+v\Bigr],\qquad
+|\sin\phi|\le\beta+|\psi|\le(0.6162+1.685\cdot1.0000007)\,\xi^{1-\mu},
+\]
+so $|\sin\phi|/\rho\le2.3156\,\xi^{-\mu}$ and $\rho\,\TDa\,\partial_\theta\log C\le1.00193\cdot1.00044\cdot2.7327\le2.7392$:
+$|\TDS''|\le8.66\,v\,\xi^{-\mu}$. So
+$|k|\le[1.0000007(1.00002+3.5\cdot10^{-6})+8.7\cdot10^{-6}]\,\xi^{-\mu}\le1.0001\,\xi^{-\mu}$.
+
+(e) For $t<\TDtc$ the true flow is smooth near the candidate $\alpha_0$ ($\rho_{\alpha_0}>0$); let $\xi\to0$ in (c) with $\omega(t)>0$
+fixed.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Run 2: the tail, the end \texorpdfstring{$E_Y$}{E\_Y}, the labels seen}\label{sec:T1-tail}
+
+The \emph{tail} consists of the labels $\theta=\alpha_0-\xi$ behind the point of tangency.
+
+\begin{lemma}[Tail and end]\label{lem:T1-tail}
+\begin{enumerate}
+\item[(a)] \emph{The end.} There is a unique label $\TDbe=\alpha_0-\TDxe$, $\TDxe\in(0,\eta)$, with $C(\TDbe)=\varepsilon g_{\max}$, and
+\[
+1.277\,\varepsilon^{1/(2-2v)}\le\TDxe\le1.566\,\varepsilon^{1/(2-2v)}
+\]
+(in particular $\TDxe\ge1.277\,\varepsilon$ and $\TDxe\le0.05$).
+\item[(b)] \emph{Seen in run 2.} Every true candidate $\theta\in[\TDbe,\alpha_0]$ is seen by $\Bts$. Every label
+$\theta\in[\STas,\TDbe]\cup[\alpha_0+1.02\,\varepsilon,2\pi-\STas]$ has $\rho_\theta(t)\ge\varepsilon$ for all $t\in[0,\Bts]$ (so there
+virtual $=$ true up to $\Bts$), with equality only for $\theta=\TDbe$ at one instant of run 2 (and for $\STas$, $2\pi-\STas$ at one
+instant of run 1).
+\item[(c)] \emph{Tail at $\Bts$: $\theta=\alpha_0-\xi$, $\TDxe\le\xi\le\eta$} (true candidates; frame of run 2 at $\Bts$):
+\begin{gather*}
+0.9939\,\xi\le|h|\le1.00012\,\xi,\quad h<0;\qquad\tau\ge32.4;\\
+-1.00013\,\xi\le z\le-0.9939\,\xi,\qquad0.408\,\xi^{2-\TDmT}\le y\le0.6125\,\xi^{2-\TDmT},\qquad\rho\le1.00203\,\xi;\\
+-1.647\,\xi^{1-\TDmT}\le\psi<0;\qquad1\le w\le1.015;\qquad|k|\le1.0001\,\xi^{-\TDmT}.
+\end{gather*}
+\item[(d)] \emph{The end point.} $E_Y:=x_{\TDbe}(\Bts)=X_0+z_E\Eu+iy_E\Eu$ with $-1.00013\,\TDxe\le z_E\le-0.9939\,\TDxe$ and
+\[
+\varepsilon\le y_E\le1.000001\,\varepsilon\,(2.0023\,\TDxe/\varepsilon)^{v/(1+v)}.
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) By Lemma~\ref{lem:T1-tang}(c), $\xi\mapsto C(\alpha_0-\xi)$ is continuous and strictly increasing on $(0,\eta]$, with
+$0.4081\,\xi^{2-2v}\le C\le0.6124\,\xi^{2-2v}$; and $C(\alpha_0-\eta)\ge0.004>\varepsilon g_{\max}$. So $\TDxe$ exists, is unique, and
+$(\varepsilon/0.6124)^{1/(2-2v)}\le\TDxe\le(1.000001\,\varepsilon/0.4081)^{1/(2-2v)}$; $1.63292^{1/2}>1.277$,
+$2.4504^{(1+\mu)/2}<1.566$; and $\varepsilon^{1/(2-2v)}\ge\varepsilon$.
+
+(c) \emph{$h$:} $\rho_0-\TDr=\int_\theta^{\alpha_0}\STA\in[0.994\,\xi,1.0000102\,\xi]$, and
+$(1-v^2)\,\omega(\Bts)\le3.4\cdot10^{-7}\varepsilon\le2.7\cdot10^{-7}\xi$ ($\xi\ge\TDxe\ge1.277\,\varepsilon$). So, by \eqref{eq:T1-h},
+$h=-(1+v)(\rho_0-\TDr)-\TDr(1-\cos\TDb)+(1-v^2)\,\omega(\Bts)<0$ and
+$0.9939\,\xi\le|h|\le1.000012\,\xi+1.03\cdot10^{-4}\xi$.
+
+\emph{$\tau$:} $2|h|/C\ge2\cdot0.9939\,\xi/(0.6124\,\xi^{2-2v})\ge3.2459\,\xi^{-1}\cdot\xi^{2v}\ge32.45$. By Lemma~\ref{lem:T1-coord}(d):
+$\tau^{1+v}\ge32.45$, $\tau\ge32.4$, $\tau^{v-1}\le0.0309$, and
+\begin{equation}\label{eq:T1-tau2}
+\frac{2|h|}C\le(1-v)\,\tau^{1+v}\le\frac{2.002\,|h|}C .
+\end{equation}
+
+\emph{$y$:} $y=C\tau^v=C(\tau^{1+v})^{v/(1+v)}$, so
+\begin{align*}
+y&\le C^{1/(1+v)}(2.0021\,|h|)^{v/(1+v)}\le0.6124^{1/(1+v)}\xi^{(2-2v)/(1+v)}(2.0024\,\xi)^{v/(1+v)}\le0.6125\,\xi^{(2-v)/(1+v)},\\
+y&\ge C^{1/(1+v)}(2|h|)^{v/(1+v)}\ge0.4081^{1/(1+v)}\xi^{(2-2v)/(1+v)}(1.9878\,\xi)^{v/(1+v)}\ge0.408\,\xi^{(2-v)/(1+v)};
+\end{align*}
+and $(2-v)/(1+v)=2-\TDmT$.
+
+\emph{$\psi$:} $\TDa\ge0.9935$ and $-2.6714/\xi\le\partial_\theta\log C<0$ give $-2.689\,y/\xi\le Y_r<0$; and
+$y/\xi\le0.6125\,\xi^{1-\TDmT}\le0.06126$. Here $\cos\beta<-v$ ($h<0$), so in Remark~\ref{rem:T1-tilt}(i) the numerator
+$(1+v\cos\beta)Y_r-v\sin\beta$ is $<0$ with modulus $\le|Y_r|+v\sin\beta$, and the denominator
+$1-v\cos\beta-v\sin\beta\,Y_r$ is $\ge1$. Moreover $\rho\ge\rho(|\cos\beta|-v)=|h|\ge0.9939\,\xi$, so
+$v\sin\beta=vy/\rho\le1.01\cdot10^{-6}y/\xi$. Hence $-2.68901\,y/\xi\le\tan\psi<0$ and $|\psi|\le1.647\,\xi^{1-\TDmT}$.
+
+\emph{$z$, $\rho$:} $z=h-v\rho<0$ and $|z|\ge|h|$; $\rho\le|z|+y$ gives $(1-v)|z|\le|h|+vy$, so $|z|\le1.00013\,\xi$; and
+$\rho\le|z|(1+(y/|z|)^2)^{1/2}$ with $y/|z|\le0.0617$.
+
+\emph{$w$:} $w\le1.00044\,[(1+v+v|Y_r|)^2+((1+v)|Y_r|+v)^2]^{1/2}/(1-v^2)\le1.00044\cdot1.0135\le1.015$ ($|Y_r|\le0.1648$); $w\ge1$.
+
+\emph{$k$:} Apply \eqref{eq:T1-k2} with $t'=t_1$, $t''=\Bts$ (the labels are true by (b)). By \eqref{eq:T1-tau2},
+\[
+\tau^{1+v}\le\frac{2.002}{1-v}\cdot\frac{1.00012\,\xi}{0.4081\,\xi^{2-2v}}\le4.9063\,\xi^{-1+2v},\qquad
+\tau\le4.9063\,\xi^{-(1-2v)/(1+v)},
+\]
+and $\tau_{\TDb}\ge\TDb/2\ge0.12505\,\xi^2$, so $\tau/\tau_{\TDb}\le39.24\,\xi^{-3/(1+v)}$ and
+\[
+(\tau/\tau_{\TDb})^v\le1.0000037\,\xi^{-\TDmT}.
+\]
+Next $|\sin\phi|=|\sin(\beta-\psi)|\le\sin\beta+|\psi|\le(0.6125/0.9939+1.647)\,\xi^{1-\TDmT}$, so
+$|\sin\phi|/\rho\le2.2771\,\xi^{-\TDmT}$, and $\rho\,\TDa\,|\partial_\theta\log C|\le1.00203\cdot1.00044\cdot2.6714\le2.678$:
+$|\TDS''|\le8.38\,v\,\xi^{-\TDmT}$; $|k_1|\le1.00002$ and $|\TDS'|\le3.42\,v$. So
+$|k|\le[1.0000037(1.00002+3.5\cdot10^{-6})+8.4\cdot10^{-6}]\,\xi^{-\TDmT}\le1.0001\,\xi^{-\TDmT}$.
+
+(d) This is (c) at $\xi=\TDxe$, where the virtual candidate is the true one by (b). $y_E=\varepsilon g_{\max}\tau^v\ge\varepsilon$
+($\tau\ge1$, $g_{\max}\ge1$). By \eqref{eq:T1-tau2} and $2.002/(1-v)\le2.002003$,
+\[
+y_E\le\varepsilon g_{\max}\Bigl(\frac{2.002003\,|h|}{\varepsilon g_{\max}}\Bigr)^{v/(1+v)},
+\]
+where $|h|\le1.00012\,\TDxe$, $2.002003\cdot1.00012\le2.0023$ and $g_{\max}^{1/(1+v)}\le1.000001$.
+
+(b) \emph{Seen.} The label $\alpha_0$ is at distance $\varepsilon$ at $\TDta$. Labels $\xi\in[0.35\,v\varepsilon,\TDxe]$:
+$C\le\varepsilon g_{\max}$ (monotonicity), and by \eqref{eq:T1-h}
+$h(\Bts)\le-0.994\,\xi+(1-v^2)\,\omega(\Bts)\le-0.994\,\xi+0.3334\,v\varepsilon\le0$
+(as $(1-v^2)\,\omega(\Bts)\le(1+v)v\varepsilon/(3(1-v))$), so $\cos\beta(\Bts)\le-v<v$: the minimum point of Lemma~\ref{lem:T1-coord}(c)
+has been passed during run 2 ($\cos\TDb>v$ at $t_1$), and there the true distance was $C/g_{\max}\le\varepsilon$. Labels
+$\xi\in(0,\varepsilon/2]$: at $\TDta$, $\TDr-\rho_0\in[-1.0000102\,\xi,-0.994\,\xi]$, so
+$h(\TDta)=(1+v)(\TDr-\rho_0)-\TDr(1-\cos\TDb)+(1+v)\varepsilon$ lies in $[0.49\,\varepsilon,(1+v)(\varepsilon-0.994\,\xi)]$. By
+\eqref{eq:T1-tau}: $\tau(\TDta)\le0.1672\,\xi^2(3.74/\varepsilon)^{1+\mu}\le0.3127\,\xi\,(3.74/\varepsilon)^\mu$ (as
+$\xi^2/\varepsilon\le\xi/2$), and $\xi\varepsilon^{-\mu}\le\varepsilon^{1-\mu}/2\le1/2$, so $\tau\le0.157$ and
+$\tau^2\le0.0491\,\xi\,(3.74/\varepsilon)^\mu$. Then $\cos\beta\ge1-2\tau^2$ and
+\[
+\rho(\TDta)=\frac h{\cos\beta+v}\le(\varepsilon-0.994\,\xi)(1+2.11\,\tau^2)
+\le\varepsilon-0.994\,\xi+2.11\cdot0.0491\cdot3.74^\mu\cdot\xi\varepsilon^{1-\mu}\le\varepsilon-0.89\,\xi<\varepsilon :
+\]
+the true candidate is within $\varepsilon$ of Harry at $\TDta$. The two ranges cover $(0,\TDxe]$.
+
+\emph{Not entering the disc.} Run 1: Lemma~\ref{lem:T1-run1}(a). Run 2, forward labels $1.02\,\varepsilon\le\xi\le\eta$:
+Lemma~\ref{lem:T1-fwd}(d). Tail $\xi\in[\TDxe,\eta]$: $\rho\ge C/g_{\max}\ge\varepsilon$ (Lemma~\ref{lem:T1-coord}(c), monotonicity of
+$C$), with equality iff $\xi=\TDxe$ at the instant $\cos\beta=v$. Labels with $|\theta-\alpha_0|\ge\eta$: Lemma~\ref{lem:T1-bulk}(a)
+below, whose proof uses only Lemma~\ref{lem:T1-tang}(b).
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{The virtual labels next to \texorpdfstring{$X_0$}{X0}}\label{sec:T1-virt}
+
+\begin{lemma}\label{lem:T1-virt}
+At time $\Bts$, for every label $\theta=\alpha_0+\xi$ with $0\le\xi\le\eta$, the \emph{virtual} front has tangent $e^{i\psi}\Eu$ with
+\[
+|\psi(\theta,\Bts)|\le1.69\,\xi^{1-\mu},\qquad\text{and}\qquad1\le w(\theta,\Bts)\le1.0151 .
+\]
+(For $\xi\ge1.02\,\varepsilon$ the virtual front is the true one.) In particular $\psi(\alpha_0,\Bts)=0$: at touch-down the virtual
+front is tangent to Harry's heading at $X_0=P(\Bts)$.
+\end{lemma}
+\begin{proof}
+For $1.02\,\varepsilon\le\xi\le\eta$ this is Lemma~\ref{lem:T1-fwd}(c),(d) at $t=\Bts$
+($(1.8435/(\xi+\omega))^\mu\le1.0000007\,\xi^{-\mu}$). Let $0<\xi\le2\varepsilon$. On $[0,\TDta]$ the label is true: in run 1 by
+Lemma~\ref{lem:T1-run1}(a); in run 2, $\rho_\theta(t)>\varepsilon$ for $t<\TDta$, because by \eqref{eq:T1-h}
+$h_\theta(t)-h_{\alpha_0}(t)=(1+v)(\TDr-\rho_0)-\TDr(1-\cos\TDb)\ge0.9938\,\xi>0$, i.e.\
+$(1+v)\rho_\theta\ge h_\theta>h_{\alpha_0}=(1+v)\rho_{\alpha_0}(t)\ge(1+v)\varepsilon$ for $t\le\TDta$. So at $\TDta$ the virtual front on
+$[\alpha_0,\alpha_0+2\varepsilon]$ is the true one, and by Lemma~\ref{lem:T1-fwd}(b),(c) with $\omega(\TDta)\ge\varepsilon$:
+\[
+|\psi(\TDta)|\le1.685\,\xi\Bigl(\frac{1.8435}{\xi+\varepsilon}\Bigr)^\mu,\qquad
+0\le y(\TDta)\le0.6124\,\xi^2\Bigl(\frac{1.8435}{\xi+\varepsilon}\Bigr)^\mu,\qquad w(\TDta)\le1.015
+\]
+(and $\psi(\TDta)=0=y(\TDta)$ at $\xi=0$). On $[\TDta,\Bts]$, an interval of length $I:=\Bts-\TDta\le\varepsilon/(1-v)$, use the virtual
+field. With $r=x_\theta-P=(z+iy)\Eu$: $r'=vF(r)-\Eu$, so $y'=v(f(\rho)/\rho)\,y$ with $0\le f/\rho\le a^*\le2/\varepsilon$, hence
+$0\le y(t)\le y(\TDta)e^{2vI/\varepsilon}$. By Lemma~\ref{lem:ST-D0}(a), $|\psi_t|\le v|p|/\STme(\rho)^2$ with
+$p=T\times r=y\cos\psi-z\sin\psi$, $|p|\le y+\rho|\psi|$, $\rho/\STme(\rho)^2\le1/\varepsilon$ and $1/\STme(\rho)^2\le1/\varepsilon^2$:
+$|\psi|'\le(v/\varepsilon)|\psi|+vy/\varepsilon^2$ almost everywhere ($|\psi|$ is Lipschitz in $t$). By Gronwall,
+\begin{align*}
+|\psi(\Bts)|&\le e^{vI/\varepsilon}\Bigl[|\psi(\TDta)|+\frac{vI}{\varepsilon^2}\,e^{2vI/\varepsilon}\,y(\TDta)\Bigr]\\
+&\le1.0000011\,\bigl[1.685+1.000004\cdot10^{-6}\cdot0.6124\,\xi/\varepsilon\bigr]\,\xi\,\Bigl(\frac{1.8435}{\xi+\varepsilon}\Bigr)^\mu
+\le1.6851\,\xi\,(1.8435/\xi)^\mu
+\end{align*}
+($\xi/\varepsilon\le2$), which is $\le1.69\,\xi^{1-\mu}$. By Lemma~\ref{lem:B-1}(i) and Lemma~\ref{lem:B-V}(ii),
+$w(\Bts)\le w(\TDta)e^{2vI/\varepsilon}\le1.015\cdot1.0000021$; $w\ge1$ by Lemma~\ref{lem:B-VC}(a). For $\xi=0$ the same argument gives
+$\psi\equiv0$ on $[\TDta,\Bts]$.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{The bulk and the hole at touch-down}\label{sec:T1-bulk}
+
+\begin{lemma}[Bulk]\label{lem:T1-bulk}
+Let $\theta\in(0,2\pi)$ with $|\theta-\alpha_0|\ge\eta$, and $\chi:=\min(\theta,2\pi-\theta)$.
+\begin{enumerate}
+\item[(a)] Its virtual candidate satisfies $\rho_\theta(t)\ge0.0049$ for $t\in[t_1,\Bts]$; if moreover $\chi\le0.0021$, then
+$\rho_\theta(t)\ge0.497$ on $[t_1,\Bts]$. The same holds for its true candidate.
+\item[(b)] If $\theta\in[\STas,2\pi-\STas]$, then at $\Bts$ the front near $\theta$ is the true one, $C^\infty$, with
+\[
+|k|\le1.22\qquad\text{and}\qquad w\le1.00036\,(2/\chi)^{2v}.
+\]
+\item[(c)] For every label $\theta\in[\alpha_0,2\pi-\STas]\cup[\STas,\TDbe]$ (no restriction on $|\theta-\alpha_0|$):
+$w(\theta,\Bts)\le1.0151\,(2/\chi)^{2v}$. Consequently, for labels $\theta_1<\theta_2$ in one of the two arcs,
+$\Delta:=\theta_2-\theta_1$:
+\[
+l_{\Bts}(\theta_1,\theta_2)\le1.0152\,\max(\Delta,0.02);\qquad
+U_1:=l_{\Bts}(\alpha_0,2\pi-\STas)\le5.3,\qquad U_2:=l_{\Bts}(\STas,\TDbe)\le1.07 .
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) By Lemma~\ref{lem:T1-tang}(b) the candidate (virtual or true) is within $3.74\cdot10^{-6}$ of $e^{i\theta}$ and $P(t)$ is within
+$5\cdot10^{-6}$ of $\TDSz$, which lies on the tangent line of the unit circle at $e^{i\pi/3}$; and
+$\operatorname{dist}(e^{i\theta},\text{that line})=1-\cos(\theta-\pi/3)\ge1-\cos(0.1-1.2\cdot10^{-6})\ge0.004995$. For
+$\chi\le0.0021$: $|e^{i\theta}-1|\le0.0021$ and $\operatorname{dist}(1,\TDSz)=1/2$ (the foot $(5/4,\sqrt3/4)$ of the perpendicular is
+the midpoint of $\TDSz$).
+
+(b) Virtual $=$ true up to $\Bts$ by Lemma~\ref{lem:T1-run1}(a) and (a). At $t_1$: $|k_1|\le1.13951$ and
+$w_1\le1.0000052\,(2/\chi)^{2v}$ (Lemma~\ref{lem:T1-run1}). On $[t_1,\Bts]$, of length $\le\rho_0/(1-v)\le1.73207$, use
+\eqref{eq:T1-laws} with $\rho\ge0.0049$: $w$ grows by a factor $\le e^{v\cdot1.73207/0.0049}\le1.000354$; and
+$\frac d{dt}|k|\le(2v/\rho)|k|+v/\rho^2$ gives
+\[
+|k(\Bts)|\le\bigl(1.13951+10^{-6}\cdot1.73207/0.0049^2\bigr)\,e^{2\cdot10^{-6}\cdot1.73207/0.0049}\le(1.13951+0.07215)\cdot1.00071<1.22 .
+\]
+
+(c) Lemma~\ref{lem:T1-fwd}(c), Lemma~\ref{lem:T1-tail}(c) and Lemma~\ref{lem:T1-virt} on $I_\eta$ (there $\chi\le1.15$, so
+$(2/\chi)^{2v}\ge1$), and (b) elsewhere. For an interval $J$ of length $\Delta\ge0.02$,
+\[
+\int_J(2/\chi)^{2v}d\theta\le2\int_0^{\Delta/2}(2/\chi)^{2v}d\chi=\frac{\Delta\,(4/\Delta)^{2v}}{1-2v}\le1.000013\,\Delta ;
+\]
+an interval of length $<0.02$ is contained in an interval of length $0.02$ of the same arc. Finally
+$U_1\le1.0151\cdot0.1+1.00036\cdot1.000013\cdot(2\pi-\alpha_0-0.1)\le0.1016+5.139$ and $U_2\le0.1016+1.0004\cdot0.9472$.
+\end{proof}
+
+\begin{lemma}[The edges of the hole at $\Bts$]\label{lem:T1-edges}
+Let $E_-:=x_{2\pi-\STas}(\Bts)$, $E_+:=x_{\STas}(\Bts)$ and $G:=E_+-E_-$. Then
+\begin{enumerate}
+\item[(a)] $2y_{\mathrm s}\le|G|\le1.00001\cdot2y_{\mathrm s}$ ($y_{\mathrm s}$ as in Lemma~\ref{lem:T1-run1}(d));
+\item[(b)] the tangent directions $\psi_-$, $\psi_+$ of the front at $E_-$, $E_+$ satisfy $|\psi_+-\arg G|\le0.58\,|G|$ and
+$|\arg G-\psi_-|\le0.58\,|G|$;
+\item[(c)] on both sides the front is the true one with $|k|\le1.22$ (Lemma~\ref{lem:T1-bulk}(b)). Hence, for the curve ``the arc
+ending at $E_-$, then the segment $[E_-,E_+]$, then the arc starting at $E_+$'', the tangent direction at arclength distance $s$ from
+the midpoint of the gap differs from $\arg G$ by at most $1.22\,s+0.58\,|G|\le2.4\,s$ ($s\ge|G|/2$).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+At $t_1$, by symmetry, $G(t_1)=2iy_{\mathrm s}$, and the tangents are $e^{i(\pi/2-\delta_{\mathrm s})}$ at $E_-$ and
+$e^{i(\pi/2+\delta_{\mathrm s})}$ at $E_+$ with $0\le\delta_{\mathrm s}\le1.1396\,y_{\mathrm s}=0.5698\,|G(t_1)|$
+(Lemma~\ref{lem:T1-run1}(c); $\STas\le2.1\varepsilon\le1/2$; the mirror label $2\pi-\alpha$ has tangent
+$-\overline{\partial_\alpha S_\alpha}$). On $[t_1,\Bts]$ both points are true candidates at distance $\ge0.497$ from $P$
+(Lemma~\ref{lem:T1-bulk}(a)), and so is the whole segment between them: $|G|$ is non-decreasing by Lemma~\ref{lem:B-VC}(b), and
+$G'=v(\rhat_+-\rhat_-)$ gives $|G|'\le v|G|/0.49$, so $|G(t)|\le1.000004\,|G(t_1)|\le0.0043$, which proves (a); and every point of the
+segment is within $0.0022+0.0043$ of $1$. For a unit vector $e$ and $r\ne0$ let
+\[
+Q(e,r):=e\times\frac{\Pi(r)}{|r|}\,e=-\frac{\sin(2(\arg r-\arg e))}{2|r|}\qquad(\Pi(r)=I-\rhat\rhat^{\mathsf T}).
+\]
+Then $\psi_\pm'=vQ(T_\pm,r_\pm)$ by \eqref{eq:T1-laws}, and, since $\rhat_+-\rhat_-=\int_0^1(\Pi/|r|)(r_-+\sigma G)\,G\,d\sigma$,
+\[
+(\arg G)'=\frac{\hat G\times G'}{|G|}=v\int_0^1Q(\hat G,r_-+\sigma G)\,d\sigma,\qquad\hat G:=G/|G| .
+\]
+$Q$ is $(1/|r|)$-Lipschitz in $\arg e$ and has $|\nabla_rQ|\le3/(2|r|^2)$. So, with $\rho_*:=0.49$,
+$D_\pm:=|\psi_\pm-\arg G|$ obey $D_\pm'\le(v/\rho_*)D_\pm+1.5\,v|G|/\rho_*^2$, and
+\[
+D_\pm(\Bts)\le e^{1.74v/\rho_*}\bigl[D_\pm(t_1)+1.74\,v\cdot1.5\,|G(\Bts)|/\rho_*^2\bigr]\le1.000004\,(0.5698+1.1\cdot10^{-5})\,|G(\Bts)|\le0.58\,|G| .
+\]
+(c) Lemma~\ref{lem:T1-bulk}(b), and integration of the curvature along each arc.
+\end{proof}
+Lemma~\ref{lem:T1-edges} describes the hole as a gap. It is not used in the proof of Theorem~\ref{thm:HT}, which instead follows the
+\emph{true} front through the hole:
+
+\begin{lemma}[The true front through the hole; the axis label]\label{lem:T1-hole}
+\begin{enumerate}
+\item[(a)] \emph{Trajectories.} For every $\alpha\in(0,2\pi)$ the true trajectory $S_\alpha$ (the solution of
+$S'=v(S-P)/|S-P|$) exists on $[0,\Bts]$ and does not meet Harry there. More precisely: for $\alpha\ne\pi$, in run 1, $C=g(\alpha)>0$, so $\rho\ge C/g_{\max}>0$; for $\alpha=\pi$, the
+candidate is on the axis behind Harry, $\rho\ge1$ in run 1 (Lemma~\ref{lem:T1-run1}(b)), and in run 2 its $\TDb=\pi-\beta^*\in(0,\pi)$; in
+run 2, $\TDb\in(0,\pi)$ for $\alpha\ne\alpha_0$ by Lemma~\ref{lem:T1-tang}(a), and the same argument applies; for $\alpha_0$,
+$\rho=\rho_0-(1-v)(t-t_1)>0$ for $t<\TDtc$, and $\Bts<\TDtc$ by Lemma~\ref{lem:T1-tang}(b) (the label $\alpha_0$ is a seen label, and in
+Theorem~\ref{thm:HT} it is replaced by the virtual one). For $0<|\alpha|<\STas$ the candidate passes within $\varepsilon$ of Harry during run 1 (it is seen) but is not caught.
+The single label $\alpha=0$ ($\equiv2\pi$) is caught at $t_0=1/(1-v)<t_1$: \textbf{it has no trajectory after $t_0$.}
+\item[(b)] \emph{The axis point.} $Z_1:=\lim_{\alpha\to0\pm}S_\alpha(t_1)$ exists and equals $P(t_1)-(1+v)$ (on the axis); more precisely
+\[
+|S_\alpha(t_1)-Z_1|\le1.01\,\bigl(y(\alpha,t_1)+1-\cos\alpha\bigr),\qquad y(\alpha,t_1)\le1.01\,g(\alpha)^{1/(1+v)}\to0\quad(\alpha\to0).
+\]
+The curve $\Gamma_1:=\{S_\alpha(t_1):0<|\alpha|\le1/2\}\cup\{Z_1\}$ (labels $\alpha\in[-1/2,1/2]$) is a $C^1$ arc of finite length whose
+unit tangent is Lipschitz in arclength with constant $1.14$; its tangent at $Z_1$ is $i$ (perpendicular to the axis).
+\item[(c)] \emph{At $\Bts$.} Let $\Phi$ be the flow map of the true field $x\mapsto v(x-P(t))/|x-P(t)|$ from $t_1$ to $\Bts$. On the
+$0.01$-neighbourhood of the point $1$, $\Phi$ is a $C^\infty$ diffeomorphism onto its image (the distance from $P(t)$ is $\ge0.48$ for
+$t\in[t_1,\Bts]$). Put $Z_{\mathrm s}:=\Phi(Z_1)=\lim_{\alpha\to0\pm}S_\alpha(\Bts)$. The curve
+$\Gamma_{\mathrm s}:=\Phi(\Gamma_1\cap\{|\alpha|\le0.005\})$ is a $C^1$ arc through $Z_{\mathrm s}$ whose unit tangent is Lipschitz in
+arclength with constant $1.22$, and it joins the true front of the labels outside the hole $C^1$-smoothly (it \emph{is} the true front
+for $\alpha\ne0$). For all $\alpha\in(0,2\pi)$: $|S_\alpha(t)-e^{i\alpha}|\le vt\le3.74\cdot10^{-6}$ ($t\le\Bts$),
+$|Z_{\mathrm s}-1|\le3.74\cdot10^{-6}$, and the bounds of Lemma~\ref{lem:T1-bulk}(b),
+\[
+|k|\le1.22,\qquad w\le1.00036\,(2/\chi)^{2v},
+\]
+hold for the true front at every label $\theta\in(0,2\pi)$ with $|\theta-\alpha_0|\ge\eta$, hole labels included.
+\item[(d)] \emph{Convention.} In Theorem~\ref{thm:HT} the label $\alpha=0$ is a ghost label carrying the point $Z_{\mathrm s}$. Nothing
+has to be seen there ($\alpha=0$ was caught, a fortiori seen, at $t_0$).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) Lemma~\ref{lem:T1-coord}(c): on a straight run $\rho\ge C/g_{\max}$ whenever $0<\beta<\pi$. $C=g(\alpha)>0$ in run 1 for
+$\alpha\in(0,\pi)$ (mirror for the lower half). The label $\alpha=\pi$ stays on the negative real axis during run 1 ($\beta\equiv\pi$,
+$\rho'=v+1$), so $\rho\ge1$ there, and its polar angle about $\Eu$ at $t_1$ is $\TDb=\pi-\beta^*\in(0,\pi/2)$ ($\beta^*>\pi/2$). In run
+2, $C=\TDr g(\TDb)>0$ since $\TDb\in(0,\pi)$ (Lemma~\ref{lem:T1-tang}(a) for $\alpha\notin\{\alpha_0,\pi\}$). Seen for
+$|\alpha|\le\STas$: Lemma~\ref{lem:T1-run1}(a). $\alpha=0$: on the axis ahead of Harry, $\rho'=-(1-v)$ and $\rho(0)=1$.
+
+(b) By Lemma~\ref{lem:T1-coord}(a),(d) at $t_1$ ($h_1<0$, $|h_1|=1-v^2+(1-\cos\alpha)$):
+\[
+y^{1+v}=C\Bigl(\frac{2|h_1|}{1-v}\Bigr)^v\Bigl[1+\frac{(1+v)C\tau_1^{v-1}}{2|h_1|}\Bigr]^v\le C\cdot2.3^v\cdot1.6^v
+\]
+($C\le1.000001$, $|h_1|\le1.13$, $\tau_1\ge1$), so $y(\alpha,t_1)\le1.01\,g(\alpha)^{1/(1+v)}\to0$ as $\alpha\to0$. Next $z=h_1-v\rho_1$
+and $\rho_1=(z^2+y^2)^{1/2}$ give ($z<0$, $|z|\le\rho_1\le|z|+y$) $(1-v)|z|\le|h_1|\le(1-v)|z|+vy$, so
+$\bigl||z|-(1+v)\bigr|\le(1-\cos\alpha+vy)/(1-v)$. Hence $Z_1=P(t_1)-(1+v)$, the same from below by symmetry. Tangent: by
+Lemma~\ref{lem:T1-run1}(c) the tangent at a label $\alpha\in(0,1/2]$ is $e^{i(\pi/2+\delta)}$ with $0\le\delta\le1.1396\,y\to0$, and at the
+mirror label it is $-\overline{e^{i(\pi/2+\delta)}}=e^{i(\pi/2-\delta)}\to i$. Length: $w_1\le1.0000015\,(2/|\alpha|)^{2v}$ is integrable.
+So the arclength parametrisation $\sigma\mapsto\Gamma_1(\sigma)$ is continuous, $C^\infty$ off the point $Z_1$ with $|\Gamma_1'|=1$, and
+$\Gamma_1'$ extends continuously by $i$ at $Z_1$; therefore $\Gamma_1$ is $C^1$ (a continuous map which is differentiable off one point,
+with a continuous extension of the derivative, is $C^1$). The tangent angle is continuous on the arc and has derivative $k_1$,
+$|k_1|\le1.14$, off one point (Lemma~\ref{lem:T1-run1}(c),(e)): it is $1.14$-Lipschitz.
+
+(c) For $|\alpha|\le0.005$, $|S_\alpha(t_1)-1|\le0.005+2.1\cdot10^{-6}$, and candidates move by $\le1.74\,v$ during run 2; $P(t)$ is
+within $5\cdot10^{-6}$ of $\TDSz$ and $\operatorname{dist}(1,\TDSz)=1/2$ (proof of Lemma~\ref{lem:T1-bulk}(a)). So the true field is
+$C^\infty$ with bounded derivatives on the $0.02$-neighbourhood of $1$ for $t\in[t_1,\Bts]$, $\Phi$ is a $C^\infty$ diffeomorphism
+there, $\Gamma_{\mathrm s}$ is $C^1$, and $\Phi(Z_1)=\lim S_\alpha(\Bts)$. Off the label $0$, $\Gamma_{\mathrm s}$ is the true front; the
+curvature law \eqref{eq:T1-laws} with $\rho\ge0.0049$ gives, exactly as in the proof of Lemma~\ref{lem:T1-bulk}(b),
+$|k(\Bts)|\le(1.13951+0.07215)\cdot1.00071<1.22$ and the bound on $w$ at every label $\theta\ne0$ with $|\theta-\alpha_0|\ge\eta$:
+Lemma~\ref{lem:T1-run1}(c),(e) hold for \emph{all} $\alpha\in(0,2\pi)$, hole labels included, and Lemma~\ref{lem:T1-bulk}(a) holds for
+the true candidates of all labels (speed $v$, distance from $\TDSz$). The tangent angle of $\Gamma_{\mathrm s}$ is continuous with
+derivative bounded by $1.22$ off one point: it is $1.22$-Lipschitz. Speed $\le v$ gives the position bounds; $Z_{\mathrm s}$ is a limit
+of such points.
+
+(d) is a convention.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{The touch-down data arc by arc}\label{sec:T1-arcs}
+
+The next proposition records the state at $\Bts$ on the two arcs of labels not known to be seen, in the form of the hypothesis
+\textup{(ST$_{\mathrm{end}}$)} of Section~\ref{sec:end}. It is implied by, and for the assembly superseded by,
+Theorem~\ref{thm:HT}; it concerns the \emph{virtual} front.
+
+\begin{proposition}[Touch-down data]\label{prop:T1-arcs}
+Let $D_1=1$, $0<v\le10^{-6}$, $0<\varepsilon\le10^{-3}$, and let $P$ follow design T up to $\Bts$ (so $\Bts\le3.7321$, and $P$ is
+$1$-Lipschitz and fixed in advance). Let $x_\theta$ be the virtual candidates of $P$, $\Eu$ the heading of run 2, and $\STas$,
+$\alpha_0$, $\TDbe=\alpha_0-\TDxe$ as in Lemmas~\ref{lem:T1-run1}, \ref{lem:T1-tang}, \ref{lem:T1-tail}. Then:
+\begin{enumerate}
+\item[(0)] \emph{Base and seen labels.} $P(\Bts)=x_{\alpha_0}(\Bts)=X_0$, and the virtual front is tangent to $\Eu$ at $X_0$. Every true
+candidate with label in $[-\STas,\STas]\cup[\TDbe,\alpha_0]$ has been seen by $\Bts$. The labels not yet known to be seen form the two
+arcs $\mathsf A_1:=[\alpha_0,2\pi-\STas]$ and $\mathsf A_2:=[\STas,\TDbe]$; on
+$[\STas,\TDbe]\cup[\alpha_0+1.02\,\varepsilon,2\pi-\STas]$ the virtual front at $\Bts$ is the true front.
+\item[(1)] \emph{\textup{(ST$_{\mathrm{end}}$)} on $\mathsf A_1$.} Label $\mathsf A_1$ by $u:=l_{\Bts}(\alpha_0,\cdot)\in[0,U_1]$,
+$U_1\le5.3$, and put $\lambda:=u_b-u_a$. With $\lambda_0:=1/40$, $c_{\mathrm{sep}}:=0.024$, and for any $a'\in(0,1-3v]$,
+$C_0:=5.4\,\lambda_0^{1-3v-a'}$ (so $C_0\lambda_0^{a'}\le0.14\le1$):
+\begin{itemize}
+\item[\textup{(E1)}] $N(a,b;\Bts)\le5.4\,\lambda^{3/2-\mu}\le C_0\lambda^{1/2+a'}$ for all pairs in $\mathsf A_1$ with
+$\varepsilon/2\le\lambda\le\lambda_0$;
+\item[\textup{(E2)}] $c(a,b;\Bts)\ge c_{\mathrm{sep}}$ for all pairs in $\mathsf A_1$ with $\lambda>\lambda_0$.
+\end{itemize}
+So hypothesis \textup{(ST$_{\mathrm{end}}$)} of Section~\ref{sec:end} holds at the leg start $\Bts$ for construction C from
+$(\Bts,\alpha_0)$ cut at $\EbE=2\pi-\STas$ (for example $a'=1/2$: $C_0=5.4\cdot40^{-1/2+3v}\le0.86$).
+\item[(2)] \emph{The arc $\mathsf A_2$ at $\Bts$} (labels: arclength at $\Bts$; $U_2\le1.07$). All its labels are true, the front is
+$C^\infty$, and: \textup{(E1)} $N(a,b;\Bts)\le0.36\,\lambda^{3/2-\TDmT}$ for all pairs in $\mathsf A_2$ with
+$\varepsilon/2\le\lambda\le\lambda_0$; \textup{(E2)} $c(a,b;\Bts)\ge0.024$ for all pairs with $\lambda>\lambda_0$; pointwise,
+$|k|\le1.22\max(1,(\alpha_0-\theta)^{-\TDmT})$; and for the tail $\theta=\alpha_0-\xi$, $\TDxe\le\xi\le0.1$, in the frame
+$(X_0;\Eu,i\Eu)$: position $z\Eu+iy\Eu$ with $-1.00013\,\xi\le z\le-0.9939\,\xi$, $0.408\,\xi^{2-\TDmT}\le y\le0.6125\,\xi^{2-\TDmT}$;
+tangent $e^{i\psi}\Eu$ with $-1.647\,\xi^{1-\TDmT}\le\psi<0$; hence
+$\EV_{\Eu}(a,b)\le1.647^2\,l_{\Bts}(a,b)\,(\alpha_0-a)^{2-2\TDmT}$ for pairs $a<b\le\TDbe$ of the tail. The end $E_Y=x_{\TDbe}(\Bts)$ has
+$1.277\,\varepsilon^{1/(2-2v)}\le\TDxe\le1.566\,\varepsilon^{1/(2-2v)}$, $z_E\in[-1.00013\,\TDxe,-0.9939\,\TDxe]$ and
+$\varepsilon\le y_E\le1.000001\,\varepsilon\,(2.0023\,\TDxe/\varepsilon)^{v/(1+v)}$.
+\item[(3)] \emph{Forward arc, pointwise} ($\theta=\alpha_0+\xi$, $0\le\xi\le0.1$; $u\in[\xi,1.0151\,\xi]$):
+$|\psi|\le1.69\,\xi^{1-\mu}$ (virtual front, all $\xi$); for $\xi\ge1.02\,\varepsilon$: $|k|\le1.0001\,\xi^{-\mu}$, lateral offset
+$0<y\le0.6124\,\xi^2(1.8435/\xi)^\mu$, and distance from $X_0$ in $[0.99379\,\xi,1.00193\,\xi]$.
+\item[(4)] \emph{The hole.} $\mathsf A_1$ ends at $E_-=x_{2\pi-\STas}(\Bts)$ and $\mathsf A_2$ starts at $E_+=x_{\STas}(\Bts)$;
+$|E_+-E_-|\in[2y_{\mathrm s},2.00002\,y_{\mathrm s}]$ with
+$y_{\mathrm s}=(\varepsilon g_{\max})^{1/(1+v)}(2(1+v))^{v/(1+v)}(1+\theta_{\mathrm s})$, $0\le\theta_{\mathrm s}\le0.51\,v\varepsilon$; the
+tangents at $E_\mp$ make angles $\le0.58\,|E_+-E_-|$ with $E_+-E_-$; $|k|\le1.22$ on both sides; $\STas\le2.1\,\varepsilon$.
+\item[(5)] \emph{Global.} Every virtual candidate satisfies $|x_\theta(t)-e^{i\theta}|\le3.74\,v$ for $t\le\Bts$. Labels with
+$|\theta-\alpha_0|\ge0.1$ kept distance $\ge0.0049$ from Harry during run 2. No constant depends on $\varepsilon$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(0): Lemma~\ref{lem:T1-tang}(b), Lemma~\ref{lem:T1-virt} (tangency), Lemma~\ref{lem:T1-run1}(a), Lemma~\ref{lem:T1-tail}(b).
+(3): Lemmas~\ref{lem:T1-virt} and~\ref{lem:T1-fwd}. (4): Lemmas~\ref{lem:T1-edges} and~\ref{lem:T1-run1}. (5):
+Lemmas~\ref{lem:T1-tang}(b) and~\ref{lem:T1-bulk}(a).
+
+\emph{(1), \textup{(E1)}.} On the forward zone ($0\le\xi\le0.1$), $\xi\le u\le1.0151\,\xi$ since $1\le w\le1.0151$
+(Lemma~\ref{lem:T1-virt}). So a label with $u\ge1.04\,\varepsilon$ has $\xi\ge1.02\,\varepsilon$: it is true, and all labels of
+$\mathsf A_1$ with $u\ge1.04\,\varepsilon$ form a $C^\infty$ arc on which, by Lemma~\ref{lem:T1-fwd}(d) and Lemma~\ref{lem:T1-bulk}(b),
+$|k|\le1.0001\,\xi^{-\mu}\le1.0002\,u^{-\mu}$ if $\xi\le0.1$ and $|k|\le1.22$ otherwise; so $|k|\le1.22\max(1,u_a^{-\mu})$ on
+$\{u\ge u_a\}$ for any $u_a\ge1.04\,\varepsilon$. Let $(a,b)$ be a pair in $\mathsf A_1$ with $\varepsilon/2\le\lambda\le\lambda_0$.
+
+\emph{Far case: $u_a\ge\max(\lambda,1.04\,\varepsilon)$.} The tangent angle is $K$-Lipschitz in arclength on $[a,b]$ with
+$K:=1.22\,\lambda^{-\mu}$ ($u_a^{-\mu}\le\lambda^{-\mu}$ if $u_a\le1$, and $1\le\lambda^{-\mu}$); $K\lambda\le\pi$. By
+Lemma~\ref{lem:T1-elem}(a) (here $l_{\Bts}(a,b)=\lambda$): $E\le K^2\lambda^3/24$ and
+$N\le(1.22/\sqrt{12})\,\lambda^{3/2-\mu}\le0.353\,\lambda^{3/2-\mu}$.
+
+\emph{Near case: $u_a<\max(\lambda,1.04\,\varepsilon)\le2.08\,\lambda$.} Then $u_b<3.08\,\lambda\le0.077$, so the pair lies in the
+forward zone, where $|T-\Eu|\le|\psi|\le1.69\,\xi^{1-\mu}\le1.69\,u^{1-\mu}$ (Lemma~\ref{lem:T1-virt}). By Lemma~\ref{lem:T1-elem}(b),
+$N^2\le\int_a^b|T-\Eu|^2ds\le1.69^2u_b^{3-2\mu}/(3-2\mu)$, so
+\[
+N\le(1.69/1.732)\,(3.08\,\lambda)^{3/2-\mu}\le0.9758\cdot5.4055\,\lambda^{3/2-\mu}\le5.3\,\lambda^{3/2-\mu}.
+\]
+Finally $\lambda^{3/2-\mu}\le\lambda^{3/2-3v}=\lambda^{1/2+a'}\lambda^{1-3v-a'}\le\lambda_0^{1-3v-a'}\lambda^{1/2+a'}$ ($\mu\le3v$,
+$\lambda\le\lambda_0<1$).
+
+\emph{(1), \textup{(E2)}.} Let $\theta_1<\theta_2$ in $\mathsf A_1$ with $\lambda>1/40$, $\Delta:=\theta_2-\theta_1$. By
+Lemma~\ref{lem:T1-bulk}(c), $1/40<1.0152\max(\Delta,0.02)$, so $\Delta\ge0.0246$; and $\Delta\le2\pi-\alpha_0$. By (5),
+\begin{align*}
+c&\ge|e^{i\theta_2}-e^{i\theta_1}|-7.5\cdot10^{-6}=2\sin(\Delta/2)-7.5\cdot10^{-6}\\
+&\ge\min\bigl(2\sin0.0123,\,2\sin(\alpha_0/2)\bigr)-7.5\cdot10^{-6}\ge0.0245>c_{\mathrm{sep}} .
+\end{align*}
+And $C_0\lambda_0^{a'}=5.4\,\lambda_0^{1-3v}\le5.4/39.99$.
+
+\emph{(2).} All labels of $\mathsf A_2$ are true up to $\Bts$ (Lemma~\ref{lem:T1-tail}(b)) and at distance $>0$ from Harry, so the front
+is $C^\infty$; by Lemma~\ref{lem:T1-tail}(c) and Lemma~\ref{lem:T1-bulk}(b), $|k|\le1.0001\,\xi^{-\TDmT}$ on the tail
+($\xi=\alpha_0-\theta\in[\TDxe,0.1]$) and $|k|\le1.22$ elsewhere. For a label $\theta$ of $\mathsf A_2$ let
+$\sigma:=l_{\Bts}(\theta,\TDbe)$ be its arclength distance to $E_Y$. On the tail $1\le w\le1.015$ (Lemma~\ref{lem:T1-tail}(c)), so
+$\sigma\le1.015\,(\xi-\TDxe)\le0.1015$ and $\xi\ge\sigma/1.015$; hence there $|k|\le1.0001\cdot1.015^{\TDmT}\sigma^{-\TDmT}\le1.22\,\sigma^{-\TDmT}$.
+So on all of $\mathsf A_2$
+\[
+|k|\le\bar k(\sigma):=1.22\,\min(\sigma,1)^{-\TDmT},
+\]
+where $\bar k$ is non-increasing on $(0,\infty)$ and $\int_0^L\bar k\,d\sigma=1.22\,L^{1-\TDmT}/(1-\TDmT)$ for $0\le L\le1$. Let $(a,b)$ be a
+pair in $\mathsf A_2$ with $\varepsilon/2\le\lambda\le\lambda_0$, parametrise it by arclength $s\in[0,\lambda]$ from $a$ (so
+$\sigma=\sigma_a-s$), and let $\psi(s)$ be the tangent angle, a $C^1$ function with $\psi'=k$, and $m:=\psi(\lambda/2)$. For
+$s\in[0,\lambda]$, $\psi(s)-m=\int_{\lambda/2}^sk$, and along this integral $\sigma$ runs over an interval of length
+$|s-\lambda/2|\le\lambda/2<1$ in $[0,\infty)$; since $\bar k$ is non-increasing,
+\[
+|\psi(s)-m|\le\int_0^{|s-\lambda/2|}\bar k\,d\sigma=\frac{1.22}{1-\TDmT}\,|s-\lambda/2|^{1-\TDmT}.
+\]
+By Lemma~\ref{lem:T1-elem}(b) with the unit vector $e^{im}$, and $|e^{i\psi}-e^{im}|\le|\psi-m|$,
+\[
+N^2\le\int_0^\lambda|\psi(s)-m|^2ds\le\Bigl(\frac{1.22}{1-\TDmT}\Bigr)^2\int_0^\lambda|s-\lambda/2|^{2-2\TDmT}ds
+=\Bigl(\frac{1.22}{1-\TDmT}\Bigr)^2\frac{2\,(\lambda/2)^{3-2\TDmT}}{3-2\TDmT},
+\]
+so, with $\TDmT\le3\cdot10^{-6}$ and $(2/3)^{1/2}2^{-3/2}=1/\sqrt{12}$,
+\begin{align*}
+N&\le\frac{1.22}{1-\TDmT}\Bigl(\frac2{3-2\TDmT}\Bigr)^{1/2}2^{-3/2+\TDmT}\lambda^{3/2-\TDmT}\\
+&\le1.000007\,\frac{1.22}{\sqrt{12}}\,\lambda^{3/2-\TDmT}\le0.3522\,\lambda^{3/2-\TDmT}\le0.36\,\lambda^{3/2-\TDmT}.
+\end{align*}
+\textup{(E2)}: as in (1), with $\Delta\le\TDbe-\STas<\alpha_0<\pi$, so $2\sin(\Delta/2)\ge2\sin0.0123$. The pointwise data are
+Lemma~\ref{lem:T1-tail}(c),(d),(a); $\EV_{\Eu}(a,b)=\int_a^b|T-\Eu|^2ds\le\sup|\psi|^2\cdot l$, and $\xi\mapsto\xi^{1-\TDmT}$ is
+increasing.
+\end{proof}
+
+\begin{remark}[What Corollary~\ref{cor:End} gives from (1)]\label{rem:T1-cor}
+This is a citation of Corollary~\ref{cor:End}, not an independent claim, and it is not used below. For $a'\in(0,1-3v]$ put
+$\gamma:=\min(a'/2,1/4)$ and $R:=\min(1/1280,(\gamma/(400C_0))^{1/a'})$; this is the $R$ of Corollary~\ref{cor:End}, since
+$\lambda_0/32=1/1280<c_{\mathrm{sep}}/16$. If $\varepsilon\le R/64$ and $v\le\min(10^{-6},2\cdot10^{-11}\gamma^2,10^{-6}\gamma R/23.2)$
+(note $4U_1+2\le23.2$), then by Corollary~\ref{cor:End} construction C from $(\Bts,\alpha_0)$ cut at $2\pi-\STas$ keeps the invariants
+of Theorem~\ref{thm:End}, sees every label of $\mathsf A_1$ and stops within time $2U_1/(1-v)\le10.7$ of $\Bts$ at arclength distance
+$\le\varepsilon$ from $E_-$. With $a'=0.99$: $C_0\le5.4\cdot40^{-0.0099}\le5.21$, $\gamma=1/4$,
+$R\ge(1/8336)^{1/0.99}\ge1.09\cdot10^{-4}$; with $a'=1/2$: $C_0\le0.86$, $R\ge5.2\cdot10^{-7}$.
+\end{remark}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{The touch-down hypothesis holds for design T}\label{sec:T1-HT}
+
+\noindent\textbf{The curve $x^0$.} For $\alpha\in[\alpha_0,2\pi+\TDbe]$ (labels mod $2\pi$) let
+\[
+\TDY(\alpha):=\begin{cases}
+x_\alpha(\Bts)\ \text{(the virtual candidate of Section~\ref{sec:bulk})},&\alpha\in[\alpha_0,\alpha_0+1.02\,\varepsilon],\\
+S_\alpha(\Bts)\ \text{(the true candidate)},&\alpha\in[\alpha_0+1.02\,\varepsilon,2\pi+\TDbe],\ \alpha\ne2\pi,\\
+Z_{\mathrm s}\ \text{(Lemma~\ref{lem:T1-hole})},&\alpha=2\pi .
+\end{cases}
+\]
+The second line includes the hole labels $0<|\alpha-2\pi|<\STas$. The first two definitions agree at $\alpha_0+1.02\,\varepsilon$ and on
+a neighbourhood to its right, and virtual $=$ true on $[\alpha_0+1.02\,\varepsilon,2\pi-\STas]\cup[2\pi+\STas,2\pi+\TDbe]$
+(Lemma~\ref{lem:T1-tail}(b)). Let $x^0$ be $\TDY$ reparametrised by arclength $u\in[0,U]$ from $\TDY(\alpha_0)=X_0$, and let
+$\Theta(u)$ be the label of $x^0(u)$. A label $u$ is called \emph{true, with direction $\theta$}, if the true candidate $S_\theta$ is
+defined on $[0,\Bts]$ (not caught before $\Bts$) and $x^0(u)=S_\theta(\Bts)$; the other labels are \emph{ghost} labels
+(these are the notions used in Hypothesis~\ref{hyp:HT}). Put
+\begin{align*}
+\TDG:=\{u:\Theta(u)=2\pi\}\cup\bigl\{u:{}&\Theta(u)\in[\alpha_0,\alpha_0+1.02\,\varepsilon)\text{ and the true candidate with label }\Theta(u)\\
+&\text{was within $\varepsilon$ of Harry at some time}\le\Bts\bigr\}.
+\end{align*}
+\emph{Note: $\TDG\subset[0,U)$ and $0\in\TDG$.} Indeed $\Theta(0)=\alpha_0$ and $\rho_{\alpha_0}(\TDta)=\varepsilon$, so $0\in\TDG$; and
+necessarily so: $x^0(0)=P(\Bts)$, whereas the true candidate $\alpha_0$ is at $S_{\alpha_0}(\Bts)=P(\Bts)+(1-v)(\TDtc-\Bts)\Eu$ with
+$\TDtc-\Bts>0$ (Lemma~\ref{lem:T1-tang}(b)), so $u=0$ cannot be a true label; it is a ghost label. And $\Theta(U)=2\pi+\TDbe$, so
+$U\notin\TDG$.
+
+\begin{theorem}[\textup{(H$_{\mathrm T}$)} holds for design T]\label{thm:HT}
+Let $D_1=1$. For design T (Definition~\ref{def:T}), every $v\in(0,10^{-6}]$ and every $\varepsilon\in(0,10^{-3}]$, the touch-down
+hypothesis, Hypothesis~\ref{hyp:HT}, holds, with the touch-down time $\Bts$ (denoted $t_{\mathrm{td}}$ where the hypothesis is
+stated) and with the absolute constants
+\begin{gather*}
+v_{\mathrm T}=10^{-6},\quad\varepsilon_{\mathrm T}=10^{-3},\quad T_2=3.74,\quad U_{\max}=6.5,\quad a'=\tfrac12,\quad C_0=0.86,\quad C_z=1.57,\\
+\lambda_0=\tfrac1{40},\quad c_{\mathrm{sep}}=0.024,\quad\gamma_{\mathrm T}=\tfrac14,\quad\vartheta_{\mathrm T}=3.3,\quad G_{\mathrm T}=0.05 .
+\end{gather*}
+Explicitly: for all $v\in(0,v_{\mathrm T}]$ and $\varepsilon\in(0,\varepsilon_{\mathrm T}]$ we have $\Bts\le T_2$, and with the unit
+vector $\hat n:=\Eu$ and the curve $x^0:[0,U]\to\R^2$ defined above, which is $C^1$ with $|\partial_ux^0|\equiv1$ and
+$1\le U\le U_{\max}$, the following hold at time $\Bts$. Here $u':=U-u$, $T$ is the unit tangent of $x^0$ in the direction of
+increasing $u$, $\lambda:=u_b-u_a$ for labels $u_a<u_b$, and $l$, $c$, $N=(2(l-c))^{1/2}$ refer to the curve $x^0$.
+\begin{itemize}
+\item[\textup{(T0)}] $x^0(0)=P(\Bts)$ $(=X_0)$. There is a set $\TDG\subset[0,U)$ of ghost labels (the set $\TDG$ above; $u=0$ is one
+of them) such that every $u\notin\TDG$ is true, and every direction $\theta\in[0,2\pi)$ is seen by Harry during $[0,\Bts]$ or is the
+direction of a true label.
+\item[\textup{(T1)}] $N(a,b)\le C_0\lambda^{1/2+a'}$ for all pairs with $\varepsilon/2\le\lambda\le\lambda_0$; and
+$C_0\lambda_0^{a'}\le1$.
+\item[\textup{(T2)}] $c(a,b)\ge\min\bigl(c_{\mathrm{sep}},(u_a+u'_b)/2\bigr)$ for all pairs with $\lambda>\lambda_0$.
+\item[\textup{(T3)}] $|T(u)-\hat n|\le\vartheta_{\mathrm T}\max(u,\varepsilon/2)^{\gamma_{\mathrm T}}$ for $u\le G_{\mathrm T}$.
+\item[\textup{(T4)}] $|T(u)-\hat n|\le\vartheta_{\mathrm T}\max(u',\varepsilon/2)^{\gamma_{\mathrm T}}$ for $u'\le G_{\mathrm T}$.
+\item[\textup{(T5)}] $P(\Bts)-x^0(U)=z_0\hat n+y_0\hat n^\perp$ with $0\le z_0\le C_z\varepsilon^{1/4}$ and
+$|y_0|\le\vartheta_{\mathrm T}(z_0+\varepsilon)(\varepsilon/2)^{\gamma_{\mathrm T}}$.
+\end{itemize}
+\emph{Sharper forms actually proved:}
+\begin{itemize}
+\item[\textup{(T1)}] in the form $N(a,b)\le5.4\,\lambda^{3/2-3v}$, hence with any $a'\in(0,1-3\cdot10^{-6}]$ and
+$C_0=5.4\,\lambda_0^{1-3\cdot10^{-6}-a'}$ ($a'=0.99$: $C_0=5.21$; $a'=1/2$: $C_0=0.86$);
+\item[\textup{(T3)}] $|T-\hat n|\le1.69\,u^{1-\mu}$;
+\item[\textup{(T4)}] $|T-\hat n|\le1.647\,(\TDxe+u')^{1-\TDmT}$;
+\item[\textup{(T5)}] $1.269\,\varepsilon^{1/(2-2v)}\le z_0\le1.567\,\varepsilon^{1/(2-2v)}$ and
+$\varepsilon\le|y_0|\le1.000001\,\varepsilon\,(2.0023\,\TDxe/\varepsilon)^{v/(1+v)}$.
+\end{itemize}
+\end{theorem}
+\begin{proof}
+$\Bts\le3.7321$ by Lemma~\ref{lem:T1-tang}(b).
+
+\emph{$x^0$ is $C^1$, $|\partial_ux^0|=1$, $1\le U\le6.5$.} $\TDY$ is $C^1$ in the label with $|\partial_\alpha\TDY|\ge1$ on
+$[\alpha_0,2\pi)$ and on $(2\pi,2\pi+\TDbe]$: on $[\alpha_0,\alpha_0+1.02\,\varepsilon]$ it is the virtual front
+(Lemma~\ref{lem:B-VC}(a)); beyond, the true front ($C^\infty$, $w\ge1$); they coincide near $\alpha_0+1.02\,\varepsilon$
+(Lemma~\ref{lem:T1-fwd}(d) and its proof: every forward label with $0.99379\,\xi>\varepsilon$ has $\rho>\varepsilon$ on $[0,\Bts]$).
+Near the label $2\pi$, $\TDY$ is the arc $\Gamma_{\mathrm s}$ of Lemma~\ref{lem:T1-hole}(c), a $C^1$ arc of finite length. So the
+arclength parametrisation is $C^1$ with unit speed. Length: Lemma~\ref{lem:T1-bulk}(c) and Lemma~\ref{lem:T1-hole}(c) give
+$w\le1.0151\,(2/\chi)^{2v}$ at every label $\ne2\pi$, so $U\le1.0151\cdot0.2+1.00036\cdot1.000013\cdot2\pi\le6.5$; and
+$U\ge|\TDY(\alpha_0+\pi)-X_0|\ge2-7.5\cdot10^{-6}\ge1$. Also, as in Lemma~\ref{lem:T1-bulk}(c),
+\begin{equation}\label{eq:T1-len}
+l(a,b)\le1.0152\,\max(\Delta,0.02)\qquad\text{for labels at distance }\Delta:=\Theta_b-\Theta_a
+\end{equation}
+(the hole labels obey the same bound for $w$).
+
+\emph{\textup{(T0)}.} $x^0(0)=x_{\alpha_0}(\Bts)=P(\Bts)$ (Lemma~\ref{lem:T1-tang}(b)). Let $u\notin\TDG$. Either
+$\Theta(u)\notin[\alpha_0,\alpha_0+1.02\,\varepsilon)$ and $\Theta(u)\ne2\pi$; then $x^0(u)=S_\Theta(\Bts)$ with $S_\Theta$ defined on
+$[0,\Bts]$ (Lemma~\ref{lem:T1-hole}(a)). Or $\Theta(u)\in(\alpha_0,\alpha_0+1.02\,\varepsilon)$ and the true candidate was never within
+$\varepsilon$ of Harry on $[0,\Bts]$; then the virtual candidate has had $\rho\ge\varepsilon$ throughout, so it equals the true one
+(Lemma~\ref{lem:B-VC}(c) and its proof), $S_\Theta$ is defined on $[0,\Bts]$ and $x^0(u)=S_\Theta(\Bts)$. ($\Theta=\alpha_0$, i.e.\
+$u=0$, is in $\TDG$ because $\rho_{\alpha_0}(\TDta)=\varepsilon$; and $\TDG\subset[0,U)$ because $\Theta(U)=2\pi+\TDbe$.) Directions:
+$\theta\in[-\STas,\STas]$ are seen in run 1 (Lemma~\ref{lem:T1-run1}(a)); $\theta\in[\TDbe,\alpha_0]$ are seen in run 2
+(Lemma~\ref{lem:T1-tail}(b)); $\theta\in(\alpha_0,\alpha_0+1.02\,\varepsilon)$ is seen (if its label is in $\TDG$, by the definition of
+$\TDG$) or is the direction of a true label; all other $\theta$ are directions of true labels.
+
+\emph{Pointwise bounds on $x^0$.} Collect Lemma~\ref{lem:T1-virt}, Lemma~\ref{lem:T1-fwd}(d), Lemma~\ref{lem:T1-tail}(c),
+Lemma~\ref{lem:T1-bulk}(b) and Lemma~\ref{lem:T1-hole}(c). Let $\xi:=\Theta-\alpha_0$ on the \emph{forward zone} ($0\le\xi\le0.1$; there
+$\xi\le u\le1.0151\,\xi$) and $\xi:=\alpha_0+2\pi-\Theta$ on the \emph{tail} ($\TDxe\le\xi\le0.1$; there $\xi\le\TDxe+u'$ because
+$w\ge1$, and $u'\le1.015\,(\xi-\TDxe)$). Then:
+\begin{itemize}
+\item[(i)] $|T-\Eu|\le|\psi|\le1.69\,\xi^{1-\mu}$ on the forward zone;
+\item[(ii)] $-1.647\,\xi^{1-\TDmT}\le\psi<0$ on the tail;
+\item[(iii)] on $\{u\ge1.04\,\varepsilon\}$ the tangent angle of $x^0$ is locally Lipschitz in $u$, with almost-everywhere derivative
+$k$, where $|k|\le1.0002\,u^{-\mu}$ on the forward zone, $|k|\le1.0001\,\xi^{-\TDmT}\le1.0001\,\varepsilon^{-\TDmT}$ on the tail
+($\xi\ge\TDxe\ge\varepsilon$), and $|k|\le1.22$ elsewhere (across the label $2\pi$: Lemma~\ref{lem:T1-hole}(c));
+\item[(iv)] $|x^0(u)-e^{i\Theta(u)}|\le3.74\cdot10^{-6}$ for all $u$.
+\end{itemize}
+
+\emph{\textup{(T1)}.} Let $\varepsilon/2\le\lambda\le1/40$. Three cases.
+
+\emph{Near $X_0$: $u_a<\max(\lambda,1.04\,\varepsilon)\le2.08\,\lambda$.} Then $u_b<3.08\,\lambda\le0.077$, the pair lies in the forward
+zone, and by (i) and Lemma~\ref{lem:T1-elem}(b), $N^2\le\int_{u_a}^{u_b}(1.69\,u^{1-\mu})^2du$, so
+$N\le(1.69/1.732)(3.08\,\lambda)^{3/2-\mu}\le5.3\,\lambda^{3/2-\mu}$.
+
+\emph{Near $E_Y$: $u_a\ge\max(\lambda,1.04\,\varepsilon)$, $u'_b<\lambda$ and $\TDxe<\lambda$.} Then $u'_a=u'_b+\lambda<2\lambda\le1/20$.
+The tail has length $\ge0.1-\TDxe\ge0.05$ ($w\ge1$, $\TDxe\le0.05$), so the pair lies in the tail, where $\xi\le\TDxe+u'<3\lambda\le0.075$.
+By (ii), $|T-\Eu|\le|\psi|\le1.647\,\xi^{1-\TDmT}\le1.647\,s^{1-\TDmT}$ with $s:=\TDxe+u'$, and as $u$ runs over $[u_a,u_b]$, $s$ runs
+over an interval of length $\lambda$ inside $[0,3\lambda]$. The integrand is increasing in $s$, so by Lemma~\ref{lem:T1-elem}(b)
+\[
+N^2\le1.647^2\int_{2\lambda}^{3\lambda}s^{2-2\TDmT}ds=1.647^2\,\frac{3^{3-2\TDmT}-2^{3-2\TDmT}}{3-2\TDmT}\,\lambda^{3-2\TDmT}
+\le\frac{19\cdot1.647^2}{3-2\TDmT}\,\lambda^{3-2\TDmT}
+\]
+($p\mapsto3^p-2^p$ is increasing, and $27-8=19$), i.e.\ $N\le1.647\cdot2.5167\,\lambda^{3/2-\TDmT}\le4.15\,\lambda^{3/2-\TDmT}$.
+
+\emph{Far: $u_a\ge\max(\lambda,1.04\,\varepsilon)$, and $u'_b\ge\lambda$ or $\TDxe\ge\lambda$.} By (iii) the tangent angle is locally
+Lipschitz on $[u_a,u_b]$ with almost-everywhere derivative $k$, where: on the forward zone $|k|\le1.0002\,u^{-\mu}\le1.0002\,\lambda^{-\mu}$
+($u\ge u_a\ge\lambda$); on the tail, every label of the pair has $u'\ge u'_b$, so $\xi\ge\TDxe+u'/1.015\ge\max(\TDxe,u'_b/1.015)\ge\lambda/1.015$
+and $|k|\le1.0001\,\xi^{-\TDmT}\le1.0001\cdot1.015^{\TDmT}\lambda^{-\TDmT}\le1.0002\,\lambda^{-\TDmT}$; elsewhere $|k|\le1.22$. As $\lambda<1$ and
+$\mu,\TDmT\le3v$, the tangent angle is $K$-Lipschitz on $[u_a,u_b]$ with $K:=1.22\,\lambda^{-3v}$, and $K\lambda\le\pi$; by
+Lemma~\ref{lem:T1-elem}(a), $N\le(K/\sqrt{12})\,\lambda^{3/2}\le0.353\,\lambda^{3/2-3v}$.
+
+The three cases are exhaustive, and $\lambda^{3/2-\mu},\lambda^{3/2-\TDmT}\le\lambda^{3/2-3v}$. Hence
+\[
+N\le5.4\,\lambda^{3/2-3v}=5.4\,\lambda^{1-3v-a'}\lambda^{1/2+a'}\le5.4\,\lambda_0^{1-3v-a'}\lambda^{1/2+a'};
+\]
+for $a'=1/2$: $5.4\cdot40^{-1/2+3v}\le0.86$, and $C_0\lambda_0^{a'}\le0.14$.
+
+\emph{\textup{(T2)}.} Let $\lambda>1/40$ and $\Delta:=\Theta_b-\Theta_a\in(0,2\pi-\TDxe]$. From \eqref{eq:T1-len}: $\Delta\ge0.0246$. By
+(iv), $c\ge2\sin(\Delta/2)-7.5\cdot10^{-6}$. \emph{If $\Delta\le2\pi-0.0246$:} $c\ge2\sin(0.0123)-7.5\cdot10^{-6}\ge0.0245\ge
+c_{\mathrm{sep}}$. \emph{If $\Delta>2\pi-0.0246$:} then $\xi_a:=\Theta_a-\alpha_0\ge0$ and $\xi_b:=\alpha_0+2\pi-\Theta_b\ge\TDxe$ satisfy
+$\xi_a+\xi_b<0.0246$: $a$ lies in the forward zone, $b$ in the tail. In the frame $(X_0;\Eu,i\Eu)$:
+$z_a=\int_0^{u_a}\cos\psi\,du\ge0.999\,u_a$ (by (i), $|\psi|\le0.042$), $z_b\le-0.9939\,\xi_b$ (Lemma~\ref{lem:T1-tail}(c)) and
+$u'_b\le1.015\,\xi_b$. So
+\[
+c\ge z_a-z_b\ge0.999\,u_a+0.979\,u'_b\ge(u_a+u'_b)/2 .
+\]
+
+\emph{\textup{(T3)}.} For $u\le0.05$: $\xi\le u\le0.1$, and by (i)
+$|T-\Eu|\le1.69\,u^{1-\mu}\le1.69\,u^{1/4}\le1.69\max(u,\varepsilon/2)^{1/4}$.
+
+\emph{\textup{(T4)}.} For $u'\le0.05$: $\xi\le\TDxe+u'\le0.1$ ($\TDxe\le0.05$), so by (ii)
+$|T-\Eu|\le1.647\,(\TDxe+u')^{1-\TDmT}\le1.647\,(\TDxe^{1/2}+u'^{1/2})$, and $\TDxe^{1/2}\le1.2514\,\varepsilon^{1/4}\le1.4882\,(\varepsilon/2)^{1/4}$,
+$u'^{1/2}\le0.473\,u'^{1/4}$: $|T-\Eu|\le1.647\cdot1.9612\cdot\max(u',\varepsilon/2)^{1/4}\le3.3\max(u',\varepsilon/2)^{1/4}$.
+
+\emph{\textup{(T5)}.} $x^0(U)=E_Y=X_0+z_E\Eu+y_E\cdot i\Eu$ (Lemma~\ref{lem:T1-tail}(d)), so
+$z_0=-z_E\in[0.9939\,\TDxe,1.00013\,\TDxe]\subset[1.269\,\varepsilon^{1/(2-2v)},1.567\,\varepsilon^{1/(2-2v)}]\subset(0,1.57\,\varepsilon^{1/4}]$,
+and $y_0=-y_E$,
+\[
+|y_0|\le1.000001\,\varepsilon\,(2.0023\,\TDxe/\varepsilon)^{v/(1+v)}\le1.000001\,\varepsilon\,(3.14\,\varepsilon^{-1/2})^v\le1.000003\,\varepsilon^{1-v/2},
+\]
+while $\vartheta_{\mathrm T}(z_0+\varepsilon)(\varepsilon/2)^{1/4}\ge3.3\cdot1.269\cdot2^{-1/4}\varepsilon^{(1+\mu)/2+1/4}\ge3.5\,\varepsilon^{3/4+\mu/2}$,
+and $\varepsilon^{1/4-v/2-\mu/2}\le1$.
+\end{proof}
+
+\begin{remark}[For the assembly]\label{rem:T1-assembly}
+(1) \emph{The axis label is singular} (caught at $t_0$, no trajectory afterwards); the true front is nevertheless a $C^{1,1}$ arc through
+the limit point $Z_{\mathrm s}$, with the same curvature bound $1.22$ on both sides (Lemma~\ref{lem:T1-hole}). Nothing else is needed
+there: the label is a ghost label. The stretch $w\sim(2/|\alpha|)^{2v}$ is unbounded at this label, so $x^0$ is $C^1$ in arclength
+but not in the label there.
+
+(2) The hole labels $0<|\alpha-2\pi|<\STas$ are \emph{true} labels (their trajectories exist and $x^0=S_\alpha(\Bts)$); they are also
+seen. The set $\TDG$ consists only of the label $2\pi$ and of the forward labels in $[\alpha_0,\alpha_0+1.02\,\varepsilon)$ whose true
+candidates entered the $\varepsilon$-disc; in particular $u=0$ is a ghost label, which is why \textup{(T0)} asks for
+$\TDG\subset[0,U)$ and not $\TDG\subset(0,U)$.
+
+(3) \emph{Derived constants.} The constants which the next section derives from the touch-down data are computed from the
+following values. With the constants of Theorem~\ref{thm:HT} ($a'=1/2$): $\min(a'/2,\gamma_{\mathrm T})=1/4$,
+$\min(c_{\mathrm{sep}},1/4)=0.024$ and $(\gamma/(400C_0))^{1/a'}=(1/(1600\cdot0.86))^2\ge5.2\cdot10^{-7}$ with $\gamma=1/4$. With the
+sharper \textup{(T1)} ($a'=0.99$, $C_0=5.21$): $\gamma=1/4$ and $(1/8336)^{1/0.99}\ge1.09\cdot10^{-4}$.
+
+(4) \emph{The value of $D_1$.} Lemmas~\ref{lem:T1-coord}--\ref{lem:T1-second}, Lemma~\ref{lem:T1-run1}(a), the method of
+Lemma~\ref{lem:T1-run1}(d), Lemma~\ref{lem:T1-tang}(a) and formula \eqref{eq:T1-k1} are exact for every $D_1>0$ (with
+$h_1=\cos\alpha+v-(1-v^2)t_1$). The numerical constants of Lemmas~\ref{lem:T1-tang}(c)--\ref{lem:T1-hole} were derived for $D_1=1$
+only.
+\end{remark}
+
+\begin{remark}[Status]\label{rem:T1-status}
+\emph{Refereed.} Lemmas~\ref{lem:T1-coord}--\ref{lem:T1-hole}, Proposition~\ref{prop:T1-arcs} and Theorem~\ref{thm:HT} were checked by
+two independent referees, who read version~2 of the claims file (reports \texttt{referee-RP8a-1.md} and
+\texttt{referee-RP8a-2.md}). Both verdicts are ``OK with text fixes'':
+neither found a false statement, a gap, or an inequality that rests on a grid of values of $(v,\varepsilon)$; every estimate is an
+explicit chain that is uniform on $0<v\le10^{-6}$, $0<\varepsilon\le10^{-3}$. All their corrections are incorporated. They concern
+the proof of Lemma~\ref{lem:T1-run1}(d) (the text gave $1.2\,v\varepsilon$; the bound stated here, $0.51\,v\varepsilon$, is the one the
+corrected proof gives), three rounded numbers in the proofs of Lemmas~\ref{lem:T1-tang}(c) and~\ref{lem:T1-tail}(c),(d), a sign in the
+proof of Lemma~\ref{lem:T1-edges}, the label $\alpha=\pi$ in Lemma~\ref{lem:T1-hole}(a), and the wording of \textup{(T0)}: the label
+$u=0$ is necessarily a ghost label, so the set of ghost labels is a subset of $[0,U)$, not of $(0,U)$. One step of the proof of Lemma~\ref{lem:T1-tail}(b) (the range $\xi\ge0.35\,v\varepsilon$) used an
+inequality that fails for $v<9.8\cdot10^{-7}$; it was repaired after the reports (the first report contains the correct
+computation), and the statement is unchanged. Lemma~\ref{lem:T1-elem} restates two facts of Sections~\ref{sec:start}
+and~\ref{sec:end} for arbitrary $C^1$ curves; the first referee re-proved them, the second took them as cited.
+
+\emph{After the reports.} These repairs, the new proof of Lemma~\ref{lem:T1-run1}(d), the strict inequality in
+Lemma~\ref{lem:T1-tang}(b), the statement and proof of Lemma~\ref{lem:T1-elem} as typeset, and
+Remark~\ref{rem:T1-assembly}(4) were not re-read by the referees. They were checked afterwards in an audit of every difference
+between the typeset text and the text the referees read (report \texttt{audit-B.md}: no difference is false or leaves a gap). In
+addition the typeset chain from this section to Theorem~\ref{thm:Main} was audited end to end (report \texttt{audit-A.md}; see
+Remark~\ref{rem:T2-status}): the twelve constants of Theorem~\ref{thm:HT} agree with those used in Section~\ref{sec:main}, and
+the arithmetic that produces them was recomputed. A gap in the far case of the proof of \textup{(T1)} in Theorem~\ref{thm:HT} and
+of Proposition~\ref{prop:T1-arcs}(2) (a reversed inequality, relevant only for astronomically small $\varepsilon$, below about $10^{-6000}$ at $v=10^{-6}$) was found in a later
+round (reports \texttt{referee-RQ3-1.md}, \texttt{referee-RQ3-2.md}) and is repaired here; the statements are unchanged.
+
+\emph{Referee checks (evidence only, not part of any proof).} (N1) \emph{Transport lemmas.} The first referee integrated
+\eqref{eq:snitch} together with its first and second variational equations in $45$-digit arithmetic, for
+$v\in\{10^{-6},10^{-3},0.1,0.5\}$, through run 1 and a second straight run with random heading and duration, and compared with
+Lemmas~\ref{lem:T1-coord}--\ref{lem:T1-second} ($17$ identities per case, including \eqref{eq:T1-k}, \eqref{eq:T1-k2} and
+\eqref{eq:T1-k1}): the worst error was about $10^{-44}$. The second referee reproduced Lemma~\ref{lem:T1-first} and
+\eqref{eq:T1-k1} by finite differences to $10^{-22}$ and Lemma~\ref{lem:T1-tang}(a) to $10^{-26}$.
+(N2) \emph{Scans.} With independent codes in $67$- to $610$-digit arithmetic the two referees evaluated every inequality of this
+section at the touch-down state computed from the closed forms (about $66$ and $110$ named inequalities per run) on $21+32$ runs covering $v\in[10^{-15},10^{-6}]$ and $\varepsilon$ from
+$10^{-3}$ down to $10^{-250}$ (two reduced runs at $\varepsilon=10^{-700}$), including both orders of limits, pairs straddling the
+virtual/true junction, the hole edges, the axis label and the end $E_Y$, and scales down to $\lambda=\varepsilon/2$: \textbf{no
+violation}. Worst ratios of left side to right side: \textup{(T1)} $0.053$ (the true value of $N/\lambda^{3/2}$ is within $0.3\%$ of
+$1/\sqrt{12}$ everywhere, as for a unit circle); \textup{(T2)} $0.976$ for $c\ge c_{\mathrm{sep}}$ (at label distance $0.0246$) and
+$0.508$ for the pairs with one label near $X_0$ and the other near $E_Y$, where the intermediate inequality
+$c\ge0.999\,u_a+0.979\,u'_b$ is used to $0.999$; \textup{(T3)} $0.054$; \textup{(T4)} $0.092$; \textup{(T5)} $0.16$ and $0.044$.
+Measured values: $\STas/\varepsilon\in[0.9994,1.0000002]$; $\TDxe/\varepsilon^{1/(2-2v)}\in[1.41421,1.41433]$ (i.e.\ $\sqrt2$; proved:
+$[1.277,1.566]$); curvature at $\Bts$ between $0.9975$ and $1.0009$ along the whole curve, hole included, in the $30$ full runs of the second
+referee (proved: $1.22$, resp.\ $1.0001\,\xi^{-\mu}$, $1.0001\,\xi^{-\TDmT}$); $\TDtc-\Bts=0.33333\,v\varepsilon$; $\theta_{\mathrm s}=0.750\,v\varepsilon^2$.
+(N3) \emph{Exponents.} At larger $v$ ($0.02$, $0.1$, $0.3$) the second referee measured the five exponents $1/(2-2v)$ (for $\TDxe$),
+$(1-2v)/(1-v)$ and $-\mu$ (tilt and curvature on the forward arc), $(1-2v)/(1+v)$ and $-3v/(1+v)$ (tail), in agreement to $6$ or more
+digits.
+
+\emph{Limits of the result.}
+(L1) \emph{The proof covers $D_1=1$ only.} Numerical experiments of the next section's source used $D_1=0.1$; that value is not covered.
+(L2) \emph{$a'=1$ is false} at $X_0$ and at $E_Y$: the curvature of the front really grows like $\xi^{-\mu}$ at $X_0$ and like
+$\xi^{-3v/(1+v)}$ at $E_Y$ (N3), so $N\lesssim\lambda^{3/2}$ fails there as $\varepsilon\to0$. What is proved is the sharper form
+$N\le5.4\,\lambda^{3/2-3v}$, i.e.\ every $a'\le1-3v$; Theorem~\ref{thm:HT} states $a'=1/2$.
+(L3) Nothing is proved here about times after $\Bts$ (departure from $E_Y$, crossing of the hole, final approach).
+(L4) The \emph{virtual} front on the seen stretch $(\TDbe,\alpha_0)$ and inside the hole is not analysed, and Theorem~\ref{thm:HT} does
+not need it ($x^0$ ends at $\TDbe$ and uses the true front through the hole). Numerically the virtual front in the hole carries a dent
+of depth about $1.2\,v^2\varepsilon$.
+(L5) All inequalities with numerical constants are proved for $v\le10^{-6}$, $\varepsilon\le10^{-3}$ only: they use that the front is
+a $10^{-5}$-perturbation of the unit circle away from $X_0$, $E_Y$ and the axis. The team's own (unrefereed) numerics suggest that
+\textup{(H$_{\mathrm T}$)} holds with similar constants up to $v=0.1$, with $a'\le1-3v/(1+v)$.
+\end{remark}

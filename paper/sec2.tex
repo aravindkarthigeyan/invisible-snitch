@@ -1,0 +1,249 @@
+% sec2.tex -- writer W1.
+\section{Virtual fronts and two-point calculus}\label{sec:prelim}
+
+Throughout, $d=1$, $0<\eps<1$, and $P$ denotes a $1$-Lipschitz path with $P(0)=0$. External input: for an ordinary
+differential equation $x'=G(t,x)$ with $G$ continuous and $D_xG$ continuous and bounded, solutions exist globally, are unique,
+depend $C^1$ on the initial point, and $\partial x/\partial x_0$ solves the variational equation (see, e.g.,
+\cite[Ch.~V]{Hartman}).
+
+\subsection{The field and virtual flows}
+
+\begin{definition}\label{def:field}
+$f(\rho):=1$ for $\rho\ge\eps$ and $f(\rho):=(\rho/\eps)(2-\rho/\eps)$ for $0\le\rho\le\eps$; $F(x):=f(|x|)\,x/|x|$, $F(0):=0$;
+$A:=DF$; $a^*(\rho):=1/\rho$ for $\rho\ge\eps$ and $a^*(\rho):=2/\eps$ for $\rho<\eps$.
+\end{definition}
+
+\begin{lemma}\label{lem:field}
+\textup{(i)} $F\in C^1(\R^2)$, $|F|\le1$, and $F(x)=x/|x|$ for $|x|\ge\eps$.
+\textup{(ii)} With $\rho=|x|$, $\rhat=x/\rho$, $\Pi=I-\rhat\rhat^{\mathsf T}$: $A=f'(\rho)\rhat\rhat^{\mathsf T}+(f(\rho)/\rho)\Pi$;
+$A$ is symmetric, $0\le A\le a^*(\rho)I$, $A=\Pi/\rho$ for $\rho\ge\eps$, and $A(0)=(2/\eps)I$. Moreover
+$f(\rho)/\rho-f'(\rho)=\rho/\max(\rho,\eps)^2$.
+\textup{(iii)} For every unit vector $e$: $|e^\perp\cdot A(x)e|\le|x\times e|/\max(\rho,\eps)^2$.
+\textup{(iv)} $(F(x)-F(y))\cdot(x-y)\ge0$ for all $x,y$; and $(x/|x|-y/|y|)\cdot(x-y)\ge0$ for $x,y\ne0$.
+\end{lemma}
+
+\begin{proof}
+$F(x)=\sigma(|x|)x$ with $\sigma(\rho)=(2\eps-\rho)/\eps^2$ on $[0,\eps]$ and $\sigma=1/\rho$ on $[\eps,\infty)$. Both pieces and
+their derivatives $-1/\eps^2$, $-1/\rho^2$ agree at $\eps$, so $\sigma\in C^1(0,\infty)$ and $F\in C^1(\R^2\setminus\{0\})$; near
+$0$, $F(x)=(2\eps x-|x|x)/\eps^2$, and $x\mapsto|x|x$ is $C^1$ with derivative $|x|I+xx^{\mathsf T}/|x|\to0$. This gives (i)
+($|F|=f\le1$) and $A(0)=(2/\eps)I$. For $x\ne0$, $DF=\sigma I+\rho\sigma'\rhat\rhat^{\mathsf T}=(f/\rho)\Pi+f'\rhat\rhat^{\mathsf T}$,
+since $\sigma+\rho\sigma'=(\rho\sigma)'=f'$. For $\rho<\eps$: $f'=(2/\eps)(1-\rho/\eps)\in[0,2/\eps]$,
+$f/\rho=(2-\rho/\eps)/\eps\in[1/\eps,2/\eps]$, $f/\rho-f'=\rho/\eps^2$; for $\rho\ge\eps$: $f'=0$, $f/\rho=1/\rho$. This is (ii).
+(iii) By (ii), $A=(f/\rho)I-(f/\rho-f')\rhat\rhat^{\mathsf T}$, so
+$e^\perp\cdot Ae=-\rho\max(\rho,\eps)^{-2}(e\cdot\rhat)(e^\perp\cdot\rhat)$, and $|e^\perp\cdot\rhat|=|e\times\rhat|=|x\times e|/\rho$;
+at $x=0$ both sides vanish. (iv) $(F(x)-F(y))\cdot(x-y)=\int_0^1(x-y)\cdot A(y+s(x-y))(x-y)\,ds\ge0$ by (ii); and
+$(x/|x|-y/|y|)\cdot(x-y)=|x|+|y|-(x\cdot y)(1/|x|+1/|y|)\ge0$ because $x\cdot y\le|x||y|$.
+\end{proof}
+
+\begin{definition}\label{def:flow}
+Let $x^\circ:[u_-,u_+]\to\R^2$ be a $C^1$ curve with $\partial_ux^\circ\ne0$, and $t_\circ\ge0$. The \emph{virtual flow} of $P$
+from $x^\circ$ at time $t_\circ$ is the solution of
+\[
+\partial_tx(u,t)=v\,F\bigl(x(u,t)-P(t)\bigr),\qquad x(u,t_\circ)=x^\circ(u),\qquad t\ge t_\circ .
+\]
+We write $x_u(t):=x(u,t)$, $r=r_u:=x-P$, $\rho:=|r|$, $\rhat:=r/\rho$, $w:=|\partial_ux|$, $T:=\partial_ux/w=e^{i\psi}$ (the unit
+tangent, with angle $\psi$) and $\phi:=\arg r-\psi$, so that $\cos\phi=T\cdot\rhat$, $\sin\phi=T\times\rhat$.
+\begin{enumerate}
+\item[(a)] \emph{Virtual candidates}: $t_\circ=0$, $x^\circ(\theta)=e^{i\theta}$; we write $x_\theta(t)$ and $\rho_\theta$.
+\item[(b)] \emph{Working front}: $t_\circ=\ttd$ (the touch-down time of Definition~\ref{def:T}), $x^\circ=\xz$ with
+$|\partial_u\xz|\equiv1$ and labels $u\in[0,U]$; $u':=U-u$.
+\item[(c)] A label $u$ of a working front is \emph{true with direction $\theta$} if the true candidate $S_\theta$ exists on
+$[0,\ttd]$ and $\xz(u)=S_\theta(\ttd)$; otherwise it is a \emph{ghost label}.
+\item[(d)] The \emph{true candidate} $S_\theta$ is the solution of $S'=v(S-P)/|S-P|$, $S(0)=e^{i\theta}$, up to the first time
+it meets $P$ (that is, \eqref{eq:snitch} with $H=P$, $d=1$).
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}\label{lem:flow}
+For a virtual flow:
+\begin{enumerate}
+\item[(a)] It exists and is unique on $[t_\circ,\infty)$, $|\partial_tx|\le v$, $x(\cdot,t)\in C^1$, $\partial_ux$ is continuous in
+$(u,t)$, and $\partial_t\partial_ux=vA(r)\partial_ux$. The stretch $w$ is non-decreasing in $t$ (so $w\ge1$ when
+$w(\cdot,t_\circ)\equiv1$), and lengths $l$ of label intervals are non-decreasing in $t$.
+\item[(b)] $w_t=vw\,T\cdot AT$ and $T_t=v(AT-(T\cdot AT)T)$. Hence $\psi_t=-v\rho\max(\rho,\eps)^{-2}\sin\phi\cos\phi$ \textup(read
+as $0$ if $\rho=0$\textup), so $|\psi_t|\le v\rho|\sin\phi|/\max(\rho,\eps)^2\le v/\max(\rho,\eps)$; and for $\rho\ge\eps$:
+$w_t/w=v\sin^2\!\phi/\rho$, $\psi_t=-(v/\rho)\sin\phi\cos\phi$.
+\item[(c)] For fixed labels, $l$, $c$, $E$ \textup(Definition~\ref{def:excess}\textup) are $C^1$ in $t$ \textup($c$ and $E$ on
+time intervals where $c>0$\textup); their derivatives involve $P$ only through $P(t)$, so they do not jump when $P$ turns.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) The field $(t,x)\mapsto vF(x-P(t))$ is continuous, and $C^1$ in $x$ with $\|D_x\|\le2v/\eps$ by Lemma~\ref{lem:field}(ii);
+the ODE facts quoted above give everything except the monotonicity, and $|\partial_tx|=v|F|\le v$. By the variational equation
+and $A\ge0$, $\partial_tw^2=2v\,\partial_ux\cdot A\,\partial_ux\ge0$; $l=\int w\,du$.
+(b) $\partial_t(w^2)=2vw^2\,T\cdot AT$ gives $w_t$; then $T_t=\partial_t(\partial_ux/w)=vAT-(w_t/w)T$. Since $T_t\perp T$,
+$\psi_t=T^\perp\cdot T_t=v\,T^\perp\cdot AT$. As $\rhat=e^{i\phi}T$, we have $T\cdot\rhat=\cos\phi$ and $T^\perp\cdot\rhat=\sin\phi$,
+so by Lemma~\ref{lem:field}(ii), $T^\perp\cdot AT=-(f/\rho-f')(T^\perp\cdot\rhat)(T\cdot\rhat)=-\rho\max(\rho,\eps)^{-2}\sin\phi\cos\phi$
+(and $T^\perp\cdot A(0)T=0$). For $\rho\ge\eps$, $A=\Pi/\rho$ and $T\cdot\Pi T=1-\cos^2\phi$.
+(c) $|w_t|\le(2v/\eps)w$ and $w_t$ is continuous in $(u,t)$, so $l=\int_a^bw\,du$ is $C^1$; $x_a,x_b$ are $C^1$ in $t$ with
+derivatives $vF(x-P(t))$.
+\end{proof}
+
+\begin{lemma}\label{lem:seen}
+\textup{(a)} If $\rho_\theta(t)\le\eps$ for a virtual candidate, the true candidate $\theta$ is seen by time $t$.
+\textup{(b)} If a label $u$ of a working front is true with direction $\theta$ and $\rho_u(t)\le\eps$ for some $t\ge\ttd$, then
+$\theta$ is seen by time $t$.
+\end{lemma}
+
+\begin{proof}
+(a) Since $\rho_\theta(0)=|e^{i\theta}-P(0)|=1>\eps$, $t':=\inf\{s\le t:\rho_\theta(s)\le\eps\}$ is positive and
+$\rho_\theta\ge\eps$ on $[0,t']$, $\rho_\theta(t')=\eps$. There $F(x_\theta-P)=(x_\theta-P)/\rho_\theta$, so $x_\theta$ solves the
+true equation; as that equation has a locally Lipschitz field away from $P$, $S_\theta=x_\theta$ on $[0,t']$, and
+$|S_\theta(t')-P(t')|=\eps$. (b) If $S_\theta$ was within $\eps$ of $P$ at some time $\le\ttd$ there is nothing to prove.
+Otherwise $\rho_u(\ttd)=|S_\theta(\ttd)-P(\ttd)|>\eps$, and the argument of (a), started at $\ttd$, applies.
+\end{proof}
+
+\begin{lemma}\label{lem:sep}
+Let $X_a,X_b$ solve $X'=vV(X-P)$ on $[t_1,t_2]$, each with its own $V\in\{F,\ x\mapsto x/|x|\}$ \textup(for $x/|x|$: a true
+candidate not meeting $P$ on $[t_1,t_2]$\textup).
+\textup{(a)} If both use $F$, $|X_b-X_a|$ is non-decreasing.
+\textup{(b)} In general, if $|X_b(t_1)-X_a(t_1)|\ge2\eps$, then $|X_b(t)-X_a(t)|\ge|X_b(t_1)-X_a(t_1)|$ on $[t_1,t_2]$.
+\textup{(c)} In particular, chords $c(a,b;t)$ of a virtual flow are non-decreasing in $t$.
+\end{lemma}
+
+\begin{proof}
+Put $D:=X_b-X_a$ and $p_\bullet:=X_\bullet-P$, so $D=p_b-p_a$ and $(|D|^2)'=2v\bigl(V_b(p_b)-V_a(p_a)\bigr)\cdot(p_b-p_a)$. If
+$V_a=V_b$ this is $\ge0$ by Lemma~\ref{lem:field}(iv); this proves (a), and (c) follows. If $V_a\ne V_b$ and $|D|\ge2\eps$, then
+$|p_a|\ge\eps$ or $|p_b|\ge\eps$; at that point both fields agree (Lemma~\ref{lem:field}(i)), so $(|D|^2)'$ is the corresponding
+expression for a single monotone field, and $(|D|^2)'\ge0$. Thus in all cases $(|D|^2)'\ge0$ whenever $|D|\ge2\eps$.
+
+Let $c_0:=|D(t_1)|$. If $c_0>2\eps$ and $|D|<c_0$ somewhere, let $t^*$ be the infimum of such times. Then $|D|\ge c_0$ on
+$[t_1,t^*]$ and $|D|>2\eps$ on $[t_1,t^*+\delta)$ for some $\delta>0$, where $|D|^2$ is non-decreasing; so $|D|\ge c_0$ on
+$[t_1,t^*+\delta)$, contradicting the choice of $t^*$. If $c_0=2\eps$, let $X_b^\eta$ solve the equation of $X_b$ with
+$X_b^\eta(t_1)=X_b(t_1)+\eta D(t_1)/c_0$, $\eta>0$. Since $X_b$ stays at positive distance from $P$ when $V_b=x/|x|$, continuous
+dependence on initial data gives, for small $\eta$, that $X_b^\eta$ exists on $[t_1,t_2]$ and $X_b^\eta\to X_b$ uniformly as
+$\eta\to0$; the case just proved gives $|X_b^\eta-X_a|\ge c_0+\eta$, and we let $\eta\to0$.
+\end{proof}
+
+\subsection{Two-point quantities}
+
+\begin{definition}\label{def:excess}
+For a regular $C^1$ curve $u\mapsto x_u$ (such as a virtual flow at a fixed time), with arclength $ds=w\,du$ and unit tangent $T$,
+and labels $a<b$: $l(a,b):=\int_a^bds$, $c(a,b):=|x_b-x_a|$, $E:=l-c\ge0$, $N:=(2E)^{1/2}$, and, when $c>0$,
+$e=e_{ab}:=(x_b-x_a)/c$. For a virtual flow the time is written as a subscript or third argument: $l_t(a,b)$, $c(a,b;t)$. We put
+$\vsig:=T\cdot e^\perp$ and $q:=e^\perp\cdot A(r)e$ \textup(functions of $s\in[a,b]$\textup). For a fixed unit vector $\uhat$ and a
+label interval $J$: $\Vu(J):=\int_J|T-\uhat|^2ds$.
+\end{definition}
+
+\begin{lemma}\label{lem:static}
+Let $u\mapsto x_u$ be a regular $C^1$ curve and $J=(a,b)$ a label interval.
+\begin{enumerate}
+\item[(a)] $E(a',b')\le E(a,b)$ for $a\le a'<b'\le b$.
+\item[(b)] $\Vu(J)=2[l(J)-(x_b-x_a)\cdot\uhat]=N(J)^2+c(J)|e_J-\uhat|^2$. Hence $N^2\le\Vu$, $|e_J-\uhat|^2\le\Vu/c$,
+$\int_J|T-e_J|^2ds=N(J)^2$, $\Vu$ is additive over adjacent intervals, and
+$|\uhat\times(x_b-x_a)|\le\int_J|T-\uhat|\,ds\le(l\,\Vu)^{1/2}$.
+\item[(c)] If the tangent angle is $K$-Lipschitz in arclength on $J$ and $Kl\le\pi$, then $N\le(K/\sqrt{12})\,l^{3/2}$.
+\item[(d)] \textup{(sub-chord tilt)} $|e_{a'b'}-e_{ab}|\le[l(a',b')^{1/2}N(a,b)+E(a',b')]/c(a',b')$ for $a\le a'<b'\le b$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) $l(a,b)=l(a,a')+l(a',b')+l(b',b)$ and $c(a,b)\le c(a,a')+c(a',b')+c(b',b)$; subtract and use $E\ge0$ on the outer pieces.
+(b) $|T-\uhat|^2=2-2T\cdot\uhat$ and $\int_JT\,ds=x_b-x_a=c\,e_J$ give the first equality; then
+$2(l-c\,e_J\cdot\uhat)=2(l-c)+c|e_J-\uhat|^2$. With $\uhat=e_J$ this is $\int_J|T-e_J|^2=N^2$. Finally
+$\uhat\times(x_b-x_a)=\int_J\uhat\times(T-\uhat)\,ds$, and Cauchy--Schwarz.
+(c) We may take $K>0$. Let $\psi$ be the tangent angle as a function of arclength $s\in[0,l]$, $\psi_{\mathrm m}:=\psi(l/2)$. Then
+$|\psi-\psi_{\mathrm m}|\le K|s-l/2|\le\pi/2$, so
+$c\ge(x_b-x_a)\cdot e^{i\psi_{\mathrm m}}=\int_0^l\cos(\psi-\psi_{\mathrm m})\,ds\ge\int_0^l\cos(K|s-l/2|)\,ds=(2/K)\sin(Kl/2)\ge l-K^2l^3/24$;
+thus $N^2=2E\le K^2l^3/12$.
+(d) $c(a',b')e_{a'b'}-l(a',b')e_{ab}=\int_{a'}^{b'}(T-e_{ab})\,ds$ has norm $\le l(a',b')^{1/2}N(a,b)$ by Cauchy--Schwarz and (b),
+and equals $c(a',b')(e_{a'b'}-e_{ab})-E(a',b')e_{ab}$.
+\end{proof}
+
+\begin{lemma}\label{lem:excess}
+For a virtual flow, fixed labels $a<b$ and any time $t$ with $c(a,b;t)>0$ \textup(primes are $t$-derivatives, integrals are over
+$s\in[a,b]$, $A=A(r(s))$\textup):
+\begin{enumerate}
+\item[(i)] $l'=v\int T\cdot AT\,ds$ and $c'=v\int e\cdot AT\,ds$.
+\item[(ii)] $E'=v\int(T-e)\cdot A(T-e)\,ds-\frac v2\int(e\cdot Ae)|T-e|^2ds+v\int\vsig q\,ds$; moreover $\int|T-e|^2ds=N^2$,
+$\int\vsig\,ds=0$ and $|\vsig|\le|T-e|$.
+\item[(iii)] For every constant $\bar q$: $E'\le v\int a^*(\rho)|T-e|^2ds+v\int\vsig(q-\bar q)\,ds$.
+\item[(iv)] $E'\le vN\|AT\|_{L^2(ds)}$.
+\item[(v)] \textup{(far inequality)} If $\rho_m:=\dist(P,\conv\{x_s:a\le s\le b\})\ge\eps$ and $p_a:=r_a\times e$, then
+\[
+E'\le\frac v{\rho_m}\Bigl(1+\frac l{\rho_m}+\frac{2l^2}{\rho_m^2}\Bigr)N^2+\frac{2vl^{3/2}|p_a|N}{\rho_m^3},\qquad
+l'\le\frac{2v}{\rho_m}\Bigl[\frac{l(|p_a|+l^{1/2}N)^2}{\rho_m^2}+N^2\Bigr].
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $l'=\int w_t\,du$ (Lemma~\ref{lem:flow}(c)) and $w_t=vw\,T\cdot AT$. Next $c'=e\cdot(x_b'-x_a')=v\,e\cdot(F(r_b)-F(r_a))$ and
+$F(r_b)-F(r_a)=\int_a^bA(r)\partial_ux\,du=\int AT\,ds$.
+(ii) By (i), $E'=v\int(T-e)\cdot AT$, and $(T-e)\cdot AT=(T-e)\cdot A(T-e)+(T-e)\cdot Ae$. Decomposing $T-e$ in the basis
+$e,e^\perp$ and using the symmetry of $A$: $(T-e)\cdot Ae=[(T-e)\cdot e](e\cdot Ae)+[(T-e)\cdot e^\perp]\,q$, where
+$(T-e)\cdot e=-|T-e|^2/2$ and $(T-e)\cdot e^\perp=\vsig$. Further, $\int|T-e|^2=N^2$ by Lemma~\ref{lem:static}(b),
+$\int\vsig=(x_b-x_a)\cdot e^\perp=0$, and $|\vsig|=|(T-e)\cdot e^\perp|\le|T-e|$.
+(iii) In (ii), $(T-e)\cdot A(T-e)\le a^*|T-e|^2$ and $e\cdot Ae\ge0$ (Lemma~\ref{lem:field}(ii)), and $\int\vsig q=\int\vsig(q-\bar q)$.
+(iv) Cauchy--Schwarz in $E'=v\int(T-e)\cdot AT$, with $\int|T-e|^2=N^2$.
+
+(v) Let $\mathcal K:=\conv\{x_s:a\le s\le b\}-P$; on $\mathcal K$, $|y|\ge\rho_m\ge\eps$, so $A(y)=\Pi(y)/|y|$ and $q(s)=Q(r(s))$
+with $Q(y):=-(y\cdot e)(y\cdot e^\perp)/|y|^3$. In the coordinates $y_1:=y\cdot e$, $y_2:=y\cdot e^\perp$,
+$\partial_{y_2}Q=-y_1(y_1^2-2y_2^2)/|y|^5$ and $\partial_{y_1}Q=-y_2(y_2^2-2y_1^2)/|y|^5$; hence $|\partial_{y_2}Q|\le|y|^{-2}$
+(as $\max_{|z|\le1}|z(3z^2-2)|=1$) and $|\partial_{y_1}Q|\le2|y_2|/|y|^3$. For $s\in[a,b]$ the segment
+$y(\sigma)=r_a+\sigma(x_s-x_a)$, $\sigma\in[0,1]$, lies in $\mathcal K$; along it $dy_2=\delta(s)\,d\sigma$,
+$dy_1=((x_s-x_a)\cdot e)\,d\sigma$,
+where $\delta(s):=(x_s-x_a)\cdot e^\perp=\int_a^s\vsig$ satisfies $|\delta(s)|\le\int|T-e|\le l^{1/2}N$; moreover
+$|(x_s-x_a)\cdot e|\le l$ and $|y_2|\le|p_a|+|\delta(s)|$ (note $|r_a\cdot e^\perp|=|r_a\times e|=|p_a|$). Therefore
+\[
+|q(s)-q(a)|\le\frac{l^{1/2}N}{\rho_m^2}+\frac{2l(|p_a|+l^{1/2}N)}{\rho_m^3}.
+\]
+Apply (iii) with $\bar q=q(a)$, $a^*(\rho)\le1/\rho_m$ on the arc, $\int|T-e|^2=N^2$ and $\int|\vsig|\le l^{1/2}N$:
+$E'\le(v/\rho_m)N^2+vl^{1/2}N\sup_s|q(s)-q(a)|$, which is the first claim. For the length, $T\cdot AT=\sin^2\!\phi/\rho$ and
+$\rho\sin\phi=T\times r=e\times r+(T-e)\times r$, where $|e\times r(s)|=|r(s)\cdot e^\perp|=|\delta(s)-p_a|\le|p_a|+l^{1/2}N$. Hence
+$\sin^2\!\phi/\rho\le2(|p_a|+l^{1/2}N)^2/\rho^3+2|T-e|^2/\rho$; integrate with $\rho\ge\rho_m$ and use (i).
+\end{proof}
+
+\begin{lemma}\label{lem:duhamel}
+Let $a<b$ be labels of a virtual flow with $c(a,b;t_1)>0$, and suppose $\rho_m(t)\ge\eps$ on $[t_1,t_2]$. With
+$\alpha:=(v/\rho_m)(1+l/\rho_m+2l^2/\rho_m^2)$ and $\beta:=2vl^{3/2}|p_a|/\rho_m^3$ \textup(functions of $t$\textup),
+\[
+N(t_2)\le e^{\int_{t_1}^{t_2}\alpha}N(t_1)+\int_{t_1}^{t_2}e^{\int_t^{t_2}\alpha}\beta(t)\,dt .
+\]
+If moreover $\rho_m\ge Kl$ on $[t_1,t_2]$, then $\alpha\le\aD(K)\,v/\rho_m$, where $\aD(K):=1+1/K+2/K^2$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:sep}(c), $c>0$ on $[t_1,t_2]$; $\alpha,\beta$ are continuous. For $\eta>0$ let $N_\eta:=(N^2+\eta^2)^{1/2}$, a
+$C^1$ function (Lemma~\ref{lem:flow}(c)). By Lemma~\ref{lem:excess}(v), $N_\eta N_\eta'=E'\le\alpha N^2+\beta N\le\alpha
+N_\eta^2+\beta N_\eta$, so $N_\eta'\le\alpha N_\eta+\beta$, i.e.\ $(N_\eta e^{-\int_{t_1}^t\alpha})'\le\beta e^{-\int_{t_1}^t\alpha}$.
+Integrate and let $\eta\to0$. The last claim is $l/\rho_m\le1/K$.
+\end{proof}
+
+\subsection{Vanishing vision radius}
+
+\begin{lemma}\label{lem:compact}
+Let $d>0$, let $D_1\subset D_2\subset\cdots$ be finite sets of directions whose union is dense in $[0,2\pi)$, and $\eps_N\to0$.
+Suppose that for each $N$ a path $H_N$ with $H_N(0)=0$, $|H_N'|\le1$ on $[0,\bar T]$ comes within $\eps_N$ of every $S_\alpha$,
+$\alpha\in D_N$, by time $\bar T$ \textup($\bar T$ independent of $N$; $S_\alpha$ is the candidate of \eqref{eq:snitch} with $H=H_N$\textup).
+Then there is a path $H$ with $H(0)=0$, $|H'|\le1$ on $[0,\bar T]$, which catches every direction by time $\bar T$.
+\end{lemma}
+
+\begin{proof}
+By Arzel\`a--Ascoli a subsequence, still written $H_N$, converges uniformly on $[0,\bar T]$ to a $1$-Lipschitz path $H$, and
+$H(0)=0$. For a $1$-Lipschitz path $G$ write $\rho^G_\alpha:=|S_\alpha-G|$ for the candidate $\alpha$ under $G$; it is defined until
+the catch (Section~\ref{sec:intro}) and $|(\rho^G_\alpha)'|\le1+v$. We use $|y/|y|-z/|z||\le2|y-z|/\max(|y|,|z|)$, which follows
+from $|y/|y|-z/|y||+|z/|y|-z/|z||\le2|y-z|/|y|$ and symmetry.
+
+\emph{Claim.} Let $G,G_k$ be $1$-Lipschitz paths on $[0,\bar T]$ with $\|G_k-G\|_\infty\to0$, and let $\rho^G_\alpha\ge c>0$ on
+$[0,\tau]$, $\tau\le \bar T$. Put $\tau':=\min(\tau+c/(2(1+v)),\bar T)$. Then there are a neighbourhood $\mathcal U$ of $\alpha$ and $k_0$ such
+that for $\alpha'\in\mathcal U$ and $k\ge k_0$ the candidate $\alpha'$ under $G_k$ is defined and has $\rho^{G_k}_{\alpha'}\ge c/4$ on
+$[0,\tau']$. Indeed, as $|(\rho^G_\alpha)'|\le1+v$, the candidate $\alpha$ under $G$ is defined with $\rho^G_\alpha\ge c/2$ on
+$[0,\tau']$. Write $S:=S_\alpha$ under $G$ and $\tilde S:=S_{\alpha'}$ under $G_k$.
+While $|S-G|,|\tilde S-G_k|\ge c/4$, the inequality above gives
+$|\tilde S-S|'\le(8v/c)(|\tilde S-S|+\|G_k-G\|_\infty)$, hence by Gr\"onwall
+$|\tilde S-S|\le b_k:=\bigl(d|e^{i\alpha'}-e^{i\alpha}|+(8v/c)\bar T\|G_k-G\|_\infty\bigr)e^{8v\bar T/c}$. Choose $\mathcal U$, $k_0$ with
+$b_k+\|G_k-G\|_\infty<c/4$. Let $I$ be the set of $s\in[0,\tau']$ such that $\tilde S$ is defined on $[0,s]$ with $|\tilde S-G_k|\ge c/4$
+there. Then $0\in I$ ($|\tilde S(0)-G_k(0)|=d\ge c$), $I$ is closed, and for $s\in I$ the bound gives
+$|\tilde S-G_k|\ge|S-G|-b_k-\|G_k-G\|_\infty>c/4$ on $[0,s]$, so $I$ contains a neighbourhood of $s$ in $[0,\tau']$. Hence
+$I=[0,\tau']$.
+
+Fix $\alpha\in D_M$. For $N\ge M$, $\alpha\in D_N$; let $t_N\le \bar T$ be the first time with $\rho^{H_N}_\alpha(t_N)\le\eps_N$ (it
+exists, as a catch time is such a time), and pass to a subsequence with $t_N\to t^*\le \bar T$. If $H$ did not catch $\alpha$ by time
+$t^*$, then $\rho^H_\alpha$ would be defined and positive on $[0,t^*]$, hence $\ge c>0$ there, and the Claim ($G=H$, $G_k=H_N$,
+$\alpha'=\alpha$, $\tau=t^*$) would give $\rho^{H_N}_\alpha\ge c/4$ on $[0,\min(t^*+c/(2(1+v)),\bar T)]\ni t_N$ for large $N$,
+contradicting $\eps_N\to0$. So $H$ catches every direction of $\bigcup_ND_N$ by time $\bar T$. Finally, the Claim with $G_k=G=H$ and
+$\tau=\bar T$ shows that the set of directions not caught by $H$ on $[0,\bar T]$ is open. It is disjoint from the dense set
+$\bigcup_ND_N$, hence empty.
+\end{proof}

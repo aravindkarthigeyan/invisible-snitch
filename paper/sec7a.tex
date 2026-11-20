@@ -1,0 +1,419 @@
+% sec7a.tex -- writer W4. Section 7 heading, 7.1 (constants), 7.2 (run 1, tangency, forward arc, virtual labels).
+\section{The front at touch-down}\label{sec:touch}
+
+In this section $P$ is design T (Definition~\ref{def:T}) and nothing after $\ttd$ is considered. The fixed data are
+\[
+\vbar=6\cdot10^{-5},\quad\eta=0.1,\quad\epsbar=10^{-3},\quad\xi_1=1.007,\quad\lambda_0=0.0333,\quad G_{\mathrm T}=0.05,
+\]
+and throughout $0<v\le\vbar$, $0<\eps\le\epsbar$. We put $\mub:=\vbar/(1-\vbar)$, $\muT:=3v/(1+v)$, $\muTb:=3\vbar/(1+\vbar)$; so
+$\mu\le\mub$ and $\muT\le\muTb$. The notation of Section~\ref{sec:designT} is used throughout ($t_1$, $\alpha_0$, $\rho_0$, $\beta^*$,
+$\nhat$, $\ta$, $\ttd$, $\tc$, $X_0$, $\omega$; run-1 data $\rho_1,\beta_1,\tau_1,\tau_\alpha,y(\alpha,t_1),h_1$; run-2 data
+$\sr,\sbb,\tau_{\sbb},C,\sa,\sfc,\sA$; $I_\eta$, $\xi$).
+
+\subsection{The constants of the touch-down}\label{sec:tdconst}
+
+In the next definition every formula is evaluated with $v:=\vbar$, $\mu:=\mub$, $\muT:=\muTb$, $\eps:=\epsbar$; Lemma~\ref{lem:mono}
+explains why this is legitimate. The numerical values are listed in Table~\ref{tab:td}.
+
+\begin{definition}[touch-down constants]\label{def:tdconst}
+{\small
+\begin{itemize}\setlength\itemsep{2pt}
+\item \emph{Basic.} $\bar t_1:=2+\mub$; $\gb:=(1-\vbar^2)^{1/2}((1+\vbar)/(1-\vbar))^{\vbar/2}$ $(=\gmax$ at $v=\vbar)$;
+$\underline\alpha:=\arccos(\frac12+\vbar)$; $\Delta_{\mathrm a}:=\pi/3-\underline\alpha$; $d_1:=\vbar\bar t_1+\mub$;
+$e_\rho:=\vbar\bar t_1+\Delta_{\mathrm a}+\mub$; $T_2:=\bar t_1+(\sqrt3+e_\rho)/(1-\vbar)$; $d_{\mathrm s}:=\vbar T_2$;
+$d_P:=\max(\mub,d_{\mathrm s}+\Delta_{\mathrm a})$.
+\item \emph{Run 1.} $\rho_{\mathrm{mid}}:=\sin\frac12$; for $\rho>0$: $W_1(\rho):=e^{\vbar\bar t_1/\rho}$, $\omega_1(\rho):=\vbar\bar t_1/(2\rho)$,
+$\vk(\rho):=(2/\rho+1/\rho^2)\vbar\bar t_1e^{2\vbar\bar t_1/\rho}$; $k_{\mathrm{arm}}:=(1+\vbar)/(\cos\frac12-\vbar)+2\vbar/(1-\vbar^2)$;
+$d_{\mathrm{arm}}:=(1+\vbar)/((1-\vbar)(\cos\frac12-\vbar))+\vbar/(1-\vbar^2)$;
+$e_1:=(2-\cos\frac12)(1+\tan^2\frac14)+(1+\vbar)\tan(\frac14)^{1-\vbar}$, $\mathcal E_1:=\max(1,e_1/(1-\vbar))$,
+$W_{\mathrm{arm}}:=\mathcal E_1^{\vbar}/(1-\vbar)$; $k_{\mathrm{all}}:=\max(k_{\mathrm{arm}},1+\vk(\rho_{\mathrm{mid}}))$,
+$W_{\mathrm{all}}:=\max(W_{\mathrm{arm}},W_1(\rho_{\mathrm{mid}})(\pi/2)^{2\vbar})$.
+\item \emph{Window.} $\theta_L:=\underline\alpha-\eta$, $\theta_R:=\pi/3+\eta$; $R_0(\theta):=(5-4\cos\theta)^{1/2}=|e^{i\theta}-2|$,
+$R_L:=R_0(\theta_L)$, $R_R:=R_0(\theta_R)$; $\sr_{\min}:=R_L-d_1$, $\sr_{\max}:=R_R+d_1$; $\rho_{\mathrm w}:=\sin\theta_L$,
+$W_{\mathrm w}:=W_1(\rho_{\mathrm w})$, $\omega_{\mathrm w}:=\omega_1(\rho_{\mathrm w})$, $\vk_{\mathrm w}:=\vk(\rho_{\mathrm w})$;
+$\iota_{\mathrm w}:=1+\vbar\bar t_1/\sin\theta_L$; $q_{\min}:=\sin(\underline\alpha+\eta/2)/R_R$, $q_{\max}:=\sin(\pi/3-\eta/2)/R_L$;
+$\ell_{\min}:=4q_{\min}/(1+d_1/R_L)$, $\ell_{\max}:=2\bar t_1\iota_{\mathrm w}q_{\max}/(1-d_1/R_L)$;
+$\Lambda_{\min}:=4\sin(\underline\alpha-\eta/2)/\sr_{\max}^2$, $\Lambda_{\max}:=2\bar t_1\iota_{\mathrm w}\sin(\pi/3+\eta/2)/\sr_{\min}^2$;
+$m_0:=\max(|1-2\cos\theta_L|,|1-2\cos\theta_R|)/R_L$, $\omega_{\mathrm p}:=\arcsin(d_1/R_L)$,
+$\angle_{\mathrm w}:=\arcsin m_0+\omega_{\mathrm w}+\omega_{\mathrm p}$, $\sA_{\min}:=\cos\angle_{\mathrm w}$, $\sA_{\max}:=W_{\mathrm w}$;
+$b_{\mathrm{lo}}:=\Lambda_{\min}(1-\eta^2/48)/4$, $b_{\mathrm{hi}}:=\Lambda_{\max}/4$, $\bar b:=b_{\mathrm{hi}}\eta^2$,
+$e_\tau:=\tan(\bar b/2)/(\bar b/2)-1$, $\beta_2:=b_{\mathrm{hi}}(1+e_\tau)/2$;
+$C_{\mathrm{hi}}:=2\sr_{\max}\beta_2^{1-\vbar}$, $C_{\mathrm{lo}}:=2\sr_{\min}(b_{\mathrm{lo}}/2)/(1+\tan^2(\bar b/2))$;
+$\mathrm{aux}:=\ell_{\max}\bar b\eta/2$, $\sa_{\min}:=\sA_{\min}\cos\bar b-\mathrm{aux}$, $\sa_{\max}:=\sA_{\max}(1+\vbar)+\mathrm{aux}$;
+$L_C:=2\Lambda_{\max}/\Lambda_{\min}+\eta\sA_{\max}/\sr_{\min}$,
+$L_{\mathrm{lo}}:=2(\cos\bar b-\vbar)(\Lambda_{\min}/\Lambda_{\max})(1-\eta^2/32)$;
+$S_1:=\ell_{\max}(\sr_{\max}\sa_{\max}L_C+(1+\vbar)\eta)/(2(1-\vbar^2)\sr_{\min})$.
+\item \emph{Forward arc.} $h_{\mathrm f}:=\sA_{\min}-\sr_{\max}b_{\mathrm{hi}}^2\eta^3/2$, $\rho_{\mathrm c}:=h_{\mathrm f}/(1+\vbar)$,
+$Q:=(1+\vbar)\sr_{\max}/h_{\mathrm f}$, $y_{\mathrm f}:=2\sr_{\max}\beta_2$;
+$Y_1:=(\ell_{\max}/2+\sA_{\max}b_{\mathrm{hi}}(1+e_\tau)\eta)/\sa_{\min}$, $\bar Y:=Y_1\eta^{1-\mub}Q^{\mub}$,
+$\theta_{\mathrm f}:=\max((1+\vbar)Y_1,\vbar y_{\mathrm f}/\rho_{\mathrm c})/(1-\vbar-\vbar\bar Y)$,
+$W_{\mathrm f}:=\sa_{\max}[(1+\vbar+\vbar\bar Y)^2+((1+\vbar)\bar Y+\vbar)^2]^{1/2}/(1-\vbar^2)$;
+$\delta_{\mathrm{fw}}:=\vbar/(3(1-\vbar)^2\xi_1)$, $\tau_{\mathrm f}:=\beta_2Q^{1+\mub}$, $\bar\tau_{\mathrm f}:=\tau_{\mathrm f}\eta^{1-\mub}$,
+$\rho_{\mathrm u}:=((1+\vbar)\sA_{\max}+\delta_{\mathrm{fw}})/(1-2\bar\tau_{\mathrm f}^2)$,
+$S_2:=(2\tau_{\mathrm f}+\theta_{\mathrm f}Q^{\mub})(\rho_{\mathrm u}\sa_{\max}L_C+1+\vbar)/((1-\vbar^2)\rho_{\mathrm c})$,
+$k_{\mathrm f}:=Q^{\mub}(1+\vk_{\mathrm w}+S_1\vbar)+S_2\vbar$.
+\item \emph{Virtual labels.} $\theta_{\mathrm v}:=Q^{\mub}e^{\mub}(\theta_{\mathrm f}+\mub e^{2\mub}y_{\mathrm f}\xi_1)$,
+$W_{\mathrm v}:=W_{\mathrm f}e^{2\mub}$, $u_{\mathrm v}:=W_{\mathrm v}\xi_1$.
+\item \emph{Tail.} $\xi_-:=C_{\mathrm{hi}}^{-1/2}$, $\xi_+:=(\gb/C_{\mathrm{lo}})^{1/(2-2\vbar)}$, $\bar\xi_{\mathrm e}:=\xi_+\epsbar^{1/2}$;
+$\delta_{\mathrm{tl}}:=(1+\vbar)\vbar/(3(1-\vbar)\xi_-)$, $h_{\mathrm t}:=\sA_{\min}-\delta_{\mathrm{tl}}$,
+$h_{\mathrm T}:=(1+\vbar)\sA_{\max}+\sr_{\max}b_{\mathrm{hi}}^2\eta^3/2$; $m_\tau:=(2h_{\mathrm t}/C_{\mathrm{hi}})\eta^{-(1-2\vbar)}$,
+$\tau_{\mathrm t}:=m_\tau^{1/(1+\vbar)}$, $e_{\mathrm t}:=(1+\vbar)/(m_\tau\tau_{\mathrm t}^{1-\vbar})$;
+$y_{\mathrm c}:=2(1+e_{\mathrm t})h_{\mathrm T}/(1-\vbar)$, $y_{\mathrm T}:=C_{\mathrm{hi}}^{1/(1+\vbar)}\max(1,y_{\mathrm c})^{\vbar}$,
+$T_{\mathrm t}:=(\max(1,y_{\mathrm c}/C_{\mathrm{lo}})\cdot2/b_{\mathrm{lo}})^{\vbar}$;
+$Y_2:=T_{\mathrm t}\ell_{\max}/(2\sa_{\min})$, $\bar Y_2:=Y_2\eta^{1-\muTb}$,
+$\theta_{\mathrm t}:=Y_2+\vbar y_{\mathrm T}/h_{\mathrm t}$, $z_{\mathrm T}:=(h_{\mathrm T}+\vbar y_{\mathrm T}\eta^{1-\muTb})/(1-\vbar)$,
+$\rho_{\mathrm T}:=z_{\mathrm T}(1+(y_{\mathrm T}\eta^{1-\muTb}/h_{\mathrm t})^2)^{1/2}$;
+$W_{\mathrm t}:=\sa_{\max}[(1+\vbar+\vbar\bar Y_2)^2+((1+\vbar)\bar Y_2+\vbar)^2]^{1/2}/(1-\vbar^2)$;
+$S_3:=(y_{\mathrm T}/h_{\mathrm t}+\theta_{\mathrm t})(\rho_{\mathrm T}\sa_{\max}L_C+1+\vbar)/((1-\vbar^2)h_{\mathrm t})$,
+$k_{\mathrm t}:=T_{\mathrm t}(1+\vk_{\mathrm w}+S_1\vbar)+S_3\vbar$; $\xi_2:=1/(3(1-\vbar)\sA_{\min})$;
+$h_{\mathrm a}:=1-\sA_{\max}/2-\sr_{\max}b_{\mathrm{hi}}^2\epsbar^3/32$, $Q_{\mathrm a}:=(1+\vbar)\sr_{\max}/h_{\mathrm a}$,
+$\tau_{\mathrm a}:=\beta_2Q_{\mathrm a}^{1+\mub}\epsbar^{1-\mub}/4$.
+\item \emph{Bulk and hole.} $e_\beta:=\arcsin(e_\rho/\sqrt3)$, $b_{\mathrm l}:=b_{\mathrm{lo}}\eta^2$, $y_{\mathrm b}:=\sin b_{\mathrm l}$,
+$H_{\mathrm b}:=3+d_1+(1+\vbar)(\sqrt3+e_\rho)/(1-\vbar)$, $T_{\mathrm b}:=2H_{\mathrm b}/(y_{\mathrm b}\tan(b_{\mathrm l}/2))$,
+$S_{\mathrm b}:=(3+\vbar)/(2(1-\vbar)y_{\mathrm b})$, $k_{\mathrm b}:=T_{\mathrm b}^{\vbar}(k_{\mathrm{all}}+S_{\mathrm b}\vbar)+S_{\mathrm b}\vbar$,
+$W_{\mathrm b}:=((1+\vbar)/(1-\vbar))T_{\mathrm b}^{\vbar}$; $r_{\mathrm B}:=0.005+\vbar\bar t_1$,
+$\rho_{\mathrm h}:=\frac12-d_P-r_{\mathrm B}-\vbar T_2$.
+\item \emph{Assembly.} $W_x:=\max(W_{\mathrm v},W_{\mathrm t},W_{\mathrm b}W_{\mathrm{all}})$,
+$U_{\max}:=(W_{\mathrm v}+W_{\mathrm t})\eta+W_{\mathrm b}W_{\mathrm{all}}(2\pi-2\eta)/(1-2\vbar)$;
+$\hat L:=(8/\lambda_0)^{2\vbar}/(1-2\vbar)$, $\Delta_0:=\lambda_0/(W_x\hat L)$, $c_{\mathrm{sep}}:=2\sin(\Delta_0/2)$,
+$\kc:=\min(\cos(\theta_{\mathrm v}\Delta_0^{1-\mub}),h_{\mathrm t}/W_{\mathrm t})$;
+$k_*:=\max(k_{\mathrm f}W_{\mathrm v}^{\mub},k_{\mathrm t}W_{\mathrm t}^{\muTb},k_{\mathrm b})$, $c_{\mathrm{far}}:=k_*/\sqrt{12}$,
+$c_{\mathrm{near}}:=\theta_{\mathrm v}((12u_{\mathrm v}^2+6u_{\mathrm v}+1)/(3-2\mub))^{1/2}$,
+$c_{\mathrm{tail}}:=\theta_{\mathrm t}(19/(3-2\muTb))^{1/2}$, $c_N:=\max(c_{\mathrm{far}},c_{\mathrm{near}},c_{\mathrm{tail}})$;
+$c_y:=y_{\mathrm T}/h_{\mathrm t}^2$; $c_{T4}:=\theta_{\mathrm t}/h_{\mathrm t}$.
+\end{itemize}}
+\end{definition}
+
+\noindent\textbf{Side conditions.}\namedlabel{hyp:SC}{(SC)} {\small
+\hyptag{SC1} $\sqrt3-e_\rho>\epsbar$. \hyptag{SC2} $\cos\frac12>\vbar$. \hyptag{SC3} $\theta_L\ge\frac12$. \hyptag{SC4} $\theta_R\le\pi/2$.
+\hyptag{SC5} $\eta\le\pi/3$. \hyptag{SC6} $\cos\theta_L<4/5$. \hyptag{SC7} $\cot(\underline\alpha-\eta/2)/2<s(\theta_R)$, where
+$s(\theta):=2\sin\theta/(5-4\cos\theta)$. \hyptag{SC8} $d_1<R_L$. \hyptag{SC9} $\angle_{\mathrm w}<\pi/2$. \hyptag{SC10} $\bar b<\pi/2$.
+\hyptag{SC11} $\beta_2<1$. \hyptag{SC12} $b_{\mathrm{lo}}<2$. \hyptag{SC13} $\sa_{\min}>0$. \hyptag{SC14} $\cos\bar b>\vbar$.
+\hyptag{SC15} $L_{\mathrm{lo}}>\eta\sA_{\max}/\sr_{\min}$. \hyptag{SC16} $0<h_{\mathrm f}\le1-\vbar^2$. \hyptag{SC17} $\rho_{\mathrm c}\xi_1>1$.
+\hyptag{SC18} $Q\ge1$. \hyptag{SC19} $1-\vbar-\vbar\bar Y>0$. \hyptag{SC20} $1-2\bar\tau_{\mathrm f}^2>\vbar$. \hyptag{SC21} $C_{\mathrm{hi}}<1$.
+\hyptag{SC22} $C_{\mathrm{lo}}\eta^2>\epsbar\gb$. \hyptag{SC23} $\gb>C_{\mathrm{lo}}$. \hyptag{SC24} $\bar\xi_{\mathrm e}<\eta$.
+\hyptag{SC25} $h_{\mathrm t}>0$. \hyptag{SC26} $m_\tau>1$. \hyptag{SC27} $\xi_2\vbar\le\frac12$. \hyptag{SC28} $\xi_-\ge\frac12$.
+\hyptag{SC29} $h_{\mathrm a}>0$. \hyptag{SC30} $1-2\tau_{\mathrm a}^2>0$. \hyptag{SC31} $\sA_{\min}>4\tau_{\mathrm a}^2$.
+\hyptag{SC32} $b_{\mathrm l}\le\pi/6-e_\beta$. \hyptag{SC33} $\pi/3+2e_\beta\le\pi-b_{\mathrm l}$. \hyptag{SC34} $T_{\mathrm b}\ge1$.
+\hyptag{SC35} $\vbar\le\frac1{10}$. \hyptag{SC36} $\rho_{\mathrm h}>0$. \hyptag{SC37} $2\gb\epsbar<\theta_L$ and $\gb\epsbar\le1$.
+\hyptag{SC38} $2-2d_{\mathrm s}\ge1$. \hyptag{SC39} $2\lambda_0+\min(\bar\xi_{\mathrm e},\lambda_0)\le\eta$. \hyptag{SC40}
+$2u_{\mathrm v}\epsbar\le\eta$. \hyptag{SC41} $W_x\hat L\le2$. \hyptag{SC42} $\Delta_0\le\eta$.
+\hyptag{SC43} $c_{\mathrm{sep}}>2\epsbar$. \hyptag{SC44} $\theta_{\mathrm v}\Delta_0^{1-\mub}\le\pi/2$.
+\hyptag{SC45} $k_*\lambda_0^{1-\muTb}\le\pi$. \hyptag{SC46} $u_{\mathrm v}\ge\frac12$.
+\hyptag{SC47} $G_{\mathrm T}>0$ and $\bar\xi_{\mathrm e}+G_{\mathrm T}\le\eta$. \hyptag{SC48} $z_{\mathrm T}\bar\xi_{\mathrm e}+\epsbar<1$ and
+$G_{\mathrm T}+z_{\mathrm T}\bar\xi_{\mathrm e}\le1$.}
+
+\medskip
+Each side condition is one inequality between explicitly computable numbers; all hold (checked in Appendix~\ref{app:const}).
+
+\begin{lemma}[monotonicity]\label{lem:mono}
+Assume \hyptag{SC1}--\hyptag{SC48}, and let $0<v\le\vbar$ and $0<\eps\le\epsbar$. Every constant of
+Definition~\ref{def:tdconst} other than $\kc$ is the value at $(\vbar,\epsbar)$ of an
+expression $E(v,\eps)$ (replace $\vbar,\mub,\muTb,\epsbar$ by $v,\mu,\muT,\eps$) which is non-decreasing in $v\in(0,\vbar]$ and in
+$\eps\in(0,\epsbar]$ (an \emph{upper} constant) or non-increasing in both (a \emph{lower} constant). The lower constants are
+$\underline\alpha$, $\rho_{\mathrm w}$, $\sr_{\min}$, $\ell_{\min}$, $\Lambda_{\min}$, $\sA_{\min}$, $b_{\mathrm{lo}}$, $C_{\mathrm{lo}}$,
+$\sa_{\min}$, $L_{\mathrm{lo}}$, $h_{\mathrm f}$, $\rho_{\mathrm c}$, $\xi_-$, $h_{\mathrm t}$, $m_\tau$, $\tau_{\mathrm t}$, $h_{\mathrm a}$,
+$b_{\mathrm l}$, $y_{\mathrm b}$, $\rho_{\mathrm h}$, $\Delta_0$, $c_{\mathrm{sep}}$, $\theta_L$, $R_L$, $q_{\min}$; all others except $\kc$
+are upper constants.
+Consequently, wherever a proof uses a constant as an upper (lower) bound for a quantity formed with the actual $v,\mu,\muT,\eps$, the
+constant is $\ge$ ($\le$) the value of that expression; and every side condition other than \hyptag{SC44} implies the same
+inequality at $(v,\eps)$.
+\end{lemma}
+\begin{proof}
+On $(0,\vbar]\subset(0,\frac1{10}]$ the following are increasing in $v$: $v$, $\mu$, $\muT$, $1+v$, $1/(1-v)$, $1/(1-v^2)$,
+$t_1=2+\mu$, $vt_1$ and $\gmax(v)$ ($d\log\gmax/dv=\operatorname{artanh}v>0$, from the closed form in Proposition~\ref{prop:runs});
+$1-v$, $\cos\frac12-v$, $\cos\bar b-v$ and $\arccos(\frac12+v)$ are decreasing. Powers are handled by three rules:
+(1) $X^{p(v)}$ with $X\ge1$ and $p$ non-decreasing is non-decreasing: $Q^\mu$, $Q^{1+\mu}$, $Q_{\mathrm a}^{1+\mu}$, $\mathcal E_1^v$,
+$(\pi/2)^{2v}$, $T_{\mathrm b}^v$, $(8/\lambda_0)^{2v}$, $W_{\mathrm v}^\mu$, $W_{\mathrm t}^{\muT}$,
+$(\max(1,y_{\mathrm c}/C_{\mathrm{lo}})2/b_{\mathrm{lo}})^v$ (base $\ge1$ by \hyptag{SC12}), $\max(1,y_{\mathrm c})^v$,
+$(\gb/C_{\mathrm{lo}})^{1/(2-2v)}$ (base $>1$ by \hyptag{SC23}); here $Q\ge1$ is \hyptag{SC18}, $Q_{\mathrm a}\ge(1+v)\sr_{\max}\ge1$ as
+$h_{\mathrm a}\le1$ and $R_0\ge1$, and $W_{\mathrm v},W_{\mathrm t}\ge\sa_{\max}\ge\sA_{\max}=W_{\mathrm w}\ge1$;
+(2) $X^{p(v)}$ with $0<X\le1$ and $p$ non-increasing is non-decreasing: $\beta_2^{1-v}$ (\hyptag{SC11}), $C_{\mathrm{hi}}^{1/(1+v)}$
+(\hyptag{SC21}), $\eta^{1-\mu}$, $\eta^{1-\muT}$, $\epsbar^{1-\mu}$, $\tan(\frac14)^{1-v}$, $\lambda_0^{1-\muT}$;
+(3) $X^{-p(v)}$ with $0<X<1$ and $p$ non-increasing is non-increasing: $\eta^{-(1-2v)}$ in $m_\tau$; then $m_\tau^{1/(1+v)}$ with
+$m_\tau>1$ is a lower constant by \hyptag{SC26}, and $\tau^{v-1}\le\tau_{\mathrm t}^{v-1}\le\tau_{\mathrm t}^{\vbar-1}$ for
+$\tau\ge\tau_{\mathrm t}\ge1$ (in $e_{\mathrm t}$). The constant $\kc$ and \hyptag{SC44} enter the proofs only as fixed numbers
+(in (T2), $\xi<\Delta_0$ refers to the fixed $\Delta_0$), so no monotonicity is needed for $\kc$ or $\Delta_0^{1-\mu}$. Every constant is built from these blocks, from the fixed data and from earlier
+constants by sums, products, quotients of positive quantities, $\max$, $\min$, and the monotone functions $\exp$, $\sqrt\cdot$,
+$\arcsin$ on $[0,1]$, $\sin$ and $\tan$ on $[0,\pi/2)$, $\cos$ on $[0,\pi/2]$ and $\cot$ on $(0,\pi/2)$; the arguments stay in these
+ranges by \hyptag{SC1}, \hyptag{SC8}--\hyptag{SC10} and $m_0\le1$ (checked in Appendix~\ref{app:const}). Going through Definition~\ref{def:tdconst} in order, each operation combines upper
+into upper and lower into lower constants in the direction stated (upper minus lower is upper, upper over lower is upper, etc.).
+Three further steps use side conditions: $C_{\mathrm{lo}}$ uses $(b_{\mathrm{lo}}\xi^2/2)^{1-v}\ge(b_{\mathrm{lo}}/2)\xi^{2-2v}$
+(\hyptag{SC12}); $\xi_-=C_{\mathrm{hi}}^{-1/2}\le C_{\mathrm{hi}}^{-1/(2-2v)}$ (\hyptag{SC21}); $\bar Y$ and $\theta_{\mathrm f}Q^{\mub}$
+use $Q\ge1$. In $\eps$: the constants containing $\epsbar$ are $\bar\xi_{\mathrm e}$, $h_{\mathrm a}$, $Q_{\mathrm a}$, $\tau_{\mathrm a}$,
+all monotone in the stated direction. Each side condition compares an upper with a lower expression (or a number) in the direction
+that is preserved when $(\vbar,\epsbar)$ is replaced by $(v,\eps)$.
+\end{proof}
+
+From now on Lemma~\ref{lem:mono} is used tacitly: ``by $v\le\vbar$'' means that a $v$-expression is bounded by its constant.
+
+\subsection{Run 1, tangency and the forward arc}\label{sec:fwd}
+
+\begin{lemma}[run 1]\label{lem:run1}
+\begin{enumerate}
+\item[(a)] Let $\as\in(0,\arccos v)$ be given by $\sg(\as)=\eps\gmax$. A true candidate $\alpha\in(-\pi,\pi]$ is seen during
+$[0,t_1]$ iff $|\alpha|\le\as$. For $\alpha\in[\as,2\pi-\as]$, $\rho_\alpha\ge\eps$ on $[0,t_1]$, so virtual $=$ true on $[0,t_1]$.
+Moreover $\as\le2\gb\eps<\theta_L$, and every candidate, true or virtual, satisfies $|S(t)-e^{i\alpha}|\le vt$.
+\item[(b)] \emph{Middle.} For $\alpha\in[\frac12,2\pi-\frac12]$, $\rho_\alpha\ge\rho_{\mathrm{mid}}$ on $[0,t_1]$; for
+$\alpha\in[\frac12,\frac\pi2]$ (and the mirror labels), $\rho_\alpha\ge\sin\alpha$ on $[0,t_1]$. If $\rho_\alpha\ge\rho$ on $[0,t_1]$,
+then at $t_1$: $1\le w_1\le W_1(\rho)$, $|\arg\partial_\alpha S_\alpha(t_1)-(\alpha+\pi/2)|\le\omega_1(\rho)$, $|k_1-1|\le\vk(\rho)$.
+\item[(c)] \emph{Arm.} For $\alpha\in(0,\frac12]$: $\rho_1\ge1+v$, $\tau_1>1$, $y(\alpha,t_1)\ge\sin\alpha$; $|k_1|\le k_{\mathrm{arm}}$;
+the tangent at $t_1$ is $e^{i(\pi/2+\delta)}$ with $0\le\delta\le\tan\delta\le d_{\mathrm{arm}}\,y(\alpha,t_1)$;
+$w_1\le W_{\mathrm{arm}}(2/\alpha)^{2v}$; and $y(\alpha,t_1)\le2\mathcal E_1\tau_\alpha^{(1-v)/(1+v)}$.
+\item[(d)] For all $\alpha\in(0,2\pi)$: $|k_1|\le k_{\mathrm{all}}$, $1\le w_1\le W_{\mathrm{all}}(2/\circab{\alpha})^{2v}$ and
+$\rho_1\ge1+v$, where $\circab\alpha:=\min(\alpha,2\pi-\alpha)$.
+\item[(e)] For every $\alpha\in(0,2\pi)$ the true candidate $S_\alpha$ exists on $[0,\ttd]$ (it does not meet $P$). The candidate
+$\alpha=0$ is caught at $1/(1-v)<t_1$.
+\end{enumerate}
+In (b)--(d) the true front is meant, also at the labels $0<\circab\alpha<\as$, which have been seen but keep moving by the true law.
+\end{lemma}
+\begin{proof}
+(a) By Lemma~\ref{lem:coord}(b),(c), $\tau$ increases from $\tau_\alpha$ to $\tau_1$, and $h_1<0$ means $\cos\beta_1<-v$, so
+$\tau_1^2>(1+v)/(1-v)>(1-v)/(1+v)$. If $0<\alpha\le\arccos v$ the minimum point of $\rho$ is passed, and
+$\min_{[0,t_1]}\rho=\sg(\alpha)/\gmax$, which is $\le\eps$ iff $\alpha\le\as$ ($\sg$ is increasing on $(0,\arccos v]$); if
+$\alpha\in(\arccos v,\pi)$, $\rho$ is increasing and $\min\rho=1$. The label $\pi$ has $\beta\equiv\pi$ and $\rho\ge1$; the lower half is
+the mirror image; $\alpha=0$ is caught (see (e)). Virtual $=$ true by Lemma~\ref{lem:truefront}. With $\tau_{\mathrm s}:=\tan(\as/2)\le1$:
+$\tau_{\mathrm s}^{1-v}=\eps\gmax(1+\tau_{\mathrm s}^2)/2\le\eps\gmax$, so $\as\le2\tau_{\mathrm s}\le2(\eps\gmax)^{1/(1-v)}\le2\eps\gmax\le2\gb\eps$,
+because $\eps\gmax\le\gb\epsbar\le1$; and $2\gb\eps<\theta_L$ (\hyptag{SC37}). Every candidate has speed $\le v$ (true: by definition;
+virtual: $|F|\le1$, Lemma~\ref{lem:field}(i)).
+
+(b) For $\alpha\in[\frac12,\frac\pi2]$: $y=C\tau^v$ is non-decreasing, so $\rho\ge y\ge\sin\alpha\ge\sin\frac12$. For
+$\alpha\in[\frac\pi2,\pi]$: $X:=\operatorname{Re}S_\alpha$ has $X'=v(X-t)/\rho$ and $(X-t)'\le v-1<0$, $X(0)=\cos\alpha\le0$; so $X-t\le X\le\cos\alpha\le0$,
+and with $y\ge\sin\alpha$, $\rho^2\ge\cos^2\alpha+\sin^2\alpha=1$. Mirror for the lower half. By Lemma~\ref{lem:truefront}, $(\log w)_t\in[0,v/\rho]$,
+so $1\le w_1\le e^{vt_1/\rho}$; $|\psi_t|\le v/(2\rho)$, and the tangent at $t=0$ is $e^{i(\alpha+\pi/2)}$; and, as
+$|1-3\sin^2\!\phi|\le2$ and $|\sin\phi(3\cos^2\!\phi-1)|\le1$ (the maximum of $|s(2-3s^2)|$ on $[-1,1]$ is $1$),
+$\frac d{dt}|k-1|\le(2v/\rho)|k-1|+2v/\rho+v/\rho^2$, whence by Gronwall ($k(0)=1$) $|k_1-1|\le(2/\rho+1/\rho^2)vt_1e^{2vt_1/\rho}$. Since
+$vt_1\le\vbar\bar t_1$, these are the bounds claimed.
+
+(c) $h_1=-(1-v^2)-(1-\cos\alpha)<0$, so $\cos\beta_1<-v$, $\beta_1>\pi/2$, $\tau_1>1$; and $|h_1|=\rho_1|\cos\beta_1+v|\le\rho_1(1-v)$ gives
+$\rho_1\ge1+v$. $y=C\tau^v$ is non-decreasing and $y(0)=\sin\alpha$.
+
+\emph{Curvature.} Apply Lemma~\ref{lem:transport}(c) at $t=0$, where $w=1$, $k=1$, $\rho=1$, $\psi=\alpha+\pi/2$, $\phi=-\pi/2$ and
+$\sa\,\partial_\alpha\log C=-\sin\alpha\cdot(\cos\alpha-v)/\sin\alpha$: there
+$\TS=-\frac v{1-v^2}[-(\cos\alpha-v)-v-\cos(-\pi-\alpha)]=0$, so $\tau_\alpha^vJ=1-v^2$ and
+\[
+k_1=\frac{\mathcal T}{w_1^3}-\TS_1,\qquad\mathcal T:=\Bigl(\frac{\tau_1}{\tau_\alpha}\Bigr)^v\ge1 .
+\]
+By Lemma~\ref{lem:transport}(a), $(1+v)w_1\ge\operatorname{Im}\Xi=\tau_1^v\sfc=(\cos\alpha-v)\mathcal T>0$ (\hyptag{SC2}), and $w_1\ge1$, so
+$0\le\mathcal T/w_1^3\le(1+v)/(\cos\alpha-v)\le(1+v)/(\cos\frac12-v)$. In $\TS_1$, $|\sa\,\partial_\alpha\log C|\le1$, so by
+Lemma~\ref{lem:transport}(e) $|\TS_1|\le\frac v{(1-v^2)\rho_1}[\rho_1+1+v]\le\frac{2v}{1-v^2}$. Hence $|k_1|\le k_{\mathrm{arm}}$.
+
+\emph{Tilt.} By Lemma~\ref{lem:transport}(a), with $\sa=-\sin\alpha<0$ and $\sfc\tau_1^v=(\cos\alpha-v)\mathcal T>0$,
+\[
+(1-v^2)\,\partial_\alpha S_\alpha(t_1)=\sa[(1-v\cos\beta_1)-iv\sin\beta_1]+\sfc\tau_1^v[-v\sin\beta_1+i(1+v\cos\beta_1)]
+\]
+has negative real part and positive imaginary part; so the tangent is $e^{i(\pi/2+\delta)}$ with $\delta\in[0,\pi/2)$ and
+\[
+\tan\delta=\frac{\sin\alpha(1-v\cos\beta_1)+v\sin\beta_1(\cos\alpha-v)\mathcal T}{v\sin\alpha\sin\beta_1+(1+v\cos\beta_1)(\cos\alpha-v)\mathcal T}
+\le\frac{(1+v)\sin\alpha}{(1-v)(\cos\alpha-v)\mathcal T}+\frac{v\sin\beta_1}{1-v};
+\]
+with $\mathcal T\ge1$, $\sin\alpha\le y$, $\sin\beta_1=y/\rho_1\le y/(1+v)$, $\cos\alpha\ge\cos\frac12$: $\tan\delta\le d_{\mathrm{arm}}y$.
+
+\emph{Stretch.} $|\Xi|^2=\sin^2\!\alpha+(\cos\alpha-v)^2\mathcal T^2\le\mathcal T^2$, so $w_1\le\mathcal T/(1-v)$. By
+Lemma~\ref{lem:coord}(d) and $\tau_1>1$: $(1-v)\tau_1^{1+v}\le2|h_1|/C+1+v$, with $|h_1|\le2-\cos\frac12$,
+$C=\sg(\alpha)\ge2\tau_\alpha^{1-v}/(1+\tan^2\frac14)$ and $1+v\le(1+v)\tan(\frac14)^{1-v}\tau_\alpha^{-(1-v)}$ ($\tau_\alpha\le\tan\frac14$).
+So $\tau_1^{1+v}\le\mathcal E_1\tau_\alpha^{-(1-v)}$, $\tau_1/\tau_\alpha\le\mathcal E_1^{1/(1+v)}\tau_\alpha^{-2/(1+v)}$ and
+$\mathcal T\le\mathcal E_1^{v}(2/\alpha)^{2v}$ ($\mathcal E_1\ge1$, $\tau_\alpha\ge\alpha/2$, $2/\alpha>1$). Hence
+$w_1\le W_{\mathrm{arm}}(2/\alpha)^{2v}$. Finally $y=C\tau_1^v\le2\tau_\alpha^{1-v}(\mathcal E_1\tau_\alpha^{-(1-v)})^{v/(1+v)}\le
+2\mathcal E_1\tau_\alpha^{(1-v)/(1+v)}$.
+
+(d) If $\circab\alpha\ge\frac12$, (b) with $\rho=\rho_{\mathrm{mid}}$ gives $|k_1|\le1+\vk(\rho_{\mathrm{mid}})$ and
+$w_1\le W_1(\rho_{\mathrm{mid}})(\pi/2)^{2v}(2/\pi)^{2v}\le W_{\mathrm{all}}(2/\circab\alpha)^{2v}$. If $\circab\alpha<\frac12$, use (c) and
+the mirror symmetry. $\rho_1\ge1+v$: the argument of (c) uses only $h_1\le-(1-v^2)$, which holds for all $\alpha$ (for $\alpha=\pi$,
+$\beta\equiv\pi$ and $\rho_1=1+(1+v)t_1$).
+
+(e) By Lemma~\ref{lem:coord}(c), on a straight run $\rho\ge C/\gmax>0$ whenever $0<\beta<\pi$ and $C>0$. In run 1,
+$C=\sg(\alpha)>0$ for $\alpha\in(0,\pi)$ (mirror for $(\pi,2\pi)$), and the label $\pi$ has $\rho\ge1$. In run 2,
+$\sbb\in(0,\pi)$ for $\alpha\ne\alpha_0$ (Lemma~\ref{lem:tang}(a); for $\alpha=\pi$, $\sbb=\pi-\beta^*$), so $C=\sr\sg(\sbb)>0$; and the
+label $\alpha_0$ has $\sbb=0$, $\rho=\rho_0-(1-v)(t-t_1)>0$ for $t<\tc$, while $\ttd<\tc$ (Lemma~\ref{lem:tang}(b), whose proof does not
+use (e)). The label $0$ lies on the axis ahead of $P$: $\rho(0)=1$, $\rho'=-(1-v)$; it is caught, a fortiori seen, at $1/(1-v)$.
+\end{proof}
+
+\begin{lemma}[tangency; data at $t_1$]\label{lem:tang}
+\begin{enumerate}
+\item[(a)] For $\theta\in(0,\pi)$: $\rho_1\,\partial_\theta\beta_1=\sin\beta_1\cdot t_1(\cos\alpha_0-\cos\theta)/\sin\theta$. Hence $\beta_1$ has its
+unique minimum on $(0,\pi)$ at $\alpha_0$; there $\sbb=\beta_1-\beta^*\in[0,\pi/2)$; on the lower half $\sbb\in(0,\pi)$; and
+\[
+\partial_\theta\sbb=\Lambda(\theta)\sin\frac{\theta-\alpha_0}2,\qquad
+\Lambda(\theta):=\frac{2t_1\sin\beta_1\sin((\theta+\alpha_0)/2)}{\rho_1\sin\theta}>0\qquad(0<\theta<\pi).
+\]
+So $\sbb$ has a double zero at $\alpha_0$: the true front at $t_1$ is tangent at $S_{\alpha_0}(t_1)$ to the ray of run 2.
+\item[(b)] $\alpha_0\in[\underline\alpha,\pi/3]$; $|\rho_0-\sqrt3|\le e_\rho$; $\rho_0>\eps$; $\ttd\le\tc\le T_2$,
+$0<\tc-\ttd\le v\eps/(3(1-v)^2)$ and $\ttd-\ta\le\eps/(1-v)$; every candidate, true or virtual, satisfies
+$|x_\theta(t)-e^{i\theta}|\le vt\le d_{\mathrm s}$ for $t\le\ttd$; $P([t_1,\ttd])$ lies within $d_P$ of the segment $[2,e^{i\pi/3}]$; the
+virtual candidate $\alpha_0$ stays on the ray of run 2, $\rho_{\alpha_0}(\ta)=\eps$ and $P(\ttd)=x_{\alpha_0}(\ttd)$.
+\item[(c)] $I_\eta\subset[\theta_L,\theta_R]\subset[\frac12,\frac\pi2]$, and on $I_\eta$:
+\begin{gather*}
+\sr_{\min}\le\sr\le\sr_{\max},\quad\Lambda_{\min}\le\Lambda\le\Lambda_{\max},\quad\ell_{\min}\le\sr\Lambda\le\ell_{\max},\quad
+\sA_{\min}\le\sA\le\sA_{\max},\\
+1\le w_1\le W_{\mathrm w},\quad|k_1-1|\le\vk_{\mathrm w},\quad b_{\mathrm{lo}}\xi^2\le\sbb\le b_{\mathrm{hi}}\xi^2\le\bar b,\quad
+\sbb/2\le\tau_{\sbb}\le\beta_2\xi^2,\\
+C_{\mathrm{lo}}\xi^{2-2v}\le C\le C_{\mathrm{hi}}\xi^{2-2v},\quad\sa_{\min}\le\sa\le\sa_{\max},\quad|\partial_\theta\log C|\le L_C/\xi;
+\end{gather*}
+for $\theta<\alpha_0$: $\partial_\theta\log C\le-(L_{\mathrm{lo}}-\eta\sA_{\max}/\sr_{\min})/\xi<0$, so $C$ is strictly monotone in $\xi$ on
+that side; and the quantity $\TS$ of Lemma~\ref{lem:transport} at $t_1$, in the frame of run 2, satisfies $|\TS|\le S_1v$.
+\item[(d)] For $\theta\in(0,\pi)\setminus\{\alpha_0\}$, at $t_1$ in the frame of run 2,
+\[
+\tau_{\sbb}^v\,\partial_\theta C=\frac{2\tau_{\sbb}\sA}{1+\tau_{\sbb}^2}+\sr\,\partial_\theta\sbb\,(\cos\sbb-v).
+\]
+Consequently, on $I_\eta$: for $\theta>\alpha_0$, $0<\tau_{\sbb}^v\partial_\theta C\le\xi(\ell_{\max}/2+\sA_{\max}b_{\mathrm{hi}}(1+e_\tau)\eta)$;
+for $\theta<\alpha_0$, $\partial_\theta C<0$ and $|\tau_{\sbb}^v\partial_\theta C|\le\sr|\partial_\theta\sbb|\le\ell_{\max}\xi/2$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) From $C=\rho\sg(\beta)$, $h=\rho(\cos\beta+v)$ and $\sg'/\sg=(\cos\beta-v)/\sin\beta$, on any straight run
+\[
+(\cos\beta+v)\,\partial_\theta C-\sg\,\partial_\theta h=\rho\,\partial_\theta\beta\cdot\sg(1-v^2)/\sin\beta .
+\]
+In run 1 at $t_1$: $\partial_\theta C=\sg(\theta)(\cos\theta-v)/\sin\theta$, $\partial_\theta h=-\sin\theta$, $\sg(\theta)/\sg(\beta_1)=\rho_1$ and
+$\rho_1(\cos\beta_1+v)=h_1$; so $(1-v^2)\rho_1\partial_\theta\beta_1=\sin\beta_1[h_1(\cos\theta-v)+\sin^2\!\theta]/\sin\theta$, and
+$h_1(\cos\theta-v)+\sin^2\!\theta=(1-v^2)(1-t_1(\cos\theta-v))=(1-v^2)t_1(\cos\alpha_0-\cos\theta)$, as $t_1(\cos\alpha_0-v)=1$. Since
+$h_1<0$, $\beta_1\in(\arccos(-v),\pi)$, so $\beta^*>\pi/2$ and on the upper half $\sbb=\beta_1-\beta^*\in[0,\pi/2)$. The mirror point
+of $S_\alpha$ has polar angle $-\beta_1(\alpha)$ about the axis of run 1, i.e.\ $\sbb=2\pi-\beta_1(\alpha)-\beta^*\in(\pi-\beta^*,2\pi-2\beta^*]\subset(0,\pi)$.
+The formula for $\partial_\theta\sbb$ is $\cos\alpha_0-\cos\theta=2\sin\frac{\theta+\alpha_0}2\sin\frac{\theta-\alpha_0}2$. In the frame of run 2,
+$\partial_\theta(S_\theta-P)(t_1)=(\sA+i\sr\,\partial_\theta\sbb)e^{i\sbb}$, which is real at $\alpha_0$.
+
+(b) $t_1=(2-v)/(1-v)$, so $\cos\alpha_0-\frac12=v(3-2v)/(2(2-v))\in[0,v]$ and $\alpha_0\in[\underline\alpha,\pi/3]$. By Lemma~\ref{lem:run1}(a),
+$|S_{\alpha_0}(t_1)-P(t_1)-(e^{i\pi/3}-2)|\le vt_1+|e^{i\alpha_0}-e^{i\pi/3}|+|t_1-2|\le vt_1+\Delta_{\mathrm a}+\mu\le e_\rho$, and
+$|e^{i\pi/3}-2|=\sqrt3$; so $|\rho_0-\sqrt3|\le e_\rho$, $\rho_0\ge\sqrt3-e_\rho>\eps$ (\hyptag{SC1}), and $\tc=t_1+\rho_0/(1-v)\le T_2$.
+The true candidate $\alpha_0$ has $\sbb=0$: it stays on the ray, at distance $\rho_0-(1-v)(t-t_1)$ (Proposition~\ref{prop:runs}), which
+is $\eps$ at $\ta$; up to $\ta$ it is the virtual one (Lemma~\ref{lem:truefront}). For $t\ge\ta$, $x=P+\sigma\nhat$ solves
+$x'=vF(x-P)$ iff $\sigma'=-1+vf(\sigma)$, $\sigma(\ta)=\eps$; by uniqueness this is the virtual candidate $\alpha_0$, and $\sigma$ reaches
+$0$ after the time $\int_0^\eps d\sigma/(1-vf(\sigma))=\eps\int_0^1d\sigma/(1-v\sigma(2-\sigma))=\ttd-\ta\le\eps/(1-v)$. Hence
+$P(\ttd)=x_{\alpha_0}(\ttd)$, and, as $f<1$ on $[0,\eps)$ and $\int_0^\eps(1-f)=\eps/3$,
+$\tc-\ttd=\int_0^\eps\frac{v(1-f)}{(1-v)(1-vf)}\,d\sigma\in(0,v\eps/(3(1-v)^2)]$. Positions: speed $\le v$ and $t\le\ttd\le T_2$. Finally
+$P(t_1)=2+\mu$ is within $\mu$ of the segment, $P(\ttd)=x_{\alpha_0}(\ttd)$ is within $vT_2+\Delta_{\mathrm a}\le d_{\mathrm s}+\Delta_{\mathrm a}$
+of $e^{i\pi/3}$, and the distance to a convex set is convex along the segment $P([t_1,\ttd])$.
+
+(c) $I_\eta\subset[\theta_L,\theta_R]$ by (b), $\subset[\frac12,\frac\pi2]$ by \hyptag{SC3}, \hyptag{SC4}. Window labels are $\ge\theta_L>\as$,
+and $\rho_\theta\ge\sin\theta\ge\rho_{\mathrm w}$ on $[0,t_1]$, so Lemma~\ref{lem:run1}(b) with $\rho=\rho_{\mathrm w}$ gives the bounds on
+$w_1$, $k_1$, and $\partial_\theta S_\theta(t_1)=w_1e^{i\psi_1}$ with $|\psi_1-(\theta+\pi/2)|\le\omega_{\mathrm w}$.
+
+\emph{$\sr$.} $\mathsf p:=S_\theta(t_1)-P(t_1)=e^{i\theta}-2+\mathsf d$ with $|\mathsf d|\le vt_1+\mu\le d_1$, and $R_0$ is increasing on $(0,\pi)$.
+
+\emph{$\Lambda$.} $\sin\beta_1/\rho_1=\operatorname{Im}\mathsf p/\sr^2$ with $\operatorname{Im}\mathsf p=\operatorname{Im}S_\theta(t_1)\in[\sin\theta,\sin\theta+vt_1]$
+($y$ non-decreasing in run 1, speed $\le v$); so $\Lambda=2t_1(\operatorname{Im}\mathsf p/\sin\theta)\sin((\theta+\alpha_0)/2)/\sr^2$ with
+$1\le\operatorname{Im}\mathsf p/\sin\theta\le\iota_{\mathrm w}$, $t_1\in[2,\bar t_1]$ and
+$(\theta+\alpha_0)/2\in[\underline\alpha-\eta/2,\pi/3+\eta/2]\subset(0,\pi/2]$ (\hyptag{SC3}, \hyptag{SC5}), where $\sin$ is increasing.
+
+\emph{$\sr\Lambda$} $=2t_1(\operatorname{Im}\mathsf p/\sin\theta)\,\tilde q(\theta)\,(R_0/\sr)$ with $\tilde q:=\sin((\theta+\alpha_0)/2)/R_0$. Here
+$\frac d{d\theta}\log\tilde q=\frac12\cot\frac{\theta+\alpha_0}2-s(\theta)$, $s=R_0'/R_0$; $s'$ has the sign of $5\cos\theta-4<0$
+(\hyptag{SC6}), so $s\ge s(\theta_R)$, while $\frac12\cot\frac{\theta+\alpha_0}2\le\frac12\cot(\underline\alpha-\eta/2)$; by \hyptag{SC7},
+$\tilde q$ is decreasing on $I_\eta$. Hence $\tilde q\in[\tilde q(\alpha_0+\eta),\tilde q(\alpha_0-\eta)]\subset[q_{\min},q_{\max}]$, and
+$R_0/\sr\in[1/(1+d_1/R_L),1/(1-d_1/R_L)]$ (\hyptag{SC8}).
+
+\emph{$\sA$} $=\partial_\theta S_\theta(t_1)\cdot\hat{\mathsf p}=w_1\cos\angle(e^{i\psi_1},\hat{\mathsf p})$. With $\mathsf p_0:=e^{i\theta}-2$:
+$ie^{i\theta}\cdot\mathsf p_0=2\sin\theta>0$ and $ie^{i\theta}\times\mathsf p_0=2\cos\theta-1$, so
+$\angle(ie^{i\theta},\mathsf p_0)=\arcsin(|2\cos\theta-1|/R_0)\le\arcsin m_0$; and $\angle(\mathsf p_0,\mathsf p)\le\arcsin(|\mathsf d|/|\mathsf p_0|)\le\omega_{\mathrm p}$.
+So $\angle(e^{i\psi_1},\hat{\mathsf p})\le\angle_{\mathrm w}<\pi/2$ (\hyptag{SC9}) and $\sA\in[\cos\angle_{\mathrm w},W_{\mathrm w}]$.
+
+\emph{$\sbb$} $(\alpha_0\pm\xi)=\int_0^\xi\Lambda(\alpha_0\pm\xi')\sin(\xi'/2)\,d\xi'\in[\Lambda_{\min},\Lambda_{\max}]\cdot4\sin^2(\xi/4)$, and
+$(\xi^2/4)(1-\xi^2/48)\le4\sin^2(\xi/4)\le\xi^2/4$. Since $\tan s/s$ is increasing on $(0,\pi/2)$ and $\sbb\le\bar b<\pi/2$ (\hyptag{SC10}):
+$\sbb/2\le\tau_{\sbb}\le(\sbb/2)(1+e_\tau)\le\beta_2\xi^2$.
+
+\emph{$C$} $=2\sr\tau_{\sbb}^{1-v}/(1+\tau_{\sbb}^2)$: $C\le2\sr_{\max}(\beta_2\xi^2)^{1-v}\le C_{\mathrm{hi}}\xi^{2-2v}$ (\hyptag{SC11}), and
+$C\ge2\sr_{\min}(b_{\mathrm{lo}}\xi^2/2)^{1-v}/(1+\tan^2(\bar b/2))\ge C_{\mathrm{lo}}\xi^{2-2v}$ (\hyptag{SC12}).
+
+\emph{$\sa$} $=\sA(\cos\sbb+v)-\sr\sin\sbb\,\partial_\theta\sbb$, and $|\sr\sin\sbb\,\partial_\theta\sbb|\le\bar b\,\ell_{\max}\xi/2\le\mathrm{aux}$, as
+$|\partial_\theta\sbb|\le\Lambda\sin(\xi/2)\le\Lambda\xi/2$.
+
+\emph{$\partial_\theta\log C$} $=\sA/\sr+(\cos\sbb-v)\,\partial_\theta\sbb/\sin\sbb$. Now
+\[
+\frac{|\partial_\theta\sbb|}{\sbb}=\frac{\Lambda(\theta)\sin(\xi/2)}{\int_0^\xi\Lambda\sin(\xi'/2)d\xi'}\in
+\Bigl[\frac{\Lambda_{\min}}{\Lambda_{\max}},\frac{\Lambda_{\max}}{\Lambda_{\min}}\Bigr]\cdot\frac12\cot\frac\xi4,
+\]
+and for $0<y\le1$, $1/y-y/2\le\cot y\le1/y$ (the function $y\cos y-\sin y+\frac{y^2}2\sin y$ vanishes at $0$ and has derivative
+$\frac{y^2}2\cos y\ge0$), so $(2/\xi)(1-\xi^2/32)\le\frac12\cot(\xi/4)\le2/\xi$. Moreover
+$(\cos\sbb-v)\sbb/\sin\sbb\in[\cos\bar b-v,\sbb\cot\sbb]\subset[\cos\bar b-v,1]$, and $\cos\bar b-v>0$ (\hyptag{SC14}). Hence
+$(\cos\sbb-v)|\partial_\theta\sbb|/\sin\sbb\in[L_{\mathrm{lo}}/\xi,\,2\Lambda_{\max}/(\Lambda_{\min}\xi)]$, while
+$0<\sA/\sr\le\sA_{\max}/\sr_{\min}\le(\eta\sA_{\max}/\sr_{\min})/\xi$. For $\theta>\alpha_0$ both terms are positive and
+$\partial_\theta\log C\le L_C/\xi$; for $\theta<\alpha_0$, $\partial_\theta\log C\le\sA_{\max}/\sr_{\min}-L_{\mathrm{lo}}/\xi\le
+-(L_{\mathrm{lo}}-\eta\sA_{\max}/\sr_{\min})/\xi<0$ (\hyptag{SC15}), and $\ge-2\Lambda_{\max}/(\Lambda_{\min}\xi)\ge-L_C/\xi$.
+
+\emph{$\TS$ at $t_1$.} The tangent is the direction of $(\sA+i\sr\,\partial_\theta\sbb)e^{i\sbb}$, so $|\sin\phi|=\sr|\partial_\theta\sbb|/w_1\le\ell_{\max}\xi/2$;
+by Lemma~\ref{lem:transport}(e) with $\rho=\sr\ge\sr_{\min}$ and $w_1\ge1$:
+$|\TS|\le\frac{v\ell_{\max}\xi}{2(1-v^2)\sr_{\min}}[\sr_{\max}\sa_{\max}L_C/\xi+1+v]\le S_1v$ ($\xi\le\eta$).
+
+(d) $\partial_\theta C=\sg(\sbb)\sA+\sr\sg'(\sbb)\partial_\theta\sbb$ with $\sg'=\sg(\cos\beta-v)/\sin\beta$, and $\tau^v\sg(\beta)=\sin\beta=2\tau/(1+\tau^2)$
+(Lemma~\ref{lem:coord}(a)); this is the identity. On the forward side both terms are positive,
+$2\tau_{\sbb}\sA/(1+\tau_{\sbb}^2)\le2\beta_2\xi^2\sA_{\max}=\sA_{\max}b_{\mathrm{hi}}(1+e_\tau)\xi^2\le\sA_{\max}b_{\mathrm{hi}}(1+e_\tau)\eta\,\xi$, and
+$0<\sr\,\partial_\theta\sbb(\cos\sbb-v)\le\sr\Lambda\xi/2\le\ell_{\max}\xi/2$. On the tail side $\partial_\theta\log C<0$ by (c), so
+$|\tau_{\sbb}^v\partial_\theta C|=\sr|\partial_\theta\sbb|(\cos\sbb-v)-2\tau_{\sbb}\sA/(1+\tau_{\sbb}^2)\le\sr|\partial_\theta\sbb|$.
+\end{proof}
+
+\begin{lemma}[forward arc]\label{lem:fwd}
+Let $\theta=\alpha_0+\xi$, $0<\xi\le\eta$. For every $t\in[t_1,\tc)$, in the frame of run 2:
+\begin{enumerate}
+\item[(a)] $h(t)\ge h_{\mathrm f}\xi+(1-v^2)\omega(t)\ge h_{\mathrm f}(\xi+\omega(t))>0$ and $\rho\ge h/(1+v)\ge\rho_{\mathrm c}(\xi+\omega)$;
+in particular $\rho>0$ and $0<\beta<\pi$.
+\item[(b)] $\tau\le\tau_{\sbb}((1+v)\sr/h)^{1+\mu}$, $(\tau/\tau_{\sbb})^v\le(Q/(\xi+\omega))^\mu$, and
+$0<y\le y_{\mathrm f}\xi^2(Q/(\xi+\omega))^\mu$.
+\item[(c)] $0<Y_r\le Y_1\xi(Q/(\xi+\omega))^\mu\le\bar Y$; $|\psi|\le|\tan\psi|\le\theta_{\mathrm f}\xi(Q/(\xi+\omega))^\mu\le
+\theta_{\mathrm f}Q^{\mub}\xi^{1-\mu}$; $1\le w\le W_{\mathrm f}$.
+\item[(d)] At $\ttd$: $\tau\le\tau_{\mathrm f}\xi^{1-\mu}\le\bar\tau_{\mathrm f}$, and $\rho(t)\ge\rho(\ttd)\ge\rho_{\mathrm c}\xi$ for all
+$t\in[t_1,\ttd]$; $\rho\ge\eps$ on $[0,t_1]$. Hence every label with $\rho_{\mathrm c}\xi>\eps$, in particular every
+$\xi\ge\xi_1\eps$ and a neighbourhood of $\xi=\xi_1\eps$ (\hyptag{SC17}), has $\rho>\eps$ on $[t_1,\ttd]$: it is true up to $\ttd$,
+virtual $=$ true there, and the front is $C^\infty$ near it. For $\xi_1\eps\le\xi\le\eta$ moreover $\rho(\ttd)\le\rho_{\mathrm u}\xi$
+and $|k|\le k_{\mathrm f}\xi^{-\mu}$ at $\ttd$.
+\item[(e)] The true front at every $t\in[t_1,\tc)$ is tangent to $\nhat$ at the candidate $\alpha_0$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $\sr-\rho_0=\int_{\alpha_0}^\theta\sA\ge\sA_{\min}\xi$ and $\sr(1-\cos\sbb)\le\sr_{\max}\sbb^2/2\le(\sr_{\max}b_{\mathrm{hi}}^2\eta^3/2)\xi$
+(Lemma~\ref{lem:tang}(c)); insert into \eqref{eq:h2} and use $h_{\mathrm f}\le1-\vbar^2\le1-v^2$ (\hyptag{SC16}). $h=\rho(\cos\beta+v)\le(1+v)\rho$.
+$\rho>0$ and Proposition~\ref{prop:runs} give $0<\beta<\pi$ (as $0<\sbb<\pi$ at $t_1$).
+
+(b) \eqref{eq:tau2}, $v(1+\mu)=\mu$, $(1+v)\sr/h\le Q/(\xi+\omega)$ by (a), $\tau_{\sbb}\le\beta_2\xi^2$ and $\sr\le\sr_{\max}$.
+
+(c) By Lemma~\ref{lem:transport}(b) and Lemma~\ref{lem:tang}(d), $Y_r=(\tau/\tau_{\sbb})^v\tau_{\sbb}^v\partial_\theta C/\sa\in(0,Y_1\xi(Q/(\xi+\omega))^\mu]$
+($\sa\ge\sa_{\min}>0$, \hyptag{SC13}), and $Y_1\xi(Q/(\xi+\omega))^\mu\le Y_1Q^\mu\xi^{1-\mu}\le\bar Y$ (\hyptag{SC18}). So
+$N_\psi\in[-v\sin\beta,(1+v)Y_r]$ and $D_\psi\ge1-v-v\bar Y>0$ (\hyptag{SC19}); hence $|\psi|\le|\tan\psi|$. With
+$\sin\beta=y/\rho\le(y_{\mathrm f}/\rho_{\mathrm c})\xi(Q/(\xi+\omega))^\mu$:
+$|\tan\psi|\le\max((1+v)Y_1,vy_{\mathrm f}/\rho_{\mathrm c})\,\xi(Q/(\xi+\omega))^\mu/(1-v-v\bar Y)\le\theta_{\mathrm f}\xi(Q/(\xi+\omega))^\mu$.
+$w=\sa|D_\psi+iN_\psi|/(1-v^2)\le W_{\mathrm f}$, since $|D_\psi|\le1+v+v\bar Y$, $|N_\psi|\le(1+v)\bar Y+v$; $w\ge1$ by Lemma~\ref{lem:truefront}.
+
+(d) By (b) with $h\ge h_{\mathrm f}\xi$: $\tau(\ttd)\le\beta_2\xi^2(Q/\xi)^{1+\mu}\le\tau_{\mathrm f}\xi^{1-\mu}\le\bar\tau_{\mathrm f}$, so
+$\cos\beta\ge1-2\bar\tau_{\mathrm f}^2>v$ (\hyptag{SC20}). As $\tau$ increases in time, $\cos\beta>v$ on $[t_1,\ttd]$ and $\rho$ is
+decreasing there (Lemma~\ref{lem:coord}(c)): $\rho(t)\ge\rho(\ttd)\ge\rho_{\mathrm c}\xi$. In run 1, $\rho\ge\eps$ since
+$\theta\ge\theta_L>\as$ (Lemma~\ref{lem:run1}(a)). Virtual $=$ true by Lemma~\ref{lem:truefront}. For $\xi\ge\xi_1\eps$:
+$\omega(\ttd)\le v\eps/(3(1-v)^2)\le\delta_{\mathrm{fw}}\xi$, so by \eqref{eq:h2} $h\le(1+v)\sA_{\max}\xi+\delta_{\mathrm{fw}}\xi$, and
+$\rho=h/(\cos\beta+v)\le h/(1-2\bar\tau_{\mathrm f}^2)\le\rho_{\mathrm u}\xi$.
+
+\emph{Curvature.} Lemma~\ref{lem:transport}(d) with $t'=t_1$, $t''=\ttd$: $(\tau/\tau_{\sbb})^v\le(Q/\xi)^\mu\le Q^{\mub}\xi^{-\mu}$,
+$|k_1|\le1+\vk_{\mathrm w}$ and $|\TS'|\le S_1v$ (Lemma~\ref{lem:tang}(c)). For $\TS''$, Lemma~\ref{lem:transport}(e) with
+$|\sin\phi|=|\sin(\beta-\psi)|\le\sin\beta+|\psi|\le2\tau+|\psi|\le(2\tau_{\mathrm f}+\theta_{\mathrm f}Q^{\mub})\xi^{1-\mu}$,
+$\rho\ge\rho_{\mathrm c}\xi$ and $\rho|\sa||\partial_\theta\log C|/w^2\le\rho_{\mathrm u}\xi\,\sa_{\max}L_C/\xi$ gives $|\TS''|\le S_2v\xi^{-\mu}$.
+So $|k|\le Q^{\mub}\xi^{-\mu}(1+\vk_{\mathrm w}+S_1v)+S_2v\xi^{-\mu}\le k_{\mathrm f}\xi^{-\mu}$.
+
+(e) For $t<\tc$ the true front is smooth near the label $\alpha_0$ ($\rho_{\alpha_0}(t)>0$), and by (c) $\psi\to0$ as $\xi\downarrow0$ with
+$\omega(t)>0$ fixed.
+\end{proof}
+
+\begin{lemma}[virtual labels next to $X_0$]\label{lem:virt}
+At $\ttd$, for every $\theta=\alpha_0+\xi$, $0\le\xi\le\eta$, the virtual front has tangent $e^{i\psi}\nhat$ with
+$|\psi(\theta,\ttd)|\le\theta_{\mathrm v}\xi^{1-\mu}$, and $1\le w\le W_{\mathrm v}$; $\psi(\alpha_0,\ttd)=0$. For $\xi\ge\xi_1\eps$ the
+virtual front is the true one.
+\end{lemma}
+\begin{proof}
+For $\xi_1\eps\le\xi\le\eta$: Lemma~\ref{lem:fwd}(c),(d) at $\ttd$, as $\theta_{\mathrm f}Q^{\mub}\le\theta_{\mathrm v}$ and
+$W_{\mathrm f}\le W_{\mathrm v}$. Let $0<\xi<\xi_1\eps$; then $\xi<\eta$, since $\xi_1\eps\le u_{\mathrm v}\epsbar\le\eta/2$ (\hyptag{SC40},
+$W_{\mathrm v}\ge1$). On $[0,t_1]$ the label is true with $\rho\ge\eps$ (Lemma~\ref{lem:run1}(a)). On $[t_1,\ta]$, by \eqref{eq:h2},
+$h_\theta(t)-h_{\alpha_0}(t)=(1+v)(\sr-\rho_0)-\sr(1-\cos\sbb)\ge h_{\mathrm f}\xi>0$ (proof of Lemma~\ref{lem:fwd}(a)) and
+$h_{\alpha_0}(t)=(1+v)\rho_{\alpha_0}(t)\ge(1+v)\eps$ (the candidate $\alpha_0$ is on the ray), so $(1+v)\rho_\theta\ge h_\theta>(1+v)\eps$.
+Hence virtual $=$ true on $[0,\ta]$ for all labels in $(\alpha_0,\alpha_0+\xi_1\eps)$ (Lemma~\ref{lem:truefront}), and by
+Lemma~\ref{lem:fwd}(b),(c) at $\ta$ ($\omega(\ta)=\eps/(1-v)\ge\eps$):
+$|\psi(\ta)|\le\theta_{\mathrm f}\xi(Q/\xi)^\mu$, $0\le y(\ta)\le y_{\mathrm f}\xi^2(Q/\xi)^\mu$, $w(\ta)\le W_{\mathrm f}$. On
+$[\ta,\ttd]$, of length $I\le\eps/(1-v)$ (so $vI/\eps\le\mu$), the virtual field acts. With $r=x_\theta-P=(z+iy)\nhat$:
+$r'=vF(r)-\nhat$, so $y'=v(f(\rho)/\rho)y$ with $0\le f(\rho)/\rho\le2/\eps$, hence $0\le y(t)\le y(\ta)e^{2\mu}$. By
+Lemma~\ref{lem:flow}(b), $|\psi_t|\le v\rho|\sin\phi|/\max(\rho,\eps)^2$, where $\rho|\sin\phi|=|T\times r|=|y\cos\psi-z\sin\psi|\le y+\rho|\psi|$
+and $\rho/\max(\rho,\eps)^2\le1/\eps$; so $|\psi|'\le(v/\eps)|\psi|+vy/\eps^2$ almost everywhere. By Gronwall,
+\[
+|\psi(\ttd)|\le e^{\mu}\Bigl[|\psi(\ta)|+\frac{vI}{\eps^2}e^{2\mu}y(\ta)\Bigr]\le e^\mu\bigl[\theta_{\mathrm f}+\mu e^{2\mu}y_{\mathrm f}\,\xi/\eps\bigr]
+Q^\mu\xi^{1-\mu}\le\theta_{\mathrm v}\xi^{1-\mu}
+\]
+($\xi/\eps<\xi_1$). By Lemma~\ref{lem:flow}(b) and Lemma~\ref{lem:field}(ii), $w_t\le va^*w\le(2v/\eps)w$, so
+$w(\ttd)\le w(\ta)e^{2\mu}\le W_{\mathrm v}$; $w\ge1$ by Lemma~\ref{lem:flow}(a). For $\xi=0$: the virtual front is $C^1$ and coincides
+at $\ta$ with the true front on $(\alpha_0,\alpha_0+\xi_1\eps)$, so $w(\alpha_0,\ta)\le W_{\mathrm f}$ and its tangent at $\alpha_0$ is the
+limit of the true tangents, $\nhat$ (Lemma~\ref{lem:fwd}(e)); thus $\psi(\ta)=0=y(\ta)$, and the same inequalities give $\psi(\alpha_0,\ttd)=0$
+and $w(\alpha_0,\ttd)\le W_{\mathrm v}$.
+\end{proof}

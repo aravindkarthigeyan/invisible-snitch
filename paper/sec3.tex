@@ -1,0 +1,337 @@
+% sec3.tex -- writer W2. Section 3: the greedy chase and the end theorem.
+\section{The greedy chase and the end theorem}\label{sec:end}
+
+Throughout Sections~\ref{sec:end} and~\ref{sec:farnear}, $0<v\le\vz$, $\mu=v/(1-v)$, and $x$ is a working front
+(Definition~\ref{def:flow}(b)) on $[0,U]$ from $\xz$ at $\ttd$, with $|\partial_u\xz|\equiv1$, so that a label is its arclength
+coordinate at $\ttd$. For labels $a<b$ we write $\lambda:=b-a$ (the \emph{label length}) and call $(a,b)$ a \emph{pair}; for a pair
+$J$ we write $\lambda_J,l(J),c(J),e_J,N(J)$.
+
+\subsection{The chase}
+
+\begin{definition}[Greedy chase]\label{def:chase}
+Let $P$ be a $1$-Lipschitz path on $[0,\ttd]$ with $\xz(0)=P(\ttd)$, and let $b_{\mathrm c}\in(0,U]$ (the \emph{cut}). Put
+$t_0:=\ttd$, $a_0:=0$. Given a leg start $t_j$ with $P(t_j)=x_{a_j}(t_j)$, let
+\[
+a_{j+1}:=\max\{u\in[a_j,b_{\mathrm c}]:\ l_{t_j}(a_j,u)\le\eps\}.
+\]
+If $a_{j+1}=b_{\mathrm c}$, the chase \emph{stops at} $t_j=:\Tstop$: leg $j+1$ is \emph{final}, it is not walked, and $P$ is
+constant after $\Tstop$. Otherwise $P$ runs at unit speed along the ray from $P(t_j)$ through $x_{a_{j+1}}(t_j)$ until it meets
+$x_{a_{j+1}}$, at time $t_{j+1}$; this requires $c(a_j,a_{j+1};t_j)>0$ (the \emph{proviso}). Leg $j+1$ is the interval
+$[t_j,t_{j+1}]$, and $\uhat_{j+1}$ is its direction. The working front is computed with the path so extended.
+\end{definition}
+
+For $t\in(t_j,t_{j+1}]$, and for $t=t_0$ with $j=0$, we write $j(t):=j$; $a_{j(t)}$ is the \emph{base} at time $t$. A leg start
+$t_j$, $j\ge1$, belongs to the legs $j$ and $j+1$: statements ``in leg $j+1$'' may be applied at $t_j$ with base $a_j$, and
+statements ``in leg $j$'' at $t_j$ with base $a_{j-1}$; both are valid since $P(t_j)=x_{a_j}(t_j)$. Likewise, for a tail pair the
+time $\tW$ is treated as a point of leg $\jW+1$, with base $a_{\jW}$ (Lemma~\ref{lem:local} and Section~\ref{sec:farnear}). Since $x(u,t)$ depends only on $\xz(u)$ and on $P|_{[\ttd,t]}$, the chase cut at
+$b_{\mathrm c}$ depends only on $\xz|_{[0,b_{\mathrm c}]}$ and on the path up to the current time.
+
+\begin{lemma}[The chase]\label{lem:chase}
+Assume the proviso at every non-final leg start reached.
+\begin{enumerate}
+\item[(0)] Either the chase stops or $t_j\to\infty$; $P$ is $1$-Lipschitz.
+\item[(1)] During leg $j+1$: $x_{a_{j+1}}=P+\rho\uhat_{j+1}$ with $\rho'=-1+vf(\rho)\le-(1-v)$, and $x_{a_j}=P-\sigma\uhat_{j+1}$ with
+$\sigma\ge0$. So $x_{a_j},P,x_{a_{j+1}}$ are collinear in this order, and the leg lasts at most
+$c(a_j,a_{j+1};t_j)/(1-v)\le\eps/(1-v)$.
+\item[(2)] Every true label $u\in[a_j,a_{j+1}]$ has its direction seen by time $t_j$; this includes the final leg.
+\item[(3)] During leg $j+1$: $l_t(a_j,a_{j+1})\le e^{2\mu}\eps$, $|P-x_{a_j}|\le e^{2\mu}\eps$, and $l_t(a,b)\le e^{2\mu}l_{t_j}(a,b)$
+for all $a<b$.
+\item[(4)] If a path $\tilde P$ equals $P$ on $[0,t_j]$, the working fronts of $P$ and $\tilde P$ agree on $[\ttd,t_j]$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:flow}(b) and Lemma~\ref{lem:field}(ii), $w_t=vw\,T\cdot AT\le(2v/\eps)w$ and, by Lemma~\ref{lem:excess}(i),
+$l'\le(2v/\eps)l$.
+(0) On $[\ttd,T]$, $w\le e^{2v(T-\ttd)/\eps}$. A non-final leg $j+1$ has $l_{t_j}(a_j,a_{j+1})=\eps$ (maximality and continuity of $l$
+in the label), so if $t_j\le T$ it advances the base by at least $\eps e^{-2v(T-\ttd)/\eps}$; hence finitely many legs start
+before $T$. $P$ is piecewise linear with speed $\le1$.
+(1) Let $\rho$ solve $\rho'=-1+vf(\rho)$, $\rho(t_j)=c(a_j,a_{j+1};t_j)>0$. As $F(\rho\uhat)=f(\rho)\uhat$, $y:=P+\rho\uhat_{j+1}$ solves
+$y'=vF(y-P)$ with $y(t_j)=x_{a_{j+1}}(t_j)$, so $y=x_{a_{j+1}}$ by uniqueness while $\rho>0$; $\rho'\le-(1-v)$ as $f\le1$. Likewise
+$P-\sigma\uhat_{j+1}$ with $\sigma'=1+vf(\sigma)$, $\sigma(t_j)=0$ solves the equation of $x_{a_j}$ (note $F(-\sigma\uhat)=-f(\sigma)\uhat$),
+and $\sigma\ge0$. Finally $c\le l_{t_j}(a_j,a_{j+1})\le\eps$.
+(2) $\rho_u(t_j)=c(a_j,u;t_j)\le l_{t_j}(a_j,u)\le\eps$; apply Lemma~\ref{lem:seen}(b).
+(3) The leg lasts at most $\eps/(1-v)$, so lengths grow at most by the factor $e^{(2v/\eps)\eps/(1-v)}=e^{2\mu}$; and
+$|P-x_{a_j}|=\sigma\le c(a_j,a_{j+1};t)\le l_t(a_j,a_{j+1})$ by (1).
+(4) Uniqueness for the equation of Definition~\ref{def:flow}.
+\end{proof}
+
+\subsection{Parameters and the end theorem}
+
+\begin{definition}[Parameters]\label{def:param}
+A \emph{parameter tuple} is
+\[
+p=(\gamma,R,m,s_0,\fF,\kappa,c_A,K_R,K_f,\Keps,\eta_1,\qc,\nu,\dL,\delta_1,A_0).
+\]
+Its \emph{derived constants} are
+\begingroup\allowdisplaybreaks
+\begin{align*}
+&M:=mR^{-\gamma},\quad \chig:=\kappa\dL,\quad c_6:=\frac{1+\delta_1}{c_A},\quad
+c_t(r):=\frac{\kappa^{1/2}r^{1/2+\gamma}+m/2}{c_A}\ (r\ge1),\quad \sigma_q:=\frac1{1-\qc^{-\gamma}},\\
+&C_A:=\sigma_q\,c_t(\qc),\quad C_B:=C_A+c_t(3),\quad \CTL:=C_A+C_B,\quad \CmuA:=1+\kappa C_A^2,\quad \ConeA:=(\kappa\CmuA)^{1/2},\\
+&c_\rho:=c_A-\frac{2\delta_1+\kappa}{K_f},\quad c_R:=c_AK_R-\frac{\delta_1}{\Keps}-\kappa,\quad K_1:=\frac{c_\rho K_f}{\kappa},\quad
+K_2:=\frac{c_R}{\kappa},\quad \camp:=\frac{\aD(K_1)\chig}{c_\rho},\\
+&B_{2U}:=\frac{2\kappa^{3/2}(1+1/K_2)}{c_R^2},\quad
+B_{2\eta}:=\frac{2\kappa^{3/2}(1+1/K_1)}{c_\rho^2}\Bigl(\frac{\chig}{\eta_1}+\frac{\dL}{\Keps\eta_1^2}\Bigr),\\
+&r_f:=1+\frac1{K_f-2},\quad C_p:=\kappa\bigl[c_t(r_f)+C_B(1+1/K_f)^\gamma\bigr],\quad B_3:=\frac{2\kappa^{3/2}C_p}{c_\rho^3},\\
+&\PsiI:=2+\log K_f,\quad \TI:=\dL(\kappa c_6+2)+c_6\chig\PsiI,\quad \Ta:=\frac{\dL}{c_6}+\chig(2+\log K_f),\\
+&\Tb:=2^\gamma\Bigl[2\dL+\chig\Bigl(\frac34+\frac{K_f^\gamma-1}{2\gamma}\Bigr)\Bigr],\quad
+k_0:=\max(\ConeA,\kappa2^\gamma C_A),\\
+&\DI:=\CmuA\TI,\quad \DIIs:=c_6^2\ConeA^2\Ta+2c_6^2\kappa\CTL\ConeA\Tb+4\dL c_6\ConeA k_0,\quad
+\DIIl:=\frac{c_6(K_f+1)^\gamma\ConeA\Ta}m,\\
+&B_5:=\frac2{c_\rho}\Bigl[\frac{(C_p+\kappa^{1/2}K_f^{-1-\gamma})^2}{c_\rho^2}+K_f^{-2\gamma}\Bigr],\quad
+I_5:=\frac{\chig(\eta_1+1/\Keps)^{2\gamma}}{2\gamma},
+\end{align*}
+and, for a length $U_0>0$,
+\begin{align*}
+&\Xfar(U_0):=\vz\Bigl[\frac{\chig U_0}{c_RR}+\frac1{c_\rho}\Bigl(\frac{\dL}{\Keps\eta_1}+\chig\log\frac{K_R}{\eta_1}\Bigr)\Bigr],\\
+&\LJ(U_0):=\exp\bigl(\Xfar(U_0)+B_5I_5\vz m^2\bigr)+\vz\kappa\TI,\qquad \bar\theta:=\fF^2+2\vz\bigl[\DI+\max(\DIIs,\DIIl)\bigr].
+\end{align*}
+\endgroup
+\namedlabel{hyp:P}{\textup{(P0)--(P7)}}\textbf{Side conditions} for $(p,U_0)$:
+\begin{itemize}
+\item[(P0)] $1/2<\gamma$, $\gamma+\nu<1$; $0<R\le1$; $m>0$; $0<s_0\le\fF<1$; $1<\kappa\le4/3$; $0<c_A\le1$; $K_f\ge3$,
+$K_f+1\le K_R$; $\Keps\ge3/2$; $0<\eta_1\le K_f/(K_f+1)$; $\qc>1$; $\nu\ge0$; $\dL,\delta_1,A_0\ge1$; $0<\vz<1$;
+\item[(P1)] $1/(1-\vz)\le\dL$ and $e^{2\vz/(1-\vz)}\le\delta_1$;
+\item[(P2)] $c_\rho K_f\ge2$, $c_R\Keps\ge1$, $c_6\le K_R\Keps$;
+\item[(P3)] $\camp\vz\le\nu$;
+\item[(P4)] $\vz\bigl[2\aD(K_1)\dL/(c_\rho K_f)+\aD(K_2)\chig U_0/(c_RR)\bigr]\le\log A_0$;
+\item[(P5)] $A_0\Bigl[s_0+\Bigl(\dfrac{K_R}{K_f}\Bigr)^{\!\nu}\dfrac{\vz}m\Bigl(\dfrac{B_{2U}\chig U_0}R+B_{2\eta}\Bigr)
++B_3K_f^{\gamma-1}\Bigl(\dfrac{2\dL}{K_f}+\dfrac{\chig}{1-\gamma-\nu}\Bigr)\vz\Bigr]\le\fF$;
+\item[(P6)] $\bar\theta<1$;\qquad (P7) $\LJ(U_0)<\kappa$.
+\end{itemize}
+\end{definition}
+By (P2), $c_\rho>0$ and $c_R>0$. By (P1), $1/(1-v)\le\dL$ and $e^{2\mu}\le\delta_1$. Note $c_6\ge2$, $K_R\ge4$, and that $\aD$ is
+decreasing.
+
+\medskip\noindent\namedlabel{hyp:end}{(H)}\textbf{Setting (H).} The working front on $[0,U]$ and the chase cut at $b_{\mathrm c}=U$;
+$(p,U_0)$ satisfies (P0)--(P7); $U\le U_0$; $\eps\le R/\Keps$; an \emph{excuse length} $\We\ge0$ with $\We=0$ or
+$U\ge2\We+R+\eps$; and a number $\delta_t\ge0$ (in the application, $\delta_t=e^{\vz K_w}-1$ of
+Section~\ref{sec:dep}). (S1) and (S2) are hypotheses at the time $\ttd$. A pair $(a,b)$, $0\le a<b\le U$, is a \emph{body pair} if $U-b\ge\We$, a \emph{tail pair} if $U-b<\We$, and
+\emph{good} if $a\ge\We$ or $U-b\ge\We$. A pair that is not good has $\lambda>U-2\We\ge R+\eps$; so \emph{every pair with
+$\lambda\le R$ is good}. The \emph{family of leg $j+1$} consists of the pairs with $\eps/2\le\lambda\le R$ and ($a=a_j$ or
+$a\ge a_{j+1}$); the \emph{family} $\Fam(t)$ is the family of leg $j(t)+1$ (so $\Fam(t_j)$, $j\ge1$, is the family of leg $j$, which
+contains that of leg $j+1$). The \emph{gap} of a pair of $\Fam(t)$ is $g:=a-a_{j(t)}\ge0$; the pair is \emph{far} if $g\ge K_f\lambda$
+and \emph{near} otherwise. Let $\jW$ be the first $j$ with $a_j\ge\We$ and $\tW:=t_{\jW}$ (if the chase reaches it). The
+\emph{admissible family} $\FamS(t)$ consists of the body pairs of $\Fam(t)$ if $t<\tW$ (or $\tW$ is not reached), and of all pairs
+of $\Fam(t)$ if $t\ge\tW$. Hypotheses:
+\begin{itemize}
+\item[(S1)] $c(a,b;\ttd)\ge c_A\min(\lambda,K_RR)$ for all good pairs with $\lambda\ge\eps/2$;
+\item[(S2)] $N(a,b;\ttd)\le s_0M\lambda^{1/2+\gamma}\min\bigl(1,K_f\lambda/\min(a,K_RR)\bigr)^\nu$ for all body pairs with
+$\eps/2\le\lambda\le R$ (the last factor is $1$ if $a=0$);
+\item[(TW)] (only if $\We>0$) if $\tW$ is reached, every tail pair with $\eps/2\le\lambda\le R$ satisfies, with $g_W:=a-a_{\jW}$,
+\[
+g_W\ge K_f\lambda,\quad l_{\tW}(a,b)\le(1+\delta_t)\lambda,\quad
+N(a,b;\tW)\le s_0M\lambda^{1/2+\gamma}\min\Bigl(1,\frac{K_f\lambda}{\min(g_W,K_RR)}\Bigr)^{\nu};
+\]
+\item[(PT)] (only if $\We>0$) $(1+\delta_t)\LJ(U_0)<\kappa$.
+\end{itemize}
+If $\We=0$, then $\jW=0$, $\tW=\ttd$, there are no tail pairs, $\FamS=\Fam$, and (TW), (PT) are void. Families shrink in $t$ (a pair
+of the family of leg $k+1$ has $a\ge a_k\ge a_{j+1}$ for $k>j$), and the gap of a fixed pair is non-increasing in $t$.
+
+\begin{theorem}[End theorem]\label{thm:end}
+In the setting \textup{(H)}, the proviso holds at every non-final leg start, and:
+\begin{enumerate}
+\item[(a)] \emph{(invariants)} for every $t\in[\ttd,\Tstop]$ and every pair of $\FamS(t)$,
+\begin{equation}\label{eq:J}
+\textup{(J1)}\quad l_t(a,b)\le\kappa\lambda,\qquad\qquad \textup{(J2)}\quad N(a,b;t)\le M\lambda^{1/2+\gamma};
+\end{equation}
+if $\We>0$, then $\tW$ is reached. Moreover, for all good pairs with $\lambda\ge\eps/2$ and all $t\ge\ttd$,
+\begin{equation}\label{eq:CA}
+\textup{(CA)}\qquad c(a,b;t)\ge c_A\min(\lambda,K_RR).
+\end{equation}
+\item[(b)] \emph{(the end)} every non-final leg advances the base by $a_{j+1}-a_j\in[\eps/\kappa,\eps]$; the chase stops at
+$\Tstop\le\ttd+\kappa U/(1-v)$; the direction of every true label of $[0,U]$ is seen by $\Tstop$.
+\item[(c)] \emph{(tilts)} at every $t\in[\ttd,\Tstop]$, for pairs $J\subset I$ of $\FamS(t)$: $|e_J-e_I|\le\CTL m(\lambda_I/R)^\gamma$, with
+$C_A$ in place of $\CTL$ if $J,I$ have the same left end, and $C_B$ if they have the same right end.
+\item[(d)] \emph{(distance from the base)} for $t$ in leg $j+1$ and a label $s\ge a_j$ with ($U-s\ge\We$ or $a_j\ge\We$):
+$\rho_s(t)\ge c_A\min(s-a_j,K_RR)-\delta_1\eps$ and $\max(\rho_s,\eps)\ge\min(s-a_j,K_RR)/c_6$.
+\item[(e)] \emph{(causality)} if a path agrees with the chase on $[0,t_j]$, then \textup{(a)}, \textup{(c)}, \textup{(d)} hold for it on
+$[\ttd,t_j]$.
+\end{enumerate}
+No constant depends on $\eps$, $v$ or $U$.
+\end{theorem}
+
+The proof occupies the rest of this section and Section~\ref{sec:farnear}; it is completed in Section~\ref{sec:endproof}.
+
+\subsection{Legs, gaps, distances, tilts}
+
+\emph{Proof of \eqref{eq:CA}.} Chords are non-decreasing in $t$ (Lemma~\ref{lem:sep}(c)); apply (S1). In particular \eqref{eq:CA}
+holds for every pair with $\eps/2\le\lambda\le R$ (such pairs are good, and $R\le K_RR$). \qed
+
+\medskip
+Let $T_{\mathrm{def}}\le\infty$ be the supremum of the times up to which the chase is defined (it is defined on $[\ttd,t_j]$ up to
+each leg start $t_j$ reached).
+
+\begin{lemma}[Legs]\label{lem:legs}
+Let $t'\le T_{\mathrm{def}}$, and suppose \textup{(J1)} holds at every leg start $t_i\le t'$ for the pairs of $\FamS(t_i)$. Then for
+every leg start $t_j\le t'$:
+\begin{enumerate}
+\item[(i)] if $U-a_j\ge\eps/2$, leg $j+1$ is final, or $a_{j+1}-a_j\in[\eps/\kappa,\eps]$ and $l_{t_j}(a_j,a_{j+1})=\eps$;
+\item[(ii)] if $U-a_j<\eps/2$, leg $j+1$ is final; if $a_j<\We$, leg $j+1$ is not final;
+\item[(iii)] if leg $j+1$ is not final, $c(a_j,a_{j+1};t_j)\ge c_A(a_{j+1}-a_j)>0$: the proviso holds;
+\item[(iv)] at most $\kappa U/\eps$ non-final legs start in $[\ttd,t']$, each lasts at most $\dL\eps$, and every $t\le t'$ satisfies
+$t-\ttd\le T_B:=\chig U$.
+\end{enumerate}
+The pairs used are $(a_j,s)$ with $a_j<s\le a_j+\eps$, and $(a_{j-1},U)$ in case \textup{(ii)}; they belong to $\FamS(t_j)$.
+\end{lemma}
+
+\begin{proof}
+Always $a_{j+1}-a_j\le l_{t_j}(a_j,a_{j+1})\le\eps$, since $w\ge1$. \emph{Admissibility.} If $t_j<\tW$ then $a_j<\We$, and every
+$s\le a_j+\eps$ has $U-s>U-\We-\eps\ge\We+R$: the pairs $(a_j,s)$ are body pairs; and $U-a_j>\eps$. If $t_j\ge\tW$,
+$\FamS(t_j)=\Fam(t_j)$. Every pair $(a_j,s)$ with $\eps/2\le s-a_j\le R$ is in $\Fam(t_j)$ (for $j=0$ it has first point $a_0$; for
+$j\ge1$, $a_j\ge a_j$ in the family of leg $j$).
+(i) The label $s:=a_j+\eps/2$ is $\le U$, and $\eps/2\le R$ ($\Keps\ge3/2$); (J1) gives $l_{t_j}(a_j,s)\le\kappa\eps/2\le\eps$, so
+$a_{j+1}\ge s$. If leg $j+1$ is non-final, $a_{j+1}<U$ and $l_{t_j}(a_j,a_{j+1})=\eps$ by maximality; the pair $(a_j,a_{j+1})$ has
+$\eps/2\le\lambda\le\eps\le R$, and (J1) gives $\eps\le\kappa\lambda$.
+(ii) A final leg $j+1$ has $U-a_j\le l_{t_j}(a_j,U)\le\eps$, so $a_j\ge U-\eps>\We$ if $\We>0$: legs with $a_j<\We$ are not final.
+Now let $U-a_j<\eps/2$; then $t_j\ge\tW$. Induction on $j$. For $j=0$, $l_{t_0}(0,U)=U<\eps/2$. For $j\ge1$, leg $j$ was not final, so
+$U-a_{j-1}\ge\eps/2$ by the induction hypothesis, and by (i) $\lambda_1:=a_j-a_{j-1}\in[\eps/\kappa,\eps]$ with
+$l_{t_{j-1}}(a_{j-1},a_j)=\eps$. With $\lambda_2:=U-a_j<\eps/2$, the pair $(a_{j-1},U)$ has label length in $[\eps/2,3\eps/2]\subset
+[\eps/2,R]$ and lies in $\Fam(t_j)$ (family of leg $j$). By (J1) and the monotonicity of lengths,
+$l_{t_j}(a_j,U)\le\kappa(\lambda_1+\lambda_2)-\eps<\frac32\kappa\eps-\eps\le\eps$, as $\kappa\le4/3$; so $a_{j+1}=U$.
+(iii) By (i), $\lambda:=a_{j+1}-a_j\in[\eps/2,R]$, and \eqref{eq:CA} gives $c\ge c_A\lambda$.
+(iv) Each non-final leg starting in $[\ttd,t']$ advances the base by at least $\eps/\kappa$ (by (i), (ii)), and the advances add up to
+at most $U$. Each leg lasts at most $\eps/(1-v)\le\dL\eps$ (Lemma~\ref{lem:chase}(1), (P1)). So $t-\ttd\le(\kappa U/\eps)\dL\eps=T_B$.
+\end{proof}
+
+\begin{lemma}[Gap--time integrals]\label{lem:gapint}
+Let $t'$ be as in Lemma~\ref{lem:legs}, $a$ a label, and $\mathcal T\subset[\ttd,t']$ a set of times on which
+$g(\tau):=a-a_{j(\tau)}\ge0$. The gap is constant on each leg and, by Lemma~\ref{lem:legs}(i), (ii), its values on distinct legs
+differ by at least $\eps/\kappa$.
+\begin{enumerate}
+\item[(i)] If $h\ge0$ is non-increasing on $[g_{\min},\infty)$, where $g_{\min}$ is the smallest value $\ge g_0$ of $g$ on
+$\mathcal T$, then
+\[
+\textstyle\int_{\{\tau\in\mathcal T:\,g(\tau)\ge g_0\}}h(g(\tau))\,d\tau\le\dL\eps\,h(g_{\min})+\chig\int_{g_{\min}}^\infty h(g)\,dg .
+\]
+\item[(ii)] If $h\ge0$ is non-decreasing on $[0,\bar g+\eps/\kappa]$ and $g\le\bar g$ on $\mathcal T$, then
+\[
+\textstyle\int_{\mathcal T}h(g(\tau))\,d\tau\le\chig\int_0^{\bar g+\eps/\kappa}h(g)\,dg .
+\]
+\item[(iii)] At most $\kappa x/\eps+1$ legs meet $\{\tau\in\mathcal T:g(\tau)<x\}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The bases of non-final legs increase by at least $\eps/\kappa$ (Lemma~\ref{lem:legs}), and each leg lasts at most $\dL\eps$.
+(i) Let $g_1>\dots>g_n=g_{\min}$ be the values $\ge g_0$. For $i<n$, $g_i-\eps/\kappa\ge g_{i+1}$ and, $h$ being non-increasing,
+$h(g_i)\le(\kappa/\eps)\int_{g_i-\eps/\kappa}^{g_i}h$; these intervals are disjoint and lie in $[g_{\min},\infty)$. So the integral is
+$\le\dL\eps\sum_ih(g_i)\le\dL\eps\,h(g_{\min})+\dL\kappa\int_{g_{\min}}^\infty h$. (ii) Likewise $h(g_i)\le(\kappa/\eps)
+\int_{g_i}^{g_i+\eps/\kappa}h$ for every value $g_i$, with disjoint intervals in $[0,\bar g+\eps/\kappa]$. (iii) The values in $[0,x)$
+are spaced by at least $\eps/\kappa$.
+\end{proof}
+
+\begin{lemma}[Distance from the base]\label{lem:dist}
+Let $t\le T_{\mathrm{def}}$ lie in leg $j+1$ \textup($t\in[t_j,t_{j+1}]$, or $t=t_j=\Tstop$\textup), and let $s\ge a_j$ be a label
+with $U-s\ge\We$ or $a_j\ge\We$. Then $\rho_s(t)\ge c_A\min(s-a_j,K_RR)-\delta_1\eps$ and $\max(\rho_s(t),\eps)\ge\min(s-a_j,K_RR)/c_6$.
+\end{lemma}
+
+\begin{proof}
+Let $w:=s-a_j$. If $w<\eps/2$, the first right side is negative ($\delta_1\ge1>c_A/2$). Otherwise $(a_j,s)$ is good, and by
+\eqref{eq:CA} and $|P-x_{a_j}|\le e^{2\mu}\eps\le\delta_1\eps$ (Lemma~\ref{lem:chase}(3), (P1); at $t=t_j$, $P=x_{a_j}$): $\rho_s\ge c(a_j,s;t)-|P-x_{a_j}|\ge c_A\min(w,K_RR)-\delta_1\eps$. Put
+$y:=\min(w,K_RR)$. If $c_Ay-\delta_1\eps\ge y/c_6$ we are done; otherwise, as $c_A-1/c_6=c_A\delta_1/(1+\delta_1)$,
+$y\,c_A\delta_1/(1+\delta_1)<\delta_1\eps$, i.e.\ $y<c_6\eps$.
+\end{proof}
+
+\begin{lemma}[Tilts]\label{lem:tilt}
+Let $t\le T_{\mathrm{def}}$ lie in leg $j+1$, let $I=(a,b)$ be a pair of the family of leg $j+1$, and suppose that \textup{(J1)},
+\textup{(J2)} hold at time $t$ for every pair of the family of leg $j+1$ contained in $[a_j,\max(b,a_{j+1})]$. Then:
+\begin{enumerate}
+\item[(i)] for pairs $J\subset I$ of the family of leg $j+1$, $|e_J-e_I|\le\CTL M\lambda_I^\gamma=\CTL m(\lambda_I/R)^\gamma$, with
+$C_A$ in place of $\CTL$ if $J$, $I$ have the same left end and $C_B$ if they have the same right end;
+\item[(ii)] for $a<s\le b$ and $\lambda_s:=\max(s-a,\eps/2)$,
+\begin{equation}\label{eq:Emu}
+\textup{(E-$\mu$)}\qquad\int_a^s|T-e_{ab}|^2ds\le\CmuA M^2\lambda^{2\gamma}\lambda_s,\qquad\int_a^s|T-e_{ab}|\,ds\le\ConeA M\lambda^\gamma\lambda_s.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+All pairs below lie in $[a_j,\max(b,a_{j+1})]$ and in the family of leg $j+1$, so (J1), (J2) and \eqref{eq:CA} apply to them.
+\emph{One step.} Let $J_1\subset I_1$ be such pairs with $\lambda_{I_1}\le r\lambda_{J_1}$, $r\ge1$. By Lemma~\ref{lem:static}(d),
+(J1), (J2), \eqref{eq:CA} and $M\lambda_{J_1}^\gamma\le MR^\gamma=m$,
+\[
+|e_{J_1}-e_{I_1}|\le\frac{(\kappa\lambda_{J_1})^{1/2}M(r\lambda_{J_1})^{1/2+\gamma}+\frac12M^2\lambda_{J_1}^{1+2\gamma}}{c_A\lambda_{J_1}}
+\le c_t(r)M\lambda_{J_1}^\gamma .
+\]
+\emph{Chains.} Let $J=(a',b')\subset I$. (A) Put $b_k:=\min(a'+\qc^k\lambda_J,b)$, $k=0,\dots,k_1$, $b_{k_1}=b$. The pairs $(a',b_k)$
+have the first point $a'$ of $J$ and label lengths in $[\lambda_J,\lambda_I]$, and $\lambda(a',b_{k+1})\le\qc\lambda(a',b_k)$. Summing
+the one-step bounds from the largest scale down, $|e_J-e_{a'b}|\le c_t(\qc)M\lambda_I^\gamma\sum_{i\ge0}\qc^{-i\gamma}=C_AM\lambda_I^\gamma$.
+(B) If $a'>a$, let $a^\circ:=a$ if $a\ge a_{j+1}$, and $a^\circ:=a_{j+1}$ if $a=a_j$ (then $a'\ge a_{j+1}$); the pairs
+$(\max(b-\qc^k\lambda(a',b),a^\circ),b)$ have first points $\ge a^\circ$, and the same sum gives $|e_{a'b}-e_{a^\circ b}|\le
+C_AM\lambda_I^\gamma$. (C) If $a=a_j\ne a^\circ$: $\lambda(a_{j+1},b)\ge\lambda(a',b)\ge\eps/2$ and $\lambda(a_j,b)\le\lambda(a_{j+1},b)+\eps
+\le3\lambda(a_{j+1},b)$, so one step gives $|e_{a^\circ b}-e_{ab}|\le c_t(3)M\lambda_I^\gamma$. If $a'=a$, (A) alone is needed; if
+$b'=b$, (B) and (C); in general all three: this is (i). (ii) Let $J:=(a,a+\lambda_s)$, a pair of the family with left end $a$. By
+Lemma~\ref{lem:static}(b) with $\uhat=e_{ab}$, (J2), (J1) and (i),
+$\int_J|T-e_{ab}|^2=N(J)^2+c(J)|e_J-e_{ab}|^2\le M^2\lambda_s^{1+2\gamma}+\kappa\lambda_sC_A^2M^2\lambda^{2\gamma}\le\CmuA M^2\lambda^{2\gamma}\lambda_s$,
+and by Cauchy--Schwarz $\int_J|T-e_{ab}|\le(\kappa\lambda_s\cdot\CmuA M^2\lambda^{2\gamma}\lambda_s)^{1/2}=\ConeA M\lambda^\gamma\lambda_s$.
+\end{proof}
+
+\begin{lemma}[Locality]\label{lem:local}
+Let $t\le T_{\mathrm{def}}$, $(a,b)\in\FamS(t)$, and $\ttd\le t'\le t$, with $t'>\tW$ if $(a,b)$ is a tail pair. Then
+\begin{enumerate}
+\item[(i)] every pair of $\Fam(t')$ contained in $[a_{j(t')},\max(b,a_{j(t')+1})]$ belongs to $\FamS(t')$;
+\item[(ii)] every $s\in[a,b]$ satisfies the hypothesis of Lemma~\ref{lem:dist} at $t'$ with the base $a_{j(t')}$; in particular the
+pair $(a_{j(t')},s)$ is good if $s-a_{j(t')}\ge\eps/2$;
+\item[(iii)] the pairs used by Lemma~\ref{lem:legs} at a leg start $t_i$ belong to $\FamS(t_i)$;
+\item[(iv)] if $\We>0$: a tail pair with $\lambda\le R$ has $a>a_{\jW}$; the pairs of $\Fam(\tW)$ with first point $a_{\jW-1}$ are body
+pairs.
+\end{enumerate}
+For a tail pair at $t'=\tW$, \textup{(i)} and \textup{(ii)} hold with $j(t')$ replaced by $\jW$ \textup($\tW$ belongs to leg
+$\jW+1$, and $\FamS(\tW)=\Fam(\tW)$ contains the family of leg $\jW+1$\textup).
+\end{lemma}
+
+\begin{proof}
+Note $a\ge a_{j(t)}\ge a_{j(t')}$. (i) If $t'\ge\tW$, $\FamS(t')=\Fam(t')$. If $t'<\tW$, then $(a,b)$ is a body pair and
+$a_{j(t')}<\We$, so $a_{j(t')+1}<\We+\eps$; a pair $(a'',b'')$ in the interval has $U-b''\ge\min(U-b,U-\We-\eps)\ge\We$. (ii) For a
+body pair $U-s\ge U-b\ge\We$; for a tail pair $t'>\tW$ gives $a_{j(t')}\ge a_{\jW}\ge\We$. (iii) is shown in the proof of
+Lemma~\ref{lem:legs}. (iv) A tail pair with $\lambda\le R$ has $a\ge b-R>U-\We-R\ge\We+\eps>a_{\jW}$, since $a_{\jW}\le a_{\jW-1}+\eps$.
+A pair with first point $a_{\jW-1}<\We$ and $\lambda\le R$ has $U-b>U-\We-R\ge\We$. The last sentence: $a_{\jW}\ge\We$.
+\end{proof}
+
+\noindent\textbf{Locality principle.} The proofs of Propositions~\ref{prop:far}--\ref{prop:length} for a pair $(a,b)\in\FamS(t)$
+use the family bounds (J1), (J2) only for the pairs of Lemma~\ref{lem:local}(i), (iii) (at the times $t'$ allowed there),
+\eqref{eq:CA} only for these pairs and for the pairs $(a_{j(t')},s)$, $s\in[a,b]$, of Lemma~\ref{lem:local}(ii) (through
+Lemma~\ref{lem:dist}), and, beyond the bounds of the pairs of Lemma~\ref{lem:local}(i) (which include $(a,b)$ itself), only the
+start data of $(a,b)$ at $t_\circ$. Each invocation in Section~\ref{sec:farnear} is of this kind.
+
+\begin{lemma}[Continuity scheme]\label{lem:cont}
+Consider the statement, for a time $t$:
+\begin{quote}
+\textup{(Imp)} every pair of $\FamS(t)$ satisfies $l_t(a,b)\le(1+\delta)\LJ(U_0)\lambda$ and
+$E(a,b;t)\le\frac12\bar\theta M^2\lambda^{1+2\gamma}$, where $\delta:=0$ for body pairs and $\delta:=\delta_t$ for tail pairs.
+\end{quote}
+Suppose that, whenever $t^*\le T_{\mathrm{def}}$ is such that the chase has not stopped before $t^*$ and \textup{(J1)}, \textup{(J2)}
+hold for all $t\in[\ttd,t^*]$ and all pairs of $\FamS(t)$, \textup{(Imp)} holds at every $t\in[\ttd,t^*]$. Then the proviso holds
+at every non-final leg start, the chase stops, \textup{(J1)}, \textup{(J2)} hold for all $t\in[\ttd,\Tstop]$ and all pairs of
+$\FamS(t)$, and $\tW$ is reached if $\We>0$.
+\end{lemma}
+
+\begin{proof}
+Let $\tau^*$ be the supremum of the $t'\le T_{\mathrm{def}}$ such that the chase has not stopped before $t'$ and (J1), (J2) hold on
+$[\ttd,t']$ for $\FamS$. At $\ttd$: $l=\lambda<\kappa\lambda$, and $\FamS(\ttd)$ consists of body pairs ($a_0=0<\We$ if $\We>0$),
+for which (S2) gives $N<M\lambda^{1/2+\gamma}$ ($s_0<1$). So $\tau^*\ge\ttd$.
+
+\emph{The bounds hold at $\tau^*$ \textup($<\infty$\textup).} Let $\tau^*>\ttd$. If $\tau^*\in(t_j,t_{j+1}]$, then $\Fam(t)=\Fam(\tau^*)$
+for $t\in(t_j,\tau^*)$, and $\FamS(t)=\FamS(\tau^*)$ unless $\tau^*=\tW$; as $l$, $E$ are continuous in $t$
+(Lemma~\ref{lem:flow}(c)), (J1), (J2) hold at $\tau^*$. If $\tau^*=\tW$, the remaining pairs are the tail pairs, and (TW), (PT) give
+$l\le(1+\delta_t)\lambda<\kappa\lambda$ ($\LJ\ge1$) and $N\le s_0M\lambda^{1/2+\gamma}<M\lambda^{1/2+\gamma}$. Hence (Imp) holds at
+$\tau^*$, and by (P7), (PT), (P6) its bounds are strict: $l<\kappa\lambda$, $E<\frac12M^2\lambda^{1+2\gamma}$.
+
+\emph{Extension.} Suppose the chase does not stop at $\tau^*$. If $\tau^*$ is a leg start $t_j$, Lemma~\ref{lem:legs} (with
+$t'=\tau^*$) shows that leg $j+1$ is non-final and satisfies the proviso; so in all cases the chase is defined on
+$[\tau^*,\tau^*+\delta_0]$ for some $\delta_0>0$, and we may take $\delta_0$ so small that $(\tau^*,\tau^*+\delta_0]$ contains no leg
+start. For $t\in(\tau^*,\tau^*+\delta_0]$, $\FamS(t)\subset\FamS(\tau^*)$ (one leg; at a leg start the family contains that of the
+next leg; $\tW\notin(\tau^*,\tau^*+\delta_0]$). For a fixed pair, $l'\le(2v/\eps)l$ and $|E'|=v|\int(T-e)\cdot AT|\le(4v/\eps)l$
+(Lemma~\ref{lem:excess}(i), Lemma~\ref{lem:field}(ii)). With $\Lambda:=(1+\delta_t)\LJ(U_0)$ if $\We>0$, $\Lambda:=\LJ(U_0)$ otherwise,
+choose $\delta\in(0,\delta_0]$ with $e^{2v\delta/\eps}\Lambda<\kappa$ and $\delta(4v/\eps)\kappa e^{2v\delta/\eps}\le\frac12(1-\bar\theta)M^2(\eps/2)^{2\gamma}$.
+Then for $t\in[\tau^*,\tau^*+\delta]$ and every pair of $\FamS(t)$ ($\lambda\ge\eps/2$):
+$l_t\le e^{2v\delta/\eps}\Lambda\lambda<\kappa\lambda$ and $E(t)\le\frac12\bar\theta M^2\lambda^{1+2\gamma}+\delta(4v/\eps)\kappa
+e^{2v\delta/\eps}\lambda\le\frac12M^2\lambda^{1+2\gamma}$, so \textup{(J1)}, \textup{(J2)} hold on $[\ttd,\tau^*+\delta]$, contradicting the definition of $\tau^*$.
+
+So the chase stops at $\tau^*$, unless $\tau^*=\infty$; but then (J1) holds at all leg starts, the chase never stops and has
+infinitely many legs (Lemma~\ref{lem:chase}(0)), against Lemma~\ref{lem:legs}(iv). Hence $\tau^*=\Tstop<\infty$, the proviso held at
+every non-final leg start (Lemma~\ref{lem:legs}(iii)), and (J1), (J2) hold on $[\ttd,\Tstop]$. Finally, if $\We>0$, the final leg
+$J+1$ has $U-a_J\le l_{t_J}(a_J,U)\le\eps$, so $a_J\ge U-\eps>\We$, and $\jW\le J$.
+\end{proof}

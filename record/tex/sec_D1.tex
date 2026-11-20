@@ -1,0 +1,441 @@
+% sec_D1.tex -- Theorem D1 and companions (Lemmas D2--D5, Proposition D6).
+% Source: referee/D-claims.md, with the fixes of reports/referee-RD.md (N1--N3, D5 heuristic label,
+% D6(b) regularity proviso) and reports/referee-RD2.md (non-circular order of the bootstrap).
+% Intended to be \input into main.tex; uses \R, \rhat and the labels of main.tex.
+
+\section{Positive vision radius: a finite construction}\label{sec:D1}
+
+This section improves Theorem~\ref{thm:A} for small $\varepsilon/d$ by an explicit path of speed exactly $1$. Unlike
+Theorems~\ref{thm:B} and~\ref{thm:B2}, the result is unconditional and uses no compactness or limits. The construction is
+a finite recursion; the key idea is a \emph{first-order prediction} $Q_\theta(t)$ of each candidate, computed from Harry's own
+past path and the \emph{initial} circle (Lemma~\ref{lem:D-pred}). Its error is controlled by the distance from Harry to the
+initial point $e^{i\theta}$ rather than to the Snitch itself, so the near-field singularity never enters.
+
+Throughout, $\R^2$ is identified with $\mathbb C$, $a\cdot b:=\operatorname{Re}(a\bar b)$ is the Euclidean inner product,
+and $\operatorname{unit}(w):=w/|w|$ for $w\neq0$.
+
+\begin{theorem}[D1]\label{thm:D1}
+Measure the vision radius in units of $d$, that is, put $\bar\varepsilon:=\varepsilon/d\in(0,1)$, and let
+\begin{equation}\label{eq:D-vD}
+v_D(\bar\varepsilon):=\min\Bigl\{10^{-4},\ \Bigl(\frac{\bar\varepsilon}{403+210\log(3.34/\bar\varepsilon)}\Bigr)^{1/2}\Bigr\}.
+\end{equation}
+If $v\le v_D(\varepsilon/d)$, there is an explicit path of speed exactly $1$ along which every candidate is seen by time $8d$.
+The path is:
+\begin{enumerate}
+\item[(a)] if $v<\varepsilon/(8d)$: the path of Theorem~\ref{thm:A} (a segment from $0$ to $(d,0)$, then once around the
+circle of radius $d$);
+\item[(b)] if $v\ge\varepsilon/(8d)$: one straight run, followed by finitely many \emph{windows}, each consisting of a
+straight connector followed by a walk at unit speed along an explicit $C^1$ curve (Section~\ref{sec:D1-windows}).
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[Range]\label{rem:D1-range}
+Asymptotically Theorem~\ref{thm:D1} allows $v\asymp(\varepsilon/(d\log(d/\varepsilon)))^{1/2}$, against
+$v\le\varepsilon/((1+2\pi)d)$ in Theorem~\ref{thm:A}. Its range is larger than that of Theorem~\ref{thm:A} exactly when
+\[
+\varepsilon/d<(1+2\pi)\cdot10^{-4}\approx7.283\cdot10^{-4};
+\]
+for $\varepsilon/d\ge(1+2\pi)\cdot10^{-4}$ the cap $v\le10^{-4}$ makes it no better. For example, at $\varepsilon/d=10^{-6}$
+Theorem~\ref{thm:D1} allows $v\le1.677\cdot10^{-5}$ and Theorem~\ref{thm:A} allows $v\le1.373\cdot10^{-7}$. The improvement is
+in the exponent of $\varepsilon$ only: $v\asymp(\varepsilon/\log(1/\varepsilon))^{1/2}$ instead of $v\asymp\varepsilon$.
+\end{remark}
+
+\subsection{Reduction and two elementary lemmas}
+The scaling $(S,H,t)\mapsto(\lambda S,\lambda H,\lambda t)$ preserves speed exactly $1$ and replaces $\varepsilon$ by
+$\varepsilon/d$ and the time $8$ by $8d$, so we normalise $d=1$. If $v<\varepsilon/8$ then $v<\varepsilon/(1+2\pi)$, because
+$1+2\pi\approx7.283<8$, and Theorem~\ref{thm:A} applies: its path has speed exactly $1$ and sees every candidate by time
+$1+2\pi<8$. This is case (a). So assume from now on
+\begin{equation}\label{eq:D-A0}
+\tag{A0}
+\varepsilon/8\le v\le10^{-4},\qquad v^2\le\frac{\varepsilon}{403+210\log(3.34/\varepsilon)}.
+\end{equation}
+Then $\varepsilon\le8v\le8\cdot10^{-4}$, and, since $\log(3.34/\varepsilon)>0$, $v^2/\varepsilon\le1/403$, i.e.\
+$\varepsilon\ge403v^2$. Let $P(s)$ denote Harry's path (to be constructed); the a priori time horizon is $8$, and it is
+verified at the end.
+
+\begin{lemma}[Unit vectors]\label{lem:D-unit}
+For $a,b\neq0$: $|\operatorname{unit}(a)-\operatorname{unit}(b)|\le\min\bigl(2,\,2|a-b|/|b|\bigr)$.
+\end{lemma}
+\begin{proof}
+$\bigl|a/|a|-b/|b|\bigr|\le|a-b|/|b|+|a|\,\bigl|1/|a|-1/|b|\bigr|=|a-b|/|b|+\bigl||b|-|a|\bigr|/|b|\le2|a-b|/|b|$.
+\end{proof}
+
+\begin{lemma}[D2: first-order prediction]\label{lem:D-pred}
+For any path $P$ with $P(0)=0$ and $|P'|\le1$ define, for each direction $\theta$,
+\begin{equation}\label{eq:D-Q}
+D_\theta(s):=|e^{i\theta}-P(s)|,\qquad Q_\theta(t):=e^{i\theta}+v\int_0^t\operatorname{unit}\bigl(e^{i\theta}-P(s)\bigr)\,ds
+\end{equation}
+(the integrand is defined for a.e.\ $s$ whenever $\{s:D_\theta(s)=0\}$ is null). If candidate $\theta$ is not seen on $[0,t]$, then
+\begin{equation}\label{eq:D-E}
+E_\theta(t):=|S_\theta(t)-Q_\theta(t)|\le2v\int_0^t\min\Bigl(1,\frac{vs}{D_\theta(s)}\Bigr)\,ds .
+\end{equation}
+\end{lemma}
+\begin{proof}
+Unseen means $|S_\theta-P|>\varepsilon>0$, so $S_\theta$ is $C^1$ and
+$S_\theta(t)-Q_\theta(t)=v\int_0^t\bigl[\operatorname{unit}(S_\theta(s)-P(s))-\operatorname{unit}(e^{i\theta}-P(s))\bigr]ds$.
+Apply Lemma~\ref{lem:D-unit} with $a=S_\theta(s)-P(s)$, $b=e^{i\theta}-P(s)$: $|a-b|=|S_\theta(s)-S_\theta(0)|\le vs$.
+\end{proof}
+
+We also use the following immediate facts. First, $|Q_\theta(t)-e^{i\theta}|\le vt$ and $|\partial_tQ_\theta|=v$. Second, if
+$\int_0^t ds/D_{\theta'}(s)$ is bounded for $\theta'$ near $\theta$, then $Q_\theta(t)$ is $C^1$ in $\theta$ with
+\begin{equation}\label{eq:D-dQ}
+\bigl|\partial_\theta Q_\theta(t)-ie^{i\theta}\bigr|\le v\int_0^t\frac{ds}{D_\theta(s)},
+\end{equation}
+because $\partial_\theta\operatorname{unit}(e^{i\theta}-P)=(I-ww^{\top})\,ie^{i\theta}/D_\theta$ with
+$w=\operatorname{unit}(e^{i\theta}-P)$, which has norm at most $1/D_\theta$. Finally,
+\begin{equation}\label{eq:D-ctheta}
+e^{i\theta}\cdot Q_\theta(t)=1+v\int_0^tc_\theta(s)\,ds,\qquad
+c_\theta(s):=e^{i\theta}\cdot\operatorname{unit}\bigl(e^{i\theta}-P(s)\bigr)=\frac{D_\theta}{2}+\frac{1-|P|^2}{2D_\theta},
+\end{equation}
+which follows from $D_\theta^2=1-2e^{i\theta}\cdot P+|P|^2$; and $|Q_\theta(t)|\ge e^{i\theta}\cdot Q_\theta(t)$.
+
+\subsection{Phase 1: one straight run}\label{sec:D1-phase1}
+Phase 1 is $P(s)=(s,0)$ for $0\le s\le t_1:=1+2v$. Write $t_\varepsilon:=(1-\varepsilon/2)/(1-v)$; this is earlier than the
+time $t_0=1/(1-v)$ of Section~3.
+
+\begin{lemma}[D3: the tip is seen]\label{lem:D-tip}
+Assume \eqref{eq:D-A0}. Every $\alpha$ with $|\alpha|\le\delta_1:=(0.3\,\varepsilon)^{1/(1-v)}$ is seen during Phase~1.
+\end{lemma}
+\begin{proof}
+$\alpha=0$ lies on the forward ray; at time $t_\varepsilon\le1/(1-v)\le t_1$ it is at distance $\varepsilon/2$. Let
+$0<\alpha\le\delta_1$ ($\alpha<0$ follows by reflection). The candidate stays in the open upper half-plane
+(Lemma~\ref{lem:A2}), so $C$ is constant (Proposition~\ref{prop:integrals}). Initially $\rho=1$, $\beta=\alpha$, so
+$C=g(\alpha)$, $h(0)=\cos\alpha+v$, and at $t_\varepsilon$, by \eqref{eq:h},
+$h(t_\varepsilon)=(1+v)\varepsilon/2-(1-\cos\alpha)$. Since $\alpha\le0.3\varepsilon$, $1-\cos\alpha\le\alpha^2/2\le\varepsilon/4$, so
+$(1+v)\varepsilon/4\le h(t_\varepsilon)\le(1+v)\varepsilon/2$.
+Let $\beta_c:=\arccos((1-v)/2)\in(\pi/3,\pi/2]$; then $\sin\beta_c\ge\sqrt3/2$ and $\tan(\beta_c/2)\le1$, so
+$g(\beta_c)\ge\sqrt3/2$. Also
+$g(\alpha)\le\alpha/(\alpha/2)^v=2^v\alpha^{1-v}\le\sqrt2\,\alpha^{1-v}\le\sqrt2\cdot0.3\,\varepsilon<(\sqrt3/4)\,\varepsilon\le\varepsilon\,g(\beta_c)/2$.
+Hence $h(t_\varepsilon)/C\ge(1+v)\varepsilon/(4g(\alpha))\ge(1+v)/(2g(\beta_c))=k(\beta_c)$. Since $k$ is decreasing
+(Lemma~\ref{lem:k}), the bearing $\beta(t_\varepsilon)=k^{-1}(h/C)\le\beta_c$, so $\cos\beta(t_\varepsilon)+v\ge(1+v)/2$ and
+$\rho(t_\varepsilon)=h(t_\varepsilon)/(\cos\beta(t_\varepsilon)+v)\le\varepsilon$.
+\end{proof}
+
+\begin{lemma}[Phase-1 integrals]\label{lem:D-P1}
+Assume \eqref{eq:D-A0}. With $P$ the Phase-1 run on $[0,t_1]$,
+\begin{align}
+\int_0^{t_1}c_\theta(s)\,ds&\ge\pi/4-2v\qquad\text{for every }\theta, \label{eq:D-P1a}\tag{P1a}\\
+J_1(\theta):=\int_0^{t_1}\frac{ds}{D_\theta(s)}&\le2+2\log\frac{\pi t_1}{2\delta_1}\le2.91+2.0004\log(3.334/\varepsilon)
+\label{eq:D-P1b}\tag{P1b}
+\end{align}
+for $\delta_1\le|\theta|\le\pi$ (angles mod $2\pi$). Moreover $vJ_1(\theta)\le0.004$ for these $\theta$.
+\end{lemma}
+\begin{proof}
+For $s\le1$, \eqref{eq:D-ctheta} with $|P|=s$ and AM--GM give $c_\theta(s)\ge(1-s^2)^{1/2}$, whose integral over $[0,1]$ is
+$\pi/4$; for $s\in[1,t_1]$, $c_\theta\ge-1$. This is \eqref{eq:D-P1a}.
+For $|\theta|\le\pi/2$, $D_\theta(s)\ge\max(|\sin\theta|,|s-\cos\theta|)$ and $|\sin\theta|\ge2|\theta|/\pi$; for
+$|\theta|\ge\pi/2$, $D_\theta\ge1$. Since $\int_0^{t_1}ds/\max(a,|s-b|)\le2+2\log(t_1/a)$ (for $0\le b\le t_1$, $0<a\le t_1$),
+the first inequality of \eqref{eq:D-P1b} follows; the second uses $\log(1/\delta_1)=\log(1/(0.3\varepsilon))/(1-v)$ and
+$v\le10^{-4}$. Finally $\varepsilon\ge403v^2$ gives $\log(3.334/\varepsilon)\le2\log(1/v)-4.79$, and with $v\le10^{-4}$ this
+yields $vJ_1\le0.004$.\footnote{\texttt{D-claims} states $vJ_1\le0.005$ at this point and $vJ_1\le0.004$ later; both are true.
+The referees recomputed the worst case ($v=10^{-4}$, $\varepsilon=403v^2$) as $vJ_1\le0.00302$.}
+\end{proof}
+
+\subsection{Phase 2: the windows}\label{sec:D1-windows}
+Let $\ell:=\varepsilon/(2v)$ (the walking length per window). Set $a_1:=\delta_1$, $\tau_1:=t_1$, $X_1:=(t_1,0)$. For
+$k=1,2,\dots$:
+\begin{itemize}
+\item $\Gamma_k(\theta):=Q_\theta(\tau_k)$ for $\theta\in[a_k,2\pi-\delta_1]$. This depends only on $P$ restricted to $[0,\tau_k]$.
+\item \emph{Connector $k$:} Harry runs straight at unit speed from $X_k$ to $\Gamma_k(a_k)$; its length is $c_k$.
+\item \emph{Walk $k$:} Harry walks along the $C^1$ curve $\Gamma_k$ at unit speed, starting at $\theta=a_k$, for arclength $\ell$
+or until $\theta=2\pi-\delta_1$, whichever comes first. Let $a_{k+1}$ be the parameter where he stops,
+$X_{k+1}:=\Gamma_k(a_{k+1})$, $\ell_k\le\ell$ the length walked, and $\tau_{k+1}:=\tau_k+c_k+\ell_k$.
+\end{itemize}
+Window $k$ (connector $k$, then walk $k$) occupies $[\tau_k,\tau_{k+1}]$. The recursion stops after the window that reaches
+$2\pi-\delta_1$; afterwards Harry may continue in any unit-speed way (for instance straight), and nothing depends on it.
+Walk $k$ is well defined as soon as $\Gamma_k$ is $C^1$ with $|\partial_\theta\Gamma_k|>0$, which is part of the bootstrap
+below; $\theta$ is then strictly increasing along each walk. Every $\theta\in[\delta_1,2\pi-\delta_1]$ lies in some
+$[a_k,a_{k+1}]$ and is passed by walk $k$ at a time $s_\theta\in[\tau_k,\tau_{k+1}]$ with
+$P(s_\theta)=\Gamma_k(\theta)=Q_\theta(\tau_k)$. Connectors and walks have unit speed and the path is continuous at every
+junction (connector $k$ ends at $\Gamma_k(a_k)$, walk $k$ ends at $X_{k+1}$), so the speed is exactly $1$.
+
+\paragraph{Connector lengths.}
+$c_1\le|Q_{\delta_1}(t_1)-e^{i\delta_1}|+|e^{i\delta_1}-1|+|1-t_1|\le3.0002v+\delta_1$. For $k\ge2$,
+$X_k=Q_{a_k}(\tau_{k-1})$ and connector $k$ ends at $Q_{a_k}(\tau_k)$, so, since $|\partial_tQ|=v$,
+\begin{equation}\label{eq:D-crec}
+c_k\le|Q_{a_k}(\tau_k)-Q_{a_k}(\tau_{k-1})|\le v(c_{k-1}+\ell_{k-1})\le v(c_{k-1}+\ell).
+\end{equation}
+As $v\ell=\varepsilon/2$, induction gives
+\begin{equation}\label{eq:D-M}
+c_k\le M:=\max\bigl(c_1,\ \varepsilon/(2(1-v))\bigr)\le5.41\,v,
+\end{equation}
+using $\delta_1\le0.3\varepsilon\le2.4v$ and $\varepsilon\le8v$.
+
+\paragraph{Upper radius.}
+On walks $|P|=|Q_\theta(\tau_j)|\le1+v\tau_j$; connectors are segments. So, as long as $s\le10$ (in particular for $s\le8$),
+$|P(s)|\le\max(1+2v,1+vs)\le1+10v$, and
+\begin{equation}\label{eq:D-upper}
+|P(s)|^2-1\le20.01\,v .
+\end{equation}
+
+\begin{lemma}[D4: time spent near a point]\label{lem:D-time}
+Assume \eqref{eq:D-A0}. Let $t\le8$ be a time of Phase~2, and suppose that every curve $\Gamma_j$ walked (fully or partly)
+inside $[t_1,t]$ satisfies $0.97\le|\partial_\theta\Gamma_j|\le1.03$, and that every connector in $[t_1,t]$ has $c_j\le M$.
+Then for every $\theta$ and $0<r\le1.9$,
+\begin{equation}\label{eq:D-time}
+\tau_\theta(r):=\bigl|\{s\in[t_1,t]:D_\theta(s)<r\}\bigr|\le3.33\,r+43.3\,v\le6.29\,r+61.2\,v .
+\end{equation}
+\end{lemma}
+\begin{proof}
+\emph{Walks.} When Harry is walking at time $s$, $P(s)=Q_{\theta'}(\tau_j)$ with $|Q_{\theta'}(\tau_j)-e^{i\theta'}|\le8v$; so
+$D_\theta(s)<r$ forces $|e^{i\theta'}-e^{i\theta}|<r+8v\le2$, hence $\theta'$ lies in an arc $I$ of length at most $\pi(r+8v)$.
+Distinct windows walk disjoint $\theta'$-intervals, and the walking time over $I$ is
+$\int_I|\partial_\theta\Gamma_j|\le1.03|I|\le3.236(r+8v)$.
+
+\emph{Connectors.} A connector meeting $B(e^{i\theta},r)$ starts within $r+M$ of $e^{i\theta}$; its start $X_k$ ($k\ge2$) is
+within $8v$ of $e^{ia_k}$, so $a_k$ lies in an arc of length $\pi(r+M+8v)$. Consecutive $a_k$ are at least $\ell/1.03$ apart
+in $\theta$ (each non-final walk has length exactly $\ell$). The $a_k$ lie in $[\delta_1,2\pi-\delta_1]$, and an arc around
+$e^{i\theta}$ with $\theta$ near $0$ may wrap across $\theta=0$ and meet this interval in two pieces; so there are at most
+$2+1.03\pi(r+M+8v)/\ell$ such $k$, plus $k=1$.\footnote{\texttt{D-claims} has ``$1+\dots$''; the count ``$2+\dots$'' for arcs
+wrapping $\theta=0$ is correction N2 of referee RD, confirmed by RD2.} Each connector has length at most $M$, and
+$M/\ell=2vM/\varepsilon\le10.82\,v^2/\varepsilon\le0.027$ (as $\varepsilon\ge403v^2$).
+
+\emph{Total.} $\tau_\theta(r)\le3.236(r+8v)+3M+0.027\cdot3.236\,(r+13.41v)\le3.33\,r+43.3\,v\le6.29\,r+61.2\,v$.
+\end{proof}
+Only the generous form $6.29r+61.2v$ is used below.
+
+\subsection{Phase 2: the bootstrap}\label{sec:D1-bootstrap}
+The induction is written in the non-circular order of referee RD2.\footnote{\texttt{D-claims} \S1.4 assumes (H1)--(H3) up to
+$\tau_k$ and then claims (H1) ``up to $\tau_{k+1}$'' before $\tau_{k+1}\le8$ is known, and re-proves (H2) for $\Gamma_k$, which
+was already assumed. RD2 found this to be a gap in presentation only; the order below is RD2's, and all constants are
+unchanged.} For $k\ge1$ let $(\mathrm B_k)$ be the statement:
+\begin{enumerate}
+\item[(i)] $\Gamma_1,\dots,\Gamma_k$ are $C^1$ with $0.97\le|\partial_\theta\Gamma_j|\le1.03$ (so windows $1,\dots,k$ are well defined);
+\item[(ii)] $\tau_k\le7.5$ and $c_j\le M$ for $j\le k$;
+\item[(iii)] $|P(s)|\ge1+0.48v$ for $s\in[t_1,\tau_k]$.
+\end{enumerate}
+At the start of window $k$ the objects that exist are the path on $[0,\tau_k]$ and the curve $\Gamma_k$, which is a function
+of that path.
+
+\paragraph{Base, $k=1$.} The path on $[0,t_1]$ is Phase~1. By \eqref{eq:D-dQ} and Lemma~\ref{lem:D-P1},
+$|\partial_\theta\Gamma_1-ie^{i\theta}|\le vJ_1\le0.004$ on $[\delta_1,2\pi-\delta_1]$, which gives (i) (differentiation under
+the integral is justified since $D_{\theta'}\ge|\sin\theta'|$, or $D_{\theta'}\ge1$ when $|\theta'|\ge\pi/2$). $\tau_1=t_1$ and
+$c_1\le M$ give (ii). For (iii), $|P(t_1)|=1+2v$.
+
+\paragraph{Step $(\mathrm B_k)\Rightarrow(\mathrm B_{k+1})$.} The following are proved in this order.
+
+\smallskip\noindent\emph{Step 1: $\tau_{k+1}\le7.5$ and $c_{k+1}\le M$.} $\tau_{k+1}=t_1+\sum_{j\le k}(c_j+\ell_j)$. By (i),
+\[
+\textstyle\sum_{j\le k}\ell_j=\sum_{j\le k}\int_{a_j}^{a_{j+1}}|\partial_\theta\Gamma_j|\,d\theta\le1.03\cdot2\pi\le6.48 .
+\]
+Summing
+\eqref{eq:D-crec} gives $\sum_jc_j\le(c_1+v\sum_j\ell_j)/(1-v)\le0.0012$. So $\tau_{k+1}\le7.4731\le7.5$. Also
+$c_{k+1}=|Q_{a_{k+1}}(\tau_{k+1})-Q_{a_{k+1}}(\tau_k)|\le v(c_k+\ell_k)\le M$; this needs only that $Q$ is defined, not (i)
+for $\Gamma_{k+1}$.
+
+\smallskip\noindent\emph{Step 2: radial bound for each $\Gamma_j$, $j\le k+1$.} For $\theta\in[\delta_1,2\pi-\delta_1]$ use
+\eqref{eq:D-ctheta}. On Phase~1, \eqref{eq:D-P1a} applies. On Phase~2, by \eqref{eq:D-ctheta} and \eqref{eq:D-upper},
+$c_\theta(s)<0$ only when $D_\theta(s)^2<|P(s)|^2-1\le20.01v$, i.e.\ $D_\theta<4.474\,v^{1/2}$, and then $c_\theta\ge-1$ ($c_\theta$
+is an inner product of unit vectors). Lemma~\ref{lem:D-time} on $[t_1,\tau_j]$ therefore gives
+\begin{equation}\label{eq:D-radial}
+|\Gamma_j(\theta)|\ge1+v\bigl[\pi/4-2v-\tau_\theta(4.474\,v^{1/2})\bigr]\ge1+v\bigl[0.7854-0.0002-28.15\cdot0.01-0.0062\bigr]\ge1+0.497\,v .
+\end{equation}
+Lemma~\ref{lem:D-time} on $[t_1,\tau_j]$ needs (i) only for $\Gamma_1,\dots,\Gamma_{j-1}$ (the walks inside $[t_1,\tau_j]$),
+$c\le M$ and $\tau_j\le8$; the upper radius \eqref{eq:D-upper} on $[t_1,\tau_j]$ needs $\tau_j\le7.5$. By $(\mathrm B_k)$ and
+Step~1 all of these are available for $j\le k+1$.
+
+\smallskip\noindent\emph{Step 3: (iii) on $[\tau_k,\tau_{k+1}]$.} Connector $k$ joins $X_k=\Gamma_{k-1}(a_k)$ (or $(t_1,0)$
+when $k=1$, of norm $1+2v$) to $\Gamma_k(a_k)$. Both endpoints have norm at least $A:=1+0.497v$ by Step~2, and a segment of
+length at most $M\le5.41v$ whose endpoints have norm at least $A$ stays at norm at least
+$(A^2-M^2/4)^{1/2}\ge A-M^2/(4A)\ge1+0.496v$. Walk $k$ lies on $\Gamma_k$, so it has norm at least $1+0.497v$ by Step~2.
+Hence $|P(s)|\ge1+0.48v$ on $[t_1,\tau_{k+1}]$.
+
+\smallskip\noindent\emph{Step 4: (i) for $\Gamma_{k+1}$.} On Phase~2, $D_\theta(s)\ge|P(s)|-1\ge0.48v$ by Step~3 and
+$(\mathrm B_k)$. By the layer-cake formula ($1/D=\int_D^\infty r^{-2}\,dr$), Lemma~\ref{lem:D-time} on $[t_1,\tau_{k+1}]$
+(which needs (i) for $\Gamma_1,\dots,\Gamma_k$) for $r\le1.9$, and $|\{D_\theta<r\}|\le8$ always,\footnote{RD2 notes that in fact
+$|\{D_\theta<r\}|\le\tau_{k+1}-t_1\le6.5$; either value works.}
+\begin{equation}\label{eq:D-J2}
+J_2(\theta):=\int_{t_1}^{\tau_{k+1}}\frac{ds}{D_\theta(s)}\le\int_{0.48v}^{1.9}(6.29\,r+61.2\,v)\,r^{-2}\,dr+\frac{8}{1.9}
+\le6.29\log(3.96/v)+131.8 .
+\end{equation}
+At $v\le10^{-4}$ (the function $v\log(1/v)$ is increasing on $(0,1/e)$) this gives $vJ_2\le0.0199$. With $vJ_1\le0.004$
+(Lemma~\ref{lem:D-P1}) and \eqref{eq:D-dQ},
+$|\partial_\theta\Gamma_{k+1}-ie^{i\theta}|\le v(J_1+J_2)\le0.024$, so $0.976\le|\partial_\theta\Gamma_{k+1}|\le1.024$, inside
+$[0.97,1.03]$. Differentiation under the integral is justified since $1/D_{\theta'}$ is bounded uniformly for $\theta'$ near
+$\theta\in[\delta_1,2\pi-\delta_1]$ (on Phase~1 as in the base case, on Phase~2 by $D_{\theta'}\ge0.48v$).
+
+\smallskip
+No step uses a property of a later curve or a later time, so the induction is not circular. Note that the same argument
+gives $|\partial_\theta\Gamma_j|\le1.024$ for every $j$ (for $j=1$ by the base case).
+
+\paragraph{Termination and time.} By $(\mathrm B_k)$(i) each non-final walk has length exactly $\ell$, and the total walked
+length is $\sum_k\ell_k=\int_{\delta_1}^{2\pi-\delta_1}|\partial_\theta\Gamma_{k(\theta)}|\,d\theta\le1.024\cdot2\pi\le6.44$, where
+$k(\theta)$ is the window of $\theta$. So there are at most $1+6.44/\ell$ windows (finitely many). From \eqref{eq:D-crec},
+$\sum_kc_k\le(c_1+v\sum_k\ell_k)/(1-v)\le0.0012$. Hence every $\tau_k\le t_1+6.44+0.0012\le7.45$.
+
+\subsection{Proof of Theorem~\ref{thm:D1}}
+Case (a) was treated at the start of the section, so assume \eqref{eq:D-A0} and let $\mathcal L:=\log(3.334/\varepsilon)$.
+
+\paragraph{Error at the window start.} Let $\theta$ be in window $k$ and unseen up to $\tau_k$. Lemma~\ref{lem:D-pred}, with
+$s\le t_1$ on Phase~1 and $s\le8$ on Phase~2, gives
+\[
+E_\theta(\tau_k)\le2v\Bigl[v\,t_1J_1(\theta)+\int_{t_1}^{\tau_k}\min\bigl(1,8v/D_\theta(s)\bigr)\,ds\Bigr].
+\]
+Use the layer-cake formula with $\varphi(r)=\min(1,8v/r)$ ($-\varphi'=8v/r^2$ on $r>8v$, and $0$ for $r<8v$), Lemma~\ref{lem:D-time}
+for $r\le1.9$ and $|\{D_\theta<r\}|\le8$:
+\[
+\int_{t_1}^{\tau_k}\varphi(D_\theta)\,ds\le8v\Bigl[\int_{8v}^{1.9}(6.29\,r+61.2\,v)\,r^{-2}\,dr+\frac{8}{1.9}\Bigr]
+\le8v\bigl[6.29\log(0.2375/v)+11.87\bigr].
+\]
+Since $v\ge\varepsilon/8$, $\log(0.2375/v)\le\log(1.9/\varepsilon)\le\mathcal L$. With \eqref{eq:D-P1b},
+\begin{equation}\label{eq:D-err}
+E_\theta(\tau_k)\le2v^2\bigl[97.88+52.33\,\mathcal L\bigr].
+\end{equation}
+
+\paragraph{Seeing.} Let $\theta\in[\delta_1,2\pi-\delta_1]$ be in window $k$. If $\theta$ is seen before $s_\theta$ there is
+nothing to prove. Otherwise Lemma~\ref{lem:D-pred} applies on $[0,\tau_k]$, $|S_\theta'|=v$ on $[\tau_k,s_\theta]$, and
+$P(s_\theta)=Q_\theta(\tau_k)$, so
+\[
+\begin{split}
+|S_\theta(s_\theta)-P(s_\theta)|&\le|S_\theta(s_\theta)-S_\theta(\tau_k)|+|S_\theta(\tau_k)-Q_\theta(\tau_k)|
+\le v(c_k+\ell)+E_\theta(\tau_k)\\
+&\le5.41\,v^2+\frac{\varepsilon}{2}+2v^2\bigl(97.88+52.33\,\mathcal L\bigr)\le\varepsilon,
+\end{split}
+\]
+the last step being exactly $v^2\le\varepsilon/(402.4+209.4\,\mathcal L)$, which is implied by \eqref{eq:D-A0}. The bound is
+uniform in $\theta$: it depends on $\theta$ only through $J_1(\theta)$, bounded uniformly by \eqref{eq:D-P1b}, and through
+$\tau_\theta(r)$, bounded uniformly by Lemma~\ref{lem:D-time}. Directions with $|\theta|<\delta_1$ were seen in Phase~1
+(Lemma~\ref{lem:D-tip}). All directions are seen by time $7.45<8$, along a path of speed exactly $1$. \qed
+
+\begin{remark}\label{rem:D1-remarks}
+(i) Harry's path is fixed in advance and computed from his own past only: $Q$ never uses the Snitch.
+(ii) The speed is exactly $1$ throughout, and no compactness is used, so the restriction in the remark after
+Lemma~\ref{lem:limit} does not arise.
+(iii) The law \eqref{eq:snitch} is used in the radial-margin estimate \eqref{eq:D-ctheta}--\eqref{eq:D-radial} (the Snitch is
+pushed \emph{outward} while Harry is inside, so Harry, riding the predicted front, stays a distance $\gtrsim v$ outside every
+initial point $e^{i\alpha}$), and in Lemma~\ref{lem:D-tip}. Theorem~\ref{thm:A}, by contrast, uses only $|S'|\le v$.
+(iv) The $\varepsilon$-dependence $v\lesssim(\varepsilon/\log(1/\varepsilon))^{1/2}$ comes from
+$E\approx v^2\cdot(\text{time})\cdot\log$. The cap $v\le10^{-4}$ enters only through numerical margins: the bracket in
+\eqref{eq:D-radial} ($28.15\,v^{1/2}\le0.29$), the bound $vJ_2\le0.0199$, and $100v^2\le0.01v$ in
+\eqref{eq:D-upper}.\footnote{\texttt{D-claims} attributes the cap only to the first of these; RD2 lists all three.}
+\end{remark}
+
+\begin{remark}[Slack; numerical]\label{rem:D1-slack}
+\textbf{(Numerical, not proof.)} Two referees built the path only from the written construction and simulated the Snitch
+end to end (about $20{,}000$ uniform plus up to $3{,}180$ adversarial directions at $12$ pairs $(\varepsilon,v)$, and three
+boundary points of the range). Every tested direction was seen, by time about $7.28$, and every bootstrap quantity stayed well
+inside its proved range. The true prediction error $|S_\theta(\tau_k)-Q_\theta(\tau_k)|$, about $40$--$58\,v^2$, is roughly $3\%$
+of the proved bound \eqref{eq:D-err}. In stress tests beyond the proved range the construction still saw every tested direction
+at $3$--$10$ times $v_D$ (depending on $\varepsilon$; e.g.\ $10\times$ at $\varepsilon=10^{-4}$, $6.9\times$ at
+$\varepsilon=10^{-3}$ with the cap removed), and it failed at $10\times$ for $\varepsilon=10^{-6}$ and at $30\times$ for
+$\varepsilon=10^{-4}$, roughly where $v\approx0.1\,\varepsilon^{1/2}$. So the logarithmic factor and the cap $v\le10^{-4}$
+appear to be artefacts of the estimates, not of the construction.
+\end{remark}
+
+\subsection{What one straight leg sees}
+Fix a straight unit-speed leg of Harry with heading $u$. For a candidate at relative position $S-H$ with polar coordinates
+$(\rho,\beta)$, $\beta\in(-\pi,\pi]$ measured from $u$, put
+\[
+F(\rho,\beta):=\bigl(\operatorname{sgn}(\beta)\,\rho\,g(|\beta|),\ \rho(\cos\beta+v)\bigr)=:(C,h),\qquad C:=0\text{ on the two rays }\beta\in\{0,\pi\},
+\]
+with $g$ as in Section~2. Let $\beta_m:=\arccos v$, the maximiser of $g$, and $g_{\max}:=g(\beta_m)$.
+
+\begin{lemma}[D5: exact seen set of one straight leg]\label{lem:D-leg}
+$F$ is a homeomorphism of $\R^2\setminus\{0\}$ onto itself, positively homogeneous of degree~$1$; it maps the forward ray onto
+$\{C=0,\ h>0\}$ and the backward ray onto $\{C=0,\ h<0\}$. A unit-speed straight leg of duration $\tau$ acts as the translation
+$(C,h)\mapsto(C,h-(1-v^2)\tau)$.\footnote{As long as the candidate is not caught; a candidate on the forward ray reaches
+$(C,h)=(0,0)$ exactly when it is caught (Proposition~\ref{prop:ray}), and $(0,0)\in V_\varepsilon$.} Consequently, with
+$V_\varepsilon:=F(\{0<\rho\le\varepsilon\})\cup\{0\}$ (a compact set, star-shaped about $0$, with boundary
+$\varepsilon(\pm g(\beta),\cos\beta+v)$, $\beta\in[0,\pi]$): a candidate is seen during the leg if and only if
+$(C,h-\sigma)\in V_\varepsilon$ for some $\sigma\in[0,(1-v^2)\tau]$, where $(C,h)$ is taken at the start of the leg.
+For $\tau\to\infty$ this reads: $|C|\le\varepsilon g_{\max}$ and $h\ge h_{\rm low}(C)$ (the lower boundary of
+$V_\varepsilon$); that is, $\rho\,g(|\beta|)\le\varepsilon g_{\max}$ with $|\beta|\le\beta_m$, or $\rho\le\varepsilon$ already.
+\end{lemma}
+\begin{proof}
+On each open half-plane $F$ is the $(C,h)$ chart of the remark after Lemma~\ref{lem:k} (bijective onto $\{\pm C>0\}$ with
+inverse $\beta=k^{-1}(h/|C|)$, $\rho=|C|/g(\beta)$). As $\beta\to0$, $g\to0$, so $C\to0$ and $h\to\rho(1+v)$; as
+$\beta\to\pi$, $h\to-\rho(1-v)$. Conversely, $C\to0$ with $h\to h_0>0$ forces $h/|C|\to+\infty$, $\beta\to0$, and
+$\rho=h/(\cos\beta+v)\to h_0/(1+v)$; similarly for $h_0<0$. Since $g(\beta)$ and $|\cos\beta+v|$ never vanish together,
+$m:=\min_\beta\max(g,|\cos\beta+v|)>0$ and $\rho\le|(C,h)|/m$, so $F^{-1}$ is continuous at $0$ too. Homogeneity is clear.
+The translation is Proposition~\ref{prop:integrals} (on the forward ray, $h=\rho(1+v)$ decreases at rate $(1+v)(1-v)$ as
+well). The seen criterion follows because a candidate is seen if and only if $\rho\le\varepsilon$ at some time, if and only if
+the translated point lies in $V_\varepsilon$. The long-leg form uses that $\rho=|C|/g(\beta)$ is minimised over the leg at
+$\beta=\beta_m$ ($g$ is increasing on $(0,\beta_m)$ and decreasing after) and that $\beta$ increases along a leg.
+\end{proof}
+
+\begin{corollary}[Needle]\label{cor:D-needle}
+Since $g(\beta)\le2^v\beta^{1-v}$, a long leg sees every candidate ahead with
+$\beta\le(\varepsilon g_{\max}/(2^v\rho))^{1/(1-v)}$, that is, within lateral half-width
+$\approx\varepsilon^{1/(1-v)}\rho^{-v/(1-v)}$ at distance $\rho$; and, up to constants, only those.
+\end{corollary}
+\begin{proof}
+The first part is Lemma~\ref{lem:D-leg} with $g(\beta)\le2^v\beta^{1-v}$. For ``only those, up to constants'', use
+$g(\beta)\ge(2\beta/\pi)^{1-v}$ on $(0,\beta_m]$, which follows from $\sin\beta\ge2\beta/\pi$ and $\tan(\beta/2)\le2\beta/\pi$.
+\end{proof}
+
+\begin{remark}[Heuristic]\label{rem:D-curv}
+\emph{The following is a heuristic and is not used anywhere.} By Corollary~\ref{cor:D-needle}, a leg crossing the front
+transversally sees an arc of length $O(\varepsilon^{1/(1-v)})$; a leg must run \emph{along} the front to be efficient, and then
+the front's curvature $\kappa$ should limit the useful leg length to $O((\varepsilon/\kappa)^{1/2})$. This is why the proof of
+Theorem~\ref{thm:D1} walks along a predicted front rather than using spokes. (The corner map at a turn by angle $\chi$ is
+$F\circ R_\chi\circ F^{-1}$, again homogeneous of degree~$1$, so the near-Harry picture at scale $\varepsilon$ is scale-free; no
+inductive invariant using this has been found.)
+\end{remark}
+
+\subsection{A conditional reduction for the leg-greedy chase}
+Here $d=1$ and $\varepsilon>0$. \emph{Strategy LG:} run straight at $\alpha=0$ until that candidate is at distance
+$\varepsilon/2$ (time $t_\varepsilon=(1-\varepsilon/2)/(1-v)$). Then repeat: let $U(t)$ be the set of unseen directions in
+$(0,2\pi)$ and $\alpha^*:=\inf U(t)$ (the \emph{target}); run straight at $S_{\alpha^*}$ until $\rho_{\alpha^*}=\varepsilon/2$.
+Stop when $U=\emptyset$. (Running straight at the target keeps it on the forward ray, as in the proof of Lemma~\ref{lem:phi}.)
+Let $\Lambda(t)$ be the length of the arc $\{S_\alpha(t):\alpha_{\rm target}\le\alpha<2\pi\}$ (the \emph{remaining arc}) and
+$\Psi(t):=\rho_{\rm target}(t)+\Lambda(t)$. Let
+\[
+K(t):=\int_{\text{remaining arc}}\frac{\sin^2\phi}{\rho}\,ds,
+\]
+with $\phi$ the angle between the arc's tangent and the direction from Harry ($K$ is unrelated to hypothesis (K) of
+Theorem~\ref{thm:B2}). The remaining arc contains already-seen directions, and a leg may \emph{catch} such a direction
+(Proposition~\ref{prop:ray}), after which its trajectory, the arc and $\Lambda$ are not defined as written. We therefore use the
+proviso
+\begin{quote}
+\textbf{(R)} on the time interval considered, $\rho_\alpha>0$ for every $\alpha$ of the remaining arc.
+\end{quote}
+
+\begin{proposition}[D6; conditional reduction]\label{prop:D6}
+\begin{enumerate}
+\item[(a)] $U(t)$ is open; at each switch $\rho_{\alpha^*}\ge\varepsilon$, so every leg lasts at least
+$\varepsilon/(2(1-v))$ and at most $2(1-v)T/\varepsilon$ legs occur before time $T$ (finitely many steps, no Zeno behaviour).
+\item[(b)] On any time interval on which \textup{(R)} holds: $\Psi$ does not increase at switches, and between switches
+$\Psi'=-(1-v)+vK(t)$ wherever $K(t)<\infty$; moreover $K$ is at most the total variation of the bearing of the remaining arc as
+seen from Harry.
+\item[(c)] Suppose \textup{(R)} holds at all times $t\ge t_\varepsilon$ of the chase (no direction of the remaining arc is ever
+caught), $K(t)\le K^*$ for all $t$, and $v(1+K^*)<1$. Then every candidate is seen by
+\[
+T\le t_\varepsilon+\frac{\Psi(t_\varepsilon)}{1-v(1+K^*)},\qquad\Psi(t_\varepsilon)\le\varepsilon/2+2\pi(1+vt_\varepsilon).
+\]
+\end{enumerate}
+\end{proposition}
+This is a \textbf{conditional reduction}: (c) assumes both the bound $K\le K^*$ and the proviso (R), neither of which is
+proved. Referee RD proposes removing (R) by continuing every trajectory through Harry with the homeomorphism of
+Lemma~\ref{lem:D-leg} (in $(C,h)$ coordinates a straight leg is a translation, so a candidate on the forward ray passes through
+$0$ onto the backward ray); that would require showing that $\Lambda$ is continuous at each passage time and absolutely
+continuous on each leg with $\Lambda'=vK$ a.e. This is not done here.
+
+\begin{proof}
+(a) If $\alpha_n\to\alpha$ with $\alpha_n$ seen by $t$ but $\alpha$ unseen on $[0,t]$, then $\rho_\alpha>\varepsilon$ on $[0,t]$
+and, by continuous dependence (the Claim in the proof of Lemma~\ref{lem:limit}), $\rho_{\alpha_n}>\varepsilon$ on $[0,t]$ for
+large $n$, a contradiction; so the seen set is closed. $\alpha^*\notin U$, but points of $U$ accumulate at $\alpha^*$, all with
+$\rho>\varepsilon$, so $\rho_{\alpha^*}\ge\varepsilon$ by continuity. At the end of a leg $B(H,\varepsilon)\supseteq
+B(S_{\alpha^*},\varepsilon/2)$, so the new target $\alpha^{**}>\alpha^*$ and $|S_{\alpha^{**}}-S_{\alpha^*}|\ge\varepsilon/2$
+(since $\rho_{\alpha^{**}}\ge\varepsilon$).
+
+(b) At a switch,
+$\Psi_{\rm old}=\varepsilon/2+|\mathrm{arc}(\alpha^*,\alpha^{**})|+\Lambda_{\rm new}\ge|H-S_{\alpha^*}|+|S_{\alpha^*}-S_{\alpha^{**}}|
++\Lambda_{\rm new}\ge\Psi_{\rm new}$. Along a leg the target is on the forward ray, so $\rho_{\rm target}'=-(1-v)$, and
+$\Lambda'=v\int\sin^2\phi\,\rho^{-1}|\partial_\alpha S|\,d\alpha$ by the stretching formula in the proof of
+Proposition~\ref{prop:length}(2); this requires $\rho>0$ on the arc, which is (R). Finally $\sin^2\phi\,ds/\rho=|\sin\phi|\,|d\beta|\le|d\beta|$,
+with $\beta$ the bearing.
+
+(c) Integrate (b): $\Psi'\le-(1-v(1+K^*))$ between switches, $\Psi$ does not increase at switches, and $\Psi\ge\varepsilon/2>0$ while
+legs run. For the initial value, $\Psi(t_\varepsilon)\le\varepsilon/2+L(t_\varepsilon)$\footnote{Read as
+$\rho_{\alpha^*}(t_\varepsilon)\le|H-S_0|+(\text{length of the arc from }S_0\text{ to }S_{\alpha^*})$, as referee RD notes.}
+and $L(t_\varepsilon)\le2\pi+2\pi vt_\varepsilon$ by Proposition~\ref{prop:length}(2), since there is no contact before
+$t_\varepsilon<1/(1-v)$.
+\end{proof}
+
+\begin{remark}
+\textbf{(Numerical.)} The bound ``$K\le$ total variation of the bearing'' is weak: at $v=0.2$ the total variation reaches about
+$4.8$, while $K$ stays near $3$ ($2.95$ in the original computation; about $3.28$ on referee RD's $4000$-point polyline, the
+difference being discretisation near Harry). With $K^*\approx3.28$ part (c) gives $T\le55.3$ at $v=0.2$, against an actual
+$13.0$; at $v=0.4$, $v(1+K^*)>1$ and the bound is void. So for $\varepsilon>0$ the problem reduces, with no compactness, to a
+bound on the weighted angle $K$ (plus the proviso (R)), the continuous analogue of hypothesis (H) of Theorem~\ref{thm:B}.
+\end{remark}

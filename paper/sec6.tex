@@ -1,0 +1,205 @@
+% sec6.tex -- writer W4. Straight runs and design T.
+\section{Straight runs and design T}\label{sec:designT}
+
+Design T consists of two straight runs. On a straight run the true candidates obey two exact integrals, and so do the first and
+second derivatives of the front in the label; this section collects these exact facts (valid for every $v\in(0,1)$) and defines
+design T.
+
+\emph{Heading frame.} While $P$ moves with constant unit velocity (its \emph{heading}), we use coordinates in which $P$ is at the
+origin and the heading is $1\in\C$; a candidate is at $r=\rho e^{i\beta}=z+iy$, and for $0<\beta<\pi$ we put $\tau:=\tan(\beta/2)$.
+
+\begin{proposition}\label{prop:runs}
+On a straight run, a true candidate with $\rho>0$ satisfies
+\[
+\rho'=v-\cos\beta,\qquad\rho\,\beta'=\sin\beta;\qquad h:=\rho(\cos\beta+v)\ \text{ satisfies }\ h'=-(1-v^2).
+\]
+If $0<\beta<\pi$, then $\beta$ stays in $(0,\pi)$ and $C:=\rho\,\sg(\beta)$ is constant, where
+\[
+\sg(\beta):=\frac{\sin\beta}{\tan^v(\beta/2)}=\frac{2\tau^{1-v}}{1+\tau^2},\qquad\frac{\sg'}{\sg}=\frac{\cos\beta-v}{\sin\beta}.
+\]
+The function $\sk:=(\cos\beta+v)/\sg$ is strictly decreasing on $(0,\pi)$, from $+\infty$ to $-\infty$; $\sg$ is increasing on
+$(0,\arccos v]$ and decreasing on $[\arccos v,\pi)$, and
+\[
+1=\sg(\pi/2)\le\gmax:=\sg(\arccos v)=(1+v)^{(1+v)/2}(1-v)^{(1-v)/2}\le e^{v^2}.
+\]
+\end{proposition}
+\begin{proof}
+$r'=v\rhat-1$; the components along $\rhat$ and $\rhat^\perp$ give the first two equations. Then
+$h'=(\cos\beta+v)(v-\cos\beta)-\rho\sin\beta\,\beta'=v^2-\cos^2\beta-\sin^2\beta$. Since $\beta'=0$ at $\beta\in\{0,\pi\}$, $\beta$
+cannot leave $(0,\pi)$. On $(0,\pi)$, $\log\sg=\log\sin\beta-v\log\tan(\beta/2)$ gives $\sg'/\sg=\cot\beta-v/\sin\beta$, and, as $\beta'/\sin\beta=1/\rho$,
+$\rho'/\rho=(v-\cos\beta)\beta'/\sin\beta=-(\sg'/\sg)(\beta)\,\beta'$; so $C$ is constant. With $\sin\beta=2\tau/(1+\tau^2)$ we get the $\tau$-form of $\sg$, so $\sg\to0$ at
+both ends of $(0,\pi)$. Next,
+$\sk'=[-\sin\beta-(\cos\beta+v)(\cos\beta-v)/\sin\beta]/\sg=-(1-v^2)/(\sg\sin\beta)<0$, and $\cos\beta+v\to1+v$, resp.\ $-(1-v)$,
+at $0$, resp.\ $\pi$, which gives the limits of $\sk$. The monotonicity of $\sg$ follows from the sign of $\cos\beta-v$. At
+$\cos\beta=v$: $\sin\beta=(1-v^2)^{1/2}$ and $\tan(\beta/2)=((1-v)/(1+v))^{1/2}$, which gives the closed form. Finally
+$\log\gmax=\frac12[(1+v)\log(1+v)+(1-v)\log(1-v)]=\sum_{n\ge1}\frac{v^{2n}}{2n(2n-1)}\le v^2\sum_{n\ge1}\frac1{2n(2n-1)}=v^2\log2\le v^2$.
+\end{proof}
+
+For a $1$-Lipschitz path $P$ and a time $t$, the \emph{true front} is the curve $\theta\mapsto S_\theta(t)$ on the labels whose true
+candidates exist on $[0,t]$. The field $x\mapsto(x-P(t))/|x-P(t)|$ is $C^\infty$ in $x\ne P(t)$ and continuous in $t$; hence near
+every label whose candidate has had $\rho>0$ on $[0,t]$ the front is $C^\infty$ in $\theta$, and $q:=\partial_\theta S_\theta$
+satisfies $\partial_tq=v(\Pi/\rho)q$, $\Pi=I-\rhat\rhat^{\mathsf T}$. We write $w=|q|$, $T=q/w=e^{i\psi}$, $\phi=\arg r-\psi$ and
+$k=\partial_s\psi=\partial_\theta\psi/w$ (so $k=1$ for the unit circle), as for virtual fronts (Definition~\ref{def:flow}).
+
+\begin{lemma}\label{lem:truefront}
+At every label and time with $\rho>0$ on $[0,t]$, the true front satisfies
+\[
+\frac{w_t}w=\frac{v\sin^2\!\phi}\rho,\qquad\psi_t=-\frac v\rho\sin\phi\cos\phi,\qquad
+k_t=\frac v\rho(1-3\sin^2\!\phi)\,k+\frac v{\rho^2}\sin\phi\,(3\cos^2\!\phi-1),
+\]
+and $w\ge1$. If the true or the virtual candidate $\theta$ has $\rho\ge\eps$ on $[0,t]$, then $x_\theta=S_\theta$ on $[0,t]$; if this
+holds for all labels of an open set, the true and the virtual front coincide there with all their label derivatives.
+\end{lemma}
+\begin{proof}
+Let $n:=\rhat^\perp$; then $T=\cos\phi\,\rhat-\sin\phi\,n$, $\Pi T=-\sin\phi\,n$, $T^\perp=\cos\phi\,n+\sin\phi\,\rhat$. From
+$\partial_t(wT)=v\Pi(wT)/\rho$: $w_t=vw\,T\cdot\Pi T/\rho=vw\sin^2\!\phi/\rho$, and
+\[
+T_t=\frac v\rho(\Pi T-(T\cdot\Pi T)T)=-\frac v\rho[\sin\phi\cos^2\!\phi\,n+\sin^2\!\phi\cos\phi\,\rhat]=-\frac v\rho\sin\phi\cos\phi\,T^\perp .
+\]
+At $t=0$, $w=|\partial_\theta e^{i\theta}|=1$, and $w$ is non-decreasing. For the curvature: $\partial_s\rho=\cos\phi$,
+$\partial_s\rhat=\Pi T/\rho=-(\sin\phi/\rho)n$, so $\partial_s\phi=-\sin\phi/\rho-k$. Since $k=\partial_\theta\psi/w$ and the front is
+smooth, $k_t=\partial_s(\psi_t)-k\,w_t/w$, and
+\[
+\partial_s\Bigl(-\frac v{2\rho}\sin2\phi\Bigr)=\frac v{\rho^2}\sin\phi\cos^2\!\phi+\frac v\rho\cos2\phi\Bigl(k+\frac{\sin\phi}\rho\Bigr);
+\]
+so $k_t=\frac v\rho k(\cos2\phi-\sin^2\!\phi)+\frac v{\rho^2}\sin\phi(\cos^2\!\phi+\cos2\phi)$, which is the claim. Finally, $F(x)=x/|x|$
+for $|x|\ge\eps$ (Lemma~\ref{lem:field}(i)): a true candidate with $\rho\ge\eps$ on $[0,t]$ solves the virtual equation, whose
+solutions are unique (Lemma~\ref{lem:flow}(a)); a virtual candidate with $\rho\ge\eps$ solves the true equation, whose solutions are
+unique while $\rho>0$.
+\end{proof}
+
+From now on in this section, $P$ moves with constant unit velocity on a time interval, coordinates are those of the heading frame,
+and candidates have $0<\beta<\pi$.
+
+\begin{lemma}\label{lem:coord}
+\begin{enumerate}
+\item[(a)] $\rho=\frac C2(\tau^{v-1}+\tau^{v+1})$, $y=\rho\sin\beta=C\tau^v$, $z=\rho\cos\beta=\frac C2(\tau^{v-1}-\tau^{v+1})$, and
+$h=\frac C2[(1+v)\tau^{v-1}-(1-v)\tau^{1+v}]$.
+\item[(b)] $\tau\mapsto(1+v)\tau^{v-1}-(1-v)\tau^{1+v}$ is a strictly decreasing bijection $(0,\infty)\to\R$. Hence $\tau$ is strictly
+increasing in time, and the state at any time of the run is determined by $(C,h)$.
+\item[(c)] $\min_\tau\rho=C/\gmax$, attained at $\tau^2=(1-v)/(1+v)$, i.e.\ $\cos\beta=v$; $\rho$ is decreasing in time while
+$\cos\beta>v$.
+\item[(d)] If $h>0$: $\tau\le((1+v)C/(2h))^{1/(1-v)}$. If $h<0$: $\tau\ge(2|h|/((1-v)C))^{1/(1+v)}$, and
+\[
+\tau^{1+v}=\frac{2|h|}{(1-v)C}\Bigl[1+\frac{(1+v)C\tau^{v-1}}{2|h|}\Bigr].
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $\sin\beta=2\tau/(1+\tau^2)$, $\cos\beta=(1-\tau^2)/(1+\tau^2)$, $\rho=C/\sg(\beta)$ and $h=z+v\rho$. (b) The derivative is
+$-(1-v^2)(\tau^{v-2}+\tau^v)<0$, the limits are $\pm\infty$, and $h'<0$. (c) $\rho'=v-\cos\beta$ (Proposition~\ref{prop:runs}), and
+$\frac d{d\tau}(\tau^{v-1}+\tau^{v+1})=\tau^{v-2}((1+v)\tau^2-(1-v))$. (d) By (a), $(1+v)\tau^{v-1}=2h/C+(1-v)\tau^{1+v}\ge2h/C$, resp.\
+$(1-v)\tau^{1+v}=2|h|/C+(1+v)\tau^{v-1}\ge2|h|/C$.
+\end{proof}
+
+\begin{lemma}[transport]\label{lem:transport}
+Let $\theta\mapsto S_\theta$ be a $C^2$ family of true candidates with $0<\beta<\pi$ on the run, $q:=\partial_\theta S_\theta$
+(heading frame), $w=|q|$, $q=we^{i\psi}$, $\phi=\beta-\psi$, and
+\[
+\Xi:=q+v\,e^{i\beta}\,\bar q .
+\]
+\begin{enumerate}
+\item[(a)] $\operatorname{Re}\Xi=\partial_\theta h=:\sa$ and $\operatorname{Im}\Xi=\tau^v\partial_\theta C=:\tau^v\sfc$, where
+$\sa(\theta)$, $\sfc(\theta)$ do not depend on time; $q=(\Xi-ve^{i\beta}\bar\Xi)/(1-v^2)$ and $(1-v)w\le|\Xi|\le(1+v)w$.
+\item[(b)] Let $Y_r:=\sfc\tau^v/\sa$ (where $\sa\ne0$), $N_\psi:=(1+v\cos\beta)Y_r-v\sin\beta$, $D_\psi:=1-v\cos\beta-v\sin\beta\,Y_r$.
+Then $(1-v^2)q=\sa(D_\psi+iN_\psi)$. If $\sa>0$ and $D_\psi>0$: $|\psi|<\pi/2$, $\tan\psi=N_\psi/D_\psi$, $|\psi|\le|\tan\psi|$ and
+$w=\sa|D_\psi+iN_\psi|/(1-v^2)$.
+\item[(c)] $J:=\sa\,\partial_\theta\sfc-\sfc\,\partial_\theta\sa$ does not depend on time, and
+\[
+k=\frac{\tau^vJ}{(1-v^2)\,w^3}-\TS,\qquad
+\TS:=\frac{v\sin\phi}{(1-v^2)\,\rho}\Bigl[\frac{\rho\,\sa\,\partial_\theta\log C}{w^2}-v-\cos(\phi-\psi)\Bigr].
+\]
+\item[(d)] For two times $t'<t''$ of the run (data $'$, $''$): $\tau''\ge\tau'$,
+\[
+k''=\Bigl(\frac{\tau''}{\tau'}\Bigr)^v\Bigl(\frac{w'}{w''}\Bigr)^3(k'+\TS')-\TS'',\qquad\text{so}\qquad
+|k''|\le\Bigl(\frac{\tau''}{\tau'}\Bigr)^v(|k'|+|\TS'|)+|\TS''|,
+\]
+and $w''\le(\tau''/\tau')^v|\Xi'|/(1-v)\le\frac{1+v}{1-v}(\tau''/\tau')^vw'$.
+\item[(e)] At every time, $|\TS|\le\dfrac{v|\sin\phi|}{(1-v^2)\rho}\Bigl[\dfrac{\rho|\sa||\partial_\theta\log C|}{w^2}+1+v\Bigr]$
+and $|\TS|\le\dfrac{v(3+v)}{2(1-v)y}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) Write $q=X+iY$. As $P$ does not depend on $\theta$: $\partial_\theta z=X$, $\partial_\theta y=Y$,
+$\partial_\theta\rho=X\cos\beta+Y\sin\beta$, $\rho\,\partial_\theta\beta=-X\sin\beta+Y\cos\beta=-w\sin\phi$. Since
+$ve^{i\beta}\bar q=v(X\cos\beta+Y\sin\beta)+iv(X\sin\beta-Y\cos\beta)$,
+\[
+\partial_\theta h=X+v\,\partial_\theta\rho=\operatorname{Re}\Xi .
+\]
+By Lemma~\ref{lem:coord}(a), $C=y\tau^{-v}$, and $\partial_\theta\log\tau=\partial_\theta\beta/\sin\beta$; so
+$\tau^v\partial_\theta C=Y-v\rho\,\partial_\theta\beta=Y(1-v\cos\beta)+vX\sin\beta=\operatorname{Im}\Xi$. Since $C$ is constant and
+$h+(1-v^2)t$ is constant (Proposition~\ref{prop:runs}), $\sa$ and $\sfc$ do not depend on time. The map
+$L:x\mapsto x+vR_\beta x$, $R_\beta x:=e^{i\beta}\bar x$, is $I+vR_\beta$ with $R_\beta$ a reflection; so $L^{-1}=(I-vR_\beta)/(1-v^2)$
+and the singular values of $L$ are $1\pm v$.
+
+(b) With $\Xi=\sa(1+iY_r)$: $(1-v^2)q=\Xi-ve^{i\beta}\bar\Xi$ and
+$e^{i\beta}(1-iY_r)=\cos\beta+Y_r\sin\beta+i(\sin\beta-Y_r\cos\beta)$ give $(1-v^2)q=\sa(D_\psi+iN_\psi)$. If $\sa,D_\psi>0$, then
+$\operatorname{Re}q>0$, so $|\psi|<\pi/2$ and $|\psi|\le|\tan\psi|$.
+
+(c) $J$ is built from the time-independent $\sa,\sfc$. Put $V:=\Xi=\sa+i\sfc\tau^v=Lq$. Then
+$\partial_\theta V=\partial_\theta\sa+i(\tau^v\partial_\theta\sfc+v\sfc\tau^v\partial_\theta\beta/\sin\beta)$,
+$\partial_\beta(L^{-1})=-vR'_\beta/(1-v^2)$ with $R'_\beta x:=ie^{i\beta}\bar x$, and
+$\partial_\theta q=L^{-1}\partial_\theta V+\partial_\theta\beta\,\partial_\beta(L^{-1})V$. For a real $2\times2$ matrix $M$,
+$(Ma)\times(Mb)=\det M\,(a\times b)$, and $\det L^{-1}=1/(1-v^2)$; hence
+\[
+kw^3=q\times\partial_\theta q=\frac{V\times\partial_\theta V}{1-v^2}-\frac{v\,\partial_\theta\beta}{1-v^2}\,q\times R'_\beta(Lq).
+\]
+Here $V\times\partial_\theta V=\tau^vJ+v\sa\sfc\tau^v\partial_\theta\beta/\sin\beta$ and $\sfc\tau^v/\sin\beta=\rho\,\partial_\theta\log C$
+(Lemma~\ref{lem:coord}(a): $\tau^v/\sin\beta=\tau^{v-1}(1+\tau^2)/2=\rho/C$). Further $Lq=w(e^{i\psi}+ve^{i\phi})$,
+$R'_\beta(Lq)=iw(e^{i\phi}+ve^{i\psi})$, $q\times R'_\beta(Lq)=w^2(\cos(\phi-\psi)+v)$, and $\partial_\theta\beta=-w\sin\phi/\rho$.
+Inserting gives
+$kw^3=\frac{\tau^vJ}{1-v^2}-\frac{vw\sin\phi}{(1-v^2)\rho}[\rho\sa\,\partial_\theta\log C-w^2(v+\cos(\phi-\psi))]$.
+
+(d) Eliminate $J$ between the formulas of (c) at $t'$ and $t''$. $\tau$ increases in time (Lemma~\ref{lem:coord}(b)) and $w$ is
+non-decreasing (Lemma~\ref{lem:truefront}), so $w'/w''\le1$. $\Xi''=\sa+i\tau''^v\sfc$ gives $|\Xi''|\le(\tau''/\tau')^v|\Xi'|$; then use
+(a).
+
+(e) The first bound is (c) with $|v+\cos(\phi-\psi)|\le1+v$. For the second: $\partial_\theta\log C=\sfc/C=\operatorname{Im}\Xi/y$ and
+$\sa=\operatorname{Re}\Xi$, so $\rho|\sa\,\partial_\theta\log C|/w^2\le\rho|\Xi|^2/(2yw^2)\le(1+v)^2\rho/(2y)$; with $|\sin\phi|\le1$ and
+$\rho\ge y$: $|\TS|\le\frac v{1-v}[\frac{1+v}{2y}+\frac1\rho]\le\frac{v(3+v)}{2(1-v)y}$.
+\end{proof}
+
+\begin{definition}[design T]\label{def:T}
+Let $t_1:=1/(1-v)+1$ $(=2+\mu)$.
+\begin{itemize}
+\item \emph{Run 1.} $P(t):=t$ for $0\le t\le t_1$.
+\item \emph{Run 2.} Let $\alpha_0:=\arccos(v+1/t_1)$ and write $S_{\alpha_0}(t_1)-P(t_1)=\rho_0e^{i\beta^*}$ ($\rho_0>0$), $\nhat:=e^{i\beta^*}$.
+Then $P(t):=P(t_1)+(t-t_1)\nhat$ for $t_1\le t\le\ttd$, where
+\[
+\ttd:=t_1+\frac{\rho_0-\eps}{1-v}+\eps\int_0^1\frac{d\sigma}{1-v\sigma(2-\sigma)} .
+\]
+\end{itemize}
+Further $\ta:=t_1+(\rho_0-\eps)/(1-v)$, $\tc:=t_1+\rho_0/(1-v)$, $X_0:=P(\ttd)$ and $\omega(t):=\tc-t$.
+\end{definition}
+
+Here $v+1/t_1=v+(1-v)/(2-v)\in(\frac12,1)$, and $\rho_0>0$ because in run 1 the candidate $\alpha_0\in(0,\pi/2)$ has
+$C=\sg(\alpha_0)>0$, so $\rho\ge C/\gmax$ (Lemma~\ref{lem:coord}(c)); $\rho_0>\eps$ by Lemma~\ref{lem:tang}(b), so $t_1<\ta<\ttd<\tc$.
+$P$ is $1$-Lipschitz, $P(0)=0$, and $P$ depends only on $(v,\eps)$: $\nhat$ is computed from the state of the true candidate $\alpha_0$
+at $t_1$, which is determined by run 1.
+
+\emph{Run-1 data.} For $\alpha\in(0,\pi)$ let $(\rho_1,\beta_1)=(\rho_1(\alpha),\beta_1(\alpha))$ be the polar coordinates of
+$S_\alpha(t_1)-P(t_1)$ in the heading frame of run 1, $\tau_1:=\tan(\beta_1/2)$, $\tau_\alpha:=\tan(\alpha/2)$ and
+$y(\alpha,t_1):=\operatorname{Im}S_\alpha(t_1)$. In run 1 the lower half is the mirror image of the upper one,
+$S_{2\pi-\alpha}=\overline{S_\alpha}$. At $t=0$, $\rho=1$, $\beta=\alpha$; hence, in run 1,
+\begin{gather*}
+C=\sg(\alpha),\qquad h(t)=\cos\alpha+v-(1-v^2)t,\qquad h_1:=h(t_1)=-(1-v^2)-(1-\cos\alpha)<0,\\
+\sa=-\sin\alpha,\qquad\sfc=(\cos\alpha-v)\tau_\alpha^{-v},
+\end{gather*}
+using $(1-v^2)t_1=(1+v)(2-v)$ and $\sg'=\sg(\cos\alpha-v)/\sin\alpha$.
+
+\emph{Run-2 data.} For $\theta\in(0,2\pi)\setminus\{\alpha_0\}$ let $(\sr(\theta),\sbb(\theta))$ be the polar coordinates of
+$S_\theta(t_1)-P(t_1)$ about $\nhat$ (the heading frame of run 2), $\tau_{\sbb}:=\tan(\sbb/2)$, and, for run 2,
+\[
+C:=\sr\,\sg(\sbb),\qquad\sa:=\partial_\theta[\sr(\cos\sbb+v)],\qquad\sfc:=\partial_\theta C,\qquad\sA:=\partial_\theta\sr .
+\]
+From now on $C$, $h$, $\sa$, $\sfc$ refer to run 2 unless said otherwise. The \emph{window} is $I_\eta:=\{\theta:|\theta-\alpha_0|\le\eta\}$,
+$\eta=0.1$, and $\xi:=|\theta-\alpha_0|$. In the frame of run 2 at time $t$ we write $S_\theta(t)-P(t)=(z+iy)\nhat=\rho e^{i\beta}\nhat$
+and $e^{i\psi}\nhat$ for the unit tangent. Since $(1-v^2)(\tc-t_1)=(1+v)\rho_0$, every label whose true candidate has $\rho>0$ on run 2 (including $\alpha_0$, for $t<\tc$) has in run 2
+\begin{equation}\label{eq:h2}
+h(t)=\sr(\cos\sbb+v)-(1-v^2)(t-t_1)=(1+v)(\sr-\rho_0)-\sr(1-\cos\sbb)+(1-v^2)\,\omega(t).
+\end{equation}
+Whenever $h(t)>0$, Lemma~\ref{lem:coord}(d) gives $\tau\le((1+v)C/(2h))^{1+\mu}$, hence $y=C\tau^v\le C^{1+\mu}((1+v)/(2h))^\mu$, and
+$C\le2\sr\tau_{\sbb}^{1-v}$ gives $C^{1+\mu}\le(2\sr)^{1+\mu}\tau_{\sbb}$; therefore
+\begin{equation}\label{eq:tau2}
+\tau\le\tau_{\sbb}\Bigl(\frac{(1+v)\sr}h\Bigr)^{1+\mu},\qquad y\le2\sr\,\tau_{\sbb}\Bigl(\frac{(1+v)\sr}h\Bigr)^{\mu}\qquad(h>0).
+\end{equation}

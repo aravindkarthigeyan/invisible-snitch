@@ -1,0 +1,1008 @@
+% sec_HTp.tex -- The touch-down data for larger v: hypothesis (H_T) for design T with every constant an explicit function of
+% (vbar, eta, epsbar, xi_1, lambda_0, G_T), for all v <= vbar <= 2e-2.
+% Source: referee/Q3-claims.md, version 2 (stream Q3, round 7), which reconciles the fixes of reports/referee-RQ3-1.md
+% (new side condition (SC51); citations of (SC39),(SC40); range of eta) and reports/referee-RQ3-2.md (A_max <= 2 stated;
+% threshold wording for the gap in sec_T1, whose repair is already in sec_T1 and is only cited here). Statements doubly refereed (v1); the row 6e-5 and
+% lem:HTp-tilt/-twotime as statements are not; see rem:HTp-status.
+% Constants: code/Q3/constants.py (function chain(); table: code/Q3/out/table.txt); column used downstream: reports/Q4-1.md.
+% Labels: all new labels have the prefix HTp-, except sec:HTp, thm:HTp (main theorem) and cor:HTp-used (the constants used
+% by the improved main theorem).
+% Notation is that of sec_T1.tex (macros \TDa, \TDc, \TDr, \TDb, \TDS, \TDT, \TDta, \TDtc, \TDG, \TDbe, \TDxe, \TDmT, \TDY,
+% \TDSz; \STas, \STA, \STme of sec_ST.tex; \Bts of sec_B.tex; \Eu, \EV of sec_E.tex). Changes against Q3-claims:
+%   x = |theta - alpha_0| -> xi;  x_e -> \TDxe;  x_1, x_2 -> xi_1, xi_2;  xe_lo, xe_hi -> xi_-, xi_+;  xbar_e -> \bar\xi_e;
+%   t_2 -> \TDtc;  delta(t) -> omega(t);  Y(alpha) -> \TDY;  u-hat -> \Eu;  A -> \STA;  a, c -> \TDa, \TDc;  r, b -> \TDr, \TDb;
+%   G (parameter) -> G_T;  E_1 -> \mathcal E_1;  ang -> \angle_w;  (r Lambda)_{min,max} -> \ell_{min,max}.
+
+\newcommand{\HTvb}{\bar v}
+\newcommand{\HTmb}{\bar\mu}
+\newcommand{\HTmTb}{\bar\mu_{\mathrm T}}
+\newcommand{\HTeb}{\bar\varepsilon}
+\newcommand{\HTxb}{\bar\xi_{\mathrm e}}
+\newcommand{\HTSC}[1]{\textup{(SC#1)}}
+
+\section{The touch-down data for larger \texorpdfstring{$v$}{v}}\label{sec:HTp}
+
+Theorem~\ref{thm:HT} proves the touch-down hypothesis, Hypothesis~\ref{hyp:HT}, for design~T with $D_1=1$, $v\le10^{-6}$ and
+$\varepsilon\le10^{-3}$. Its proof uses $v\le10^{-6}$ in many places, always in the same way: an inequality which holds with a
+numerical constant because the front at $t_1$ and at $\Bts$ is a $10^{-5}$-perturbation of the unit circle. In this section every such
+constant is replaced by an explicit function of six parameters $(\HTvb,\eta,\HTeb,\xi_1,\lambda_0,G_{\mathrm T})$: an upper bound
+$\HTvb$ for $v$, the half-width $\eta$ of the window around $\alpha_0$, an upper bound $\HTeb$ for $\varepsilon$, a threshold $\xi_1$ beyond
+which the forward labels are true, and the constants $\lambda_0$, $G_{\mathrm T}$ of \MHT. The outcome is
+Theorem~\ref{thm:HTp}: if $51$ explicit inequalities between these numbers hold (the side conditions \HTSC{1}--\HTSC{51}), then
+\MHT\ holds for \emph{all} $v\le\HTvb$ and $\varepsilon\le\HTeb$ with the constants of Definition~\ref{def:HTp-const}. The side
+conditions hold for every row of Table~\ref{tab:HTp} (Corollary~\ref{cor:HTp-table}), which reaches $\HTvb=2\cdot10^{-2}$, and for the
+row $\HTvb=6\cdot10^{-5}$, $\eta=0.1$ that is used by the improved main theorem (Corollary~\ref{cor:HTp-used}). Already at
+$\HTvb=10^{-6}$ the constants are better than those of Theorem~\ref{thm:HT} (Remark~\ref{rem:HTp-compare}).
+
+The method is that of Section~\ref{sec:touch}: the two runs are straight, so the state at $\Bts$ follows from the integrals
+$C$, $h$ and the exact transport Lemmas~\ref{lem:T1-coord}--\ref{lem:T1-second}. Four devices are new.
+\begin{itemize}
+\item An exact formula for the tilt on the window (Lemma~\ref{lem:HTp-tilt}); it gives $|\psi|\le\theta_{\mathrm v}\xi^{1-\mu}$ with
+$\theta_{\mathrm v}\to1$ as $(\HTvb,\eta)\to0$ ($\theta_{\mathrm v}=1.070$ at $\HTvb=10^{-6}$, $\eta=0.1$, and
+$\theta_{\mathrm v}\to1.069$ as $\HTvb\to0$ at $\eta=0.1$; the true constant is $1$), instead of $1.69$.
+\item The two-time form \eqref{eq:T1-k2} of the curvature transport, used for \emph{every} label (Lemma~\ref{lem:HTp-twotime}). In the
+bulk it replaces a Gronwall estimate over the time $1.73$ which fails for $v\gtrsim10^{-3}$.
+\item Monotonicity of chords for any mixture of virtual and true candidates (Lemma~\ref{lem:HTp-chord}). It replaces the position bound
+$|x_\theta(t)-e^{i\theta}|\le3.74\cdot10^{-6}$ in the proof of \textup{(T2)}, which is false at $v=2\cdot10^{-2}$.
+\item A three-case proof of \textup{(T1)} (near $X_0$, near $E_Y$, far; Lemma~\ref{lem:HTp-T1}), with the near-$E_Y$ case built in.
+\end{itemize}
+Every inequality of the proofs is either exact in $v$ or obtained from its value at $\HTvb$ by a monotone substitution
+(Lemma~\ref{lem:HTp-M}); no step rests on a grid of values of $(v,\varepsilon)$. \textbf{Nothing in this section concerns times after
+$\Bts$, and only $D_1=1$ is treated.} The status is recorded in Remark~\ref{rem:HTp-status}.
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{What is reused and what is re-proved}\label{sec:HTp-reuse}
+
+The setting, the conventions and the notation are those of Section~\ref{sec:touch}, with two changes: the standing assumption
+$0<v\le10^{-6}$, $0<\varepsilon\le10^{-3}$ is replaced by $0<v\le\HTvb$, $0<\varepsilon\le\HTeb$; and the window half-width $\eta=0.1$
+of Subsection~\ref{sec:T1-tang} is replaced by the parameter $\eta$. Thus $D_1=1$, $t_1=2+\mu$, $\alpha_0$, $\rho_0$, $\beta^*$, $\Eu$,
+$\TDta$, $\Bts$, $\TDtc$, $X_0$ are as in Definition~\ref{def:T}; $\xi:=|\theta-\alpha_0|$, $I_\eta:=\{|\theta-\alpha_0|\le\eta\}$,
+$\omega(t):=\TDtc-t$; $(\TDr,\TDb)$, $\tau_{\TDb}$, $C$, $\TDa$, $\TDc$, $\STA$ refer to run 2 as in Subsection~\ref{sec:T1-tang}, and
+$(\rho_1,\beta_1,\tau_1)$, $\TDT$, $y(\alpha,t_1)$ to run 1 as in Subsection~\ref{sec:T1-run1}. Further
+\[
+\HTmb:=\frac{\HTvb}{1-\HTvb},\qquad\HTmTb:=\frac{3\HTvb}{1+\HTvb},\qquad\text{so }\mu\le\HTmb,\ \ \TDmT\le\HTmTb .
+\]
+
+\noindent\textbf{Used unchanged} (their statements and proofs are exact for every $v\in(0,1)$, or use no smallness of $v$):
+Lemma~\ref{lem:T1-elem}; Lemmas~\ref{lem:T1-coord}, \ref{lem:T1-first}, \ref{lem:T1-second} with \eqref{eq:T1-k}, \eqref{eq:T1-k2};
+Remark~\ref{rem:T1-tilt}(i); Definition~\ref{def:T}; the law \eqref{eq:T1-laws}; formula \eqref{eq:T1-k1}; Lemma~\ref{lem:T1-run1}(a)
+except its last sentence (the characterisation of the seen labels of run 1 and $\rho_\alpha\ge\varepsilon$ on $[\STas,2\pi-\STas]$);
+Lemma~\ref{lem:T1-tang}(a); the exact parts of the proof of Lemma~\ref{lem:T1-tang}(b) (the virtual candidate $\alpha_0$ on the ray,
+$\rho_{\alpha_0}(\TDta)=\varepsilon$, $P(\Bts)=x_{\alpha_0}(\Bts)$, the integral for $\TDtc-\Bts$); formulas \eqref{eq:T1-h} and
+\eqref{eq:T1-tau}; Lemma~\ref{lem:T1-fwd}(e); Lemma~\ref{lem:T1-hole}(a) and (d) (exact); the definition of the curve $x^0$ and of the
+set $\TDG$ in Subsection~\ref{sec:T1-HT}, with the threshold $1.02\,\varepsilon$ replaced by $\xi_1\varepsilon$.
+
+\medskip\noindent\textbf{Re-proved with $\HTvb$-dependent constants} (every place where Section~\ref{sec:touch} uses $v\le10^{-6}$):
+\begin{itemize}
+\item Lemma~\ref{lem:T1-run1}(a), last sentence ($\STas\le2.1\varepsilon$), (b) ($0.479$, $1.0000042$, $2.1\cdot10^{-6}$,
+$2\cdot10^{-5}$), (c) ($1.14$, $1.1396$, $1.0000015$), (e) ($1.0000052$) $\to$ Lemma~\ref{lem:HTp-run1}.
+\item Lemma~\ref{lem:T1-tang}(b) ($1.2\cdot10^{-6}$, $10^{-5}$, $3.7321$, $3.74\cdot10^{-6}$, $5\cdot10^{-6}$) and (c) (every number on
+$I_{0.1}$) $\to$ Lemmas~\ref{lem:HTp-tang} and~\ref{lem:HTp-tilt}.
+\item Lemma~\ref{lem:T1-fwd}(a)--(d) ($0.9938$, $1.8435$, $0.6124$, $2.751$, $1.685$, $1.015$, $0.3081$, $1.00193$, $1.0001$; the threshold
+$1.02\,\varepsilon$) $\to$ Lemma~\ref{lem:HTp-fwd}; Lemma~\ref{lem:T1-virt} ($1.69$, $1.0151$) $\to$ Lemma~\ref{lem:HTp-virt}.
+\item Lemma~\ref{lem:T1-tail} ($1.277$, $1.566$, $0.9939$, $1.00012$, $32.4$, $2.002$, $0.6125$, $1.647$, $1.0001$, $2.0023$; the split at
+$0.35\,v\varepsilon$ and the argument at $\TDta$) $\to$ Lemma~\ref{lem:HTp-tail}.
+\item Lemma~\ref{lem:T1-bulk}(a) (distance $0.0049$, from the positions $3.74\cdot10^{-6}$), (b) (Gronwall over time $1.73$, factor
+$e^{353v}$), (c) (lengths) and Lemma~\ref{lem:T1-hole}(b),(c) ($1.01$, $0.48$, the $0.02$-neighbourhood, $1.22$) $\to$
+Lemmas~\ref{lem:HTp-bulk} and~\ref{lem:HTp-len}.
+\item In the proof of Theorem~\ref{thm:HT}: the positions (iv) in \textup{(T2)} $\to$ Lemma~\ref{lem:HTp-chord}; \eqref{eq:T1-len}
+$\to$ Lemma~\ref{lem:HTp-len}; $0.999$, $0.979$ $\to$ $\kappa_2$; \textup{(T1)} ($0.353$, $5.3$, $4.15$) $\to$
+Lemma~\ref{lem:HTp-T1}; \textup{(T3)}--\textup{(T5)} ($1.69$, $1.647$, $1.9612$, $3.3$, $1.57$) $\to$ $\vartheta_3,\vartheta_4,\vartheta_5$,
+$C_z$, $c_y$.
+\end{itemize}
+\textbf{Not re-proved, not needed:} Lemma~\ref{lem:T1-run1}(d), Lemma~\ref{lem:T1-edges}, Proposition~\ref{prop:T1-arcs},
+Remark~\ref{rem:T1-cor}.
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Parameters, constants and side conditions}\label{sec:HTp-const}
+
+The parameters are
+\[
+\HTvb\in(0,\tfrac1{10}],\quad\eta\in(0,\tfrac\pi6],\quad\HTeb\in(0,1),\quad\xi_1>0,\quad\lambda_0\in(0,\tfrac14],\quad G_{\mathrm T}>0,
+\]
+and throughout $0<v\le\HTvb$, $0<\varepsilon\le\HTeb$. In the next definition every formula is evaluated with $v:=\HTvb$,
+$\mu:=\HTmb$, $\TDmT:=\HTmTb$; Lemma~\ref{lem:HTp-M} explains why this is legitimate.
+
+\begin{TDdefinition}[Constants]\label{def:HTp-const}
+{\small
+\begin{itemize}\setlength\itemsep{2pt}
+\item \emph{Basic.} $\bar t_1:=2+\HTmb$; $g_{\mathrm b}:=(1-\HTvb^2)^{1/2}\bigl((1+\HTvb)/(1-\HTvb)\bigr)^{\HTvb/2}$ $(=g_{\max}$ at
+$v=\HTvb)$; $\underline\alpha:=\arccos(\frac12+\HTvb)$; $\Delta_{\mathrm a}:=\pi/3-\underline\alpha$; $d_1:=\HTvb\bar t_1+\HTmb$;
+$e_\rho:=\HTvb\bar t_1+\Delta_{\mathrm a}+\HTmb$; $T_2:=\bar t_1+(\sqrt3+e_\rho)/(1-\HTvb)$; $d_{\mathrm s}:=\HTvb T_2$;
+$d_P:=\max(\HTmb,d_{\mathrm s}+\Delta_{\mathrm a})$.
+\item \emph{Run 1.} $\rho_{\mathrm m}:=\sin\frac12$; for $\rho>0$: $W_1(\rho):=e^{\HTvb\bar t_1/\rho}$,
+$\omega_1(\rho):=\HTvb\bar t_1/(2\rho)$, $\kappa_1(\rho):=(2/\rho+1/\rho^2)\HTvb\bar t_1e^{2\HTvb\bar t_1/\rho}$;
+$k_{\mathrm{arm}}:=(1+\HTvb)/(\cos\frac12-\HTvb)+2\HTvb/(1-\HTvb^2)$;
+$d_{\mathrm{arm}}:=(1+\HTvb)/((1-\HTvb)(\cos\frac12-\HTvb))+\HTvb/(1-\HTvb^2)$;
+$e_1:=(2-\cos\frac12)(1+\tan^2\frac14)+(1+\HTvb)\tan(\frac14)^{1-\HTvb}$, $\mathcal E_1:=\max(1,e_1/(1-\HTvb))$,
+$W_{\mathrm{arm}}:=\mathcal E_1^{\HTvb}/(1-\HTvb)$; $k_{\mathrm{all}}:=\max(k_{\mathrm{arm}},1+\kappa_1(\rho_{\mathrm m}))$,
+$W_{\mathrm{all}}:=\max(W_{\mathrm{arm}},W_1(\rho_{\mathrm m})(\pi/2)^{2\HTvb})$.
+\item \emph{Window.} $\theta_L:=\underline\alpha-\eta$, $\theta_R:=\pi/3+\eta$; $R_0(\theta):=(5-4\cos\theta)^{1/2}=|e^{i\theta}-2|$,
+$R_L:=R_0(\theta_L)$, $R_R:=R_0(\theta_R)$; $\TDr_{\min}:=R_L-d_1$, $\TDr_{\max}:=R_R+d_1$; $\rho_{\mathrm w}:=\sin\theta_L$,
+$W_{\mathrm w}:=W_1(\rho_{\mathrm w})$, $\omega_{\mathrm w}:=\omega_1(\rho_{\mathrm w})$, $\kappa_{\mathrm w}:=\kappa_1(\rho_{\mathrm w})$;
+$\iota:=1+\HTvb\bar t_1/\sin\theta_L$; $q_{\min}:=\sin(\underline\alpha+\eta/2)/R_R$, $q_{\max}:=\sin(\pi/3-\eta/2)/R_L$;
+$\ell_{\min}:=4q_{\min}/(1+d_1/R_L)$, $\ell_{\max}:=2\bar t_1\iota q_{\max}/(1-d_1/R_L)$;
+$\Lambda_{\min}:=4\sin(\underline\alpha-\eta/2)/\TDr_{\max}^2$, $\Lambda_{\max}:=2\bar t_1\iota\sin(\pi/3+\eta/2)/\TDr_{\min}^2$;
+$m_0:=\max(|1-2\cos\theta_L|,|1-2\cos\theta_R|)/R_L$, $\omega_{\mathrm p}:=\arcsin(d_1/R_L)$,
+$\angle_{\mathrm w}:=\arcsin m_0+\omega_{\mathrm w}+\omega_{\mathrm p}$, $\STA_{\min}:=\cos\angle_{\mathrm w}$,
+$\STA_{\max}:=W_{\mathrm w}$; $b_{\mathrm{lo}}:=\Lambda_{\min}(1-\eta^2/48)/4$, $b_{\mathrm{hi}}:=\Lambda_{\max}/4$,
+$\bar b:=b_{\mathrm{hi}}\eta^2$, $e_\tau:=\tan(\bar b/2)/(\bar b/2)-1$, $\beta_2:=b_{\mathrm{hi}}(1+e_\tau)/2$;
+$C_{\mathrm{hi}}:=2\TDr_{\max}\beta_2^{1-\HTvb}$, $C_{\mathrm{lo}}:=2\TDr_{\min}(b_{\mathrm{lo}}/2)/(1+\tan^2(\bar b/2))$;
+$\mathrm{aux}:=\ell_{\max}\bar b\eta/2$, $\TDa_{\min}:=\STA_{\min}\cos\bar b-\mathrm{aux}$,
+$\TDa_{\max}:=\STA_{\max}(1+\HTvb)+\mathrm{aux}$; $L_C:=2\Lambda_{\max}/\Lambda_{\min}+\eta\STA_{\max}/\TDr_{\min}$,
+$L_{\mathrm{lo}}:=2(\cos\bar b-\HTvb)(\Lambda_{\min}/\Lambda_{\max})(1-\eta^2/32)$;
+$S_1:=\ell_{\max}\bigl(\TDr_{\max}\TDa_{\max}L_C+(1+\HTvb)\eta\bigr)/\bigl(2(1-\HTvb^2)\TDr_{\min}\bigr)$.
+\item \emph{Forward arc.} $h_{\mathrm f}:=\STA_{\min}-\TDr_{\max}b_{\mathrm{hi}}^2\eta^3/2$, $\rho_{\mathrm c}:=h_{\mathrm f}/(1+\HTvb)$,
+$Q:=(1+\HTvb)\TDr_{\max}/h_{\mathrm f}$, $y_{\mathrm f}:=2\TDr_{\max}\beta_2$;
+$Y_1:=\bigl(\ell_{\max}/2+\STA_{\max}b_{\mathrm{hi}}(1+e_\tau)\eta\bigr)/\TDa_{\min}$, $\bar Y:=Y_1\eta^{1-\HTmb}Q^{\HTmb}$,
+$\theta_{\mathrm f}:=\max\bigl((1+\HTvb)Y_1,\HTvb y_{\mathrm f}/\rho_{\mathrm c}\bigr)/(1-\HTvb-\HTvb\bar Y)$,
+$W_{\mathrm f}:=\TDa_{\max}\bigl[(1+\HTvb+\HTvb\bar Y)^2+((1+\HTvb)\bar Y+\HTvb)^2\bigr]^{1/2}/(1-\HTvb^2)$;
+$\delta_1:=\HTvb/(3(1-\HTvb)^2\xi_1)$, $\tau_{\mathrm f}:=\beta_2Q^{1+\HTmb}$, $\bar\tau_{\mathrm f}:=\tau_{\mathrm f}\eta^{1-\HTmb}$,
+$\rho_{\mathrm u}:=((1+\HTvb)\STA_{\max}+\delta_1)/(1-2\bar\tau_{\mathrm f}^2)$,
+$S_2:=(2\tau_{\mathrm f}+\theta_{\mathrm f}Q^{\HTmb})(\rho_{\mathrm u}\TDa_{\max}L_C+1+\HTvb)/((1-\HTvb^2)\rho_{\mathrm c})$,
+$K_{\mathrm f}:=Q^{\HTmb}(1+\kappa_{\mathrm w}+S_1\HTvb)+S_2\HTvb$.
+\item \emph{Virtual labels.} $\theta_{\mathrm v}:=Q^{\HTmb}e^{\HTmb}(\theta_{\mathrm f}+\HTmb e^{2\HTmb}y_{\mathrm f}\xi_1)$,
+$W_{\mathrm v}:=W_{\mathrm f}e^{2\HTmb}$, $u_1:=W_{\mathrm v}\xi_1$.
+\item \emph{Tail.} $\xi_-:=C_{\mathrm{hi}}^{-1/2}$, $\xi_+:=(g_{\mathrm b}/C_{\mathrm{lo}})^{1/(2-2\HTvb)}$, $\HTxb:=\xi_+\HTeb^{1/2}$;
+$\delta_2:=(1+\HTvb)\HTvb/(3(1-\HTvb)\xi_-)$, $h_{\mathrm t}:=\STA_{\min}-\delta_2$,
+$h_{\mathrm T}:=(1+\HTvb)\STA_{\max}+\TDr_{\max}b_{\mathrm{hi}}^2\eta^3/2$; $m_\tau:=(2h_{\mathrm t}/C_{\mathrm{hi}})\eta^{-(1-2\HTvb)}$,
+$\tau_{\mathrm t}:=m_\tau^{1/(1+\HTvb)}$, $e_{\mathrm t}:=(1+\HTvb)/(m_\tau\tau_{\mathrm t}^{1-\HTvb})$;
+$y_{\mathrm c}:=2(1+e_{\mathrm t})h_{\mathrm T}/(1-\HTvb)$, $y_{\mathrm T}:=C_{\mathrm{hi}}^{1/(1+\HTvb)}\max(1,y_{\mathrm c})^{\HTvb}$,
+$T_{\mathrm t}:=\bigl(\max(1,y_{\mathrm c}/C_{\mathrm{lo}})\cdot2/b_{\mathrm{lo}}\bigr)^{\HTvb}$;
+$Y_2:=T_{\mathrm t}\ell_{\max}/(2\TDa_{\min})$, $\bar Y_2:=Y_2\eta^{1-\HTmTb}$,
+$\theta_{\mathrm t}:=Y_2+\HTvb y_{\mathrm T}/h_{\mathrm t}$, $z_{\mathrm T}:=(h_{\mathrm T}+\HTvb y_{\mathrm T}\eta^{1-\HTmTb})/(1-\HTvb)$,
+$\rho_{\mathrm T}:=z_{\mathrm T}\bigl(1+(y_{\mathrm T}\eta^{1-\HTmTb}/h_{\mathrm t})^2\bigr)^{1/2}$;
+$W_{\mathrm t}:=\TDa_{\max}\bigl[(1+\HTvb+\HTvb\bar Y_2)^2+((1+\HTvb)\bar Y_2+\HTvb)^2\bigr]^{1/2}/(1-\HTvb^2)$;
+$S_3:=(y_{\mathrm T}/h_{\mathrm t}+\theta_{\mathrm t})(\rho_{\mathrm T}\TDa_{\max}L_C+1+\HTvb)/((1-\HTvb^2)h_{\mathrm t})$,
+$K_{\mathrm t}:=T_{\mathrm t}(1+\kappa_{\mathrm w}+S_1\HTvb)+S_3\HTvb$; $\xi_2:=1/(3(1-\HTvb)\STA_{\min})$;
+$h_{\mathrm a}:=1-\STA_{\max}/2-\TDr_{\max}b_{\mathrm{hi}}^2\HTeb^3/32$, $Q_{\mathrm a}:=(1+\HTvb)\TDr_{\max}/h_{\mathrm a}$,
+$\tau_{\mathrm a}:=\beta_2Q_{\mathrm a}^{1+\HTmb}\HTeb^{1-\HTmb}/4$.
+\item \emph{Bulk and hole.} $e_\beta:=\arcsin(e_\rho/\sqrt3)$, $b_{\mathrm l}:=b_{\mathrm{lo}}\eta^2$, $y_{\mathrm b}:=\sin b_{\mathrm l}$,
+$H_{\mathrm b}:=3+d_1+(1+\HTvb)(\sqrt3+e_\rho)/(1-\HTvb)$, $T_{\mathrm b}:=2H_{\mathrm b}/(y_{\mathrm b}\tan(b_{\mathrm l}/2))$,
+$S_{\mathrm b}:=(3+\HTvb)/(2(1-\HTvb)y_{\mathrm b})$, $K_{\mathrm b}:=T_{\mathrm b}^{\HTvb}(k_{\mathrm{all}}+S_{\mathrm b}\HTvb)+S_{\mathrm b}\HTvb$,
+$W_{\mathrm b}:=((1+\HTvb)/(1-\HTvb))T_{\mathrm b}^{\HTvb}$; $r_{\mathrm B}:=0.005+\HTvb\bar t_1$,
+$\rho_{\mathrm h}:=\frac12-d_P-r_{\mathrm B}-\HTvb T_2$.
+\item \emph{Assembly.} $W_x:=\max(W_{\mathrm v},W_{\mathrm t},W_{\mathrm b}W_{\mathrm{all}})$,
+$U_{\max}:=(W_{\mathrm v}+W_{\mathrm t})\eta+W_{\mathrm b}W_{\mathrm{all}}(2\pi-2\eta)/(1-2\HTvb)$;
+$\hat L:=(8/\lambda_0)^{2\HTvb}/(1-2\HTvb)$, $\Delta_0:=\lambda_0/(W_x\hat L)$, $c_{\mathrm{sep}}:=2\sin(\Delta_0/2)$,
+$\kappa_2:=\min\bigl(\cos(\theta_{\mathrm v}\Delta_0^{1-\HTmb}),h_{\mathrm t}/W_{\mathrm t}\bigr)$;
+$K_*:=\max(K_{\mathrm f}W_{\mathrm v}^{\HTmb},K_{\mathrm t}W_{\mathrm t}^{\HTmTb},K_{\mathrm b})$, $c_{\mathrm{far}}:=K_*/\sqrt{12}$,
+$c_{\mathrm{near}}:=\theta_{\mathrm v}\bigl((12u_1^2+6u_1+1)/(3-2\HTmb)\bigr)^{1/2}$,
+$c_{\mathrm{tail}}:=\theta_{\mathrm t}\bigl(19/(3-2\HTmTb)\bigr)^{1/2}$, $c_N:=\max(c_{\mathrm{far}},c_{\mathrm{near}},c_{\mathrm{tail}})$;
+$\vartheta_3:=\theta_{\mathrm v}G_{\mathrm T}^{3/4-\HTmb}$,
+$\vartheta_4:=\theta_{\mathrm t}(\HTxb+G_{\mathrm T})^{1/2-\HTmTb}(2^{1/4}\xi_+^{1/2}+G_{\mathrm T}^{1/4})$,
+$c_y:=y_{\mathrm T}/h_{\mathrm t}^2$, $\vartheta_5:=2^{1/4}c_y\max(1,z_{\mathrm T}\xi_+)$,
+$\vartheta_{\mathrm T}:=\max(\vartheta_3,\vartheta_4,\vartheta_5)$; $C_z:=z_{\mathrm T}\xi_+\HTeb^{1/4}$;
+$c_{\mathrm T4}:=\theta_{\mathrm t}/h_{\mathrm t}$.
+\end{itemize}}
+\end{TDdefinition}
+
+\noindent\textbf{Side conditions.} {\small
+\HTSC1 $\sqrt3-e_\rho>\HTeb$. \HTSC2 $\cos\frac12>\HTvb$. \HTSC3 $\theta_L\ge\frac12$. \HTSC4 $\theta_R\le\pi/2$. \HTSC5 $\eta\le\pi/3$.
+\HTSC6 $\cos\theta_L<4/5$. \HTSC7 $\cot(\underline\alpha-\eta/2)/2<s(\theta_R)$, where $s(\theta):=2\sin\theta/(5-4\cos\theta)$.
+\HTSC8 $d_1<R_L$. \HTSC9 $\angle_{\mathrm w}<\pi/2$. \HTSC{10} $\bar b<\pi/2$. \HTSC{11} $\beta_2<1$. \HTSC{12} $b_{\mathrm{lo}}<2$.
+\HTSC{13} $\TDa_{\min}>0$. \HTSC{14} $\cos\bar b>\HTvb$. \HTSC{15} $L_{\mathrm{lo}}>\eta\STA_{\max}/\TDr_{\min}$.
+\HTSC{16} $0<h_{\mathrm f}\le1-\HTvb^2$. \HTSC{17} $\rho_{\mathrm c}\xi_1>1$. \HTSC{18} $Q\ge1$. \HTSC{19} $1-\HTvb-\HTvb\bar Y>0$.
+\HTSC{20} $1-2\bar\tau_{\mathrm f}^2>\HTvb$. \HTSC{21} $C_{\mathrm{hi}}<1$. \HTSC{22} $C_{\mathrm{lo}}\eta^2>\HTeb g_{\mathrm b}$.
+\HTSC{23} $g_{\mathrm b}>C_{\mathrm{lo}}$. \HTSC{24} $\HTxb<\eta$. \HTSC{25} $h_{\mathrm t}>0$. \HTSC{26} $m_\tau>1$.
+\HTSC{27} $\xi_2\HTvb\le\frac12$. \HTSC{28} $\xi_-\ge\frac12$. \HTSC{29} $h_{\mathrm a}>0$. \HTSC{30} $1-2\tau_{\mathrm a}^2>0$.
+\HTSC{31} $\STA_{\min}>4\tau_{\mathrm a}^2$. \HTSC{32} $b_{\mathrm l}\le\pi/6-e_\beta$. \HTSC{33} $\pi/3+2e_\beta\le\pi-b_{\mathrm l}$.
+\HTSC{34} $T_{\mathrm b}\ge1$. \HTSC{35} $\HTvb\le\frac1{10}$. \HTSC{36} $\rho_{\mathrm h}>0$. \HTSC{37} $2g_{\mathrm b}\HTeb<\theta_L$ and
+$g_{\mathrm b}\HTeb\le1$. \HTSC{38} $2-2d_{\mathrm s}\ge1$. \HTSC{39} $2\lambda_0+\min(\HTxb,\lambda_0)\le\eta$. \HTSC{40}
+$2u_1\HTeb\le\eta$. \HTSC{41} $\lambda_0\le\frac14$. \HTSC{42} $W_x\hat L\le2$. \HTSC{43} $\Delta_0\le\eta$. \HTSC{44}
+$c_{\mathrm{sep}}>2\HTeb$. \HTSC{45} $\theta_{\mathrm v}\Delta_0^{1-\HTmb}\le\pi/2$. \HTSC{46} $\kappa_2\ge\frac12$. \HTSC{47}
+$K_*\lambda_0^{1-\HTmTb}\le\pi$. \HTSC{48} $u_1\ge\frac12$. \HTSC{49} $c_N\lambda_0^{1-\HTmTb}\le1$. \HTSC{50} $G_{\mathrm T}>0$ and
+$\HTxb+G_{\mathrm T}\le\eta$. \HTSC{51} $z_{\mathrm T}\HTxb+\HTeb<1$ and $G_{\mathrm T}+z_{\mathrm T}\HTxb\le1$.}
+
+\medskip
+\HTSC1--\HTSC{50} are, in this order, the keys of the dictionary \texttt{cond} returned by the function \texttt{chain} in
+\texttt{code/Q3/constants.py}; \HTSC{51} is evaluated separately from the same output. Each is one inequality between explicitly computable numbers.
+
+\begin{lemma}[Monotonicity in $v$; rule (M)]\label{lem:HTp-M}
+Let the parameters satisfy \HTSC1--\HTSC{51}, and let $0<v\le\HTvb$, $0<\varepsilon\le\HTeb$. Every constant of
+Definition~\ref{def:HTp-const} is the value at $(v,\varepsilon)=(\HTvb,\HTeb)$ of an expression $E(v,\varepsilon)$ which is
+non-decreasing (an \emph{upper} constant) or non-increasing (a \emph{lower} constant) in $v\in(0,\HTvb]$ and in $\varepsilon\in(0,\HTeb]$.
+The lower constants are $\underline\alpha$, $\rho_{\mathrm w}$, $\TDr_{\min}$, $\ell_{\min}$, $\Lambda_{\min}$, $\STA_{\min}$,
+$b_{\mathrm{lo}}$, $C_{\mathrm{lo}}$, $\TDa_{\min}$, $L_{\mathrm{lo}}$, $h_{\mathrm f}$, $\rho_{\mathrm c}$, $\xi_-$, $h_{\mathrm t}$,
+$m_\tau$, $\tau_{\mathrm t}$, $h_{\mathrm a}$, $b_{\mathrm l}$, $y_{\mathrm b}$, $\rho_{\mathrm h}$, $\Delta_0$, $c_{\mathrm{sep}}$, $\kappa_2$; all
+other constants are upper constants. Consequently, wherever a proof below uses a constant as an upper (lower) bound for a quantity
+formed with the actual $v$, $\mu$, $\TDmT$, $\varepsilon$, the constant is $\ge$ ($\le$) the value of the corresponding expression at the
+actual $(v,\varepsilon)$. Every side condition evaluated at $\HTvb$ implies the same inequality at every $v\le\HTvb$, $\varepsilon\le\HTeb$.
+In particular, all constants are monotone in $\HTvb$, so a parameter tuple admissible for $\HTvb$ gives the same theorem for every
+smaller $v$.
+\end{lemma}
+\begin{proof}
+The building blocks are monotone in $v$ on $(0,\HTvb]\subset(0,\frac1{10}]$: $v$, $\mu=v/(1-v)$, $\TDmT=3v/(1+v)$, $1+v$, $1/(1-v)$,
+$1/(1-v^2)$, $t_1=2+\mu$, $vt_1$ and $g_{\max}(v)$ are increasing ($d\log g_{\max}/dv=\operatorname{artanh}v>0$, by differentiating
+$\frac12\log(1-v^2)+\frac v2\log\frac{1+v}{1-v}$); $1-v$, $\cos\frac12-v$, $\cos\bar b-v$, $\frac12+v\mapsto\arccos(\frac12+v)$ are decreasing.
+Powers are handled by the following rules: $X^{p(v)}$ with $X\ge1$ and $p$ non-decreasing is non-decreasing ($Q^\mu$, $Q^{1+\mu}$,
+$\mathcal E_1^v$, $T_{\mathrm b}^v$, $(8/\lambda_0)^{2v}$, $(\max(1,y_{\mathrm c}/C_{\mathrm{lo}})2/b_{\mathrm{lo}})^v$ (base $\ge1$ by
+\HTSC{12}), $\max(1,y_{\mathrm c})^{v}$, $(g_{\mathrm b}/C_{\mathrm{lo}})^{1/(2-2v)}$ (base $>1$ by \HTSC{23}), $\tau_{\mathrm t}^{v-1}$
+for the lower bound $\tau_{\mathrm t}\ge1$ read as $\tau^{v-1}\le\tau_{\mathrm t}^{v-1}\le\tau_{\mathrm t}^{\HTvb-1}$); $X^{p(v)}$ with
+$0<X\le1$ and $p$ non-increasing is non-decreasing ($\beta_2^{1-v}$ by \HTSC{11}, $C_{\mathrm{hi}}^{1/(1+v)}$ by \HTSC{21},
+$\eta^{1-\mu}$, $\eta^{1-\TDmT}$, $\HTeb^{1-\mu}$, $\tan(\frac14)^{1-v}$, $G_{\mathrm T}^{3/4-\mu}$, $\Delta_0^{1-\mu}$,
+$\lambda_0^{1-\TDmT}$, $(\HTxb+G_{\mathrm T})^{1/2-\TDmT}$); and $X^{-p(v)}$ with $0<X<1$ and $p$ non-increasing is non-increasing
+($\eta^{-(1-2v)}$ in $m_\tau$; then $m_\tau^{1/(1+v)}$ with $m_\tau>1$ is a lower bound by \HTSC{26}). Every constant is built from these
+blocks, from $\eta$, $\HTeb$, $\xi_1$, $\lambda_0$, $G_{\mathrm T}$, and from previously defined constants, by sums, products, quotients of
+positive quantities, $\max$, $\min$ and the monotone functions $\exp$, $\sqrt{\cdot}$, $\arcsin$ on $[0,1]$, $\sin$ and $\tan$ on
+$[0,\pi/2)$, $\cos$ on $[0,\pi/2]$ (decreasing), $\cot$ on $(0,\pi/2)$ (decreasing). Going through Definition~\ref{def:HTp-const} in
+order, each operation combines upper constants into an upper constant and lower into lower in the direction recorded above (a
+difference ``upper minus lower'' is upper, a quotient ``upper over lower'' is upper, etc.); the arguments of $\arcsin$, $\cos$, $\tan$,
+$\cot$ stay in the stated ranges by \HTSC8, \HTSC9, \HTSC{10}, \HTSC1. The non-obvious cases are exactly the powers listed above,
+together with: $C_{\mathrm{lo}}$ uses $(b_{\mathrm{lo}}\xi^2/2)^{1-v}\ge(b_{\mathrm{lo}}/2)\xi^{2-2v}$ (\HTSC{12}); $\xi_-=C_{\mathrm{hi}}^{-1/2}
+\le C_{\mathrm{hi}}^{-1/(2-2v)}$ (\HTSC{21}); $e_{\mathrm t}$ uses $\tau_{\mathrm t}^{v-1}\le\tau_{\mathrm t}^{\HTvb-1}$
+($\tau_{\mathrm t}\ge1$); $\tau_{\mathrm a}$ uses $\varepsilon^{1-\mu}\le\HTeb^{1-\mu}\le\HTeb^{1-\HTmb}$; $\bar Y$, $\theta_{\mathrm f}Q^{\HTmb}$
+use $Q\ge1$ (\HTSC{18}). In $\varepsilon$, the constants depending on $\HTeb$ are $\HTxb$, $\vartheta_4$, $\vartheta_{\mathrm T}$, $C_z$,
+$h_{\mathrm a}$, $Q_{\mathrm a}$, $\tau_{\mathrm a}$, and the side conditions depending on $\HTeb$ are \HTSC1, \HTSC{22}, \HTSC{24},
+\HTSC{29}--\HTSC{31}, \HTSC{37}, \HTSC{39}, \HTSC{40}, \HTSC{44}, \HTSC{50}, \HTSC{51}; all monotonically. The last two sentences follow because each side condition
+compares an upper with a lower expression (or with a number) in the direction that is preserved.
+\end{proof}
+
+From now on Lemma~\ref{lem:HTp-M} is used tacitly: ``by $v\le\HTvb$'' means that a $v$-expression is bounded by its constant.
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Run 1 and the data at \texorpdfstring{$t_1$}{t1}}\label{sec:HTp-run1}
+
+\begin{lemma}[Run 1]\label{lem:HTp-run1}
+\begin{enumerate}
+\item[(a)] Lemma~\ref{lem:T1-run1}(a) holds with $\STas\le2g_{\mathrm b}\varepsilon$ in place of $\STas\le2.1\,\varepsilon$; so
+$\STas<\theta_L$. Every candidate, true or virtual, satisfies $|S(t)-e^{i\alpha}|\le vt$.
+\item[(b)] \emph{Middle.} For $\alpha\in[\frac12,2\pi-\frac12]$, $\rho_\alpha(t)\ge\rho_{\mathrm m}$ on $[0,t_1]$; for
+$\alpha\in[\frac12,\frac\pi2]$ (and the mirror labels), $\rho_\alpha(t)\ge\sin\alpha$ on $[0,t_1]$. If $\rho_\alpha\ge\rho$ on $[0,t_1]$, then
+at $t_1$: $1\le w_1\le W_1(\rho)$, $|\arg\partial_\alpha S_\alpha(t_1)-(\alpha+\pi/2)|\le\omega_1(\rho)$, $|k_1-1|\le\kappa_1(\rho)$.
+\item[(c)] \emph{Arm.} For $\alpha\in(0,\frac12]$: $\rho_1\ge1+v$, $\tau_1>1$, $y(\alpha,t_1)\ge\sin\alpha$; $|k_1|\le k_{\mathrm{arm}}$; the
+tangent at $t_1$ is $e^{i(\pi/2+\delta)}$ with $0\le\delta\le\tan\delta\le d_{\mathrm{arm}}\,y(\alpha,t_1)$;
+$w_1\le W_{\mathrm{arm}}(2/\alpha)^{2v}$; and $y(\alpha,t_1)\le2\mathcal E_1\tan(\alpha/2)^{(1-v)/(1+v)}$.
+\item[(d)] For all $\alpha\in(0,2\pi)$, with $\chi:=\min(\alpha,2\pi-\alpha)$: $|k_1|\le k_{\mathrm{all}}$,
+$1\le w_1\le W_{\mathrm{all}}(2/\chi)^{2v}$, and $\rho_1\ge1+v$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) The characterisation is exact (see the proof of Lemma~\ref{lem:T1-run1}(a)). That proof also gives
+$\STas\le2\tau_{\mathrm s}\le2(\varepsilon g_{\max})^{1/(1-v)}$, and this is $\le2\varepsilon g_{\max}\le2g_{\mathrm b}\varepsilon$ since
+$\varepsilon g_{\max}\le g_{\mathrm b}\HTeb\le1$ \HTSC{37}; $2g_{\mathrm b}\varepsilon<\theta_L$ by \HTSC{37}. The speed of every candidate
+is $\le v$ (\eqref{eq:snitch} and Lemma~\ref{lem:B-V}(i)).
+
+(b) As in the proof of Lemma~\ref{lem:T1-run1}(b), which is exact up to the numbers: for $\alpha\in[\frac12,\frac\pi2]$, $y'=vy/\rho\ge0$,
+so $\rho\ge y\ge\sin\alpha\ge\sin\frac12$; for $\alpha\in[\frac\pi2,\pi]$, $\rho\ge1$; mirror for the lower half. By \eqref{eq:T1-laws},
+$(\log w)_t=v\sin^2\!\phi/\rho\in[0,v/\rho]$, so $1\le w_1\le e^{vt_1/\rho}$; $|\psi_t|\le v/(2\rho)$; and with $|1-3\sin^2\!\phi|\le2$,
+$|\sin\phi(3\cos^2\!\phi-1)|\le1$ (the maximum of $|s(2-3s^2)|$ on $[-1,1]$ is $1$),
+$\frac d{dt}|k-1|\le(2v/\rho)|k-1|+2v/\rho+v/\rho^2$, whence by Gronwall ($k(0)=1$)
+$|k_1-1|\le(2/\rho+1/\rho^2)vt_1e^{2vt_1/\rho}$. Since $t_1\le\bar t_1$ and $v\le\HTvb$ these are $\le W_1(\rho)$, $\omega_1(\rho)$,
+$\kappa_1(\rho)$.
+
+(c) $h_1=\cos\alpha+v-(1-v^2)t_1=-(1-v^2)-(1-\cos\alpha)<0$, so $\cos\beta_1<-v$, $\beta_1>\pi/2$, $\tau_1>1$; and
+$|h_1|=\rho_1|\cos\beta_1+v|\le\rho_1(1-v)$ gives $\rho_1\ge1+v$. $y=C\tau^v$ is non-decreasing, $y(0)=\sin\alpha$.
+
+\emph{Curvature.} By \eqref{eq:T1-k1}, $k_1=\TDT/w_1^3-\TDS_1$ with $\TDT=(\tau_1/\tau_\alpha)^v\ge1$, and (proof of
+Lemma~\ref{lem:T1-run1}(c), exact) $0\le\TDT/w_1^3\le(1+v)/(\cos\alpha-v)\le(1+v)/(\cos\frac12-v)$. In $\TDS_1$,
+$|\TDa\,\partial_\alpha\log C|=\sin\alpha\cdot(\cos\alpha-v)/\sin\alpha\le1$, so
+$|\TDS_1|\le\frac v{(1-v^2)\rho_1}[\rho_1+v+1]=\frac v{1-v^2}+\frac v{(1-v)\rho_1}\le\frac{2v}{1-v^2}$. Hence $|k_1|\le k_{\mathrm{arm}}$.
+
+\emph{Tilt.} From the exact formula for $\tan\delta$ in the proof of Lemma~\ref{lem:T1-run1}(c), bounding its denominator below by
+$(1+v\cos\beta_1)(\cos\alpha-v)\TDT$:
+\[
+\tan\delta\le\frac{(1+v)\sin\alpha}{(1-v)(\cos\alpha-v)\TDT}+\frac{v\sin\beta_1}{1+v\cos\beta_1},
+\]
+and $1+v\cos\beta_1\ge1-v$, $\TDT\ge1$, $\sin\alpha\le y$, $\sin\beta_1=y/\rho_1\le y/(1+v)$, $\cos\alpha\ge\cos\frac12$:
+$\tan\delta\le d_{\mathrm{arm}}y$.
+
+\emph{Stretch.} $|\Xi|^2=\sin^2\!\alpha+(\cos\alpha-v)^2\TDT^2\le\TDT^2$, so $w_1\le\TDT/(1-v)$. By Lemma~\ref{lem:T1-coord}(d)
+and $\tau_1>1$: $(1-v)\tau_1^{1+v}=2|h_1|/C+(1+v)\tau_1^{v-1}\le2|h_1|/C+1+v$, with $|h_1|\le2-\cos\frac12$,
+$C=g(\alpha)=2\tau_\alpha^{1-v}/(1+\tau_\alpha^2)\ge2\tau_\alpha^{1-v}/(1+\tan^2\frac14)$, and
+$1+v\le(1+v)\tan(\frac14)^{1-v}\tau_\alpha^{-(1-v)}$ ($\tau_\alpha\le\tan\frac14$). So
+$\tau_1^{1+v}\le\mathcal E_1\tau_\alpha^{-(1-v)}$, $\tau_1/\tau_\alpha\le\mathcal E_1^{1/(1+v)}\tau_\alpha^{-2/(1+v)}$ and
+$\TDT\le\mathcal E_1^{v/(1+v)}\tau_\alpha^{-2v/(1+v)}\le\mathcal E_1^{v}(2/\alpha)^{2v}$ ($\mathcal E_1\ge1$, $\tau_\alpha\ge\alpha/2$,
+$2/\alpha>1$). Hence $w_1\le W_{\mathrm{arm}}(2/\alpha)^{2v}$.
+
+\emph{Size of $y$.} $y=C\tau_1^v\le2\tau_\alpha^{1-v}\bigl(\mathcal E_1\tau_\alpha^{-(1-v)}\bigr)^{v/(1+v)}\le2\mathcal E_1
+\tau_\alpha^{(1-v)/(1+v)}$.
+
+(d) Let $\chi\ge\frac12$. Then (b) with $\rho=\rho_{\mathrm m}$ gives $|k_1|\le1+\kappa_1(\rho_{\mathrm m})$ and
+$w_1\le W_1(\rho_{\mathrm m})=W_1(\rho_{\mathrm m})(\pi/2)^{2v}\,(2/\pi)^{2v}$, which is $\le W_{\mathrm{all}}(2/\chi)^{2v}$ as
+$\chi\le\pi$. For $\chi<\frac12$:
+(c) and the mirror symmetry ($k_1$ and $w_1$ are mirror invariant). $\rho_1\ge1+v$: the argument of (c) uses only
+$h_1\le-(1-v^2)$.
+\end{proof}
+
+\begin{lemma}[Tangency; data at $t_1$ on the window]\label{lem:HTp-tang}
+\begin{enumerate}
+\item[(a)] Lemma~\ref{lem:T1-tang}(a) holds (exact).
+\item[(b)] $\alpha_0\in[\underline\alpha,\pi/3]$; $|\rho_0-\sqrt3|\le e_\rho$; $\rho_0>\varepsilon$; $\Bts\le\TDtc\le T_2$,
+$0<\TDtc-\Bts\le v\varepsilon/(3(1-v)^2)$ and $\Bts-\TDta\le\varepsilon/(1-v)$; every candidate, true or virtual, satisfies
+$|x_\theta(t)-e^{i\theta}|\le vt\le d_{\mathrm s}$ for $t\le\Bts$; $P([t_1,\Bts])$ lies within $d_P$ of $\TDSz=[2,e^{i\pi/3}]$;
+$P(\Bts)=x_{\alpha_0}(\Bts)$ and $\rho_{\alpha_0}(\TDta)=\varepsilon$.
+\item[(c)] $I_\eta\subset[\theta_L,\theta_R]\subset[\frac12,\frac\pi2]$, and on $I_\eta$:
+\begin{gather*}
+\TDr_{\min}\le\TDr\le\TDr_{\max},\quad\Lambda_{\min}\le\Lambda\le\Lambda_{\max},\quad\ell_{\min}\le\TDr\Lambda\le\ell_{\max},\quad
+\STA_{\min}\le\STA\le\STA_{\max},\\
+1\le w_1\le W_{\mathrm w},\quad|k_1-1|\le\kappa_{\mathrm w},\quad b_{\mathrm{lo}}\xi^2\le\TDb\le b_{\mathrm{hi}}\xi^2\le\bar b,\quad
+\TDb/2\le\tau_{\TDb}\le\beta_2\xi^2,\\
+C_{\mathrm{lo}}\xi^{2-2v}\le C\le C_{\mathrm{hi}}\xi^{2-2v},\quad\TDa_{\min}\le\TDa\le\TDa_{\max},\quad
+|\partial_\theta\log C|\le L_C/\xi;
+\end{gather*}
+for $\theta<\alpha_0$: $\partial_\theta\log C\le-(L_{\mathrm{lo}}-\eta\STA_{\max}/\TDr_{\min})/\xi<0$, so $C$ is strictly monotone in $\xi$ on
+the tail side; and the quantity $\TDS$ of Lemma~\ref{lem:T1-second} at $t_1$, in the frame of run 2, satisfies $|\TDS|\le S_1v$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(b) $t_1=(2-v)/(1-v)$, so $\cos\alpha_0=v+1/t_1$ and $\cos\alpha_0-\frac12=v(3-2v)/(2(2-v))\in[0,v]$: $\alpha_0\in[\underline\alpha,\pi/3]$.
+$|S_{\alpha_0}(t_1)-P(t_1)-(e^{i\pi/3}-2)|\le vt_1+|e^{i\alpha_0}-e^{i\pi/3}|+|t_1-2|\le vt_1+\Delta_{\mathrm a}+\mu\le e_\rho$, and
+$|e^{i\pi/3}-2|=\sqrt3$; so $|\rho_0-\sqrt3|\le e_\rho$, $\rho_0\ge\sqrt3-e_\rho>\varepsilon$ \HTSC1, and
+$\TDtc=t_1+\rho_0/(1-v)\le T_2$. The rest is the exact part of the proof of Lemma~\ref{lem:T1-tang}(b):
+$\TDtc-\Bts=\int_0^\varepsilon v(1-f)/((1-v)(1-vf))\,d\sigma\in(0,v\varepsilon/(3(1-v)^2)]$,
+$\Bts-\TDta=\varepsilon\int_0^1d\sigma/(1-v\sigma(2-\sigma))\le\varepsilon/(1-v)$, $P(\Bts)=x_{\alpha_0}(\Bts)$,
+$\rho_{\alpha_0}(\TDta)=\varepsilon$. Positions: speed $\le v$, $t\le\Bts\le T_2$. $P(t_1)=2+\mu$ is within $\mu$ of $\TDSz$;
+$P(\Bts)=x_{\alpha_0}(\Bts)$ is within $vT_2+\Delta_{\mathrm a}\le d_{\mathrm s}+\Delta_{\mathrm a}$ of $e^{i\pi/3}$; $P$ is a segment on
+$[t_1,\Bts]$, and the distance to the convex set $\TDSz$ is convex.
+
+(c) $I_\eta\subset[\theta_L,\theta_R]$ by (b), $\subset[\frac12,\frac\pi2]$ by \HTSC3, \HTSC4. Window labels are $\ge\theta_L>\STas$,
+so Lemma~\ref{lem:HTp-run1}(a),(b) apply with $\rho=\rho_{\mathrm w}$ ($\sin$ is increasing on $[\theta_L,\pi/2]$): bounds on $w_1$,
+$k_1$, and $\partial_\theta S_\theta(t_1)=w_1e^{i\psi_1}$ with $|\psi_1-(\theta+\pi/2)|\le\omega_{\mathrm w}$.
+
+\emph{$\TDr$.} $\mathsf p:=S_\theta(t_1)-P(t_1)=e^{i\theta}-2+\mathsf d$, $|\mathsf d|\le vt_1+\mu\le d_1$; $R_0$ is increasing on
+$(0,\pi)$, so $\TDr\in[R_L-d_1,R_R+d_1]$.
+
+\emph{$\Lambda$.} $\sin\beta_1/\rho_1=\operatorname{Im}\mathsf p/\TDr^2$ with $\operatorname{Im}\mathsf p=\operatorname{Im}S_\theta(t_1)\in
+[\sin\theta,\sin\theta+vt_1]$ ($y$ non-decreasing in run 1, speed $\le v$), so
+$\Lambda=2t_1(\operatorname{Im}\mathsf p/\sin\theta)\sin((\theta+\alpha_0)/2)/\TDr^2$ with
+$1\le\operatorname{Im}\mathsf p/\sin\theta\le\iota$, $t_1\in[2,\bar t_1]$, and
+$(\theta+\alpha_0)/2\in[\alpha_0-\eta/2,\alpha_0+\eta/2]\subset[\underline\alpha-\eta/2,\pi/3+\eta/2]\subset(0,\pi/2]$ \HTSC5, where $\sin$
+is increasing.
+
+\emph{$\TDr\Lambda$.} $\TDr\Lambda=2t_1(\operatorname{Im}\mathsf p/\sin\theta)\,\tilde q(\theta)\,(R_0/\TDr)$ with
+$\tilde q(\theta):=\sin((\theta+\alpha_0)/2)/R_0(\theta)$. Here $\frac d{d\theta}\log\tilde q=\frac12\cot\frac{\theta+\alpha_0}2-s(\theta)$,
+$s=R_0'/R_0$; $s'$ has the sign of $5\cos\theta-4<0$ on the window \HTSC6, so $s\ge s(\theta_R)$ there, while
+$\frac12\cot\frac{\theta+\alpha_0}2\le\frac12\cot(\underline\alpha-\eta/2)$; by \HTSC7, $\tilde q$ is decreasing on $I_\eta$. Hence
+$\tilde q\in[\tilde q(\alpha_0+\eta),\tilde q(\alpha_0-\eta)]\subset[q_{\min},q_{\max}]$ ($R_0(\alpha_0+\eta)\le R_R$,
+$R_0(\alpha_0-\eta)\ge R_L$); and $R_0/\TDr\in[1/(1+d_1/R_L),1/(1-d_1/R_L)]$ \HTSC8.
+
+\emph{$\STA$.} $\STA=\partial_\theta S_\theta(t_1)\cdot\hat{\mathsf p}=w_1\cos\angle(e^{i\psi_1},\hat{\mathsf p})$. With
+$\mathsf p_0:=e^{i\theta}-2$: $ie^{i\theta}\cdot\mathsf p_0=2\sin\theta>0$ and $ie^{i\theta}\times\mathsf p_0=2\cos\theta-1$, so
+$\angle(ie^{i\theta},\mathsf p_0)=\arcsin(|2\cos\theta-1|/R_0(\theta))\le\arcsin m_0$ ($|2\cos\theta-1|$ is maximal at an end of
+$[\theta_L,\theta_R]$, $R_0\ge R_L$); $\angle(\mathsf p_0,\mathsf p)\le\arcsin(|\mathsf d|/|\mathsf p_0|)\le\omega_{\mathrm p}$. So
+$\angle(e^{i\psi_1},\hat{\mathsf p})\le\angle_{\mathrm w}<\pi/2$ \HTSC9 and $\STA\in[\cos\angle_{\mathrm w},W_{\mathrm w}]$.
+
+\emph{$\TDb$.} $\TDb(\alpha_0\pm\xi)=\int_0^\xi\Lambda(\alpha_0\pm\xi')\sin(\xi'/2)\,d\xi'\in[\Lambda_{\min},\Lambda_{\max}]\cdot4\sin^2(\xi/4)$
+and $(\xi^2/4)(1-\xi^2/48)\le4\sin^2(\xi/4)\le\xi^2/4$. Since $\tan s/s$ is increasing on $(0,\pi/2)$ and $\TDb\le\bar b<\pi/2$
+\HTSC{10}: $\TDb/2\le\tau_{\TDb}\le(\TDb/2)(1+e_\tau)\le\beta_2\xi^2$.
+
+\emph{$C$.} $C=\TDr g(\TDb)=2\TDr\tau_{\TDb}^{1-v}/(1+\tau_{\TDb}^2)$. Upper: $C\le2\TDr_{\max}(\beta_2\xi^2)^{1-v}\le C_{\mathrm{hi}}\xi^{2-2v}$
+($\beta_2<1$ \HTSC{11}). Lower: $C\ge2\TDr_{\min}(b_{\mathrm{lo}}\xi^2/2)^{1-v}/(1+\tan^2(\bar b/2))\ge C_{\mathrm{lo}}\xi^{2-2v}$
+($b_{\mathrm{lo}}/2<1$ \HTSC{12}).
+
+\emph{$\TDa$.} $\TDa=\partial_\theta[\TDr(\cos\TDb+v)]=\STA(\cos\TDb+v)-\TDr\sin\TDb\,\partial_\theta\TDb$, and
+$|\TDr\sin\TDb\,\partial_\theta\TDb|\le\bar b\cdot\ell_{\max}\xi/2\le\mathrm{aux}$ ($|\partial_\theta\TDb|\le\Lambda\sin(\xi/2)\le\Lambda\xi/2$).
+
+\emph{$\partial_\theta\log C$} $=\STA/\TDr+(\cos\TDb-v)\,\partial_\theta\TDb/\sin\TDb$ (as $g'/g=(\cos\beta-v)/\sin\beta$,
+Lemma~\ref{lem:k}). Now $|\partial_\theta\TDb|/\TDb=\Lambda(\theta)\sin(\xi/2)/\int_0^\xi\Lambda\sin(\xi'/2)d\xi'\in
+[\Lambda_{\min}/\Lambda_{\max},\Lambda_{\max}/\Lambda_{\min}]\cdot\frac12\cot(\xi/4)$, and for $0<y\le1$, $1/y-y/2\le\cot y\le1/y$ (the
+function $y\cos y-\sin y+\frac{y^2}2\sin y$ vanishes at $0$ and has derivative $\frac{y^2}2\cos y\ge0$), so
+$(2/\xi)(1-\xi^2/32)\le\frac12\cot(\xi/4)\le2/\xi$. Moreover $(\cos\TDb-v)\TDb/\sin\TDb\in[\cos\bar b-v,\TDb\cot\TDb]\subset
+[\cos\bar b-v,1]$. Hence $(\cos\TDb-v)|\partial_\theta\TDb|/\sin\TDb\in[L_{\mathrm{lo}}/\xi,\,2\Lambda_{\max}/(\Lambda_{\min}\xi)]$, while
+$0<\STA/\TDr\le\STA_{\max}/\TDr_{\min}\le(\eta\STA_{\max}/\TDr_{\min})/\xi$. For $\theta>\alpha_0$ both terms are positive and
+$\partial_\theta\log C\le L_C/\xi$; for $\theta<\alpha_0$, $\partial_\theta\log C\le\STA_{\max}/\TDr_{\min}-L_{\mathrm{lo}}/\xi\le
+-(L_{\mathrm{lo}}-\eta\STA_{\max}/\TDr_{\min})/\xi<0$ \HTSC{15}, and $\ge-2\Lambda_{\max}/(\Lambda_{\min}\xi)\ge-L_C/\xi$.
+
+\emph{$\TDS$ at $t_1$.} In the frame of run 2 the tangent is the direction of $(\STA+i\TDr\,\partial_\theta\TDb)e^{i\TDb}$, so
+$|\sin\phi|=\TDr|\partial_\theta\TDb|/w_1\le\ell_{\max}\xi/2$; by Lemma~\ref{lem:HTp-twotime}(b) below (an identity-level bound) with
+$\rho=\TDr\ge\TDr_{\min}$, $w_1\ge1$: $|\TDS|\le\frac{v\,\ell_{\max}\xi}{2(1-v^2)\TDr_{\min}}\bigl[\TDr_{\max}\TDa_{\max}L_C/\xi+1+v\bigr]\le S_1v$
+($\xi\le\eta$).
+\end{proof}
+
+\begin{lemma}[Exact tilt formula]\label{lem:HTp-tilt}
+Let $\theta\in(0,\pi)\setminus\{\alpha_0\}$.
+\begin{enumerate}
+\item[(a)] At $t_1$, in the frame of run 2,
+\[
+\tau_{\TDb}^v\,\partial_\theta C=\frac{2\tau_{\TDb}\STA}{1+\tau_{\TDb}^2}+\TDr\,\partial_\theta\TDb\,(\cos\TDb-v).
+\]
+Consequently, on $I_\eta$: for $\theta>\alpha_0$, $0<\tau_{\TDb}^v\partial_\theta C\le\xi\bigl(\ell_{\max}/2+\STA_{\max}b_{\mathrm{hi}}(1+e_\tau)\eta\bigr)$;
+for $\theta<\alpha_0$, $\partial_\theta C<0$ and $|\tau_{\TDb}^v\partial_\theta C|\le\TDr|\partial_\theta\TDb|\le\ell_{\max}\xi/2$.
+\item[(b)] At any time $t$ of run 2 at which the true candidate $\theta$ exists with $0<\beta<\pi$ and $\TDa(\theta)\ne0$,
+\[
+Y_r:=\frac{\TDc\,\tau^v}{\TDa}=\Bigl(\frac\tau{\tau_{\TDb}}\Bigr)^v\frac{\tau_{\TDb}^v\,\partial_\theta C}{\TDa},
+\]
+and, with $N_\psi:=(1+v\cos\beta)Y_r-v\sin\beta$ and $D_\psi:=1-v\cos\beta-v\sin\beta\,Y_r$, the tangent
+$q=\partial_\theta S_\theta(t)$ satisfies $(1-v^2)q=\TDa(D_\psi+iN_\psi)$ (heading frame of run 2). If $\TDa>0$ and $D_\psi>0$, then
+the angle $\psi$ of $q$ against $\Eu$ satisfies $|\psi|<\pi/2$, $\tan\psi=N_\psi/D_\psi$, $|\psi|\le|\tan\psi|$, and
+$w=\TDa|D_\psi+iN_\psi|/(1-v^2)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $C=\TDr g(\TDb)$ and $\partial_\theta\TDr=\STA$, so $\partial_\theta C=g(\TDb)\STA+\TDr g'(\TDb)\partial_\theta\TDb$, with
+$g'=g(\cos\beta-v)/\sin\beta$ (Lemma~\ref{lem:k}). By Lemma~\ref{lem:T1-coord}(a), $\tau^vg(\beta)=2\tau/(1+\tau^2)=\sin\beta$; hence
+$\tau_{\TDb}^vg(\TDb)=2\tau_{\TDb}/(1+\tau_{\TDb}^2)$ and $\tau_{\TDb}^vg(\TDb)/\sin\TDb=1$, which is the identity. On the forward side
+both terms are positive: $2\tau_{\TDb}\STA/(1+\tau_{\TDb}^2)\le2\beta_2\xi^2\STA_{\max}=\STA_{\max}b_{\mathrm{hi}}(1+e_\tau)\xi^2\le
+\STA_{\max}b_{\mathrm{hi}}(1+e_\tau)\eta\,\xi$, and $0<\TDr\partial_\theta\TDb(\cos\TDb-v)\le\TDr\Lambda\xi/2\le\ell_{\max}\xi/2$
+(Lemma~\ref{lem:HTp-tang}(c)). On the tail side $\partial_\theta\log C<0$ (Lemma~\ref{lem:HTp-tang}(c)), so $\partial_\theta C<0$ and
+$|\tau_{\TDb}^v\partial_\theta C|=\TDr|\partial_\theta\TDb|(\cos\TDb-v)-2\tau_{\TDb}\STA/(1+\tau_{\TDb}^2)\le\TDr|\partial_\theta\TDb|$.
+
+(b) By Lemma~\ref{lem:T1-first}, $\TDc=\partial_\theta C$ does not depend on time and $\operatorname{Im}\Xi=\tau^v\TDc$,
+$\operatorname{Re}\Xi=\TDa$; so $\Xi=\TDa(1+iY_r)$ and $Y_r=(\tau/\tau_{\TDb})^v\tau_{\TDb}^v\TDc/\TDa$. Then
+$(1-v^2)q=\Xi-ve^{i\beta}\bar\Xi$ and $e^{i\beta}(1-iY_r)=\cos\beta+Y_r\sin\beta+i(\sin\beta-Y_r\cos\beta)$ give
+$(1-v^2)q=\TDa(D_\psi+iN_\psi)$ (this is Remark~\ref{rem:T1-tilt}(i)). If $\TDa>0$, $D_\psi>0$, then $\operatorname{Re}q>0$, so
+$\psi\in(-\pi/2,\pi/2)$ and $|\psi|\le|\tan\psi|$.
+\end{proof}
+
+\begin{lemma}[Two-time transport of the curvature]\label{lem:HTp-twotime}
+Let a label $\theta$ be true on $[t_1,t'']$, $t''\le\Bts$, with $0<\beta<\pi$ there, and write $'$ for $t_1$ (where $\tau'=\tau_{\TDb}$)
+and $''$ for $t''$.
+\begin{enumerate}
+\item[(a)] $|k''|\le(\tau''/\tau_{\TDb})^v\bigl(|k_1|+|\TDS'|\bigr)+|\TDS''|$, and $\tau''\ge\tau_{\TDb}$.
+\item[(b)] At any time of run 2, $|\TDS|\le\dfrac{v|\sin\phi|}{(1-v^2)\rho}\Bigl[\dfrac{\rho\,|\TDa|\,|\partial_\theta\log C|}{w^2}+1+v\Bigr]$.
+\item[(c)] At any time of run 2, $|\TDS|\le v(3+v)/(2(1-v)y)$.
+\item[(d)] $w''\le(\tau''/\tau_{\TDb})^v|\Xi'|/(1-v)\le\frac{1+v}{1-v}(\tau''/\tau_{\TDb})^vw_1$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) \eqref{eq:T1-k2} with $w'/w''\le1$; $\tau$ is increasing in time (Lemma~\ref{lem:T1-coord}(b)), and at $t_1$ the polar angle of the
+candidate in the frame of run 2 is $\TDb$. (b) \eqref{eq:T1-k} and $|v+\cos(\phi-\psi)|\le1+v$. (c) By Lemma~\ref{lem:T1-first} and
+$C=y\tau^{-v}$: $\partial_\theta\log C=\TDc/C=\operatorname{Im}\Xi/y$ and $\TDa=\operatorname{Re}\Xi$, so
+$\rho|\TDa\,\partial_\theta\log C|/w^2\le\rho|\Xi|^2/(2yw^2)\le(1+v)^2\rho/(2y)$; with (b), $|\sin\phi|\le1$ and $\rho\ge y$:
+$|\TDS|\le\frac v{1-v}\bigl[\frac{1+v}{2y}+\frac1\rho\bigr]\le\frac{v(3+v)}{2(1-v)y}$. (d) $\Xi''=\TDa+i\tau''^v\TDc$ and
+$\tau''\ge\tau'$ give $|\Xi''|\le(\tau''/\tau')^v|\Xi'|$; and $(1-v)w\le|\Xi|\le(1+v)w$ (Lemma~\ref{lem:T1-first}).
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Run 2: forward arc, virtual labels, tail}\label{sec:HTp-run2}
+
+Recall \eqref{eq:T1-h}: $h(t)=(1+v)(\TDr-\rho_0)-\TDr(1-\cos\TDb)+(1-v^2)\omega(t)$ in run 2 (exact).
+
+\begin{lemma}[Forward arc; true flow]\label{lem:HTp-fwd}
+Let $\theta=\alpha_0+\xi$, $0<\xi\le\eta$. For every $t\in[t_1,\TDtc)$:
+\begin{enumerate}
+\item[(a)] $h(t)\ge h_{\mathrm f}\xi+(1-v^2)\omega(t)\ge h_{\mathrm f}(\xi+\omega(t))>0$ and $\rho\ge h/(1+v)\ge\rho_{\mathrm c}(\xi+\omega)$;
+in particular $\rho>0$ and $0<\beta<\pi$.
+\item[(b)] $\tau\le\tau_{\TDb}((1+v)\TDr/h)^{1+\mu}$, $(\tau/\tau_{\TDb})^v\le(Q/(\xi+\omega))^\mu$, and
+$0<y\le y_{\mathrm f}\xi^2(Q/(\xi+\omega))^\mu$.
+\item[(c)] $0<Y_r\le Y_1\xi(Q/(\xi+\omega))^\mu\le\bar Y$; $|\psi|\le|\tan\psi|\le\theta_{\mathrm f}\xi(Q/(\xi+\omega))^\mu\le
+\theta_{\mathrm f}Q^{\HTmb}\xi^{1-\mu}$; $1\le w\le W_{\mathrm f}$.
+\item[(d)] At $t=\Bts$: $\tau\le\tau_{\mathrm f}\xi^{1-\mu}\le\bar\tau_{\mathrm f}$, and $\rho(t)\ge\rho(\Bts)\ge\rho_{\mathrm c}\xi$ for all
+$t\in[t_1,\Bts]$; $\rho\ge\varepsilon$ on $[0,t_1]$. Hence every label with $\rho_{\mathrm c}\xi>\varepsilon$, in particular every
+$\xi\ge\xi_1\varepsilon$ and a neighbourhood of $\xi=\xi_1\varepsilon$ \HTSC{17}, has $\rho>\varepsilon$ on $[t_1,\Bts]$: it is true up to
+$\Bts$, virtual $=$ true there, and the front is $C^\infty$ near it. For $\xi_1\varepsilon\le\xi\le\eta$ moreover
+$\rho(\Bts)\le\rho_{\mathrm u}\xi$ and $|k|\le K_{\mathrm f}\xi^{-\mu}$ at $\Bts$.
+\item[(e)] The true front at every $t\in[t_1,\TDtc)$ is tangent to $\Eu$ at the candidate $\alpha_0$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $\TDr-\rho_0=\int_{\alpha_0}^\theta\STA\ge\STA_{\min}\xi$ and $\TDr(1-\cos\TDb)\le\TDr_{\max}\TDb^2/2\le(\TDr_{\max}b_{\mathrm{hi}}^2\eta^3/2)\xi$
+(Lemma~\ref{lem:HTp-tang}(c)); so $h\ge h_{\mathrm f}\xi+(1-v^2)\omega\ge h_{\mathrm f}(\xi+\omega)$ ($h_{\mathrm f}\le1-\HTvb^2\le1-v^2$,
+\HTSC{16}). $h=\rho(\cos\beta+v)\le(1+v)\rho$. $\rho>0$ and Lemma~\ref{lem:T1-coord} give $0<\beta<\pi$.
+
+(b) \eqref{eq:T1-tau}, $v(1+\mu)=\mu$, $(1+v)\TDr/h\le Q/(\xi+\omega)$ by (a), $\tau_{\TDb}\le\beta_2\xi^2$ and $2\TDr\le2\TDr_{\max}$.
+
+(c) By Lemma~\ref{lem:HTp-tilt}, $Y_r=(\tau/\tau_{\TDb})^v\tau_{\TDb}^v\partial_\theta C/\TDa\in(0,Y_1\xi(Q/(\xi+\omega))^\mu]$, and
+$Y_1\xi(Q/(\xi+\omega))^\mu\le Y_1Q^\mu\xi^{1-\mu}\le Y_1Q^{\HTmb}\eta^{1-\HTmb}=\bar Y$ \HTSC{18}. In Lemma~\ref{lem:HTp-tilt}(b),
+$N_\psi\in[-v\sin\beta,(1+v)Y_r]$ and $D_\psi\ge1-v-v\bar Y>0$ \HTSC{19}, and $\TDa\ge\TDa_{\min}>0$ \HTSC{13}; so $|\psi|\le|\tan\psi|$.
+With $\sin\beta=y/\rho\le(y_{\mathrm f}/\rho_{\mathrm c})\xi(Q/(\xi+\omega))^\mu$:
+$|\tan\psi|\le\max((1+v)Y_1,vy_{\mathrm f}/\rho_{\mathrm c})\,\xi(Q/(\xi+\omega))^\mu/(1-v-v\bar Y)\le\theta_{\mathrm f}\xi(Q/(\xi+\omega))^\mu$.
+$w=\TDa|D_\psi+iN_\psi|/(1-v^2)\le W_{\mathrm f}$ ($|D_\psi|\le1+v+v\bar Y$, $|N_\psi|\le(1+v)\bar Y+v$); $w\ge1$ by \eqref{eq:T1-laws}.
+
+(d) By (b) with $h\ge h_{\mathrm f}\xi$: $\tau(\Bts)\le\beta_2\xi^2(Q/\xi)^{1+\mu}\le\tau_{\mathrm f}\xi^{1-\mu}\le\bar\tau_{\mathrm f}$, so
+$\cos\beta\ge1-2\bar\tau_{\mathrm f}^2>v$ \HTSC{20}. $\tau$ increases in time, so $\cos\beta>v$ on $[t_1,\Bts]$, and $\rho$ is decreasing
+there (Lemma~\ref{lem:T1-coord}(c)): $\rho(t)\ge\rho(\Bts)\ge\rho_{\mathrm c}\xi$. In run 1, $\rho\ge\varepsilon$ since
+$\theta\ge\theta_L>\STas$ (Lemma~\ref{lem:HTp-run1}(a)). Virtual $=$ true by Lemma~\ref{lem:B-VC}(c) and its proof. For
+$\xi\ge\xi_1\varepsilon$: $\omega(\Bts)\le v\varepsilon/(3(1-v)^2)\le\delta_1\xi$, $h\le(1+v)\STA_{\max}\xi+\delta_1\xi$, and
+$\rho=h/(\cos\beta+v)\le h/(1-2\bar\tau_{\mathrm f}^2)\le\rho_{\mathrm u}\xi$.
+
+\emph{Curvature.} Lemma~\ref{lem:HTp-twotime}(a) with $t''=\Bts$: $(\tau/\tau_{\TDb})^v\le(Q/\xi)^\mu\le Q^{\HTmb}\xi^{-\mu}$,
+$|k_1|\le1+\kappa_{\mathrm w}$, $|\TDS'|\le S_1v$. For $\TDS''$, by Lemma~\ref{lem:HTp-twotime}(b):
+$|\sin\phi|=|\sin(\beta-\psi)|\le\sin\beta+|\psi|\le2\tau+|\psi|\le(2\tau_{\mathrm f}+\theta_{\mathrm f}Q^{\HTmb})\xi^{1-\mu}$, $\rho\ge\rho_{\mathrm c}\xi$,
+$\rho|\TDa||\partial_\theta\log C|/w^2\le\rho_{\mathrm u}\xi\TDa_{\max}L_C/\xi$; so $|\TDS''|\le S_2v\xi^{-\mu}$, and
+$|k|\le Q^{\HTmb}\xi^{-\mu}(1+\kappa_{\mathrm w}+S_1v)+S_2v\xi^{-\mu}\le K_{\mathrm f}\xi^{-\mu}$ ($\xi^{-\mu}\ge1$).
+
+(e) Lemma~\ref{lem:T1-fwd}(e): let $\xi\to0$ in (c) with $\omega(t)>0$ fixed.
+\end{proof}
+
+\begin{lemma}[The virtual labels next to $X_0$]\label{lem:HTp-virt}
+At $\Bts$, for every $\theta=\alpha_0+\xi$, $0\le\xi\le\eta$, the virtual front has tangent $e^{i\psi}\Eu$ with
+$|\psi(\theta,\Bts)|\le\theta_{\mathrm v}\xi^{1-\mu}$, and $1\le w\le W_{\mathrm v}$; $\psi(\alpha_0,\Bts)=0$. For $\xi\ge\xi_1\varepsilon$ the
+virtual front is the true one.
+\end{lemma}
+\begin{proof}
+For $\xi_1\varepsilon\le\xi\le\eta$: Lemma~\ref{lem:HTp-fwd}(c),(d) at $\Bts$ ($\theta_{\mathrm f}Q^{\HTmb}\le\theta_{\mathrm v}$,
+$W_{\mathrm f}\le W_{\mathrm v}$). Let $0<\xi<\xi_1\varepsilon$ ($\le\eta$ by \HTSC{40}). On $[0,t_1]$ the label is true with $\rho\ge\varepsilon$
+(Lemma~\ref{lem:HTp-run1}(a)). On $[t_1,\TDta]$: $h_\theta(t)-h_{\alpha_0}(t)=(1+v)(\TDr-\rho_0)-\TDr(1-\cos\TDb)\ge h_{\mathrm f}\xi>0$
+(proof of Lemma~\ref{lem:HTp-fwd}(a)) and $h_{\alpha_0}(t)=(1+v)\rho_{\alpha_0}(t)\ge(1+v)\varepsilon$ (the candidate $\alpha_0$ is on the
+ray), so $(1+v)\rho_\theta\ge h_\theta>(1+v)\varepsilon$. Hence virtual $=$ true on $[0,\TDta]$ (Lemma~\ref{lem:B-VC}(c) and its proof), and
+by Lemma~\ref{lem:HTp-fwd}(b),(c) at $\TDta$ ($\omega(\TDta)=\varepsilon/(1-v)\ge\varepsilon$):
+$|\psi(\TDta)|\le\theta_{\mathrm f}\xi(Q/(\xi+\varepsilon))^\mu$, $0\le y(\TDta)\le y_{\mathrm f}\xi^2(Q/(\xi+\varepsilon))^\mu$,
+$w(\TDta)\le W_{\mathrm f}$. On $[\TDta,\Bts]$, of length $I\le\varepsilon/(1-v)$ (so $vI/\varepsilon\le\mu$), the virtual field acts: as in the
+proof of Lemma~\ref{lem:T1-virt}, $y'=v(f(\rho)/\rho)y$ with $0\le f/\rho\le2/\varepsilon$, so $0\le y(t)\le y(\TDta)e^{2\mu}$; and by
+Lemma~\ref{lem:ST-D0}(a), $|\psi|'\le(v/\varepsilon)|\psi|+vy/\varepsilon^2$ almost everywhere. By Gronwall,
+\[
+|\psi(\Bts)|\le e^\mu\Bigl[|\psi(\TDta)|+\frac{vI}{\varepsilon^2}e^{2\mu}y(\TDta)\Bigr]\le e^\mu\bigl[\theta_{\mathrm f}+\mu e^{2\mu}y_{\mathrm f}
+(\xi/\varepsilon)\bigr](Q/\xi)^\mu\xi\le\theta_{\mathrm v}\xi^{1-\mu}
+\]
+($\xi/\varepsilon<\xi_1$). By Lemma~\ref{lem:B-1}(i) and Lemma~\ref{lem:B-V}(ii), $w(\Bts)\le w(\TDta)e^{va^*I}\le W_{\mathrm f}e^{2\mu}\le
+W_{\mathrm v}$; $w\ge1$ by Lemma~\ref{lem:B-VC}(a). For $\xi=0$: $\psi(\TDta)=0=y(\TDta)$ and the same inequality gives $\psi\equiv0$.
+\end{proof}
+
+\begin{lemma}[Tail, end, labels seen]\label{lem:HTp-tail}
+\begin{enumerate}
+\item[(a)] There is a unique $\TDbe=\alpha_0-\TDxe$, $\TDxe\in(0,\eta)$, with $C(\TDbe)=\varepsilon g_{\max}$, and
+\[
+\xi_-\varepsilon^{1/(2-2v)}\le\TDxe\le\xi_+\varepsilon^{1/(2-2v)}\le\HTxb;\qquad\TDxe\ge\xi_-\varepsilon\ge\varepsilon/2 .
+\]
+\item[(b)] Every true candidate $\theta\in[\TDbe,\alpha_0]$ is seen by $\Bts$.
+\item[(c)] \emph{Tail at $\Bts$}, $\theta=\alpha_0-\xi$, $\TDxe\le\xi\le\eta$ (true candidates, never caught; frame of run 2 at $\Bts$):
+$h<0$, $h_{\mathrm t}\xi\le|h|\le h_{\mathrm T}\xi$; $\tau\ge\tau_{\mathrm t}>1$; $-z_{\mathrm T}\xi\le z\le-h_{\mathrm t}\xi$;
+$0<y\le y_{\mathrm T}\xi^{2-\TDmT}$; $\rho\le\rho_{\mathrm T}\xi$; $(\tau/\tau_{\TDb})^v\le T_{\mathrm t}\xi^{-\TDmT}$;
+$-\theta_{\mathrm t}\xi^{1-\TDmT}\le\psi<0$; $1\le w\le W_{\mathrm t}$; $|k|\le K_{\mathrm t}\xi^{-\TDmT}$.
+\item[(d)] $E_Y:=x_{\TDbe}(\Bts)=X_0+z_E\Eu+iy_E\Eu$ with $-z_{\mathrm T}\TDxe\le z_E\le-h_{\mathrm t}\TDxe$ and
+$0<y_E\le y_{\mathrm T}\TDxe^{2-\TDmT}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) By Lemma~\ref{lem:HTp-tang}(c), $\xi\mapsto C(\alpha_0-\xi)$ is continuous and strictly increasing on $(0,\eta]$, $\le C_{\mathrm{hi}}\xi^{2-2v}
+\to0$, and $C(\alpha_0-\eta)\ge C_{\mathrm{lo}}\eta^2>\HTeb g_{\mathrm b}\ge\varepsilon g_{\max}$ \HTSC{22}. So $\TDbe$ exists and is unique, and
+$C_{\mathrm{lo}}\TDxe^{2-2v}\le\varepsilon g_{\max}\le C_{\mathrm{hi}}\TDxe^{2-2v}$. Hence $\TDxe\ge(\varepsilon/C_{\mathrm{hi}})^{1/(2-2v)}\ge
+\xi_-\varepsilon^{1/(2-2v)}$ ($C_{\mathrm{hi}}<1$ \HTSC{21}, $g_{\max}\ge1$) and $\TDxe\le(g_{\mathrm b}/C_{\mathrm{lo}})^{1/(2-2v)}
+\varepsilon^{1/(2-2v)}\le\xi_+\varepsilon^{1/(2-2v)}$ ($g_{\mathrm b}/C_{\mathrm{lo}}>1$ \HTSC{23}). Also
+$\varepsilon\le\varepsilon^{1/(2-2v)}\le\varepsilon^{1/2}\le\HTeb^{1/2}$, $\xi_-\ge\frac12$ \HTSC{28}, $\HTxb<\eta$ \HTSC{24}.
+
+(c) \emph{$h$.} $\rho_0-\TDr=\int_\theta^{\alpha_0}\STA\in[\STA_{\min}\xi,\STA_{\max}\xi]$; $0\le\TDr(1-\cos\TDb)\le\TDr_{\max}b_{\mathrm{hi}}^2\eta^3\xi/2$;
+$0\le(1-v^2)\omega(\Bts)\le(1+v)v\varepsilon/(3(1-v))\le\delta_2\xi$ ($\varepsilon\le\xi/\xi_-$ by (a)). So by \eqref{eq:T1-h}
+$h\le-(\STA_{\min}-\delta_2)\xi=-h_{\mathrm t}\xi<0$ \HTSC{25} and $|h|\le h_{\mathrm T}\xi$. The candidate is never caught: $\rho\ge
+C/g_{\max}>0$ in run 2 (Lemma~\ref{lem:T1-coord}(c)) and $\rho\ge\varepsilon$ in run 1; and $0<\beta<\pi$ in run 2 since $\TDb\in(0,\pi)$.
+
+\emph{$\tau$.} Lemma~\ref{lem:T1-coord}(d): $\tau^{1+v}\ge2|h|/((1-v)C)\ge2h_{\mathrm t}\xi/(C_{\mathrm{hi}}\xi^{2-2v})\ge
+(2h_{\mathrm t}/C_{\mathrm{hi}})\eta^{-(1-2v)}\ge m_\tau>1$ \HTSC{26}, so $\tau\ge\tau_{\mathrm t}>1$. Then
+$(1+v)C\tau^{v-1}/(2|h|)\le(1+v)\tau_{\mathrm t}^{\HTvb-1}/m_\tau\le e_{\mathrm t}$, and Lemma~\ref{lem:T1-coord}(d) gives
+$2|h|/C\le(1-v)\tau^{1+v}\le(1+e_{\mathrm t})\,2|h|/C$.
+
+\emph{$y$.} $y=C\tau^v=C(\tau^{1+v})^{v/(1+v)}$, so
+\[
+y\le C^{1/(1+v)}\Bigl(\frac{2(1+e_{\mathrm t})|h|}{1-v}\Bigr)^{v/(1+v)}\le
+C_{\mathrm{hi}}^{1/(1+v)}\xi^{(2-2v)/(1+v)}(y_{\mathrm c}\xi)^{v/(1+v)}\le y_{\mathrm T}\xi^{(2-v)/(1+v)},
+\]
+and $(2-v)/(1+v)=2-\TDmT$.
+
+\emph{$\tau/\tau_{\TDb}$.} $\tau^{1+v}\le(1+e_{\mathrm t})2|h|/((1-v)C)\le y_{\mathrm c}\xi/(C_{\mathrm{lo}}\xi^{2-2v})$ and
+$\tau_{\TDb}\ge b_{\mathrm{lo}}\xi^2/2$, so
+\[
+\frac\tau{\tau_{\TDb}}\le\max\Bigl(1,\frac{y_{\mathrm c}}{C_{\mathrm{lo}}}\Bigr)\frac2{b_{\mathrm{lo}}}\,\xi^{-3/(1+v)}\qquad\text{and}\qquad
+\Bigl(\frac\tau{\tau_{\TDb}}\Bigr)^v\le T_{\mathrm t}\xi^{-\TDmT}.
+\]
+
+\emph{$\psi$.} By Lemma~\ref{lem:HTp-tilt}, $Y_r<0$ and $|Y_r|\le T_{\mathrm t}\xi^{-\TDmT}\ell_{\max}\xi/(2\TDa_{\min})=Y_2\xi^{1-\TDmT}\le
+\bar Y_2$. Here $\cos\beta<-v$ ($h<0$), so $N_\psi<0$ with $|N_\psi|\le|Y_r|+v\sin\beta$, and $D_\psi\ge1$: $\psi\in(-\pi/2,0)$ and
+$|\psi|\le|Y_r|+v\sin\beta$. Further $\rho\ge|h|\ge h_{\mathrm t}\xi$ ($|\cos\beta+v|\le1$) and
+$\sin\beta=y/\rho\le y_{\mathrm T}\xi^{1-\TDmT}/h_{\mathrm t}$: $|\psi|\le\theta_{\mathrm t}\xi^{1-\TDmT}$.
+
+\emph{$z$, $\rho$.} $z=h-v\rho<0$, $|z|\ge|h|\ge h_{\mathrm t}\xi$; $\rho\le|z|+y$ gives $(1-v)|z|\le|h|+vy\le
+(h_{\mathrm T}+vy_{\mathrm T}\eta^{1-\TDmT})\xi$, so $|z|\le z_{\mathrm T}\xi$; and $\rho\le|z|(1+(y/|z|)^2)^{1/2}\le\rho_{\mathrm T}\xi$
+($y/|z|\le y_{\mathrm T}\eta^{1-\HTmTb}/h_{\mathrm t}$).
+
+\emph{$w$.} $w=\TDa|D_\psi+iN_\psi|/(1-v^2)\le W_{\mathrm t}$ ($|D_\psi|\le1+v+v\bar Y_2$, $|N_\psi|\le(1+v)\bar Y_2+v$); $w\ge1$.
+
+\emph{$k$.} Lemma~\ref{lem:HTp-twotime}(a),(b) with $t''=\Bts$: $|k|\le(\tau/\tau_{\TDb})^v(1+\kappa_{\mathrm w}+S_1v)+|\TDS''|$, where
+$|\sin\phi|\le\sin\beta+|\psi|\le(y_{\mathrm T}/h_{\mathrm t}+\theta_{\mathrm t})\xi^{1-\TDmT}$, $\rho\ge h_{\mathrm t}\xi$ and
+$\rho|\TDa||\partial_\theta\log C|\le\rho_{\mathrm T}\xi\,\TDa_{\max}L_C/\xi$; so $|\TDS''|\le S_3v\xi^{-\TDmT}$ and
+$|k|\le K_{\mathrm t}\xi^{-\TDmT}$.
+
+(d) is (c) at $\xi=\TDxe$: the label $\TDbe$ has $\rho\ge C/g_{\max}=\varepsilon$ in run 2 and $\rho\ge\varepsilon$ in run 1, so its virtual
+candidate is the true one.
+
+(b) \emph{Label $\alpha_0$}: $\rho_{\alpha_0}(\TDta)=\varepsilon$. \emph{Labels $\xi\in[\xi_2v\varepsilon,\TDxe]$}: $C(\alpha_0-\xi)\le
+C(\TDbe)=\varepsilon g_{\max}$ (monotonicity), and $h(\Bts)\le-(1+v)\STA_{\min}\xi+(1+v)v\varepsilon/(3(1-v))\le0$; so
+$\cos\beta(\Bts)\le-v<v$, while at $t_1$, $\cos\beta=\cos\TDb\ge\cos\bar b>v$ \HTSC{14}. By Lemma~\ref{lem:T1-coord}(b),(c) the minimum
+$C/g_{\max}\le\varepsilon$ of $\rho$ is attained during $(t_1,\Bts)$: seen. \emph{Labels $\xi\in(0,\varepsilon/2]$} (this covers
+$(0,\xi_2v\varepsilon)$ by \HTSC{27}): at $\TDta$, $(1-v^2)\omega(\TDta)=(1+v)\varepsilon$ and
+$h(\TDta)=(1+v)\varepsilon-(1+v)(\rho_0-\TDr)-\TDr(1-\cos\TDb)\in[h_{\mathrm a}\varepsilon,(1+v)(\varepsilon-\STA_{\min}\xi)]$. For the
+lower bound: $\STA_{\max}=W_{\mathrm w}\le e^{\HTvb\bar t_1/\sin(1/2)}<1.6$ by \HTSC3, \HTSC{35}, so $\STA_{\max}\xi\le\varepsilon$ and
+$(1+v)(\varepsilon-\STA_{\max}\xi)\ge(1-\STA_{\max}/2)\varepsilon$; and $\TDr(1-\cos\TDb)\le\TDr_{\max}b_{\mathrm{hi}}^2\xi^4/2\le
+\TDr_{\max}b_{\mathrm{hi}}^2\HTeb^3\varepsilon/32$; $h_{\mathrm a}>0$ \HTSC{29}. By \eqref{eq:T1-tau},
+$\tau(\TDta)\le\beta_2\xi^2(Q_{\mathrm a}/\varepsilon)^{1+\mu}\le\beta_2Q_{\mathrm a}^{1+\mu}\varepsilon^{1-\mu}/4\le\tau_{\mathrm a}$, and also
+$\tau^2\le\tau_{\mathrm a}\beta_2Q_{\mathrm a}^{1+\mu}\xi^2\varepsilon^{-1-\mu}$. Then $\cos\beta+v\ge1+v-2\tau^2>0$ \HTSC{30}, and
+\[
+\rho(\TDta)=\frac h{\cos\beta+v}\le\frac{(1+v)(\varepsilon-\STA_{\min}\xi)}{1+v-2\tau^2}<\varepsilon
+\iff2\tau^2\varepsilon<(1+v)\STA_{\min}\xi,
+\]
+which holds because $2\tau^2\varepsilon\le2\tau_{\mathrm a}\beta_2Q_{\mathrm a}^{1+\mu}\xi^2\varepsilon^{-\mu}\le
+\tau_{\mathrm a}\beta_2Q_{\mathrm a}^{1+\mu}\varepsilon^{1-\mu}\xi\le4\tau_{\mathrm a}^2\xi<\STA_{\min}\xi$ ($\xi\le\varepsilon/2$; \HTSC{31}). So
+$\rho(\TDta)<\varepsilon$: seen. Since $\TDxe\ge\varepsilon/2$ and $\xi_2v\varepsilon\le\varepsilon/2$, the three ranges cover $[\TDbe,\alpha_0]$.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{Bulk, hole and chords}\label{sec:HTp-bulk}
+
+\begin{lemma}[Bulk and hole]\label{lem:HTp-bulk}
+\begin{enumerate}
+\item[(a)] Lemma~\ref{lem:T1-hole}(a) holds: for every $\theta\in(0,2\pi)\setminus\{\alpha_0\}$ the true trajectory exists on $[0,\Bts]$ and
+never meets Harry; the label $2\pi$ ($\equiv0$) is caught at $1/(1-v)<t_1$.
+\item[(b)] Let $\theta\in(0,2\pi)\setminus I_\eta$, $\chi:=\min(\theta,2\pi-\theta)$. In the frame of run 2,
+$\TDb(\theta)\in[b_{\mathrm l},\pi/3+2e_\beta]$, $y(\theta,t)\ge y_{\mathrm b}$ for $t\in[t_1,\Bts]$, and at $\Bts$ the true front near
+$\theta$ is $C^\infty$ with $|k|\le K_{\mathrm b}$ and $w\le W_{\mathrm b}W_{\mathrm{all}}(2/\chi)^{2v}$.
+\item[(c)] \emph{(Hole.)} $Z_1:=\lim_{\alpha\to0\pm}S_\alpha(t_1)$ exists and equals $P(t_1)-(1+v)$; $\Gamma_1:=\{S_\alpha(t_1):0<|\alpha|\le0.005\}
+\cup\{Z_1\}$ is a $C^1$ arc of finite length with tangent $i$ at $Z_1$. Let $\Phi$ be the flow map from $t_1$ to $\Bts$ of the true field
+$x\mapsto v(x-P(t))/|x-P(t)|$. On $B(1,r_{\mathrm B})$, $\Phi$ is a $C^\infty$ diffeomorphism onto its image, $\Gamma_1\subset
+B(1,r_{\mathrm B})$, $Z_{\mathrm s}:=\Phi(Z_1)=\lim_{\alpha\to0\pm}S_\alpha(\Bts)$, and $\Gamma_{\mathrm s}:=\Phi(\Gamma_1)$ is a $C^1$ arc
+through $Z_{\mathrm s}$ which is the true front for $\alpha\ne0$ and whose unit tangent is $K_{\mathrm b}$-Lipschitz in arclength.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) The proof of Lemma~\ref{lem:T1-hole}(a) is exact (it uses Lemma~\ref{lem:T1-coord}(c), Lemma~\ref{lem:T1-tang}(a), $\rho\ge1$ for
+$\alpha=\pi$ from the exact part of Lemma~\ref{lem:T1-run1}(b), and $\Bts<\TDtc$).
+
+(b) \emph{$\TDb$.} $\beta^*=\arg(S_{\alpha_0}(t_1)-P(t_1))$, $\arg(e^{i\pi/3}-2)=5\pi/6$, and the two vectors differ by $\le e_\rho<\sqrt3$
+(Lemma~\ref{lem:HTp-tang}(b)): $|\beta^*-5\pi/6|\le e_\beta$, so $\pi-\beta^*\in[\pi/6-e_\beta,\pi/6+e_\beta]$. Upper half, $\theta\notin I_\eta$:
+$\beta_1$ is monotone on each side of $\alpha_0$ (Lemma~\ref{lem:T1-tang}(a)), so $\TDb=\beta_1-\beta^*\ge\min(\TDb(\alpha_0-\eta),
+\TDb(\alpha_0+\eta))\ge b_{\mathrm{lo}}\eta^2=b_{\mathrm l}$, and $\TDb<\pi-\beta^*$; $\theta=\pi$: $\TDb=\pi-\beta^*$; lower half:
+$\TDb\in(\pi-\beta^*,2\pi-2\beta^*]$. Hence $\TDb\in[b_{\mathrm l},\pi/3+2e_\beta]$ (\HTSC{32}: $\pi-\beta^*\ge b_{\mathrm l}$), and
+$\sin\TDb\ge\sin b_{\mathrm l}$ by \HTSC{33}. \emph{$y$.} $\TDr=\rho_1\ge1+v\ge1$ (Lemma~\ref{lem:HTp-run1}(d)), so
+$y(t_1)=\TDr\sin\TDb\ge y_{\mathrm b}$; $y=C\tau^v$ is non-decreasing in run 2, so $y\ge y_{\mathrm b}$ on $[t_1,\Bts]$; in particular
+$\rho\ge y_{\mathrm b}>0$ and $0<\beta<\pi$ there.
+
+\emph{$\tau$.} $\tau(t_1)=\tau_{\TDb}\ge\tan(b_{\mathrm l}/2)$; at $\Bts$, $\tau=\tan(\beta/2)=(\rho-z)/y\le2\rho/y_{\mathrm b}$, and
+$\rho(\Bts)\le\TDr+(1+v)(\Bts-t_1)\le(|e^{i\theta}-2|+d_1)+(1+v)(\sqrt3+e_\rho)/(1-v)\le H_{\mathrm b}$. So $1\le\tau(\Bts)/\tau_{\TDb}\le
+T_{\mathrm b}$ and $(\tau(\Bts)/\tau_{\TDb})^v\le T_{\mathrm b}^{\HTvb}$ \HTSC{34}.
+
+\emph{$k$, $w$.} By Lemma~\ref{lem:HTp-twotime}(c) with $y\ge y_{\mathrm b}$, $|\TDS|\le S_{\mathrm b}v$ at $t_1$ and at $\Bts$; by
+Lemma~\ref{lem:HTp-twotime}(a) and Lemma~\ref{lem:HTp-run1}(d), $|k(\Bts)|\le T_{\mathrm b}^{\HTvb}(k_{\mathrm{all}}+S_{\mathrm b}\HTvb)+
+S_{\mathrm b}\HTvb=K_{\mathrm b}$; by Lemma~\ref{lem:HTp-twotime}(d), $w(\Bts)\le\frac{1+v}{1-v}T_{\mathrm b}^{\HTvb}w_1\le
+W_{\mathrm b}W_{\mathrm{all}}(2/\chi)^{2v}$. The front is $C^\infty$ near $\theta$ since $\rho>0$ on $[0,\Bts]$ ((a)).
+
+(c) \emph{$\Gamma_1$.} By Lemma~\ref{lem:HTp-run1}(c), for $0<\alpha\le\frac12$, $y(\alpha,t_1)\le2\mathcal E_1\tan(\alpha/2)^{(1-v)/(1+v)}\to0$;
+$z=h_1-v\rho_1<0$ and $\rho_1\le|z|+y$ give $(1-v)|z|\le|h_1|\le(1-v)|z|+vy$ with $|h_1|=(1-v^2)+(1-\cos\alpha)$, so
+$\bigl||z|-(1+v)\bigr|\le(1-\cos\alpha+vy)/(1-v)\to0$: $S_\alpha(t_1)\to P(t_1)-(1+v)$, and by the mirror symmetry the same from below.
+The tangent at $\alpha\in(0,\frac12]$ is $e^{i(\pi/2+\delta)}$ with $0\le\delta\le\arctan(d_{\mathrm{arm}}y)\to0$, at the mirror label
+$e^{i(\pi/2-\delta)}$: both tend to $i$. Length: $w_1\le W_{\mathrm{arm}}(2/|\alpha|)^{2v}$ is integrable ($2v<1$). Hence the arclength
+parametrisation of $\Gamma_1$ is continuous, $C^\infty$ off $Z_1$ with unit speed, and its derivative extends continuously (by $i$) to
+$Z_1$: $\Gamma_1$ is $C^1$.
+
+\emph{$\Phi$.} For $X(t_1)\in B(1,r_{\mathrm B})$ and $t\in[t_1,\Bts]$: $|X(t)-1|\le r_{\mathrm B}+vT_2$ (speed $\le v$), while $P(t)$ is
+within $d_P$ of $\TDSz$ and $\operatorname{dist}(1,\TDSz)=\frac12$ (the foot $(5/4,\sqrt3/4)$ of the perpendicular from $1$ is the
+midpoint of $\TDSz$); so $|X(t)-P(t)|\ge\rho_{\mathrm h}>0$ \HTSC{36}. The field is $C^\infty$ with bounded derivatives along these
+trajectories, and $\Phi$ is a $C^\infty$ diffeomorphism of $B(1,r_{\mathrm B})$ onto its image. $|S_\alpha(t_1)-1|\le|e^{i\alpha}-1|+vt_1\le
+0.005+\HTvb\bar t_1=r_{\mathrm B}$ for $|\alpha|\le0.005$, and $Z_1$ is a limit of such points: $\Gamma_1\subset B(1,r_{\mathrm B})$ (closed
+ball). $\Gamma_{\mathrm s}=\Phi(\Gamma_1)$ is $C^1$, $\Phi(Z_1)=\lim\Phi(S_\alpha(t_1))=\lim S_\alpha(\Bts)$, and off $\alpha=0$ it is the true
+front, whose curvature is bounded by $K_{\mathrm b}$ by (b) (the labels $0<|\alpha|\le0.005$ are not in $I_\eta\subset[\frac12,\frac\pi2]$).
+The tangent angle of $\Gamma_{\mathrm s}$ is continuous with derivative bounded by $K_{\mathrm b}$ off one point: it is
+$K_{\mathrm b}$-Lipschitz.
+\end{proof}
+
+\begin{lemma}[Chords of mixed virtual and true candidates]\label{lem:HTp-chord}
+Let $X_a,X_b:[0,\Bts]\to\R^2$ be two trajectories with $X_a(0)=e^{i\theta_a}$, $X_b(0)=e^{i\theta_b}$, each solving $X'=vV(X-P)$ with
+$V=F$ (a virtual candidate) or $V(x)=x/|x|$ (a true candidate, not caught on $[0,\Bts]$). If $|e^{i\theta_b}-e^{i\theta_a}|>2\varepsilon$,
+then $|X_b(t)-X_a(t)|\ge|e^{i\theta_b}-e^{i\theta_a}|$ for all $t\in[0,\Bts]$. The same holds if one of them is replaced by the limit
+point $Z_{\mathrm s}$ of Lemma~\ref{lem:HTp-bulk}(c) (with $\theta=0$).
+\end{lemma}
+\begin{proof}
+Both fields are monotone: $(F(p)-F(q))\cdot(p-q)\ge0$ (Lemma~\ref{lem:B-V}(iv)), and for $p,q\ne0$,
+$(p/|p|-q/|q|)\cdot(p-q)=|p|+|q|-(p\cdot q)(1/|p|+1/|q|)\ge0$. Moreover $F(x)=x/|x|$ outside the open disc $D_\varepsilon$ of radius
+$\varepsilon$ (Lemma~\ref{lem:B-V}(i)). Put $D:=X_b-X_a$ and $p_\bullet:=X_\bullet-P$, so $D=p_b-p_a$ and
+$(|D|^2)'=2v\bigl(V_b(p_b)-V_a(p_a)\bigr)\cdot(p_b-p_a)$. If $V_a=V_b$ this is $\ge0$. If $V_a\ne V_b$ and, say, $p_b\notin D_\varepsilon$,
+then $V_b(p_b)=V_a(p_b)$, and again $(|D|^2)'=2v(V_a(p_b)-V_a(p_a))\cdot(p_b-p_a)\ge0$; similarly if $p_a\notin D_\varepsilon$ (a true
+candidate has $p\ne0$). So $(|D|^2)'\ge0$ at every time at which $|D|\ge2\varepsilon$ (then $p_a$, $p_b$ are not both in $D_\varepsilon$).
+Let $c_0:=|D(0)|>2\varepsilon$ and suppose $|D(t)|<c_0$ for some $t$; let $t^*:=\inf\{t:|D(t)|<c_0\}$. Then $|D|\ge c_0>2\varepsilon$ on
+$[0,t^*]$ and, by continuity, $|D|>2\varepsilon$ on $[t^*,t^*+\sigma)$ for some $\sigma>0$, where $|D|^2$ is non-decreasing; so
+$|D|\ge|D(t^*)|\ge c_0$ there, contradicting the definition of $t^*$. For $Z_{\mathrm s}=\lim_{\alpha\to0}S_\alpha(\Bts)$: if
+$|1-e^{i\theta}|>2\varepsilon$, then $|e^{i\alpha}-e^{i\theta}|>2\varepsilon$ for small $\alpha$; pass to the limit.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{The curve \texorpdfstring{$x^0$}{x0}, lengths and the three cases of (T1)}\label{sec:HTp-curve}
+
+\noindent\textbf{The curve $x^0$} is that of Subsection~\ref{sec:T1-HT} with the threshold $1.02\,\varepsilon$ replaced by $\xi_1\varepsilon$:
+for $\alpha\in[\alpha_0,2\pi+\TDbe]$, $\TDY(\alpha):=x_\alpha(\Bts)$ (virtual) if $\alpha\in[\alpha_0,\alpha_0+\xi_1\varepsilon]$;
+$\TDY(\alpha):=S_\alpha(\Bts)$ (true) if $\alpha\in[\alpha_0+\xi_1\varepsilon,2\pi+\TDbe]$, $\alpha\ne2\pi$; $\TDY(2\pi):=Z_{\mathrm s}$.
+$x^0$ is $\TDY$ reparametrised by arclength $u\in[0,U]$ from $\TDY(\alpha_0)=X_0$, $\Theta(u)$ is the label of $x^0(u)$, $u':=U-u$, and
+\begin{align*}
+\TDG:=\{u:\Theta(u)=2\pi\}\cup\bigl\{u:{}&\Theta(u)\in[\alpha_0,\alpha_0+\xi_1\varepsilon)\text{ and the true candidate with label }\Theta(u)\\
+&\text{was within $\varepsilon$ of Harry at some time}\le\Bts\bigr\}.
+\end{align*}
+Exactly as in Subsection~\ref{sec:T1-HT}, $0\in\TDG$ and $\TDG\subset[0,U)$. The \emph{forward zone} is $\{\Theta\in[\alpha_0,\alpha_0+\eta]\}$,
+with $\xi:=\Theta-\alpha_0$; the \emph{tail zone} is $\{\Theta\in[2\pi+\alpha_0-\eta,2\pi+\TDbe]\}$, with $\xi:=\alpha_0+2\pi-\Theta\in[\TDxe,\eta]$;
+the rest is the \emph{bulk}.
+
+\begin{lemma}[Regularity, length, pointwise data]\label{lem:HTp-len}
+$x^0$ is $C^1$ with $|\partial_ux^0|\equiv1$, and $1\le U\le U_{\max}$. On the forward zone $\xi\le u\le W_{\mathrm v}\xi$ and
+$|T-\Eu|\le|\psi|\le\theta_{\mathrm v}\xi^{1-\mu}$; on the tail zone $\xi-\TDxe\le u'\le W_{\mathrm t}(\xi-\TDxe)$ and
+$-\theta_{\mathrm t}\xi^{1-\TDmT}\le\psi<0$. On $\{u\ge u_1\varepsilon\}$ the tangent angle of $x^0$ is locally Lipschitz in $u$, with almost
+everywhere derivative $k$, where $|k|\le K_{\mathrm f}\xi^{-\mu}$ on the forward zone, $|k|\le K_{\mathrm t}\xi^{-\TDmT}$ on the tail zone,
+$|k|\le K_{\mathrm b}$ on the bulk (across the label $2\pi$ as well). For labels $\Theta_a<\Theta_b$ at distance $\Delta:=\Theta_b-\Theta_a$,
+\begin{equation}\label{eq:HTp-len}
+l(a,b)\le W_x\,\Delta\,(4/\Delta)^{2v}/(1-2v),\qquad\text{and}\qquad\lambda:=u_b-u_a>\lambda_0\ \Longrightarrow\ \Delta>\Delta_0 .
+\end{equation}
+\end{lemma}
+\begin{proof}
+\emph{Regularity.} $\TDY$ is $C^1$ in the label with $|\partial_\alpha\TDY|\ge1$ on $[\alpha_0,2\pi)$ and on $(2\pi,2\pi+\TDbe]$: on
+$[\alpha_0,\alpha_0+\xi_1\varepsilon]$ it is the virtual front (Lemma~\ref{lem:B-VC}(a)); on $[\alpha_0+\xi_1\varepsilon,2\pi+\TDbe]\setminus\{2\pi\}$
+the true front ($C^\infty$ by Lemmas~\ref{lem:HTp-fwd}(d), \ref{lem:HTp-tail}(c), \ref{lem:HTp-bulk}(a),(b); $w\ge1$); the two coincide on
+a neighbourhood of $\alpha_0+\xi_1\varepsilon$ (Lemma~\ref{lem:HTp-fwd}(d)). Near $2\pi$, $\TDY$ is the arc $\Gamma_{\mathrm s}$
+(Lemma~\ref{lem:HTp-bulk}(c)). So the arclength parametrisation is $C^1$ with unit speed.
+
+\emph{Pointwise data.} Lemma~\ref{lem:HTp-virt} on the forward zone ($1\le w\le W_{\mathrm v}$, $|T-\Eu|=|e^{i\psi}-1|\le|\psi|$);
+Lemma~\ref{lem:HTp-tail}(c) on the tail zone ($1\le w\le W_{\mathrm t}$). On $\{u\ge u_1\varepsilon\}$ the forward labels have
+$\xi\ge u/W_{\mathrm v}\ge\xi_1\varepsilon$, so they are true and Lemma~\ref{lem:HTp-fwd}(d) applies; Lemma~\ref{lem:HTp-tail}(c) on the
+tail; Lemma~\ref{lem:HTp-bulk}(b),(c) on the bulk.
+
+\emph{Length.} $w\le W_{\mathrm v}$ on the forward zone, $w\le W_{\mathrm t}$ on the tail zone, $w\le W_{\mathrm b}W_{\mathrm{all}}(2/\chi)^{2v}$ on
+the bulk. Since $\int_0^{2\pi}(2/\chi)^{2v}d\theta=2\pi(2/\pi)^{2v}/(1-2v)\le2\pi/(1-2v)$ and the integrand is $\ge1$ on $I_\eta$ ($\chi\le
+\pi/2+\eta<2$), the bulk integral is $\le2\pi/(1-2v)-2\eta\le(2\pi-2\eta)/(1-2v)$; so $U\le U_{\max}$. $U\ge|\TDY(\alpha_0+\pi)-X_0|\ge
+|e^{i(\alpha_0+\pi)}-e^{i\alpha_0}|-2d_{\mathrm s}\ge1$ (Lemma~\ref{lem:HTp-tang}(b), \HTSC{38}). Since $(2/\chi)^{2v}\ge1$ on $I_\eta$,
+$w\le W_x(2/\chi)^{2v}$ at every label $\ne2\pi$. The function $\theta\mapsto(2/\chi)^{2v}$ is symmetric and decreasing in the circular
+distance $\chi$ to $0$, so its integral over an arc of length $\Delta\le2\pi$ is at most $2\int_0^{\Delta/2}(2/\chi)^{2v}d\chi=
+\Delta(4/\Delta)^{2v}/(1-2v)$; this is the first part of \eqref{eq:HTp-len}. If $\Delta\le\Delta_0$, then, as $\Delta\mapsto\Delta^{1-2v}$ is
+increasing and $4/\Delta_0=4W_x\hat L/\lambda_0\le8/\lambda_0$ \HTSC{42},
+$l\le W_x\Delta_0(4/\Delta_0)^{2v}/(1-2v)\le W_x\Delta_0(8/\lambda_0)^{2v}/(1-2v)\le W_x\Delta_0\hat L=\lambda_0$; this is the contrapositive of
+the second part.
+\end{proof}
+
+\begin{lemma}[The three cases of (T1)]\label{lem:HTp-T1}
+For all pairs $u_a<u_b$ of $x^0$ with $\varepsilon/2\le\lambda:=u_b-u_a\le\lambda_0$:
+\[
+N(a,b)\le c_N\lambda^{3/2-\TDmT}\le c_N\lambda^{3/2-\HTmTb}.
+\]
+More precisely: $N\le c_{\mathrm{near}}\lambda^{3/2-\mu}$ if $u_a<\max(\lambda,u_1\varepsilon)$ (near $X_0$);
+$N\le c_{\mathrm{tail}}\lambda^{3/2-\TDmT}$ if $u'_b<\lambda$ and $\TDxe<\lambda$ (near $E_Y$); and $N\le c_{\mathrm{far}}\lambda^{3/2-\TDmT}$
+otherwise (far).
+\end{lemma}
+\begin{proof}
+\emph{Near $X_0$: $u_a<\max(\lambda,u_1\varepsilon)$.} If $\lambda\ge u_1\varepsilon$, then $[u_a,u_b]\subset[0,2\lambda)$ and
+$u_b<2\lambda_0\le\eta$ \HTSC{39}; otherwise $u_a<u_1\varepsilon\le2u_1\lambda$ ($\varepsilon\le2\lambda$), so $[u_a,u_b]\subset[0,(2u_1+1)\lambda)$,
+and $u_b<2u_1\varepsilon\le2u_1\HTeb\le\eta$ \HTSC{40}. In both cases $[u_a,u_b]$ is an interval of length $\lambda$ in $[0,(2u_1+1)\lambda]$
+($u_1\ge\frac12$ \HTSC{48}) inside the forward zone (the forward zone contains $\{u\le\eta\}$, as $u\ge\xi$). By Lemma~\ref{lem:T1-elem}(b)
+with $\Eu$ and Lemma~\ref{lem:HTp-len} ($|T-\Eu|\le\theta_{\mathrm v}\xi^{1-\mu}\le\theta_{\mathrm v}u^{1-\mu}$):
+\[
+N^2\le\theta_{\mathrm v}^2\int_{u_a}^{u_b}u^{2-2\mu}du\le\theta_{\mathrm v}^2\lambda^{3-2\mu}\frac{(2u_1+1)^{3-2\mu}-(2u_1)^{3-2\mu}}{3-2\mu}
+\le\theta_{\mathrm v}^2\lambda^{3-2\mu}\frac{12u_1^2+6u_1+1}{3-2\HTmb},
+\]
+since the integrand is increasing (the right-most interval of length $\lambda$ maximises the integral) and $s\mapsto A^s-B^s$ is
+non-decreasing for $A>B\ge1$. So $N\le c_{\mathrm{near}}\lambda^{3/2-\mu}$.
+
+\emph{Near $E_Y$: $u'_b<\lambda$ and $\TDxe<\lambda$.} Then $u'_a=u'_b+\lambda<2\lambda$, and $\TDxe\le\min(\HTxb,\lambda_0)$, so
+$\TDxe+u'_a<2\lambda_0+\min(\HTxb,\lambda_0)\le\eta$ \HTSC{39}: the pair lies in the tail zone ($\xi\le\TDxe+u'$). There
+$|T-\Eu|\le|\psi|\le\theta_{\mathrm t}\xi^{1-\TDmT}\le\theta_{\mathrm t}s^{1-\TDmT}$ with $s:=\TDxe+u'$, and as $u$ runs over $[u_a,u_b]$,
+$s$ runs over an interval of length $\lambda$ inside $[0,3\lambda]$. As above,
+$N^2\le\theta_{\mathrm t}^2\lambda^{3-2\TDmT}(3^{3-2\TDmT}-2^{3-2\TDmT})/(3-2\TDmT)\le19\,\theta_{\mathrm t}^2\lambda^{3-2\TDmT}/(3-2\HTmTb)$, i.e.\
+$N\le c_{\mathrm{tail}}\lambda^{3/2-\TDmT}$.
+
+\emph{Far: otherwise}, i.e.\ $u_a\ge\max(\lambda,u_1\varepsilon)$, and $u'_b\ge\lambda$ or $\TDxe\ge\lambda$. By Lemma~\ref{lem:HTp-len} the
+tangent angle is locally Lipschitz on $[u_a,u_b]$ with almost everywhere derivative $k$. Forward-zone labels of the pair have
+$\xi\ge u/W_{\mathrm v}\ge\lambda/W_{\mathrm v}$, so $|k|\le K_{\mathrm f}W_{\mathrm v}^{\HTmb}\lambda^{-\mu}$; tail labels have
+$\xi\ge\TDxe+u'/W_{\mathrm t}\ge\max(\TDxe,u'_b/W_{\mathrm t})\ge\lambda/W_{\mathrm t}$ ($W_{\mathrm t}\ge1$), so
+$|k|\le K_{\mathrm t}W_{\mathrm t}^{\HTmTb}\lambda^{-\TDmT}$; bulk labels have $|k|\le K_{\mathrm b}$. As $\lambda<1$ and $\mu\le\TDmT$, the tangent
+angle is $K$-Lipschitz on $[u_a,u_b]$ with $K:=K_*\lambda^{-\TDmT}$, and $K\lambda\le K_*\lambda_0^{1-\HTmTb}\le\pi$ \HTSC{47}.
+Lemma~\ref{lem:T1-elem}(a): $N\le(K/\sqrt{12})\lambda^{3/2}=c_{\mathrm{far}}\lambda^{3/2-\TDmT}$.
+
+The cases are exhaustive, $\lambda^{3/2-\mu}\le\lambda^{3/2-\TDmT}\le\lambda^{3/2-\HTmTb}$ ($\lambda<1$), and $c_N$ is the maximum.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{The theorem}\label{sec:HTp-thm}
+
+\begin{theorem}[\textup{(H$_{\mathrm T}$)} for all $v\le\HTvb$, with explicit constants]\label{thm:HTp}
+Let $(\HTvb,\eta,\HTeb,\xi_1,\lambda_0,G_{\mathrm T})$ satisfy \HTSC1--\HTSC{51}. Then for design~T with $D_1=1$, for all $v\in(0,\HTvb]$ and
+$\varepsilon\in(0,\HTeb]$, Hypothesis~\ref{hyp:HT} holds with the curve $x^0$ and the set $\TDG$ of Subsection~\ref{sec:HTp-curve},
+$\hat n:=\Eu$, and the constants
+\begin{gather*}
+v_{\mathrm T}:=\HTvb,\quad\varepsilon_{\mathrm T}:=\HTeb,\quad T_2,\quad U_{\max},\quad\lambda_0,\quad c_{\mathrm{sep}},\quad
+\gamma_{\mathrm T}:=\tfrac14,\quad\vartheta_{\mathrm T},\quad G_{\mathrm T},\quad C_z\\
+\text{(Definition~\ref{def:HTp-const}), any }a'\in(0,1-\HTmTb],\qquad C_0:=c_N\lambda_0^{1-\HTmTb-a'}\quad(\text{so }C_0\lambda_0^{a'}
+=c_N\lambda_0^{1-\HTmTb}\le1).
+\end{gather*}
+Moreover the following sharper forms hold:
+\begin{itemize}
+\item[\textup{(T1$'$)}] $N(a,b)\le c_N\lambda^{3/2-\TDmT}\le c_N\lambda^{3/2-\HTmTb}$ for all pairs with $\varepsilon/2\le\lambda\le\lambda_0$;
+\item[\textup{(T2$'$)}] for all pairs with $\lambda>\lambda_0$: $c(a,b)\ge c_{\mathrm{sep}}$ or $c(a,b)\ge\kappa_2(u_a+u'_b)$; hence
+$c\ge\min(c_{\mathrm{sep}},\kappa_2(u_a+u'_b))$;
+\item[\textup{(T3$'$)}] $|T(u)-\hat n|\le\theta_{\mathrm v}u^{1-\mu}\le\theta_{\mathrm v}u^{1-\HTmb}$ for $u\le G_{\mathrm T}$;
+\item[\textup{(T4$'$)}] $|T(u)-\hat n|\le\theta_{\mathrm t}(\TDxe+u')^{1-\TDmT}\le c_{\mathrm T4}(u'+z_0)^{1-\HTmTb}$ for $u'\le G_{\mathrm T}$;
+\item[\textup{(T5$'$)}] $h_{\mathrm t}\xi_-\varepsilon^{1/(2-2v)}\le z_0\le z_{\mathrm T}\xi_+\varepsilon^{1/(2-2v)}\le z_{\mathrm T}\xi_+\varepsilon^{1/2}$,
+and $|y_0|\le y_{\mathrm T}\TDxe^{2-\TDmT}\le c_y z_0^{2-\TDmT}\le c_y(z_0+\varepsilon)^{2-\HTmTb}$.
+\end{itemize}
+\end{theorem}
+\begin{proof}
+\emph{Ranges.} $\Bts\le\TDtc\le T_2$ (Lemma~\ref{lem:HTp-tang}(b)), $T_2\ge1$; $\HTvb,\HTeb\in(0,1)$; $1\le U\le U_{\max}$
+(Lemma~\ref{lem:HTp-len}); $a'\in(0,1]$; $C_0,C_z>0$; $\lambda_0\in(0,\frac14]$ \HTSC{41}; $c_{\mathrm{sep}}\in(0,1]$ ($\Delta_0\le\eta<1$);
+$\gamma_{\mathrm T}=\frac14$; $\vartheta_{\mathrm T}>0$; $G_{\mathrm T}\in(0,1]$ \HTSC{50}; $x^0$ is $C^1$ with unit speed
+(Lemma~\ref{lem:HTp-len}).
+
+\emph{\textup{(T0)}.} $x^0(0)=x_{\alpha_0}(\Bts)=P(\Bts)$ (Lemma~\ref{lem:HTp-tang}(b)). Let $u\notin\TDG$. If
+$\Theta(u)\notin[\alpha_0,\alpha_0+\xi_1\varepsilon)$ and $\Theta(u)\ne2\pi$, then $x^0(u)=S_\Theta(\Bts)$ with $S_\Theta$ defined on $[0,\Bts]$
+(Lemma~\ref{lem:HTp-bulk}(a)). If $\Theta(u)\in(\alpha_0,\alpha_0+\xi_1\varepsilon)$ and the true candidate was never within $\varepsilon$ of
+Harry on $[0,\Bts]$, it has had $\rho\ge\varepsilon$ throughout, so it equals the virtual one (Lemma~\ref{lem:B-VC}(c) and its proof), and
+$x^0(u)=S_\Theta(\Bts)$. So every $u\notin\TDG$ is true. Directions: $[-\STas,\STas]$ are seen in run 1 (Lemma~\ref{lem:HTp-run1}(a));
+$[\TDbe,\alpha_0]$ in run 2 (Lemma~\ref{lem:HTp-tail}(b)); $\theta\in(\alpha_0,\alpha_0+\xi_1\varepsilon)$ is seen if its label is in $\TDG$
+and is the direction of a true label otherwise; all other $\theta\in[0,2\pi)$ are directions of true labels.
+
+\emph{\textup{(T1$'$)}, \textup{(T1)}.} Lemma~\ref{lem:HTp-T1}; and for $a'\le1-\HTmTb$,
+$N\le c_N\lambda^{1-\HTmTb-a'}\lambda^{1/2+a'}\le c_N\lambda_0^{1-\HTmTb-a'}\lambda^{1/2+a'}=C_0\lambda^{1/2+a'}$; $C_0\lambda_0^{a'}\le1$ \HTSC{49}.
+
+\emph{\textup{(T2$'$)}, \textup{(T2)}.} Let $\lambda>\lambda_0$. By \eqref{eq:HTp-len}, $\Delta:=\Theta_b-\Theta_a\in(\Delta_0,2\pi-\TDxe]$.
+\emph{If $\Delta\le2\pi-\Delta_0$:} $x^0(u_a)$, $x^0(u_b)$ are endpoints at $\Bts$ of two trajectories as in Lemma~\ref{lem:HTp-chord}
+(virtual, true, or $Z_{\mathrm s}$) starting at $e^{i\Theta_a}$, $e^{i\Theta_b}$, and $|e^{i\Theta_b}-e^{i\Theta_a}|=2|\sin(\Delta/2)|\ge
+2\sin(\Delta_0/2)=c_{\mathrm{sep}}>2\varepsilon$ ($\Delta_0\le\eta\le\pi/6$, \HTSC{44}); by Lemma~\ref{lem:HTp-chord}, $c\ge c_{\mathrm{sep}}$.
+\emph{If $\Delta>2\pi-\Delta_0$:} $\xi_a:=\Theta_a-\alpha_0\ge0$ and $\xi_b:=\alpha_0+2\pi-\Theta_b\ge\TDxe$ satisfy $\xi_a+\xi_b<\Delta_0\le\eta$
+\HTSC{43}: $a$ lies in the forward zone, $b$ in the tail zone. In the frame $(X_0;\Eu,i\Eu)$:
+$z_a=\int_0^{u_a}\cos\psi\,du\ge\cos(\theta_{\mathrm v}\Delta_0^{1-\HTmb})u_a$ (on $[0,u_a]$, $|\psi|\le\theta_{\mathrm v}\xi^{1-\mu}\le
+\theta_{\mathrm v}\Delta_0^{1-\HTmb}\le\pi/2$ \HTSC{45}), and $z_b\le-h_{\mathrm t}\xi_b\le-(h_{\mathrm t}/W_{\mathrm t})u'_b$
+(Lemma~\ref{lem:HTp-tail}(c); $u'_b\le W_{\mathrm t}(\xi_b-\TDxe)$). So $c\ge z_a-z_b\ge\kappa_2(u_a+u'_b)\ge(u_a+u'_b)/2$ \HTSC{46}.
+
+\emph{\textup{(T3$'$)}, \textup{(T3)}.} For $u\le G_{\mathrm T}$ ($\le\eta$): $\xi\le u$, $|T-\hat n|\le\theta_{\mathrm v}\xi^{1-\mu}\le
+\theta_{\mathrm v}u^{1-\mu}\le\theta_{\mathrm v}G_{\mathrm T}^{3/4-\HTmb}u^{1/4}\le\vartheta_3\max(u,\varepsilon/2)^{1/4}$ ($u\le G_{\mathrm T}<1$,
+$3/4-\mu\ge3/4-\HTmb>0$).
+
+\emph{\textup{(T4$'$)}, \textup{(T4)}.} For $u'\le G_{\mathrm T}$: $\xi\le\TDxe+u'\le\HTxb+G_{\mathrm T}\le\eta$ \HTSC{50}, and
+$|T-\hat n|\le\theta_{\mathrm t}\xi^{1-\TDmT}\le\theta_{\mathrm t}s^{1-\TDmT}$ with $s:=\TDxe+u'\le\bar s:=\HTxb+G_{\mathrm T}<1$. By
+Lemma~\ref{lem:HTp-tail}(d), $z_0=-z_E\ge h_{\mathrm t}\TDxe$, so $s\le(u'+z_0)/h_{\mathrm t}$ ($h_{\mathrm t}\le1$) and
+$\theta_{\mathrm t}s^{1-\TDmT}\le(\theta_{\mathrm t}/h_{\mathrm t})(u'+z_0)^{1-\TDmT}\le c_{\mathrm T4}(u'+z_0)^{1-\HTmTb}$; the last step uses
+$u'+z_0\le G_{\mathrm T}+z_{\mathrm T}\HTxb\le1$ \HTSC{51} ($z_0\le z_{\mathrm T}\TDxe$). For \textup{(T4)}:
+$s^{1-\TDmT}\le\bar s^{1/2-\HTmTb}s^{1/2}$, $s^{1/2}\le\TDxe^{1/2}+u'^{1/2}$, $\TDxe^{1/2}\le\xi_+^{1/2}\varepsilon^{1/(4-4v)}\le
+\xi_+^{1/2}\varepsilon^{1/4}=2^{1/4}\xi_+^{1/2}(\varepsilon/2)^{1/4}$ and $u'^{1/2}\le G_{\mathrm T}^{1/4}u'^{1/4}$: $|T-\hat n|\le
+\vartheta_4\max(u',\varepsilon/2)^{1/4}$.
+
+\emph{\textup{(T5$'$)}, \textup{(T5)}.} $x^0(U)=E_Y$ ($\Theta(U)=2\pi+\TDbe$) and $P(\Bts)-x^0(U)=-z_E\Eu-y_E\,i\Eu$, i.e.\ $z_0=-z_E$, $y_0=-y_E$.
+By Lemma~\ref{lem:HTp-tail}(d),(a): $h_{\mathrm t}\TDxe\le z_0\le z_{\mathrm T}\TDxe$, which gives the bounds on $z_0$
+($\varepsilon^{1/(2-2v)}\le\varepsilon^{1/2}$); in particular $0\le z_0\le z_{\mathrm T}\xi_+\varepsilon^{1/2}\le C_z\varepsilon^{1/4}$. And
+$|y_0|=y_E\le y_{\mathrm T}\TDxe^{2-\TDmT}\le y_{\mathrm T}(z_0/h_{\mathrm t})^{2-\TDmT}\le c_yz_0^{2-\TDmT}\le c_y(z_0+\varepsilon)^{2-\HTmTb}$,
+using $h_{\mathrm t}\le1$ and $z_0+\varepsilon\le z_{\mathrm T}\HTxb+\HTeb<1$ \HTSC{51}. For \textup{(T5)}:
+$z_0^{1-\TDmT}\le(z_{\mathrm T}\xi_+)^{1-\TDmT}\varepsilon^{(1-\TDmT)/2}\le\max(1,z_{\mathrm T}\xi_+)\varepsilon^{1/4}$ ($\TDmT\le\frac12$), so
+$|y_0|\le c_yz_0\max(1,z_{\mathrm T}\xi_+)2^{1/4}(\varepsilon/2)^{1/4}\le\vartheta_5(z_0+\varepsilon)(\varepsilon/2)^{1/4}$.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------
+\subsection{The table of constants and the constants used downstream}\label{sec:HTp-table}
+
+\begin{table}[ht]
+\centering
+{\small\setlength\tabcolsep{4pt}
+\begin{tabular}{@{}ll|lll|lllll@{}}
+\toprule
+$\HTvb$&$\eta$&$\xi_1$&$\lambda_0$&$G_{\mathrm T}$&$T_2$&$U_{\max}$&$c_{\mathrm{sep}}$&$\kappa_2$&$K_{\mathrm b}$\\
+\midrule
+$10^{-6}$&0.1&1.007&0.0333&0.05&3.733&6.285&0.03309&0.9884&1.141\\
+$10^{-5}$&0.1&1.007&0.0333&0.05&3.733&6.286&0.03309&0.9883&1.152\\
+$10^{-4}$&0.1&1.007&0.0333&0.05&3.733&6.300&0.03303&0.9878&1.262\\
+$10^{-3}$&0.1&1.008&0.0333&0.05&3.739&6.434&0.03215&0.9830&2.376\\
+$10^{-2}$&0.1&1.022&0.0333&0.0486&3.802&7.958&0.02344&0.9334&15.06\\
+$10^{-6}$&0.2&1.031&0.0726&0.1&3.733&6.295&0.07043&0.9458&1.140\\
+$10^{-5}$&0.2&1.031&0.0726&0.1&3.733&6.296&0.07041&0.9458&1.144\\
+$10^{-4}$&0.2&1.031&0.0726&0.1&3.733&6.308&0.07029&0.9452&1.176\\
+$10^{-3}$&0.2&1.033&0.0725&0.1&3.739&6.426&0.06900&0.9392&1.507\\
+$10^{-2}$&0.2&1.052&0.0715&0.1&3.802&7.747&0.05239&0.8790&5.222\\
+$2\cdot10^{-2}$&0.2&1.074&0.0703&0.1&3.874&9.572&0.03761&0.8105&10.58\\
+$10^{-6}$&0.3&1.092&0.1197&0.15&3.733&6.335&0.1094&0.8563&1.140\\
+$10^{-3}$&0.3&1.095&0.1195&0.15&3.739&6.456&0.1071&0.8481&1.335\\
+\bottomrule
+\end{tabular}
+
+\medskip
+\begin{tabular}{@{}ll|llllllll@{}}
+\toprule
+$\HTvb$&$\eta$&$c_N$&$C_0(\frac12)$&$\theta_{\mathrm v}$&$c_{\mathrm T4}$&$z_{\mathrm T}\xi_+$&$c_y$&$\vartheta_{\mathrm T}$&$C_z$\\
+\midrule
+$10^{-6}$&0.1&2.720&0.4962&1.070&1.042&1.565&0.6193&1.153&0.2783\\
+$10^{-5}$&0.1&2.720&0.4963&1.070&1.043&1.565&0.6194&1.153&0.2783\\
+$10^{-4}$&0.1&2.724&0.4975&1.071&1.044&1.567&0.6202&1.155&0.2786\\
+$10^{-3}$&0.1&2.766&0.5098&1.081&1.054&1.578&0.6280&1.179&0.2806\\
+$10^{-2}$&0.1&4.346&0.8773&1.189&1.166&1.702&0.7134&1.444&0.3026\\
+$10^{-6}$&0.2&3.100&0.8353&1.174&1.126&1.734&0.7933&1.636&0.3083\\
+$10^{-5}$&0.2&3.101&0.8355&1.174&1.127&1.734&0.7934&1.636&0.3083\\
+$10^{-4}$&0.2&3.106&0.8375&1.176&1.128&1.735&0.7944&1.639&0.3085\\
+$10^{-3}$&0.2&3.162&0.8581&1.188&1.141&1.749&0.8053&1.675&0.3110\\
+$10^{-2}$&0.2&3.796&1.098&1.324&1.283&1.894&0.9234&2.080&0.3368\\
+$2\cdot10^{-2}$&0.2&4.700&1.457&1.501&1.475&2.075&1.080&2.662&0.3689\\
+$10^{-6}$&0.3&3.908&1.352&1.347&1.300&1.927&1.076&2.464&0.3426\\
+$10^{-3}$&0.3&4.003&1.393&1.366&1.320&1.945&1.094&2.530&0.3458\\
+\bottomrule
+\end{tabular}}
+\caption{Corollary~\ref{cor:HTp-table}: parameters and constants, $\HTeb=10^{-3}$. $\xi_1$, $\lambda_0$, $G_{\mathrm T}$ are the chosen
+parameters (exact); upper bounds are rounded up and the lower bounds $c_{\mathrm{sep}}$, $\kappa_2$ down, in the fourth digit.
+$C_0(\frac12):=c_N\lambda_0^{1/2-\HTmTb}$ is $C_0$ for $a'=\frac12$; $a'$ may be taken up to $1-\HTmTb$, where $C_0=c_N$.
+Source: \texttt{code/Q3/out/table.txt}.}
+\label{tab:HTp}
+\end{table}
+
+\begin{corollary}[The table]\label{cor:HTp-table}
+For each row of Table~\ref{tab:HTp} (parameters $\HTvb$, $\eta$, $\HTeb=10^{-3}$ and the printed $\xi_1$, $\lambda_0$, $G_{\mathrm T}$),
+\HTSC1--\HTSC{51} hold. Hence Theorem~\ref{thm:HTp} applies with the printed constants; in particular \MHT\ holds for design~T with
+$D_1=1$ for every $v\le2\cdot10^{-2}$ and $\varepsilon\le10^{-3}$ (row $2\cdot10^{-2}$, $\eta=0.2$).
+\end{corollary}
+\begin{proof}
+Each side condition is an explicit inequality between closed-form numbers (finitely many evaluations of elementary functions).
+\HTSC1--\HTSC{50} are evaluated by \texttt{code/Q3/constants.py} in $50$-digit arithmetic, which prints ``ALL OK (50)'' for every row;
+\HTSC{51} is evaluated from the same output: $z_{\mathrm T}\HTxb+\HTeb\le0.0667$ and $G_{\mathrm T}+z_{\mathrm T}\HTxb\le0.2115$ in every row.
+\end{proof}
+
+With $\HTeb=10^{-6}$ the end $\TDxe\le1.93\,\varepsilon^{1/2}$ occupies less of the window and larger $\lambda_0$ are admissible, e.g.\
+$(\HTvb,\eta)=(10^{-3},0.2)$: $\lambda_0=0.0991$, $c_{\mathrm{sep}}=0.0943$, $c_N=3.162$; $(10^{-2},0.2)$: $\lambda_0=0.099$,
+$c_{\mathrm{sep}}=0.073$, $c_N=3.796$; $(10^{-3},0.3)$: $\lambda_0=0.149$, $c_{\mathrm{sep}}=0.1336$, $c_N=4.003$ (all side conditions hold;
+\texttt{code/Q3/out/table.txt}). Rows not in the table: $(10^{-2},0.3)$ fails \HTSC{21}; $(2\cdot10^{-2},0.1)$ fails \HTSC{42}; all
+rows with $\HTvb=3\cdot10^{-2}$ fail \HTSC{42}, and those with $\eta\ge0.2$ also \HTSC{21}.
+
+The improved main theorem uses the row $\HTvb=6\cdot10^{-5}$, $\eta=0.1$, which is not in the table:
+
+\begin{corollary}[The constants used by the improved main theorem]\label{cor:HTp-used}
+The parameters $\HTvb=6\cdot10^{-5}$, $\eta=0.1$, $\HTeb=10^{-3}$, $\xi_1=1.007$, $\lambda_0=0.0333$, $G_{\mathrm T}=0.05$ satisfy
+\HTSC1--\HTSC{51}. Hence for design~T with $D_1=1$, every $v\in(0,6\cdot10^{-5}]$ and every $\varepsilon\in(0,10^{-3}]$, Hypothesis~\ref{hyp:HT}
+holds with
+\begin{gather*}
+v_{\mathrm T}=6\cdot10^{-5},\quad\varepsilon_{\mathrm T}=10^{-3},\quad T_2=3.73247,\quad U_{\max}=6.29320,\quad\lambda_0=0.0333,\quad
+c_{\mathrm{sep}}=0.0330591,\\
+a'=0.99982\ (\le1-\HTmTb),\qquad C_0=2.72160\ \ (\ge c_N=c_{\mathrm{near}};\ C_0\lambda_0^{a'}\le0.0907),\\
+\gamma_{\mathrm T}=\tfrac14,\quad\vartheta_{\mathrm T}=1.15397,\quad G_{\mathrm T}=0.05,\quad C_z=0.278412,
+\end{gather*}
+and the sharper forms of Theorem~\ref{thm:HTp} hold with $\HTmTb\le1.79990\cdot10^{-4}$, $\HTmb\le6.00037\cdot10^{-5}$ and
+\begin{gather*}
+\textup{(T1$'$)}\ N\le2.72160\,\lambda^{3/2-\TDmT};\qquad
+\textup{(T2$'$)}\ c\ge\min\bigl(0.0330591,\ 0.988089\,(u_a+u'_b)\bigr)\ \ (\lambda>\lambda_0);\\
+\textup{(T3$'$)}\ |T-\hat n|\le1.07003\,u^{1-\mu}\ \ (u\le0.05);\qquad
+\textup{(T4$'$)}\ |T-\hat n|\le1.04263\,(u'+z_0)^{1-\HTmTb}\ \ (u'\le0.05);\\
+\textup{(T5$'$)}\ 1.27025\,\varepsilon^{1/(2-2v)}\le z_0\le1.56563\,\varepsilon^{1/(2-2v)},\qquad|y_0|\le0.619797\,(z_0+\varepsilon)^{2-\HTmTb}.
+\end{gather*}
+\end{corollary}
+\begin{proof}
+The function \texttt{chain} of \texttt{code/Q3/constants.py}, called with
+\texttt{('6e-5', '0.1', '1e-3', x1='1.007', lam0='0.0333', G='0.05')}, prints ``ALL OK (50)'', and
+\HTSC{51} holds with $z_{\mathrm T}\HTxb+\HTeb\le0.050510$ and $G_{\mathrm T}+z_{\mathrm T}\HTxb\le0.099510$. The $50$-digit values are
+$T_2=3.7324640$, $U_{\max}=6.2931948$, $c_{\mathrm{sep}}=0.03305915$, $\kappa_2=0.98808912$ $(=h_{\mathrm t}/W_{\mathrm t})$,
+$c_N=c_{\mathrm{near}}=2.7215935$ ($c_{\mathrm{tail}}=2.6083$, $c_{\mathrm{far}}=0.3501$), $\HTmTb=1.7998920\cdot10^{-4}$,
+$\theta_{\mathrm v}=1.0700235$, $c_{\mathrm T4}=1.0426250$, $h_{\mathrm t}\xi_-=1.2702545$, $z_{\mathrm T}\xi_+=1.5656236$,
+$c_y=0.61979693$, $\vartheta_{\mathrm T}=\vartheta_5=1.1539694$ ($\vartheta_3=0.1132$, $\vartheta_4=0.6412$), $C_z=0.27841163$,
+$K_{\mathrm b}=1.2128$; the displayed numbers are these, rounded up (upper bounds) or down (lower bounds). With $a'=0.99982\le1-\HTmTb=
+0.99982001$, Theorem~\ref{thm:HTp} gives \textup{(T1)} with $c_N\lambda_0^{1-\HTmTb-a'}\le c_N\le2.72160$, and
+$2.72160\cdot0.0333^{0.99982}\le0.0907$.
+\end{proof}
+
+These are the touch-down constants of \texttt{reports/Q4-1.md}, \S3 (which prints them rounded to the nearest sixth digit, e.g.\
+$T_2=3.73246$, $c_N=2.72159$, $\theta_{\mathrm v}=1.07002$; its verification used the exact values). Table~\ref{tab:T3-const}
+repeats the values displayed in Corollary~\ref{cor:HTp-used}, rounded in the safe direction.
+
+%---------------------------------------------------------------------------------------------------------------------
+\begin{remark}[Comparison with Theorem~\ref{thm:HT}]\label{rem:HTp-compare}
+The row $\HTvb=10^{-6}$, $\eta=0.1$ gives, for $v\le10^{-6}$, \MHT\ with $T_2=3.733$, $U_{\max}=6.285$, $\lambda_0=0.0333$,
+$c_{\mathrm{sep}}=0.0330$, $\vartheta_{\mathrm T}=1.153$, $C_z=0.2783$ and $N\le2.72\,\lambda^{3/2-3v}$, against $3.74$, $6.5$, $1/40$, $0.024$,
+$3.3$, $1.57$ and $5.4\,\lambda^{3/2-3v}$ in Theorem~\ref{thm:HT}; $\kappa_2=0.9883$ against $0.979$, $\theta_{\mathrm v}=1.070$ against $1.69$,
+$c_{\mathrm T4}=1.043$ against $1.66$. The gain in the tilt comes from Lemma~\ref{lem:HTp-tilt}: the proof of Lemma~\ref{lem:T1-fwd}(c)
+bounds $y\,\partial_\theta\log C$ by the product of the separate maxima $0.6124\,\xi^2$ and $2.7327/\xi$, which are not attained at the
+same label, while the exact formula loses only the factor $\ell_{\max}/2\approx1.03$ against the value $\TDr\Lambda/2=t_1\sin\beta_1=1$ at
+$\alpha_0$. (The proof of \textup{(T1)} in Theorem~\ref{thm:HT} contains the near-$E_Y$ case of Lemma~\ref{lem:HTp-T1}; this repair of
+a reversed inequality is recorded in Remark~\ref{rem:T1-status} and is not repeated here.)
+\end{remark}
+
+\begin{remark}[Status]\label{rem:HTp-status}
+\emph{Refereed.} Lemmas~\ref{lem:HTp-M}--\ref{lem:HTp-T1} (except as noted below) and Theorem~\ref{thm:HTp} were checked by two
+independent referees on version~1 of the claims file (reports \texttt{referee-RQ3-1.md}, \texttt{referee-RQ3-2.md}).
+Corollary~\ref{cor:HTp-table} was checked row by row for \HTSC1--\HTSC{50} by RQ3-2; RQ3-1 confirmed with its own parameter choices
+that the same $(\HTvb,\eta)$ admit all side conditions including \HTSC{51}; \HTSC{51} on the printed rows is checked by the author's
+code and by audit~D. Neither found a false statement or a gap; both verdicts are ``OK with fixes''. The fixes are incorporated:
+the side condition \HTSC{51} (used in \textup{(T4$'$)} and \textup{(T5$'$)} and true in every row), the citation of \HTSC{39}, \HTSC{40}
+in the near-$X_0$ case, the range $\eta\le\pi/6$, and the explicit bound $\STA_{\max}<1.6$ in Lemma~\ref{lem:HTp-tail}(b).
+\begin{itemize}
+\item \emph{RQ3-1} read the proofs line by line, checked every substitution of Lemma~\ref{lem:HTp-M} by hand and numerically
+($54$ values of $\HTvb\in[10^{-7},2\cdot10^{-2}]$: every upper constant non-decreasing, every lower constant non-increasing), and wrote its
+own constants code. It integrated \eqref{eq:snitch} with the first and second variational equations in $40$-digit arithmetic for
+$v\in\{10^{-6},10^{-4},10^{-3},10^{-2},2\cdot10^{-2}\}$. All bounds of Lemmas~\ref{lem:HTp-fwd}, \ref{lem:HTp-tail}, \ref{lem:HTp-bulk} hold at
+$\HTvb=v$. The tilt formula of Lemma~\ref{lem:HTp-tilt} agrees with $\arg\partial_\theta S$ to $10^{-41}$, and \eqref{eq:T1-k2} with the ODE
+curvature to $10^{-40}$. Mixed virtual/true chords never decrease (Lemma~\ref{lem:HTp-chord}). It reproduced the row $\HTvb=10^{-6}$,
+$\eta=0.1$ to all printed digits.
+\item \emph{RQ3-2} rebuilt the curve $x^0$ independently from the straight-run integrals (precision up to $178$ digits; validated
+against direct integration) and scanned every item of \MHT\ and of the sharper forms in $99$ configurations. These cover $7$
+parameter sets with $\HTvb\le2\cdot10^{-2}$, $v\in\{\HTvb,\HTvb/10,\HTvb/1000\}$ and $\varepsilon$ from $10^{-3}$ down to $10^{-60}$, with about
+$27\,000$ pairs per configuration at $\varepsilon=10^{-60}$. No item exceeds its bound. At $\HTvb=2\cdot10^{-2}$ the tightest margins are
+$1.4\%$ ($\Bts\le T_2$), $4$--$5\%$ (the bounds on $z$ in Lemma~\ref{lem:HTp-tail}(c)) and $19\%$ (\textup{(T2$'$)}); everything else has at
+least $25\%$. At small $\HTvb$ the margins are thinner (the constants are the exact $v=0$ values plus $O(\HTvb)$), and they stay below $1$
+at $v=\HTvb/1000$. It also evaluated its own constants code on all $18$ rows of \texttt{code/Q3/out/table.txt} ($13$ with
+$\HTeb=10^{-3}$, $5$ with $\HTeb=10^{-6}$): \HTSC1--\HTSC{50} hold, and the printed values agree to $7\cdot10^{-4}$ relative and are
+rounded in the safe direction.
+\end{itemize}
+\emph{Not refereed.} The typeset text of this section; Lemma~\ref{lem:HTp-tilt} and Lemma~\ref{lem:HTp-twotime} as separate statements (in
+the claims they are parts of the proofs of Q2(c), Q3, Q5, Q6, which were refereed); the row $\HTvb=6\cdot10^{-5}$ of
+Corollary~\ref{cor:HTp-used} (evaluated by \texttt{code/Q3/constants.py}, which \texttt{code/Q4/final.py} calls unchanged, so
+\texttt{final.py} is not an independent evaluation; reproduced to all printed digits, with no failed side condition, by the two
+referees' independent codes \texttt{code/referee/Q3\_1/consts.py}, \texttt{code/referee/Q3\_2/consts.py}, report \texttt{audit-C.md},
+and independently, from the typeset formulas, by \texttt{code/audit/D/HTp\_constants.py}).
+
+\emph{Where the extension stops.} The proof is the same for every $\HTvb\le\frac1{10}$, but beyond $\HTvb\approx2\cdot10^{-2}$ the side
+conditions fail. At $(2\cdot10^{-2},0.1)$ \HTSC{42} fails; at $\HTvb=3\cdot10^{-2}$ \HTSC{42} fails, and for $\eta\ge0.2$ also \HTSC{21}; at
+$\HTvb=5\cdot10^{-2}$ also \HTSC{36}, \HTSC{47} and \HTSC{49} fail. The weak point is the bulk. Lemma~\ref{lem:HTp-bulk}(b) bounds $\TDS$ through
+$1/y\le1/y_{\mathrm b}\approx1/(b_{\mathrm{lo}}\eta^2)$, which is attained only next to the window, where in fact $y\approx\sqrt3\,\TDb$. So
+$K_{\mathrm b}$ (and $T_{\mathrm b}$, $W_{\mathrm b}$, hence $W_x$) grows like $\HTvb/\eta^2$: at $(\HTvb,\eta)=(2\cdot10^{-2},0.1)$,
+$K_{\mathrm b}=33.3$, while the true bulk curvature is $\le1.015$ (RQ3-1, by ODE). A sharper bulk estimate would extend the range; this is
+not attempted. Only $D_1=1$ is treated (the same formulas with $D_1<1$ give uniformly worse constants; numerical only).
+\end{remark}

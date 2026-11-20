@@ -1,0 +1,356 @@
+<title>The Invisible Snitch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an instrument panel. One large live field (the pursuit) beside a narrow control column;
+   below it, the four phases of the path, the proof chain, and how far the constant has come. */
+:root{
+  --bg:#EDF1F3;            /* cool survey paper */
+  --panel:#F8FAFB;
+  --ink:#16212B;
+  --muted:#5B6873;
+  --rule:#CBD4DA;
+  --gold:#B07A10;          /* the Snitch's possible positions */
+  --gold-soft:rgba(176,122,16,.22);
+  --harry:#0B6E86;         /* Harry */
+  --harry-soft:rgba(11,110,134,.16);
+  --seen:#9AA7B1;
+  --accent:#0B6E86;
+  --warn:#A4471C;
+  --f-display:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111B24;--panel:#162330;--ink:#E4EBF0;--muted:#93A3AF;--rule:#2A3A48;
+  --gold:#E9B84E;--gold-soft:rgba(233,184,78,.22);--harry:#62D3E6;--harry-soft:rgba(98,211,230,.15);
+  --seen:#4E6070;--accent:#62D3E6;--warn:#F08A5D;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111B24;--panel:#162330;--ink:#E4EBF0;--muted:#93A3AF;--rule:#2A3A48;
+  --gold:#E9B84E;--gold-soft:rgba(233,184,78,.22);--harry:#62D3E6;--harry-soft:rgba(98,211,230,.15);
+  --seen:#4E6070;--accent:#62D3E6;--warn:#F08A5D;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:40px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4.4vw,44px);font-weight:700;line-height:1.05}
+h2{font-size:22px;font-weight:600}
+h3{font-size:15px;font-weight:600}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+header{display:grid;gap:12px}
+header p{color:var(--muted)}
+header p b{color:var(--ink);font-weight:600}
+.eq{font-family:var(--f-mono);font-size:13.5px;color:var(--ink);background:var(--panel);border:1px solid var(--rule);
+  padding:3px 8px;border-radius:4px;white-space:nowrap}
+
+/* stage */
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
+@media (max-width:860px){.stage{grid-template-columns:minmax(0,1fr)}}
+.field{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:6px;overflow:hidden;aspect-ratio:1/1;max-width:100%}
+.field canvas{display:block;width:100%;height:100%}
+.hud{position:absolute;left:12px;top:10px;display:flex;gap:8px;flex-wrap:wrap;pointer-events:none}
+.chip{font-family:var(--f-mono);font-size:12px;padding:3px 8px;border-radius:3px;background:var(--bg);border:1px solid var(--rule);color:var(--ink)}
+.chip.phase{border-color:var(--harry);color:var(--harry)}
+.chip.done{border-color:var(--gold);color:var(--gold)}
+.chip.fail{border-color:var(--warn);color:var(--warn)}
+.side{display:grid;gap:18px;min-width:0}
+.box{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;display:grid;gap:12px}
+.ctl{display:grid;gap:4px}
+.ctl label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.ctl label span{font-family:var(--f-mono);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--harry)}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:5px;overflow:hidden}
+.seg button{font:500 13px var(--f-body);padding:7px 6px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--harry);color:var(--panel)}
+.btns{display:flex;gap:8px}
+.btn{flex:1;font:600 13px var(--f-body);padding:8px 10px;border-radius:5px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--harry);border-color:var(--harry);color:var(--panel)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.stat{display:grid;gap:1px}
+.stat .k{font-size:11.5px;color:var(--muted)}
+.stat .v{font-family:var(--f-mono);font-size:17px;font-variant-numeric:tabular-nums}
+.bar{height:6px;background:var(--rule);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.legend{display:grid;gap:7px;font-size:13px;color:var(--muted)}
+.legend div{display:flex;gap:9px;align-items:center}
+.sw{width:18px;height:10px;flex:none;border-radius:2px}
+.note{font-size:12.5px;color:var(--muted)}
+
+/* phases */
+.phases{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.phases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.phases{grid-template-columns:minmax(0,1fr)}}
+.ph{border-top:3px solid var(--rule);padding-top:10px;display:grid;gap:6px;transition:border-color .25s}
+.ph .n{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.ph p{font-size:14px;color:var(--muted)}
+.ph.on{border-color:var(--harry)}
+.ph.on .n{color:var(--harry)}
+
+/* proof + numbers */
+.two{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:minmax(0,1fr)}}
+.chain{display:grid;gap:0}
+.link{display:grid;grid-template-columns:86px minmax(0,1fr);gap:14px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.link:first-child{border-top:1px solid var(--rule)}
+.link .s{font-family:var(--f-mono);font-size:12px;color:var(--harry);padding-top:2px}
+.link b{font-weight:600}
+.link p{font-size:14px;color:var(--muted)}
+.link.goal .s{color:var(--gold)}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.num{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:12px 14px;display:grid;gap:2px}
+.num .v{font-family:var(--f-display);font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.num .k{font-size:12.5px;color:var(--muted)}
+.chartbox{overflow-x:auto}
+.chartbox svg{display:block;width:100%;min-width:560px;height:auto}
+footer{color:var(--muted);font-size:13px;display:grid;gap:6px;border-top:1px solid var(--rule);padding-top:16px}
+@media (prefers-reduced-motion: reduce){.ph{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Pursuit problem · proved for v ≤ 6·10⁻⁵</span>
+    <h1>The Invisible Snitch</h1>
+    <p>Harry starts at the centre and runs at speed at most 1. The Snitch starts at distance 1 in a direction he cannot see and always flees straight away from him at speed <b>v</b>: <span class="eq">S′ = v·(S − H)/|S − H|</span>. Harry must commit to his whole path in advance and come within his vision radius <b>ε</b> of the Snitch, whichever direction it started in. Every gold dot below is one possible Snitch. The path is the one from the proof: once every dot has turned grey, Harry has won against all of them at once.</p>
+  </header>
+
+  <section class="stage" aria-label="Live simulation">
+    <div class="field" id="field">
+      <canvas id="cv" role="img" aria-label="Simulation of Harry sweeping the possible Snitch positions"></canvas>
+      <div class="hud"><span class="chip phase" id="hudPhase">Run 1</span><span class="chip mono" id="hudT">t = 0.00</span></div>
+    </div>
+
+    <div class="side">
+      <div class="box">
+        <div class="seg" role="group" aria-label="Start">
+          <button id="mT" aria-pressed="true">Proof's path</button>
+          <button id="mH" aria-pressed="false">Stop at contact</button>
+        </div>
+        <div class="ctl"><label for="v">Snitch speed v <span id="vv">0.10</span></label><input id="v" type="range" min="0.01" max="0.30" step="0.01" value="0.10"></div>
+        <div class="ctl"><label for="e">Vision radius ε <span id="ev">0.025</span></label><input id="e" type="range" min="0.008" max="0.08" step="0.001" value="0.025"></div>
+        <div class="ctl"><label for="n">Possible Snitches <span id="nv">720</span></label><input id="n" type="range" min="180" max="1440" step="60" value="720"></div>
+        <div class="ctl"><label for="sp">Playback speed <span id="spv">×1</span></label><input id="sp" type="range" min="1" max="8" step="1" value="1"></div>
+        <div class="btns"><button class="btn primary" id="play">Pause</button><button class="btn" id="reset">Restart</button></div>
+      </div>
+
+      <div class="box">
+        <div class="stats">
+          <div class="stat"><span class="k">Time</span><span class="v" id="sT">0.00</span></div>
+          <div class="stat"><span class="k">Still unseen</span><span class="v" id="sU">720</span></div>
+          <div class="stat"><span class="k">Touch-down at</span><span class="v" id="sTd">–</span></div>
+          <div class="stat"><span class="k">All seen at</span><span class="v" id="sDone">–</span></div>
+        </div>
+        <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+      </div>
+
+      <div class="box legend">
+        <div><span class="sw" style="background:var(--gold)"></span>Unseen possible Snitches (the front)</div>
+        <div><span class="sw" style="background:var(--seen)"></span>Already seen</div>
+        <div><span class="sw" style="background:var(--harry)"></span>Harry and his path</div>
+        <div><span class="sw" style="border:2px solid var(--harry);background:var(--harry-soft)"></span>Vision radius ε</div>
+        <div><span class="sw" style="border:1px dashed var(--muted)"></span>Starting circle, radius 1</div>
+      </div>
+      <p class="note">Time is in units of the starting distance. The theorem guarantees 10.13 for v ≤ 6·10⁻⁵; the slider goes far beyond that to show the same path still working in simulation.</p>
+    </div>
+  </section>
+
+  <section style="display:grid;gap:16px">
+    <h2>The path, in four phases</h2>
+    <div class="phases">
+      <div class="ph" id="p1"><span class="n">1 · Run through</span><h3>Straight through the front</h3><p>Harry runs straight past first contact and on for distance 1. Stopping at contact would leave a corner; running through leaves a smooth front with a small seen hole.</p></div>
+      <div class="ph" id="p2"><span class="n">2 · Touch down</span><h3>Meet the front at a tangent</h3><p>He heads for the candidate at angle arccos(v + 1/t₁), chosen so the second straight run grazes the front instead of hitting it head-on.</p></div>
+      <div class="ph" id="p3"><span class="n">3 · Walk</span><h3>Walk the front, step ε</h3><p>He repeatedly heads for the next unseen candidate. The front ahead stays flat at every scale, which is the heart of the proof.</p></div>
+      <div class="ph" id="p4"><span class="n">4 · Close</span><h3>Into the end left behind</h3><p>Having gone all the way round, he walks into the end he left at touch-down. Because he left it tangentially, it has not curled into a spiral.</p></div>
+    </div>
+  </section>
+
+  <section class="two">
+    <div style="display:grid;gap:14px">
+      <h2>How the proof fits together</h2>
+      <div class="chain">
+        <div class="link"><span class="s">§6–7</span><div><b>Touch-down data</b><p>Two straight runs have exact formulas, so the front at touch-down is known exactly: its tilt shrinks at small scales both ahead of Harry and at the end left behind.</p></div></div>
+        <div class="link"><span class="s">§3–4</span><div><b>End theorem</b><p>Walking the front in steps of ε, the gap between arc and chord for every pair of points stays bounded at every scale, right up to the last end, with constants independent of ε.</p></div></div>
+        <div class="link"><span class="s">§5</span><div><b>Heading and departure</b><p>The end left behind at touch-down keeps its good shape while Harry walks away from it, then rejoins the main argument.</p></div></div>
+        <div class="link"><span class="s">§8</span><div><b>Every direction seen by 10.13</b><p>Assembling the pieces: for every ε and v ≤ 6·10⁻⁵ all directions are seen within a time that does not depend on ε.</p></div></div>
+        <div class="link goal"><span class="s">§2 · Cor.</span><div><b>Exact capture at ε = 0</b><p>Because the time bound is independent of ε, a limit of these paths catches every direction exactly.</p></div></div>
+      </div>
+    </div>
+    <div style="display:grid;gap:14px">
+      <h2>In numbers</h2>
+      <div class="nums">
+        <div class="num"><span class="v mono">6·10⁻⁵</span><span class="k">largest proven Snitch speed v₀</span></div>
+        <div class="num"><span class="v mono">10.13</span><span class="k">capture time, in units of the starting distance</span></div>
+        <div class="num"><span class="v mono">201</span><span class="k">numerical conditions, checked in 50-digit arithmetic</span></div>
+        <div class="num"><span class="v mono">43</span><span class="k">pages in the short paper (from a 163-page record)</span></div>
+      </div>
+      <p class="note">Every link was checked by two independent AI referees and two audits. No human mathematician has verified it yet.</p>
+    </div>
+  </section>
+
+  <section style="display:grid;gap:14px">
+    <h2>How far the proven speed has come</h2>
+    <p class="note">Largest Snitch speed with a proof of exact capture, on a logarithmic scale.</p>
+    <div class="chartbox" id="chart"></div>
+  </section>
+
+  <footer>
+    <span>The simulation uses the proof's path with a simple greedy walk: Harry always heads straight for the next unseen candidate in order around the front. The modified Snitch rule v·(S−H)/max(|S−H|, ε) is used for every candidate, as in the proof; it matches the real Snitch until the candidate is first seen.</span>
+    <span>“Stop at contact” is the obvious start the proof avoids: Harry runs at the front and turns at first contact. The end he leaves behind curls into a slowly winding spiral, which is why the proof needed a different start.</span>
+  </footer>
+</div>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const cv=$('cv'),ctx=cv.getContext('2d');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let C={};
+function readColors(){const s=getComputedStyle(document.documentElement);
+  for(const k of['bg','panel','ink','muted','rule','gold','gold-soft','harry','harry-soft','seen','warn'])C[k]=s.getPropertyValue('--'+k).trim();}
+readColors();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors();draw();});
+new MutationObserver(()=>{readColors();draw();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+const P={v:.10,eps:.025,N:720,mode:'T',speed:1};
+let S,seenAt,st,running=!reduce,view=2.4;
+const TWO_PI=Math.PI*2;
+
+function init(){
+  const N=P.N;S=new Float64Array(2*N);seenAt=new Float64Array(N).fill(-1);
+  for(let i=0;i<N;i++){const a=TWO_PI*i/N;S[2*i]=Math.cos(a);S[2*i+1]=Math.sin(a);}
+  st={t:0,hx:0,hy:0,phase:'run1',dx:1,dy:0,ptr:0,i0:-1,target:-1,unseen:N,tTouch:null,tDone:null,fail:false,trail:[[0,0]],trailTick:0,touch:null};
+  st.t1=1/(1-P.v)+1;
+  view=2.4;updateStats();draw();
+}
+function dist(i){return Math.hypot(S[2*i]-st.hx,S[2*i+1]-st.hy);}
+function step(dt){
+  const N=P.N,v=P.v,eps=P.eps;
+  // candidates flee (modified rule, as in the proof)
+  for(let i=0;i<N;i++){const dx=S[2*i]-st.hx,dy=S[2*i+1]-st.hy,r=Math.hypot(dx,dy),f=v*dt/Math.max(r,eps);S[2*i]+=f*dx;S[2*i+1]+=f*dy;}
+  // Harry's heading
+  if(st.phase==='run1'){
+    if(P.mode==='T'&&st.t>=st.t1){
+      const a0=Math.acos(Math.min(1,v+1/st.t1));let i0=Math.round(a0/TWO_PI*N)%N;
+      st.i0=i0;const dx=S[2*i0]-st.hx,dy=S[2*i0+1]-st.hy,r=Math.hypot(dx,dy);st.dx=dx/r;st.dy=dy/r;st.phase='run2';
+    }
+  }else if(st.phase==='run2'){
+    if(seenAt[st.i0]>=0){st.phase='walk';st.ptr=st.i0;st.tTouch=st.t;st.touch=[st.hx,st.hy];}
+  }
+  if(st.phase==='walk'){
+    let k=0,j=st.ptr;while(k<N&&seenAt[j]>=0){j=(j+1)%N;k++;}
+    if(k<N){st.ptr=j;st.target=j;const dx=S[2*j]-st.hx,dy=S[2*j+1]-st.hy,r=Math.hypot(dx,dy)||1;st.dx=dx/r;st.dy=dy/r;}
+  }
+  st.hx+=st.dx*dt;st.hy+=st.dy*dt;st.t+=dt;
+  // who is seen
+  for(let i=0;i<N;i++){if(seenAt[i]<0&&dist(i)<=eps){seenAt[i]=st.t;st.unseen--;
+    if(P.mode==='H'&&st.phase==='run1'){st.phase='walk';st.ptr=i;st.tTouch=st.t;st.touch=[st.hx,st.hy];}}}
+  if(++st.trailTick%6===0)st.trail.push([st.hx,st.hy]);
+  if(st.unseen===0){st.tDone=st.t;st.phase='done';st.trail.push([st.hx,st.hy]);}
+  else if(st.t>80){st.fail=true;st.phase='done';}
+}
+function tick(){
+  if(running&&st.phase!=='done'){
+    const dt=Math.min(.004,P.eps/3),steps=Math.round(P.speed*8*(.004/dt));
+    for(let s=0;s<steps&&st.phase!=='done';s++)step(dt);
+    updateStats();
+    if(st.phase==='done'){running=false;$('play').textContent='Play';}
+  }
+  draw();requestAnimationFrame(tick);
+}
+function size(){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);}
+function draw(){
+  const W=cv.width,H=cv.height,d=devicePixelRatio||1;if(!W)return;
+  let m=Math.max(Math.abs(st.hx),Math.abs(st.hy),1.3);
+  for(let i=0;i<P.N;i+=7){if(seenAt[i]<0){m=Math.max(m,Math.abs(S[2*i]),Math.abs(S[2*i+1]));}}
+  const target=m*1.12+.1;view+=(target-view)*.06;
+  const sc=Math.min(W,H)/(2*view),cx=W/2,cy=H/2;
+  const X=x=>cx+x*sc,Y=y=>cy-y*sc;
+  ctx.fillStyle=C.panel;ctx.fillRect(0,0,W,H);
+  // grid
+  ctx.strokeStyle=C.rule;ctx.lineWidth=1;
+  for(let g=-Math.ceil(view);g<=Math.ceil(view);g++){ctx.globalAlpha=g===0?.9:.45;
+    ctx.beginPath();ctx.moveTo(X(g),0);ctx.lineTo(X(g),H);ctx.moveTo(0,Y(g));ctx.lineTo(W,Y(g));ctx.stroke();}
+  ctx.globalAlpha=1;
+  // starting circle
+  ctx.setLineDash([4*d,5*d]);ctx.strokeStyle=C.muted;ctx.beginPath();ctx.arc(X(0),Y(0),sc,0,TWO_PI);ctx.stroke();ctx.setLineDash([]);
+  // seen candidates
+  ctx.fillStyle=C.seen;
+  for(let i=0;i<P.N;i++)if(seenAt[i]>=0){ctx.fillRect(X(S[2*i])-1*d,Y(S[2*i+1])-1*d,2*d,2*d);}
+  // front polyline (unseen, consecutive)
+  ctx.strokeStyle=C.gold;ctx.lineWidth=2*d;ctx.lineJoin='round';ctx.beginPath();let open=false;
+  for(let k=0;k<=P.N;k++){const i=k%P.N;
+    if(seenAt[i]<0){const x=X(S[2*i]),y=Y(S[2*i+1]);
+      if(open){const j=(k-1)%P.N;if(Math.hypot(S[2*i]-S[2*j],S[2*i+1]-S[2*j+1])>.35){ctx.stroke();ctx.beginPath();ctx.moveTo(x,y);}else ctx.lineTo(x,y);}
+      else{ctx.moveTo(x,y);open=true;}}
+    else if(open){ctx.stroke();ctx.beginPath();open=false;}}
+  ctx.stroke();
+  ctx.fillStyle=C.gold;
+  for(let i=0;i<P.N;i+=Math.max(1,Math.round(P.N/240)))if(seenAt[i]<0){ctx.beginPath();ctx.arc(X(S[2*i]),Y(S[2*i+1]),1.7*d,0,TWO_PI);ctx.fill();}
+  // trail
+  ctx.strokeStyle=C.harry;ctx.lineWidth=1.6*d;ctx.globalAlpha=.75;ctx.beginPath();
+  st.trail.forEach((p,i)=>{i?ctx.lineTo(X(p[0]),Y(p[1])):ctx.moveTo(X(p[0]),Y(p[1]));});ctx.lineTo(X(st.hx),Y(st.hy));ctx.stroke();ctx.globalAlpha=1;
+  // touch-down marker
+  if(st.touch){ctx.strokeStyle=C.harry;ctx.lineWidth=1.5*d;const tx=X(st.touch[0]),ty=Y(st.touch[1]);
+    ctx.beginPath();ctx.moveTo(tx-6*d,ty);ctx.lineTo(tx+6*d,ty);ctx.moveTo(tx,ty-6*d);ctx.lineTo(tx,ty+6*d);ctx.stroke();}
+  // target
+  if(st.phase==='walk'&&st.target>=0){ctx.strokeStyle=C.gold;ctx.lineWidth=1.5*d;ctx.beginPath();ctx.arc(X(S[2*st.target]),Y(S[2*st.target+1]),5*d,0,TWO_PI);ctx.stroke();}
+  if(st.phase==='run2'&&st.i0>=0){ctx.strokeStyle=C.gold;ctx.setLineDash([3*d,4*d]);ctx.lineWidth=1.2*d;ctx.beginPath();
+    ctx.moveTo(X(st.hx),Y(st.hy));ctx.lineTo(X(S[2*st.i0]),Y(S[2*st.i0+1]));ctx.stroke();ctx.setLineDash([]);}
+  // Harry + vision disc
+  const rv=Math.max(P.eps*sc,3*d);
+  ctx.fillStyle=C['harry-soft'];ctx.strokeStyle=C.harry;ctx.lineWidth=1.5*d;ctx.beginPath();ctx.arc(X(st.hx),Y(st.hy),rv,0,TWO_PI);ctx.fill();ctx.stroke();
+  ctx.fillStyle=C.harry;ctx.beginPath();ctx.arc(X(st.hx),Y(st.hy),3.6*d,0,TWO_PI);ctx.fill();
+  // scale label
+  ctx.fillStyle=C.muted;ctx.font=`${11*d}px JetBrains Mono, monospace`;ctx.fillText('1',X(1)+4*d,Y(0)-5*d);
+}
+const phaseName={run1:'Run 1 · straight',run2:'Run 2 · to touch-down',walk:'Walking the front',done:'All seen'};
+function updateStats(){
+  $('hudT').textContent='t = '+st.t.toFixed(2);
+  const hp=$('hudPhase');hp.className='chip '+(st.phase==='done'?(st.fail?'fail':'done'):'phase');
+  hp.textContent=st.fail?'Not finished by t = 80':(P.mode==='H'&&st.phase==='run1'?'Run · head-on':phaseName[st.phase]);
+  $('sT').textContent=st.t.toFixed(2);$('sU').textContent=st.unseen;
+  $('sTd').textContent=st.tTouch==null?'–':st.tTouch.toFixed(2);
+  $('sDone').textContent=st.tDone==null?(st.fail?'> 80':'–'):st.tDone.toFixed(2);
+  $('bar').style.width=(100*(1-st.unseen/P.N)).toFixed(1)+'%';
+  const near=st.phase==='walk'&&st.unseen<P.N*0.04;
+  const on=st.phase==='run1'?'p1':st.phase==='run2'?'p2':st.phase==='walk'?(near?'p4':'p3'):'p4';
+  for(const id of['p1','p2','p3','p4'])$(id).classList.toggle('on',id===on);
+}
+function bindRange(id,key,fmt,cb){const el=$(id);el.addEventListener('input',()=>{P[key]=+el.value;$(id+'v').textContent=fmt(+el.value);cb&&cb();});}
+bindRange('v','v',x=>x.toFixed(2),restart);bindRange('e','eps',x=>x.toFixed(3),restart);bindRange('n','N',x=>String(x),restart);
+bindRange('sp','speed',x=>'×'+x);
+function restart(){init();running=!reduce||running;$('play').textContent=running?'Pause':'Play';}
+$('reset').onclick=()=>{init();running=true;$('play').textContent='Pause';};
+$('play').onclick=()=>{if(st.phase==='done'){init();running=true;}else running=!running;$('play').textContent=running?'Pause':'Play';};
+function setMode(m){P.mode=m;$('mT').setAttribute('aria-pressed',m==='T');$('mH').setAttribute('aria-pressed',m==='H');init();running=true;$('play').textContent='Pause';}
+$('mT').onclick=()=>setMode('T');$('mH').onclick=()=>setMode('H');
+new ResizeObserver(()=>{size();draw();}).observe($('field'));
+size();init();if(reduce)$('play').textContent='Play';requestAnimationFrame(tick);
+
+// progress chart (log scale)
+(function chart(){
+  const w=900,h=190,l=40,r=30,top=46,ax=118;
+  const x=e=>l+(e+56)/(56)*(w-l-r);   // log10 from -56 to 0
+  let s=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Proven speed limit rose from 4e-51 to 6e-5; method ceiling about 1e-4; simulations work to about 0.2">`;
+  s+=`<rect x="${x(Math.log10(1e-4))}" y="${top-8}" width="${x(Math.log10(.2))-x(Math.log10(1e-4))}" height="${ax-top+8}" fill="var(--gold-soft)"/>`;
+  s+=`<line x1="${l}" x2="${w-r}" y1="${ax}" y2="${ax}" stroke="var(--muted)" stroke-width="1"/>`;
+  for(let e=-50;e<=0;e+=10){s+=`<line x1="${x(e)}" x2="${x(e)}" y1="${ax}" y2="${ax+5}" stroke="var(--muted)"/>`+
+    `<text x="${x(e)}" y="${ax+20}" fill="var(--muted)" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">10${e===0?'⁰':sup(e)}</text>`;}
+  const pts=[[Math.log10(4e-51),'Round 6: first proof','4·10⁻⁵¹','var(--harry)',62],[Math.log10(4.7e-15),'Same core, new assembly','4.7·10⁻¹⁵','var(--muted)',62],[Math.log10(6e-5),'Round 7: optimised','6·10⁻⁵','var(--harry)',30]];
+  pts.forEach(([e,lab,val,col,yy])=>{s+=`<line x1="${x(e)}" x2="${x(e)}" y1="${yy+8}" y2="${ax}" stroke="${col}" stroke-dasharray="2 3"/>`+
+    `<circle cx="${x(e)}" cy="${ax}" r="5.5" fill="${col}"/>`+
+    `<text x="${x(e)}" y="${yy-6}" fill="var(--ink)" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">${lab}</text>`+
+    `<text x="${x(e)}" y="${yy+8}" fill="var(--muted)" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">${val}</text>`;});
+  s+=`<text x="${x(-2.2)}" y="${top+8}" fill="var(--gold)" font-family="Inter, sans-serif" font-size="12.5" font-weight="600" text-anchor="end">simulations succeed</text>`;
+  s+=`<text x="${x(-2.2)}" y="${top+24}" fill="var(--muted)" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="end">up to v ≈ 0.2</text>`;
+  s+=`<text x="${l}" y="${h-8}" fill="var(--muted)" font-family="Inter, sans-serif" font-size="12">Shaded: beyond the method's estimated ceiling (≈10⁻⁴) but inside what simulation shows works.</text>`;
+  $('chart').innerHTML=s+'</svg>';
+  function sup(e){const m={'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};return String(e).split('').map(c=>m[c]).join('');}
+})();
+})();
+</script>

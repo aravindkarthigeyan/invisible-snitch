@@ -1,0 +1,342 @@
+% sec7b.tex -- writer W5. Sections 7.3-7.5: tail, bulk and hole, the curve x^0, the touch-down theorem.
+% Standing: 0<v<=\vbar, 0<eps<=\epsbar, the constants of Definition 7.1, Lemma 7.2 used tacitly; mu=v/(1-v), mu_T=3v/(1+v).
+
+\subsection{The tail and the end}\label{sec:tail}
+
+Throughout Sections~\ref{sec:tail}--\ref{sec:x0}, $0<v\le\vbar$, $0<\eps\le\epsbar$, the constants are those of
+Definition~\ref{def:tdconst}, and Lemma~\ref{lem:mono} is used tacitly: a constant bounds the corresponding expression formed with
+the actual $v$, $\mu=v/(1-v)\le\mub$, $\muT=3v/(1+v)\le\muTb$ and $\eps$. The \emph{tail} consists of the labels
+$\theta=\alpha_0-\xi$, $0<\xi\le\eta$, behind the point of tangency; there $\theta\ge\underline\alpha-\eta=\theta_L$.
+
+\begin{lemma}\label{lem:tail}
+\begin{enumerate}
+\item[(a)] There is a unique $\be=\alpha_0-\xe$ with $\xe\in(0,\eta)$ and $C(\be)=\eps\gmax$, and
+\[
+\xi_-\eps^{1/(2-2v)}\le\xe\le\xi_+\eps^{1/(2-2v)}\le\bar\xi_{\mathrm e},\qquad\xe\ge\xi_-\eps\ge\eps/2 .
+\]
+\item[(b)] Every true candidate $\theta\in[\be,\alpha_0]$ is seen by $\ttd$.
+\item[(c)] Let $\theta=\alpha_0-\xi$ with $\xe\le\xi\le\eta$. Then $S_\theta$ exists on $[0,\ttd]$, $\rho_\theta>0$ there, and in the
+frame of run~2 at $\ttd$:
+$h<0$ and $h_{\mathrm t}\xi\le|h|\le h_{\mathrm T}\xi$; $\tau\ge\tau_{\mathrm t}>1$; $-z_{\mathrm T}\xi\le z\le-h_{\mathrm t}\xi$;
+$0<y\le y_{\mathrm T}\xi^{2-\muT}$; $\rho\le\rho_{\mathrm T}\xi$; $(\tau/\tau_{\sbb})^v\le T_{\mathrm t}\xi^{-\muT}$;
+$-\theta_{\mathrm t}\xi^{1-\muT}\le\psi<0$; $1\le w\le W_{\mathrm t}$; and $|k|\le k_{\mathrm t}\xi^{-\muT}$.
+\item[(d)] The virtual and the true candidate $\be$ coincide on $[0,\ttd]$, and $\xend:=x_{\be}(\ttd)$ satisfies
+$\xend-X_0=z_{\mathrm E}\nhat+y_{\mathrm E}\nhat^\perp$ with $-z_{\mathrm T}\xe\le z_{\mathrm E}\le-h_{\mathrm t}\xe$ and
+$0<y_{\mathrm E}\le y_{\mathrm T}\xe^{2-\muT}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Tail labels lie in the window, where the bounds of Lemma~\ref{lem:tang}(c) hold; in particular $\xi\mapsto C(\alpha_0-\xi)$ is
+continuous and strictly increasing on $(0,\eta]$, $C_{\mathrm{lo}}\xi^{2-2v}\le C\le C_{\mathrm{hi}}\xi^{2-2v}$, and
+$\sbb\in(0,\pi)$. In run~1 every tail label has $\rho\ge\eps$, since $\theta\ge\theta_L>\as$ (Lemma~\ref{lem:run1}(a)).
+
+(a) $C(\alpha_0-\xi)\le C_{\mathrm{hi}}\xi^{2-2v}\to0$ as $\xi\to0$, and $C(\alpha_0-\eta)\ge C_{\mathrm{lo}}\eta^2>\epsbar\gb\ge\eps\gmax$
+\hyptag{SC22}. So $\be$ exists and is unique, and $C_{\mathrm{lo}}\xe^{2-2v}\le\eps\gmax\le C_{\mathrm{hi}}\xe^{2-2v}$. As
+$C_{\mathrm{hi}}<1$ \hyptag{SC21} and $\gmax\ge1$, $\xe\ge(\eps/C_{\mathrm{hi}})^{1/(2-2v)}\ge\xi_-\eps^{1/(2-2v)}$; as $\gb/C_{\mathrm{lo}}>1$
+\hyptag{SC23}, $\xe\le(\gb/C_{\mathrm{lo}})^{1/(2-2v)}\eps^{1/(2-2v)}\le\xi_+\eps^{1/(2-2v)}$. Finally
+$\eps\le\eps^{1/(2-2v)}\le\eps^{1/2}\le\epsbar^{1/2}$, $\xi_-\ge\frac12$ \hyptag{SC28} and $\bar\xi_{\mathrm e}<\eta$ \hyptag{SC24}.
+
+(c) \emph{$h$.} $\rho_0-\sr=\int_\theta^{\alpha_0}\sA\in[\sA_{\min}\xi,\sA_{\max}\xi]$, $0\le\sr(1-\cos\sbb)\le\sr_{\max}\sbb^2/2\le
+\sr_{\max}b_{\mathrm{hi}}^2\eta^3\xi/2$, and $0\le(1-v^2)\omega(\ttd)\le(1+v)v\eps/(3(1-v))\le\delta_{\mathrm{tl}}\xi$, by
+Lemma~\ref{lem:tang}(b) and $\eps\le\xi/\xi_-$ (from (a)). By \eqref{eq:h2}, $h\le-(\sA_{\min}-\delta_{\mathrm{tl}})\xi=-h_{\mathrm t}\xi<0$
+\hyptag{SC25} and $|h|\le h_{\mathrm T}\xi$. In run~2, $\rho\ge C/\gmax>0$ (Lemma~\ref{lem:coord}(c)), and $\rho\ge\eps$ in run~1; so
+$S_\theta$ exists on $[0,\ttd]$ with $\rho>0$, and $0<\beta<\pi$ throughout run~2.
+
+\emph{$\tau$.} By Lemma~\ref{lem:coord}(d), $\tau^{1+v}\ge2|h|/((1-v)C)\ge2h_{\mathrm t}\xi/(C_{\mathrm{hi}}\xi^{2-2v})\ge
+(2h_{\mathrm t}/C_{\mathrm{hi}})\eta^{-(1-2v)}\ge m_\tau>1$ \hyptag{SC26}; so $\tau\ge\tau_{\mathrm t}>1$. Then
+$(1+v)C\tau^{v-1}/(2|h|)\le(1+v)\tau_{\mathrm t}^{\vbar-1}/m_\tau\le e_{\mathrm t}$, and Lemma~\ref{lem:coord}(d) gives
+$2|h|/C\le(1-v)\tau^{1+v}\le(1+e_{\mathrm t})2|h|/C$.
+
+\emph{$y$.} $y=C\tau^v=C^{1/(1+v)}(C\tau^{1+v})^{v/(1+v)}$, and $C\tau^{1+v}\le y_{\mathrm c}\xi$ by the bound on $\tau$; with
+$C\le C_{\mathrm{hi}}\xi^{2-2v}$,
+\[
+y\le C_{\mathrm{hi}}^{1/(1+v)}\xi^{(2-2v)/(1+v)}(y_{\mathrm c}\xi)^{v/(1+v)}\le y_{\mathrm T}\xi^{(2-v)/(1+v)},\qquad\frac{2-v}{1+v}=2-\muT .
+\]
+
+\emph{$\tau/\tau_{\sbb}$.} $\tau^{1+v}\le y_{\mathrm c}\xi/(C_{\mathrm{lo}}\xi^{2-2v})$ and $\tau_{\sbb}\ge b_{\mathrm{lo}}\xi^2/2$, so
+$\tau/\tau_{\sbb}\le\max(1,y_{\mathrm c}/C_{\mathrm{lo}})(2/b_{\mathrm{lo}})\xi^{-3/(1+v)}$ and $(\tau/\tau_{\sbb})^v\le T_{\mathrm t}\xi^{-\muT}$.
+
+\emph{$\psi$.} By Lemma~\ref{lem:tang}(d), $\sfc=\partial_\theta C<0$ and $|\tau_{\sbb}^v\sfc|\le\ell_{\max}\xi/2$; with
+$\sa\ge\sa_{\min}>0$ \hyptag{SC13}, $Y_r=(\tau/\tau_{\sbb})^v\tau_{\sbb}^v\sfc/\sa$ (Lemma~\ref{lem:transport}(b)) satisfies $Y_r<0$ and
+$|Y_r|\le Y_2\xi^{1-\muT}\le\bar Y_2$. As $\cos\beta<-v$ ($h<0$), $N_\psi<0$, $|N_\psi|\le|Y_r|+v\sin\beta$ and $D_\psi\ge1$; so
+$\psi\in(-\pi/2,0)$ and $|\psi|\le|\tan\psi|\le|Y_r|+v\sin\beta$. Further $\rho\ge|h|\ge h_{\mathrm t}\xi$ and
+$\sin\beta=y/\rho\le y_{\mathrm T}\xi^{1-\muT}/h_{\mathrm t}$, whence $|\psi|\le\theta_{\mathrm t}\xi^{1-\muT}$.
+
+\emph{$z$, $\rho$.} $z=h-v\rho<0$ and $|z|\ge|h|\ge h_{\mathrm t}\xi$; $\rho\le|z|+y$ gives
+$(1-v)|z|\le|h|+vy\le(h_{\mathrm T}+vy_{\mathrm T}\eta^{1-\muT})\xi$, so $|z|\le z_{\mathrm T}\xi$, and
+$\rho\le|z|(1+(y/|z|)^2)^{1/2}\le\rho_{\mathrm T}\xi$.
+
+\emph{$w$, $k$.} $w=\sa|D_\psi+iN_\psi|/(1-v^2)\le W_{\mathrm t}$, as $|D_\psi|\le1+v+v\bar Y_2$ and $|N_\psi|\le(1+v)\bar Y_2+v$; and
+$w\ge1$ (Lemma~\ref{lem:truefront}). By Lemma~\ref{lem:transport}(d) with $t'=t_1$, $t''=\ttd$ and the bounds $|k_1|\le1+\vk_{\mathrm w}$,
+$|\TS(t_1)|\le S_1v$ of Lemma~\ref{lem:tang}(c): $|k|\le(\tau/\tau_{\sbb})^v(1+\vk_{\mathrm w}+S_1v)+|\TS(\ttd)|$. In
+Lemma~\ref{lem:transport}(e), $|\sin\phi|\le\sin\beta+|\psi|\le(y_{\mathrm T}/h_{\mathrm t}+\theta_{\mathrm t})\xi^{1-\muT}$, $\rho\ge h_{\mathrm t}\xi$
+and $\rho|\sa||\partial_\theta\log C|/w^2\le\rho_{\mathrm T}\xi\cdot\sa_{\max}L_C/\xi$; so $|\TS(\ttd)|\le S_3v\xi^{-\muT}$ and
+$|k|\le k_{\mathrm t}\xi^{-\muT}$.
+
+(d) In run~2 the label $\be$ has $\rho\ge C(\be)/\gmax=\eps$, and $\rho\ge\eps$ in run~1; by Lemma~\ref{lem:truefront} its virtual and
+true candidates coincide on $[0,\ttd]$. The bounds are (c) at $\xi=\xe$.
+
+(b) \emph{The label $\alpha_0$} has $\rho_{\alpha_0}(\ta)=\eps$ (Lemma~\ref{lem:tang}(b)). \emph{Labels with $\xi_2v\eps\le\xi\le\xe$.}
+By monotonicity $C(\alpha_0-\xi)\le C(\be)=\eps\gmax$, and by \eqref{eq:h2}, $h(\ttd)\le-(1+v)\sA_{\min}\xi+(1+v)v\eps/(3(1-v))\le0$;
+so $\cos\beta(\ttd)\le-v$, while at $t_1$, $\cos\beta=\cos\sbb\ge\cos\bar b>v$ \hyptag{SC14}. By Lemma~\ref{lem:coord}(b),(c), $\beta$
+passes $\arccos v$ during $(t_1,\ttd)$, where $\rho$ attains its minimum $C/\gmax\le\eps$: the candidate is seen.
+\emph{Labels with $0<\xi\le\eps/2$.} At $\ta$, $(1-v^2)\omega(\ta)=(1+v)\eps$, so by \eqref{eq:h2}
+$h(\ta)=(1+v)\eps-(1+v)(\rho_0-\sr)-\sr(1-\cos\sbb)$. Here $\sA_{\max}=W_{\mathrm w}=e^{\vbar\bar t_1/\sin\theta_L}<2$ ($\theta_L\ge\frac12$
+\hyptag{SC3}, $\vbar\le\frac1{10}$ \hyptag{SC35}, $\bar t_1<3$), so $\sA_{\max}\xi\le\eps$ and
+$(1+v)(\eps-\sA_{\max}\xi)\ge(1-\sA_{\max}/2)\eps$; and $\sr(1-\cos\sbb)\le\sr_{\max}b_{\mathrm{hi}}^2\xi^4/2\le
+\sr_{\max}b_{\mathrm{hi}}^2\epsbar^3\eps/32$. Hence $h_{\mathrm a}\eps\le h(\ta)\le(1+v)(\eps-\sA_{\min}\xi)$, with $h_{\mathrm a}>0$
+\hyptag{SC29}. By \eqref{eq:tau2}, $\tau(\ta)\le\beta_2\xi^2(Q_{\mathrm a}/\eps)^{1+\mu}\le\beta_2Q_{\mathrm a}^{1+\mu}\eps^{1-\mu}/4\le
+\tau_{\mathrm a}$, and $\tau(\ta)^2\le\tau_{\mathrm a}\beta_2Q_{\mathrm a}^{1+\mu}\xi^2\eps^{-1-\mu}$. Then
+$\cos\beta+v\ge1+v-2\tau^2>0$ \hyptag{SC30}, and
+\[
+\rho(\ta)=\frac h{\cos\beta+v}\le\frac{(1+v)(\eps-\sA_{\min}\xi)}{1+v-2\tau^2}<\eps
+\iff2\tau^2\eps<(1+v)\sA_{\min}\xi ,
+\]
+which holds since $2\tau^2\eps\le2\tau_{\mathrm a}\beta_2Q_{\mathrm a}^{1+\mu}\xi^2\eps^{-\mu}\le\tau_{\mathrm a}\beta_2Q_{\mathrm a}^{1+\mu}
+\eps^{1-\mu}\xi\le4\tau_{\mathrm a}^2\xi<\sA_{\min}\xi$ ($\xi\le\eps/2$, \hyptag{SC31}). So the candidate is seen at $\ta$. Since
+$\xi_2v\eps\le\eps/2$ \hyptag{SC27} and $\xe\ge\eps/2$, the three ranges cover $[\be,\alpha_0]$.
+\end{proof}
+
+\subsection{The bulk and the hole}\label{sec:bulk}
+
+By Lemma~\ref{lem:run1}(e) every true candidate $S_\theta$, $\theta\in(0,2\pi)$, exists on $[0,\ttd]$ with $\rho_\theta>0$, and
+$S_0$ is caught at $1/(1-v)<t_1$; as there, $\circab\theta=\min(\theta,2\pi-\theta)$.
+
+\begin{lemma}\label{lem:bulk}
+\begin{enumerate}
+\item[(a)] \emph{(Bulk.)} Let $\theta\in(0,2\pi)\setminus I_\eta$. In the frame of run~2, $\sbb(\theta)\in[b_{\mathrm l},\pi/3+2e_\beta]$
+and $y(\theta,t)\ge y_{\mathrm b}$ for $t\in[t_1,\ttd]$; at $\ttd$ the true front is $C^\infty$ near $\theta$, with $|k|\le k_{\mathrm b}$
+and $w\le W_{\mathrm b}W_{\mathrm{all}}(2/\circab\theta)^{2v}$.
+\item[(b)] \emph{(Hole.)} $Z_1:=\lim_{\alpha\to0\pm}S_\alpha(t_1)$ exists and equals $P(t_1)-(1+v)$, and
+$\Gamma_1:=\{S_\alpha(t_1):0<|\alpha|\le0.005\}\cup\{Z_1\}$ is a $C^1$ arc of finite length with tangent $i$ at $Z_1$. Let $\Phi$ be
+the flow map from $t_1$ to $\ttd$ of the field $x\mapsto v(x-P(t))/|x-P(t)|$. On the closed disc $\bar B(1,r_{\mathrm B})$, $\Phi$ is a
+$C^\infty$ diffeomorphism onto its image; $\Gamma_1\subset\bar B(1,r_{\mathrm B})$; $Z_{\mathrm s}:=\Phi(Z_1)=\lim_{\alpha\to0\pm}S_\alpha(\ttd)$;
+and $\Gamma_{\mathrm s}:=\Phi(\Gamma_1)$ is a $C^1$ arc through $Z_{\mathrm s}$, equal to the true front off $\alpha=0$, whose unit
+tangent is $k_{\mathrm b}$-Lipschitz in arclength.
+\item[(c)] \emph{(Chords.)} Let $\theta_a,\theta_b\in[0,2\pi)$ with $|e^{i\theta_b}-e^{i\theta_a}|\ge2\eps$, and let $X_\bullet(\ttd)$
+($\bullet=a,b$) be the position at $\ttd$ of the virtual candidate $\theta_\bullet$, or of the true candidate $\theta_\bullet\ne0$, or
+$Z_{\mathrm s}$ if $\theta_\bullet=0$. Then $|X_b(\ttd)-X_a(\ttd)|\ge|e^{i\theta_b}-e^{i\theta_a}|$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) \emph{$\sbb$.} By Lemma~\ref{lem:tang}(b), $\alpha_0\in[\underline\alpha,\pi/3]$, and candidates move with speed $\le v$, so
+$|S_{\alpha_0}(t_1)-P(t_1)-(e^{i\pi/3}-2)|\le vt_1+|e^{i\alpha_0}-e^{i\pi/3}|+|t_1-2|\le e_\rho<\sqrt3=|e^{i\pi/3}-2|$; as
+$\arg(e^{i\pi/3}-2)=5\pi/6$, $|\beta^*-5\pi/6|\le e_\beta$ and $\pi-\beta^*\in[\pi/6-e_\beta,\pi/6+e_\beta]$. In the upper half
+($0<\theta<\pi$), $\beta_1$ is monotone on each side of $\alpha_0$ (Lemma~\ref{lem:tang}(a)), so for $\theta\notin I_\eta$,
+$\sbb=\beta_1-\beta^*\ge\min(\sbb(\alpha_0-\eta),\sbb(\alpha_0+\eta))\ge b_{\mathrm{lo}}\eta^2=b_{\mathrm l}$, and $\sbb<\pi-\beta^*$; for
+$\theta=\pi$, $\sbb=\pi-\beta^*$; in the lower half, $\sbb\in(\pi-\beta^*,2\pi-2\beta^*]$. Hence $\sbb\in[b_{\mathrm l},\pi/3+2e_\beta]$
+(using $\pi-\beta^*\ge b_{\mathrm l}$ \hyptag{SC32}), and $\sin\sbb\ge\sin b_{\mathrm l}$ by \hyptag{SC33}.
+
+\emph{$y$.} $\sr=\rho_1\ge1+v\ge1$ (Lemma~\ref{lem:run1}(d)), so $y(t_1)=\sr\sin\sbb\ge y_{\mathrm b}$; $y=C\tau^v$ is non-decreasing in
+run~2, so $y\ge y_{\mathrm b}$ on $[t_1,\ttd]$; in particular $\rho\ge y_{\mathrm b}$ and $0<\beta<\pi$ there.
+
+\emph{$\tau$.} $\tau(t_1)=\tau_{\sbb}\ge\tan(b_{\mathrm l}/2)$. At $\ttd$, $\tau=(\rho-z)/y\le2\rho/y_{\mathrm b}$, and
+$\rho(\ttd)\le\sr+(1+v)(\ttd-t_1)\le|e^{i\theta}-2|+d_1+(1+v)(\sqrt3+e_\rho)/(1-v)\le H_{\mathrm b}$ (as $|S_\theta(t_1)-P(t_1)-(e^{i\theta}-2)|\le
+vt_1+\mu\le d_1$, $\ttd-t_1\le\rho_0/(1-v)$ and $\rho_0\le\sqrt3+e_\rho$). So $1\le\tau(\ttd)/\tau_{\sbb}\le T_{\mathrm b}$ and
+$(\tau(\ttd)/\tau_{\sbb})^v\le T_{\mathrm b}^{\vbar}$ \hyptag{SC34}.
+
+\emph{$k$, $w$.} By Lemma~\ref{lem:transport}(e) with $y\ge y_{\mathrm b}$, $|\TS|\le S_{\mathrm b}v$ at $t_1$ and at $\ttd$. By
+Lemma~\ref{lem:transport}(d) and Lemma~\ref{lem:run1}(d) ($|k_1|\le k_{\mathrm{all}}$, $w_1\le W_{\mathrm{all}}(2/\circab\theta)^{2v}$),
+$|k(\ttd)|\le T_{\mathrm b}^{\vbar}(k_{\mathrm{all}}+S_{\mathrm b}\vbar)+S_{\mathrm b}\vbar=k_{\mathrm b}$ and
+$w(\ttd)\le\frac{1+v}{1-v}T_{\mathrm b}^{\vbar}w_1\le W_{\mathrm b}W_{\mathrm{all}}(2/\circab\theta)^{2v}$. The front is $C^\infty$ near $\theta$
+because $\rho>0$ on $[0,\ttd]$.
+
+(b) \emph{$\Gamma_1$.} Let $0<\alpha\le\frac12$. By Lemma~\ref{lem:run1}(c), $y(\alpha,t_1)\le2\mathcal E_1\tan(\alpha/2)^{(1-v)/(1+v)}\to0$.
+In the frame of run~1, $z=h_1-v\rho_1<0$ and $\rho_1\le|z|+y$, with $|h_1|=(1-v^2)+(1-\cos\alpha)$; so
+$|h_1|\le(1-v)|z|\le|h_1|+vy$, hence $0\le|z|-(1+v)\le(1-\cos\alpha+vy)/(1-v)\to0$. Thus $S_\alpha(t_1)\to P(t_1)-(1+v)$, and
+from below by the mirror symmetry of run~1. The tangent at $\alpha$ is $e^{i(\pi/2+\delta)}$ with $0\le\delta\le\arctan(d_{\mathrm{arm}}y)\to0$
+(Lemma~\ref{lem:run1}(c)), and at the mirror label $e^{i(\pi/2-\delta)}$; both tend to $i$. The stretch $w_1\le W_{\mathrm{arm}}(2/|\alpha|)^{2v}$
+is integrable ($2v<1$). Hence the arclength parametrisation of $\Gamma_1$ is continuous, $C^\infty$ with unit speed off $Z_1$, and its
+derivative extends continuously (by $i$) to $Z_1$; so $\Gamma_1$ is $C^1$.
+
+\emph{$\Phi$.} If $X(t_1)\in\bar B(1,r_{\mathrm B})$ and $t\in[t_1,\ttd]$, then $|X(t)-1|\le r_{\mathrm B}+vT_2$, while $P(t)$ lies within
+$d_P$ of the segment $[2,e^{i\pi/3}]$ (Lemma~\ref{lem:tang}(b)), whose distance from $1$ is $\frac12$ (the foot of the perpendicular,
+$(5+i\sqrt3)/4$, is its midpoint). So $|X(t)-P(t)|\ge\rho_{\mathrm h}>0$ \hyptag{SC36}: along these trajectories the field is $C^\infty$
+with bounded derivatives, and $\Phi$ is a $C^\infty$ diffeomorphism of $\bar B(1,r_{\mathrm B})$ onto its image. For $|\alpha|\le0.005$,
+$|S_\alpha(t_1)-1|\le|e^{i\alpha}-1|+vt_1\le r_{\mathrm B}$, and $Z_1$ is a limit of such points; so $\Gamma_1\subset\bar B(1,r_{\mathrm B})$.
+Hence $\Gamma_{\mathrm s}$ is a $C^1$ arc, $\Phi(Z_1)=\lim\Phi(S_\alpha(t_1))=\lim S_\alpha(\ttd)$, and off $\alpha=0$ it is the true
+front, whose curvature is bounded by $k_{\mathrm b}$ by (a), since $I_\eta\subset[\frac12,\frac\pi2]$ (Lemma~\ref{lem:tang}(c)) contains no
+label with $|\alpha|\le0.005$. The tangent angle of $\Gamma_{\mathrm s}$ is continuous, with derivative bounded by $k_{\mathrm b}$ off one
+point; so it is $k_{\mathrm b}$-Lipschitz.
+
+(c) Virtual candidates solve $X'=vF(X-P)$ and true candidates $X'=v(X-P)/|X-P|$ without meeting $P$ on $[0,\ttd]$, all starting at
+$e^{i\theta}$ at time $0$; so this is Lemma~\ref{lem:sep}(b) on $[0,\ttd]$. If $X_a(\ttd)=Z_{\mathrm s}$ and $X_b$ starts at
+$e^{i\theta}$ with $|1-e^{i\theta}|\ge2\eps$, then $|e^{i\alpha}-e^{i\theta}|\ge|1-e^{i\theta}|$ for all small $\alpha$ of one sign (if
+$\theta\ne\pi$), resp.\ $|e^{i\alpha}-e^{i\theta}|>2\eps$ for all small $\alpha$ (if $\theta=\pi$). (The case split is needed because
+Lemma~\ref{lem:sep}(b) requires the initial distance $\ge2\eps$ for each approximating $\alpha$; the limit gives the bound.)
+Lemma~\ref{lem:sep}(b) applied to $S_\alpha$
+and $X_b$, and $\alpha\to0$ with~(b), give the claim.
+\end{proof}
+
+\subsection{The curve at touch-down}\label{sec:x0}
+
+\begin{definition}\label{def:x0}
+For $\alpha\in[\alpha_0,2\pi+\be]$ (labels mod $2\pi$) let
+\[
+\Ups(\alpha):=\begin{cases}
+x_\alpha(\ttd)\ \text{(virtual candidate)},&\alpha\in[\alpha_0,\alpha_0+\xi_1\eps],\\
+S_\alpha(\ttd)\ \text{(true candidate)},&\alpha\in[\alpha_0+\xi_1\eps,2\pi+\be],\ \alpha\ne2\pi,\\
+Z_{\mathrm s}\ \text{(Lemma~\ref{lem:bulk}(b))},&\alpha=2\pi .
+\end{cases}
+\]
+Let $\xz:[0,U]\to\R^2$ be $\Ups$ reparametrised by arclength from $\Ups(\alpha_0)=X_0$, let $\Theta(u)$ be the label of $\xz(u)$, and
+$u':=U-u$. The \emph{forward zone} is $\{u:\Theta(u)\in[\alpha_0,\alpha_0+\eta]\}$, with $\xi:=\Theta-\alpha_0$; the \emph{tail zone} is
+$\{u:\Theta(u)\in[2\pi+\alpha_0-\eta,2\pi+\be]\}$, with $\xi:=2\pi+\alpha_0-\Theta\in[\xe,\eta]$; the rest is the \emph{bulk}. The
+\emph{ghost set} is
+\[
+\Ghost:=\{u:\Theta(u)=2\pi\}\cup\{u:\Theta(u)\in[\alpha_0,\alpha_0+\xi_1\eps)\text{ and }S_{\Theta(u)}\text{ was within $\eps$ of $P$ at
+some time}\le\ttd\}.
+\]
+\end{definition}
+
+That $\Ups$ is well defined and that $\xz$ exists are part of Lemma~\ref{lem:len}. The two definitions of $\Ups$ agree near
+$\alpha_0+\xi_1\eps$ (Lemma~\ref{lem:fwd}(d)); the hole labels $0<|\alpha-2\pi|<\as$ are true (Lemma~\ref{lem:run1}(e)). We have
+$0\in\Ghost$, since $\Theta(0)=\alpha_0$ and the true candidate $\alpha_0$ coincides with the virtual one up to $\ta$, where
+$\rho_{\alpha_0}(\ta)=\eps$ (Lemma~\ref{lem:tang}(b)); and $U\notin\Ghost$, since $\Theta(U)=2\pi+\be$. Thus $\xz(U)=\xend$.
+
+\begin{lemma}\label{lem:len}
+$\xz$ is $C^1$ with $|\partial_u\xz|\equiv1$, and $1\le U\le U_{\max}$. On the forward zone $\xi\le u\le W_{\mathrm v}\xi$ and
+$|T-\nhat|\le|\psi|\le\theta_{\mathrm v}\xi^{1-\mu}$; on the tail zone $\xi-\xe\le u'\le W_{\mathrm t}(\xi-\xe)$ and
+$-\theta_{\mathrm t}\xi^{1-\muT}\le\psi<0$; here $T=e^{i\psi}\nhat$. On $\{u\ge u_{\mathrm v}\eps\}$ the tangent angle of $\xz$ is locally
+Lipschitz in $u$, with almost everywhere derivative $k$, where $|k|\le k_{\mathrm f}\xi^{-\mu}$ on the forward zone,
+$|k|\le k_{\mathrm t}\xi^{-\muT}$ on the tail zone and $|k|\le k_{\mathrm b}$ on the bulk (across the label $2\pi$ as well). For labels
+$\Theta_a<\Theta_b$ with $\Delta:=\Theta_b-\Theta_a$ and $\lambda:=u_b-u_a$:
+\[
+\lambda=l(a,b)\le W_x\,\Delta\,(4/\Delta)^{2v}/(1-2v),\qquad\text{and}\qquad\lambda>\lambda_0\ \Longrightarrow\ \Delta>\Delta_0 .
+\]
+\end{lemma}
+
+\begin{proof}
+\emph{Regularity.} $\Ups$ is $C^1$ in the label, with $|\partial_\alpha\Ups|\ge1$, on $[\alpha_0,2\pi)$ and on $(2\pi,2\pi+\be]$: on
+$[\alpha_0,\alpha_0+\xi_1\eps]$ it is a virtual front (Lemma~\ref{lem:flow}(a)); on the rest it is the true front, which is $C^\infty$
+with $w\ge1$ by Lemmas~\ref{lem:fwd}(d), \ref{lem:tail}(c), \ref{lem:bulk}(a) and~\ref{lem:truefront}; the two coincide on a
+neighbourhood of $\alpha_0+\xi_1\eps$ (Lemma~\ref{lem:fwd}(d)). Near the label $2\pi$, $\Ups$ is the arc $\Gamma_{\mathrm s}$
+(Lemma~\ref{lem:bulk}(b)). So the arclength parametrisation exists once $\Ups$ has finite length (shown below), and it is $C^1$ with
+unit speed.
+
+\emph{Pointwise data.} On the forward zone, Lemma~\ref{lem:virt} gives $1\le w\le W_{\mathrm v}$ and the bound on $\psi$, and
+$|T-\nhat|=|e^{i\psi}-1|\le|\psi|$; $u=\int_{\alpha_0}^{\Theta}w$ gives $\xi\le u\le W_{\mathrm v}\xi$. On the tail zone,
+Lemma~\ref{lem:tail}(c) gives $1\le w\le W_{\mathrm t}$ and the bound on $\psi$, and $u'=\int_\Theta^{2\pi+\be}w$. On
+$\{u\ge u_{\mathrm v}\eps\}$ the forward labels have $\xi\ge u/W_{\mathrm v}\ge\xi_1\eps$, so they are true and Lemma~\ref{lem:fwd}(d)
+gives the curvature; Lemma~\ref{lem:tail}(c) on the tail zone and Lemma~\ref{lem:bulk}(a),(b) on the bulk.
+
+\emph{Length.} At every label $\ne2\pi$, $w\le W_{\mathrm v}$ on the forward zone, $w\le W_{\mathrm t}$ on the tail zone and
+$w\le W_{\mathrm b}W_{\mathrm{all}}(2/\circab\theta)^{2v}$ on the bulk. The function $\theta\mapsto(2/\circab\theta)^{2v}$ is
+symmetric and decreasing in the circular distance $\circab\theta$ to $0$; so its integral over an arc of length $\Delta\le2\pi$ is at
+most $2\int_0^{\Delta/2}(2/\chi)^{2v}d\chi=\Delta(4/\Delta)^{2v}/(1-2v)$ (the \emph{arc bound}). The bulk labels form an arc of length
+$2\pi-2\eta>4$; by the arc bound, its contribution is at most
+$W_{\mathrm b}W_{\mathrm{all}}(2\pi-2\eta)\bigl(4/(2\pi-2\eta)\bigr)^{2v}/(1-2v)\le W_{\mathrm b}W_{\mathrm{all}}(2\pi-2\eta)/(1-2v)$; with
+$W_{\mathrm v}\eta$ and $W_{\mathrm t}\eta$ for the forward and tail zones, $U\le U_{\max}$. Further
+$U\ge|\Ups(\alpha_0+\pi)-X_0|\ge|e^{i(\alpha_0+\pi)}-e^{i\alpha_0}|-2d_{\mathrm s}=2-2d_{\mathrm s}\ge1$, since all candidates and
+$X_0=x_{\alpha_0}(\ttd)$ have moved by at most $v\ttd\le d_{\mathrm s}$ (Lemma~\ref{lem:tang}(b)), and \hyptag{SC38}.
+
+As $(2/\circab\theta)^{2v}\ge1$ on $I_\eta$ (there $\circab\theta\le\pi/2+\eta<2$), $w\le W_x(2/\circab\theta)^{2v}$ at every label
+$\ne2\pi$, and the arc bound gives the bound on $l$. If
+$\Delta\le\Delta_0$, then, as $\Delta\mapsto\Delta^{1-2v}$ is increasing and $4/\Delta_0=4W_x\hat L/\lambda_0\le8/\lambda_0$ \hyptag{SC41},
+$l\le W_x\Delta_0(4/\Delta_0)^{2v}/(1-2v)\le W_x\Delta_0(8/\lambda_0)^{2v}/(1-2v)\le W_x\Delta_0\hat L=\lambda_0$; this is the contrapositive
+of the last claim.
+\end{proof}
+
+\begin{lemma}\label{lem:Nbound}
+For all pairs $u_a<u_b$ of $\xz$ with $\eps/2\le\lambda:=u_b-u_a\le\lambda_0$: $N(a,b)\le c_N\lambda^{3/2-\muT}$. More precisely,
+$N\le c_{\mathrm{near}}\lambda^{3/2-\mu}$ if $u_a<\max(\lambda,u_{\mathrm v}\eps)$ \textup(near $X_0$\textup);
+$N\le c_{\mathrm{tail}}\lambda^{3/2-\muT}$ if $u'_b<\lambda$ and $\xe<\lambda$ \textup(near $\xend$\textup); and
+$N\le c_{\mathrm{far}}\lambda^{3/2-\muT}$ otherwise.
+\end{lemma}
+
+\begin{proof}
+\emph{Near $X_0$.} If $\lambda\ge u_{\mathrm v}\eps$, then $[u_a,u_b]\subset[0,2\lambda)$ and $u_b<2\lambda_0\le\eta$ \hyptag{SC39}; otherwise
+$u_a<u_{\mathrm v}\eps\le2u_{\mathrm v}\lambda$, so $[u_a,u_b]\subset[0,(2u_{\mathrm v}+1)\lambda)$, and $u_b<2u_{\mathrm v}\eps\le
+2u_{\mathrm v}\epsbar\le\eta$ \hyptag{SC40}. In both cases $[u_a,u_b]$ is an interval of length $\lambda$ in
+$[0,(2u_{\mathrm v}+1)\lambda]$ ($u_{\mathrm v}\ge\frac12$, \hyptag{SC46}) contained in $\{u<\eta\}$, which lies in the forward zone
+(there $u\ge\xi$). By Lemma~\ref{lem:static}(b) with $\uhat=\nhat$ and Lemma~\ref{lem:len} ($|T-\nhat|\le\theta_{\mathrm v}\xi^{1-\mu}\le
+\theta_{\mathrm v}u^{1-\mu}$),
+\[
+N^2\le\theta_{\mathrm v}^2\int_{u_a}^{u_b}u^{2-2\mu}du\le\theta_{\mathrm v}^2\lambda^{3-2\mu}
+\frac{(2u_{\mathrm v}+1)^{3-2\mu}-(2u_{\mathrm v})^{3-2\mu}}{3-2\mu}\le\theta_{\mathrm v}^2\lambda^{3-2\mu}\frac{12u_{\mathrm v}^2+6u_{\mathrm v}+1}{3-2\mub},
+\]
+since the integrand is increasing (the right-most interval maximises the integral) and $s\mapsto A^s-B^s$ is non-decreasing for
+$A>B\ge1$. So $N\le c_{\mathrm{near}}\lambda^{3/2-\mu}$.
+
+\emph{Near $\xend$.} Here $u'_a=u'_b+\lambda<2\lambda$ and $\xe<\lambda\le\lambda_0$, so $\xe+u'_a<2\lambda_0+\min(\bar\xi_{\mathrm e},\lambda_0)
+\le\eta$ \hyptag{SC39}; as $u'\ge\xi-\xe$ on the tail zone, the pair lies in the tail zone, where $\xi\le s:=\xe+u'$ and
+$|T-\nhat|\le|\psi|\le\theta_{\mathrm t}\xi^{1-\muT}\le\theta_{\mathrm t}s^{1-\muT}$. As $u$ runs over $[u_a,u_b]$, $s$ runs over an interval
+of length $\lambda$ in $[0,3\lambda]$; as above,
+$N^2\le\theta_{\mathrm t}^2\lambda^{3-2\muT}(3^{3-2\muT}-2^{3-2\muT})/(3-2\muT)\le19\,\theta_{\mathrm t}^2\lambda^{3-2\muT}/(3-2\muTb)$, i.e.\
+$N\le c_{\mathrm{tail}}\lambda^{3/2-\muT}$.
+
+\emph{Far:} $u_a\ge\max(\lambda,u_{\mathrm v}\eps)$, and $u'_b\ge\lambda$ or $\xe\ge\lambda$. By Lemma~\ref{lem:len} the tangent angle is
+locally Lipschitz on $[u_a,u_b]$ with almost everywhere derivative $k$. Forward-zone labels of the pair have $\xi\ge u/W_{\mathrm v}\ge
+\lambda/W_{\mathrm v}$, so $|k|\le k_{\mathrm f}W_{\mathrm v}^{\mub}\lambda^{-\mu}$; tail-zone labels have
+$\xi\ge\xe+u'/W_{\mathrm t}\ge\max(\xe,u'_b/W_{\mathrm t})\ge\lambda/W_{\mathrm t}$, so $|k|\le k_{\mathrm t}W_{\mathrm t}^{\muTb}\lambda^{-\muT}$;
+bulk labels have $|k|\le k_{\mathrm b}$. As $\lambda<1$ and $\mu\le\muT$, the tangent angle is $K$-Lipschitz on $[u_a,u_b]$ with
+$K:=k_*\lambda^{-\muT}$, and $K\lambda\le k_*\lambda_0^{1-\muTb}\le\pi$ \hyptag{SC45}. By Lemma~\ref{lem:static}(c),
+$N\le(K/\sqrt{12})\lambda^{3/2}=c_{\mathrm{far}}\lambda^{3/2-\muT}$.
+
+The cases are exhaustive, $\lambda^{3/2-\mu}\le\lambda^{3/2-\muT}$, and $c_N=\max(c_{\mathrm{far}},c_{\mathrm{near}},c_{\mathrm{tail}})$.
+\end{proof}
+
+\begin{theorem}\label{thm:touchdown}
+Let $0<v\le6\cdot10^{-5}$, $0<\eps\le10^{-3}$, and let $P$ follow design~T. Then $\ttd\le T_2$, and the curve $\xz$ of
+Definition~\ref{def:x0} is $C^1$ with $|\partial_u\xz|\equiv1$ and $1\le U\le U_{\max}$. With $\nhat$ of Definition~\ref{def:T},
+$u'=U-u$, $T$ the unit tangent of $\xz$, $\lambda=u_b-u_a$, and $l,c,N$ referring to $\xz$:
+\begin{itemize}
+\item[\textup{(T0)}] $\xz(0)=P(\ttd)$; every $u\notin\Ghost$ is a true label; every direction $\theta\in[0,2\pi)$ is seen during $[0,\ttd]$
+or is the direction of a true label.
+\item[\textup{(T1)}] $N(a,b)\le c_N\lambda^{3/2-\muTb}$ for $\eps/2\le\lambda\le\lambda_0$.
+\item[\textup{(T2)}] $c(a,b)\ge\min\bigl(c_{\mathrm{sep}},\kc(u_a+U-u_b)\bigr)$ for $\lambda>\lambda_0$.
+\item[\textup{(T3)}] $|T(u)-\nhat|\le\theta_{\mathrm v}\,u^{1-\mub}$ for $u\le G_{\mathrm T}$.
+\item[\textup{(T4)}] $|T(u)-\nhat|\le c_{T4}(U-u+z_0)^{1-\muTb}$ for $U-u\le G_{\mathrm T}$.
+\item[\textup{(T5)}] $P(\ttd)-\xz(U)=z_0\nhat+y_0\nhat^\perp$ with $\czlo\eps^{1/(2-2v)}\le z_0\le\czhi\eps^{1/2}$ and
+$|y_0|\le c_y(z_0+\eps)^{2-\muTb}$.
+\end{itemize}
+Here $T_2=3.73247$, $U_{\max}=6.29320$, $\lambda_0=0.0333$, $c_{\mathrm{sep}}=0.0330591$, $\kc=0.988089$, $c_N=2.72160$,
+$\muTb=1.79990\cdot10^{-4}$, $\mub=6.00037\cdot10^{-5}$, $\theta_{\mathrm v}=1.07003$, $c_{T4}=1.04263$, $\czlo=1.27025$, $\czhi=1.56563$,
+$c_y=0.619797$ and $G_{\mathrm T}=0.05$.
+\end{theorem}
+
+\begin{proof}
+By Table~\ref{tab:td} (Appendix~\ref{app:const}) the parameters $\vbar=6\cdot10^{-5}$, $\eta=0.1$, $\epsbar=10^{-3}$, $\xi_1=1.007$,
+$\lambda_0=0.0333$, $G_{\mathrm T}=0.05$ satisfy \hyptag{SC1}--\hyptag{SC48}, and the numbers displayed are the constants
+$T_2$, $U_{\max}$, $c_{\mathrm{sep}}$, $\kc$, $c_N$, $\muTb$, $\mub$, $\theta_{\mathrm v}$, $\theta_{\mathrm t}/h_{\mathrm t}$,
+$h_{\mathrm t}\xi_-$, $z_{\mathrm T}\xi_+$, $c_y$ of Definition~\ref{def:tdconst}, rounded down for $c_{\mathrm{sep}}$, $\kc$, $\czlo$ and up
+for the others. So it suffices to prove the theorem with these constants of Definition~\ref{def:tdconst} in place of the numbers. Also
+$\mu\le\mub$ and $\muT\le\muTb$, and $\ttd\le\tc\le T_2$ by Lemma~\ref{lem:tang}(b). Regularity and $1\le U\le U_{\max}$ are
+Lemma~\ref{lem:len}.
+
+\emph{\textup{(T0)}.} $\xz(0)=x_{\alpha_0}(\ttd)=P(\ttd)$ (Lemma~\ref{lem:tang}(b)). Let $u\notin\Ghost$. If
+$\Theta(u)\notin[\alpha_0,\alpha_0+\xi_1\eps)$, then $\Theta(u)\ne2\pi$ and $\xz(u)=S_{\Theta(u)}(\ttd)$, with $S_{\Theta(u)}$ defined on
+$[0,\ttd]$ (Lemma~\ref{lem:run1}(e)). If $\Theta(u)\in(\alpha_0,\alpha_0+\xi_1\eps)$, the true candidate has had $\rho\ge\eps$ on
+$[0,\ttd]$, so it coincides with the virtual one (Lemma~\ref{lem:truefront}) and $\xz(u)=S_{\Theta(u)}(\ttd)$. So every $u\notin\Ghost$ is
+true. Directions: those in $[-\as,\as]$ are seen in run~1 (Lemma~\ref{lem:run1}(a)), those in $[\be,\alpha_0]$ in run~2
+(Lemma~\ref{lem:tail}(b)); $\theta\in(\alpha_0,\alpha_0+\xi_1\eps)$ is seen if its label is in $\Ghost$ and is the direction of a true
+label otherwise; every other $\theta\in[0,2\pi)$ is the direction of a true label.
+
+\emph{\textup{(T1)}} is Lemma~\ref{lem:Nbound}, as $\lambda^{3/2-\muT}\le\lambda^{3/2-\muTb}$ for $\lambda<1$.
+
+\emph{\textup{(T2)}.} Let $\lambda>\lambda_0$. By Lemma~\ref{lem:len}, $\Delta:=\Theta_b-\Theta_a\in(\Delta_0,2\pi-\xe]$.
+\emph{If $\Delta\le2\pi-\Delta_0$,} then $\xz(u_a)$, $\xz(u_b)$ are positions at $\ttd$ as in Lemma~\ref{lem:bulk}(c), with initial points
+$e^{i\Theta_a}$, $e^{i\Theta_b}$ at distance $2\sin(\Delta/2)\ge2\sin(\Delta_0/2)=c_{\mathrm{sep}}>2\epsbar\ge2\eps$ ($\Delta_0\le\eta$
+\hyptag{SC42}, \hyptag{SC43}); so $c\ge c_{\mathrm{sep}}$. \emph{If $\Delta>2\pi-\Delta_0$,} then $\xi_a:=\Theta_a-\alpha_0\ge0$ and
+$\xi_b:=2\pi+\alpha_0-\Theta_b\ge\xe$ satisfy $\xi_a+\xi_b=2\pi-\Delta<\Delta_0\le\eta$: $u_a$ lies in the forward zone and $u_b$ in the
+tail zone. In the frame $(X_0;\nhat,\nhat^\perp)$, $z_a=\int_0^{u_a}\cos\psi\,du\ge\cos(\theta_{\mathrm v}\Delta_0^{1-\mub})u_a$, as
+$|\psi|\le\theta_{\mathrm v}\xi^{1-\mu}\le\theta_{\mathrm v}\Delta_0^{1-\mub}\le\pi/2$ on $[0,u_a]$ \hyptag{SC44}; and
+$z_b\le-h_{\mathrm t}\xi_b\le-(h_{\mathrm t}/W_{\mathrm t})u'_b$ by Lemma~\ref{lem:tail}(c) and $u'_b\le W_{\mathrm t}(\xi_b-\xe)$. So
+$c\ge z_a-z_b\ge\kc(u_a+u'_b)$.
+
+\emph{\textup{(T3)}.} Let $u\le G_{\mathrm T}$. As $G_{\mathrm T}<\eta$ \hyptag{SC47}, $u$ lies in the forward zone and $\xi\le u<1$; so
+$|T-\nhat|\le\theta_{\mathrm v}\xi^{1-\mu}\le\theta_{\mathrm v}u^{1-\mu}\le\theta_{\mathrm v}u^{1-\mub}$.
+
+\emph{\textup{(T5)}.} $\xz(U)=\xend$, so by Lemma~\ref{lem:tail}(d) $z_0=-z_{\mathrm E}$, $y_0=-y_{\mathrm E}$ and
+$h_{\mathrm t}\xe\le z_0\le z_{\mathrm T}\xe$. With Lemma~\ref{lem:tail}(a), $h_{\mathrm t}\xi_-\eps^{1/(2-2v)}\le z_0\le
+z_{\mathrm T}\xi_+\eps^{1/(2-2v)}\le z_{\mathrm T}\xi_+\eps^{1/2}$. Next $h_{\mathrm t}\le\sA_{\min}\le1$, so
+$|y_0|\le y_{\mathrm T}\xe^{2-\muT}\le y_{\mathrm T}(z_0/h_{\mathrm t})^{2-\muT}\le c_yz_0^{2-\muT}\le c_y(z_0+\eps)^{2-\muTb}$, as
+$z_0+\eps\le z_{\mathrm T}\bar\xi_{\mathrm e}+\epsbar<1$ \hyptag{SC48}.
+
+\emph{\textup{(T4)}.} Let $u'\le G_{\mathrm T}$ and $s:=\xe+u'$. Then $\xi\le s\le\bar\xi_{\mathrm e}+G_{\mathrm T}\le\eta$ \hyptag{SC47}: $u$
+lies in the tail zone, and $|T-\nhat|\le\theta_{\mathrm t}\xi^{1-\muT}\le\theta_{\mathrm t}s^{1-\muT}$. By (T5), $s\le u'+z_0/h_{\mathrm t}\le
+(u'+z_0)/h_{\mathrm t}$; so $|T-\nhat|\le(\theta_{\mathrm t}/h_{\mathrm t})(u'+z_0)^{1-\muT}\le(\theta_{\mathrm t}/h_{\mathrm t})(u'+z_0)^{1-\muTb}$,
+using $u'+z_0\le G_{\mathrm T}+z_{\mathrm T}\bar\xi_{\mathrm e}\le1$ \hyptag{SC48}.
+\end{proof}

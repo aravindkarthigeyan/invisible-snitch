@@ -1,0 +1,183 @@
+% sec_D2.tex -- Theorem D2 (range v ~ 1/log(d/eps), time bound independent of eps).
+% Source: referee/D2-claims.md (stream D2, round 5), with the fixes of reports/referee-RD2a.md and
+% reports/referee-RD2b.md (degenerate connector, domain of theta*, explicit walk-time intersection, rounding 21.2142).
+% Doubly refereed.
+
+\section{Positive vision radius: a logarithmic range}\label{sec:D2}
+
+Theorem~\ref{thm:D1} allows $v$ of order $(\varepsilon/\log(1/\varepsilon))^{1/2}$. Here the range improves to order
+$1/\log(d/\varepsilon)$, with a time bound that does not depend on $\varepsilon$. The idea is to replace each candidate by a
+\emph{virtual candidate} that obeys the same law at distance $\ge\varepsilon$ from Harry but is defined for all time, and to let
+Harry walk the exactly computed front of virtual candidates in windows of length $\varepsilon/v$.
+
+Normalise $d=1$, $0<\varepsilon<1$, $0<v<1$; identify $\R^2$ with $\mathbb C$, $a\cdot b:=\operatorname{Re}(a\bar b)$. Harry's path
+$P$ is $1$-Lipschitz with $P(0)=0$. Write $\chi(\theta,\phi):=|e^{i\theta}-e^{i\phi}|\le|\theta-\phi|$ and $L:=\log(1/\varepsilon)$.
+
+\begin{theorem}[D2]\label{thm:D2}
+For every $\varepsilon\in(0,d)$ and every
+\[
+v\le v_2(\varepsilon/d):=\frac{1}{22\log(d/\varepsilon)+28},
+\]
+there is a path fixed in advance, of speed at most $1$, along which every direction is seen by time
+$(1+4\pi)d/(1-v)\le14.07\,d$.
+\end{theorem}
+
+For example $v_2=4.1\cdot10^{-3}$ at $\varepsilon/d=10^{-3}$ and $v_2=3.0\cdot10^{-3}$ at $\varepsilon/d=10^{-6}$, against
+$10^{-4}$ and $1.7\cdot10^{-5}$ in Theorem~\ref{thm:D1}. Theorem~\ref{thm:D2} beats Theorem~\ref{thm:A} when $\varepsilon/d\lesssim0.09$.
+
+\subsection{The field and virtual candidates}
+
+\begin{lemma}[D2.1: the field]\label{lem:D2-field}
+Let $F(x):=x/\max(|x|,\varepsilon)$, i.e.\ $F=\pi_\varepsilon/\varepsilon$ with $\pi_\varepsilon$ the metric projection onto
+$\bar B(0,\varepsilon)$. Then (a) $|F|\le1$, $F$ is $\varepsilon^{-1}$-Lipschitz and $(F(x)-F(y))\cdot(x-y)\ge0$;
+(b) $|F(x)-F(y)|\le|x-y|/\max(\varepsilon,\min(|x|,|y|))$.
+\end{lemma}
+\begin{proof}
+(a) $|\pi_\varepsilon x|\le\varepsilon$, and projection onto a closed convex set is firmly non-expansive:
+$(\pi_\varepsilon x-\pi_\varepsilon y)\cdot(x-y)\ge|\pi_\varepsilon x-\pi_\varepsilon y|^2$; this gives monotonicity and, with
+Cauchy--Schwarz, $|\pi_\varepsilon x-\pi_\varepsilon y|\le|x-y|$. (b) If $\min(|x|,|y|)\le\varepsilon$ use (a). Otherwise
+$F(x)=x/|x|$, $F(y)=y/|y|$ and $|x-y|^2-|x||y|\,|x/|x|-y/|y||^2=(|x|-|y|)^2\ge0$, so
+$|F(x)-F(y)|\le|x-y|/\sqrt{|x||y|}\le|x-y|/\min(|x|,|y|)$.
+\end{proof}
+
+\begin{lemma}[D2.2: virtual candidates]\label{lem:D2-virtual}
+For a continuous path $P$ let $\tilde S_\theta(0)=e^{i\theta}$, $\tilde S_\theta'=vF(\tilde S_\theta-P)$, and put
+$\rho_\theta:=|\tilde S_\theta-P|$, $J_\theta(t):=\int_0^t ds/\max(\varepsilon,\rho_\theta(s))$.
+\begin{enumerate}
+\item[(a)] $\tilde S_\theta$ exists and is unique on $[0,\infty)$, $|\tilde S_\theta'|\le v$, and
+$|\tilde S_\theta(t)-\tilde S_\phi(t)|\le e^{vt/\varepsilon}|\theta-\phi|$.
+\item[(b)] $|\tilde S_\theta(t)-\tilde S_\phi(t)|$ is non-decreasing in $t$; in particular it is $\ge\chi(\theta,\phi)$.
+\item[(c)] If $\rho_\theta(t)\le\varepsilon$ for some $t$, the true candidate $\theta$ is seen by time $t$.
+\item[(d)] For every $\theta,t$: $\limsup_{\phi\to\theta}|\tilde S_\phi(t)-\tilde S_\theta(t)|/|\phi-\theta|\le\exp(vJ_\theta(t))$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) The right side is continuous in $(t,S)$ and $(v/\varepsilon)$-Lipschitz in $S$ (Lemma~\ref{lem:D2-field}(a)): global
+existence, uniqueness and Gronwall. (b) With $x=\tilde S_\theta-P$, $y=\tilde S_\phi-P$:
+$\frac{d}{dt}|\tilde S_\theta-\tilde S_\phi|^2=2v(F(x)-F(y))\cdot(x-y)\ge0$.
+(c) Let $t_0:=\inf\{s:\rho_\theta(s)\le\varepsilon\}\le t$. On $[0,t_0]$, $|\tilde S_\theta-P|\ge\varepsilon$, where $F(x)=x/|x|$, so
+$\tilde S_\theta$ solves the true equation there with $\tilde S_\theta\ne P$. The true equation has a locally Lipschitz right side on
+$\{S\ne P(t)\}$, hence $S_\theta=\tilde S_\theta$ on $[0,t_0]$ and $|S_\theta(t_0)-P(t_0)|=\rho_\theta(t_0)\le\varepsilon$.
+(d) Fix $\phi\ne\theta$, $D(s):=|\tilde S_\phi(s)-\tilde S_\theta(s)|>0$ by (b). $D$ is Lipschitz and, for a.e.\ $s$, with $x,y$ as
+above, $|x|=\rho_\theta$, $|y|\ge\rho_\theta-D$, so Lemma~\ref{lem:D2-field}(b) gives $D'\le v|F(y)-F(x)|\le vDa_\phi(s)$ with
+$a_\phi:=1/\max(\varepsilon,\rho_\theta-D)$. Gronwall: $D(t)\le D(0)\exp(v\int_0^ta_\phi)$ and $D(0)\le|\phi-\theta|$. As
+$\phi\to\theta$, $\sup_{[0,t]}D\to0$ by (a), so $a_\phi\to1/\max(\varepsilon,\rho_\theta)$ pointwise with $a_\phi\le1/\varepsilon$;
+dominated convergence finishes the proof.
+\end{proof}
+
+\begin{lemma}[D2.3]\label{lem:D2-lip}
+If $\gamma:[c,d]\to\mathbb C$ is continuous and $\limsup_{\phi'\to\phi}|\gamma(\phi')-\gamma(\phi)|/|\phi'-\phi|\le\Lambda$ for every
+$\phi\in[c,d]$, then $\gamma$ is $\Lambda$-Lipschitz.
+\end{lemma}
+\begin{proof}
+Fix $\eta>0$, $a\in[c,d)$ and let $b^*:=\sup\{b\in[a,d]:|\gamma(b')-\gamma(a)|\le(\Lambda+\eta)(b'-a)\ \forall b'\in[a,b]\}$.
+By continuity the inequality holds at $b^*$; if $b^*<d$ the hypothesis at $b^*$ and the triangle inequality extend it past $b^*$, a
+contradiction. So $\gamma$ is $(\Lambda+\eta)$-Lipschitz for every $\eta>0$.
+\end{proof}
+
+\subsection{Construction W: the window walk}\label{sec:D2-W}
+Put $\ell:=\varepsilon/v$. Each walk is computed from $P$ on earlier times; each connector is the unique straight run solving
+its implicit definition, by the ansatz below. Hence $P$ depends only on $(v,\varepsilon)$ and is fixed in advance.
+
+\emph{Connector 1.} $P(s):=s$ until $P$ meets $\tilde S_0$, at time $\tau_1'$; set $a_1:=0$. ($\tilde S_0$ stays on the positive
+real axis with $\rho_0'=-1+v\min(1,\rho_0/\varepsilon)\le-(1-v)$, $\rho_0(0)=1$, so $\tau_1'\le1/(1-v)$.)
+
+\emph{Walk $j\ge1$.} Given $P$ on $[0,\tau_j']$ with $P(\tau_j')=\tilde S_{a_j}(\tau_j')$, let $\Gamma_j(\phi):=\tilde S_\phi(\tau_j')$
+for $\phi\in[a_j,2\pi]$ and $\sigma_j(\phi):=$ length of $\Gamma_j$ on $[a_j,\phi]$. By Lemma~\ref{lem:D2-virtual}(b),
+$|\Gamma_j(\theta)-\Gamma_j(\phi)|\ge\chi(\theta,\phi)$, so $\sigma_j$ is continuous and strictly increasing. Let
+$a_{j+1}:=\max\{\phi\in[a_j,2\pi]:\sigma_j(\phi)\le\ell\}$, $w_j:=\sigma_j(a_{j+1})$, $\tau_{j+1}:=\tau_j'+w_j$, and
+$P(\tau_j'+s):=\Gamma_j(\sigma_j^{-1}(s))$ for $s\in[0,w_j]$. If $a_{j+1}=2\pi$ the walk is \emph{final}: the construction stops and
+$P$ is constant afterwards. Otherwise $w_j=\ell$.
+
+\emph{Connector $j+1$ (after a non-final walk $j$).} At $\tau_{j+1}$, $P=\Gamma_j(a_{j+1})=\tilde S_{a_{j+1}}(\tau_j')$, so
+$\rho_{a_{j+1}}(\tau_{j+1})\le vw_j=\varepsilon$. If $\rho_{a_{j+1}}(\tau_{j+1})=0$ the connector is empty:
+$\tau_{j+1}':=\tau_{j+1}$, $c_{j+1}:=0$. Otherwise let $u$ be the unit vector from $P(\tau_{j+1})$ to $\tilde S_{a_{j+1}}(\tau_{j+1})$;
+the ansatz $P=P(\tau_{j+1})+(s-\tau_{j+1})u$, $\tilde S_{a_{j+1}}=P(\tau_{j+1})+r u$ solves both equations with
+$\rho'=-1+v\min(1,\rho/\varepsilon)\le-(1-v)$, so by uniqueness Harry runs at unit speed straight at $\tilde S_{a_{j+1}}$ and meets it at
+$\tau_{j+1}'$, after $c_{j+1}:=\tau_{j+1}'-\tau_{j+1}\le\varepsilon/(1-v)$.
+
+$P$ is $1$-Lipschitz (connectors are unit-speed segments, walks are arclength parametrisations) and continuous at every junction.
+
+\begin{lemma}[D2.4: seeing by construction]\label{lem:D2-see}
+(a) Every $\phi\in[a_j,a_{j+1}]$ is seen by time $s_\phi:=\tau_j'+\sigma_j(\phi)$.
+(b) For $s\ge\tau_1'$ during the construction let $\theta^*(s):=a_j$ on connector $j\ge2$ and
+$\theta^*(s):=\sigma_j^{-1}(s-\tau_j')\in[a_j,a_{j+1}]$ on walk $j$. Then $|P(s)-\tilde S_{\theta^*(s)}(s)|\le\varepsilon$.
+(c) If the construction stops, every direction is seen by the stopping time.
+\end{lemma}
+\begin{proof}
+(a) $P(s_\phi)=\Gamma_j(\phi)=\tilde S_\phi(\tau_j')$ and $|\tilde S_\phi'|\le v$, so $\rho_\phi(s_\phi)\le v\sigma_j(\phi)\le v\ell=\varepsilon$;
+apply Lemma~\ref{lem:D2-virtual}(c). (b) On walk $j$, $P(s)=\tilde S_{\theta^*(s)}(\tau_j')$ and $s-\tau_j'\le\ell$; on connector $j$,
+$\rho_{a_j}$ decreases from a value $\le\varepsilon$. (c) The intervals $[a_j,a_{j+1}]$ cover $[0,2\pi]$.
+\end{proof}
+
+\begin{lemma}[D2.5: time bound]\label{lem:D2-time}
+Let $\Lambda\ge1$ and
+\[
+(1-v)J^*(\Lambda):=2+2\log\frac{2}{(1-v)\varepsilon}+2\pi\Lambda L+2+2\pi\Lambda .
+\]
+If $vJ^*(\Lambda)\le\log\Lambda$, construction W stops after at most $1+2\pi\Lambda/\ell$ walks, at a time
+$T\le(1+2\pi\Lambda)/(1-v)$, every direction is seen by $T$, and every walked front $\Gamma_j$ is $\Lambda$-Lipschitz on $[a_j,2\pi]$.
+\end{lemma}
+\begin{proof}
+For $j\ge1$ let $(B_j)$ be: $J_\phi(t)\le J^*(\Lambda)$ for all $\phi\in[0,2\pi]$, $t\in[0,\tau_j']$. By
+Lemmas~\ref{lem:D2-virtual}(d) and~\ref{lem:D2-lip}, $(B_j)$ implies that $\Gamma_j$ is $e^{vJ^*}$-Lipschitz, hence
+$\Lambda$-Lipschitz, on $[a_j,2\pi]$; so $\sigma_j(b)-\sigma_j(a)\le\Lambda(b-a)$ and, if walk $j$ is not final,
+$a_{j+1}-a_j\ge\ell/\Lambda$.
+
+\emph{$(B_1)$.} For $t\le\tau_1'$, $P(s)=s$ and $g(s):=\operatorname{Re}\tilde S_\phi(s)-s$ has $g'\in[-1-v,-(1-v)]$, $|g(0)|\le1$, so
+$|g|\le R:=2/(1-v)$ on $[0,\tau_1']$. As $\rho_\phi\ge|g|$ and $g$ is decreasing with $|g'|\ge1-v$,
+$J_\phi(\tau_1')\le\frac1{1-v}\int_{-R}^R\frac{du}{\max(\varepsilon,|u|)}=\frac{2}{1-v}\bigl(1+\log\frac R\varepsilon\bigr)\le J^*$.
+
+\emph{$(B_j)\Rightarrow(B_{j+1})$ for a non-final walk $j$.} By $(B_1),\dots,(B_j)$, walks $1,\dots,j$ are on $\Lambda$-Lipschitz fronts
+and non-final, so $a_{i+1}-a_i\ge\ell/\Lambda$ ($i\le j$) and $j\le2\pi\Lambda/\ell$; connectors last $\le\varepsilon/(1-v)$. Fix $\phi$
+and $t\in(\tau_1',\tau_{j+1}']$. For $s\in[\tau_1',t]$, by Lemma~\ref{lem:D2-see}(b) and Lemma~\ref{lem:D2-virtual}(b),
+$\rho_\phi(s)\ge\chi(\phi,\theta^*(s))-\varepsilon$, hence $\max(\varepsilon,\rho_\phi(s))\ge\psi(s):=\max(\varepsilon,\chi(\phi,\theta^*(s))/2)$.
+By the layer-cake formula $1/\psi=\int_0^\infty\mathbf 1\{\psi<y\}y^{-2}dy$ and $\psi\ge\varepsilon$,
+\[
+\int_{\tau_1'}^t\frac{ds}{\max(\varepsilon,\rho_\phi)}\le\int_\varepsilon^\infty m(y)y^{-2}dy,\qquad m(y):=|\{s\in[\tau_1',t]:\psi(s)<y\}|.
+\]
+For $y>1$: $m(y)\le t-\tau_1'\le\sum_{i\le j}w_i+\sum_{i=2}^{j+1}c_i\le2\pi\Lambda+j\varepsilon/(1-v)\le2\pi\Lambda/(1-v)$, since
+$\sum w_i\le\Lambda\sum(a_{i+1}-a_i)\le2\pi\Lambda$ and $\varepsilon/\ell=v$. For $\varepsilon<y\le1$: $\psi(s)<y$ forces
+$\theta^*(s)\in A_y:=\{\vartheta:\chi(\phi,\vartheta)<2y\}$, a union of at most two intervals of total length $\le4\arcsin y\le2\pi y$.
+On walk $i$, $\theta^*(s)\in[a_i,a_{i+1}]$; hence $|\{s\in\text{walk }i:\theta^*(s)\in I\}|\le\Lambda|I\cap[a_i,a_{i+1}]|$ for any interval
+$I$, and summing over $i$ and the at most two intervals of $A_y$ gives walking time $\le\Lambda|A_y|\le2\pi\Lambda y$. Connectors $i\ge2$
+with $a_i\in A_y$: within each interval of $A_y$ consecutive such $a_i$ differ by $\ge\ell/\Lambda$, so there are at most
+$2+2\pi y\Lambda/\ell$ of them, each of duration $\le\varepsilon/(1-v)$. Therefore $m(y)\le(2\pi\Lambda y+2\varepsilon)/(1-v)$, and
+$\int_\varepsilon^1m\,y^{-2}dy\le(2\pi\Lambda L+2)/(1-v)$, $\int_1^\infty m\,y^{-2}dy\le2\pi\Lambda/(1-v)$. Adding $(B_1)$'s bound gives
+$J_\phi(t)\le J^*(\Lambda)$, which is $(B_{j+1})$.
+
+\emph{Termination and time.} Each non-final walk advances $a$ by $\ge\ell/\Lambda$, so there are at most $2\pi\Lambda/\ell$ of them and the
+construction stops, at time $\tau_1'+\sum w_i+\sum c_i\le(1+2\pi\Lambda)/(1-v)$. Lemma~\ref{lem:D2-see}(c) finishes the proof.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:D2}]
+Scale to $d=1$ and apply Lemma~\ref{lem:D2-time} with $\Lambda=2$; it suffices that $vJ^*(2)\le\log2$. Let $v\le1/(22L+28)\le1/28$.
+Then $1-v\ge27/28$, $\log(1/(1-v))\le1/27$, and
+$(1-v)J^*(2)=(2+4\pi)L+4+4\pi+2\log2+2\log(1/(1-v))\le14.567L+18.028$, so
+\[
+vJ^*(2)\le\frac{14.567L+18.028}{(22L+28)(27/28)}=\frac{14.567L+18.028}{21.2142L+27}\le\max(0.68667,\,0.66770)<0.6931<\log2 .
+\]
+The time is $\le(1+4\pi)/(1-v)\le(1+4\pi)\cdot28/27<14.07$.
+\end{proof}
+
+\begin{corollary}[D2.6: reduction]\label{cor:D2-red}
+Let $v<1$ and $\varepsilon\in(0,1)$. If every walked front $\Gamma_j$ of construction W is $\Lambda$-Lipschitz on $[a_j,a_{j+1}]$,
+the construction stops after at most $1+2\pi\Lambda/\ell$ walks, by time $(1+2\pi\Lambda)/(1-v)$, and every direction is seen.
+\end{corollary}
+\begin{proof}
+The termination paragraph of Lemma~\ref{lem:D2-time} uses only the $\Lambda$-Lipschitz property of the walked parts and the connector
+durations; then Lemma~\ref{lem:D2-see}(c).
+\end{proof}
+
+\begin{remark}[Status and limits]\label{rem:D2}
+Theorem~\ref{thm:D2} was checked by two independent referees (reports \texttt{referee-RD2a.md}, \texttt{referee-RD2b.md}), each with
+an independent simulation of construction W at $v=v_2$ (all directions seen, front Lipschitz constant $\le1.07$, time $\approx7.4$).
+The logarithm comes from bounding the stretching rate by $v/\rho$ instead of the true $v\sin^2\!\phi/\rho$: with that bound
+$J\gtrsim\log(1/\varepsilon)$ is unavoidable, and with $\Lambda=2$ the constant $22$ cannot go below $(2+4\pi)/\log2\approx21.0$.
+For construction~W, a range of $v$ independent of $\varepsilon$ would follow from Corollary~\ref{cor:D2-red} and an
+$\varepsilon$-uniform Lipschitz bound on the walked fronts (CONJECTURE for small $v$). An $\varepsilon$-independent range,
+$v\le6\cdot10^{-5}$, is proved for a different construction in Theorem~\ref{thm:Main2}. NUMERICAL (report D2-1): for $v\le0.2$ construction W sees every direction down to
+$\varepsilon=10^{-3}$, with stopping times independent of $\varepsilon$ to three digits ($9.91$ at $v=0.1$, $14.28$ at $v=0.2$), but the
+largest stretch grows slowly ($\approx\varepsilon^{-v}$); at $v=0.25$, $\varepsilon=0.005$ the walk had not stopped by $t=200$, the
+stretch blowing up at the left-behind tip near $\theta=2\pi$.
+\end{remark}

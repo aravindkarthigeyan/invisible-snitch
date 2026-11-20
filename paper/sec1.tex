@@ -1,0 +1,93 @@
+% sec1.tex -- writer W1.
+\section{Introduction}\label{sec:intro}
+
+\paragraph{The problem.} Identify $\R^2$ with $\C$. A \emph{pursuer path} is a map $H:[0,\infty)\to\R^2$ with $H(0)=0$ and
+$|H'|\le1$ a.e., i.e.\ a $1$-Lipschitz path from the origin. A point $S$, the Snitch, starts at distance $d>0$ from the origin in
+an unknown direction $\alpha\in[0,2\pi)$ and always moves with speed $v\in(0,1)$ directly away from the pursuer:
+\begin{equation}\label{eq:snitch}
+S_\alpha'(t)=v\,\frac{S_\alpha(t)-H(t)}{|S_\alpha(t)-H(t)|},\qquad S_\alpha(0)=d\,e^{i\alpha}.
+\end{equation}
+The pursuer knows $d$ and $v$ but not $\alpha$, and sees the Snitch only when it is within distance $\eps\in[0,d)$ (the
+\emph{vision radius}); his path is therefore fixed in advance, i.e.\ it may not depend on $\alpha$. For a continuous $H$ the
+right-hand side of \eqref{eq:snitch} is continuous in $t$ and locally Lipschitz in $S$ away from $H(t)$; we call $S_\alpha$, the
+\emph{candidate} $\alpha$, the maximal solution, defined up to the first time at which it meets $H$ (since $|S_\alpha'|=v$ and
+$\bigl||S_\alpha-H|'\bigr|\le1+v$, a maximal solution defined only on a bounded interval has a limit at its end, where it meets
+$H$). Candidate $\alpha$ is \emph{caught} if $S_\alpha(t)=H(t)$ for some $t$ and \emph{seen} if $|S_\alpha(t)-H(t)|\le\eps$ for
+some $t$ in its interval of existence or at its end. With $\eps>0$ the pursuer wins once the Snitch is seen; with $\eps=0$ he
+must catch it. Since \eqref{eq:snitch} is invariant under $(S,H,t)\mapsto(\lambda S,\lambda H,\lambda t)$, one may take $d=1$.
+
+The question is whether, for given $v$, a single path sees (or catches) \emph{every} direction, and in what time. A path that
+runs to the circle of radius $d$ and around it sees every direction when $v\lesssim\eps/d$; the difficulty is to obtain a range of
+$v$, and a time, that do not degenerate as $\eps\to0$.
+
+\begin{theorem}\label{thm:main}
+Let $\vz:=6\cdot10^{-5}$, $T_0:=10.13$ and $\epsS:=4\cdot10^{-11}$. For every $d>0$, every $\eps\in(0,d)$ and every
+$v\in(0,\vz]$ the path $H=H_{v,\eps,d}$ --- design~T \textup{(Definition~\ref{def:T})} followed by the greedy chase
+\textup{(Definition~\ref{def:chase})} on the working front of Theorem~\ref{thm:touchdown}, both for the vision radius
+$\eps':=\min(\eps,\epsS d)$ and scaled to distance $d$ --- satisfies $H(0)=0$, $|H'|\le1$ a.e., depends only on $(v,\eps,d)$, and
+for every $\alpha\in[0,2\pi)$ there is $t\le T_0d$ with $|S_\alpha(t)-H(t)|\le\eps$. Neither $\vz$ nor $T_0$ depends on $\eps$.
+\end{theorem}
+
+\begin{corollary}\label{cor:exact}
+Let $d>0$ and $v\in(0,6\cdot10^{-5}]$. There is a path $H$ with $H(0)=0$, $|H'|\le1$ a.e., such that for every
+$\alpha\in[0,2\pi)$ there is $t\le10.13\,d$ with $S_\alpha(t)=H(t)$.
+\end{corollary}
+
+Both are proved in Section~\ref{sec:proof}; the corollary follows from the theorem and the compactness Lemma~\ref{lem:compact},
+because the time bound of Theorem~\ref{thm:main} is uniform in $\eps$.
+
+\begin{remark}\label{rem:numerics}
+The parameters of Appendix~\ref{app:const} were found by numerical optimisation; the script \texttt{verify\_constants.py}
+checks every side condition in $50$-digit arithmetic. The method as it stands cannot reach much beyond $v\approx10^{-4}$: the
+near-pair estimate (Proposition~\ref{prop:near}) is the bottleneck. Simulations suggest that the same path works for much
+larger $v$.
+\end{remark}
+
+\paragraph{Outline of the proof.} We take $d=1$. Inside the vision disc the field $x/|x|$ of \eqref{eq:snitch} is singular, so
+we replace it by a $C^1$ field $F$ that coincides with $x/|x|$ outside the disc of radius $\eps$ (Definition~\ref{def:field}).
+Curves of \emph{virtual} candidates, moved by $vF(x-P)$, form $C^1$ fronts whose arclength never decreases and whose chords
+never shrink (Lemmas~\ref{lem:flow}, \ref{lem:sep}), and a virtual candidate that comes within $\eps$ of the path is a true
+candidate that has been seen (Lemma~\ref{lem:seen}). The pursuer can therefore follow such a front without knowing which of
+its points carry the Snitch: the \emph{greedy chase} (Definition~\ref{def:chase}) walks along it in straight legs, each aimed
+at the point an arclength $\eps$ further on, and every point passed is seen.
+
+The chase finishes in a time independent of $\eps$ only if the front stays nearly straight on every scale between $\eps$ and a
+fixed length $R$. This is measured by the two-point \emph{excess} $E=l-c$, arc length minus chord, of pairs of labels
+(Definition~\ref{def:excess}); its evolution under the flow is governed by the exact identities of Lemma~\ref{lem:excess}, in
+which the stretching $T\cdot AT$ of the front and the turning of its chord appear explicitly. The end theorem
+(Theorem~\ref{thm:end}) is a bootstrap: if at the start the excess of a pair of label distance $\lambda$ is at most a small
+multiple of $\lambda^{1+2\gamma}$, with $\gamma>\frac12$, and chords are comparable to $\lambda$, then the length bound
+$l\le\kappa\lambda$ and the excess bound $N=(2E)^{1/2}\le M\lambda^{1/2+\gamma}$ persist along the whole chase, every
+leg advances the label by at least $\eps/\kappa$, and the chase ends after time $\kappa U/(1-v)$, where $U$ is the length of
+the front. Pairs far ahead of the pursuer are controlled by a Duhamel inequality (Lemma~\ref{lem:duhamel}), pairs near him by
+integrating the excess identity over the legs (Section~\ref{sec:farnear}). No constant depends on $\eps$.
+
+The start data come from \emph{design~T} (Definition~\ref{def:T}). The pursuer first runs straight through the set of possible
+positions, catching direction $0$ and seeing a thin sector around it; he then turns and runs along a straight line that
+touches the remaining front tangentially, at the label $\alpha_0$, at the touch-down time $\ttd$. Along a straight run the
+motion of the candidates has two exact integrals (Proposition~\ref{prop:runs}), and their derivatives in the direction label
+transport the tangent and the curvature of the front exactly (Lemma~\ref{lem:transport}). This yields the front at touch-down
+explicitly enough (Theorem~\ref{thm:touchdown}): it is a $C^1$ curve of bounded length that starts at the pursuer, is
+flat at \emph{both} ends with tangent close to the run-2 heading, has excess $N\le c_N\lambda^{3/2-\muTb}$ on small scales and
+chords bounded below on large ones.
+
+The front ends close to its start: its last point lies a distance at most of order $\eps^{1/2}$ behind the pursuer at $\ttd$. Pairs
+with one point at the beginning of the front and the other near its end do not satisfy the start conditions. They are
+\emph{excused}: the end theorem claims nothing about them until the chase has advanced by a fixed length $\We$. Meanwhile the
+pursuer moves away from the end of the front with a controlled heading (Lemma~\ref{lem:heading}, obtained from a second
+application of the end theorem to a short initial arc), and the departure theorem (Theorem~\ref{thm:departure}) shows that the
+excused pairs are then far pairs with the start data the bootstrap needs. Assembling these pieces with explicit constants
+(Section~\ref{sec:proof}, Appendix~\ref{app:const}) gives Theorem~\ref{thm:main}; letting $\eps\to0$ along a sequence of these
+paths gives Corollary~\ref{cor:exact}.
+
+\paragraph{Organisation.} Section~\ref{sec:prelim} collects the calculus of virtual fronts and of the excess. Section~\ref{sec:end}
+defines the chase and states and organises the proof of the end theorem, which is completed in Section~\ref{sec:farnear}.
+Section~\ref{sec:dep} proves the heading lemma and the departure theorem. Section~\ref{sec:designT} treats straight runs and
+defines design~T, and Section~\ref{sec:touch} analyses the front at touch-down. Section~\ref{sec:proof} assembles the proof, and
+Appendix~\ref{app:const} lists the constants and the side conditions they satisfy.
+
+\paragraph{Notation.} Vectors in $\R^2=\C$: $a\cdot b:=\operatorname{Re}(\bar ab)$, $a\times b:=\operatorname{Im}(\bar ab)$,
+$a^\perp:=ia$; thus $a^\perp\cdot b=a\times b$. Throughout Sections~\ref{sec:prelim}--\ref{sec:proof} (except in the last two proofs
+of Section~\ref{sec:proof}) $d=1$, $0<v\le\vz$, $0<\eps\le\epsS$ (in Sections~\ref{sec:designT} and~\ref{sec:touch}:
+$0<\eps\le10^{-3}$), and $\mu:=v/(1-v)$. Named constants are numbers, listed in Appendix~\ref{app:const}. The notation for fronts is
+fixed in Section~\ref{sec:prelim}.

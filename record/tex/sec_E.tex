@@ -1,0 +1,1041 @@
+% sec_E.tex -- Walking into an end: Theorem E (bulk bootstrap with general exponent on an arc that ENDS), Corollary End
+% (final approach, hypothesis (ST_end)), passive far phase, tangential departure, hand-over, two-pass transport,
+% transversal departure (straight-arc model).
+% Source: referee/P7-claims.md, version 2 (stream P7, round 7), which reconciles the fixes of
+% reports/referee-RP7-1.md and reports/referee-RP7-2.md. Doubly refereed.
+% Changes of notation against P7-claims (clashes with sec_B.tex / main.tex):
+%   end label E -> \Ee (sans serif; E is the excess);  mu_u(J), mu_t(a,b) -> \EV_{\hat u}(J), \EV_t(a,b)  (mu is v/(1-v));
+%   pointwise D of Fact 0.3 -> \mathfrak d;  weight \mathcal A of Fact 0.3 -> \mathcal B;  majorant A_s -> \EA_s  (A is DF);
+%   c_1 = 4.85 -> c_t  (c_1 is a constant of (F_b));  duration T -> integrals I_1, I_2;  k of P7.D' -> q_0  (k is curvature);
+%   in P7.C: t = tan(theta/2) -> zeta,  D_1, D_2 -> d_1, d_2,  dummy angle -> varphi.
+% Uses the macros \Bjs, \Bts, \BLs, \BF of sec_B.tex.
+
+\newcommand{\Ee}{\mathsf E}
+\newcommand{\EbE}{b_{\mathsf E}}
+\newcommand{\EtE}{t_{\mathsf E}}
+\newcommand{\EUE}{U_{\mathsf E}}
+\newcommand{\Eu}{\hat u}
+\newcommand{\EV}{\mathcal V}
+\newcommand{\EA}{\mathcal A}
+\newcommand{\ETL}{C_{\mathrm{TL}}}
+
+\section{Walking into an end}\label{sec:end}
+
+Theorem~\ref{thm:Bulk} controls the greedy chase of the virtual front only for ``legs whose target stays within the arc'' on which
+the start condition holds, and only with the exponent $3/4$ in \textup{(I2)}. This section removes both restrictions and adds the
+tools needed to leave an end of the unseen set and to come back to it. Theorem~\ref{thm:End} is the bulk bootstrap for an invariant
+$N\le M\lambda^{1/2+\gamma}$ with any $\gamma\in(0,1/4]$, on an arc that \emph{ends} at a label $\EbE$: the construction walks into
+the end, sees every label of the arc and stops, in a time that does not depend on $\varepsilon$. Corollary~\ref{cor:End} reformulates
+the start condition as a hypothesis \textup{(ST$_{\mathrm{end}}$)} with a free exponent $a'$. Lemma~\ref{lem:E-far} transports the
+excess through a phase in which Harry is far from an arc. Theorem~\ref{thm:E-dep} treats a departure from an end along the tangent
+line (the exponent drops by at most $7v$, and Proposition~\ref{prop:E-depsharp} shows that the chord tilts from the end do lose an exponent $v/(1+v)$), Lemma~\ref{lem:E-H}
+derives its hypothesis from the invariants of Theorem~\ref{thm:End}, and Corollary~\ref{cor:E-T} chains these statements.
+Proposition~\ref{prop:E-trans} computes, in a straight-arc model, what a transversal departure does to an end. \textbf{Nothing in this
+section is a statement about a complete sweep}; what is and is not provided is listed in Remark~\ref{rem:E-status}.
+The complete sweep is assembled in Section~\ref{sec:main}, which uses Lemma~\ref{lem:E-facts}, Theorem~\ref{thm:End}(a),(b),(d),
+Corollary~\ref{cor:End} and Remark~\ref{rem:E-B}(4).
+
+Notation and conventions are those of Section~\ref{sec:bulk}: $d=1$, the field $F$, $A=DF$, $a^*$, the virtual candidates
+$x_\theta$, $r=x-P$, $\rho=|r|$, the quantities $l,c,e,E,N$, the products $a\cdot b$, $a\times b$, and $\mu=v/(1-v)$. The curvature
+is not used. New notation: an \emph{end} label is written $\Ee$ (the excess is $E$).
+
+\subsection{Three elementary facts}
+
+\begin{lemma}\label{lem:E-facts}
+Let $P$ be a $1$-Lipschitz path.
+\begin{enumerate}
+\item[(a)] \emph{(The excess is monotone under inclusion.)} At a fixed time, for labels $a\le a'<b'\le b$:
+$E(a',b')\le E(a,b)$.
+\item[(b)] \emph{(Frozen direction.)} Fix a unit vector $\Eu$ and a time. For a label interval $J=(a,b)$ put
+$\EV_{\Eu}(J):=\int_J|T-\Eu|^2ds$. Then
+\[
+\EV_{\Eu}(J)=2\bigl[l(J)-(x_b-x_a)\cdot\Eu\bigr]=N(J)^2+c(J)\,|e_J-\Eu|^2 ;
+\]
+in particular $N(J)^2\le\EV_{\Eu}(J)$, $|e_J-\Eu|^2\le\EV_{\Eu}(J)/c(J)$, and $\EV_{\Eu}$ is additive over adjacent intervals.
+Moreover $(x_b-x_a)\cdot\Eu=l(J)-\EV_{\Eu}(J)/2$ and
+$|\Eu\times(x_b-x_a)|\le\int_J|T-\Eu|\,ds\le(l(J)\,\EV_{\Eu}(J))^{1/2}$.
+\item[(c)] \emph{(Pointwise law for a frozen direction.)} Let $\Eu$ be a fixed unit vector, $w=|\partial_\theta x|$ and
+$\mathfrak d(\theta,t):=w(1-T\cdot\Eu)=\frac12w|T-\Eu|^2$. For every label $\theta$, $\mathfrak d$ is $C^1$ in $t$ and
+\[
+\partial_t\mathfrak d=vw\,(T-\Eu)\cdot AT\le v\bigl[2a^*(\rho)\,\mathfrak d+(2w\mathfrak d)^{1/2}|q_{\Eu}|\bigr],\qquad
+q_{\Eu}:=\Eu^\perp\cdot A(r)\Eu,\quad|q_{\Eu}|\le\frac{|r\times\Eu|}{\max(\rho,\varepsilon)^2}.
+\]
+Consequently $\chi:=(2\mathfrak d)^{1/2}=w^{1/2}|T-\Eu|$ satisfies, for $t_1\le t_2$ and
+$\mathcal B(t):=\exp\bigl(v\int_{t_1}^ta^*(\rho_\theta)\bigr)$,
+\[
+\chi(t_2)\le\mathcal B(t_2)\chi(t_1)+v\int_{t_1}^{t_2}\frac{\mathcal B(t_2)}{\mathcal B(t)}\,w(t)^{1/2}|q_{\Eu}(t)|\,dt,
+\qquad\text{and}\qquad w(t_2)\le\mathcal B(t_2)\,w(t_1).
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $l(a,b)=l(a,a')+l(a',b')+l(b',b)$ and $c(a,b)\le c(a,a')+c(a',b')+c(b',b)$; subtract and use $E\ge0$.
+
+(b) $|T-\Eu|^2=2-2T\cdot\Eu$ and $\int_JT\,ds=x_b-x_a=c\,e_J$ give the first equality; then
+$2(l-c\,e_J\cdot\Eu)=2(l-c)+2c(1-e_J\cdot\Eu)$ and $2(1-e_J\cdot\Eu)=|e_J-\Eu|^2$. The identity for $(x_b-x_a)\cdot\Eu$ is the first
+equality; $\Eu\times(x_b-x_a)=\int_J\Eu\times(T-\Eu)\,ds$, then Cauchy--Schwarz.
+
+(c) $\mathfrak d=w-\partial_\theta x\cdot\Eu$. By Lemma~\ref{lem:B-VC}(a) and Lemma~\ref{lem:B-1}(i),
+$\partial_t\partial_\theta x=vA\partial_\theta x=vw\,AT$ and $w_t=vw\,T\cdot AT$, so $\partial_t\mathfrak d=vw\,(T-\Eu)\cdot AT$.
+As in Lemma~\ref{lem:B-2}(ii), with $e$ replaced by the constant vector $\Eu$,
+\[
+(T-\Eu)\cdot AT=(T-\Eu)\cdot A(T-\Eu)-\tfrac12|T-\Eu|^2(\Eu\cdot A\Eu)+(T\cdot\Eu^\perp)\,q_{\Eu}
+\le a^*|T-\Eu|^2+|T-\Eu|\,|q_{\Eu}|,
+\]
+because $0\le A\le a^*I$ (Lemma~\ref{lem:B-V}(ii)) and $|T\cdot\Eu^\perp|=|(T-\Eu)\cdot\Eu^\perp|\le|T-\Eu|$; multiply by $vw$. The
+bound for $q_{\Eu}$ is Lemma~\ref{lem:B-V}(iii). For $\chi_\eta:=(2\mathfrak d+\eta^2)^{1/2}$, $\eta>0$:
+$\chi_\eta\chi_\eta'=\partial_t\mathfrak d\le va^*\chi_\eta^2+vw^{1/2}\chi_\eta|q_{\Eu}|$, so
+$\chi_\eta'\le va^*\chi_\eta+vw^{1/2}|q_{\Eu}|$; variation of constants, then $\eta\to0$. Finally $w_t=vw\,T\cdot AT\le va^*w$.
+\end{proof}
+
+\subsection{The bulk bootstrap on an arc that ends}
+
+\noindent\textbf{Construction C from $(\Bts,a_{\mathrm s})$, cut at $\EbE$.} Let $P$ be an arbitrary $1$-Lipschitz path on
+$[0,\Bts]$ with $P(0)=0$, let $x_\theta$ be its virtual candidates, and let $a_{\mathrm s}<\EbE$ be labels with
+$\EbE-a_{\mathrm s}<2\pi$ and $P(\Bts)=x_{a_{\mathrm s}}(\Bts)$. For $t\ge\Bts$, $P$ follows the legs of construction C with the
+final label $2\pi$ replaced by $\EbE$: with $a_{\Bjs}:=a_{\mathrm s}$, $t_{\Bjs}:=\Bts$,
+\[
+a_{j+1}:=\max\{\theta\in[a_j,\EbE]:\ l_{t_j}(a_j,\theta)\le\varepsilon\};
+\]
+if $a_{j+1}=\EbE$ the construction \emph{stops at $t_j$} (leg $j+1$ is called \emph{final} and is not walked); otherwise $P$ runs at
+unit speed along the ray from $P(t_j)$ through $x_{a_{j+1}}(t_j)$ until it meets $x_{a_{j+1}}$, at time $t_{j+1}$.
+Lemma~\ref{lem:B-C}(0),(2),(3),(4) hold verbatim: their proofs use the final label only as the right end of the arc, and use the
+path only from the leg start on (compare the last clause of Corollary~\ref{cor:M}); Lemma~\ref{lem:B-VC}(c) holds because $P(0)=0$.
+In (3) the intervals $[a_j,a_{j+1}]$ now cover $[a_{\mathrm s},\EbE]$. By reflection of the plane, everything below also holds for
+an arc traversed in the direction of decreasing labels.
+
+\medskip\noindent\textbf{Standing assumptions in this subsection.} $\gamma\in(0,1/4]$ and $v\le2\cdot10^{-11}\gamma^2$, so that
+$e^{2\mu}\le2$, $\varepsilon_1\le2\varepsilon$ and every leg lasts at most $2\varepsilon$. Put $\nu:=22v$, let $R\in(0,1]$,
+\[
+M:=\frac\gamma{50}R^{-\gamma}\qquad(\text{so }m:=MR^\gamma=\gamma/50\le1/200),
+\]
+and
+\[
+c_{\mathrm t}:=4.85,\quad\ETL:=\frac{16.5}\gamma,\quad C_\mu:=2+2.25\,\ETL^2\le\frac{613}{\gamma^2},\quad
+C_1:=1.6\,\ETL=\frac{26.4}\gamma,\quad C_\vartheta:=\frac{47}\gamma .
+\]
+\emph{Labels.} $u\in[0,U]$ is the arclength at time $\Bts$ along the arc $[a_{\mathrm s},\EbE]$, measured from
+$x_{a_{\mathrm s}}$; $U:=l_{\Bts}(a_{\mathrm s},\EbE)$. For labels $a<b$ in the arc, $\lambda:=u_b-u_a$ is the label length. Lengths
+and chords are non-decreasing in $t$ (Lemma~\ref{lem:B-VC}).
+
+\medskip\noindent\textbf{Start hypothesis (ST$_\gamma$)} at $\Bts$:
+\begin{itemize}
+\item[(S1)] $c(a,b;\Bts)\ge\frac12\min(\lambda,32R)$ for all pairs with $\lambda\ge\varepsilon/2$;
+\item[(S2)] $N(a,b;\Bts)\le\dfrac M8\,\lambda^{1/2+\gamma}\min\Bigl(1,\dfrac{64\lambda}{\min(u_a,32R)}\Bigr)^{\nu}$ for all pairs
+with $\varepsilon/2\le\lambda\le R$ (the last factor is $1$ when $u_a=0$);
+\item[(S3)] $\varepsilon\le R/64$.
+\end{itemize}
+By (S1) and the monotonicity of chords, for all $t\ge\Bts$ and all pairs with $\lambda\ge\varepsilon/2$,
+\begin{equation}\label{eq:E-CA}
+c(a,b;t)\ge\tfrac12\min(\lambda,32R).
+\end{equation}
+
+\emph{Family.} For $t$ in leg $j+1$ ($t_j<t\le t_{j+1}$, $j\ge\Bjs$; and $t=\Bts$ for $j=\Bjs$), the family $\BF(t)$ consists of the
+pairs $(a,b)$ with $u_b\le U$, $\varepsilon/2\le\lambda\le R$ and ($a=a_j$ or $a\ge a_{j+1}$); we call it \emph{the family of leg
+$j+1$}. So at a switching time $t_j$ ($j>\Bjs$), $\BF(t_j)$ is the family of leg $j$, i.e.\ the pairs with $a=a_{j-1}$ or
+$a\ge a_j$; it contains the family of leg $j+1$. (When an estimate ``for $t$ in leg $j+1$'' is made at $t=t_j$, it concerns the
+pairs of the family of leg $j+1$.) The \emph{gap} is $g:=u_a-u_{a_j}\ge0$; a pair is \emph{far} if $g\ge64\lambda$ and \emph{near}
+otherwise. $\BF(t)$ only shrinks as $t$ grows, and $g$ is non-increasing in $t$.
+
+\begin{theorem}[E: bulk bootstrap on an arc that ends]\label{thm:End}
+Assume \textup{(ST$_\gamma$)}, $\gamma\in(0,1/4]$, $v\le2\cdot10^{-11}\gamma^2$ and $v(4U+2)\le10^{-6}\gamma R$. Then:
+\begin{enumerate}
+\item[(a)] \emph{Invariants.} For every $t$ from $\Bts$ until the construction stops and every pair of $\BF(t)$:
+\begin{equation}\label{eq:E-J}
+\textup{(J1)}\ \ l_t(a,b)\le\tfrac98\lambda\ \ (\text{in fact}\le1.01\lambda);\qquad
+\textup{(J2)}\ \ N(a,b;t)\le M\lambda^{1/2+\gamma},\ \text{i.e.\ }E\le\tfrac12M^2\lambda^{1+2\gamma}.
+\end{equation}
+\item[(b)] \emph{The end.} Every non-final leg advances the base label by $u_{a_{j+1}}-u_{a_j}\in[\varepsilon/2,\varepsilon]$. The
+construction stops, at a leg start $T_{\mathrm{stop}}=t_J$ with $J-\Bjs\le2U/\varepsilon$ and
+$T_{\mathrm{stop}}\le\Bts+2U/(1-v)$. At $T_{\mathrm{stop}}$, $l_{T_{\mathrm{stop}}}(a_J,\EbE)\le\varepsilon$; every label of
+$[a_{\mathrm s},\EbE]$ has been seen by $T_{\mathrm{stop}}$; and $|P(T_{\mathrm{stop}})-x_{\EbE}(T_{\mathrm{stop}})|\le\varepsilon$.
+\item[(c)] \emph{Flatness, separation, $\tilde K$.} For every non-final leg $j+1>\Bjs$ and every $t$ in it, \textup{(F$_b$)} and
+\textup{(S)} of Theorem~\ref{thm:R} hold with $b^*=\EbE$ and $\gamma$, $r_0=R$, $c_0=\gamma^2/5000$, $c_1=0$, $r_1=R/8$; and
+\[
+\tilde K(t):=\int_{a_{j+1}}^{\EbE}T\cdot AT\,ds\le17+19\,U/R .
+\]
+\item[(d)] \emph{Tilts.} At any such $t$, for pairs $J\subset I$ of $\BF(t)$:
+$|e_J-e_I|\le\ETL M\lambda_I^\gamma=0.33\,(\lambda_I/R)^\gamma$.
+\end{enumerate}
+No constant depends on $\varepsilon$.
+\end{theorem}
+
+So no pair is ever ``beyond the arc'': (J1), (J2) hold for pairs arbitrarily close to $\EbE$ (down to the scale $\varepsilon/2$)
+while the base approaches $\EbE$, and the last leg is covered by (b). Nothing is claimed about labels $>\EbE$ or about pairs with
+$b>\EbE$. The invariants at a time $t$ depend only on $P|_{[0,t]}$ (Remark~\ref{rem:E-B}(4)).
+
+\begin{proof}[Proof of \textup{(a)}: the continuity argument]
+Let $T_{\mathrm{end}}$ be the stopping time (or $\infty$), and let $t^*$ be the supremum of the times $t'\le T_{\mathrm{end}}$ such
+that (J1), (J2) hold for all $t\in[\Bts,t']$ and all pairs of $\BF(t)$. At $\Bts$: $l=\lambda$ and
+$N\le(M/8)\lambda^{1/2+\gamma}$. We shall show:
+\begin{quote}
+\textbf{(Imp)} if (J1), (J2) hold on $[\Bts,t^*)$, then for every $t\le t^*$ ($t<\infty$) and every pair of $\BF(t)$:
+$l_t\le1.01\lambda$ and $E\le\frac14M^2\lambda^{1+2\gamma}$.
+\end{quote}
+Given (Imp), we conclude as for Theorem~\ref{thm:Bulk}. The bounds of (Imp) hold at $t^*$ by continuity (a pair of $\BF(t^*)$ is in
+$\BF(t)$ for $t<t^*$). For $t\in[t^*,t^*+\delta]$: $l_t\le e^{2v\delta/\varepsilon}l_{t^*}$ and, as
+$|E'|\le v\int|T-e||AT|\,ds\le(4v/\varepsilon)l$, $E(t)\le\frac14M^2\lambda^{1+2\gamma}+\delta(4v/\varepsilon)\cdot2\lambda$. Both
+stay below the bounds (J1), (J2) for a $\delta>0$ that depends only on $(v,\varepsilon,M,\gamma)$, because
+$\lambda\ge\varepsilon/2$; and $\BF(t)\subset\BF(t^*)$. So $t^*=T_{\mathrm{end}}$ (by Lemma~\ref{lem:B-C}(0) there are finitely many
+legs on bounded time intervals).
+
+From now on (J1), (J2) (``family bounds'') are assumed on $[\Bts,t^*)$ and, by continuity, at $t^*$; all times are $\le t^*$.
+Steps~1--5 below prove (Imp).
+\end{proof}
+
+\paragraph{Step 1 (legs, the end, times, distances).}
+(a) \emph{Dichotomy at a leg start $t_j$ ($j\ge\Bjs$).} ($\alpha$) If $U-u_{a_j}\ge\varepsilon/2$, then leg $j+1$ is final or
+$u_{a_{j+1}}-u_{a_j}\in[\varepsilon/2,\varepsilon]$. ($\beta$) If $U-u_{a_j}<\varepsilon/2$, then $l_{t_j}(a_j,\EbE)\le\varepsilon$,
+i.e.\ leg $j+1$ is final.
+
+\emph{Proof.} Always $u_{a_{j+1}}-u_{a_j}\le l_{t_j}(a_j,a_{j+1})\le\varepsilon$. ($\alpha$): the label $s$ with
+$u_s=u_{a_j}+\varepsilon/2$ is $\le U$, the pair $(a_j,s)$ is in $\BF(t_j)$, and (J1) gives
+$l_{t_j}(a_j,s)\le9\varepsilon/16\le\varepsilon$, so $a_{j+1}\ge s$ by maximality. ($\beta$): by induction on $j$. For $j=\Bjs$:
+$l_{\Bts}(a_{\mathrm s},\EbE)=U<\varepsilon/2$. For $j>\Bjs$: leg $j$ was not final, so by the induction hypothesis ($\beta$) did
+not apply at $t_{j-1}$; hence ($\alpha$) applied and $\lambda_1:=u_{a_j}-u_{a_{j-1}}\in[\varepsilon/2,\varepsilon]$. With
+$\lambda_2:=U-u_{a_j}<\varepsilon/2$, the pair $(a_{j-1},\EbE)$ has label length
+$\lambda_1+\lambda_2\in[\varepsilon/2,3\varepsilon/2]\subset[\varepsilon/2,R]$ and belongs to $\BF(t_j)$, the family of leg $j$.
+By (J1) and $l_{t_j}(a_{j-1},a_j)\ge\lambda_1$:
+\[
+l_{t_j}(a_j,\EbE)\le\tfrac98(\lambda_1+\lambda_2)-\lambda_1=\tfrac18\lambda_1+\tfrac98\lambda_2
+<\tfrac18\varepsilon+\tfrac9{16}\varepsilon<\varepsilon .
+\]
+
+(b) Hence every non-final leg advances the base label by at least $\varepsilon/2$, there are at most $2U/\varepsilon$ non-final legs
+after $\Bjs$, each of duration $\le\varepsilon/(1-v)\le2\varepsilon$, and the time elapsed since $\Bts$ is at most $T_B:=4U+2$
+(indeed $\le2U/(1-v)$).
+
+(c) Inequality \eqref{eq:B-1c} holds, with the same proof: for a fixed label $a$ the gaps at successive legs are spaced by
+$\ge\varepsilon/2$, and each leg lasts $\le2\varepsilon$; so for every non-increasing $h\ge0$ and every $g_0\ge0$,
+\begin{equation}\label{eq:E-1c}
+\int_{\{t:\,g(t)\ge g_0\}}h(g(t))\,dt\le2\varepsilon\,h(g_{\min})+4\int_{g_{\min}}^\infty h(g)\,dg,
+\end{equation}
+where $g_{\min}$ is the smallest gap $\ge g_0$ attained.
+
+(d) Inequality \eqref{eq:B-star} holds, with the same proof (\eqref{eq:E-CA} and Lemma~\ref{lem:B-C}(4)): for $t$ in leg $j+1$ and
+a label $s$ with $w_s:=u_s-u_{a_j}\ge0$,
+\begin{equation}\label{eq:E-star}
+\rho_s\ge\tfrac12\min(w_s,32R)-2\varepsilon,\qquad\text{hence}\qquad\max(\rho_s,\varepsilon)\ge\tfrac16\min(w_s,32R).
+\end{equation}
+
+\paragraph{Step 2 (tilt lemma); this is part (d).}
+\emph{At any time, if $J\subset I$ are pairs of the family, then}
+\begin{equation}\label{eq:E-TL}
+|e_J-e_I|\le\ETL M\lambda_I^\gamma .
+\end{equation}
+First let $J_1\subset I_1$ be family pairs with $\lambda_{I_1}\le3\lambda_{J_1}$. By Lemma~\ref{lem:B-4}(a), (J1), (J2) and
+\eqref{eq:E-CA} ($c(J_1)\ge\lambda_{J_1}/2$),
+\[
+|e_{J_1}-e_{I_1}|\le\Bigl[\bigl(\tfrac98\lambda_{J_1}\bigr)^{1/2}M(3\lambda_{J_1})^{1/2+\gamma}
++\tfrac12M^2\lambda_{J_1}^{1+2\gamma}\Bigr]\frac2{\lambda_{J_1}}
+=M\lambda_{J_1}^\gamma\Bigl[2\bigl(\tfrac98\bigr)^{1/2}3^{1/2+\gamma}+M\lambda_{J_1}^\gamma\Bigr]\le c_{\mathrm t}M\lambda_{J_1}^\gamma,
+\]
+since $3^{1/2+\gamma}\le3^{3/4}=2.2796$, $2\cdot1.0607\cdot2.2796=4.836$ and $M\lambda^\gamma\le m\le0.005$. Let
+$S:=1/(1-2^{-\gamma})$; by concavity of $\gamma\mapsto1-2^{-\gamma}$ on $[0,1/4]$,
+$1-2^{-\gamma}\ge4\gamma(1-2^{-1/4})=0.6364\,\gamma$, so $S\le1.5714/\gamma$. Now let $J=(a',b')\subset I=(a,b)$, $t$ in leg $j+1$.
+
+(A) Extend to the right: $b_k:=\min(u_{a'}+2^k\lambda_J,u_b)$, $k=0,\dots,k_1$, with $b_{k_1}=b$. The arcs $(a',b_k)$ are in the
+family (first point $a'$, length $\le R$), consecutive label lengths have ratio $\le2$, and
+$\lambda(a',b_k)=2^k\lambda_J\le\lambda_I$ for $k<k_1$; so the tilts sum to at most
+$\sum_{k<k_1}c_{\mathrm t}M(2^k\lambda_J)^\gamma\le c_{\mathrm t}SM\lambda_I^\gamma$.
+
+(B) If $a'>a$, extend to the left down to $a^\circ:=a$ if $a\ge a_{j+1}$, and $a^\circ:=a_{j+1}$ if $a=a_j$: put
+$a_k':=\max(u_b-2^k\lambda(a',b),u_{a^\circ})$. The arcs $(a_k',b)$ start at labels $\ge a_{j+1}$, so they are in the family; the
+same sum is $\le c_{\mathrm t}SM\lambda_I^\gamma$.
+
+(C) If $a=a_j\ne a^\circ$: $(a_{j+1},b)\subset(a_j,b)$ with
+$\lambda(a_j,b)\le\lambda(a_{j+1},b)+\varepsilon\le3\lambda(a_{j+1},b)$ (as $\lambda(a_{j+1},b)\ge\lambda_J\ge\varepsilon/2$): one
+more step, $\le c_{\mathrm t}M\lambda_I^\gamma$.
+
+The total is $\le c_{\mathrm t}(2S+1)M\lambda_I^\gamma\le4.85\,(3.1428/\gamma+1)M\lambda_I^\gamma\le(16.46/\gamma)M\lambda_I^\gamma$
+(as $1\le0.25/\gamma$). This is \eqref{eq:E-TL}; and $\ETL M\lambda_I^\gamma=(16.5/\gamma)(\gamma/50)(\lambda_I/R)^\gamma$.
+
+\emph{Consequence.} For a family pair $(a,b)$ with label length $\lambda$ and a family sub-arc $J\subset(a,b)$ with label length
+$\lambda_J$ (shorter arcs starting at a family first point are enlarged to label length $\varepsilon/2$ inside $(a,b)$ where this is
+used),
+\begin{equation}\label{eq:E-mu}
+\int_J|T-e_{ab}|^2ds\le2N(J)^2+2l(J)|e_J-e_{ab}|^2\le2M^2\lambda_J^{1+2\gamma}+\tfrac94\lambda_J\,\ETL^2M^2\lambda^{2\gamma}
+\le C_\mu M^2\lambda^{2\gamma}\lambda_J,
+\end{equation}
+and by Cauchy--Schwarz
+$\int_J|T-e_{ab}|\,ds\le\bigl(\tfrac98\lambda_J\cdot C_\mu M^2\lambda^{2\gamma}\lambda_J\bigr)^{1/2}\le C_1M\lambda^\gamma\lambda_J$
+(indeed $\frac98C_\mu=2.25+2.53125\,\ETL^2\le(1.6\,\ETL)^2$, as $\ETL\ge66$).
+
+\paragraph{Step 3 (far pairs: $N\le\frac38M\lambda^{1/2+\gamma}$).}
+Let $(a,b)$ be far at time $t$ (in leg $j+1$): $g\ge64\lambda\ge32\varepsilon$, so $a>a_{j+1}$, and the pair has been in the family
+and far since $\Bts$. Put $\hat g:=\min(g,32R)$. The hull of the arc lies in $B(x_a,l)$ with $l\le2\lambda$, so by
+\eqref{eq:E-star} $\rho_m\ge\hat g/2-2\varepsilon-2\lambda$. If $g\le32R$ this is $\ge g/2-6\lambda\ge(\frac12-\frac6{64})g$, which
+is $\ge g/4$ and $\ge26\lambda$. If $g>32R$ it is $\ge16R-R/32-2R\ge13.9R$, which is $\ge8R=\hat g/4$ and $\ge13.9\lambda$. In both
+cases
+\[
+\rho_m\ge\hat g/4\qquad\text{and}\qquad\rho_m\ge13.9\lambda\ge\max(\varepsilon,4l),
+\]
+so Lemma~\ref{lem:B-3}(e) applies on the whole far period, with $\alpha\le1.375v/\rho_m\le5.5v/\hat g$.
+
+\emph{Amplification.} Between a time with gap $g_1$ and a later one with gap $g_2$ (both $\le32R$), by \eqref{eq:E-1c},
+$\int\alpha\,dt\le5.5v[2\varepsilon/g_2+4\log(g_1/g_2)]\le0.35v+22v\log(g_1/g_2)$; while $g>32R$,
+$\int\alpha\,dt\le5.5vT_B/(32R)$. So with $A_0:=\exp(v(0.35+0.18\,T_B/R))\le2$ and $\hat g_2:=\min(g_2,32R)$, for arbitrary gaps
+$g_1\ge g_2$,
+\[
+\exp\Bigl(\int\alpha\Bigr)\le A_0\bigl(\min(g_1,32R)/\hat g_2\bigr)^\nu
+\]
+(if $g_2>32R$ only the second bound is used and the power is $1$).
+
+\emph{Forcing} $\beta=2v\,l^{3/2}|p_a|/\rho_m^3$. If $g>R/2$: exactly as in Step~3 of the proof of Theorem~\ref{thm:Bulk} (which
+uses only $l\le2\lambda$, $|p_a|\le\rho_m+l$ and the bounds on $\rho_m$ above),
+\[
+\beta\le408\,v\lambda^{3/2}/R^2\qquad\text{whenever }g>R/2 .
+\]
+If $g\le R/2$: $P$ lies on $[x_{a_j},x_{a_{j+1}}]$ (Lemma~\ref{lem:B-C}(2)), so
+$|p_a|\le\max_{a'\in\{a_j,a_{j+1}\}}\operatorname{dist}(x_{a'},\operatorname{line}(x_a,x_b))$, and this distance equals
+$c(a',a)|e_{a'a}\times e_{ab}|\le c(a',a)(|e_{a'a}-e_{a'b}|+|e_{ab}-e_{a'b}|)$. The pairs $(a',a)$, $(a,b)$, $(a',b)$ are in the
+family (label lengths $\ge64\lambda-\varepsilon\ge\varepsilon/2$, resp.\ $\le g+\lambda\le R$), $c(a',a)\le\frac98g$, and
+\eqref{eq:E-TL} with $\lambda(a',b)\le g+\lambda\le\frac{65}{64}g$ gives
+\begin{align*}
+|p_a|&\le\tfrac98g\cdot2\,\ETL M\bigl(\tfrac{65}{64}g\bigr)^\gamma\le2.26\,\ETL Mg^{1+\gamma},\\
+\beta&\le2v\bigl(\tfrac98\lambda\bigr)^{3/2}\cdot2.26\,\ETL Mg^{1+\gamma}\cdot\frac{64}{g^3}\le346\,v\,\ETL M\lambda^{3/2}g^{\gamma-2}.
+\end{align*}
+
+\emph{Result.} Let $g_{\mathrm s}:=u_a$ be the gap at $\Bts$, $g_2\ge64\lambda$ the gap at time $t$, and
+$\hat g_2:=\min(g_2,32R)$. By Lemma~\ref{lem:B-3}(e), (S2) and \eqref{eq:E-1c} with $h(g)=g^{\nu+\gamma-2}$ (non-increasing):
+\begin{align*}
+N\le{}&A_0\Bigl(\frac{\min(g_{\mathrm s},32R)}{\hat g_2}\Bigr)^{\!\nu}N(\Bts)
++A_0\Bigl(\frac{32R}{\hat g_2}\Bigr)^{\!\nu}\frac{408\,vT_B\lambda^{3/2}}{R^2}\\
+&+A_0\cdot346\,v\,\ETL M\lambda^{3/2}g_2^{-\nu}\Bigl[2\varepsilon g_2^{\nu+\gamma-2}+\frac{4g_2^{\nu+\gamma-1}}{1-\gamma-\nu}\Bigr]
+\end{align*}
+(the third term is present only if $g_2\le R/2$, and then $\hat g_2=g_2$).
+
+\emph{First term.} If $g_2\le32R$ (so $\hat g_2=g_2\ge64\lambda$) it is at most
+\[
+2\cdot\frac M8\lambda^{1/2+\gamma}\Bigl(\frac{64\lambda}{\min(g_{\mathrm s},32R)}\Bigr)^{\!\nu}
+\Bigl(\frac{\min(g_{\mathrm s},32R)}{g_2}\Bigr)^{\!\nu}
+=\frac M4\lambda^{1/2+\gamma}\Bigl(\frac{64\lambda}{g_2}\Bigr)^{\!\nu}\le\frac M4\lambda^{1/2+\gamma};
+\]
+if $g_2>32R$ it is $\le A_0N(\Bts)\le\frac M4\lambda^{1/2+\gamma}$ directly.
+
+\emph{Second term.} $(32R/\hat g_2)^\nu\le(R/\lambda)^\nu$ (if $g_2\le32R$ because $g_2\ge64\lambda$; if $g_2>32R$ the left side is
+$1$), and $\lambda^{3/2}(R/\lambda)^\nu=\lambda^{1/2+\gamma}\lambda^{1-\gamma-\nu}R^\nu\le\lambda^{1/2+\gamma}R^{1-\gamma}$; so the
+term is $\le816\,(vT_B/R)R^{-\gamma}\lambda^{1/2+\gamma}=816\cdot(50/\gamma)(vT_B/R)\,M\lambda^{1/2+\gamma}
+\le0.041\,M\lambda^{1/2+\gamma}$, by $vT_B\le10^{-6}\gamma R$.
+
+\emph{Third term.} $2\varepsilon/g_2\le1/16$ and $1-\gamma-\nu\ge0.74$, so the bracket is $\le5.47\,g_2^{\nu+\gamma-1}$, and
+$g_2^{\gamma-1}\le(64\lambda)^{\gamma-1}\le64^{-3/4}\lambda^{\gamma-1}=0.0442\,\lambda^{\gamma-1}$; so the term is
+$\le2\cdot346\cdot5.47\cdot0.0442\,v\,\ETL M\lambda^{1/2+\gamma}\le168\cdot(16.5/\gamma)\,vM\lambda^{1/2+\gamma}
+\le2772\,(v/\gamma)M\lambda^{1/2+\gamma}\le10^{-7}M\lambda^{1/2+\gamma}$.
+
+Hence $N\le(\frac14+0.041+10^{-7})M\lambda^{1/2+\gamma}\le\frac38M\lambda^{1/2+\gamma}$, i.e.
+\[
+E\le\tfrac9{128}M^2\lambda^{1+2\gamma}\le M^2\lambda^{1+2\gamma}/8\qquad\text{for far pairs.}
+\]
+
+\paragraph{Step 4 (near pairs).}
+Let $(a,b)\in\BF(t)$ be near. As in Step~4 of the proof of Theorem~\ref{thm:Bulk} (by Step~1(c)), the total time a given pair spends
+near is $\le(128\lambda/\varepsilon+1)\cdot2\varepsilon+2\varepsilon\le264\lambda$. When it becomes near (or at $\Bts$),
+$E\le M^2\lambda^{1+2\gamma}/8$ (Step~3; resp.\ (S2): $E(\Bts)\le M^2\lambda^{1+2\gamma}/128$); and during the near period all
+sub-arcs used below are family pairs. We bound the increase $\Delta E$ of $E$ while near by integrating Lemma~\ref{lem:B-3}(a) with
+$\bar q=0$:
+\[
+E'\le\mathrm I+\mathrm{II},\qquad\mathrm I:=v\int_a^ba^*(\rho)|T-e|^2ds,\qquad\mathrm{II}:=v\int_a^b|\tau||q|\,ds,\qquad e:=e_{ab}
+\]
+($\tau=T\cdot e^\perp$, $q=e^\perp\cdot Ae$ as in Lemma~\ref{lem:B-2}). Put $\bar\rho:=\max(\varepsilon,\min_{[a,b]}\rho)$ and
+$\tilde g:=\max(g,\varepsilon)$. Every $s\in[a,b]$ has $w_s\ge g$, so by \eqref{eq:E-star} $\bar\rho\ge\min(g,32R)/6$; if
+$g>32R$ then $6\bar\rho\ge32R\ge\lambda$, and otherwise $6\bar\rho\ge\tilde g$. So
+$\log^+(\lambda/(6\bar\rho))\le\log^+(\lambda/\tilde g)$ in all cases.
+
+\emph{Term \textup{I}.} With $\omega(y):=\int_{\{s\in(a,b):\,\rho_s<y\}}|T-e|^2ds$,
+$\mathrm I=v\bigl[\omega(\varepsilon)/\varepsilon+\int_\varepsilon^\infty\omega(y)y^{-2}dy\bigr]$. By \eqref{eq:E-star}, $\rho_s<y$
+forces $w_s<2y+4\varepsilon$ when $2y+4\varepsilon\le32R$; so these $s$ lie in the sub-arc $J_y$ of $(a,b)$ starting at $a$ with
+label length $\max(\min(\lambda,2y+4\varepsilon-g),\varepsilon/2)\le\min(\lambda,6y)$ (for $y\ge\varepsilon$), a family pair. By
+\eqref{eq:E-mu}, $\omega(y)\le C_\mu M^2\lambda^{2\gamma}\min(\lambda,6y)$ (for larger $y$ trivially, since then $6y\ge\lambda$ and
+$\omega\le N^2\le M^2\lambda^{1+2\gamma}$), and $\omega(y)=0$ for $y\le\min\rho$. Hence
+\[
+\mathrm I\le vC_\mu M^2\lambda^{2\gamma}\Bigl[6+\int_{\bar\rho}^{\lambda/6}\frac{6\,dy}y+\int_{\lambda/6}^\infty\frac{\lambda\,dy}{y^2}\Bigr]
+\le6vC_\mu M^2\lambda^{2\gamma}\bigl[2+\log^+(\lambda/\tilde g)\bigr].
+\]
+
+\emph{Term \textup{II}.} By Lemma~\ref{lem:B-V}(iii), $|q|\le|p(s)|/\max(\rho_s,\varepsilon)^2$ with $p(s):=(x_s-P)\times e$, and
+since $P\in[x_{a_j},x_{a_{j+1}}]$, $|p(s)|\le\max_{a'\in\{a_j,a_{j+1}\}}|(x_s-x_{a'})\times e|$. Let
+\[
+\vartheta:=C_\vartheta M\lambda^\gamma\ \text{ if }65\lambda\le R,\qquad\vartheta:=2\ \text{ otherwise.}
+\]
+In both cases $C_1M\lambda^\gamma\le\vartheta\le2$ ($C_1m=0.528$, $C_\vartheta m=0.94$) and, if $65\lambda\le R$,
+$\ETL M(65\lambda)^\gamma\le2.84\,\ETL M\lambda^\gamma\le\vartheta$. Put $\lambda_s':=\max(u_s-u_a,\varepsilon/2)$.
+
+\emph{Case $a'\le a$.} $(x_s-x_{a'})\times e=\int_a^s\tau+(x_a-x_{a'})\times e$. The first term is
+$\le\int_{(a,s)}|T-e|\le C_1M\lambda^\gamma\lambda_s'\le\vartheta\lambda_s'$ (Step~2). The second vanishes if $a'=a$. Let
+$65\lambda\le R$. If $g':=u_a-u_{a'}\ge\varepsilon/2$, the second term equals
+$c(a',a)|e_{a'a}\times e_{ab}|\le\frac98g'\cdot2\,\ETL M(65\lambda)^\gamma\le4\vartheta g$: the pairs $(a',a)$, $(a,b)$, $(a',b)$
+are family pairs with $\lambda(a',b)\le65\lambda\le R$. If $0<g'<\varepsilon/2$ (then $a'=a_{j+1}$): with
+$J_0:=(a',\text{label }u_{a'}+\varepsilon/2)\subset(a',b)$, a family pair, and \eqref{eq:E-TL} in $(a',b)$
+($\lambda(a',b)\le2\lambda$),
+\[
+|(x_a-x_{a'})\times e|\le l(a',a)^{1/2}\Bigl(\int_{J_0}|T-e_{ab}|^2\Bigr)^{1/2}
+\le\bigl(\tfrac9{16}\varepsilon\bigr)^{1/2}\bigl[2M^2(\varepsilon/2)^{1+2\gamma}+\tfrac98\varepsilon(2\vartheta)^2\bigr]^{1/2}
+\le3\vartheta\varepsilon .
+\]
+
+\emph{Case $a=a_j$, $a'=a_{j+1}\le b$.} $(x_s-x_{a'})\times e=\pm\int\tau$ over the arc between $a'$ and $s$, which is contained in
+$(a,\max(s,a'))\subset(a,b)$; so it is $\le\vartheta\max(\lambda_s',\varepsilon)$.
+
+\emph{Case $a=a_j$, $a'=a_{j+1}>b$} (then $\lambda<\varepsilon$). $I:=(a_j,a_{j+1})$ is a family pair containing $(a,b)$, with
+$\varepsilon/2\le\lambda_I\le\varepsilon\le2\lambda$, and
+\[
+\begin{aligned}
+|(x_s-x_{a'})\times e|&\le\int_I|T-e_I|\,ds+l(I)\,|e_I-e_{ab}|
+\le\bigl(\tfrac98\lambda_I\bigr)^{1/2}M\lambda_I^{1/2+\gamma}+\tfrac98\lambda_I\,\ETL M\lambda_I^\gamma\\
+&\le1.19\,\ETL M(2\lambda)^\gamma\varepsilon\le\vartheta\varepsilon
+\end{aligned}
+\]
+(with $\vartheta=2$ if $65\lambda>R$, as $1.19\cdot2^{1/4}\ETL m\le0.47$).
+
+So if $65\lambda\le R$: $|p(s)|\le\vartheta(\lambda_s'+4g+3\varepsilon)\le\vartheta(5w_s+4\varepsilon)$, and with
+\eqref{eq:E-star}, for $w_s\le32R$,
+\[
+|q|\le\frac{\vartheta(5w_s+4\varepsilon)}{\max(\varepsilon,w_s/6)^2}\le\frac{34\vartheta}{\max(\varepsilon,w_s/6)}
+=\int_{\max(w_s,6\varepsilon)}^\infty204\,\vartheta\,y^{-2}dy ;
+\]
+if $65\lambda>R$ ($\vartheta=2$) the same bound holds since $|p|\le\rho_s$. For $w_s>32R$, $|q|\le1/\rho_s\le1/(15R)$. With
+$\int_{\{s\in(a,b):\,w_s<y\}}|T-e|\,ds\le\vartheta\min(\lambda,y)$ for $y\ge6\varepsilon$ (Step~2; zero if $y\le g$):
+\[
+\mathrm{II}\le204\,v\vartheta^2\int_{\max(6\varepsilon,g)}^\infty\frac{\min(\lambda,y)}{y^2}\,dy+\frac v{15R}\int_a^b|T-e|\,ds
+\le204\,v\vartheta^2\bigl[1+\log^+(\lambda/\tilde g)\bigr]+\frac{0.1\,vM\lambda^{1+\gamma}}R .
+\]
+
+\emph{Time integrals.} As in Step~4 of the proof of Theorem~\ref{thm:Bulk}, by \eqref{eq:E-1c}:
+$\int_{\mathrm{near}}[1+\log^+(\lambda/\tilde g)]\,dt\le272\lambda$ and $\int_{\mathrm{near}}[2+\log^+(\lambda/\tilde g)]\,dt\le536\lambda$.
+So
+\[
+\Delta E\le3216\,C_\mu vM^2\lambda^{1+2\gamma}+55488\,v\vartheta^2\lambda+26.4\,vM\lambda^{2+\gamma}/R .
+\]
+Here $C_\mu\le613/\gamma^2$, and $M\lambda^{2+\gamma}/R\le M^2\lambda^{1+2\gamma}/m=(50/\gamma)M^2\lambda^{1+2\gamma}$. If
+$65\lambda\le R$, then $\vartheta^2\lambda=(2209/\gamma^2)M^2\lambda^{1+2\gamma}$. If $65\lambda>R$,
+\[
+\vartheta^2\lambda=4\lambda\le4(65/R)^{2\gamma}\lambda^{1+2\gamma}=4\cdot65^{2\gamma}M^2\lambda^{1+2\gamma}/m^2
+\le(80700/\gamma^2)M^2\lambda^{1+2\gamma}.
+\]
+In all cases
+\[
+\Delta E\le\frac{4.5\cdot10^9}{\gamma^2}\,vM^2\lambda^{1+2\gamma}\le0.09\,M^2\lambda^{1+2\gamma}\le\frac{M^2\lambda^{1+2\gamma}}8,
+\quad\text{so}\quad E\le\frac{M^2\lambda^{1+2\gamma}}4\ \ \text{for near pairs.}
+\]
+With Step~3 this is the $E$-part of (Imp).
+
+\paragraph{Step 5 ((J1): $l\le1.01\lambda$).}
+$l(\Bts)=\lambda$ and $l'=v\int T\cdot AT$.
+
+\emph{Far, $g>R/2$:} $T\cdot AT\le1/\rho_m\le8/R$; the total increase of $\log l$ is $\le8vT_B/R\le8\cdot10^{-6}\gamma$.
+
+\emph{Far, $g\le R/2$:} by Lemma~\ref{lem:B-3}(c), $l'\le(2v/\rho_m)[l(|p_a|+l^{1/2}N)^2/\rho_m^2+N^2]$, with
+$|p_a|+l^{1/2}N\le2.26\,\ETL Mg^{1+\gamma}+1.07M\lambda^{1+\gamma}\le2.27\,\ETL Mg^{1+\gamma}$, $\rho_m\ge g/4$ and
+$N^2\le M^2\lambda^{1+2\gamma}\le lM^2g^{2\gamma}$. So
+$(\log l)'\le(8v/g)(16\cdot2.27^2\,\ETL^2+1)M^2g^{2\gamma}\le661\,\ETL^2vM^2g^{2\gamma-1}$, and by \eqref{eq:E-1c}
+$\int g^{2\gamma-1}dt\le2\varepsilon(32\varepsilon)^{2\gamma-1}+4\int_0^{R/2}g^{2\gamma-1}dg\le(2.02/\gamma)R^{2\gamma}$. The total is
+$\le661\cdot(272.25/\gamma^2)(2.02/\gamma)\,vm^2\le146\,v/\gamma$.
+
+\emph{Near:} $T\cdot AT\le a^*(\rho)$, so $l'\le v[\tilde m(\varepsilon)/\varepsilon+\int_\varepsilon^\infty\tilde m(y)y^{-2}dy]$
+with $\tilde m(y):=|\{s\in(a,b):\rho_s<y\}|\le\frac98\min(\lambda,6y)$ ((J1) for $J_y$). Hence
+$l'\le6.75\,v[2+\log^+(\lambda/\tilde g)]$, and the increase while near is $\le3618\,v\lambda$.
+
+Altogether $l_t\le\lambda\exp(8\cdot10^{-6}\gamma+146v/\gamma)+3618\,v\lambda\le1.00001\,\lambda$. This completes the proof of (Imp),
+hence of (a). \qed
+
+\begin{proof}[Proof of \textup{(b)}]
+By Step~1(a),(b), now valid up to $T_{\mathrm{end}}$: every non-final leg advances the base label by $\ge\varepsilon/2$ (and
+$\le\varepsilon$), so there are at most $2U/\varepsilon$ non-final legs, each of duration $\le\varepsilon/(1-v)$. The construction
+stops at a leg start $T_{\mathrm{stop}}=t_J\le\Bts+2U/(1-v)$ with $a_{J+1}=\EbE$, i.e.\ $l_{T_{\mathrm{stop}}}(a_J,\EbE)\le\varepsilon$.
+By Lemma~\ref{lem:B-C}(3) every $\theta\in[a_j,a_{j+1}]$ is seen by $t_j$, for all $j\le J$; these intervals cover
+$[a_{\mathrm s},\EbE]$. Finally $|P-x_{\EbE}|=c(a_J,\EbE)\le l\le\varepsilon$ at $T_{\mathrm{stop}}$.
+\end{proof}
+
+\begin{proof}[Proof of \textup{(c)}]
+Let leg $j+1$ be non-final, $t$ in it, $s\in(a_{j+1},\EbE]$. By (b), $\lambda(a_j,s)\ge\varepsilon/2$. If $l:=l_t(a_j,s)\le R$:
+then $\lambda\le l\le R$, the pair is in $\BF(t)$, and $E\le\frac12M^2\lambda^{1+2\gamma}\le\frac12m^2\,l\,(l/R)^{2\gamma}$: this is
+\textup{(F$_b$)} with $c_0=m^2/2=\gamma^2/5000$. If $l>R$: then $\lambda>R/2$ (if $\lambda\le R$, (J1) gives $\lambda\ge8l/9$),
+and by \eqref{eq:E-CA} and Lemma~\ref{lem:B-C}(4) $\rho_s\ge\frac12\min(\lambda,32R)-2\varepsilon\ge R/4-R/32\ge R/8$: this is
+\textup{(S)}.
+
+For $\tilde K$ apply the Claim in the proof of Theorem~\ref{thm:R} with $b^*=\EbE$, $K_T=0$, with $2\pi$ replaced by $\EbE$ in
+$R_j$ and $\tilde K$, and with $\BLs:=\frac98U$. Its proof uses only \textup{(F$_b$)}, \textup{(S)}, Lemma~\ref{lem:B-C}(2),(4),
+Lemma~\ref{lem:B-3}(d), Lemma~\ref{lem:B-4}(b) and $R_j\le\BLs$, and nothing about labels beyond $b^*$. Here
+$R_j=l_{t_j}(a_j,\EbE)\le\frac98(U-u_{a_j})$. Indeed, for $j=\Bjs$, $R_j=U$. For $j>\Bjs$ apply (J1) at $t_j$ to consecutive pairs
+covering $[a_j,\EbE]$: the first pair is $(a_j,a_{j+1})$ (label length in $[\varepsilon/2,\varepsilon]$, leg $j+1$ being non-final);
+the others start at labels $\ge a_{j+1}$ and have label length $\varepsilon$, a last piece shorter than $\varepsilon/2$
+being merged with its predecessor (label length $<3\varepsilon/2\le R$); if $0<U-u_{a_{j+1}}<\varepsilon/2$ use the single pair $(a_j,\EbE)$, of label length
+$<3\varepsilon/2\le R$. All these pairs belong to the family of leg $j+1$, hence to $\BF(t_j)$. The Claim gives
+\[
+\tilde K\le16e^{2\mu}+4c_0(1+1/\gamma)+2e^{2\mu}\BLs/r_1\le16.01+0.001+18.01\,U/R
+\]
+(as $2\cdot\frac98U\cdot\frac8R=18\,U/R$).
+\end{proof}
+
+\begin{remark}\label{rem:E-B}
+(1) \emph{What the proof of Theorem~\ref{thm:Bulk} uses of \textup{(ST)}.} The cubic bound $E\le\kappa^2\lambda^3$ is used nowhere
+except through the three items of Remark~\ref{rem:B-relaxed}: \eqref{eq:B-CA} at $\Bts$, the start value of near pairs, and $N(\Bts)$
+in the first term of Step~3. All structural steps (tilt lemma, far forcing, near terms I and II, length) work for the invariant
+exponent $1+2\gamma$ with any $\gamma\in(0,1/4]$ ($\gamma<1-\nu$ would do, with other constants): the tilt-lemma constant is
+$\sim1/\gamma$ (a geometric series over scales), the far forcing $\int g^{\nu+\gamma-2}dg$ and the length integral
+$\int g^{2\gamma-1}dg$ converge, and $v$ must be small against $\gamma^2$. The start exponent only has to exceed the invariant
+exponent by the amplification exponent $\nu=22v$; this is the weight in (S2). Theorem~\ref{thm:End} with $\gamma=1/4$ is the
+\emph{analogue} of Theorem~\ref{thm:Bulk} under a relaxed start of the type (W1)--(W3) of Remark~\ref{rem:B-relaxed}, with a complete
+proof, but neither statement contains the other: the normalisation is $m=1/200$ and $\ETL=66$ in place of $1/140$ and $91$ (so (S2)
+is slightly stronger than (W2)), and the ranges are $v\le1.25\cdot10^{-12}$, $v(4U+2)\le2.5\cdot10^{-7}R$ in place of
+$v\le10^{-12}$, $v(4U+2)\le10^{-6}R$. Theorem~\ref{thm:End} removes the restriction ``legs whose target stays within the arc'': when
+the arc on which the start condition holds reaches the end of the unseen set, the restriction is void.
+
+(2) \emph{Reflection.} For an arc traversed towards decreasing labels apply the theorem to the reflected configuration.
+
+(3) \emph{Harry at the end.} If a design wants $P=x_{\EbE}$, one more straight leg to $x_{\EbE}$ costs at most $\varepsilon/(1-v)$.
+
+(4) \emph{Scope and causality.} Nothing is claimed about labels $>\EbE$ or pairs with $b>\EbE$: the family has $u_b\le U$ and
+$\tilde K$ integrates up to $\EbE$ only, so a later statement about the stretching of the whole front must treat the labels beyond
+$\EbE$ separately. Suppose that $P$ follows the construction on $[\Bts,t_j]$ for a leg start $t_j$ and does anything afterwards.
+Let $\tilde P$ equal $P$ on $[0,t_j]$ and continue the construction after $t_j$. The candidates at times $\le t_j$ are the same
+for $P$ and $\tilde P$, and Theorem~\ref{thm:End} applies to $\tilde P$. Hence
+(J1), (J2), \eqref{eq:E-CA}, \eqref{eq:E-star}, \eqref{eq:E-TL} and Step~1 hold on $[\Bts,t_j]$ for $P$, and so do
+(c), (d) for the legs completed by $t_j$. This is used in Lemma~\ref{lem:E-H} and Corollary~\ref{cor:E-T}, and in
+Section~\ref{sec:main} (Lemmas~\ref{lem:T2-H} and~\ref{lem:T2-StA}).
+\end{remark}
+
+\subsection{Final approach into a benign end}
+
+Let $\Bts$ be a leg start of the construction of the previous subsection, i.e.\ $P(\Bts)=x_{a_{\mathrm s}}(\Bts)$ and
+$\EbE-a_{\mathrm s}<2\pi$; let $\mathsf A:=[a_{\mathrm s},\EbE]$, with labels $u\in[0,U]$ as before. ``Pairs in $\mathsf A$'' are all
+label pairs $a<b$ in $\mathsf A$, including $a=a_{\mathrm s}$ and $b=\EbE$.
+
+\medskip\noindent\textbf{Hypothesis (ST$_{\mathrm{end}}$)} at $\Bts$, with constants $a'\in(0,1]$, $C_0>0$, $\lambda_0\in(0,1]$,
+$c_{\mathrm{sep}}>0$ such that $C_0\lambda_0^{a'}\le1$:
+\[
+\begin{aligned}
+&\textup{(E1)}\quad N(a,b;\Bts)\le C_0\lambda^{1/2+a'}\ \ \bigl(\text{i.e.\ }E\le\tfrac12C_0^2\lambda^{1+2a'}\bigr)
+&&\text{for all pairs in $\mathsf A$ with }\varepsilon/2\le\lambda\le\lambda_0,\\
+&\textup{(E2)}\quad c(a,b;\Bts)\ge c_{\mathrm{sep}}&&\text{for all pairs in $\mathsf A$ with }\lambda>\lambda_0 .
+\end{aligned}
+\]
+
+\begin{corollary}[Final approach into an end]\label{cor:End}
+Fix $a'\in(0,1]$, $C_0>0$, $\lambda_0\in(0,1]$, $c_{\mathrm{sep}}>0$ with $C_0\lambda_0^{a'}\le1$, and $U_{\max}>0$, all independent
+of $(v,\varepsilon)$. Put
+\[
+\gamma:=\min\bigl(\tfrac{a'}2,\tfrac14\bigr),\quad R:=\min\Bigl(1,\,\frac{\lambda_0}{32},\,\frac{c_{\mathrm{sep}}}{16},\,
+\Bigl(\frac\gamma{400\,C_0}\Bigr)^{1/a'}\Bigr),\quad
+v_0:=\min\Bigl(2\cdot10^{-11}\gamma^2,\,\frac{10^{-6}\gamma R}{4U_{\max}+2}\Bigr).
+\]
+Let $(v,\varepsilon)$ satisfy $\varepsilon\le R/64$ and $v\le v_0$, and let the configuration produced with this $(v,\varepsilon)$
+satisfy \textup{(E1)}, \textup{(E2)} with these constants at a leg start $\Bts$ with $P(\Bts)=x_{a_{\mathrm s}}(\Bts)$,
+$\EbE-a_{\mathrm s}<2\pi$ and $U\le U_{\max}$. Then \textup{(ST$_\gamma$)} holds, and so do all conclusions of Theorem~\ref{thm:End}:
+the construction sees every label of $\mathsf A$ and stops within time $2U/(1-v)$ of $\Bts$ at arclength distance
+$l_{T_{\mathrm{stop}}}(a_J,\EbE)\le\varepsilon$ from the end, with $\tilde K\le17+19U/R$, and
+$E(a,b;t)\le\frac12M^2\lambda^{1+2\gamma}$ for all pairs ahead of the base at all scales $\varepsilon/2\le\lambda\le R$, up to the
+end. $v_0$ and all constants depend only on $(a',C_0,\lambda_0,c_{\mathrm{sep}},U_{\max})$.
+\end{corollary}
+\textup{(ST$_{\mathrm{end}}$)} is a hypothesis on the configuration, which depends on $(v,\varepsilon)$; it is not
+$\varepsilon$-free. (In $R$, $\lambda_0/32$ may be replaced by $\lambda_0$.)
+\begin{proof}
+(S3) is assumed, and $v(4U+2)\le10^{-6}\gamma R$ because $U\le U_{\max}$. Next $\nu=22v\le4.4\cdot10^{-10}\gamma^2\le\gamma\le
+a'-\gamma$, so $\gamma+\nu\le a'$. (S2): for $\varepsilon/2\le\lambda\le R$ ($\le\lambda_0$),
+\[
+N\le C_0R^{a'}(\lambda/R)^{a'}\lambda^{1/2}\le\frac\gamma{400}(\lambda/R)^{\gamma+\nu}\lambda^{1/2}
+=\frac M8\lambda^{1/2+\gamma}(\lambda/R)^\nu,
+\]
+and $(\lambda/R)^\nu\le\min(1,2\lambda/R)^\nu\le\min(1,64\lambda/\min(u_a,32R))^\nu$. (S1): for
+$\varepsilon/2\le\lambda\le\lambda_0$, $E\le\frac12(C_0\lambda^{a'})^2\lambda\le\lambda/2$, so $c\ge\lambda/2$, which is
+$\ge\frac12\min(\lambda,32R)$; for $\lambda>\lambda_0$, $c\ge c_{\mathrm{sep}}\ge16R$.
+\end{proof}
+
+\begin{remark}[Free $\gamma$; restarting on the same side]\label{rem:E-restart}
+(1) \emph{Free $\gamma$.} The proof uses the choice of $\gamma$ only through $\gamma\le1/4$ and $\gamma+\nu\le a'$. Hence
+Corollary~\ref{cor:End} holds, with the same proof, for every $\gamma\in(0,\min(a',1/4)]$ and
+$v\le\min(2\cdot10^{-11}\gamma^2,\ (a'-\gamma)/22,\ 10^{-6}\gamma R/(4U_{\max}+2))$, with $R$ given by the same formula. The choice
+$\gamma=\min(a'/2,1/4)$ gives away a factor $4$ in $v$ and makes restarts lossy, see (3).
+
+(2) \emph{Restart.} Let (J1), (J2) hold with constants $(\gamma_1,R_1,M_1)$, and let $t_j$ be a later leg start with
+$U-u_{a_j}\ge\varepsilon/2$ (otherwise the construction stops at $t_j$ by Step~1($\beta$), and there is no room for the enlargement
+used below). In the labels $u':=l_{t_j}(a_j,\cdot)$ at $t_j$: $\lambda\le\lambda'\le\frac98\lambda$ for family pairs; for every pair
+with $a\ge a_j$ and $\varepsilon/2\le\lambda'\le R_1$, $N\le M_1\lambda'^{\,1/2+\gamma_1}$ (if $\lambda<\varepsilon/2$, enlarge the
+pair to old label length $\varepsilon/2\le\lambda'$, on either side inside $[a_j,\EbE]$, and use Lemma~\ref{lem:E-facts}(a)); and
+$c\ge4R_1/9$ for $\lambda'>R_1$ by \eqref{eq:E-CA}. So \textup{(ST$_{\mathrm{end}}$)} holds on $[a_j,\EbE]$ with $a'=\gamma_1$,
+$C_0=M_1$, $\lambda_0=R_1$, $c_{\mathrm{sep}}=4R_1/9$ (and $C_0\lambda_0^{a'}=\gamma_1/50\le1$): the class is closed under
+restarting, with $\gamma=\gamma_1/2$. From Theorem~\ref{thm:Bulk} \emph{verbatim} one only has (I1) $l\le2\lambda$ and (I2)
+$N\le M\lambda^{3/4}$, $M=R^{-1/4}/140$, and only for legs with $u_{a_{j+1}}\le U$; the same argument then gives
+$\lambda\le\lambda'\le2\lambda$ and \textup{(ST$_{\mathrm{end}}$)} on the arc from $a_j$ to the label $U$ with $a'=1/4$,
+$C_0=R^{-1/4}/140$, $\lambda_0=R$ and $c_{\mathrm{sep}}=R/4$ (for $\lambda'>R$: $\lambda>R/2$ and \eqref{eq:B-CA}), again for
+$U-u_{a_j}\ge\varepsilon/2$.
+
+(3) \emph{Cost of a restart.} Corollary~\ref{cor:End} applied to $(a',C_0,\lambda_0,c_{\mathrm{sep}})=(\gamma_1,M_1,R_1,4R_1/9)$
+has $\gamma=\gamma_1/2$, $R=16^{-1/\gamma_1}R_1$ (because $(\gamma/(400M_1))^{1/\gamma_1}=16^{-1/\gamma_1}R_1$; this is $R_1/65536$
+for $\gamma_1=1/4$) and $v_0\propto\gamma_1^2/4$. So a restart costs $\gamma\mapsto\gamma/2$ and $R\mapsto16^{-1/\gamma_1}R$, and
+(2) may be used a bounded number of times only, not a number of times that grows as $\varepsilon\to0$. With (1) the loss in
+$\gamma$ is $22v$ per restart, but $R$ still degrades geometrically, because (S2) asks for the constant $M/8$ where the output has
+$M$.
+\end{remark}
+
+\subsection{A passive far phase}
+
+\begin{lemma}[Passive far phase]\label{lem:E-far}
+Let $P$ be any $1$-Lipschitz path, $\Gamma$ a label interval, $[t',t'']$ a time interval and
+$\rho_0:[t',t'']\to[\varepsilon,\infty)$ continuous with
+$\operatorname{dist}\bigl(P(t),\operatorname{conv}\{x_s(t):s\in\Gamma\}\bigr)\ge\rho_0(t)$ for all $t$. Put
+$\Lambda(t):=v\int_{t'}^t d\sigma/\rho_0(\sigma)$ and assume $l_{t'}(\Gamma)\,e^{\Lambda(t)}\le\rho_0(t)/4$ on $[t',t'']$. Then for
+every pair $(a,b)\subset\Gamma$ and every $t\in[t',t'']$:
+\begin{enumerate}
+\item[(i)] $l_{t'}(a,b)\le l_t(a,b)\le e^{\Lambda(t)}l_{t'}(a,b)$ and $c(a,b;t)\ge c(a,b;t')$;
+\item[(ii)] $N(a,b;t)\le e^{1.375\Lambda(t)}\Bigl[N(a,b;t')+2.5\,v\,l_t(a,b)^{3/2}\displaystyle\int_{t'}^t\frac{d\sigma}{\rho_0(\sigma)^2}\Bigr]$.
+\end{enumerate}
+In particular, for constant $\rho_0$ and $\Delta:=t-t'$:
+$N(t)\le e^{1.375v\Delta/\rho_0}\bigl[N(t')+2.5\,v\Delta\,l_t^{3/2}/\rho_0^2\bigr]$, whence
+$E(t)\le e^{2.75v\Delta/\rho_0}\bigl[2E(t')+6.25\,v^2\Delta^2l_t^3/\rho_0^4\bigr]$.
+\end{lemma}
+\begin{proof}
+(i) Monotonicity is Lemma~\ref{lem:B-VC}. On $\Gamma$, $\rho\ge\rho_0\ge\varepsilon$, so $T\cdot AT\le1/\rho_0$ and
+$l'=v\int T\cdot AT\le(v/\rho_0)\,l$. (ii) The hull of the arc of $(a,b)$ is contained in that of $\Gamma$, so
+$\rho_m\ge\rho_0\ge\max(\varepsilon,4l_t(\Gamma))\ge\max(\varepsilon,4l)$, and Lemma~\ref{lem:B-3}(e) applies with
+$\alpha\le1.375v/\rho_0$ and $\beta=2v\,l^{3/2}|p_a|/\rho_m^3$. Since $x_a$ lies in the hull of the arc, whose diameter is $\le l$,
+$|p_a|\le\rho_a\le\rho_m+l\le1.25\rho_m$; so $\beta\le2.5\,v\,l^{3/2}/\rho_m^2\le2.5\,v\,l_t^{3/2}/\rho_0(\sigma)^2$ at time $\sigma$
+($l$ is non-decreasing). Insert, and bound $\exp(\int_\sigma^t\alpha)\le e^{1.375\Lambda(t)}$. The $E$-form is
+$(x+y)^2\le2x^2+2y^2$.
+\end{proof}
+The additive term is a curvature increment $\approx v\Delta/\rho_0^2$ (exponent $3/2$ in $N$): it never spoils a bound
+$N\le C\lambda^{1/2+\gamma}$ with $\gamma\le1$.
+
+\subsection{Tangential departure from an end}
+
+\noindent\textbf{Setting.} $P$ is a $1$-Lipschitz path, $\EtE$ a time, $\Ee$ a label with $P(\EtE)=x_{\Ee}(\EtE)$, $\Eu$ a unit
+vector, $D>0$, and
+\[
+P(t)=P(\EtE)-(t-\EtE)\,\Eu\qquad\text{for }t\in[\EtE,\EtE+D].
+\]
+\emph{In this subsection and the next, $\tau:=t-\EtE$} (the quantity $T\cdot e^\perp$ of Lemma~\ref{lem:B-2} does not occur).
+Consider an arc of the front starting at $\Ee$, on one side, labelled by its arclength $u\in[0,\EUE]$ at time $\EtE$ measured from
+$x_{\Ee}$, with $\EUE\ge\varepsilon/2$. For labels $a<b$ of the arc let $\lambda:=u_b-u_a$, let $\EV_t(a,b):=\EV_{\Eu}((a,b))$ at
+time $t$ (Lemma~\ref{lem:E-facts}(b)), and $\bar u:=\max(u,\varepsilon/2)$.
+
+\medskip\noindent\textbf{Hypotheses}, with $\gamma\in(0,1/4]$ and $\vartheta_0>0$:
+\begin{itemize}
+\item[(D1)] $\EV_{\EtE}(a,b)\le\vartheta_0^2\,\lambda\,u_b^{2\gamma}$ for all pairs $0\le u_a<u_b\le\EUE$ with
+$\lambda\ge\varepsilon/2$;
+\item[(D2)] $\vartheta_0(\EUE+D)^\gamma\le1/20$;
+\item[(D3)] $v\le10^{-5}$ and $v\le\gamma/7$.
+\end{itemize}
+(D1) says: seen at scale $\lambda$ at distance $u_b$ from the end, the arc is aligned with the line of departure up to a tilt
+$\vartheta_0u_b^\gamma$. By Lemma~\ref{lem:E-facts}(b), (D1) contains $N(a,b;\EtE)\le\vartheta_0\lambda^{1/2}u_b^\gamma$ and
+$|e_{ab}-\Eu|\le1.01\,\vartheta_0u_b^\gamma$.
+
+\begin{theorem}[Tangential departure]\label{thm:E-dep}
+Assume \textup{(D1)--(D3)}. For every $t=\EtE+\tau\in[\EtE,\EtE+D]$ and every pair with $\lambda\ge\varepsilon/2$:
+\begin{enumerate}
+\item[(i)] \emph{exact laws:} $x_{\Ee}(t)=P(t)+\sigma(t)\Eu$ with $\sigma'=1+vf(\sigma)$, $\sigma(\EtE)=0$; for every label $s$,
+$y_s:=\Eu\times(x_s-P)$ satisfies $y_s'=v\,(f(\rho_s)/\rho_s)\,y_s$, and $z_s:=(x_s-P)\cdot\Eu$ satisfies $z_s'\ge1-v$;
+\item[(ii)] $\EV_t(a,b)^{1/2}\le1.01\,\vartheta_0\,\lambda^{1/2}u_b^\gamma\,\bigl(1+\tau/\max(\lambda,u_a)\bigr)^{7v}$;
+\item[(iii)] $\lambda\le l_t(a,b)\le1.03\,\lambda$ and $c(a,b;t)\ge c(a,b;\EtE)\ge0.998\,\lambda$;
+\item[(iv)] \emph{near pairs} ($u_a<64\lambda$): $N(a,b;t)\le2.9\,\vartheta_0\,\lambda^{1/2+\gamma}(1+\tau/\lambda)^{7v}$;
+\item[(v)] \emph{far pairs} ($u_a\ge64\lambda$):
+$N(a,b;t)\le(1+\tau/u_a)^{1.39v}\bigl[N(a,b;\EtE)+0.2\,v\vartheta_0\lambda^{1/2+\gamma}\bigr]$.
+\end{enumerate}
+In particular, if also $N(a,b;\EtE)\le M_0\lambda^{1/2+\gamma}$ for all pairs \emph{and $M_0\le\vartheta_0$}, then for all pairs and
+all $\tau\le D$:
+\[
+N(a,b;t)\le2.9\,\vartheta_0\,(\lambda+\tau)^{7v}\lambda^{1/2+\gamma-7v} .
+\]
+So the exponent is lowered by at most $7v$ and the constant is worse by a bounded factor, uniformly in $\varepsilon$.
+\end{theorem}
+The condition $M_0\le\vartheta_0$ is an assumption, not a normalisation: (D1) only gives
+$N(\EtE)\le\vartheta_0\lambda^{1/2}u_b^\gamma$, which is weaker for far pairs, and $\vartheta_0$ cannot be enlarged freely because of
+(D2). The proof shows that $M_0\le2.8\,\vartheta_0$ suffices, and that without any relation between $M_0$ and $\vartheta_0$ the last
+display holds with $2.9\max(\vartheta_0,M_0)$ in place of $2.9\,\vartheta_0$.
+
+\begin{proof}
+\textbf{(i)} $r_s'=vF(r_s)+\Eu$. For $\Ee$ the ansatz $r=\sigma\Eu$ solves this if and only if $\sigma'=vf(\sigma)+1$; conclude by
+uniqueness. Next $y_s'=\Eu\times(vF(r_s)+\Eu)=v(f(\rho_s)/\rho_s)(\Eu\times r_s)$, and
+$z_s'=vf(\rho_s)(z_s/\rho_s)+1\ge1-v$.
+
+\textbf{Geometry at $\EtE$.} By Lemma~\ref{lem:E-facts}(b), (D1), (D2): for $u_s\ge\varepsilon/2$,
+$z_s(\EtE)=(x_s-x_{\Ee})\cdot\Eu=u_s-\EV_{\EtE}(\Ee,s)/2\ge u_s(1-\frac1{800})$. For $u_s<\varepsilon/2$, with $s'$ the label
+$u=\varepsilon/2$: $z_s\ge z_{s'}-|x_{s'}-x_s|\ge\frac\varepsilon2(1-\frac1{800})-(\frac\varepsilon2-u_s)$. So
+$z_s(\EtE)\ge u_s-\bar u_s/800$ for all $s$, and by (i) $z_s(t)\ge u_s-\bar u_s/800+(1-v)\tau$. Consequently, with $X:=u_s+\tau$
+(if $X\le\varepsilon$ use $\varepsilon\ge(X+\varepsilon)/2$; if $X>\varepsilon$, $\rho_s\ge z_s\ge0.998X\ge0.499(X+\varepsilon)$),
+\begin{equation}\label{eq:E-41}
+\max(\rho_s(t),\varepsilon)\ge0.49\,(u_s+\tau+\varepsilon),\qquad\text{hence}\qquad
+a^*(\rho_s)\le\frac2{\max(\rho_s,\varepsilon)}\le\frac{4.1}{u_s+\varepsilon+\tau}.
+\end{equation}
+Define
+\begin{equation}\label{eq:E-42}
+\EA_s(t):=\Bigl(\frac{u_s+\varepsilon+\tau}{u_s+\varepsilon}\Bigr)^{4.1v}\le\Bigl(1+\frac\tau{u_s}\Bigr)^{4.1v};\qquad
+\exp\Bigl(v\int_{\tau'}^{\tau}a^*(\rho_s)\Bigr)\le\frac{\EA_s(\tau)}{\EA_s(\tau')}\quad(0\le\tau'\le\tau)
+\end{equation}
+by \eqref{eq:E-41} (we write $\EA_s(\tau)$ for $\EA_s(\EtE+\tau)$). Thus $\EA_s$ is a \emph{majorant} of
+$\exp(v\int_{\EtE}^ta^*(\rho_s))$, non-decreasing in $\tau$; every use of $\EA_s$ below is an upper bound that the majorant
+satisfies. Also, by Lemma~\ref{lem:E-facts}(b) applied to $(\Ee,s^+)$, $s^+$ the label $\max(u_s,\varepsilon/2)$:
+$|y_s(\EtE)|\le(\bar u_s\cdot\vartheta_0^2\bar u_s^{1+2\gamma})^{1/2}=\vartheta_0\bar u_s^{1+\gamma}$; and by (i) and
+$f(\rho)/\rho\le a^*(\rho)$,
+\begin{equation}\label{eq:E-43}
+|y_s(t)|\le\vartheta_0\,\bar u_s^{1+\gamma}\,\EA_s(t).
+\end{equation}
+
+\textbf{Pointwise bound.} Work in the label $u$ ($du=ds$ at $\EtE$), put $\tilde w:=w/w(\EtE)$ (so $l_t(J)=\int_J\tilde w\,du$) and
+$\tilde\chi(u,t):=\tilde w^{1/2}|T-\Eu|$ (so $\EV_t(J)=\int_J\tilde\chi^2du$). By Lemma~\ref{lem:E-facts}(c) (divided by
+$w(\EtE)^{1/2}$), $\tilde w\le\EA_s$, \eqref{eq:E-42}, \eqref{eq:E-41}, \eqref{eq:E-43} and Lemma~\ref{lem:B-V}(iii):
+\begin{align}
+\tilde\chi(u,t)&\le\EA_s(t)\tilde\chi(u,\EtE)+v\EA_s(t)\int_0^\tau\EA_s(\tau')^{-1/2}\frac{|y_s|}{\max(\rho_s,\varepsilon)^2}\,d\tau'\notag\\
+&\le\EA_s(t)\tilde\chi(u,\EtE)+v\EA_s(t)^{3/2}\vartheta_0\bar u_s^{1+\gamma}\int_0^\infty\frac{4.17\,d\tau'}{(u_s+\varepsilon+\tau')^2}
+\le\EA_s(t)\tilde\chi(u,\EtE)+4.17\,v\vartheta_0\,\EA_s(t)^{3/2}\bar u_s^\gamma .\label{eq:E-44}
+\end{align}
+
+\textbf{Two integrals over $J=(a,b)$, $\lambda\ge\varepsilon/2$.} Let $Z:=1+\tau/\max(\lambda,u_a)$ and $p\in[1,3.3]$.
+
+($\alpha$) $\int_J\EA_s^p\,du\le1.001\,\lambda\,Z^{4.1pv}$. Indeed $\EA_s\le(1+\tau/u)^{4.1v}$, which decreases in $u$; if
+$u_a\ge\lambda$ bound it by its value at $u_a$; otherwise, with $\eta:=4.1pv\le1.4\cdot10^{-4}$,
+$\int_{u_a}^{u_a+\lambda}(1+\tau/u)^\eta du\le\int_0^\lambda((\lambda+\tau)/u)^\eta du=\lambda^{1-\eta}(\lambda+\tau)^\eta/(1-\eta)$.
+
+($\beta$) $\int_J\EA_s^p\,\tilde\chi(u,\EtE)^2du\le1.001\,\vartheta_0^2\,\lambda\,u_b^{2\gamma}Z^{4.1pv}$. If $u_a\ge\lambda$:
+$\EA_s^p\le(1+\tau/u_a)^{4.1pv}$ on $J$, and (D1). If $u_a<\lambda$: let $K\ge0$ be the integer with
+$2^{-K}\lambda\in[\varepsilon/2,\varepsilon)$, $J_K:=(u_a,u_a+2^{-K}\lambda]$ and
+$J_k:=(u_a+2^{-k-1}\lambda,u_a+2^{-k}\lambda]$ for $0\le k<K$. All have label length $\ge\varepsilon/2$ and right end $\le u_b$, so
+by (D1) $\EV_{\EtE}(J_k)\le\vartheta_0^22^{-k-1}\lambda u_b^{2\gamma}$ ($k<K$) and
+$\EV_{\EtE}(J_K)\le\vartheta_0^22^{-K}\lambda u_b^{2\gamma}$. On $J_k$, $u\ge2^{-k-1}\lambda$, so
+$\EA_s\le(1+2^{k+1}\tau/\lambda)^{4.1v}\le(2^{k+1}(1+\tau/\lambda))^{4.1v}$; on $J_K$, by \eqref{eq:E-42},
+$\EA_s\le((\varepsilon+\tau)/\varepsilon)^{4.1v}\le(2^K(1+\tau/\lambda))^{4.1v}$. With $\eta=4.1pv$ and $q:=1-\eta$ the sum is
+$\le\vartheta_0^2\lambda u_b^{2\gamma}(1+\tau/\lambda)^\eta\bigl[\sum_{i=1}^K2^{-iq}+2^{-Kq}\bigr]$, and the bracket equals
+$1/(2^q-1)-2^{-Kq}(1/(2^q-1)-1)\le1/(2^q-1)\le1/(1-2\eta\ln2)\le1.001$.
+
+\textbf{(ii).} By \eqref{eq:E-44} and Minkowski's inequality in $L^2(J,du)$, then ($\beta$) with $p=2$ and ($\alpha$) with $p=3$
+($\bar u_s\le u_b$ on $J$):
+\[
+\EV_t(J)^{1/2}\le(1.001)^{1/2}\vartheta_0\lambda^{1/2}u_b^\gamma Z^{4.1v}+4.17\,v\vartheta_0u_b^\gamma(1.001\lambda)^{1/2}Z^{6.15v}
+\le1.01\,\vartheta_0\lambda^{1/2}u_b^\gamma Z^{7v}.
+\]
+
+\textbf{(iii).} Chords are non-decreasing, and
+$c(a,b;\EtE)\ge(x_b-x_a)\cdot\Eu=\lambda-\EV_{\EtE}(a,b)/2\ge\lambda(1-\frac1{800})$. For the length:
+$\tilde w_t=v\tilde w\,T\cdot AT$ and $T\cdot AT\le2(T-\Eu)\cdot A(T-\Eu)+2\Eu\cdot A\Eu\le2a^*|T-\Eu|^2+2\Eu\cdot A\Eu$, so
+$\tilde w_t\le2va^*\tilde\chi^2+2v\tilde w\,\Eu\cdot A\Eu$.
+
+\emph{First part.} Let $X:=(u_s+\varepsilon+\tau)/(u_s+\varepsilon)$, so that $X^v=\EA_s^{1/4.1}$ exactly and
+$v\log X\le X^v/e=\EA_s^{1/4.1}/e$. By \eqref{eq:E-41}, \eqref{eq:E-44} (whose right side is non-decreasing in $\tau$):
+\[
+\int_0^\tau2va^*\tilde\chi^2\,d\tau'\le8.2\,v\log X\cdot\bigl[\EA_s\tilde\chi(u,\EtE)+4.17\,v\vartheta_0\EA_s^{3/2}\bar u_s^\gamma\bigr]^2
+\le6.04\,\EA_s^{2.25}\tilde\chi(u,\EtE)^2+106\,v^2\vartheta_0^2\EA_s^{3.25}\bar u_s^{2\gamma};
+\]
+integrating over $J$ by ($\beta$) with $p=2.25$ and ($\alpha$) with $p=3.25$ gives
+$\le(6.05+107v^2)\vartheta_0^2\lambda u_b^{2\gamma}Z^{14v}$. Now $u_b\le2X_0$ with $X_0:=\max(\lambda,u_a)$, and $2\gamma\ge14v$, so
+\begin{equation}\label{eq:E-Z}
+u_b^{2\gamma}Z^{14v}\le2^{2\gamma}X_0^{2\gamma-14v}(X_0+\tau)^{14v}\le1.42\,(\EUE+D)^{2\gamma};
+\end{equation}
+with (D2) the first part is $\le6.06\cdot1.42\,\lambda/400\le0.0216\,\lambda$.
+
+\emph{Second part.} Where $\rho_s\ge\varepsilon$, $\Eu\cdot A\Eu=(\Eu\times\rhat)^2/\rho=y_s^2/\rho_s^3
+\le8.5\,\vartheta_0^2\bar u_s^{2+2\gamma}\EA_s^2/(u_s+\varepsilon+\tau')^3$ by \eqref{eq:E-41}, \eqref{eq:E-43}, and the
+corresponding part of $\int_0^\tau2v\tilde w\,\Eu\cdot A\Eu$ is
+$\le2v\EA_s^3\cdot8.5\,\vartheta_0^2\bar u_s^{2+2\gamma}/(2(u_s+\varepsilon)^2)\le8.5\,v\vartheta_0^2\EA_s^3u_b^{2\gamma}$. Where
+$\rho_s<\varepsilon$ (only if $\tau'<1.05\varepsilon$, by \eqref{eq:E-41}, and then $\EA_s\le1.001$), $\Eu\cdot A\Eu\le2/\varepsilon$
+contributes $\le4.21v$. Integrating over $J$ (($\alpha$) with $p=3$, \eqref{eq:E-Z}, (D2)):
+$\le(8.6\cdot1.42/400+4.21)v\lambda\le4.3\,v\lambda$.
+
+So $l_t(J)-\lambda=\int_J(\tilde w-1)\,du\le0.0216\,\lambda+4.3\,v\lambda\le0.03\,\lambda$.
+
+\textbf{(iv).} $N^2\le\EV_t$ (Lemma~\ref{lem:E-facts}(b)), $u_b\le65\lambda$, $65^\gamma\le2.84$ and $\max(\lambda,u_a)\ge\lambda$ give
+$N\le1.01\cdot2.84\,\vartheta_0\lambda^{1/2+\gamma}(1+\tau/\lambda)^{7v}$.
+
+\textbf{(v).} Let $g:=u_a\ge64\lambda\ge32\varepsilon$. For $s\in[a,b]$ and $\tau'\in[0,\tau]$:
+$z_s\ge u_s(1-\frac1{800})+(1-v)\tau'\ge0.99(g+\tau')$; $z$ is a linear functional of norm $1$, so the distance from $P$ to the hull
+of the arc is $\rho_m\ge0.99(g+\tau')\ge\max(\varepsilon,4l)$ ($l\le1.03\lambda$, $g\ge64\lambda\ge32\varepsilon$). So
+Lemma~\ref{lem:B-3}(e) applies on $[\EtE,t]$ with $\alpha\le1.375v/\rho_m\le1.39v/(g+\tau')$ and
+$\beta=2v\,l^{3/2}|p_a|/\rho_m^3$. Decomposing $r_a$ along $\Eu$ and $\Eu^\perp$:
+$|p_a|=|r_a\times e_{ab}|\le\rho_a|\Eu\times e_{ab}|+|y_a|$. By Lemma~\ref{lem:E-facts}(b), (ii), (iii):
+\[
+|\Eu\times e_{ab}|\le|e_{ab}-\Eu|\le(\EV_{t'}/c)^{1/2}\le1.012\,\vartheta_0u_b^\gamma(1+\tau'/g)^{7v}\le1.02\,\vartheta_0g^\gamma(1+\tau'/g)^{7v};
+\]
+$\rho_a(t')\le\rho_a(\EtE)+(1+v)\tau'\le1.001(g+\tau')$; and $|y_a|\le\vartheta_0g^{1+\gamma}(1+\tau'/g)^{4.1v}$ by \eqref{eq:E-43},
+\eqref{eq:E-42}. So $|p_a|\le2.03\,\vartheta_0g^\gamma(g+\tau')(1+\tau'/g)^{7v}$ and
+\[
+\beta\le\frac{2\,(1.03)^{3/2}\cdot2.03}{0.99^3}\,v\vartheta_0\lambda^{3/2}g^{\gamma-7v}(g+\tau')^{7v-2}
+\le4.4\,v\vartheta_0\lambda^{3/2}g^{\gamma-7v}(g+\tau')^{7v-2}.
+\]
+By Lemma~\ref{lem:B-3}(e),
+\begin{align*}
+N(t)&\le\Bigl(\frac{g+\tau}g\Bigr)^{1.39v}N(\EtE)+4.4\,v\vartheta_0\lambda^{3/2}g^{\gamma-7v}(g+\tau)^{1.39v}\int_0^\infty(g+\tau')^{5.61v-2}d\tau'\\
+&\le(1+\tau/g)^{1.39v}\bigl[N(\EtE)+4.41\,v\vartheta_0\lambda^{3/2}g^{\gamma-1}\bigr],
+\end{align*}
+and $g^{\gamma-1}\le64^{-3/4}\lambda^{\gamma-1}$, $4.41\cdot64^{-3/4}\le0.2$.
+
+\textbf{The final statement} follows from (iv), (v) and $(1+\tau/\lambda)^{7v}=(\lambda+\tau)^{7v}\lambda^{-7v}$,
+$(1+\tau/u_a)^{1.39v}\le(1+\tau/\lambda)^{7v}$, $1.01\cdot2.84\le2.9$ and $M_0+0.2\,v\vartheta_0\le2.9\,\vartheta_0$ (valid for
+$M_0\le2.8\,\vartheta_0$; in general $M_0+0.2\,v\vartheta_0\le2.9\max(\vartheta_0,M_0)$).
+\end{proof}
+
+\begin{remark}[Optional weakening of (D2)]\label{rem:E-D2}
+(D2) is used only through $\vartheta_0\EUE^\gamma\le1/20$, except in \eqref{eq:E-Z}. Since $X_0\le\EUE$, $\tau\le D$ and
+$2\gamma\ge14v$, the middle term of \eqref{eq:E-Z} is also $\le1.42\,[\EUE^{\gamma-7v}(\EUE+D)^{7v}]^2$. Hence
+Theorem~\ref{thm:E-dep} holds, with the same proof and constants, if (D2) is replaced by
+\[
+\textup{(D2$'$)}\qquad\vartheta_0\,\EUE^{\gamma-7v}(\EUE+D)^{7v}\le1/20
+\]
+(which implies $\vartheta_0\EUE^\gamma\le1/20$). For $\EUE+D\le1$ this follows from $\vartheta_0\EUE^{\gamma-7v}\le1/20$, which
+does not involve $D$. This variant is not used below.
+\end{remark}
+
+\begin{proposition}[The loss of exponent is real]\label{prop:E-depsharp}
+In the setting of Theorem~\ref{thm:E-dep}, for every label $s$ with $1.01\,\varepsilon\le u_s\le\EUE$ and every $\tau\in[0,D]$, the
+angle $\angle_s(t)$ between $\Eu$ and the chord from $x_{\Ee}$ to $x_s$ satisfies
+\[
+\sin\angle_s(\EtE+\tau)\ge0.96\,\sin\angle_s(\EtE)\,\Bigl(1+\frac{(1+v)\tau}{u_s}\Bigr)^{v/(1+v)} .
+\]
+Hence, if the chord tilts at $\EtE$ satisfy $\sin\angle_s\ge q_0u_s^{\gamma'}$ for some $\gamma'>0$ and $q_0>0$ (for instance an arc
+of curvature $\approx2q_0$, with $\gamma'=1$; $\gamma'$ is not the $\gamma$ of (D1)), then at time $\EtE+\tau$ they are
+$\ge0.96\,q_0\,\tau^{v/(1+v)}u_s^{\gamma'-v/(1+v)}$.
+\end{proposition}
+So the exponent of the tilts of the chords from the end drops by $v/(1+v)$: for these tilts ``same exponent, bounded factor'' is
+false, and a bound $|e-\Eu|\lesssim\vartheta_0u^\gamma$ cannot be propagated with the same exponent. This is a statement about the
+chords from $\Ee$; it does \emph{not} prove that (J2) with exponent $\gamma$ fails for $N$, which measures the variation of the
+tilt.
+\begin{proof}
+$x_{\Ee}$ stays on the axis (Theorem~\ref{thm:E-dep}(i)), so $\Eu\times(x_s-x_{\Ee})=y_s$ and $\sin\angle_s=|y_s|/c(\Ee,s)$. By
+the proof of Theorem~\ref{thm:E-dep}, $\rho_s\ge z_s\ge0.998\,u_s\ge\varepsilon$ on $[\EtE,t]$, so $y_s'=(v/\rho_s)y_s$; and
+$\rho_s(\EtE+\tau')\le\rho_s(\EtE)+(1+v)\tau'\le u_s+(1+v)\tau'$, as $|r_s'|\le1+v$. Hence
+\[
+|y_s(t)|\ge|y_s(\EtE)|\exp\Bigl(v\int_0^\tau\frac{d\tau'}{u_s+(1+v)\tau'}\Bigr)=|y_s(\EtE)|\Bigl(1+\frac{(1+v)\tau}{u_s}\Bigr)^{v/(1+v)}.
+\]
+Finally $c(\Ee,s;t)\le l_t(\Ee,s)\le1.03\,u_s$ and $c(\Ee,s;\EtE)\ge0.998\,u_s$ (Theorem~\ref{thm:E-dep}(iii)), and
+$0.998/1.03\ge0.96$.
+\end{proof}
+
+\begin{lemma}[Hand-over: the invariants of Theorem~\ref{thm:End} imply (D1)]\label{lem:E-H}
+Let the hypotheses of Theorem~\ref{thm:End} hold for $(\gamma_1,R_1,M_1)$, $M_1=(\gamma_1/50)R_1^{-\gamma_1}$, with first-pass labels
+$u^{(1)}\in[0,U^{(1)}]$, and let $P$ follow the construction of that theorem on $[\Bts,\EtE]$, where $\EtE:=t_j$ is a leg start
+with $j>\Bjs$. Put $\Ee:=a_j$, let $\Eu$ be the direction of leg $j$, and assume $U^{(1)}-u^{(1)}_{\Ee}\ge R_1$. Let
+$u:=l_{\EtE}(\Ee,\cdot)$ be the arclength at $\EtE$ on the arc ahead of $\Ee$, and let $\EUE\le R_1/2$. Then \textup{(D1)} holds on
+$[0,\EUE]$ with $\gamma=\gamma_1$ and
+\[
+\vartheta_0:=48\,M_1/\gamma_1=0.96\,R_1^{-\gamma_1},
+\]
+and moreover $N(a,b;\EtE)\le M_1\lambda^{1/2+\gamma_1}$ for all pairs in $[0,\EUE]$ with $\lambda\ge\varepsilon/2$. \textup{(D2)}
+then holds as soon as $\EUE+D\le R_1\cdot20^{-1/\gamma_1}$.
+\end{lemma}
+The first pass is truncated at $\EtE$ and need not reach its $T_{\mathrm{stop}}$; what $P$ does after $\EtE$ is irrelevant for the
+lemma. By causality (Remark~\ref{rem:E-B}(4)) the invariants (J1), (J2), \eqref{eq:E-TL} and Step~1 hold on $[\Bts,\EtE]$.
+\begin{proof}
+Let $(a,b)$ be a pair in $[0,\EUE]$ with $\lambda=l_{\EtE}(a,b)\ge\varepsilon/2$, and let $\lambda^{(1)}\le\lambda$ be its
+first-pass label length. If $\lambda^{(1)}\ge\varepsilon/2$ put $(a^+,b^+):=(a,b)$; otherwise enlarge it (to the right; there is
+room) to first-pass length $\varepsilon/2\le\lambda$. Then $(a^+,b^+)$, $I:=(a_{j-1},b^+)$ and $(a_{j-1},a_j)$ belong to
+$\BF(t_j)$, the family of leg $j$: their first points are $\ge a_j$, resp.\ equal to the base $a_{j-1}$;
+$\lambda^{(1)}(a_{j-1},a_j)\in[\varepsilon/2,\varepsilon]$ by Step~1(a), leg $j$ being non-final; and
+$\lambda^{(1)}_I\le u_b+\varepsilon/2+\varepsilon\le R_1$. By Lemma~\ref{lem:B-C}(2), $x_{a_j}-x_{a_{j-1}}=\sigma\Eu$ with
+$\sigma>0$ at $t_j$, i.e.\ $e_{(a_{j-1},a_j)}=\Eu$. By \eqref{eq:E-TL} twice,
+$|e_{a^+b^+}-\Eu|\le2\,\ETL M_1(\lambda^{(1)}_I)^{\gamma_1}$, and $\lambda^{(1)}_I\le u_b+1.5\varepsilon\le4u_b$ (as
+$u_b\ge\lambda\ge\varepsilon/2$). By Lemma~\ref{lem:E-facts}(a) and (J2),
+$N(a,b)^2\le N(a^+,b^+)^2\le M_1^2\max(\lambda^{(1)},\varepsilon/2)^{1+2\gamma_1}\le M_1^2\lambda^{1+2\gamma_1}$. If the pair was
+enlarged, Lemma~\ref{lem:B-4}(a) with
+$c(a,b)=\lambda-E(a,b)\ge\lambda-\frac12M_1^2(\varepsilon/2)^{1+2\gamma_1}\ge0.99\lambda$ gives
+\[
+|e_{ab}-e_{a^+b^+}|\le\frac{\lambda^{1/2}M_1(\varepsilon/2)^{1/2+\gamma_1}+\frac12M_1^2(\varepsilon/2)^{1+2\gamma_1}}{0.99\,\lambda}
+\le1.1\,M_1u_b^{\gamma_1}.
+\]
+So $|e_{ab}-\Eu|\le(2\cdot4^{\gamma_1}\ETL+1.1)M_1u_b^{\gamma_1}\le2.86\,\ETL M_1u_b^{\gamma_1}$, and by
+Lemma~\ref{lem:E-facts}(b) (with $c\le\lambda$)
+\[
+\EV_{\EtE}(a,b)\le M_1^2\lambda^{1+2\gamma_1}+\lambda(2.86\,\ETL M_1)^2u_b^{2\gamma_1}\le(2.87\,\ETL M_1)^2\lambda\,u_b^{2\gamma_1},
+\]
+and $2.87\cdot16.5\le48$. For (D2): $\vartheta_0(\EUE+D)^{\gamma_1}\le0.96/20$.
+\end{proof}
+
+\subsection{Two-pass transport}
+
+\begin{corollary}[First pass, departure, far phase: data for a restart]\label{cor:E-T}
+Let the hypotheses of Theorem~\ref{thm:End} hold for $(\gamma_1,R_1,M_1)$ and let $P$ follow the construction of that theorem on
+$[\Bts,\EtE]$, $\EtE=t_j$ with $j>\Bjs$, with $\Ee=a_j$ and $\Eu$ as in Lemma~\ref{lem:E-H} and $U^{(1)}-u^{(1)}_{\Ee}\ge R_1$.
+Suppose that after $\EtE$ Harry
+\begin{enumerate}
+\item[(1)] walks straight back, $P(t)=P(\EtE)-(t-\EtE)\Eu$, for $t\in[\EtE,\EtE+D]$; and
+\item[(2)] on $[\EtE+D,t_1]$ follows any $1$-Lipschitz path with
+$\operatorname{dist}(P(t),\operatorname{conv}\{x_s(t):s\in\Gamma\})\ge\rho_0(t)\ge\varepsilon$, $\rho_0$ continuous, where $\Gamma$
+is the arc ahead of $\Ee$ of $\EtE$-arclength $U_\Gamma\ge\varepsilon$.
+\end{enumerate}
+Put $I_1:=\int_{\EtE+D}^{t_1}dt/\rho_0(t)$ and $I_2:=\int_{\EtE+D}^{t_1}dt/\rho_0(t)^2$. Assume
+\[
+D\le\tfrac12,\qquad U_\Gamma+D\le R_1\cdot20^{-1/\gamma_1},\qquad U_\Gamma\le\tfrac15\min\rho_0,\qquad
+v\le\min\bigl(10^{-5},\gamma_1/14\bigr),\qquad vI_1\le\tfrac1{200}.
+\]
+Then at time $t_1$, with $\lambda_1:=l_{t_1}(a,b)$, for every pair $(a,b)\subset\Gamma$ with $\lambda_1\ge\varepsilon/2$:
+\[
+N(a,b;t_1)\le2.9\,R_1^{-\gamma_1}\lambda_1^{1/2+\gamma_1-7v}+2.8\,vI_2\,\lambda_1^{3/2},\qquad
+0.95\,\lambda_1\le c(a,b;t_1)\le\lambda_1 .
+\]
+Consequently ($\lambda_1\le1$ and $\gamma_1-7v\ge\gamma_1/2$), on $\Gamma$ and in the $t_1$-arclength labels the data at $t_1$
+satisfy \textup{(E1)} of \textup{(ST$_{\mathrm{end}}$)} with
+\[
+a'=\gamma_1/2,\qquad C_0=2.9\,R_1^{-\gamma_1}+2.8\,vI_2,
+\]
+for scales up to $l_{t_1}(\Gamma)$.
+\end{corollary}
+For constant $\rho_0$ and a far phase of duration $\Delta:=t_1-\EtE-D$, $I_1=\Delta/\rho_0$ and $I_2=\Delta/\rho_0^2$. The hypothesis
+on $v$ is automatic under those of Theorem~\ref{thm:End} ($v\le2\cdot10^{-11}\gamma_1^2$); it is recorded because the departure and
+the far phase use nothing more.
+
+\emph{What the corollary gives, and what its hypotheses force.} Corollary~\ref{cor:End} can be applied to a second pass that
+approaches $\Ee$ from the other side \emph{only if \textup{(E1)}, \textup{(E2)} are also verified on the rest of its arc
+$\mathsf A$ and for pairs not contained in $\Gamma$}; this depends on the design and is not provided here. Moreover $\lambda_0$
+must be chosen with $C_0\lambda_0^{a'}\le1$, which is not automatic: it requires $\lambda_0\le C_0^{-1/a'}$ in addition to
+$\lambda_0\le l_{t_1}(\Gamma)$ (for pairs contained in $\Gamma$, (E2) then holds with $c_{\mathrm{sep}}=0.95\lambda_0$). Finally,
+$x_{\Ee}$ belongs to $\Gamma$ and $|P(\EtE+D)-x_{\Ee}(\EtE+D)|=\sigma(D)\le(1+v)D$ by Theorem~\ref{thm:E-dep}(i), so the hypotheses
+force
+\[
+\rho_0(\EtE+D)\le(1+v)D,\qquad\text{hence}\qquad U_\Gamma\le\tfrac15(1+v)D\le\tfrac15(1+v)R_1\cdot20^{-1/\gamma_1}:
+\]
+the corollary only treats a short arc next to $\Ee$, and for constant $\rho_0$ its constant $C_0\ge2.8\,v\Delta/\rho_0^2$ is governed
+by $v\Delta/\rho_0^2$ with $\rho_0\le(1+v)R_1\cdot20^{-1/\gamma_1}$. There is no dependence on $\varepsilon$ as long as $D$ is fixed
+independently of $\varepsilon$.
+\begin{proof}
+Lemma~\ref{lem:E-H} gives (D1) on $[0,U_\Gamma]$ with $\vartheta_0=0.96R_1^{-\gamma_1}$ (note $U_\Gamma\le R_1/2$), and (D2), (D3)
+hold. Let $(a,b)\subset\Gamma$ have $\EtE$-arclength $\lambda_{\Ee}\ge\varepsilon/2$. By the final statement of
+Theorem~\ref{thm:E-dep} (with $M_0=M_1\le\vartheta_0$, $\tau=D\le1/2$, $\lambda_{\Ee}\le1/2$):
+$N(\EtE+D)\le2.9\,\vartheta_0\lambda_{\Ee}^{1/2+\gamma_1-7v}$, and $l_{\EtE+D}\le1.03\lambda_{\Ee}$, $c\ge0.998\lambda_{\Ee}$. For
+phase (2) apply Lemma~\ref{lem:E-far} on $[\EtE+D,t_1]$: $\Lambda(t)\le vI_1\le1/200$ and
+$l_{\EtE+D}(\Gamma)e^{\Lambda(t)}\le1.03\cdot1.006\,U_\Gamma\le1.036\,\rho_0(t)/5\le\rho_0(t)/4$. So
+$l_{t_1}\le1.036\lambda_{\Ee}$ and
+\[
+N(t_1)\le e^{1.375/200}\bigl[2.9\,\vartheta_0\lambda_{\Ee}^{1/2+\gamma_1-7v}+2.5\,vI_2\,l_{t_1}^{3/2}\bigr].
+\]
+Since $\lambda_{\Ee}\le\lambda_1=l_{t_1}$, $2.9\cdot0.96\cdot1.007\le2.9$ and $2.5\cdot1.007\le2.6$, the bound follows (with
+$2.6$); and $c(t_1)\ge0.998\lambda_{\Ee}\ge0.998\lambda_1/1.036$. If $\lambda_1\ge\varepsilon/2$ but
+$\lambda_{\Ee}<\varepsilon/2$, enlarge the pair inside $\Gamma$ to a pair $(a^+,b^+)$ of $\EtE$-arclength
+$\varepsilon/2\le\lambda_1$ and use Lemma~\ref{lem:E-facts}(a): $N(a,b;t_1)\le N(a^+,b^+;t_1)$, where
+$l_{t_1}(a^+,b^+)\le1.036\cdot\varepsilon/2\le1.036\lambda_1$ (this turns $2.6$ into $2.6\cdot1.036^{3/2}\le2.8$); and
+$c(a,b;t_1)=\lambda_1-E(a,b;t_1)\ge\lambda_1-E(a^+,b^+;t_1)\ge\lambda_1-(1.036-0.998)\varepsilon/2\ge0.96\lambda_1$. Finally
+$\lambda_1\le l_{t_1}(\Gamma)\le1.036\,U_\Gamma\le1$ and $7v\le\gamma_1/2$ give
+$\lambda_1^{1/2+\gamma_1-7v}\le\lambda_1^{1/2+\gamma_1/2}$ and $\lambda_1^{3/2}\le\lambda_1^{1/2+\gamma_1/2}$.
+\end{proof}
+
+\subsection{Transversal departure: the straight-arc model}
+
+The next proposition is \textbf{a statement about a model}, not about a front produced by a chase: the front is assumed to contain
+a straight segment ending at Harry's position, and Harry leaves at a right angle. It computes exactly what such a departure does to
+the end. \emph{In this subsection $\tau$ is the time, $\theta$ an angle, and $\zeta:=\tan(\theta/2)$.}
+
+\medskip\noindent\textbf{Setting (model).} $\hat e\perp\hat n$ are unit vectors. At time $0$ Harry is at the origin and the front
+contains the straight segment $\{r\hat e:\varepsilon\le r\le r_0\}$. Harry moves along $P(\tau)=\tau\hat n$, $\tau\ge0$. Each of
+these candidates has $\rho\ge r\ge\varepsilon$ for all $\tau\ge0$ (see the proof), so true and virtual candidates coincide for
+$\tau\ge0$ and $\varepsilon$ plays no further role.
+
+\begin{proposition}[Transversal departure in the straight-arc model: a hook, not a rigid rotation]\label{prop:E-trans}
+For $\theta\in(0,\pi/2]$ let $\zeta:=\tan(\theta/2)$, $J(\theta):=(1-\zeta^{1-v})/(1-v)$ and
+\[
+G(\theta):=\frac{\cot\theta\cdot\zeta^{-v}+vJ(\theta)}{1+v}\qquad(\text{strictly decreasing from }+\infty\text{ to }0).
+\]
+For the candidate starting at $r\hat e$ let $\theta=\theta(\tau/r)$ be the solution of $G(\theta)=\tau/r$. Then at time $\tau$:
+\begin{enumerate}
+\item[(i)] its position is $X(r,\tau)=r\zeta^{-v}\hat e+v(rJ(\theta)-\tau)\hat n$; the angle at Harry between $-\hat n$ and the
+candidate is $\theta$, and $\rho=r/(\sin\theta\cdot\zeta^v)$;
+\item[(ii)] the tangent of the front is $\partial_rX=d_1\hat e+d_2\hat n$ with
+\[
+d_1=\frac{\zeta^{-v}(1+v-v\cos\theta)-v^2J\sin\theta}{1+v},\qquad d_2=\frac{v\,[J(1+v\cos\theta)-\zeta^{1-v}\cos\theta]}{1+v};
+\]
+\item[(iii)] let $\Theta$ be the angle from $\hat e$ to $\partial_rX$. If $v\mu<1$ (i.e.\ $v<(\sqrt5-1)/2$), then $d_1>0$ and
+\[
+\tan\Theta\le\frac{\mu(1+v)\,\zeta^v}{1-v\mu};\qquad\text{if moreover }2\zeta^{1-v}\le1,\text{ then}\qquad
+\tan\Theta\ge\frac{\mu\,\zeta^v(1-2\zeta^{1-v})}{1+v}.
+\]
+Here $(1+v)\tau/r=(1-\zeta^2)\zeta^{-1-v}/2+vJ(\theta)$. Hence, as $r/\tau\to0$:
+$\zeta=(2(1+v)\tau/r)^{-1/(1+v)}(1+o(1))$ and
+\[
+\Theta=c_v\,(r/\tau)^{v/(1+v)}(1+o(1)),\qquad c_v:=\mu\,(1+v)^{1/(1+v)}2^{-v/(1+v)} .
+\]
+\end{enumerate}
+\end{proposition}
+So in this model the tangent near the end is \emph{not} rotated rigidly by $\approx v$: the rotation at distance $r$ is
+$\approx c_v(r/\tau)^{v/(1+v)}$; it tends to $0$ at the end, with the slow exponent $v/(1+v)$ in $r$ (exponent $v$ in the arclength
+of the image, which is $\propto r^{1/(1+v)}$). A transversally left end is a hook of amplitude $\approx v$ and tilt exponent
+$a'=v<v/(1-v)$.
+\begin{proof}
+Write $x-P=\rho(\sin\theta\,\hat e-\cos\theta\,\hat n)$; then $(x-P)'=v\rhat-\hat n$, so $\rho'=v+\cos\theta$ and
+$\rho\theta'=-\hat n\cdot(\cos\theta\,\hat e+\sin\theta\,\hat n)=-\sin\theta$. Initially $\theta=\pi/2$, $\rho=r$; $\theta$ decreases
+and stays in $(0,\pi/2]$, so $\rho'\ge v>0$ and $\rho\ge r\ge\varepsilon$. Since $d\ln\zeta/d\theta=1/\sin\theta$,
+\[
+\frac{d}{d\tau}\ln(\rho\sin\theta\,\zeta^v)=\frac{v+\cos\theta}\rho-\frac{\cos\theta}\rho-\frac v\rho=0,\qquad\text{so}\qquad
+\rho\sin\theta\,\zeta^v=r .
+\]
+Then $d\theta/d\tau=-\sin^2\!\theta\,\zeta^v/r$, so $\tau/r=\int_\theta^{\pi/2}d\varphi/(\sin^2\!\varphi\,\tan^v(\varphi/2))$. This
+integral equals $G(\theta)$: $G(\pi/2)=0$ ($\zeta=1$, $J=0$), and, using $d\zeta/d\theta=(1+\zeta^2)/2=1/(1+\cos\theta)=\zeta/\sin\theta$,
+hence $J'=-\zeta^{-v}/(1+\cos\theta)=-\zeta^{-v}(1-\cos\theta)/\sin^2\!\theta$ and $(\zeta^{-v})'=-v\zeta^{-v}/\sin\theta$,
+\[
+(1+v)G'=-\frac{\zeta^{-v}}{\sin^2\!\theta}-\frac{v\cos\theta\,\zeta^{-v}}{\sin^2\!\theta}-\frac{v\zeta^{-v}(1-\cos\theta)}{\sin^2\!\theta}
+=-\frac{(1+v)\zeta^{-v}}{\sin^2\!\theta}.
+\]
+(i) $X=\tau\hat n+\rho(\sin\theta\,\hat e-\cos\theta\,\hat n)=r\zeta^{-v}\hat e+(\tau-r\cot\theta\,\zeta^{-v})\hat n$, and
+$\tau-r\cot\theta\,\zeta^{-v}=r(G-\cot\theta\,\zeta^{-v})=vr(J-G)=v(rJ-\tau)$.
+
+(ii) At fixed $\tau$, differentiating $G(\theta)=\tau/r$: $\partial_r\theta=-(\tau/r^2)/G'(\theta)=(\tau/r^2)\sin^2\!\theta\,\zeta^v$.
+So $\partial_r(r\zeta^{-v})=\zeta^{-v}-v(\tau/r)\sin\theta$ and
+$\partial_r(vrJ)=vJ+vrJ'\partial_r\theta=vJ-v(\tau/r)(1-\cos\theta)$. Insert $\tau/r=G$, $\sin\theta\cot\theta=\cos\theta$ and
+$(1-\cos\theta)\cot\theta=\zeta\cos\theta$.
+
+(iii) $0\le J\le1/(1-v)$. Upper bound: $d_2\le vJ(1+v\cos\theta)/(1+v)\le\mu$ and
+$d_1\ge[\zeta^{-v}-v\mu]/(1+v)\ge\zeta^{-v}(1-v\mu)/(1+v)$, which is positive when $v\mu<1$. Lower bound:
+$d_2\ge v(J-\zeta^{1-v})/(1+v)\ge L:=\mu(1-2\zeta^{1-v})/(1+v)$, because $J-\zeta^{1-v}=(1-(2-v)\zeta^{1-v})/(1-v)$, and
+$0<d_1\le\zeta^{-v}$; so $\tan\Theta=d_2/d_1\ge L\zeta^v$ when $L\ge0$, i.e.\ when $2\zeta^{1-v}\le1$. The relation for $\tau/r$ is
+$(1+v)G$ with $\cot\theta=(1-\zeta^2)/(2\zeta)$. As $r/\tau\to0$: $\zeta\to0$, $(1+v)\tau/r\sim\zeta^{-1-v}/2$ and
+$\tan\Theta\sim\mu(1+v)\zeta^v$.
+\end{proof}
+
+\begin{remark}\label{rem:E-trans}
+To first order in $v$ the formula gives a rigid rotation by $v$: $(r/\tau)^{v/(1+v)}=1-O(v\log(\tau/r))$. The differential rotation
+per $e$-fold of scale is $\approx v^2(r/\tau)^{v/(1+v)}$: of second order in $v$, but not summable over scales with room to spare.
+Corollary~\ref{cor:End} needs $a'\ge\gamma+22v$ with $v\le2\cdot10^{-11}\gamma^2$, which $a'=v$ cannot satisfy. This is a limitation
+of the present proof; it does not show that such ends cannot be handled.
+\end{remark}
+
+\subsection{Status}
+
+\begin{remark}[Status]\label{rem:E-status}
+\emph{Refereed.} Lemma~\ref{lem:E-facts}, Theorem~\ref{thm:End}, Corollary~\ref{cor:End}, Lemma~\ref{lem:E-far},
+Theorem~\ref{thm:E-dep}, Propositions~\ref{prop:E-depsharp} and~\ref{prop:E-trans}, Lemma~\ref{lem:E-H} and Corollary~\ref{cor:E-T}
+were checked, in the form of version~1 of the claims, by two independent referees (reports \texttt{referee-RP7-1.md} and
+\texttt{referee-RP7-2.md}). Neither found a false conclusion or a gap affecting a conclusion. Their corrections are incorporated;
+they changed no numerical constant of Theorem~\ref{thm:End}, Corollary~\ref{cor:End}, Lemma~\ref{lem:E-far} or
+Theorem~\ref{thm:E-dep}(i)--(v), but they did change Corollary~\ref{cor:E-T} ($v\le\gamma_1/14$, $a'=\gamma_1/2$), restrict
+Proposition~\ref{prop:E-trans}(iii), and repair one step of the proof of Theorem~\ref{thm:E-dep}(iii). Two corrections on the path
+to Theorem~\ref{thm:Main} are due to one referee each: the definition of the family at switching times, and the case
+$g_2>32R$ in Step~3 of the proof of Theorem~\ref{thm:End}. The time-dependent form of Corollary~\ref{cor:E-T},
+Remarks~\ref{rem:E-D2}, \ref{rem:E-restart}(1),(3), \ref{rem:E-B}(4) and this remark were written afterwards, each on the
+suggestion of one referee. None of these later passages was re-read by the referees. They were checked afterwards in an audit of
+every difference between the typeset text and the text the referees read (report \texttt{audit-B.md}: no difference is false or
+leaves a gap), and the part of this section that is used for Theorem~\ref{thm:Main} was audited end to end as typeset (report
+\texttt{audit-A.md}; see Remark~\ref{rem:T2-status}). Both
+referees recomputed the numerical constants of the version they read; the binding one is $\Delta E\le0.09\,M^2\lambda^{1+2\gamma}$ in Step~4, which is used to
+$99.5\%$ at $v=2\cdot10^{-11}\gamma^2$, so that constant cannot be raised without redoing Step~4.
+
+\emph{Referee simulations (evidence only).}
+(N1) In-range runs of the construction cut at an end ($v=10^{-12}$, $\varepsilon=3\cdot10^{-5}$, $\gamma=1/4$,
+$R\approx2\cdot10^{-3}$; all hypotheses of Theorem~\ref{thm:End} hold), by both referees with independent codes. In one, the virtual
+and the \emph{true} candidates were integrated separately: all true candidates of the arc were seen, after $338$ non-final legs
+(bound $2U/\varepsilon=661$), with final remaining length $0.825\,\varepsilon$. In the other, (J1), (J2), \eqref{eq:E-CA} and
+\eqref{eq:E-TL} held at all sampled pairs, including all pairs ending at $\EbE$ ($\max l/\lambda=1.0000000$, (J2) used to $1.5\%$,
+no unseen label). These are weak tests, since at $v=10^{-12}$ the front hardly moves; they check the bookkeeping of the end.
+(N2) The identities of Proposition~\ref{prop:E-trans} and the exact law behind Proposition~\ref{prop:E-depsharp},
+$y/y_0=((\rho+z)/(\rho_0+z_0))^{v/(1+v)}$, were confirmed to about $10^{-33}$ in $40$-digit arithmetic, for $v$ between $10^{-5}$ and
+$0.3$; out of the range of $v$ treated here ($v=10^{-3}$, $0.03$, $0.2$) the measured loss of the tilt exponent at an end
+was $0.0010$, $0.0283$, $0.162$, against $v/(1+v)=0.0010$, $0.0291$, $0.167$.
+(N3) Out of range, the end mechanism (dichotomy, final leg, everything seen) persisted in the runs up to $v=0.3$, but (J1) fails
+at $v=0.1$ ($\max l/\lambda=1.153>9/8$). So the smallness of $v$ is genuinely needed for this proof: the sharpened bound (J1) is what
+makes Step~1($\beta$) work, and it is not a counterexample to anything stated.
+
+\emph{What this section does not provide.}
+(a) Each restart by Remark~\ref{rem:E-restart} costs $\gamma\mapsto\gamma/2$ and $R\mapsto16^{-1/\gamma_1}R$; it can be used a
+bounded number of times only.
+(b) Corollary~\ref{cor:E-T} gives \textup{(E1)} only on $\Gamma$, a short arc next to the end, in the $t_1$-arclength labels.
+Bounds on the rest of the arc of a second pass, \textup{(E1)} for pairs straddling the far end of $\Gamma$ (for which
+Lemma~\ref{lem:E-facts}(a) does not help; a tilt-matching estimate of the type \eqref{eq:E-TL} between $\Gamma$ and the rest is
+needed), \textup{(E2)} for pairs not contained in $\Gamma$, and the transport from $t_1$ to the leg start of the second pass must all
+come from the construction. Corollary~\ref{cor:E-T} alone is not a two-pass theorem.
+(c) Nothing is proved \emph{in this section} about labels beyond $\EbE$, about the tip hypothesis \textup{(T)} of Theorem~\ref{thm:R}, or about an end
+created by first contact or by a transversal departure: by Proposition~\ref{prop:E-trans} the latter has tilt exponent $a'=v$, and
+a kink of angle $\Theta$ at scale $\varepsilon$ needs $\Theta\lesssim C_0\varepsilon^{a'}$ in \textup{(E1)}.
+(The end $E_Y$ created by the tangential run of design~T is treated in Sections~\ref{sec:touch} and~\ref{sec:main}.)
+
+\emph{Use.} The section is independent of the design of the path: it assumes \textup{(ST$_\gamma$)} or
+\textup{(ST$_{\mathrm{end}}$)} at some leg start and does not say how to reach it. It is used for the start with tangential first
+contact (design~T, Definition~\ref{def:T}): the start data are proved in Section~\ref{sec:touch} (Theorem~\ref{thm:HT}), and
+Section~\ref{sec:main} applies Corollary~\ref{cor:End} twice to obtain Theorem~\ref{thm:Main}. Theorem~\ref{thm:Main} uses from
+this section only Lemma~\ref{lem:E-facts}, Theorem~\ref{thm:End}(a),(b),(d) with \eqref{eq:E-CA}, \eqref{eq:E-star},
+Remark~\ref{rem:E-B}(4) and Corollary~\ref{cor:End}. Theorem~\ref{thm:Main2} uses from this section Lemma~\ref{lem:E-facts}(a),(b),
+Remark~\ref{rem:E-B}(4) and, through Theorem~\ref{thm:Estar}, the parts of the proof of Theorem~\ref{thm:End} listed in
+Table~\ref{tab:Estar-unch}, but not the statements of Theorem~\ref{thm:End} and Corollary~\ref{cor:End}.
+\end{remark}

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "The Invisible Snitch: exact capture of a fleeing invisible target"
+authors:
+  - name: "The invisible-snitch contributors"
+date-released: 2026-11-20
+license: CC-BY-4.0
+abstract: >
+  For the invisible-Snitch pursuit problem, an explicit path fixed in advance sees every
+  starting direction by time 10.13 d whenever the Snitch's speed is at most 6e-5, for every
+  vision radius; consequently a single path catches the Snitch exactly. Proofs checked by
+  AI referees and audits, not yet by a human.

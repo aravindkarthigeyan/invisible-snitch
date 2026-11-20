@@ -1,0 +1,375 @@
+% sec_G.tex -- Results G1, G2, G2', G3, G4, G5, G6: lower bounds for v near 1.
+% Source: referee/G-claims.md, with the fixes of reports/referee-RG.md built in
+% (G5: P is 2pi-Lipschitz; G5(ii): width argument with D_K = diam K >= D; G4 reading: "only if";
+%  G1: right derivative at every t < t_*).
+% Intended to be \input into main.tex right after the section "Constraints on every path";
+% uses \R, \rhat and the labels of main.tex.
+
+\subsection{Lower bounds for $v$ near $1$}\label{sec:G}
+
+As in the rest of this section, $H$ is an arbitrary path with $H(0)=0$ and $|H'|\le1$ almost everywhere, that is, a
+$1$-Lipschitz path of speed \emph{at most} $1$. \textbf{Every result of this subsection holds under this hypothesis}; none
+needs speed exactly $1$. We write
+\[
+\nu:=1-v .
+\]
+Candidates are indexed by their direction $\alpha$ on the circle, $S_\alpha(0)=d(\cos\alpha,\sin\alpha)$, and we write
+$r_\alpha=S_\alpha-H$, $\rho_\alpha=|r_\alpha|$, $\rhat_\alpha=r_\alpha/\rho_\alpha$, $u=H'$ (defined a.e., $|u|\le1$). In this subsection
+the letter $P$ denotes a perimeter, not a candidate, and $e_\theta=(\cos\theta,\sin\theta)$.
+
+\paragraph{Conventions and facts used.}
+The field $(S,t)\mapsto v(S-H(t))/|S-H(t)|$ is continuous, and $C^\infty$ in $S$ away from $H(t)$, so trajectories are unique and
+$C^1$ while $\rho>0$, and depend $C^1$ on $\alpha$. For $\varepsilon=0$ let $\tau(\alpha)\in(0,\infty]$ be the capture time; for
+$\varepsilon>0$ let $\sigma(\alpha)$ be the sighting time, the first $t$ with $\rho_\alpha(t)\le\varepsilon$. Let
+\[
+U(t)=\{\alpha:\tau(\alpha)>t\}
+\]
+be the set of directions uncaught at time $t$. It is open, by the Claim in the proof of Lemma~\ref{lem:limit} (applied with
+$H_N=H$); hence $\tau$ is lower semicontinuous, and in particular Borel. We use:
+\begin{itemize}
+\item[(P0)] By \eqref{eq:P0}, $\rho_\alpha$ is absolutely continuous while positive, with $\rho_\alpha'=v-u\cdot\rhat_\alpha\ge-\nu$ a.e.
+Hence $\rho_\alpha(t)\ge d-\nu t$, and no capture happens before $d/\nu$. Also $|r_\alpha'|\le1+v$.
+\item[(V)] The variational equation (Proposition~\ref{prop:length}(2); $H'$ does not appear):
+$\partial_t\partial_\alpha S=\frac{v}{\rho}(I-\rhat\rhat^{\!\top})\partial_\alpha S$. So for $\alpha\in U(t)$
+\[
+|\partial_\alpha S(\alpha,t)|=d\exp\Bigl(\int_0^t\frac{v}{\rho_\alpha}\sin^2\phi_\alpha\,ds\Bigr),
+\]
+where $\phi_\alpha$ is the angle between $\partial_\alpha S$ and $\rhat_\alpha$. In particular $|\partial_\alpha S|$ is non-decreasing in $t$.
+\item[(E1)] Lemma~\ref{lem:E1}: for $\alpha\ne\alpha'$ both uncaught on $[t_1,t_2]$, $|S_\alpha-S_{\alpha'}|$ is non-decreasing there.
+\item[(L)] We put
+\[
+L(t):=\mathcal H^1\bigl(\{S_\alpha(t):\alpha\in U(t)\}\bigr)=\int_{U(t)}|\partial_\alpha S(\alpha,t)|\,d\alpha ,
+\]
+the second equality by the area formula, since $\alpha\mapsto S_\alpha(t)$ is $C^1$ and injective on $U(t)$ (by (E1)). Before the
+first capture this is the length of the wavefront $\Gamma(t)$, as in Theorem~\ref{thm:E3}.
+\end{itemize}
+By Theorem~\ref{thm:E3}(c), if every direction is caught by time $T$ then $T\ge t+L(t)/\nu$ for $t<d/\nu$. Theorem~\ref{thm:G3}(ii)
+below reproves this input in measure form, for every $t\ge0$.
+
+% ---------------------------------------------------------------------------------------------------------------------
+\begin{theorem}[G1, hull growth before first contact]\label{thm:G1}
+Let $|H'|\le1$. Let $t_*$ be any time such that $\rho_\alpha(t)>0$ for all $\alpha$ and all $t<t_*$; for example the first capture
+time or, for $\varepsilon>0$, the first sighting time. For $t<t_*$ let $K(t)$ be the convex hull of the wavefront
+$\Gamma(t)=\{S_\alpha(t)\}$. Then
+\[
+\operatorname{Per}K(t)\ \ge\ 2\pi d+2vt,\qquad\text{and therefore}\qquad L(t)=\operatorname{length}\Gamma(t)\ \ge\ 2\pi d+2vt .
+\]
+\end{theorem}
+\begin{proof}
+\emph{Step 1: Harry is inside $K$.} For $s\le t<t_*$ the map $(\alpha,s)\mapsto S_\alpha(s)-H(s)$ is continuous and non-zero on
+the circle times $[0,t]$. So the winding number of $\Gamma(t)$ about $H(t)$ is $1$, as at $s=0$. A closed curve with non-zero
+winding number about a point $p$ cannot lie in an open half-plane missing $p$, so $H(t)\in K(t)$. Hence $\rho_\alpha(t)\le
+\operatorname{diam}K(t)$ for every $\alpha$.
+
+\emph{Step 2: support function.} Let $g(\theta,t)=\max_\alpha S_\alpha(t)\cdot e_\theta$. By Cauchy's formula,
+$\operatorname{Per}K(t)=\int_0^{2\pi}g(\theta,t)\,d\theta$. Each $S_\alpha$ is $C^1$ in $t$ with $\partial_tS_\alpha=v\rhat_\alpha$. This is
+jointly continuous in $(\alpha,t)$ on the circle times $[0,t_*)$, since $\rho>0$ there, and the circle is compact. By Danskin's
+theorem the right derivative exists at every $t<t_*$ and equals
+\[
+D^+g(\theta,t)=\max\{v\rhat_\alpha\cdot e_\theta:\ \alpha\text{ a maximiser}\}.
+\]
+
+\emph{Step 3: lower bound.} For a maximiser $\alpha$, $r_\alpha\cdot e_\theta=g(\theta,t)-H(t)\cdot e_\theta=:f(\theta,t)\ge0$ by Step~1. So
+$v\rhat_\alpha\cdot e_\theta=vf/\rho_\alpha\ge vf/D(t)$, where $D(t)=\operatorname{diam}K(t)$.
+
+\emph{Step 4: integrate in $\theta$.} The difference quotients of $g(\theta,\cdot)$ are bounded by $v$, so $\operatorname{Per}K$ is
+Lipschitz and, by dominated convergence, at \emph{every} $t<t_*$
+\[
+D^+\operatorname{Per}K(t)=\int_0^{2\pi}D^+g\,d\theta\ \ge\ \frac vD\int_0^{2\pi}f\,d\theta
+=\frac vD\Bigl(\operatorname{Per}K-\int_0^{2\pi}H\cdot e_\theta\,d\theta\Bigr)=\frac{v\operatorname{Per}K}{D}.
+\]
+For a compact convex set $D\le\operatorname{Per}/2$, so $D^+\operatorname{Per}K\ge2v$. Since $\operatorname{Per}K$ is Lipschitz, hence
+absolutely continuous, its a.e.\ derivative equals $D^+\operatorname{Per}K$, and integration is legitimate. Also
+$\operatorname{Per}K(0)=2\pi d$.
+
+\emph{Step 5.} A closed curve is at least as long as the perimeter of its convex hull; $\Gamma(t)$ is an injective closed $C^1$
+curve.
+\end{proof}
+
+% ---------------------------------------------------------------------------------------------------------------------
+\begin{corollary}[G2, lower bound, $\varepsilon=0$]\label{cor:G2}
+If a path with $|H'|\le1$ catches every direction by time $T$, then
+\[
+T\ \ge\ \frac{(1+2\pi)d}{\nu}+\frac{2vd}{\nu^2},
+\qquad\text{as well as}\qquad T\ge\frac d\nu+\frac{2\pi d}{\nu^{3/2}}\ \ \text{(Theorem~\ref{thm:E5})}.
+\]
+\end{corollary}
+\begin{proof}
+By (P0) the first capture time $t_1$ is at least $d/\nu$. For $t<d/\nu$, Theorem~\ref{thm:E3}(c) (used only in the weaker form
+$T\ge t+L(t)/\nu$, which Theorem~\ref{thm:G3}(ii) reproves independently) and Theorem~\ref{thm:G1} with $t_*=t_1$ give
+$T\ge t+(2\pi d+2vt)/\nu$. The right-hand side increases in $t$; let $t$ increase to $d/\nu$.
+\end{proof}
+
+\begin{remark}[Comparison with Theorem~\ref{thm:E5}]\label{rem:G2-E5}
+Corollary~\ref{cor:G2} beats Theorem~\ref{thm:E5} for $v\ge0.8$, and grows like $2d/\nu^2$ instead of $2\pi d/\nu^{3/2}$. With $d=1$:
+\begin{center}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+$v$ & $0.5$ & $0.7$ & $0.8$ & $0.9$ & $0.95$ & $0.99$\\
+\midrule
+Corollary~\ref{cor:G2} & $18.6$ & $39.8$ & $76.4$ & $252.8$ & $905.7$ & $20{,}528$\\
+Theorem~\ref{thm:E5} & $19.8$ & $41.6$ & $75.2$ & $208.7$ & $582.0$ & $6{,}383$\\
+\bottomrule
+\end{tabular}
+\end{center}
+(For all $v\ge0.8$: the difference of the two bounds, times $\nu^2/d$, equals $(2\pi-2)\nu-2\pi\sqrt\nu+2$, which is positive for
+$\sqrt\nu<0.466$, in particular for $\nu\le0.2$.)
+\end{remark}
+
+\begin{remark}[Rate $4v$: a conjecture]\label{rem:G1-conj}
+The constant $2v$ in Theorem~\ref{thm:G1} cannot be improved by the convex geometry used in the proof: bodies with Harry in the
+interior and $\operatorname{Per}'/v\to2$ exist. In simulations of the actual dynamics (16 paths, $v=0.3$ to $0.95$), however, the
+hull perimeters of the wavefronts grew at rate about $4v$ or more: the smallest instantaneous rate $\operatorname{Per}'/v$ was $4.01$
+(near contact, where it is sensitive to resolution) and the smallest time-averaged rate was $4.75$ (NUMERICAL). This is weak
+evidence for the following.
+
+\smallskip\noindent\textbf{Conjecture (not proved).} Before first contact, $\operatorname{Per}K(t)\ge2\pi d+4vt$.
+
+\smallskip\noindent
+If true, the proof of Corollary~\ref{cor:G2} would give $T\ge(1+2\pi)d/\nu+4vd/\nu^2$. The conjecture is consistent with the straight
+first run, whose wavefront length at first contact is $L(d/\nu)=7.68$, $11.72$, $50.68$, $443.06$ at $v=0.2$, $0.5$, $0.9$, $0.99$
+($d=1$; NUMERICAL, exact map), against $2\pi+4vd/\nu=402.3$ at $v=0.99$. So the first-contact length is of order $1/\nu$, and
+Theorem~\ref{thm:G1} shows that this order is forced.
+\end{remark}
+
+% ---------------------------------------------------------------------------------------------------------------------
+\begin{corollary}[G2$'$, lower bound, $\varepsilon>0$]\label{cor:G2p}
+Let $|H'|\le1$ and $0<\varepsilon<d$. If every direction is seen by time $T$, then for every $\lambda>0$
+\[
+T\ \ge\ \frac{d-\varepsilon}{\nu}+\frac{\pi d+v(d-\varepsilon)/\nu-\pi\lambda-2\pi\varepsilon}{\nu\,(1+2\varepsilon/\lambda)} .
+\]
+With $\lambda=d\nu^{-1/2}$ this gives $T\ge(1-O(\sqrt\nu))\,v(d-\varepsilon)/\nu^2$ as $v\to1$, for fixed $\varepsilon/d$. So seeing everything
+also takes time of order $1/(1-v)^2$, whereas Proposition~\ref{prop:E3eps} is of order $1/\nu$.
+\end{corollary}
+\begin{proof}
+\emph{Step 1.} Let $t_s$ be the first sighting time; $t_s\ge(d-\varepsilon)/\nu$ by (P0). Fix $t<t_s$. For $t'<t_s$ every $\rho>\varepsilon>0$, so
+Theorem~\ref{thm:G1} applies with $t_*=t_s$: $\operatorname{Per}K(t)\ge2\pi d+2vt$. No candidate has been seen by time $t$.
+
+\emph{Step 2.} Fix $\delta>0$ and split $(t,T]$ into $k=\lceil(T-t)/\delta\rceil$ intervals $I_i$ of length $\delta$. Let $A_i$ be the set
+of positions at time $t$ of the candidates first seen during $I_i$. Proposition~\ref{prop:E3eps}, run from time $t$ instead of $0$,
+gives $\operatorname{diam}A_i\le\nu\delta+2\varepsilon=:D_\delta$. (Restarting at $t$ is legitimate: if $\sigma(\alpha)\le\sigma(\alpha')$, both
+candidates have $\rho\ge\varepsilon>0$ on $[t,\sigma(\alpha)]$, so (E1) gives $|S_\alpha(t)-S_{\alpha'}(t)|\le|S_\alpha(\sigma(\alpha))-S_{\alpha'}(\sigma(\alpha))|
+\le\varepsilon+\rho_{\alpha'}(\sigma(\alpha))\le2\varepsilon+\nu(\sigma(\alpha')-\sigma(\alpha))$, the last step by (P0) and $\rho_{\alpha'}(\sigma(\alpha'))=\varepsilon$,
+which uses $d>\varepsilon$.)
+
+\emph{Step 3.} In each non-empty $A_i$ pick a point $p_i$, belonging to a candidate with sighting time $s_i$. Taken in increasing
+$i$, consecutive points satisfy $|p_i-p_j|\le2\varepsilon+\nu(s_j-s_i)$, by the same inequality. So the polyline $c$ through them has
+length $\ell\le2\varepsilon(k-1)+\nu(T-t)$.
+
+\emph{Step 4.} Every point of $\Gamma(t)$ lies in some $A_i$, hence within $D_\delta$ of $c$. So $K(t)\subset\operatorname{conv}(c)+\bar B(0,D_\delta)$.
+By monotonicity of perimeter on convex sets and Steiner's formula,
+\[
+\operatorname{Per}K(t)\le\operatorname{Per}\operatorname{conv}(c)+2\pi D_\delta\le2\ell+2\pi D_\delta ,
+\]
+where $\operatorname{Per}\operatorname{conv}(c)=\int_0^\pi\operatorname{width}_\theta(c)\,d\theta\le\int_0^\pi\operatorname{TV}(c\cdot e_\theta)\,d\theta=2\ell$
+(Cauchy--Crofton). If only one $A_i$ is non-empty, $\operatorname{conv}(c)$ is a point and the bound is trivial.
+
+\emph{Step 5.} Combine Steps 1--4, using $k-1<(T-t)/\delta$ and $\lambda:=\nu\delta$ (which ranges over $(0,\infty)$):
+\[
+\pi d+vt\ \le\ \nu(T-t)(1+2\varepsilon/\lambda)+\pi\lambda+2\pi\varepsilon .
+\]
+The resulting lower bound on $T$ increases with $t$; let $t$ increase to $(d-\varepsilon)/\nu$, which is $\le t_s$. (If the numerator in
+the statement is negative, the statement still holds, because $T\ge(d-\varepsilon)/\nu$.)
+
+\emph{Asymptotics.} With $\lambda=d\nu^{-1/2}$ we have $2\varepsilon/\lambda=O(\sqrt\nu)$ and $\pi\lambda\big/\bigl(v(d-\varepsilon)/\nu\bigr)=O(\sqrt\nu)$, which gives
+the stated form.
+\end{proof}
+
+\begin{remark}
+The factor $2$ lost against Corollary~\ref{cor:G2} is genuine for this method: with $\varepsilon>0$ a thin loop can be seen by a path
+along one of its two strands, and Step~4 is sharp for segments. The convergence in the asymptotic form is slow: the ratio of the
+bound to $v(d-\varepsilon)/\nu^2$ is $0.67$, $0.89$, $0.96$ at $v=0.99$, $0.999$, $0.9999$ ($\varepsilon=0.1d$; $0.88$, $0.95$, $0.98$
+with the optimal $\lambda$). At moderate $v$ the bound is weak (e.g.\ $10.5d$ at $v=0.7$, $\varepsilon=0.1d$, against the simulated
+$213.96d$ of Section~\ref{sec:numerics}).
+\end{remark}
+
+% ---------------------------------------------------------------------------------------------------------------------
+\begin{theorem}[G3, catch rate, unconditional measure form]\label{thm:G3}
+Let $|H'|\le1$. For every $t\ge0$ and every Borel set $J\subset(t,\infty)$,
+\begin{equation}\label{eq:G3a}
+\int_{\tau^{-1}(J)}|\partial_\alpha S(\alpha,t)|\,d\alpha\ \le\ \nu\,|J| .
+\end{equation}
+Let $m(\alpha):=\lim_{s\uparrow\tau(\alpha)}|\partial_\alpha S(\alpha,s)|\in[d,\infty]$ be the stretch just before capture; the limit exists by (V).
+Then
+\begin{equation}\label{eq:G3b}
+\int_{\tau^{-1}(J)}m(\alpha)\,d\alpha\ \le\ \nu\,|J|\qquad\text{for every Borel }J\subset(0,\infty).
+\end{equation}
+In particular, if every direction is caught by time $T$, then
+\begin{enumerate}
+\item[(i)] $T\ge d/\nu+\nu^{-1}\int_0^{2\pi}m(\alpha)\,d\alpha$;
+\item[(ii)] for every $t\ge0$, $T\ge t+L(t)/\nu$.
+\end{enumerate}
+\end{theorem}
+Item (ii) is the case $J=(t,T]$ of \eqref{eq:G3a}, since then $\tau^{-1}(J)=U(t)$. It is the input from Theorem~\ref{thm:E3}(c)
+used in Corollary~\ref{cor:G2}, reproved here in measure form and for every $t$ (also after first contact), so
+Corollary~\ref{cor:G2} does not depend on Theorem~\ref{thm:E3}(c). Inequality \eqref{eq:G3b} is the integrated form of the
+differential catch-rate bound ``$\alpha'(\tau)\,|\partial_\alpha S|\le1-v$'' along a catch order, but it needs no monotone or absolutely
+continuous catch order and no continuity of $\partial_\alpha S$ at the caught point.\footnote{The differential form is Corollary E4(b) of
+the working notes \texttt{referee/E-claims.md}, proved there only under those hypotheses; it is not included in this paper.
+The comparison is the source's wording.}
+
+\begin{proof}
+\emph{Step 1.} On the open set $U(t)$ the map $F_t(\alpha)=S_\alpha(t)$ is $C^1$: the field and its $S$-derivative are continuous in
+$(t,S)$ where $\rho>0$. It is injective by (E1) (or by backward uniqueness). Let $B=\tau^{-1}(J)$, a Borel subset of $U(t)$.
+
+\emph{Step 2.} Take $\alpha,\alpha'\in B$ with $\tau(\alpha)\le\tau(\alpha')$. By (E1) on $[t,s]$ for $s<\tau(\alpha)$, then $s\uparrow\tau(\alpha)$, and then (P0),
+\[
+|F_t(\alpha)-F_t(\alpha')|\le|H(\tau(\alpha))-S_{\alpha'}(\tau(\alpha))|=\rho_{\alpha'}(\tau(\alpha))\le\nu\bigl(\tau(\alpha')-\tau(\alpha)\bigr).
+\]
+Equal catch times would force $F_t(\alpha)=F_t(\alpha')$, so $\tau$ is injective on $B$, and the map $\tau(\alpha)\mapsto F_t(\alpha)$ from
+$\tau(B)$ onto $F_t(B)$ is $\nu$-Lipschitz.
+
+\emph{Step 3.} A $\nu$-Lipschitz map on a subset of $\R$ multiplies one-dimensional Hausdorff (outer) measure by at most $\nu$, so
+$\mathcal H^1(F_t(B))\le\nu\,\mathcal H^1(\tau(B))\le\nu|J|$. No measurability of $\tau(B)$ is needed.
+
+\emph{Step 4.} By the area formula for the injective $C^1$ map $F_t$, applied on a countable union of compact arcs of $U(t)$,
+$\mathcal H^1(F_t(B))=\int_B|\partial_\alpha S(\alpha,t)|\,d\alpha$. This is \eqref{eq:G3a}.
+
+\emph{Step 5.} For \eqref{eq:G3b}, first let $J\subset(a,b]$ with $a\ge0$; recall that $\tau>0$ always. For $n\ge1$ split $(a,b]$ into
+$2^n$ dyadic intervals $(t_k,t_{k+1}]$. Apply \eqref{eq:G3a} at time $t_k$ to $J\cap(t_k,t_{k+1}]$, and sum:
+\[
+\int_{\tau^{-1}(J)}|\partial_\alpha S(\alpha,t_{k(\alpha),n})|\,d\alpha\le\nu|J| ,
+\]
+where $t_{k(\alpha),n}$ is the left end of the dyadic interval containing $\tau(\alpha)$. As $n$ grows, $t_{k(\alpha),n}$ increases to
+$\tau(\alpha)$, staying strictly below it. Since $|\partial_\alpha S|$ is non-decreasing in time by (V) (and $\ge d>0$), monotone convergence
+gives \eqref{eq:G3b} for $J\subset(a,b]$; the integrands are measurable, being compositions with step functions. Let $a\to0$ and
+$b\to\infty$.
+
+\emph{Step 6.} For full capture by $T$, $\tau$ takes values in $[d/\nu,T]$ by (P0); apply \eqref{eq:G3b} with $J=[d/\nu,T]$. Note
+$m\ge d$. Item (ii) was explained after the statement.
+\end{proof}
+
+\begin{remark}
+Along a straight leg aimed at a target whose wavefront tangent is transversal, $|\partial_\alpha S|$ grows like $\rho^{-v/\nu}$, so
+$m=\infty$ there. Thus \eqref{eq:G3b} implies that, for a.e.\ direction, catches must be ``tangential''.
+\end{remark}
+
+% ---------------------------------------------------------------------------------------------------------------------
+\begin{proposition}[G4, stretching costs time: accounting inequality]\label{prop:G4}
+Let $|H'|\le1$ and suppose every direction is caught by time $T$. For $s<t<T$ let
+\[
+\operatorname{Str}(s,t)=\int_s^t\int_{U(t)}\frac{v}{\rho_\alpha(r)}\sin^2\phi_\alpha(r)\,|\partial_\alpha S(\alpha,r)|\,d\alpha\,dr ,
+\]
+the total amount by which the part of the wavefront still uncaught at time $t$ was stretched during $[s,t]$. Then
+\[
+T\ \ge\ s+\frac{L(s)+\operatorname{Str}(s,t)}{\nu}\qquad\text{for all }s<t<T.
+\]
+\end{proposition}
+In words: after time $s$ Harry needs $L(s)/\nu$ to eat what is there, plus $1/\nu$ for every unit of length by which the
+uncaught wavefront is later stretched.
+\begin{proof}
+By (V), for $\alpha\in U(t)$, $|\partial_\alpha S(\alpha,t)|=|\partial_\alpha S(\alpha,s)|+\int_s^t(v/\rho_\alpha)\sin^2\phi_\alpha\,|\partial_\alpha S|\,dr$; integrating
+over $U(t)$ (Tonelli; values in $[0,\infty]$ are allowed),
+\[
+L(t)=\int_{U(t)}|\partial_\alpha S(\alpha,s)|\,d\alpha+\operatorname{Str}(s,t).
+\]
+By \eqref{eq:G3a} at time $s$ with $J=(s,t]$, the part of $L(s)$ caught during $(s,t]$ has length
+\[
+\int_{U(s)\setminus U(t)}|\partial_\alpha S(\alpha,s)|\,d\alpha\ \le\ \nu(t-s).
+\]
+So $L(t)\ge L(s)-\nu(t-s)+\operatorname{Str}(s,t)$. Insert this
+into $T\ge t+L(t)/\nu$ (Theorem~\ref{thm:G3}(ii)).
+\end{proof}
+
+\begin{remark}[Reading of Proposition~\ref{prop:G4}]
+A path finishes in finite time \emph{only if} it stretches the uncaught wavefront by a finite total amount: finite $T$ implies
+$\operatorname{Str}(s,t)\le\nu(T-s)-L(s)$. The converse is \emph{not} proved. So an impossibility proof for $v$ near $1$ would follow from
+a proof that every path that catches everything must stretch the uncaught wavefront by an infinite total amount. Before contact
+stretching is forced: by Theorem~\ref{thm:G1} the hull perimeter grows at rate at least $2v$. After contact it is not forced
+pointwise: a straight radial segment ahead of Harry is eaten with zero stretching (Proposition~\ref{prop:ray}: the whole forward
+ray is caught, with $\phi=0$ on it).
+\end{remark}
+
+% ---------------------------------------------------------------------------------------------------------------------
+\begin{lemma}[G5, hull lemma after contact; the needle condition]\label{lem:G5}
+Let $|H'|\le1$. Let $X(t)=\{H(t)\}\cup\{S_\alpha(t):\alpha\in U(t)\}$, $K(t)=\operatorname{conv}X(t)$, $P(t)=\operatorname{Per}K(t)$ (with
+$P=2\cdot$length for a segment; $P\equiv0$ when $U(t)=\emptyset$), and, when $U(t)\neq\emptyset$, $D(t)=\sup_{\alpha\in U(t)}\rho_\alpha(t)$. If $H(t)$ is an extreme point
+of $K(t)$ with a non-degenerate normal cone, let $\gamma(t)\in[0,\pi)$ be the interior angle of $K(t)$ there; otherwise put
+$\cos(\gamma/2):=0$. Then $P$ is Lipschitz with constant $2\pi$ on $[0,T]$ (each $g(\theta,\cdot)$ below is $1$-Lipschitz), with
+$P(T)=0$ if everything is caught by $T$, and for a.e.\ $t$ with $U(t)\neq\emptyset$
+\begin{equation}\label{eq:G5}
+P'(t)\ \ge\ \frac{vP(t)}{D(t)}-2|H'(t)|\cos\frac{\gamma(t)}2\ \ge\ 2v-2\cos\frac{\gamma(t)}2\ \ge\ -2\nu .
+\end{equation}
+Consequences:
+\begin{enumerate}
+\item[(i)] $T-t\ge P(t)/(2\nu)$ for full capture by $T$.
+\item[(ii)] \textbf{Needle condition.} At a.e.\ time at which $P'(t)<0$, two things hold. First, $\cos(\gamma/2)>v$, so the uncaught
+set lies in a cone at Harry of opening $<2\arccos v\approx2\sqrt{2\nu}$. Second, $P<(2/v)D$, so $K$ is a needle: its minimal width
+$w$ satisfies $w/D<\sqrt{1-v^2}/v\approx\sqrt{2\nu}$, and also $w/D_K<\sqrt{1-v^2}/v$, where $D_K=\operatorname{diam}K\ge D$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\emph{Step 1: support function.} Let $g(\theta,t)=\sup_{x\in X(t)}x\cdot e_\theta$ and $f=g-H\cdot e_\theta\ge0$. So
+$f(\theta,t)=\max\bigl(0,\sup_{U(t)}r_\alpha(t)\cdot e_\theta\bigr)$, and $P(t)=\int_0^{2\pi}g\,d\theta=\int_0^{2\pi}f\,d\theta$.
+
+\emph{Step 2: $g$ is $1$-Lipschitz in $t$.} Let $s>t$. A candidate uncaught at $s$ moved at most $v(s-t)$. One caught at
+$\tau\in(t,s]$ was at $H(\tau)$ then, and $|S_\alpha(t)-H(s)|\le v(\tau-t)+(s-\tau)\le s-t$. And $H(s)$ is within $s-t$ of $H(t)$. So each
+point of $X(t)$ is within $s-t$ of a point of $X(s)$, and vice versa. Hence $g(\theta,\cdot)$ is $1$-Lipschitz and $P=\int g\,d\theta$ is
+$2\pi$-Lipschitz. If all are caught by $T$, $X(T)=\{H(T)\}$ and $P(T)=0$.
+
+\emph{Step 3: directions with $f(\theta,t)>0$.} Take $\alpha_n\in U(t)$ with $S_{\alpha_n}(t)\cdot e_\theta\to g(\theta,t)$. For large $n$,
+$r_{\alpha_n}(t)\cdot e_\theta\ge f/2$, so $\rho_{\alpha_n}(t)\ge f/2$, and by (P0) $\alpha_n$ stays uncaught for time $\ge f/(2\nu)$. For
+$0<h<\min\{f/(2\nu),\,f/(2(1+v))\}$ (so that the numerator below is positive; only $h\to0$ is used) and $r\in[t,t+h]$ we have $r_{\alpha_n}(r)\cdot e_\theta\ge r_{\alpha_n}(t)\cdot e_\theta-(1+v)(r-t)$ and
+$\rho_{\alpha_n}(r)\le D(t)+(1+v)h$. Hence
+\[
+g(\theta,t+h)\ge S_{\alpha_n}(t+h)\cdot e_\theta\ge S_{\alpha_n}(t)\cdot e_\theta+vh\,\frac{r_{\alpha_n}(t)\cdot e_\theta-(1+v)h}{D(t)+(1+v)h} .
+\]
+Let $n\to\infty$, divide by $h$, and let $h\to0$: the lower right Dini derivative satisfies $D_+g(\theta,t)\ge vf(\theta,t)/D(t)$, at every $t$.
+
+\emph{Step 4: directions with $f(\theta,t)=0$.} Then $g(\theta,t)=H(t)\cdot e_\theta$ and $g(\theta,t+h)\ge H(t+h)\cdot e_\theta$. So
+$D_+g(\theta,t)\ge u(t)\cdot e_\theta$ wherever $H$ is differentiable.
+
+\emph{Step 5: integrate.} By Step 2 and Fubini, for a.e.\ $t$ the derivative $\partial_tg(\theta,t)$ exists for a.e.\ $\theta$, and
+$P'(t)=\int\partial_tg\,d\theta$. Let $N(t)=\{\theta:f(\theta,t)=0\}$; this is the normal cone of $K(t)$ at $H(t)$. Then
+\[
+P'\ \ge\ \frac vD\int_{N^c}f\,d\theta+\int_Nu\cdot e_\theta\,d\theta=\frac{vP}{D}+\int_Nu\cdot e_\theta\,d\theta .
+\]
+If $H$ is a vertex with angle $\gamma$, $N$ is an arc of length $\pi-\gamma$, and $\int_Nu\cdot e_\theta\,d\theta\ge-2|u|\sin((\pi-\gamma)/2)=
+-2|u|\cos(\gamma/2)$. (This includes $K$ a segment with $H$ at an end: $\gamma=0$, an arc of length $\pi$.) Otherwise $N$ is null.
+Finally $D\le\operatorname{diam}K\le P/2$, which gives the second and third inequalities in \eqref{eq:G5}.
+
+\emph{Step 6.} (i) $P$ is Lipschitz, decreases at rate at most $2\nu$, and $P(T)=0$.
+
+(ii) If $P'<0$ then $2\cos(\gamma/2)\ge2|u|\cos(\gamma/2)>vP/D\ge2v$, and $vP/D<2$. For the width, let $D_K:=\operatorname{diam}K\ge D$. The set $K$
+contains a diameter segment $[a,b]$ of length $D_K$. In the direction normal to it, $K$ has width $\ge w$, so it contains points
+$c,c'$ on the two support lines parallel to $[a,b]$, at heights $h_1,h_2\ge0$ on either side of the line $ab$, with $h_1+h_2\ge w$.
+Since $|ca|,|cb|,|c'a|,|c'b|\le D_K$, the projections of $c$ and $c'$ onto the line $ab$ lie in $[a,b]$; so the diagonals cross inside
+$[a,b]$, $a,c,b,c'$ is a convex quadrilateral inside $K$, and $P\ge|ac|+|cb|+|bc'|+|c'a|$. Now $|ac|+|cb|\ge\sqrt{D_K^2+4h_1^2}$, and
+likewise for $c'$. By convexity of $h\mapsto\sqrt{D_K^2+4h^2}$,
+\[
+P\ \ge\ 2\sqrt{D_K^2+(h_1+h_2)^2}\ \ge\ 2\sqrt{D_K^2+w^2}.
+\]
+Combined with $P<2D/v$ and $D\le D_K$: $w^2<D^2/v^2-D_K^2\le D^2(1/v^2-1)$. So $w/D<\sqrt{1-v^2}/v$, and also $w/D_K\le w/D<\sqrt{1-v^2}/v$.
+\end{proof}
+
+\begin{remark}[Reading of Lemma~\ref{lem:G5}]
+Before contact $\gamma=\pi$ (Harry is inside $K$, Step~1 of Theorem~\ref{thm:G1}), and Lemma~\ref{lem:G5} reduces to
+Theorem~\ref{thm:G1}. Right after a straight first run catches $\alpha=0$, the uncaught set fills exactly the cone of opening
+$2(\pi-\theta^*)=2\arccos v$ at Harry: the bearings fill $(\theta^*,2\pi-\theta^*)$.\footnote{Source wording, citing the bearing
+ordering. In this paper Proposition~\ref{prop:order} gives the ordering for $t<t_0$ and Proposition~\ref{prop:V} the limiting bearings
+$\pm\theta^*$ as $\alpha\to0^\pm$ at $t_0$.} That is the borderline case of (ii). So for $v$ near $1$, Harry can make progress in this
+measure only while the remaining wavefront is a needle of relative width $O(\sqrt\nu)$ pointing at him.
+\end{remark}
+
+% ---------------------------------------------------------------------------------------------------------------------
+\begin{corollary}[G6, time forced into needle configurations]\label{cor:G6}
+Let $|H'|\le1$. Call $t$ a \emph{needle time} if $\cos(\gamma(t)/2)>v$ and $P(t)<2D(t)/v$ (notation of Lemma~\ref{lem:G5}). If a
+path catches every direction by $T$, and $t_1\ge d/\nu$ is its first capture time, then
+\[
+\bigl|\{t\in(t_1,T):t\text{ is a needle time}\}\bigr|^*\ \ge\ \bigl|\{t\in(t_1,T):P'(t)<0\}\bigr|\ \ge\ \frac{P(t_1)}{2\nu}\ \ge\ \frac{\pi d+vt_1}{\nu}\ \ge\ \frac{\pi d}{\nu}+\frac{vd}{\nu^2}.
+\]
+\end{corollary}
+\begin{proof}
+At a.e.\ non-needle time, Lemma~\ref{lem:G5} gives $P'\ge0$: if $\cos(\gamma/2)\le v$ then $P'\ge vP/D-2\cos(\gamma/2)\ge2v-2v$; if $P\ge2D/v$
+then $P'\ge2-2\cos(\gamma/2)\ge0$. (On any interval where $U$ is empty, $P\equiv0$.) So the measurable set $\{P'<0\}$ is contained, up to a
+null set, in the set of needle times ($|\cdot|^*$ denotes outer measure, since measurability of $\gamma$ and $D$ is not needed). Since
+$P'\ge-2\nu$ a.e., $P$ is Lipschitz and $P(T)=0$, $P(t_1)=-\int_{t_1}^TP'\le\int(P')^-\le2\nu\,|\{P'<0\}|$. Finally $P$ is continuous and, for $t<t_1$,
+$K(t)=\operatorname{conv}\Gamma(t)$ because $H(t)\in\operatorname{conv}\Gamma(t)$ (Step~1 of Theorem~\ref{thm:G1}); so $P(t_1)\ge2\pi d+2vt_1$
+by Theorem~\ref{thm:G1}.
+\end{proof}
+
+\begin{remark}
+So an impossibility proof near $v=1$ would follow from showing that a path cannot keep the uncaught wavefront inside a cone of
+opening $2\arccos v$ at Harry, as a needle of width ratio $<\sqrt{1-v^2}/v$, for a total time of $\pi d/\nu+vd/\nu^2$. Whether this
+can be overcome is open.
+\end{remark}

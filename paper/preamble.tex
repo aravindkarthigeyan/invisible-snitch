@@ -1,0 +1,115 @@
+% preamble.tex -- shared by all section files of the short paper. Do not add macros in section files;
+% ask the architect. Notation: short/OUTLINE.md, Section 4.
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array}
+\usepackage[hidelinks]{hyperref}
+
+\numberwithin{equation}{section}
+\renewcommand{\topfraction}{0.9}\renewcommand{\textfraction}{0.1}\renewcommand{\floatpagefraction}{0.8}
+
+% ---------------------------------------------------------------- theorem environments (shared counter, per section)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% A named hypothesis/condition label: \namedlabel{hyp:end}{(S1)} makes \ref{hyp:end} print "(S1)".
+\makeatletter
+\newcommand{\namedlabel}[2]{\begingroup\def\@currentlabel{#2}\phantomsection\label{#1}\endgroup}
+\makeatother
+% Item tag for hypotheses: \hypitem{S1} gives "(S1)".
+\newcommand{\hyptag}[1]{\textup{(#1)}}
+
+% ---------------------------------------------------------------- general
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\epsS}{\varepsilon_*}           % 4e-11
+\newcommand{\vz}{v_0}                        % 6e-5
+\newcommand{\rhat}{\hat r}
+\newcommand{\uhat}{\hat u}                   % frozen unit vector; leg direction \uhat_{j+1}
+\newcommand{\nhat}{\hat n}                   % run-2 heading / touch-down tangent direction
+\newcommand{\xz}{x^0}                        % curve at touch-down
+\newcommand{\vsig}{\varsigma}                % T . e^perp
+\newcommand{\Vu}{V_{\hat u}}                 % int |T - u|^2
+\newcommand{\aD}{\alpha_{\mathrm D}}         % 1 + 1/K + 2/K^2
+\newcommand{\toff}{\mathfrak t}              % time offset t - t_td
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\dist}{dist}
+
+% ---------------------------------------------------------------- chase and end theorem (Sections 3-4)
+\newcommand{\ttd}{t_{\mathrm{td}}}           % touch-down time
+\newcommand{\Tstop}{T_{\mathrm{stop}}}
+\newcommand{\Fam}{\mathcal F}                % family
+\newcommand{\FamS}{\mathcal F_*}             % admissible family
+\newcommand{\We}{W_{\mathrm e}}              % excuse length
+\newcommand{\jW}{j_W}
+\newcommand{\tW}{t_W}
+\newcommand{\fF}{f_{\mathrm F}}
+\newcommand{\dL}{d_{\mathrm L}}
+\newcommand{\qc}{q_{\mathrm c}}
+\newcommand{\chig}{\chi_{\mathrm g}}
+\newcommand{\Keps}{K_\varepsilon}
+\newcommand{\CTL}{C_{\mathrm{TL}}}
+\newcommand{\CmuA}{C_{\mu\mathrm A}}
+\newcommand{\ConeA}{C_{1\mathrm A}}
+\newcommand{\camp}{c_{\mathrm{amp}}}
+\newcommand{\PsiI}{\Psi_{\mathrm I}}
+\newcommand{\TI}{T_{\mathrm I}}
+\newcommand{\Ta}{T_\alpha}
+\newcommand{\Tb}{T_\beta}
+\newcommand{\DI}{D_{\mathrm I}}
+\newcommand{\DIIs}{D_{\mathrm{IIs}}}
+\newcommand{\DIIl}{D_{\mathrm{IIl}}}
+\newcommand{\Xfar}{X_{\mathrm{far}}}
+\newcommand{\LJ}{L_J}
+\newcommand{\pA}{p_{\mathrm A}}              % stage-A tuple
+\newcommand{\gD}{\gamma_{\mathrm D}}
+
+% ---------------------------------------------------------------- heading, departure, assembly (Sections 5, 8)
+\newcommand{\UA}{U_{\mathrm A}}
+\newcommand{\UE}{U_{\mathrm E}}
+\newcommand{\hH}{h_{\mathrm H}}
+\newcommand{\Dbar}{\bar D}
+\newcommand{\etaD}{\eta_{\mathrm D}}
+\newcommand{\etaN}{\eta_{\mathrm N}}
+\newcommand{\kD}{k_{\mathrm D}}
+\newcommand{\Tsharp}{T_0^\sharp}
+
+% ---------------------------------------------------------------- straight runs, design T, touch-down (Sections 6-7)
+\newcommand{\sg}{\mathsf g}                  % sin(beta)/tan^v(beta/2)
+\newcommand{\gmax}{\mathsf g_{\max}}
+\newcommand{\gb}{\mathsf g_{\mathrm b}}
+\newcommand{\sk}{\mathsf k}
+\newcommand{\sa}{\mathsf a}
+\newcommand{\sfc}{\mathsf c}
+\newcommand{\sbb}{\mathsf b}
+\newcommand{\sr}{\mathsf r}
+\newcommand{\sA}{\mathsf A}
+\newcommand{\TS}{\mathfrak S}
+\newcommand{\ta}{t_{\mathrm a}}
+\newcommand{\tc}{t_{\mathrm c}}
+\newcommand{\as}{\alpha_{\mathrm s}}
+\newcommand{\circab}[1]{|#1|_\circ}          % min(alpha, 2pi - alpha)
+\newcommand{\xe}{\xi_{\mathrm e}}
+\newcommand{\be}{b_{\mathrm e}}
+\newcommand{\vbar}{\bar v}
+\newcommand{\epsbar}{\bar\varepsilon}
+\newcommand{\mub}{\bar\mu}
+\newcommand{\muT}{\mu_{\mathrm T}}
+\newcommand{\muTb}{\bar\mu_{\mathrm T}}
+\newcommand{\vk}{\varkappa}
+\newcommand{\kc}{\kappa_{\mathrm c}}
+\newcommand{\czlo}{c_{\mathrm{zlo}}}
+\newcommand{\czhi}{c_{\mathrm{zhi}}}
+\newcommand{\Ups}{\Upsilon}
+\newcommand{\Ghost}{\mathcal G}
+\newcommand{\xend}{x_{\mathrm{end}}}

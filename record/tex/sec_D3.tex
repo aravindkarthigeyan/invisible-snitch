@@ -1,0 +1,389 @@
+% sec_D3.tex -- Theorem D3.1 (walking the exact front: range v <= 0.115/(log(d/eps)+7.5), time <= 22.8d) and
+% Proposition D3.2 (ordered phase of the leg-greedy eps-chase LG0; part (d) is a CONDITIONAL reduction).
+% Source: referee/D3-claims.md (stream D3, round 5), with the fixes of reports/referee-RD3a.md and
+% reports/referee-RD3b.md: wording of T_c = 22.7923; "monotone in v" caveat for f; self-contained proof of W3(a);
+% Gamma_k defined on the whole interval; explicit continuity argument in the induction step; range versus
+% Theorem A (eps/d < 0.084); in D3.2: alpha* = target of the current leg (not inf U(t)), Lambda defined,
+% (b) hypothesis on the pairs of the arc at the START of the leg, (c) "as a limit" removed, (d) positivity on
+% [alpha*, alpha_e(t2)] x [0, t2], Prop. D6(a) applies verbatim to LG0, monotone convergence for Psi(t0).
+% Numerical facts in the closing remark: reports/D3-1.md Section 3 and the referees' simulations. Doubly refereed.
+% Uses \R, \rhat and the labels of main.tex, sec_D1.tex, sec_D2.tex. New labels are prefixed D3-.
+
+\section{Positive vision radius: walking the exact front}\label{sec:D3}
+
+Theorem~\ref{thm:D2} reaches the range $v\asymp1/\log(d/\varepsilon)$ with virtual candidates. This section proves a range of
+the same order, with a larger constant, by an independent mechanism. Harry walks along the \emph{exact} current front
+$\theta\mapsto S_\theta(\tau_k)$, which he can compute from his own past path, in windows of length $0.1\,\varepsilon/v$. There is
+no first-order prediction (as in Theorem~\ref{thm:D1}) and there are no virtual candidates (as in Theorem~\ref{thm:D2}). The
+stretch of the front is controlled by the stretching formula of Proposition~\ref{prop:length}(2), by Lemma~\ref{lem:E1} and by
+a layer-cake estimate. Section~\ref{sec:D3-chase} then treats the ordered phase of a leg-greedy $\varepsilon$-chase and reduces
+that chase, \emph{conditionally} on a bearing-order hypothesis (O), to a range of $v$ independent of $\varepsilon$.
+
+\begin{theorem}[D3.1]\label{thm:D3}
+Let $0<\varepsilon\le0.1\,d$ and
+\[
+v\le v_W(\varepsilon/d):=\frac{0.115}{\log(d/\varepsilon)+7.5}.
+\]
+Then there is an explicit path of speed exactly $1$, fixed in advance, along which every candidate is seen by time
+$T\le22.8\,d$.
+\end{theorem}
+
+For $\varepsilon/d\le0.1$, $v_W\le0.0118$. For example $v_W(10^{-2})=9.50\cdot10^{-3}$, $v_W(10^{-6})=5.40\cdot10^{-3}$ and
+$v_W(10^{-12})=3.27\cdot10^{-3}$. Theorem~\ref{thm:A} allows $v\le\varepsilon/((1+2\pi)d)$, which exceeds $v_W(\varepsilon/d)$ for
+$\varepsilon/d>0.0839$ (at $\varepsilon/d=0.1$: $0.01376$ against $0.01173$). So for $\varepsilon/d>0.084$ Theorem~\ref{thm:A} gives the
+larger range, and Theorem~\ref{thm:D3} improves on it only for $\varepsilon/d<0.084$, by a factor
+$\asymp1/((\varepsilon/d)\log(d/\varepsilon))$. Theorem~\ref{thm:D1} allows about $(\varepsilon/\log(1/\varepsilon))^{1/2}$, capped
+at $10^{-4}$ (for example $1.7\cdot10^{-5}$ at $\varepsilon/d=10^{-6}$). Theorem~\ref{thm:D2} has the same order
+$1/\log(d/\varepsilon)$, but Theorem~\ref{thm:D3} has the larger asymptotic constant, $0.115$ against $1/22\approx0.0455$. Its range
+of $v$ is therefore about $2.5$ times that of Theorem~\ref{thm:D2} for small $\varepsilon$ (at $\varepsilon/d=10^{-6}$:
+$5.4\cdot10^{-3}$ against $3.0\cdot10^{-3}$), and it is the larger one for $\varepsilon/d\lesssim0.06$. Theorem~\ref{thm:D2} has the
+better time bound, $14.07\,d$ against $22.8\,d$.
+
+\medskip
+Normalise $d=1$: the scaling $(S,H,t)\mapsto(cS,cH,ct)$ preserves speed exactly $1$ and replaces $\varepsilon$ by $\varepsilon/d$
+and the time $22.8$ by $22.8\,d$. Harry's path is $H$, with $H(0)=0$. Candidate $\theta$ starts at $e^{i\theta}$ and obeys
+\eqref{eq:snitch}; $r=S-H$, $\rho=|r|$. For directions $\theta,\theta'$ let $\operatorname{dist}(\theta,\theta')\in[0,\pi]$ be
+their angular distance on the circle, and put
+\[
+\operatorname{chord}(\theta,\theta'):=|e^{i\theta}-e^{i\theta'}|=2\sin\bigl(\operatorname{dist}(\theta,\theta')/2\bigr),
+\qquad \operatorname{chord}(x):=2\sin(x/2).
+\]
+
+\subsection{The path (strategy W)}\label{sec:D3-W}
+Fix $\lambda=0.1$, $\kappa=0.29$, $M=3$, $R=0.85$, and put
+\[
+\delta_1:=(0.3\,\varepsilon)^{1/(1-v)},\qquad \ell:=\lambda\varepsilon/v\ \text{(walk length)},\qquad
+\eta:=\kappa\varepsilon\ \text{(skip)},\qquad t_\varepsilon:=\frac{1-\varepsilon/2}{1-v}.
+\]
+\begin{itemize}
+\item \emph{Phase 1.} $H(s)=(s,0)$ for $0\le s\le\tau_1:=t_\varepsilon$. Put $X_1:=H(\tau_1)$ and $b_1:=\delta_1$.
+\item \emph{Window $k$ ($k\ge1$)}, given $\tau_k$, $X_k=H(\tau_k)$ and $b_k<2\pi-\delta_1$:
+\begin{itemize}
+\item $\Gamma_k(\theta):=S_\theta(\tau_k)$ for $\theta\in[b_k,2\pi-\delta_1]$ (computable from the path on $[0,\tau_k]$).
+$\Gamma_k$ is defined on this whole interval, including directions that have already been seen; nothing is removed, so the
+front has no holes.
+\item \emph{Connector $k$:} a straight unit-speed run from $X_k$ to $\Gamma_k(b_k)$; its length is $c_k$.
+\item \emph{Walk $k$:} a unit-speed walk along $\Gamma_k$ starting at $\theta=b_k$, for arclength $\ell$ or until $\theta=2\pi-\delta_1$,
+whichever comes first. The stop parameter is $a_{k+1}$, the length walked is $\ell_k\le\ell$, $\tau_{k+1}:=\tau_k+c_k+\ell_k$, and
+$X_{k+1}:=\Gamma_k(a_{k+1})=H(\tau_{k+1})$.
+\item If $a_{k+1}=2\pi-\delta_1$, or $b_{k+1}:=a_{k+1}+\eta\ge2\pi-\delta_1$, the construction stops (Harry then moves in any
+unit-speed way); otherwise go to window $k+1$.
+\end{itemize}
+\end{itemize}
+Walk $k$ is well defined once $\Gamma_k$ is $C^1$ with $|\partial_\theta\Gamma_k|\ge1$ (proved below): then arclength is a $C^1$
+increasing function of $\theta$, and $\theta$ increases along the walk. The path is continuous at all junctions and has speed
+exactly $1$. Since each $\Gamma_k$ is computed from $H$ on $[0,\tau_k]$, the path depends only on $(v,\varepsilon)$ and is fixed in
+advance.
+
+\subsection{Lemmas}
+
+\begin{lemma}[W1: stretch]\label{lem:D3-W1}
+Let $I$ be an open interval of directions and $t>0$ with $\rho_\theta>0$ on $[0,t]$ for all $\theta\in I$. Then
+$\theta\mapsto S_\theta(t)$ is $C^1$ on $I$ and
+\[
+1\le|\partial_\theta S_\theta(t)|\le\exp\Bigl(v\int_0^t\frac{ds}{\rho_\theta(s)}\Bigr).
+\]
+\end{lemma}
+\begin{proof}
+$F(t,x)=v(x-H(t))/|x-H(t)|$ is continuous on the open set $\{x\ne H(t)\}$ and $C^1$ in $x$ there, with
+$\partial_xF=(v/\rho)(I-\rhat\rhat^{\top})$ continuous; hence solutions are $C^1$ in the initial point and $\partial_\theta S$ solves
+the variational equation $\partial_t\partial_\theta S=(v/\rho)(I-\rhat\rhat^{\top})\partial_\theta S$. So
+$\partial_t|\partial_\theta S|=(v/\rho)\sin^2\!\phi\,|\partial_\theta S|$ with $\phi$ the angle between $\partial_\theta S$ and $\rhat$
+(Proposition~\ref{prop:length}(2)), and $|\partial_\theta e^{i\theta}|=1$. Integrate:
+$|\partial_\theta S(t)|=\exp\bigl(\int_0^t v\sin^2\!\phi/\rho\bigr)\in\bigl[1,\exp\bigl(v\int_0^t ds/\rho\bigr)\bigr]$.
+\end{proof}
+
+\begin{lemma}[W2: straight run]\label{lem:D3-W2}
+During a straight unit-speed run of Harry, any candidate with $\rho>0$ throughout satisfies
+$|\{s:\rho(s)<r\}|\le2r/(1-v)$ for every $r>0$.
+\end{lemma}
+\begin{proof}
+With heading $u$ let $x:=r\cdot u$. Then $x'=v\,\rhat\cdot u-1\le-(1-v)$, so $x$ is strictly decreasing with slope $\le-(1-v)$; and
+$\rho<r$ implies $|x|<r$, a set of times of measure $\le2r/(1-v)$.
+\end{proof}
+
+\begin{lemma}[W3: phase 1]\label{lem:D3-W3}
+Let $0<\varepsilon\le0.1$ and $v\le1/2$. During Phase 1:
+\begin{enumerate}
+\item[(a)] every $\theta$ with $\operatorname{dist}(\theta,0)\le\delta_1$ has $\rho_\theta(t_\varepsilon)\le\varepsilon$ (so it is
+seen); in particular $c_1=\rho_{\delta_1}(t_\varepsilon)\le\varepsilon$;
+\item[(b)] for $\theta\in[\delta_1,2\pi-\delta_1]$ and $s\in[0,t_\varepsilon]$: $\rho_\theta(s)\ge\rho_1:=\min(1,g(\delta_1)/g_{\max})$,
+where $g_{\max}=\max g=g(\arccos v)$;
+\item[(c)] for $\theta\in(\pi,2\pi)$ the ordinate $y_\theta(s)$ of $S_\theta(s)$ is negative and non-increasing on $[0,t_\varepsilon]$;
+for $\theta\in(0,\pi)$ it is positive and non-decreasing.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) This is Lemma~\ref{lem:D-tip}, whose proof uses \eqref{eq:D-A0} only through $v\le1/2$ and $\varepsilon<1$: it uses
+$\alpha\le\delta_1\le0.3\varepsilon$, $\alpha^{1-v}\le0.3\varepsilon$, $1-\cos\alpha\le\varepsilon/4$, $2^v\le\sqrt2$,
+$\sqrt2\cdot0.3<\sqrt3/4$, and $\beta_c=\arccos((1-v)/2)\in(\pi/3,\pi/2)$ with $\sin\beta_c\ge\sqrt3/2$, $\tan(\beta_c/2)\le1$, all
+valid for $v\le1/2$. A self-contained proof (referee RD3a): $\theta=0$ is on the forward ray and $\rho_0(t_\varepsilon)=\varepsilon/2$.
+Let $0<\theta\le\delta_1$. By Lemma~\ref{lem:A2} and Proposition~\ref{prop:integrals}, $C=g(\theta)$ is constant, and
+$h(t_\varepsilon)=\cos\theta-1+(1+v)\varepsilon/2\in(0,(1+v)\varepsilon/2]$ because $1-\cos\theta\le\theta^2/2\le(0.3\varepsilon)^2/2$;
+also $C=g(\theta)\le2^v\theta^{1-v}\le2^v\cdot0.3\,\varepsilon$. If $\rho(t_\varepsilon)>\varepsilon$, then
+$\cos\beta+v=h/\rho<(1+v)/2$, so $\beta\in(\arccos((1-v)/2),\arccos(-v))$, where $\sin\beta\ge\sqrt3/2$ and
+$\tan(\beta/2)\le\sqrt{(1+v)/(1-v)}\le\sqrt3$; then
+$\rho=C\tan^v(\beta/2)/\sin\beta\le2^{1/2}\cdot0.3\cdot3^{1/4}\cdot(2/\sqrt3)\,\varepsilon<0.65\,\varepsilon$, a contradiction.
+Negative $\theta$ follow by reflection.
+
+(b) For $\theta\in(0,\pi)$ the bearing stays in $(0,\pi)$ (Lemma~\ref{lem:A2}), so $C=\rho\,g(\beta)$ is constant
+(Proposition~\ref{prop:integrals}), equal to $g(\theta)$ (initially $\rho=1$, $\beta=\theta$). Hence $\rho\ge g(\theta)/g_{\max}$. If
+$\theta\in[\delta_1,\arccos v]$, then $g(\theta)\ge g(\delta_1)$, since $g'/g=(\cos\beta-v)/\sin\beta\ge0$ there (Lemma~\ref{lem:k}). If
+$\theta\in[\arccos v,\pi)$, then $\beta\ge\theta\ge\arccos v$ throughout ($\beta$ increases), so $\rho'=v-\cos\beta\ge0$ and $\rho\ge1$.
+$\theta=\pi$ stays on the backward ray, with $\rho$ increasing. $\theta\in(\pi,2\pi-\delta_1]$ follows by reflection.
+
+(c) $y'=vy/\rho$ on the run (Harry has ordinate $0$), and $y$ never vanishes for $\theta\notin\{0,\pi\}$ (Lemma~\ref{lem:A2}).
+\end{proof}
+
+\begin{lemma}[W4: chords]\label{lem:D3-W4}
+If $\rho_\theta,\rho_{\theta'}>0$ on $[0,t]$, then $|S_\theta(t)-S_{\theta'}(t)|\ge\operatorname{chord}(\theta,\theta')$.
+\end{lemma}
+\begin{proof}
+Lemma~\ref{lem:E1}.
+\end{proof}
+
+\begin{lemma}[W5: layer cake]\label{lem:D3-W5}
+If $\rho\ge\rho_*>0$ on $[0,\tau]$, $m(r):=|\{s\le\tau:\rho(s)<r\}|\le Ar+B$ for $\rho_*\le r\le R$, and $\tau\le T$, then
+\[
+\int_0^\tau\frac{ds}{\rho}\le A\log(R/\rho_*)+B/\rho_*+T/R.
+\]
+\end{lemma}
+\begin{proof}
+$\int_0^\tau ds/\rho=\int_0^\infty|\{1/\rho>y\}|\,dy=\int_0^\infty m(r)\,r^{-2}\,dr$; $m=0$ on $(0,\rho_*)$, $m\le Ar+B$ on
+$[\rho_*,R]$, and $m\le T$ on $(R,\infty)$.
+\end{proof}
+
+\emph{Elementary inequalities used.} For $0\le x\le1$ the set $\{\theta':\operatorname{chord}(\theta,\theta')<x\}$ is an arc of
+half-length $2\arcsin(x/2)\le(\pi/3)x$, hence of measure $\le Wx$ with $W:=2\pi/3$ ($\arcsin y\le(\pi/3)y$ on $[0,1/2]$, by
+convexity). Also $2\sin(x/2)\ge(2/\pi)x$ on $[0,\pi]$, and $2\sin(x/2)\ge x(1-x^2/24)$, $\sin x\ge x(1-x^2/6)$ for $x\ge0$.
+
+\subsection{The constants}
+Let $\rho_*:=\min(\rho_1,\rho_w,\rho_c,\rho_l)$ with
+\[
+\rho_w:=\operatorname{chord}(\min(\eta,2\delta_1))-(\lambda+v)\varepsilon,\quad
+\rho_c:=\operatorname{chord}(\min(\ell/M+\eta,\pi))-(1+v)\varepsilon,\quad
+\rho_l:=\sin\delta_1-v\varepsilon,
+\]
+and
+\begin{align*}
+A&:=\frac{2}{1-v}+WM\Bigl(1+\frac v\lambda\Bigr),\qquad
+B:=WM(\lambda+v)\varepsilon+3\varepsilon+\frac{WMv(1+v)\varepsilon}{\lambda},\\
+T_*&:=t_\varepsilon+2\pi M+\varepsilon+\frac{2\pi Mv}{\lambda},\qquad
+J_*:=A\log(R/\rho_*)+B/\rho_*+T_*/R.
+\end{align*}
+\emph{Conditions.} (C1) $v+\lambda+M\kappa\le1$; (C2) $\rho_*>0$; (C3) $vJ_*\le\log M$; (C0) $R+(1+v)\varepsilon\le1$,
+$R\ge\rho_*$, $v\le1/2$.
+
+\begin{lemma}[W6: constants]\label{lem:D3-W6}
+If $0<\varepsilon\le0.1$ and $v\le v_W(\varepsilon)$, then \textup{(C0)--(C3)} hold, and $T_*\le22.8$.
+\end{lemma}
+\begin{proof}
+$v\le0.115/(\log10+7.5)<0.0118\le v_c:=0.015$. Since $7.5\ge\log(1/0.3)$, $v\log(1/(0.3\varepsilon))\le0.115$, so
+$f:=(0.3\varepsilon)^{v/(1-v)}\ge\exp(-0.115/0.985)\ge0.8898$, and $\delta_1=0.3\varepsilon f\in[0.2669\varepsilon,0.03]$; note
+$\delta_1^{1-v}=0.3\varepsilon$ exactly. Then (all bounds monotone in $v$, worst case $v=v_c$, except $f$, which is bounded via
+$v\log(1/(0.3\varepsilon))\le0.115$; arithmetic in \texttt{code/D3/constants.py}):
+\begin{itemize}
+\item $g(\delta_1)\ge\delta_1(1-\delta_1^2/6)/\bigl(\tfrac{\delta_1}{2}(1+\delta_1^2/8)\bigr)^v
+\ge2^v\delta_1^{1-v}(1-\delta_1^2/6)(1+\delta_1^2/8)^{-v}\ge0.3\varepsilon(1-0.03^2/6)$ (using $\tan y\le y(1+y^2/2)$ for $y\le0.1$
+and $2^v(1+\delta_1^2/8)^{-v}\ge1$); $g_{\max}=(1-v^2)^{1/2}((1+v)/(1-v))^{v/2}\le g_{\max}(v_c)\le1.0002$. So
+$\rho_1\ge0.29995\varepsilon/1.00012\ge0.2999\varepsilon$.
+\item $\rho_w\ge[\min(\kappa,0.6f)(1-0.06^2/24)-\lambda-v_c]\varepsilon=[0.29\cdot0.99985-0.115]\varepsilon\ge0.17495\varepsilon$.
+\item $\ell/M+\eta\ge\lambda\varepsilon/(v_cM)$, so
+$\rho_c\ge[\min((2/\pi)\lambda/(v_cM),2/\varepsilon)-(1+v_c)]\varepsilon\ge0.3997\varepsilon$.
+\item $\rho_l\ge[0.3f(1-0.03^2/6)-v_c]\varepsilon\ge0.2519\varepsilon$.
+\end{itemize}
+Hence $\rho_*\ge r_*\varepsilon$ with $r_*=0.17495$. (C1): $0.015+0.1+0.87=0.985$. (C0): $0.85+1.015\cdot0.1<1$.
+% Referee fix (RD3a, RD3b): 22.7923 is not T_* at (v_c, 0.1) (that is 22.7415); it bounds T_* using t_eps <= 1/(1-v),
+% eps <= 0.1, v <= v_c. The two referees' replacement texts agree; RD3a's adds "v <= v_c", kept here.
+% A_c and b_c do not depend on eps, so "(values at v = v_c)" is kept for them only.
+With $A\le A_c=9.2562$ and $B\le b_c\varepsilon$, $b_c=4.6792$ (values at $v=v_c$), and
+\[
+T_*\le T_c:=\frac{1}{1-v_c}+0.1+2\pi M\Bigl(1+\frac{v_c}{\lambda}\Bigr)=22.7923
+\qquad(\text{using }t_\varepsilon\le1/(1-v),\ \varepsilon\le0.1,\ v\le v_c),
+\]
+we get
+$J_*\le A_c\bigl[\log(1/\varepsilon)+\log(R/r_*)+(b_c/r_*+T_c/R)/A_c\bigr]=A_c\bigl[\log(1/\varepsilon)+7.3671\ldots\bigr]$. So
+$vJ_*\le\log3$ holds if $v\le(\log3/A_c)/(\log(1/\varepsilon)+7.3671)$, and $\log3/A_c=0.11869\ge0.115$, $7.5\ge7.3671$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:D3}}
+By Lemma~\ref{lem:D3-W6} the conditions (C0)--(C3) hold and $T_*\le22.8$. Write $M=3=e^\mu$, so (C3) reads $vJ_*\le\mu$. For
+$k\ge1$ let $(H_k)$ be the statement:
+\begin{quote}
+$(H_k)$ windows $1,\dots,k-1$ have been performed with $c_j\le\varepsilon$, $b_k<2\pi-\delta_1$ is defined, and for every
+$\theta\in[b_k,2\pi-\delta_1]$: (i) $\rho_\theta(s)\ge\rho_*$ for $s\in[0,\tau_k]$; (ii) $\int_0^{\tau_k}ds/\rho_\theta\le J_*$.
+\end{quote}
+By Lemma~\ref{lem:D3-W1} (applied on a slightly larger open interval, where $\rho>0$ by continuity and compactness), $(H_k)$
+gives: $\Gamma_k$ is $C^1$ with $1\le|\partial_\theta\Gamma_k|\le e^{vJ_*}\le M$ on $[b_k,2\pi-\delta_1]$, so window $k$ is well
+defined.
+
+\emph{Base.} $(H_1)$: Lemma~\ref{lem:D3-W3}(b) gives $\rho\ge\rho_1\ge\rho_*$ on $[0,t_\varepsilon]$; Lemma~\ref{lem:D3-W2} gives
+$m(r)\le2r/(1-v)\le Ar$, so (ii) follows by Lemma~\ref{lem:D3-W5}.
+
+\emph{Counting facts (valid while $(H_j)$ holds for $j\le k$).} The walked $\theta$-ranges $[b_j,a_{j+1}]$ are disjoint subsets of
+$[\delta_1,2\pi-\delta_1]$; the walking time over a set $E$ of $\theta'$ is $\int_E|\partial\Gamma_j|\le M|E|$. A non-final walk has
+length exactly $\ell$, so $a_{j+1}-b_j\ge\ell/M$ and $b_{j+1}-b_j\ge\ell/M+\eta$. Hence the number of windows is at most
+$1+2\pi M/\ell$, $\sum\ell_j\le2\pi M$, $\sum c_j\le\varepsilon(1+2\pi Mv/(\lambda\varepsilon))$, and every $\tau_j\le T_*$.
+
+\emph{Step $(H_k)\Rightarrow c_k\le\varepsilon$.} For $k=1$ this is Lemma~\ref{lem:D3-W3}(a). For $k\ge2$, $X_k=S_{a_k}(\tau_{k-1})$, so
+\[
+c_k\le|S_{b_k}(\tau_k)-S_{b_k}(\tau_{k-1})|+|S_{b_k}(\tau_{k-1})-S_{a_k}(\tau_{k-1})|\le v(c_{k-1}+\ell)+M\eta
+\le(v+\lambda+M\kappa)\varepsilon\le\varepsilon
+\]
+by (C1); the second term is an arc of $\Gamma_{k-1}$ over $[a_k,b_k]\subset[b_{k-1},2\pi-\delta_1]$ (and $S_{b_k}$ is defined on
+$[\tau_{k-1},\tau_k]$ by $(H_k)$(i)).
+
+\emph{Step $(H_k)\Rightarrow(H_{k+1})$} (when window $k+1$ exists). Fix $\theta\in[b_{k+1},2\pi-\delta_1]\subset[b_k,2\pi-\delta_1]$.
+On $[0,\tau_k]$, (i) is $(H_k)$(i). On $[\tau_k,\tau_{k+1}]$ let $\sigma$ be the supremum of the $s\le\tau_{k+1}$ such that $S_\theta$ is
+defined and $\rho_\theta>0$ on $[\tau_k,s]$; the bounds below hold on $[\tau_k,\sigma)$ and give $\rho_\theta\ge\rho_*$ there, so
+$\sigma=\tau_{k+1}$.
+\begin{itemize}
+\item \emph{Connector $k$}, $s\in[\tau_k,\tau_k+c_k]$: $|H(s)-\Gamma_k(b_k)|\le c_k$ and $|S_\theta(s)-S_\theta(\tau_k)|\le vc_k$, so by
+Lemma~\ref{lem:D3-W4} at $\tau_k$ (both $\theta$ and $b_k$ satisfy $(H_k)$(i)):
+$\rho_\theta(s)\ge\operatorname{chord}(\theta,b_k)-(1+v)c_k$. Here $\theta-b_k\ge\ell/M+\eta$. If $k\ge2$, also
+$2\pi-(\theta-b_k)\ge2\delta_1+\ell/M+\eta$, so $\operatorname{dist}(\theta,b_k)\ge\min(\ell/M+\eta,\pi)$ and $\rho_\theta\ge\rho_c$. If
+$k=1$ and $\operatorname{dist}(\theta,b_1)<\min(\ell/M+\eta,\pi)$, then $\operatorname{dist}=2\pi-\theta+\delta_1$, so
+$\theta\in(\pi+\delta_1,2\pi-\delta_1]$; the connector-1 segment has ordinate $\ge0$ (its end $S_{\delta_1}(t_\varepsilon)$ has positive
+ordinate, Lemma~\ref{lem:D3-W3}(c)), and $y_\theta(t_\varepsilon)\le\sin\theta\le-\sin\delta_1$, so
+$\rho_\theta(s)\ge-y_\theta(s)\ge\sin\delta_1-vc_1\ge\rho_l$.
+\item \emph{Walk $k$}, $s\in[\tau_k+c_k,\tau_{k+1}]$: $H(s)=S_{\theta'}(\tau_k)$ with $\theta'\in[b_k,a_{k+1}]$, and
+$s-\tau_k\le c_k+\ell$, so $\rho_\theta(s)\ge\operatorname{chord}(\theta,\theta')-v(c_k+\ell)\ge\operatorname{chord}(\theta,\theta')-(\lambda+v)\varepsilon$.
+Here $\theta-\theta'\ge\eta$ and $2\pi-(\theta-\theta')\ge2\delta_1$, so $\rho_\theta(s)\ge\rho_w$.
+\end{itemize}
+So (i) holds on $[0,\tau_{k+1}]$. For (ii) bound $m(r):=|\{s\le\tau_{k+1}:\rho_\theta(s)<r\}|$ for $\rho_*\le r\le R$, by the same
+estimates applied to every earlier window $j\le k$ (each uses Lemma~\ref{lem:D3-W4} at $\tau_j$, legitimate by $(H_j)$(i)):
+\begin{itemize}
+\item Phase 1: $\le2r/(1-v)$ (Lemma~\ref{lem:D3-W2}).
+\item Walks: $\rho_\theta(s)<r$ forces $\operatorname{chord}(\theta,\theta'(s))<r+(\lambda+v)\varepsilon\le1$, so $\theta'(s)$ lies in an
+arc of measure $\le W(r+(\lambda+v)\varepsilon)$; each $\theta'$ is walked at most once, at speed $|\partial\Gamma_j|\le M$: total
+$\le WM(r+(\lambda+v)\varepsilon)$.
+\item Connectors $j\ge2$ contribute only if $\operatorname{chord}(\theta,b_j)<r+(1+v)\varepsilon\le1$, i.e.\ $b_j$ lies in an arc of
+measure $\le W(r+(1+v)\varepsilon)$ (meeting $[\delta_1,2\pi-\delta_1]$ in at most two intervals); the $b_j$ are $\ell/M$ apart, so
+there are at most $2+W(r+(1+v)\varepsilon)M/\ell$ of them, each of duration $\le\varepsilon$. Connector 1 has duration $\le\varepsilon$.
+\end{itemize}
+In total $m(r)\le Ar+B$ with $A,B$ as above (use $\varepsilon M/\ell=Mv/\lambda$). Also $m(r)=0$ for $r<\rho_*$, and
+$\tau_{k+1}\le T_*$. Lemma~\ref{lem:D3-W5} gives (ii). This proves $(H_{k+1})$.
+
+\emph{Everything is seen.} $\operatorname{dist}(\theta,0)\le\delta_1$: Lemma~\ref{lem:D3-W3}(a). $\theta\in[b_k,a_{k+1}]$ (walked in
+window $k$): Harry is at $\Gamma_k(\theta)=S_\theta(\tau_k)$ at a time $s_\theta\in[\tau_k,\tau_{k+1}]$; if $\theta$ were unseen up to
+$s_\theta$, then $\rho_\theta>0$ there and $\rho_\theta(s_\theta)=|S_\theta(s_\theta)-S_\theta(\tau_k)|\le v(c_k+\ell)\le(v+\lambda)\varepsilon\le\varepsilon$,
+a contradiction. $\theta\in[a_{k+1},b_{k+1}\wedge(2\pi-\delta_1)]$ (skipped): at $\tau_{k+1}$, $H=S_{a_{k+1}}(\tau_k)$, so if $\theta$ is
+unseen, $\rho_\theta(\tau_{k+1})\le v(c_k+\ell)+M(\theta-a_{k+1})\le(v+\lambda+M\kappa)\varepsilon\le\varepsilon$, a contradiction
+($\theta\in[b_k,2\pi-\delta_1]$, so $|\partial\Gamma_k|\le M$ on $[a_{k+1},\theta]$). These sets cover the circle; the number of
+windows is finite, and the last one ends by $T_*\le22.8$.\qed
+
+\subsection{The ordered phase of a leg-greedy \texorpdfstring{$\varepsilon$}{epsilon}-chase}\label{sec:D3-chase}
+Here $d=1$ and $\varepsilon>0$; $g$, $k$ are as in Section~2, $\theta^*=\arccos(-v)$, and $t_0=1/(1-v)$.
+
+% Referee fix (RD3a, RD3b): alpha* is the target of the current leg (constant on a leg), not inf U(t); Lambda defined.
+% The LG0 paragraph below is RD3a's replacement text.
+\emph{Chase LG0.} Harry runs along the positive $x$-axis up to $t_0$ (catching candidate $0$ exactly). Then he runs straight
+legs. At the start time $t_j$ of each leg let $U(t_j)$ be the set of directions in $(0,2\pi)$ unseen up to $t_j$ (open; see below),
+set $\alpha^*_j:=\inf U(t_j)$ (the \emph{target}; note $\alpha^*_j\notin U(t_j)$ since $U$ is open, but
+$\rho_{\alpha^*_j}\ge\varepsilon$ on $[0,t_j]$ by continuity), and run straight at $S_{\alpha^*_j}$ until
+$\rho_{\alpha^*_j}=\varepsilon/2$. Repeat while $U\ne\emptyset$. During that leg,
+\[
+\alpha^*(t):=\alpha^*_j,\qquad \alpha_e(t):=\sup U(t),\qquad
+\Lambda(t):=\text{length of }\mathcal A(t)=\int_{\alpha^*(t)}^{\alpha_e(t)}|\partial_\alpha S(\alpha,t)|\,d\alpha,
+\]
+where $\mathcal A(t):=\{S_\alpha(t):\alpha\in[\alpha^*(t),\alpha_e(t)]\}$ is the \emph{remaining arc}, and $\Psi:=\rho_{\alpha^*}+\Lambda$.
+Thus $\alpha^*(t)$ is the target of the current leg, constant on the leg; it is \emph{not} $\inf U(t)$, which increases inside a leg
+once the target is seen. Bearings $\beta(\alpha,t)\in(-\pi,\pi]$ are measured from the current heading, so $\beta(\alpha^*,t)=0$.
+The proof of Proposition~\ref{prop:D6}(a) (closedness of the seen set by continuous dependence; $\rho_{\alpha^*}\ge\varepsilon$ at a
+switch; every leg lasts at least $\varepsilon/(2(1-v))$) applies verbatim to LG0, including at $t_0$: $U(t)$ is open, and there are
+finitely many legs before any finite time.
+
+\begin{quote}
+\textbf{(O) at time $t$:} $\beta(\cdot,t)$ is strictly increasing on $[\alpha^*(t),\alpha_e(t)]$ with values in $[0,\pi]$.
+\end{quote}
+
+\begin{proposition}[D3.2: ordered phase of the $\varepsilon$-chase]\label{prop:D32}
+\begin{enumerate}
+\item[(a)] \textup{(O)} holds at $t_0$.
+\item[(b)] On one leg, for two candidates $P,Q$ with bearings in $(0,\pi)$ on the whole leg, $k(\beta_P(s))-k(\beta_Q(s))$ is affine in
+the leg time $s$. Hence, if \textup{(O)} holds at the start $t_s$ of a leg, and $\beta(P,t_e)\le\beta(Q,t_e)$ for all
+$\alpha^*\le P<Q\le\alpha_e(t_s)$ \textup{(}pairs of the arc \emph{at the start} of the leg; $t_e$ is the end of the leg\textup{)},
+then \textup{(O)} holds at every $t\in(t_s,t_e)$ on $[\alpha^*,\alpha_e(t)]$.
+\item[(c)] If \textup{(O)} holds at the end time $t_e$ of a leg, with bearings measured from the old heading, and $U\ne\emptyset$, then it
+holds at the start of the next leg.
+\item[(d)] \textbf{Conditional reduction.} Suppose that
+\begin{quote}
+\textup{(O)} holds at every $t\ge t_0$ of LG0,
+\end{quote}
+and that $v(1+\pi)<1$. Then every candidate is seen by
+\[
+T\le t_0+\frac{2\pi}{(1-v)\bigl(1-v(1+\pi)\bigr)}.
+\]
+\end{enumerate}
+\end{proposition}
+
+Part (d) is a \textbf{conditional reduction}: hypothesis (O) is \emph{not proved} for $t>t_0$, and is in fact false late in the
+chase for some $v$ (Remark~\ref{rem:D3}). Parts (a)--(c) are unconditional.
+
+\begin{proof}
+(a) At $t_0$ the bearings $\theta(\alpha)$ of $S_\alpha(t_0)$ from the initial heading are strictly increasing on $(0,2\pi)$ with
+values in $(\theta^*,2\pi-\theta^*)$, $\cos\theta^*=-v$ (Lemma~\ref{lem:A1}, whose proof is for one direction at a time and applies to
+every $\alpha\in(0,2\pi)$). From the new heading (towards $S_{\alpha^*}$) the bearings are
+$\theta(\alpha)-\theta(\alpha^*)\in[0,2\pi-2\theta^*)\subset[0,\pi)$, strictly increasing.
+
+% Referee fix (RD3a, RD3b): the end-of-leg hypothesis must cover the pairs of the arc at the START of the leg, since
+% alpha_e can decrease inside a leg. Both referees give replacement texts; RD3b's (explicit t_s, t_e, conclusion on
+% [alpha*, alpha_e(t)]) is the more careful one and is used in the statement of (b).
+(b) The affine formula is Lemma~\ref{lem:A4} (Proposition~\ref{prop:integrals}: $C$ constant, $h$ decreasing at rate $1-v^2$).
+Bearings in $(0,\pi)$ stay in $(0,\pi)$, and the forward and backward rays are invariant (Lemma~\ref{lem:A2}). An affine function
+that is $>0$ at $s=0$ and $\ge0$ at the end is $>0$ in between, and $k$ is strictly decreasing; this applies to every pair
+$P<Q$ in $[\alpha^*,\alpha_e(t_s)]$, which contains $[\alpha^*,\alpha_e(t)]$ because $\alpha_e$ is non-increasing. A point at
+bearing $0$ at the start other than the target is excluded by strictness; a point at bearing $\pi$ at the start stays at $\pi$,
+and every other point stays below $\pi$.
+
+(c) At the switch the new target $\alpha^{**}>\alpha^*$ has old bearing $b\in[0,\pi]$; the new bearings are the old ones minus $b$,
+strictly increasing on $[\alpha^{**},\alpha_e]\subset[\alpha^*,\alpha_e]$ with values in $[0,\pi-b]$.
+
+% Referee fix (RD3a fix 1): positivity is needed on I x [0, t2] (whole history), with I = [alpha*, alpha_e(t2)];
+% replacement text of RD3a used. Final time computation and monotone convergence as in RD3b.
+(d) Under (O) the only arc point at bearing $0$ is the target, so no arc point is caught (Proposition~\ref{prop:ray}). Let
+$[t_1,t_2]$ be an interval inside a leg. Every $\alpha\in I:=[\alpha^*,\alpha_e(t_2)]$ lies in $\mathcal A(s)$ for all $s\le t_2$
+($\alpha^*$ non-decreasing, $\alpha_e$ non-increasing), is not the target of any leg before $t_2$ except possibly $\alpha=\alpha^*$,
+hence by (O) and Proposition~\ref{prop:ray} is never caught on $[0,t_2]$ (and $\rho_{\alpha^*}\ge\varepsilon/2$); so $\rho$ is
+continuous and positive on $I\times[0,t_2]$, hence bounded below. By the smoothness argument of Lemma~\ref{lem:D3-W1},
+$L_I(t):=\int_I|\partial_\alpha S(\alpha,t)|\,d\alpha$ is $C^1$ on $[t_1,t_2]$, with
+\[
+L_I'=v\int_I\sin^2\!\phi\,\rho^{-1}|\partial_\alpha S|\,d\alpha\le v\int_I|\partial_\alpha\beta|\,d\alpha
+=v\bigl(\beta(\alpha_e(t_2))-0\bigr)\le v\pi,
+\]
+using $\sin^2\!\phi\,|\partial_\alpha S|/\rho\le|\partial_\alpha\beta|$ (Proposition~\ref{prop:length}(2)) and (O) at time $t$ on
+$I\subset[\alpha^*,\alpha_e(t)]$ ($\alpha_e$ is non-increasing). Since $\Lambda(t_2)=L_I(t_2)$ and $L_I(t_1)\le\Lambda(t_1)$,
+$\Lambda(t_2)-\Lambda(t_1)\le v\pi(t_2-t_1)$. With $\rho_{\alpha^*}'=-(1-v)$, $\Psi=\rho_{\alpha^*}+\Lambda$ satisfies
+$\Psi(t_2)-\Psi(t_1)\le-(1-v(1+\pi))(t_2-t_1)$ inside legs. $\Psi$ does not increase at switches, by the elementary switch
+inequality of Proposition~\ref{prop:D6}(b):
+$\Psi_{\rm old}=\varepsilon/2+|\mathrm{arc}(\alpha^*,\alpha^{**})|+\Lambda_{\rm new}\ge\rho_{\alpha^{**}}+\Lambda_{\rm new}$.
+Every leg lasts at least $\varepsilon/(2(1-v))$ (Proposition~\ref{prop:D6}(a), which applies to LG0), so there are finitely many legs
+before any finite time, and $\Psi\ge\varepsilon/2$ while legs run. Finally
+$\Psi(t_0)\le\lim_{t\uparrow t_0}L(t)\le2\pi/(1-v)$ (Proposition~\ref{prop:length}(2); the arc from $S_0$ to $S_{\alpha^*}$ bounds
+$\rho_{\alpha^*}$; the limit exists by monotone convergence, since $|\partial_\alpha S|$ is non-decreasing in $t$). Hence the time
+after $t_0$ is at most $(2\pi/(1-v)-\varepsilon/2)/(1-v(1+\pi))$, which gives the stated bound.
+\end{proof}
+
+\begin{remark}
+Under (O) the bearing of the remaining arc has total variation at most $\pi$, so the quantity $K$ of Proposition~\ref{prop:D6}
+is at most $\pi$; this is the mechanism of Proposition~\ref{prop:D6}(c) with $K^*=\pi$, and under (O) the proviso (R) is not needed,
+since no arc point is caught. Part (b) is a \emph{criterion}, not a
+proof of order: by itself it says nothing about the end of a leg, whereas (c) needs strict order there. The chain
+(a)$\to$(b)$\to$(c) proves (O) only if strict order at every leg end is verified separately; this is not done.
+\end{remark}
+
+\begin{remark}[Status]\label{rem:D3}
+Theorem~\ref{thm:D3} and Proposition~\ref{prop:D32} were checked by two independent referees (reports \texttt{referee-RD3a.md},
+\texttt{referee-RD3b.md}); no claim was found false, and the fixes they asked for are applied above. Both referees recomputed the
+constants of Lemma~\ref{lem:D3-W6} exactly and simulated strategy W independently: at $v=v_W$ for $\varepsilon=0.1$, $0.01$ and
+$0.001$, every sampled direction is seen, at time $\approx7.45$ (between $7.44$ and $7.46$), and the front stretch
+$\max|\partial_\theta\Gamma_k|$ stays $\le1.08$ (the proof allows $M=3$). The logarithm in $v_W$ enters only where the factor
+$\sin^2\!\phi$ of the stretching rate is discarded (report D3-1, \S2.1).
+
+\textbf{(Numerical, report D3-1 \S3.)} Along the greedy chase LG0, $K(t)\le2.07$ in every run, and its profile over the chase is
+essentially independent of $\varepsilon$ (rows for $\varepsilon=0.1$, $0.01$, $0.001$ agree to about $0.02$). The order (O) never fails
+at $v=0.01$, down to $\varepsilon=10^{-3}$. At $v=0.2$ it fails late: at $87\%$ of the chase for $\varepsilon=0.01$ and at $79\%$ for
+$\varepsilon=0.001$; at the first failure the remaining arc lies in a sector of opening $\le0.40$ rad. Referee RD3b found the same
+pattern independently ((O) held throughout at $v=0.1$, $\varepsilon=0.1$, and failed late in the chase at $v=0.2$ and $0.24$). An
+end-phase argument after the first failure of (O) is missing.
+\end{remark}
