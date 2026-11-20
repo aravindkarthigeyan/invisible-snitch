@@ -35,7 +35,7 @@ The speed limit is tiny because the proof is wasteful, not because the path stop
 
 ## How the path works
 
-**[▶ Try the interactive simulation](http://aravindkarthigeyan.com/invisible-snitch/viz/)**: adjust the Snitch's speed and the vision radius, and compare with the obvious start the proof avoids.
+**[▶ Try the interactive simulation](https://aravindkarthigeyan.com/invisible-snitch/viz/)**: adjust the Snitch's speed and the vision radius, and compare with the obvious start the proof avoids.
 
 1. **Run through.** Harry runs straight out along a line, through the front and a distance $d$ beyond it. Stopping at first contact would leave a corner in the front; running through leaves it smooth, apart from a small hole of directions he has already seen.
 2. **Touch down.** He turns and runs straight at the candidate at angle $\arccos(v + 1/t_1)$, chosen so that this second run meets the front **tangentially**.
