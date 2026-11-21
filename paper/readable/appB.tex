@@ -1,0 +1,548 @@
+% appB.tex -- writer H-touch. Appendix B: the front at touch-down (proof of Theorem thm:touchdown).
+% Uses from the main text: lem:F, def:vflow, lem:vflow, lem:seen, lem:chords, lem:excess, def:designT, thm:touchdown.
+% Defines (here, with these labels): prop:integrals, lem:tau, lem:transport, eq:run2h, eq:run2tau.
+\section{The front at touch-down (proof of the Touch-down Theorem)}\label{app:touchdown}
+
+This appendix proves Theorem~\ref{thm:touchdown}, \emph{perturbatively around $v=0$} (at $v=0$ the front is the unit
+circle, Run~1 is $[0,2]$, $\alpha_0=\pi/3$, and Run~2 is the tangent from $2$ to $e^{i\pi/3}$, with $\rho_0=\sqrt3$,
+$\beta^*=5\pi/6$). The data at the turning time $t_1$ do not involve $\varepsilon$ and are $O(v)$-close to their $v=0$
+values; on Run~2 the exact integrals (Lemma~\ref{lem:transport}) carry them to $t_\td$ with no Gr\"onwall loss. The only
+$\varepsilon$-dependence is explicit: $t_\td$ lies within $\varepsilon/(1-v)$ of the $\varepsilon$-free time $t_c$.
+
+\textbf{Conventions.} We fix an absolute window half-width $\eta\in(0,\frac1{10}]$, small enough for the finitely many
+inequalities marked ``(small $\eta$)''. Then $v_{\mathrm T},\varepsilon_{\mathrm T}$ are chosen small, depending on $\eta$
+only. In this appendix $c,C$ (and $\lesssim,\asymp$) denote positive constants that depend on $\eta$ only. They never depend on
+$v\in(0,v_{\mathrm T}]$, on $\varepsilon\in(0,\varepsilon_{\mathrm T}]$, or on the label. We often use that $X^v,X^\mu=1+O(v)$ for
+$X\in[c,C]$. We write $\mu=v/(1-v)$, $\mu_T=3v/(1+v)$, and $|\theta|_\circ$ for the distance from $\theta$ to $2\pi\mathbb Z$;
+we always take $v_{\mathrm T}\le\frac1{23}$, so that $\mu_T\le\frac18$. Two kinds of smallness alternate within single
+proofs. ``Small $v$'' means $v\le v_{\mathrm T}$, with a threshold depending on $\eta$ only (for instance $C_0v\le\frac12$ in
+Lemma~\ref{lem:B-tail}(b)). ``Small $\varepsilon$'' means $\varepsilon\le\varepsilon_{\mathrm T}$, with a threshold depending
+on $\eta$ only and uniform in $v\le v_{\mathrm T}$ (for instance $C\varepsilon^{2-2\mu}<\frac12$ and
+$\mathcal C(\alpha_0-\eta)>\varepsilon\gmax$ in Lemma~\ref{lem:B-tail}, and $\xie\le\eta/4$); the single exception is
+$2\varepsilon_{\mathrm T}<c_{\mathrm{sep}}(\lambda_0)$ in \S\ref{app:B-proof}.
+
+%----------------------------------------------------------------------
+\subsection{Straight runs}\label{app:B-runs}
+
+While $P$ moves with constant unit velocity, we use the \emph{heading frame}: $P$ is at $0$ and the heading is $1\in\C$. A
+candidate is at $r=\rho e^{i\beta}=z+iy$, and for $0<\beta<\pi$ we put $\tau:=\tan(\beta/2)$.
+
+\begin{proposition}[Exact integrals]\label{prop:integrals}
+On a straight run, a true candidate with $\rho>0$ satisfies $\rho'=v-\cos\beta$ and $\rho\beta'=\sin\beta$, and
+$h:=\rho(\cos\beta+v)$ satisfies $h'=-(1-v^2)$. If $0<\beta<\pi$ at one time, then $\beta$ stays in $(0,\pi)$ and
+$\mathcal C:=\rho\,\frg(\beta)$ is constant, where
+\[
+\frg(\beta):=\frac{\sin\beta}{\tan^v(\beta/2)}=\frac{2\tau^{1-v}}{1+\tau^2},\qquad\frac{\frg'}{\frg}=\frac{\cos\beta-v}{\sin\beta},\qquad
+1\le\gmax:=\max\frg=\frg(\arccos v)\le e^{v^2}.
+\]
+\end{proposition}
+\begin{proof}
+Resolve $r'=v\hat r-1$ along $\hat r$ and $\hat r^\perp$. Then $h'=(\cos\beta+v)(v-\cos\beta)-\rho\sin\beta\,\beta'=v^2-1$. The
+angles $0,\pi$ are equilibria of $\beta'=\sin\beta/\rho$. Finally $\rho'/\rho=(v-\cos\beta)\beta'/\sin\beta=-(\frg'/\frg)\beta'$. At
+$\cos\beta=v$, $\gmax=(1+v)^{(1+v)/2}(1-v)^{(1-v)/2}$, and $\log\gmax=\sum_{n\ge1}v^{2n}/(2n(2n-1))\le v^2$.
+\end{proof}
+
+\begin{lemma}[$\tau$-relations]\label{lem:tau}
+Let $0<\beta<\pi$.
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item $\rho=\frac{\mathcal C}2(\tau^{v-1}+\tau^{v+1})$, $y=\mathcal C\tau^v$, $z=\frac{\mathcal C}2(\tau^{v-1}-\tau^{v+1})$, and
+$h=\frac{\mathcal C}2[(1+v)\tau^{v-1}-(1-v)\tau^{1+v}]$.
+\item $\tau$ is strictly increasing in time. Hence $y$ is non-decreasing. $\min_\tau\rho=\mathcal C/\gmax$ is attained at $\cos\beta=v$,
+and $\rho$ decreases while $\cos\beta>v$.
+\item If $h>0$, then $\tau\le\bigl((1+v)\mathcal C/(2h)\bigr)^{1/(1-v)}$. If $h<0$, then
+$\tau^{1+v}=\frac{2|h|}{(1-v)\mathcal C}\bigl[1+\frac{(1+v)\mathcal C\tau^{v-1}}{2|h|}\bigr]\ge\frac{2|h|}{(1-v)\mathcal C}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) Use $\sin\beta=2\tau/(1+\tau^2)$, $\cos\beta=(1-\tau^2)/(1+\tau^2)$ and $\rho=\mathcal C/\frg$. (b) The bracket in $h$ is strictly
+decreasing in $\tau$, and $h$ is strictly decreasing in time. Also $\frac{d}{d\tau}(\tau^{v-1}+\tau^{v+1})$ has the sign of
+$(1+v)\tau^2-(1-v)$. (c) Rearrange (a).
+\end{proof}
+
+For a family of true candidates, put $q:=\partial_\theta S_\theta=we^{i\psi}$, $\phi:=\beta-\psi$ ($\beta=\arg r$), and let
+$k:=\partial_\theta\psi/w$ be the curvature (so $k=1$ for the unit circle).
+
+\begin{lemma}[True front evolution and transport]\label{lem:transport}
+Let $\theta\mapsto S_\theta$ be a $C^2$ family of true candidates with $\rho>0$.
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item On any $1$-Lipschitz path: $w_t/w=v\sin^2\phi/\rho$ and $\psi_t=-(v/\rho)\sin\phi\cos\phi$.
+\item On a straight run with $0<\beta<\pi$ (heading frame), put $\Xi:=q+ve^{i\beta}\bar q$. Then $\operatorname{Re}\Xi=\partial_\theta h=:\fra$ and
+$\operatorname{Im}\Xi=\tau^v\partial_\theta\mathcal C=:\tau^v\frc$, where $\fra,\frc$ do not depend on time, and
+$(1-v)w\le|\Xi|\le(1+v)w$. If $\fra\ne0$, put $Y_r:=\frc\tau^v/\fra$. Then $(1-v^2)q=\fra(D_\psi+iN_\psi)$, where
+$D_\psi:=1-v\cos\beta-v\sin\beta\,Y_r$ and $N_\psi:=(1+v\cos\beta)Y_r-v\sin\beta$.
+\item For two times $t'<t''$ of the run (data $'$, $''$):
+\[
+k''=\Bigl(\frac{\tau''}{\tau'}\Bigr)^v\Bigl(\frac{w'}{w''}\Bigr)^3(k'+\frS')-\frS'',\quad
+|k''|\le\Bigl(\frac{\tau''}{\tau'}\Bigr)^v\bigl(|k'|+|\frS'|\bigr)+|\frS''|,\quad
+w''\le\frac{1+v}{1-v}\Bigl(\frac{\tau''}{\tau'}\Bigr)^vw',
+\]
+where $\frS:=\frac{v\sin\phi}{(1-v^2)\rho}\bigl[\frac{\rho\,\fra\,\partial_\theta\log\mathcal C}{w^2}-v-\cos(\phi-\psi)\bigr]$. Moreover
+$|\frS|\le\frac{v|\sin\phi|}{(1-v^2)\rho}\bigl[\frac{\rho|\fra\,\partial_\theta\log\mathcal C|}{w^2}+1+v\bigr]$ and
+$|\frS|\le\frac{v(3+v)}{2(1-v)y}$. \textup(The correction $\frS$ comes from the exact identity
+\[
+kw^3=q\times\partial_\theta q=\frac{\tau^vJ}{1-v^2}-w^3\frS,\qquad J:=\fra\,\partial_\theta\frc-\frc\,\partial_\theta\fra
+\ \text{ independent of time,}
+\]
+proved below; eliminating $J$ between two times gives the formula for $k''$.\textup)
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $\partial_t q=v(\Pi/\rho)q$ with $\Pi=I-\hat r\hat r^{\mathsf T}$. Write $T=\cos\phi\,\hat r-\sin\phi\,\hat r^\perp$; then
+$\Pi T=-\sin\phi\,\hat r^\perp$, which gives $w_t$ and $\psi_t$.
+(b) Write $q=X+iY$. Then $\partial_\theta h=X+v\partial_\theta\rho=X+v(X\cos\beta+Y\sin\beta)=\operatorname{Re}\Xi$. By
+Lemma~\ref{lem:tau}(a), $\mathcal C=y\tau^{-v}$, so $\tau^v\partial_\theta\mathcal C=Y-v\rho\partial_\theta\beta=\operatorname{Im}\Xi$. The time
+independence follows from Proposition~\ref{prop:integrals}, because $\partial_\theta$ of a time-independent quantity is
+time-independent. The map $L:x\mapsto x+ve^{i\beta}\bar x$ has singular values $1\pm v$ and
+$L^{-1}=(I-ve^{i\beta}\overline{(\cdot)})/(1-v^2)$. Insert $\Xi=\fra(1+iY_r)$.
+(c) The quantity $J:=\fra\partial_\theta\frc-\frc\partial_\theta\fra$ is time-independent. Differentiating $q=L^{-1}\Xi$ in $\theta$,
+and using $(Ma)\times(Mb)=\det M\,(a\times b)$ together with $\tau^v/\sin\beta=\rho/\mathcal C$, gives
+$kw^3=q\times\partial_\theta q=\tau^vJ/(1-v^2)-w^3\frS$. Eliminate $J$ between $t'$ and $t''$, and use $w'\le w''$ (by (a)). Since
+$|\Xi''|\le(\tau''/\tau')^v|\Xi'|$, the bound on $w''$ follows from (b). For the bounds on $\frS$, use
+$|v+\cos(\phi-\psi)|\le1+v$, and $\rho|\fra\,\partial_\theta\log\mathcal C|=\rho|\operatorname{Re}\Xi\operatorname{Im}\Xi|/y\le(1+v)^2\rho w^2/(2y)$
+together with $\rho\ge y$.
+\end{proof}
+
+\textbf{Design T in the two frames.} Recall Definition~\ref{def:designT}: $t_1=2+\mu$,
+$\alpha_0=\arccos(v+1/t_1)$, $\hat n=e^{i\beta^*}$, $t_a$, $t_\td$ and $t_c=t_1+\rho_0/(1-v)$; we put $\omega(t):=t_c-t$,
+the time left until Harry would meet the true candidate $\alpha_0$. In Run~1
+the candidate $\alpha\in(0,\pi)$ starts with $\rho=1$ and $\beta=\alpha$. So in the Run-1 frame
+\begin{equation}\label{eq:B-run1}
+\mathcal C=\frg(\alpha),\quad h_1:=h(t_1)=-(1-v^2)-(1-\cos\alpha)<0,\quad \fra=-\sin\alpha,\quad \frc=(\cos\alpha-v)\tau_\alpha^{-v},
+\end{equation}
+where $\tau_\alpha=\tan(\alpha/2)$ and $(1-v^2)t_1=(1+v)(2-v)$. The lower half is the mirror image: $S_{2\pi-\alpha}=\overline{S_\alpha}$ during
+Run~1. In Run~2 let $(\frr(\theta),\frb(\theta))$ be the polar coordinates of $p(\theta):=S_\theta(t_1)-P(t_1)$ about $\hat n$,
+$\tau_\frb:=\tan(\frb/2)$, and $\frA:=\partial_\theta\frr$. From now on $\mathcal C=\frr\,\frg(\frb)$, $h$, $\fra$, $\frc$ refer to Run~2. Since
+$(1-v^2)(t_c-t_1)=(1+v)\rho_0$, every label with $\rho>0$ on Run~2 satisfies
+\begin{equation}\label{eq:run2h}
+h(t)=(1+v)(\frr-\rho_0)-\frr(1-\cos\frb)+(1-v^2)\,\omega(t).
+\end{equation}
+If $h(t)>0$, then Lemma~\ref{lem:tau}(c), $v(1+\mu)=\mu$ and $\mathcal C\le2\frr\tau_\frb^{1-v}$ give
+\begin{equation}\label{eq:run2tau}
+\tau\le\tau_\frb\Bigl(\frac{(1+v)\frr}{h}\Bigr)^{1+\mu},\qquad
+\Bigl(\frac{\tau}{\tau_\frb}\Bigr)^v\le\Bigl(\frac{(1+v)\frr}{h}\Bigr)^{\mu},\qquad
+y\le2\frr\,\tau_\frb\Bigl(\frac{(1+v)\frr}{h}\Bigr)^{\mu}.
+\end{equation}
+
+%----------------------------------------------------------------------
+\subsection{Run 1}\label{app:B-run1}
+
+\begin{lemma}[Run 1]\label{lem:B-run1}
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item \emph{(Seen set.)} Let $\alpha_s\in(0,\arccos v)$ be defined by $\frg(\alpha_s)=\varepsilon\gmax$. A true candidate
+$\alpha\in(-\pi,\pi]$ is seen during $[0,t_1]$ if and only if $|\alpha|\le\alpha_s$, and $\alpha_s\le4\varepsilon$. For
+$|\alpha|_\circ>\alpha_s$ we have $\rho_\alpha\ge\varepsilon$ on $[0,t_1]$, so the virtual and true candidates agree there
+(Lemma~\ref{lem:seen}). Every candidate, true or virtual, satisfies $|x_\alpha(t)-e^{i\alpha}|\le vt$.
+\item \emph{(Middle.)} If $|\alpha|_\circ\ge\frac12$, then $\rho_\alpha\ge\frac13$ on $[0,t_1]$, and at $t_1$ we have $w_1=1+O(v)$,
+$\psi_1=\alpha+\frac\pi2+O(v)$ and $k_1=1+O(v)$.
+\item \emph{(Arm.)} Let $0<\alpha\le\frac12$. Then $\rho_1\ge1+v$ and $|k_1|\le C$. The tangent at $t_1$ is $e^{i(\pi/2+\delta)}$ with
+$0\le\delta\le Cy(\alpha,t_1)$. Moreover $w_1\le(1+Cv)(2/\alpha)^{2v}$ and $y(\alpha,t_1)\le C\alpha^{(1-v)/(1+v)}$. The mirror
+statements hold for $-\frac12\le\alpha<0$.
+\item For all $\alpha\in(0,2\pi)$: $\rho_1\ge1+v$, $|k_1|\le C$ and $1\le w_1\le(1+Cv)(2/|\alpha|_\circ)^{2v}$.
+\item Every true candidate $\alpha\in(0,2\pi)$ exists on $[0,t_\td]$. The candidate $\alpha=0$ is caught at time $1/(1-v)<t_1$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) Let $\alpha\in(0,\pi)$; the lower half follows by mirror symmetry. By Lemma~\ref{lem:tau}(b), $\cos\beta$ decreases. By
+\eqref{eq:B-run1}, $\cos\beta_1<-v$ at $t_1$. If $\alpha\le\arccos v$, the minimum point $\cos\beta=v$ is passed, so
+$\min_{[0,t_1]}\rho=\frg(\alpha)/\gmax$. This is $\le\varepsilon$ iff $\alpha\le\alpha_s$, because $\frg$ is increasing on
+$(0,\arccos v]$. If $\alpha>\arccos v$, then $\rho$ increases and $\min\rho=1$. The label $\pi$ has $\beta\equiv\pi$. For
+$\alpha\le\pi/2$, $\frg(\alpha)\ge\tau_\alpha^{1-v}\ge(\alpha/2)^{1-v}$, so $\alpha_s\le2(\varepsilon\gmax)^{1/(1-v)}\le4\varepsilon$.
+Speeds are at most $v$ (Lemma~\ref{lem:F}(i)).
+
+(b) By mirror symmetry let $\alpha\in[\frac12,\pi]$. For $\alpha\le\frac\pi2$, $\rho\ge y\ge\sin\alpha\ge\frac13$, since $y$ is
+non-decreasing. For $\alpha\in[\frac\pi2,\pi]$, the coordinate $X=\operatorname{Re}S_\alpha$ satisfies $(X-t)'\le v-1<0$, so
+$X-t\le\cos\alpha\le0$, and $y\ge\sin\alpha$ ($y$ non-decreasing); so $\rho^2\ge\cos^2\alpha+\sin^2\alpha=1$. By
+Lemma~\ref{lem:transport}(a), $(\log w)_t\in[0,3v]$ and $|\psi_t|\le3v$; integrating over $[0,t_1]$, $t_1\le3$, gives
+$w_1=1+O(v)$ and $\psi_1=\alpha+\frac\pi2+O(v)$. For the curvature let first $\alpha<\pi$, so $0<\beta<\pi$ on Run~1. At $t=0$
+we have $w=k=\rho=1$, $\phi=-\pi/2$ and $\psi=\alpha+\pi/2$, and \eqref{eq:B-run1} gives $\fra\,\partial_\alpha\log\mathcal C=-(\cos\alpha-v)$;
+so the bracket in the definition of $\frS$ vanishes, $\frS(0)=0$ (for every $\alpha\in(0,\pi)$). Lemma~\ref{lem:transport}(c)
+from $t'=0$ gives $k_1=(\tau_1/\tau_\alpha)^v/w_1^3-\frS_1$. Here $(\log\tau)'=\beta'/\sin\beta=1/\rho\le3$, so
+$(\tau_1/\tau_\alpha)^v\le e^{9v}$; and $|\frS_1|\le Cv$ by the first bound on $\frS$, since $\frac13\le\rho_1\le1+2t_1$, $w_1\ge1$
+and $|\fra\,\partial_\alpha\log\mathcal C|=|\cos\alpha-v|\le1+v$. Hence $k_1=1+O(v)$. For $\alpha=\pi$ use the continuity of $k_1$ in $\alpha$ (the
+front is smooth there, as $\rho\ge1$).
+
+(c) Since $|h_1|=\rho_1|\cos\beta_1+v|\le(1-v)\rho_1$ and $|h_1|\ge1-v^2$, we get $\rho_1\ge1+v$. As in (b), $\frS(0)=0$, $w=k=1$
+at $t=0$.
+Put $\mathcal K:=(\tau_1/\tau_\alpha)^v\ge1$. Lemma~\ref{lem:transport}(c) from $t'=0$ gives
+$k_1=\mathcal K/w_1^3-\frS_1$. From $(1+v)w_1\ge\operatorname{Im}\Xi=(\cos\alpha-v)\mathcal K$ we get
+$0\le\mathcal K/w_1^3\le(1+v)/(\cos\frac12-v)\le2$. Since $|\fra\,\partial_\alpha\log\mathcal C|\le1$ and $\rho_1\ge1$, we have $|\frS_1|\le3v$.
+By Lemma~\ref{lem:transport}(b), $(1-v^2)q$ has real part $-\sin\alpha(1-v\cos\beta_1)-v\sin\beta_1(\cos\alpha-v)\mathcal K<0$ and
+imaginary part $v\sin\alpha\sin\beta_1+(1+v\cos\beta_1)(\cos\alpha-v)\mathcal K>0$. Hence
+$\tan\delta\le\frac{(1+v)\sin\alpha}{(1-v)(\cos\alpha-v)}+\frac{v\sin\beta_1}{1-v}\le Cy$, using $\sin\alpha\le y$ and
+$\sin\beta_1=y/\rho_1$. Next, $|\Xi|^2=\sin^2\alpha+(\cos\alpha-v)^2\mathcal K^2\le\mathcal K^2$, so $w_1\le\mathcal K/(1-v)$. By
+Lemma~\ref{lem:tau}(c) and $\tau_1>1$, $(1-v)\tau_1^{1+v}\le2|h_1|/\mathcal C+1+v\le K_E\,\tau_\alpha^{-(1-v)}$ with an absolute $K_E\ge1$, because
+$\mathcal C=\frg(\alpha)\ge\tau_\alpha^{1-v}$. So $\mathcal K\le K_E^{v}\tau_\alpha^{-2v/(1+v)}\le(1+Cv)(2/\alpha)^{2v}$, and
+$y=\mathcal C\tau_1^v\le2\tau_\alpha^{1-v}(K_E\tau_\alpha^{-(1-v)})^{v/(1+v)}\le C\alpha^{(1-v)/(1+v)}$.
+
+(d) Combine (b) and (c). The bound $\rho_1\ge1+v$ only used $h_1\le-(1-v^2)$.
+
+(e) On a straight run, $\rho\ge \mathcal C/\gmax>0$ while $0<\beta<\pi$. In Run~1, $\mathcal C=\frg(\alpha)>0$ for $\alpha\ne0,\pi$, and $\alpha=\pi$ has
+$\rho\ge1$. In Run~2, $\frb\in(0,\pi)$ for $\theta\ne\alpha_0$ (Lemma~\ref{lem:B-window}(a) below), and $\alpha_0$ stays on the
+ray at distance $\rho_0-(1-v)(t-t_1)>0$ for $t<t_c$, while $t_\td<t_c$. The candidate $0$ lies on the axis ahead of $P$ and is
+caught at time $1/(1-v)$.
+\end{proof}
+
+%----------------------------------------------------------------------
+\subsection{The tangency window at $t_1$}\label{app:B-window}
+
+Let $I_\eta:=[\alpha_0-\eta,\alpha_0+\eta]$ and $\xi:=|\theta-\alpha_0|$. At $v=0$ we have $p(\theta)=e^{i\theta}-2$. Hence
+$\frr=R_0(\theta):=|e^{i\theta}-2|$ and $\frA=2\sin\theta/R_0(\theta)$, with $\frA(\pi/3)=1$.
+
+\begin{lemma}[Window and Run-2 timing]\label{lem:B-window}
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item \emph{(Tangency identity.)} For $\theta\in(0,\pi)$,
+\[
+\partial_\theta\frb=\Lambda(\theta)\sin\frac{\theta-\alpha_0}2,\qquad
+\Lambda(\theta):=\frac{2t_1\sin\beta_1\sin((\theta+\alpha_0)/2)}{\rho_1\sin\theta}>0 .
+\]
+So $\frb$ has a unique zero at $\alpha_0$, and it is a double zero. On the upper half $\frb\in[0,\pi-\beta^*)$, and on the lower half $\frb\in(\pi-\beta^*,2\pi-2\beta^*]$.
+\item \emph{(Timing.)} $\alpha_0\in[\pi/3-2v,\pi/3]$, $\rho_0=\sqrt3+O(v)$ and $\beta^*=5\pi/6+O(v)$. Moreover
+$t_1<t_a<t_\td<t_c$, $t_\td-t_a\le\varepsilon/(1-v)$ and $0<\omega(t_\td)\le v\varepsilon/(3(1-v)^2)$. So
+$t_\td=2+\sqrt3+O(v+\varepsilon)\le4$. The virtual candidate $\alpha_0$ stays on the Run-2 ray, $\rho_{\alpha_0}(t_a)=\varepsilon$, and
+$P(t_\td)=x_{\alpha_0}(t_\td)$. Finally, $P([t_1,t_\td])$ lies within $Cv$ of the segment $[2,e^{i\pi/3}]$.
+\item \emph{(Window data.)} For $\theta\in I_\eta$:
+$\frr\in[1,2]$, $\frA\in[\frac12,\frac32]$, $|\Lambda(\theta)-\Lambda(\alpha_0)|\le C\xi$ with $\Lambda(\alpha_0)\in[1,2]$,
+$c\xi^2\le\frb\le\xi^2$, $c\xi^2\le\tau_\frb\le\xi^2$, $\mathcal C(\theta)\asymp\xi^{2-2v}$, $\fra\in[\frac13,2]$,
+$|\partial_\theta\log\mathcal C|\le C/\xi$, $w_1=1+O(v)$ and $|k_1|\le2$. Further,
+$\tau_\frb^v\partial_\theta\mathcal C\in(0,C\xi]$ for $\theta>\alpha_0$. For $\theta<\alpha_0$ we have $\partial_\theta\mathcal C<0$,
+$|\tau_\frb^v\partial_\theta\mathcal C|\le C\xi$ and $\xi\,\partial_\theta\log\mathcal C\le-1$. In particular $\xi\mapsto \mathcal C(\alpha_0-\xi)$ is
+strictly increasing. The quantity $\frS$ at $t_1$ (Run-2 frame) satisfies $|\frS(t_1)|\le Cv$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) On any straight run, differentiating $\mathcal C=\rho\frg(\beta)$ and $h=\rho(\cos\beta+v)$ in $\theta$ gives
+$(\cos\beta+v)\partial_\theta\mathcal C-\frg\,\partial_\theta h=(1-v^2)\frg\,\rho\,\partial_\theta\beta/\sin\beta$. At $t_1$ in the Run-1 frame, insert
+\eqref{eq:B-run1}, $\frg(\theta)/\frg(\beta_1)=\rho_1$ and $h_1=\rho_1(\cos\beta_1+v)$. This yields
+\[
+(1-v^2)\rho_1\,\partial_\theta\beta_1=\frac{\sin\beta_1}{\sin\theta}\bigl[h_1(\cos\theta-v)+\sin^2\theta\bigr].
+\]
+Inserting $h_1=-(1-v^2)-(1-\cos\theta)$, the bracket equals $(1+v)\bigl[(1+v-v^2)-(2-v)\cos\theta\bigr]
+=(1-v^2)t_1(\cos\alpha_0-\cos\theta)$, because $(1-v^2)t_1=(1+v)(2-v)$ and $\cos\alpha_0=v+1/t_1=(1+v-v^2)/(2-v)$. So the
+bracket vanishes exactly at $\theta=\alpha_0$: this is the defining property of $\alpha_0$. Now $\frb=\beta_1-\beta^*$ on the
+upper half, and $\cos\alpha_0-\cos\theta=2\sin\frac{\theta+\alpha_0}2\sin\frac{\theta-\alpha_0}2$, which gives the identity.
+\emph{Ranges.} For $\theta\in(0,\pi)$, $\beta$ stays in $(0,\pi)$ on Run~1 (Proposition~\ref{prop:integrals}), and $h_1<0$ gives
+$\cos\beta_1<-v$; so $\beta_1\in(\pi/2,\pi)$ and $\frb=\beta_1-\beta^*<\pi-\beta^*$. Since $\frb(\alpha_0)=0$ and
+$\partial_\theta\frb$ has the sign of $\theta-\alpha_0$, $\frb\ge0$ on $(0,\pi)$, i.e.\ $\beta_1\ge\beta^*$. A mirror label has
+polar angle $-\beta_1$ about the Run-1 axis, i.e.\ $\frb=2\pi-\beta_1-\beta^*\in(\pi-\beta^*,2\pi-2\beta^*]$.
+
+(b) We have $\cos\alpha_0-\frac12=v(3-2v)/(2(2-v))\in[0,v]$. By Lemma~\ref{lem:B-run1}(a),
+$|S_{\alpha_0}(t_1)-P(t_1)-(e^{i\pi/3}-2)|\le vt_1+|e^{i\alpha_0}-e^{i\pi/3}|+\mu=O(v)$, and $e^{i\pi/3}-2=\sqrt3e^{5i\pi/6}$. The true
+candidate $\alpha_0$ has $\frb=0$, so it runs along the ray at distance $\rho_0-(1-v)(t-t_1)$. This distance equals $\varepsilon$ at
+$t_a$, and up to $t_a$ the candidate is the virtual one. After $t_a$, the point $x=P+\sigma\hat n$ solves $x'=vF(x-P)$ iff
+$\sigma'=-1+vf(\sigma)$. By uniqueness this is the virtual candidate $\alpha_0$, and it reaches $\sigma=0$ after time
+$\varepsilon\int_0^1d\sigma/(1-v\sigma(2-\sigma))=t_\td-t_a$. Since $\int_0^\varepsilon(1-f)=\varepsilon/3$, we get
+$t_c-t_\td=\int_0^\varepsilon\frac{v(1-f)}{(1-v)(1-vf)}d\sigma\in(0,\frac{v\varepsilon}{3(1-v)^2}]$. The endpoints of $P([t_1,t_\td])$ are
+within $O(v)$ of $2$ and $e^{i\pi/3}$, and distance to a segment is convex.
+
+(c) \emph{Everything here is $\varepsilon$-free.} On $I_\eta\subset[\frac12,\frac\pi2]$, Run-1 candidates have $\rho\ge\frac13$
+(Lemma~\ref{lem:B-run1}(b)). The position $p(\theta)$, the tangent $w_1e^{i\psi_1}$ and $k_1$ are within $O(v)$ of their $v=0$ values
+$e^{i\theta}-2$, $ie^{i\theta}$ and $1$, uniformly on $I_\eta$, and $\alpha_0,\beta^*,t_1$ are within $O(v)$ of $\pi/3,5\pi/6,2$. Hence:
+
+\emph{$\frr,\frA,\Lambda$.} $\frr=|p|$ and $\frA=w_1\cos\angle(e^{i\psi_1},p)$. Also
+$\Lambda=2t_1\sin((\theta+\alpha_0)/2)\operatorname{Im}p/(|p|^2\sin\theta)$, because $\sin\beta_1/\rho_1=\operatorname{Im}p/|p|^2$. At $v=0$
+these are $R_0$, $2\sin\theta/R_0$ and $4\sin((\theta+\pi/3)/2)/R_0^2$, which at $\pi/3$ equal $\sqrt3$, $1$ and $2/\sqrt3$. They are
+$O(v)$-perturbations of smooth functions, and $\partial_\theta\Lambda$ is bounded because $\partial_\theta\operatorname{Im}p=w_1\sin\psi_1$.
+So the stated ranges hold for small $\eta$ and then small $v$.
+
+\emph{$\frb,\tau_\frb,\mathcal C$.} By (a), $\frb(\alpha_0\pm\xi)=\int_0^\xi\Lambda(\alpha_0\pm s)\sin(s/2)\,ds$, which lies in
+$[\frac14\min\Lambda,\frac14\max\Lambda]\cdot\xi^2(1+O(\xi^2))$. Since $\max\Lambda\le2+C\eta$, we get $\frb\le\xi^2$
+(small $\eta$). Then $\tau_\frb=\frac{\frb}{2}(1+O(\eta^4))$ and $\mathcal C=2\frr\tau_\frb^{1-v}/(1+\tau_\frb^2)$. For $X\in[c,1]$ we have
+$X^{1-v}\in[X,1]$.
+
+\emph{$\fra$.} $\fra=\partial_\theta[\frr(\cos\frb+v)]=\frA(\cos\frb+v)-\frr\sin\frb\,\partial_\theta\frb=\frA+O(v)+O(\eta^3)$.
+
+\emph{$\partial_\theta\mathcal C$.} Differentiating $\mathcal C=\frr\frg(\frb)$ and using $\tau^v\frg(\beta)=\sin\beta=2\tau/(1+\tau^2)$ gives
+\[
+\tau_\frb^v\,\partial_\theta\mathcal C=\frac{2\tau_\frb\frA}{1+\tau_\frb^2}+\frr\,\partial_\theta\frb\,(\cos\frb-v).
+\]
+The first term lies in $(0,3\xi^2]$. The second has the sign of $\theta-\alpha_0$, and its modulus lies in $[\xi/6,2\xi]$. Indeed
+$\frr\Lambda\in[1,3]$, since it equals $2$ at $v=0$, $\theta=\pi/3$; also $\sin(\xi/2)\in[\xi/3,\xi/2]$ and $\cos\frb-v\in[\frac12,1]$.
+Since $3\xi^2\le\xi/12$ (small $\eta$), the sum is positive on the forward side, negative on the tail side, and at most $C\xi$ in
+modulus.
+
+\emph{$\partial_\theta\log\mathcal C$} $=\frA/\frr+(\cos\frb-v)\,\partial_\theta\frb/\sin\frb$. Because $\Lambda$ is Lipschitz,
+\[
+\partial_\theta\frb/\frb=\pm\Lambda(\theta)\sin(\xi/2)\Big/\textstyle\int_0^\xi\Lambda\sin(s/2)\,ds=\pm\frac2\xi(1+O(\xi)),
+\]
+and
+$(\cos\frb-v)\frb/\sin\frb=1+O(v+\eta^4)$. So the second term is $\pm\frac2\xi(1+O(\eta+v))$, while $0<\frA/\frr\le\frac32$. This gives
+$|\partial_\theta\log\mathcal C|\le C/\xi$, and on the tail side $\xi\partial_\theta\log\mathcal C\le-2(1-O(\eta+v))+\frac32\eta\le-1$.
+
+\emph{$\frS(t_1)$.} In the Run-2 frame, $\partial_\theta p=(\frA+i\frr\partial_\theta\frb)e^{i\frb}$, so
+$|\sin\phi|=\frr|\partial_\theta\frb|/w_1\le C\xi$. Lemma~\ref{lem:transport}(c) with $\rho=\frr\ge1$ and
+$\rho|\fra\partial_\theta\log\mathcal C|/w^2\le C/\xi$ gives $|\frS(t_1)|\le Cv\xi(1/\xi+1)\le Cv$.
+\end{proof}
+
+%----------------------------------------------------------------------
+\subsection{The forward arc and the virtual labels}\label{app:B-forward}
+
+\begin{lemma}[Forward arc]\label{lem:B-forward}
+Let $\theta=\alpha_0+\xi$ with $0<\xi\le\eta$. For $t\in[t_1,t_c)$, in the Run-2 frame:
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item $c(\xi+\omega)\le h\le C(\xi+\omega)$ and $\rho\ge c_\rho(\xi+\omega)$, where $c_\rho>0$ depends on $\eta$ only.
+\item $\tau\le C\xi^2(\xi+\omega)^{-1-\mu}$, $(\tau/\tau_\frb)^v\le(1+Cv)(\xi+\omega)^{-\mu}$ and $0<y\le C\xi^2(\xi+\omega)^{-\mu}$.
+\item $0<Y_r\le C\xi(\xi+\omega)^{-\mu}$, $|\psi|\le C\xi(\xi+\omega)^{-\mu}\le C\xi^{1-\mu}$ and $1\le w\le C$.
+\item On $[t_1,t_\td]$ we have $\cos\beta>v$, so $\rho(t)\ge\rho(t_\td)\ge c_\rho\xi$. Put $\xi_1:=2/c_\rho$. Every label with
+$\xi\ge\xi_1\varepsilon$ has $\rho\ge2\varepsilon$ on $[0,t_\td]$, so it is true up to $t_\td$ and virtual $=$ true near it. For such
+labels, $\rho(t_\td)\le C\xi$ and $|k(t_\td)|\le C\xi^{-\mu}$.
+\item The true front at every $t\in[t_1,t_c)$ has tangent $\hat n$ at the label $\alpha_0$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) By Lemma~\ref{lem:B-window}(c), $\frr-\rho_0=\int_{\alpha_0}^\theta\frA\in[\frac12\xi,\frac32\xi]$ and
+$\frr(1-\cos\frb)\le\frb^2\le\eta^3\xi$. Insert these into \eqref{eq:run2h}. Then use $h\le(1+v)\rho$.
+(b) This is \eqref{eq:run2tau} with $(1+v)\frr/h\le C/(\xi+\omega)$, $\tau_\frb\le\xi^2$ and $C^\mu=1+O(v)$.
+(c) By Lemma~\ref{lem:B-window}(c), $Y_r=(\tau/\tau_\frb)^v\,\tau_\frb^v\partial_\theta\mathcal C/\fra\in(0,C\xi(\xi+\omega)^{-\mu}]$. In
+particular $Y_r\le C\eta^{1/2}\le1$. In Lemma~\ref{lem:transport}(b), $D_\psi\ge1-2v>0$ and $|N_\psi|\le2Y_r+v\sin\beta$, with
+$\sin\beta=y/\rho\le C\xi(\xi+\omega)^{-\mu}$. Hence $|\psi|\le|\tan\psi|=|N_\psi|/D_\psi\le C\xi(\xi+\omega)^{-\mu}$, and
+$w=\fra|D_\psi+iN_\psi|/(1-v^2)\le C$.
+(d) At $t_\td$, (b) gives $\tau\le C\xi^{1-\mu}\le C\eta^{1/2}$, so $\cos\beta\ge1-2\tau^2>v$ (small $\eta$). Since $\tau$
+increases, the same holds on $[t_1,t_\td]$, and $\rho$ decreases there (Lemma~\ref{lem:tau}(b)). In Run~1, $\rho\ge\frac13$. For
+$\xi\ge\xi_1\varepsilon$: $\omega(t_\td)\le v\varepsilon\le\xi$, so $h(t_\td)\le C\xi$ and $\rho=h/(\cos\beta+v)\le C\xi$. For the
+curvature use Lemma~\ref{lem:transport}(c) with $t'=t_1$, $t''=t_\td$: $(\tau''/\tau')^v\le C\xi^{-\mu}$, $|k_1|\le2$ and
+$|\frS'|\le Cv$. For $\frS''$: $|\sin\phi|\le\sin\beta+|\psi|\le C\xi^{1-\mu}$, $\rho\asymp\xi$ and
+$\rho|\fra\partial_\theta\log\mathcal C|/w^2\le C$, so $|\frS''|\le Cv\xi^{-\mu}$.
+(e) For $t<t_c$ the front is smooth near $\alpha_0$, and by (c) $\psi\to0$ as $\xi\downarrow0$ with $\omega(t)>0$ fixed.
+\end{proof}
+
+The delicate point on the forward side is $\xi<\xi_1\varepsilon$. There the virtual candidate may come within $\varepsilon$ of
+$P$ and differ from the true one, and we must show that its tangent is still almost $\hat n$.
+
+\begin{lemma}[Virtual labels next to $P(t_\td)$]\label{lem:B-virtual}
+For $0\le\xi\le\eta$, the virtual front at $t_\td$ satisfies $|\psi(\alpha_0+\xi,t_\td)|\le C\xi^{1-\mu}$ and $1\le w\le C$, and
+$\psi(\alpha_0,t_\td)=0$. Here $C$ depends on $\eta$ (and on $\xi_1$, which depends on $\eta$).
+\end{lemma}
+\begin{proof}
+For $\xi\ge\xi_1\varepsilon$ this is Lemma~\ref{lem:B-forward}(c),(d). Let $0<\xi<\xi_1\varepsilon$.
+
+\emph{Up to $t_a$ the label is true.} By \eqref{eq:run2h}, the difference $h_\theta(t)-h_{\alpha_0}(t)=(1+v)(\frr-\rho_0)-\frr(1-\cos\frb)\ge c\xi$
+does not depend on $t$. Moreover $h_{\alpha_0}(t)=(1+v)\rho_{\alpha_0}(t)\ge(1+v)\varepsilon$ for $t\le t_a$. Hence
+$(1+v)\rho_\theta\ge h_\theta>(1+v)\varepsilon$ on $[t_1,t_a]$, and $\rho_\theta\ge\frac13$ in Run~1. So virtual $=$ true on $[0,t_a]$.
+Lemma~\ref{lem:B-forward}(b),(c) at $t_a$, where $\omega(t_a)\ge\varepsilon$, give $|\psi(t_a)|\le C\xi\varepsilon^{-\mu}$,
+$y(t_a)\le C\xi^2\varepsilon^{-\mu}$ and $w(t_a)\le C$.
+
+\emph{On $[t_a,t_\td]$, of length $\le\varepsilon/(1-v)$, the regularised field acts.} With $r=x_\theta-P=(z+iy)\hat n$ we have
+$y'=v(f(\rho)/\rho)y\le(2v/\varepsilon)y$, so $y\le e^{2\mu}y(t_a)$. By Lemma~\ref{lem:vflow}(b),
+$|\psi_t|\le v\rho|\sin\phi|/\max(\rho,\varepsilon)^2$. Here $\rho|\sin\phi|=|T\times r|\le y+\rho|\psi|$ and
+$\rho/\max(\rho,\varepsilon)^2\le1/\varepsilon$, so $|\psi|'\le(v/\varepsilon)|\psi|+vy/\varepsilon^2$. By Gr\"onwall,
+\[
+|\psi(t_\td)|\le e^{\mu}\Bigl[|\psi(t_a)|+\frac{\varepsilon}{1-v}\cdot\frac{v}{\varepsilon^2}e^{2\mu}y(t_a)\Bigr]
+\le C\xi\varepsilon^{-\mu}\Bigl(1+v\frac{\xi}{\varepsilon}\Bigr)\le C(1+\xi_1)\,\xi_1^{\mu}\,\xi^{1-\mu},
+\]
+where $\xi<\xi_1\varepsilon$ is used twice: $\xi/\varepsilon<\xi_1$ and $\varepsilon^{-\mu}<\xi_1^\mu\xi^{-\mu}$. Without this bound the
+additive term $vy/\varepsilon^2$ would not be controlled. Similarly $w_t\le(2v/\varepsilon)w$ (Lemma~\ref{lem:F}(ii)) gives
+$w(t_\td)\le e^{2\mu}C$.
+
+\emph{The label $\alpha_0$.} The virtual front is $C^1$ (Lemma~\ref{lem:vflow}(a)). At $t_a$ it coincides with the true front on
+$(\alpha_0,\alpha_0+\xi_1\varepsilon)$, so its tangent at $\alpha_0$ is $\hat n$ (Lemma~\ref{lem:B-forward}(e)). Thus $\psi(t_a)=0$, and
+$y\equiv0$ on the ray. The same differential inequality then gives $\psi(\alpha_0,t)=0$ on $[t_a,t_\td]$.
+\end{proof}
+
+%----------------------------------------------------------------------
+\subsection{The tail and its seen set}\label{app:B-tail}
+
+\begin{lemma}[Tail]\label{lem:B-tail}
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item There is a unique $\be=\alpha_0-\xie$ with $\xie\in(0,\eta)$ and $\mathcal C(\be)=\varepsilon\gmax$. Moreover
+$\xie\asymp\varepsilon^{1/(2-2v)}$ and $\xie\ge\varepsilon/2$.
+\item Every true candidate $\theta\in[\be,\alpha_0]$ is seen by $t_\td$.
+\item Let $\theta=\alpha_0-\xi$ with $\xie\le\xi\le\eta$. Then $\rho_\theta>0$ on $[0,t_\td]$, and at $t_\td$ in the Run-2 frame:
+$h\le-c\xi$, $|h|\le C\xi$, $\tau^{1+v}\asymp\xi^{-(1-2v)}$, $-C\xi\le z\le-c\xi$, $\rho\asymp\xi$, $0<y\le C\xi^{2-\mu_T}$,
+$(\tau/\tau_\frb)^v\le(1+Cv)\xi^{-\mu_T}$, $-C\xi^{1-\mu_T}\le\psi<0$, $1\le w\le C$ and $|k|\le C\xi^{-\mu_T}$.
+\item The virtual and true candidates $\be$ coincide on $[0,t_\td]$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) By Lemma~\ref{lem:B-window}(c), $\xi\mapsto \mathcal C(\alpha_0-\xi)$ is continuous and strictly increasing, and it is
+$\asymp\xi^{2-2v}$. Also $\mathcal C(\alpha_0-\eta)\ge c\eta^2>\varepsilon\gmax$ for small $\varepsilon$, and $\mathcal C\to0$ as $\xi\to0$. So $\be$
+exists and is unique, and $\varepsilon\gmax=\mathcal C(\be)\asymp\xie^{2-2v}$. Finally,
+$\mathcal C(\alpha_0-\varepsilon/2)\lesssim(\varepsilon/2)^{2-2v}<\varepsilon$ for small $\varepsilon$ (as $2-2v>1$), so $\xie>\varepsilon/2$.
+
+(c) Here $\rho_0-\frr\in[\frac12\xi,\frac32\xi]$ and $\frr(1-\cos\frb)\le\eta^3\xi$. By Lemma~\ref{lem:B-window}(b) and (a),
+$(1-v^2)\omega(t_\td)\le v\varepsilon\le2v\xi$. So \eqref{eq:run2h} gives $-C\xi\le h\le-c\xi$. Lemma~\ref{lem:tau}(c) gives
+$\tau^{1+v}\ge2|h|/((1-v)\mathcal C)\ge c\xi^{-(1-2v)}\ge c\eta^{-1/2}$, so $\tau$ is large (small $\eta$). The correction in
+Lemma~\ref{lem:tau}(c) is $\mathrm{corr}:=(1+v)\mathcal C\tau^{v-1}/(2|h|)$; eliminating $\mathcal C/|h|$ with the identity
+there gives $\mathrm{corr}=(1+v)/((1-v)\tau^2-(1+v))\le1$ since $\tau$ is large, so $\tau^{1+v}\asymp|h|/\mathcal C\asymp\xi^{-(1-2v)}$. Then
+$y=\mathcal C\tau^v=\mathcal C^{1/(1+v)}(\mathcal C\tau^{1+v})^{v/(1+v)}\asymp\xi^{(2-2v)/(1+v)}\xi^{v/(1+v)}=\xi^{2-\mu_T}$. Next,
+$\tau/\tau_\frb\le C\xi^{-(1-2v)/(1+v)-2}=C\xi^{-3/(1+v)}$, which gives the bound on $(\tau/\tau_\frb)^v$. Since $z=h-v\rho$ and
+$\rho\le|z|+y$, we get $|z|\asymp\xi\asymp\rho$. On Run~2, $\rho\ge \mathcal C/\gmax>0$.
+For $\psi$: $\fra\ge\frac13$ and $\tau_\frb^v\partial_\theta\mathcal C<0$ with modulus $\le C\xi$, so $Y_r<0$ and $|Y_r|\le C\xi^{1-\mu_T}$.
+Since $\cos\beta<-v$, Lemma~\ref{lem:transport}(b) gives $D_\psi\ge1$ and $N_\psi<0$. So $-\pi/2<\psi<0$ and
+$|\psi|\le|N_\psi|\le|Y_r|+v\sin\beta\le C\xi^{1-\mu_T}$, as $\sin\beta=y/\rho$. Also $w=\fra|D_\psi+iN_\psi|/(1-v^2)\le C$. Finally,
+Lemma~\ref{lem:transport}(c) between $t_1$ and $t_\td$ gives
+$|k|\le C\xi^{-\mu_T}(2+Cv)+|\frS''|$, with $|\frS''|\le\frac{Cv\xi^{1-\mu_T}}{\xi}(C+2)\le Cv\xi^{-\mu_T}$.
+
+(d) On Run~2, $\rho\ge \mathcal C(\be)/\gmax=\varepsilon$, and on Run~1, $\rho\ge\frac13$. Apply Lemma~\ref{lem:seen}.
+
+(b) This is the delicate part on the tail side: for tiny $\xi$ the candidate meets $P$ almost head-on, near $t_a$. There are
+three ranges.
+\emph{$\xi=0$:} $\rho_{\alpha_0}(t_a)=\varepsilon$.
+\emph{$C_0v\varepsilon\le\xi\le\xie$} ($C_0$ large): by monotonicity $\mathcal C(\theta)\le \mathcal C(\be)=\varepsilon\gmax$. By \eqref{eq:run2h},
+$h(t_\td)\le-\frac12\xi+v\varepsilon\le0$ (the term $-\frr(1-\cos\frb)$ is $\le0$). So $\cos\beta(t_\td)\le-v$, while $\cos\beta(t_1)=\cos\frb>v$. Hence $\beta$ crosses
+$\arccos v$ in $(t_1,t_\td)$, and there $\rho=\mathcal C/\gmax\le\varepsilon$ (Lemma~\ref{lem:tau}(b)).
+\emph{$0<\xi\le\varepsilon/2$:} at $t_a$, $(1-v^2)\omega(t_a)=(1+v)\varepsilon$, so
+$h(t_a)=(1+v)(\varepsilon-(\rho_0-\frr))-\frr(1-\cos\frb)$. Here $\rho_0-\frr\in[\frac12\xi,\frac32\xi]$ and $\frac32\xi\le\frac34\varepsilon$
+(this uses $\frA\le\frac32<2$). Also $\frr(1-\cos\frb)\le\xi^4\le\varepsilon\xi^3$. Hence $c\varepsilon\le h(t_a)\le(1+v)(\varepsilon-\frac12\xi)$.
+By \eqref{eq:run2tau}, $\tau(t_a)\le C\xi^2\varepsilon^{-1-\mu}$. Then $\cos\beta+v\ge1+v-2\tau^2$, and
+\[
+\rho(t_a)=\frac{h}{\cos\beta+v}\le\frac{(1+v)(\varepsilon-\frac12\xi)}{1+v-2\tau^2}<\varepsilon
+\iff2\tau^2\varepsilon<\tfrac12(1+v)\xi .
+\]
+This holds because $2\tau^2\varepsilon\le C\xi^4\varepsilon^{-1-2\mu}\le C\varepsilon^{2-2\mu}\xi$, which is $<\frac12\xi$ for small
+$\varepsilon$. So the candidate is seen at $t_a$.
+For small $v$ we have $C_0v\varepsilon\le\varepsilon/2\le\xie$, so the three ranges cover $[\be,\alpha_0]$.
+\end{proof}
+
+%----------------------------------------------------------------------
+\subsection{The bulk and the hole}\label{app:B-bulk}
+
+\begin{lemma}[Bulk, hole, chords]\label{lem:B-bulk}
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item \emph{(Bulk.)} Let $\theta\in(0,2\pi)\setminus I_\eta$. Then $y(\theta,t)\ge c$ on $[t_1,t_\td]$. At $t_\td$ the true front is
+smooth near $\theta$, with $|k|\le C$ and $1\le w\le(1+Cv)(2/|\theta|_\circ)^{2v}$.
+\item \emph{(Hole.)} The limit $Z_1:=\lim_{\alpha\to0\pm}S_\alpha(t_1)$ exists and equals $P(t_1)-(1+v)$. Put $r_h:=\frac1{100}$.
+The set $\Gamma_1:=\{S_\alpha(t_1):0<|\alpha|\le r_h\}\cup\{Z_1\}$ is a $C^1$ arc of finite length, with tangent $i$ at $Z_1$. Let $\Phi$
+be the time-$(t_1\to t_\td)$ flow map of $x\mapsto v(x-P(t))/|x-P(t)|$. Then $\Phi$ is a $C^\infty$ diffeomorphism of
+$\bar B(1,\frac1{50})\supset\Gamma_1$ onto its image, and $Z_s=\Phi(Z_1)=\lim_{\alpha\to0\pm}S_\alpha(t_\td)$. The image
+$\Gamma_s:=\Phi(\Gamma_1)$ is a $C^1$ arc through $Z_s$, it is the true front off $\alpha=0$, and its unit tangent is $C$-Lipschitz in
+arclength.
+\item \emph{(Chords.)} Let $\theta_a,\theta_b\in[0,2\pi)$ with $|e^{i\theta_b}-e^{i\theta_a}|\ge2\varepsilon$. For $\bullet=a,b$ let $X_\bullet$
+be the position at $t_\td$ of the virtual candidate $\theta_\bullet$, or of the true candidate $\theta_\bullet\neq0$, or $Z_s$ if
+$\theta_\bullet=0$. Then $|X_b-X_a|\ge|e^{i\theta_b}-e^{i\theta_a}|$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) By Lemma~\ref{lem:B-window}(a),(b), $\frb$ is monotone on each side of $\alpha_0$ on the upper half. So off $I_\eta$ it satisfies
+$\frb\ge\min\frb(\alpha_0\pm\eta)\ge c\eta^2$, and $\frb<\pi-\beta^*=\pi/6+O(v)$. On the lower half and at $\theta=\pi$,
+$\frb\in[\pi-\beta^*,2\pi-2\beta^*]\subset[\pi/7,\pi/2]$. Since $\frr=\rho_1\ge1$ (Lemma~\ref{lem:B-run1}(d)), we get
+$y(t_1)=\frr\sin\frb\ge c$, and $y$ is non-decreasing on Run~2. So $\tau(t_1)=\tau_\frb\ge c$. Also
+$\tau(t_\td)=(\rho-z)/y\le2\rho/c\le C$, because $\rho\le\frr+2(t_\td-t_1)\le C$. Hence $(\tau(t_\td)/\tau_\frb)^v=1+O(v)$, and
+$|\frS|\le Cv/y\le Cv$ at both times (Lemma~\ref{lem:transport}(c)). Lemma~\ref{lem:transport}(c) and Lemma~\ref{lem:B-run1}(d) give
+the bounds. The front is smooth because $\rho>0$ on $[0,t_\td]$.
+
+(b) Let $0<\alpha\le\frac12$; negative $\alpha$ follows by mirror symmetry. In the Run-1 frame, $z=h_1-v\rho_1<0$ and $\rho_1\le|z|+y$.
+So $|h_1|\le(1-v)|z|\le|h_1|+vy$, i.e.\ $0\le|z|-(1+v)\le(1-\cos\alpha+vy)/(1-v)$. Since $y(\alpha,t_1)\le C\alpha^{(1-v)/(1+v)}\to0$
+(Lemma~\ref{lem:B-run1}(c)), $S_\alpha(t_1)\to Z_1$. The tangents $e^{i(\pi/2\pm\delta)}$ tend to $i$, and
+$w_1\le(1+Cv)(2/|\alpha|)^{2v}$ is integrable since $2v<1$. So the arclength parametrisation of $\Gamma_1$ is $C^1$.
+Next, the segment $[2,e^{i\pi/3}]$ has distance $\frac12$ from $1$: the foot of the perpendicular, $(5+i\sqrt3)/4$, is its midpoint.
+By Lemma~\ref{lem:B-window}(b), every trajectory starting in $\bar B(1,\frac1{50})$ at $t_1$ stays at distance
+$\ge\frac12-Cv-\frac1{50}-2v\ge\frac14$ from $P$ up to $t_\td$. Along such trajectories the field is smooth with bounded
+derivatives, so $\Phi$ is a diffeomorphism there. Also $|S_\alpha(t_1)-1|\le r_h+3v\le\frac1{50}$ for $|\alpha|\le r_h$. Off $Z_s$,
+$\Gamma_s$ is the true front at labels outside $I_\eta$, whose curvature is $\le C$ by (a). Its tangent angle is continuous and has
+derivative $\le C$ off one point, so it is $C$-Lipschitz.
+
+(c) Virtual candidates solve $X'=vF(X-P)$, and true candidates solve $X'=v(X-P)/|X-P|$ without meeting $P$
+(Lemma~\ref{lem:B-run1}(e)). All start at $e^{i\theta}$ at time $0$, so Lemma~\ref{lem:chords}(b) applies on $[0,t_\td]$. If
+$\theta_a=0$, replace $X_a$ by $S_\alpha$ with $\alpha\to0$ from one side. If $\theta_b\neq\pi$, choose the side with
+$|e^{i\alpha}-e^{i\theta_b}|\ge|1-e^{i\theta_b}|$; if $\theta_b=\pi$, either side has $|e^{i\alpha}-e^{i\theta_b}|>2\varepsilon$. Apply
+Lemma~\ref{lem:chords}(b) and pass to the limit using (b).
+\end{proof}
+
+%----------------------------------------------------------------------
+\subsection{The arclength curve}\label{app:B-curve}
+
+Recall from Theorem~\ref{thm:touchdown} the curve $\Upsilon$ on $[\alpha_0,2\pi+\be]$: virtual candidates on
+$[\alpha_0,\alpha_0+\xi_1\varepsilon]$, true candidates on the rest except $2\pi$, and $Z_s$ at $2\pi$. Let $x^0$ be its arclength
+reparametrisation, $\Theta(u)$ the label of $x^0(u)$, and $u':=U-u$. The \emph{forward zone} is $\{\Theta\in[\alpha_0,\alpha_0+\eta]\}$,
+with $\xi=\Theta-\alpha_0$. The \emph{tail zone} is $\{\Theta\in[2\pi+\alpha_0-\eta,2\pi+\be]\}$, with $\xi=2\pi+\alpha_0-\Theta\in[\xie,\eta]$.
+The rest is the \emph{bulk}. We write $T=e^{i\psi}\hat n$ for the unit tangent.
+
+\begin{lemma}[The curve $x^0$]\label{lem:B-curve}
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item $x^0$ is $C^1$ with $|\partial_ux^0|\equiv1$, and $|U-2\pi|\le C(v+\varepsilon^{1/2})$. In particular $1\le U\le8$.
+\item On the forward zone, $\xi\le u\le C_w\xi$ and $|T-\hat n|\le|\psi|\le C\xi^{1-\mu}$. On the tail zone,
+$\xi-\xie\le u'\le C_w(\xi-\xie)$ and $-C\xi^{1-\mu_T}\le\psi<0$. Here $C_w$ depends on $\eta$ only.
+\item Put $u_v:=C_w\xi_1$. On $\{u\ge u_v\varepsilon\}$ the tangent angle is locally Lipschitz, with a.e.\ derivative $k$ satisfying
+$|k|\le C\xi^{-\mu}$ on the forward zone, $|k|\le C\xi^{-\mu_T}$ on the tail zone, and $|k|\le C$ on the bulk (across $Z_s$ too).
+\item If $\Theta_a<\Theta_b$, $\Delta:=\Theta_b-\Theta_a$ and $\lambda:=u_b-u_a$, then $\lambda\le C_\Delta\Delta^{1/2}$. Hence $\lambda>\lambda_0$
+implies $\Delta>(\lambda_0/C_\Delta)^2$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\emph{Stretch.} We claim that at every label $\theta\ne2\pi$ of $\Upsilon$,
+\begin{equation}\label{eq:B-stretch}
+1\le w\le(1+Cv)\,\mathfrak m(\theta),\qquad \mathfrak m(\theta):=\begin{cases}(2/|\theta|_\circ)^{2v},&\theta\notin I_\eta,\\ |\theta-\alpha_0|^{-\mu_T},&\theta\in I_\eta,\end{cases}
+\end{equation}
+and that $w\le C_w$ on $I_\eta$. On the bulk this is Lemma~\ref{lem:B-bulk}(a). On true window labels, Lemma~\ref{lem:transport}(c)
+with $w_1=1+O(v)$ gives $w\le(1+Cv)(\tau/\tau_\frb)^v$. Lemma~\ref{lem:B-forward}(b) bounds this by $(1+Cv)\xi^{-\mu}\le(1+Cv)\xi^{-\mu_T}$,
+and Lemma~\ref{lem:B-tail}(c) bounds it by $(1+Cv)\xi^{-\mu_T}$. On virtual labels, $w(t_\td)\le e^{2\mu}w(t_a)$, and $w(t_a)$ is
+bounded by the same forward-arc argument with $\omega(t_a)\ge\varepsilon>\xi/\xi_1$. The bound $w\le C_w$ comes from
+Lemmas~\ref{lem:B-forward}(c), \ref{lem:B-virtual} and~\ref{lem:B-tail}(c).
+
+(a) $\Upsilon$ is $C^1$ in the label with $|\partial_\theta\Upsilon|\ge1$ on $[\alpha_0,2\pi)$ and on $(2\pi,2\pi+\be]$. Indeed it is a virtual
+front (Lemma~\ref{lem:vflow}(a)) or a smooth true front, and the two agree on a neighbourhood of $\alpha_0+\xi_1\varepsilon$, where
+$\rho>\varepsilon$ (Lemma~\ref{lem:B-forward}(d)). Near $2\pi$ it is the arc $\Gamma_s$. By \eqref{eq:B-stretch}, using
+$\int_0^\pi(2/x)^{2v}dx=\pi+O(v)$ and $\int_0^\eta\xi^{-\mu_T}d\xi=\eta+O(v)$,
+\[
+2\pi-\xie\le U=\int_{\alpha_0}^{2\pi+\be}w\,d\theta\le(1+Cv)(2\pi+Cv),
+\]
+and $\xie\le C\varepsilon^{1/2}$. So the arclength parametrisation exists and is $C^1$ with unit speed.
+
+(b) Use $u=\int_{\alpha_0}^\Theta w$ and $u'=\int_\Theta^{2\pi+\be}w$ with $1\le w\le C_w$, and Lemmas~\ref{lem:B-virtual}
+and~\ref{lem:B-tail}(c). Also $|e^{i\psi}-1|\le|\psi|$.
+
+(c) If $u\ge u_v\varepsilon$ in the forward zone, then $\xi\ge u/C_w\ge\xi_1\varepsilon$, so the label is true. Now apply
+Lemmas~\ref{lem:B-forward}(d), \ref{lem:B-tail}(c) and~\ref{lem:B-bulk}(a),(b).
+
+(d) Both parts of $\mathfrak m$ are decreasing functions of the distance $d$ to a point, of the form $c\,d^{-a}$ with $a\le\frac12$. The
+integral of $d^{-a}$ over an arc of length $\Delta\le2\pi$ is at most $2\int_0^{\Delta/2}x^{-a}dx\le C\Delta^{1/2}$.
+\end{proof}
+
+%----------------------------------------------------------------------
+\subsection{Proof of the Touch-down Theorem}\label{app:B-proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:touchdown}]
+The bound $t_\td\le4$ is Lemma~\ref{lem:B-window}(b). Regularity of $x^0$ and $1\le U\le8$ are Lemma~\ref{lem:B-curve}(a).
+\emph{Choice of constants.} $\xi_1=2/c_\rho$ comes from Lemma~\ref{lem:B-forward}. Choose $\lambda_*\in(0,\eta/8]$ absolute with
+$(2u_v+1)\lambda_*\le\eta$ and $K_*\lambda_*^{7/8}\le\pi$, where $K_*$ is the constant in (T1) case 3 below (this condition
+does not involve $v$; it implies $K_*\lambda^{1-\mu_T}\le\pi$ for all $\lambda\le\lambda_*$, since $\mu_T\le\frac18$ and
+$\lambda_*<1$). Choose
+$\Delta_*\in(0,\eta]$ with $C\Delta_*^{1-\mu}\le\pi/3$, where $C$ is the constant in Lemma~\ref{lem:B-curve}(b). Put
+$G_T:=\eta/4$. Now let $\lambda_0\in(0,\lambda_*]$ be arbitrary. Put $\Delta_0:=\min(\Delta_*,(\lambda_0/C_\Delta)^2)$ and
+$c_{\mathrm{sep}}:=2\sin(\Delta_0/2)$, and take $\varepsilon_T=\varepsilon_T(\lambda_0)$ so small that $2\varepsilon_T<c_{\mathrm{sep}}$,
+$\xie\le\eta/4$, and the smallness of $\varepsilon$ used above holds. \emph{All constants except $c_{\mathrm{sep}}$ and $\varepsilon_T$
+are independent of $\lambda_0$.}
+
+\emph{(T0).} $x^0(0)=x_{\alpha_0}(t_\td)=P(t_\td)$ by Lemma~\ref{lem:B-window}(b). If $u\notin\mathcal G$, then
+$\Theta(u)\notin[\alpha_0,\alpha_0+\xi_1\varepsilon)\cup\{2\pi\}$, and $x^0(u)=S_{\Theta(u)}(t_\td)$ is true
+(Lemma~\ref{lem:B-run1}(e)). Let $u\in\mathcal G$. If $\Theta(u)=2\pi$, direction $0$ is caught on Run~1
+(Lemma~\ref{lem:B-run1}(e)), hence seen. If $\Theta(u)=\alpha_0$, it is seen, as $\rho_{\alpha_0}(t_a)=\varepsilon$. If
+$\Theta(u)\in(\alpha_0,\alpha_0+\xi_1\varepsilon)$ and the true candidate is not seen by $t_\td$, it keeps $\rho>\varepsilon$ on
+$[0,t_\td]$, so it equals the virtual one (as in Lemma~\ref{lem:seen}) and $u$ is true. (A direction in this window need
+\emph{not} be seen: for $\xi\gtrsim\varepsilon$ the minimum of $\rho$ is about $\xi$.) Finally, directions in
+$[-\alpha_s,\alpha_s]$ and in $[\be,\alpha_0]$ are seen (Lemmas~\ref{lem:B-run1}(a), \ref{lem:B-tail}(b)); every other
+direction $\theta$ equals $\Theta(u)$ for some label $u$, and by what was just shown $u$ is true or $\theta$ is seen.
+
+\emph{(T1).} Let $\varepsilon/2\le\lambda\le\lambda_0$. By Lemma~\ref{lem:excess}(b), $N^2=\int|T-e_{ab}|^2\le\int_{u_a}^{u_b}|T-\hat n|^2du$.
+\emph{Case 1, $u_a<\max(\lambda,u_v\varepsilon)$.} Since $u_v\varepsilon\le2u_v\lambda$, we have $[u_a,u_b]\subset[0,(2u_v+1)\lambda]$,
+which lies in the forward zone because $\xi\le u\le\eta$. There $|T-\hat n|\le C\xi^{1-\mu}\le Cu^{1-\mu}$, so
+$N^2\le C\lambda^{3-2\mu}$.
+\emph{Case 2, $u'_b<\lambda$ and $\xie<\lambda$.} Then $u'<2\lambda\le\eta/4$. The tail zone contains $\{u'\le\eta-\xie\}$, since $u'\ge\xi-\xie$
+there, so the pair lies in the tail zone. Put $s:=\xie+u'\in[0,3\lambda]$. Then $\xi\le s$, $|T-\hat n|\le Cs^{1-\mu_T}$ and
+$N^2\le C\lambda^{3-2\mu_T}$.
+\emph{Case 3, otherwise.} Then $u_a\ge\max(\lambda,u_v\varepsilon)$, and $u'_b\ge\lambda$ or $\xie\ge\lambda$. Forward labels of the pair
+have $\xi\ge u/C_w\ge\lambda/C_w$. Tail labels have $\xi\ge\max(\xie,\xie+u'/C_w)\ge\lambda/C_w$. By Lemma~\ref{lem:B-curve}(c), the
+tangent angle is $K$-Lipschitz on $[u_a,u_b]$ with $K:=K_*\lambda^{-\mu_T}$, and $K\lambda=K_*\lambda^{1-\mu_T}\le
+K_*\lambda_*^{7/8}\le\pi$. By Lemma~\ref{lem:excess}(c),
+$N\le K\lambda^{3/2}/\sqrt{12}$.
+In all cases $N\le C\lambda^{3/2-\mu_T}$, with $C$ independent of $\lambda_0$, $v$ and $\varepsilon$.
+
+\emph{(T2).} Let $\lambda>\lambda_0$. By Lemma~\ref{lem:B-curve}(d), $\Delta:=\Theta_b-\Theta_a>\Delta_0$, and $\Delta\le2\pi-\xie$.
+\emph{Case $\Delta\le2\pi-\Delta_0$.} Here $|e^{i\Theta_b}-e^{i\Theta_a}|=2\sin(\Delta/2)\ge c_{\mathrm{sep}}>2\varepsilon$. Lemma~\ref{lem:B-bulk}(c),
+with $Z_s$ at the label $2\pi$ and virtual candidates on $[\alpha_0,\alpha_0+\xi_1\varepsilon]$, gives $c\ge c_{\mathrm{sep}}$. This covers
+all pairs whose label interval contains the hole label $2\pi$, as well as pairs with an endpoint at $Z_s$.
+\emph{Case $\Delta>2\pi-\Delta_0$ (pairs that nearly wrap around).} Put $\xi_a:=\Theta_a-\alpha_0\ge0$ and
+$\xi_b:=2\pi+\alpha_0-\Theta_b\ge\xie$. Then $\xi_a+\xi_b<\Delta_0\le\eta$, so $u_a$ lies in the forward zone and $u_b$ in the tail zone.
+In the frame $(P(t_\td);\hat n,\hat n^\perp)$: $z_a=\int_0^{u_a}\cos\psi\ge\frac12u_a$, since $|\psi|\le C\Delta_*^{1-\mu}\le\pi/3$. Also
+$z_b\le-c\,\xi_b\le-(c/C_w)u'_b$ (Lemma~\ref{lem:B-tail}(c) and Lemma~\ref{lem:B-curve}(b)). So
+$c(a,b)\ge z_a-z_b\ge\kappa_c(u_a+U-u_b)$ with $\kappa_c:=\min(\frac12,c/C_w)$.
+
+\emph{(T3).} For $u\le G_T$ the label is in the forward zone with $\xi\le u$, so $|T-\hat n|\le C\xi^{1-\mu}\le Cu^{1-\mu}$.
+
+\emph{(T5).} $x^0(U)=S_{\be}(t_\td)$, which is also the virtual candidate (Lemma~\ref{lem:B-tail}(d)). Lemma~\ref{lem:B-tail}(c) at
+$\xi=\xie$ gives $x^0(U)-P(t_\td)=(z+iy)\hat n$ with $-z\asymp\xie\asymp\varepsilon^{1/(2-2v)}$ and $0<y\le C\xie^{2-\mu_T}$. So
+$z_0=-z$, $y_0=-y$, and $|y_0|\le C(z_0/c)^{2-\mu_T}\le C(z_0+\varepsilon)^{2-\mu_T}$.
+
+\emph{(T4).} Let $u'\le G_T$. Then $\xi\le\xie+u'\le\eta/2$, so $u$ lies in the tail zone. By (T5), $\xie\le z_0/c$, hence
+$|T-\hat n|\le C\xi^{1-\mu_T}\le C(\xie+u')^{1-\mu_T}\le C(u'+z_0)^{1-\mu_T}$.
+\end{proof}

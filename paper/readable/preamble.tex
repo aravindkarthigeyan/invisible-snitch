@@ -1,0 +1,61 @@
+% preamble.tex -- shared preamble for the human-readable proof (owner: H-main).
+% Other writers: \input{preamble} is done by snitch_human.tex; do not \input it again in appendix files.
+\usepackage[margin=25mm]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumerate}
+\usepackage{booktabs,tabularx}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,width=0.92\linewidth}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,angles,quotes,decorations.pathreplacing}
+
+\definecolor{primary}{RGB}{24, 78, 119}
+\definecolor{accent}{RGB}{181, 68, 42}
+\definecolor{muted}{RGB}{90, 102, 115}
+
+\usepackage[colorlinks=true,linkcolor=primary,citecolor=primary,urlcolor=primary]{hyperref}
+
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\takeaway}[2]{%
+  \vspace{5pt}\noindent\colorbox{primary!7}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+      \vspace{4pt}\textbf{\color{primary}#1.}\hspace{0.4em}#2\vspace{4pt}%
+    }%
+  }\vspace{5pt}%
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\td}{\mathrm{td}}
+\newcommand{\stopp}{\mathrm{stop}}
+\newcommand{\We}{W_{\mathrm{e}}}
+\newcommand{\UA}{U_{\mathrm{A}}}
+\newcommand{\UE}{U_{\mathrm{E}}}
+\newcommand{\be}{b_{\mathrm{e}}}
+\newcommand{\xie}{\xi_{\mathrm{e}}}
+\newcommand{\gmax}{\mathfrak{g}_{\max}}
+\newcommand{\frg}{\mathfrak{g}}
+\newcommand{\frr}{\mathfrak{r}}
+\newcommand{\frb}{\mathfrak{b}}
+\newcommand{\fra}{\mathfrak{a}}
+\newcommand{\frc}{\mathfrak{c}}
+\newcommand{\frA}{\mathfrak{A}}
+\newcommand{\frS}{\mathfrak{S}}
+\newcommand{\frt}{\mathfrak{t}}
+\newcommand{\one}{\mathbf{1}}

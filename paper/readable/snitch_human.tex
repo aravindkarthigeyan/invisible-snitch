@@ -1,0 +1,48 @@
+\documentclass[11pt,letterpaper]{article}
+\input{preamble}
+
+\title{\textbf{A path fixed in advance finds a slow fleeing point}\\[4pt]
+\large a readable proof}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A point $S$ (the Snitch) starts at distance $d$ from the origin in an unknown direction and always moves with speed $v$
+directly away from a pursuer (Harry) of speed at most $1$ who starts at the origin and must fix his path in advance. Harry
+wins when the Snitch comes within his vision radius $\varepsilon$. We prove that there are absolute constants $v_0,T_0>0$
+such that for every $v\le v_0$ and every $\varepsilon\in(0,d)$ an explicit path wins, whatever the direction, by time
+$T_0d$. Since $T_0$ does not depend on $\varepsilon$, a compactness argument gives a single path that catches the Snitch
+\emph{exactly} ($\varepsilon=0$) in every direction. The path runs once through the set of possible positions, turns to
+touch it tangentially, and then walks along it. The heart of the proof is a bootstrap showing that the set of possible
+positions stays nearly straight, on every scale between $\varepsilon$ and a fixed length, while Harry walks along it.
+\end{abstract}
+
+\IfFileExists{main1.tex}{\input{main1}}{}
+\IfFileExists{main2.tex}{\input{main2}}{}
+\IfFileExists{main3.tex}{\input{main3}}{}
+\IfFileExists{main4.tex}{\input{main4}}{}
+\IfFileExists{main5.tex}{\input{main5}}{}
+\IfFileExists{main6.tex}{\input{main6}}{}
+\IfFileExists{main7.tex}{\input{main7}}{}
+
+\begin{thebibliography}{9}
+\bibitem{HLP}
+G.~H.~Hardy, J.~E.~Littlewood, and G.~P\'olya,
+\emph{Inequalities}, 2nd ed., Cambridge University Press, Cambridge, 1952.
+\bibitem{Hartman}
+P.~Hartman,
+\emph{Ordinary Differential Equations}, 2nd ed., Classics in Applied Mathematics~38, SIAM, Philadelphia, 2002.
+\bibitem{short}
+\emph{A path fixed in advance that finds a slow fleeing point} (the companion paper with explicit constants,
+$v_0=5.8\cdot10^{-3}$, $T_0=13.1$; file \texttt{short/snitch.pdf}).
+\end{thebibliography}
+
+\appendix
+\IfFileExists{appA.tex}{\input{appA}}{}
+\IfFileExists{appB.tex}{\input{appB}}{}
+\IfFileExists{appC.tex}{\input{appC}}{}
+
+\end{document}

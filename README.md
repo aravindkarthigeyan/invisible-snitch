@@ -56,15 +56,26 @@ The difficulty is near Harry. As he approaches a piece of the front, the Snitche
 
 A longer plain-language walkthrough is in **[docs/PROOF_OVERVIEW.md](docs/PROOF_OVERVIEW.md)**.
 
+## Two versions of the proof
+
+| | [Readable version](paper/readable/snitch-readable.pdf) (42 pages) | [Explicit version](paper/snitch.pdf) (50 pages) |
+|---|---|---|
+| Proves | *some* speed $v_0 > 0$ works, for every $\varepsilon$ and for exact capture | $v_0 = 5.8\cdot10^{-3}$ works, with time $13.1\,d$ |
+| Style | Story and pictures first: a 17-page main text with every step stated and explained, complete proofs in three appendices | Every constant tracked to a number |
+| Computer checks | None; every estimate can be checked by hand | 218 numerical conditions, checked by `verify_constants.py` |
+
+**If you want to understand why Harry wins, read the readable version.** It uses the same path and the same argument, with the constants fixed to round values and the smallness of $v$ left unquantified. That is why it can skip the numerics. It began as a user-supplied streamlined outline of the explicit paper. The outline had one false step (fixed by changing a single constant) and several steps that were only asserted. The readable version supplies all of them. It was checked by two independent AI referees and an audit of the revision.
+
 ## What's in this repository
 
 | Path | What it is |
 |---|---|
-| [`paper/snitch.pdf`](paper/snitch.pdf) | **The proof**: a 50-page standalone paper proving the theorem and the corollary. Start here. |
+| [`paper/readable/snitch-readable.pdf`](paper/readable/snitch-readable.pdf) | **Start here.** The readable 42-page standalone proof that some $v_0 > 0$ works, with pictures and no computer step. Sources and figure scripts are in the same folder. |
+| [`paper/snitch.pdf`](paper/snitch.pdf) | The explicit 50-page standalone paper proving the theorem and corollary with $v_0 = 5.8\cdot10^{-3}$. |
 | [`paper/verify_constants.py`](paper/verify_constants.py) | Checks all 218 numerical conditions the proof relies on, in 50-digit arithmetic. |
 | [`record/short-paper-v1.pdf`](record/short-paper-v1.pdf) | The first version of the short paper (43 pages, $v_0 = 6\cdot10^{-5}$). Version 2 sharpened three estimates (tilts, near pairs, far pairs and length) to reach $5.8\cdot10^{-3}$. |
 | [`record/research-record.pdf`](record/research-record.pdf) | The full 163-page research record. It covers everything else that was found: weaker theorems for $\varepsilon>0$, lower bounds on the capture time, conditional results up to $v \approx 0.47$, refuted conjectures, and numerics. |
-| [`record/reports/`](record/reports) | The research reports, referee reports and audits behind the record. |
+| [`record/reports/`](record/reports) | The research reports, referee reports and audits behind the record (the readable version's are `referee-streamlined.md`, `referee-human-*.md` and `audit-human-rev.md`). |
 | [`viz/index.html`](viz/index.html) | The interactive simulation. |
 | [`numerics/`](numerics) | A standalone simulation of the path, the deep-scale endgame experiments, and the constant-optimisation scripts. |
 | [`docs/`](docs) | The proof overview and the status of every claim. |
@@ -79,11 +90,12 @@ pip install numpy matplotlib pillow
 python numerics/simulate_design_T.py --v 0.1 --eps 0.03
 ```
 
-To rebuild the paper, run `pdflatex snitch.tex` twice in `paper/`.
+To rebuild the papers, run `pdflatex snitch.tex` twice in `paper/`, or `pdflatex snitch_human.tex` twice in `paper/readable/`.
 
 ## Status: please read
 
 - **Not yet checked by a human.** Every proof was checked by independent AI referees (two per piece) and by two end-to-end audits of the assembled argument. No human mathematician has verified it. Treat it as a detailed, carefully checked claim, not an established theorem.
+- **The readable version is the newest piece.** It has had two referee passes and one audit, fewer than the explicit paper.
 - **The constants are tight by design.** Several of the 218 conditions hold with margins below 0.1%. They are checked exactly, but they leave no room for slips.
 - **Simulation is evidence, not proof.** Nothing is claimed for $v > 5.8\cdot10^{-3}$. The framework of the proof assumes the front is nearly straight at every scale, which stops being true somewhere around $v \approx 0.05$; reaching the $v \approx 0.2$ that simulations suggest needs a different kind of argument.
 - **Still open:** whether Harry wins for every $v < 1$ (the author's conjecture), or whether there is a threshold.

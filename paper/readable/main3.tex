@@ -1,0 +1,281 @@
+﻿% main3.tex -- H-main.  Section 3: modified candidates and bendiness; basic lemmas with proofs.
+%======================================================================
+\section{Modified candidates and the bendiness of a pair}\label{sec:virtual}
+%======================================================================
+
+A real candidate has no well-defined velocity once Harry reaches it, and the front of real candidates tears where
+candidates are caught. We therefore follow \emph{modified} (``virtual'') candidates, which slow down inside the vision
+disc instead of fleeing at full speed. They agree with the real candidates until the moment they are seen, so seeing
+every modified candidate is as good as seeing every real one; and their front is a smooth curve for all time, which never
+shrinks. Then we introduce the quantity that measures how bent the front is, and derive the few calculus facts about it
+that the rest of the proof uses. Throughout, $P$ is a $1$-Lipschitz path with $P(0)=0$, $d=1$ and $0<\varepsilon<1$.
+
+\subsection{The regularised field and virtual fronts}
+
+\begin{definition}[Regularised field]\label{def:F}
+Put $f(\rho):=1$ for $\rho\ge\varepsilon$ and $f(\rho):=(\rho/\varepsilon)(2-\rho/\varepsilon)$ for
+$0\le\rho\le\varepsilon$. Define $F(x):=f(|x|)\,x/|x|$ for $x\ne0$, $F(0):=0$, $A:=DF$, and $a^*(\rho):=1/\rho$ for
+$\rho\ge\varepsilon$, $a^*(\rho):=2/\varepsilon$ for $\rho<\varepsilon$.
+\end{definition}
+
+\begin{lemma}\label{lem:F}
+\textup{(i)} $F\in C^1(\R^2)$, $|F|\le1$, and $F(x)=x/|x|$ for $|x|\ge\varepsilon$.
+\textup{(ii)} With $\rho=|x|$, $\hat r=x/\rho$ and $\Pi=I-\hat r\hat r^{\mathsf T}$:
+$A=f'(\rho)\hat r\hat r^{\mathsf T}+(f(\rho)/\rho)\Pi$ is symmetric, $0\le A\le a^*(\rho)I$, $A=\Pi/\rho$ for
+$\rho\ge\varepsilon$, $A(0)=(2/\varepsilon)I$, and $f(\rho)/\rho-f'(\rho)=\rho/\max(\rho,\varepsilon)^2$.
+\textup{(iii)} For every unit vector $e$: $|e^\perp\cdot A(x)e|\le|x\times e|/\max(\rho,\varepsilon)^2$.
+\textup{(iv)} $(F(x)-F(y))\cdot(x-y)\ge0$ for all $x,y$, and $(x/|x|-y/|y|)\cdot(x-y)\ge0$ for $x,y\ne0$.
+\end{lemma}
+
+\begin{proof}
+Write $F(x)=\sigma(|x|)x$ with $\sigma(\rho)=(2\varepsilon-\rho)/\varepsilon^2$ on $[0,\varepsilon]$ and $\sigma=1/\rho$ on
+$[\varepsilon,\infty)$. Both pieces have value $1/\varepsilon$ and slope $-1/\varepsilon^2$ at $\varepsilon$, so $\sigma$ is
+$C^1$ on $(0,\infty)$; near $0$, $F(x)=(2\varepsilon x-|x|x)/\varepsilon^2$ is $C^1$ with $DF(0)=(2/\varepsilon)I$. Also
+$|F|=f=1-(1-\rho/\varepsilon)^2\le1$ inside the disc. This is (i). Differentiating, $DF=\sigma I+\rho\sigma'\hat r\hat
+r^{\mathsf T}=(f/\rho)\Pi+f'\hat r\hat r^{\mathsf T}$, since $f=\rho\sigma$. For $\rho\ge\varepsilon$ the eigenvalues are
+$1/\rho$ and $0$; for $\rho<\varepsilon$ they are $f/\rho=(2\varepsilon-\rho)/\varepsilon^2\in(1/\varepsilon,2/\varepsilon]$ and
+$f'=2(\varepsilon-\rho)/\varepsilon^2\in[0,2/\varepsilon]$, and $f/\rho-f'=\rho/\varepsilon^2$. This is (ii). For (iii),
+$e^\perp\cdot Ae=-(f/\rho-f')(e\cdot\hat r)(e^\perp\cdot\hat r)$ and $|e^\perp\cdot\hat r|=|x\times e|/\rho$; use (ii).
+For (iv), $(F(x)-F(y))\cdot(x-y)=\int_0^1(x-y)\cdot A(y+s(x-y))(x-y)\,ds\ge0$; and
+$(x/|x|-y/|y|)\cdot(x-y)=|x|+|y|-(x\cdot y)(1/|x|+1/|y|)\ge0$ because $x\cdot y\le|x||y|$.
+\end{proof}
+
+\begin{definition}[Virtual flow]\label{def:vflow}
+Given a $C^1$ curve $x^\circ:[u_-,u_+]\to\R^2$ with $\partial_ux^\circ\ne0$ and a time $t_\circ\ge0$, the
+\emph{virtual flow} of $P$ from $x^\circ$ at $t_\circ$ solves
+\[
+\partial_tx(u,t)=vF\bigl(x(u,t)-P(t)\bigr),\qquad x(u,t_\circ)=x^\circ(u),\qquad t\ge t_\circ .
+\]
+We write $x_u(t):=x(u,t)$, $r=r_u:=x-P$, $\rho:=|r|$, $\hat r:=r/\rho$, $w:=|\partial_ux|$,
+$T:=\partial_ux/w=e^{i\psi}$ and $\phi:=\arg r-\psi$. \emph{Virtual candidates} $x_\theta(t)$ start at $t_\circ=0$ from
+$x^\circ(\theta)=e^{i\theta}$. A \emph{working front} starts at $t_\circ=t_\td$ from a curve $x^0$ on $[0,U]$ with
+$|\partial_ux^0|\equiv1$; a label $u$ of it is \emph{true with direction $\theta$} if $S_\theta$ exists on $[0,t_\td]$
+and $x^0(u)=S_\theta(t_\td)$.
+\end{definition}
+
+\begin{lemma}[Basic properties of virtual flows]\label{lem:vflow}
+For a virtual flow:
+\textup{(a)} $x(\cdot,t)$ is $C^1$, $|\partial_tx|\le v$, $\partial_t\partial_ux=vA(r)\partial_ux$, and both $w$ and
+the arclengths $l(a,b;t)=\int_a^bw\,du$ are non-decreasing in $t$ \textup(so $w\ge1$ on a working front\textup).
+\textup{(b)} $w_t=vw\,T\cdot AT$, $T_t=v(AT-(T\cdot AT)T)$ and
+$\psi_t=-v\rho\max(\rho,\varepsilon)^{-2}\sin\phi\cos\phi$. For $\rho\ge\varepsilon$: $w_t/w=v\sin^2\phi/\rho$ and
+$\psi_t=-(v/\rho)\sin\phi\cos\phi$.
+\textup{(c)} For fixed labels, $l$, $c$ and $E$ \textup(the latter two where $c>0$; Definition~\ref{def:twopt}\textup)
+are $C^1$ in $t$, and their derivatives depend on $P$ only through $P(t)$.
+\end{lemma}
+
+\begin{proof}
+The field $(t,x)\mapsto vF(x-P(t))$ is continuous, and $C^1$ in $x$ with $|D_x|\le2v/\varepsilon$ (Lemma~\ref{lem:F}).
+By the standard theory \cite[Ch.~V]{Hartman}, solutions are global and unique, depend $C^1$ on the initial point, and
+$\partial_ux$ solves the variational equation $\partial_t\partial_ux=vA(r)\partial_ux$. Hence
+$\partial_t(w^2)=2v\,\partial_ux\cdot A\partial_ux\ge0$, which gives (a) and $w_t=vwT\cdot AT$. Then
+$T_t=(\partial_ux)_t/w-\partial_ux\,w_t/w^2$ is the formula in (b), and $\psi_t=T^\perp\cdot T_t=vT^\perp\cdot AT$.
+Lemma~\ref{lem:F}(iii) with $e=T$ (where $T\cdot\hat r=\cos\phi$, $T^\perp\cdot\hat r=\sin\phi$) gives $\psi_t$; for
+$\rho\ge\varepsilon$, $T\cdot AT=T\cdot\Pi T/\rho=\sin^2\phi/\rho$. Part (c) follows since $w>0$ and $\partial_ux$ is
+$C^1$ in $t$, and the time derivatives are integrals of $vA(x-P(t))\partial_ux$.
+\end{proof}
+
+\begin{lemma}[Virtual hits imply true sightings]\label{lem:seen}
+If $\rho_\theta(t)\le\varepsilon$ for a virtual candidate, or $\rho_u(t)\le\varepsilon$ for a true label $u$ of a working
+front with direction $\theta$ and some $t\ge t_\td$, then the true candidate $S_\theta$ is seen by time $t$.
+\end{lemma}
+
+\begin{proof}
+Let $t'\le t$ be the first time at which $\rho\le\varepsilon$ (it exists by continuity; for a virtual candidate $t'>0$
+since $\rho(0)=1>\varepsilon$). Up to $t'$ we have $\rho\ge\varepsilon$, hence $F(x-P)=(x-P)/\rho$: the virtual point
+solves the true equation \eqref{eq:snitch}. By uniqueness for \eqref{eq:snitch} away from $H$, it coincides with
+$S_\theta$ on $[0,t']$ (respectively on $[t_\td,t']$, where it starts from $S_\theta(t_\td)$). So $S_\theta$ exists up to
+$t'$ and $|S_\theta(t')-P(t')|=\rho(t')\le\varepsilon$.
+\end{proof}
+
+\begin{lemma}[Chords never shrink]\label{lem:chords}
+Let $X_a,X_b$ solve $X'=vV(X-P)$ on $[t_1,t_2]$, each with its own $V\in\{F,\,x\mapsto x/|x|\}$ \textup(for $x/|x|$,
+as long as the point does not meet $P$\textup).
+\textup{(a)} If both use $F$, then $|X_b-X_a|$ is non-decreasing; in particular, chords $c(a,b;t)$ of a virtual flow are
+non-decreasing in $t$.
+\textup{(b)} In general, if $|X_b(t_1)-X_a(t_1)|\ge2\varepsilon$, then $|X_b(t)-X_a(t)|\ge|X_b(t_1)-X_a(t_1)|$ on
+$[t_1,t_2]$.
+\end{lemma}
+
+\begin{proof}
+Put $p_a:=X_a-P$, $p_b:=X_b-P$ and $D:=X_b-X_a=p_b-p_a$. Then $(|D|^2)'=2v(V_b(p_b)-V_a(p_a))\cdot(p_b-p_a)$. If
+$V_a=V_b$ this is $\ge0$ by Lemma~\ref{lem:F}(iv), which proves (a). For (b), note first: whenever $|D|\ge2\varepsilon$,
+one of $|p_a|,|p_b|$ is at least $\varepsilon$, say $|p_b|$; there $V_b(p_b)=p_b/|p_b|=F(p_b)$, and $V_b(p_b)-V_a(p_a)$
+is a difference of the single monotone field $F$ (if $V_a=F$) or $x/|x|$ (if $V_a=x/|x|$), so again $(|D|^2)'\ge0$.
+Now if $|D(t_1)|>2\varepsilon$, let $\tau$ be the infimum of times with $|D|<|D(t_1)|$; if $\tau<t_2$, then
+$|D|>2\varepsilon$ on a neighbourhood of $\tau$, where $|D|$ is non-decreasing, a contradiction. If
+$|D(t_1)|=2\varepsilon$, replace $X_b(t_1)$ by $X_b(t_1)+\iota D(t_1)/|D(t_1)|$; the perturbed solutions exist on
+$[t_1,t_2]$ for small $\iota>0$, keep distance $\ge2\varepsilon+\iota$ from $X_a$, and converge to $X_b$ as $\iota\to0$.
+\end{proof}
+
+\subsection{Bendiness: arc minus chord}
+
+How do we measure ``nearly straight''? Take two points $x_a,x_b$ on the front. The arc between them has length $l$, the
+straight segment has length $c$, and the difference $E=l-c\ge0$ vanishes exactly when the arc is straight. We use
+$N:=\sqrt{2E}$, because of a simple identity (Lemma~\ref{lem:excess}(b)): $N^2=\int|T-e|^2\,ds$, where $e$ is the
+direction of the chord. So $N/\sqrt l$ is the root-mean-square angle between the front and its chord. The bound the proof
+maintains, $N\le M\lambda^{1/2+\gamma}$ with $M\lambda^\gamma=m(\lambda/R)^\gamma$ (here $\gamma=\frac23$ and
+$m=\frac1{10}$ are locked numbers, $R$ is a fixed small length chosen in Section~\ref{sec:assembly}, and
+$M:=mR^{-\gamma}$), says: \emph{on a piece of label
+length $\lambda$, the front deviates from its chord by an average angle at most $m(\lambda/R)^{\gamma}$}, which tends
+to zero as the piece shrinks. Figure~\ref{fig:bend} shows the quantities; whether a pair is ``near'' or ``far'' depends
+on its distance from Harry measured in units of its own length.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  % left: one pair
+  \begin{scope}[shift={(0,0)},scale=1.15]
+    \draw[primary!35,line width=1pt] (-0.5,-0.4) .. controls (0.2,0.5) and (1.3,1.3) .. (2.2,1.35)
+       .. controls (3.1,1.4) and (3.9,0.7) .. (4.5,-0.3);
+    \draw[primary,line width=2.2pt] (0.32,0.5) .. controls (0.9,1.1) and (1.5,1.33) .. (2.2,1.35)
+       .. controls (2.9,1.37) and (3.3,1.0) .. (3.65,0.62);
+    \fill[primary] (0.32,0.5) circle (2pt) node[left,font=\small] {$x_a$};
+    \fill[primary] (3.65,0.62) circle (2pt) node[right,font=\small] {$x_b$};
+    \draw[accent,thick,dashed] (0.32,0.5) -- (3.65,0.62) node[pos=0.62,below,font=\small] {chord $c$};
+    \node[primary,font=\small] at (2.2,1.68) {arc $l$};
+    \draw[->,thick,black!70] (0.75,0.96) -- ++(0.55,0.45) node[above,font=\footnotesize] {$T$};
+    \draw[->,thick,black!70] (0.75,0.96) -- ++(0.75,0.027) node[right,font=\footnotesize] {$e$};
+    \node[font=\small,align=center] at (2.0,-0.8) {bendiness: $E=l-c$, \ $N=\sqrt{2E}$,\\[2pt]
+      $N^2=\int_a^b|T-e|^2\,ds$};
+  \end{scope}
+  % right: near and far pairs relative to Harry on a leg
+  \begin{scope}[shift={(6.4,0)},scale=1.0]
+    \draw[primary!35,line width=1pt] (0,0) .. controls (2.0,0.18) and (3.8,0.30) .. (6.0,0.55)
+      .. controls (7.0,0.68) and (8.0,0.88) .. (9.0,1.12);
+    \coordinate (Aj) at (0.5,0.04);
+    \coordinate (P) at (1.1,0.09);
+    \coordinate (Aj1) at (1.7,0.15);
+    \draw[accent,very thick] (Aj) -- (P);
+    \draw[accent,thick,dashed] (P) -- (Aj1);
+    \fill[accent] (P) circle (2.4pt) node[above=2pt,font=\small] {Harry};
+    \fill[primary] (Aj) circle (1.6pt);
+    \fill[primary] (Aj1) circle (1.6pt);
+    \node[font=\footnotesize,primary] at (0.5,-0.25) {$x_{a_j}$};
+    \node[font=\footnotesize,primary] at (1.85,-0.15) {$x_{a_{j+1}}$};
+    % near pair
+    \draw[primary,line width=2.2pt] (2.3,0.2) .. controls (2.7,0.23) and (3.1,0.26) .. (3.4,0.29);
+    \node[font=\footnotesize,primary,align=center] at (2.85,0.75) {near pair\\(gap $<K_f\lambda$)};
+    % far pair
+    \draw[primary,line width=2.2pt] (6.6,0.63) .. controls (6.9,0.67) and (7.2,0.72) .. (7.5,0.79);
+    \node[font=\footnotesize,primary,align=center] at (6.9,1.4) {far pair\\(gap $\ge K_f\lambda$)};
+    \draw[<->,muted] (0.5,-0.6) -- (6.6,-0.6) node[midway,below,font=\footnotesize] {gap $g=a-a_j$};
+    \draw[<->,muted] (6.6,-0.6) -- (7.5,-0.6) node[midway,below,font=\footnotesize] {$\lambda$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Left: the bendiness of a pair of points is the arc length minus the chord length; it is zero exactly for a
+straight piece. Right: Harry walks the front in short legs; a pair is \emph{near} if its distance ahead of Harry is less
+than ten times its own length, and \emph{far} otherwise (legs, the base point $x_{a_j}$ and the gap $g$ are defined in
+Section~\ref{sec:chase}).}
+\label{fig:bend}
+\end{figure}
+
+\begin{definition}[Two-point quantities]\label{def:twopt}
+For a regular $C^1$ curve $u\mapsto x_u$ (arclength element $ds=w\,du$) and labels $a<b$:
+\[
+l(a,b):=\int_a^bds,\;\; c(a,b):=|x_b-x_a|,\;\; E:=l-c\ge0,\;\; N:=(2E)^{1/2},\;\; e=e_{ab}:=\frac{x_b-x_a}{c}\;\;(c>0).
+\]
+Set $\varsigma:=T\cdot e^\perp$, $q:=e^\perp\cdot A(r)e$, and, for a unit vector $\hat u$ and an interval $J$,
+$V_{\hat u}(J):=\int_J|T-\hat u|^2\,ds$ and $\mathbf v_J:=x_{b'}-x_{a'}=c(J)e_J$ for $J=(a',b')$.
+\end{definition}
+
+\begin{lemma}[Excess and curvature]\label{lem:excess}
+For a regular $C^1$ curve and an interval $J=(a,b)$:
+\textup{(a)} $E(a',b')\le E(a,b)$ for $a\le a'<b'\le b$.
+\textup{(b)} $V_{\hat u}(J)=2[l(J)-(x_b-x_a)\cdot\hat u]=N(J)^2+c(J)|e_J-\hat u|^2$ \textup(if $c(J)>0$\textup). Thus
+$\int_J|T-e_J|^2\,ds=N(J)^2$, $V_{\hat u}$ is additive over adjacent intervals, and
+$|\hat u\times(x_b-x_a)|\le(l\,V_{\hat u})^{1/2}$.
+\textup{(c)} If the tangent angle is $K$-Lipschitz in arclength on $J$ and $Kl\le\pi$, then $N\le(K/\sqrt{12})\,l^{3/2}$.
+\end{lemma}
+
+\begin{proof}
+(a) $l(a,b)=l(a,a')+l(a',b')+l(b',b)$ while $c(a,b)\le l(a,a')+c(a',b')+l(b',b)$. (b) $|T-\hat u|^2=2-2T\cdot\hat u$ and
+$\int_JT\,ds=x_b-x_a=c\,e_J$, so $V_{\hat u}=2l-2c\,e_J\cdot\hat u=2(l-c)+c(2-2e_J\cdot\hat u)$. Also
+$\hat u\times(x_b-x_a)=\int_J\hat u\times(T-\hat u)\,ds$; apply Cauchy--Schwarz. (c) With $\psi_m$ the tangent angle at
+the midpoint, $|\psi(s)-\psi_m|\le K|s-l/2|\le\pi/2$, so
+$c\ge\int_0^l\cos(\psi-\psi_m)\,ds\ge\int_0^l\cos(K|s-l/2|)\,ds=\frac2K\sin\frac{Kl}2\ge l-\frac{K^2l^3}{24}$.
+\end{proof}
+
+The next lemma says that a short piece inside a nearly straight longer piece points in nearly the same direction.
+
+\begin{lemma}[Split tilt]\label{lem:splittilt}
+For intervals $J\subset I$, $J\ne I$, with $c(I),c(J)>0$, put $l_c:=l(I)-l(J)$ and $Z:=|\mathbf v_J\times e_I|$. Then
+\textup{(i)} $Z^2\le N(I)^2\,l(J)\,l_c/l(I)$;
+\textup{(ii)} if $N(I)^2<4c(J)$, then $|e_J-e_I|\le(Z/c(J))\bigl(1-N(I)^2/(4c(J))\bigr)^{-1/2}$.
+\end{lemma}
+
+\begin{proof}
+(i) $\mathbf v_J\times e_I=\int_J(T-e_I)\times e_I\,ds$, and also $=-\int_{I\setminus J}(T-e_I)\times e_I\,ds$ since
+$\mathbf v_I\times e_I=0$. Cauchy--Schwarz gives $Z^2\le l(J)\int_J|T-e_I|^2$ and $Z^2\le l_c\int_{I\setminus J}|T-e_I|^2$.
+Divide by $l(J)$ and $l_c$, add, and use Lemma~\ref{lem:excess}(b): $Z^2\,l(I)/(l(J)l_c)\le N(I)^2$.
+(ii) With $\mathbf d:=e_J-e_I$, $|\mathbf d|^2(1-|\mathbf d|^2/4)=|e_J\times e_I|^2=Z^2/c(J)^2$, and
+Lemma~\ref{lem:excess}(b) gives $c(J)|\mathbf d|^2\le V_{e_I}(J)\le V_{e_I}(I)=N(I)^2$.
+\end{proof}
+
+\subsection{How the bendiness changes in time}
+
+The next lemma computes the time derivative of the bendiness of a fixed pair. Its last part is the key estimate for
+pairs far from Harry: there the field $x/|x|$ is smooth on the scale of the pair, and the bendiness can grow only
+through the sideways offset $p_a$ of Harry from the chord.
+
+\begin{lemma}[Evolution of $l$, $c$ and $E$]\label{lem:Eprime}
+For a virtual flow, fixed labels $a<b$ and $c(a,b;t)>0$ \textup(integrals over the arc from $x_a$ to $x_b$\textup):
+\begin{enumerate}[(i)]
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item $l'=v\int T\cdot AT\,ds$ and $c'=v\int e\cdot AT\,ds$.
+\item $E'=v\int(T-e)\cdot A(T-e)\,ds-\frac v2\int(e\cdot Ae)|T-e|^2\,ds+v\int\varsigma q\,ds$, where
+$\int|T-e|^2\,ds=N^2$, $\int\varsigma\,ds=0$ and $|\varsigma|\le|T-e|$.
+\item For every constant $\bar q$: $E'\le v\int a^*(\rho)|T-e|^2\,ds+v\int\varsigma(q-\bar q)\,ds$; also
+$E'\le vN\|AT\|_{L^2(ds)}$.
+\item \textup(Far inequality\textup) Let $\underline\rho:=\min_{s\in[a,b]}\rho_s$ and $p_a:=r_a\times e$. If
+$\underline\rho\ge\varepsilon$, then
+\[
+E'\le\frac v{\underline\rho}\Bigl(1+\frac l{\pi\underline\rho}+\frac{2l^2}{\pi^2\underline\rho^2}\Bigr)N^2
++\frac{2vl^{3/2}|p_a|N}{\pi\underline\rho^3},\qquad
+l'\le\frac v{\underline\rho}\Bigl[N+\frac{l^{1/2}|p_a|+lN/\pi}{\underline\rho}\Bigr]^2 .
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $l'=\int w_t\,du$ with Lemma~\ref{lem:vflow}(b); $c'=e\cdot\partial_t(x_b-x_a)=e\cdot\int_a^bvA\,\partial_ux\,du$.
+(ii) $E'=v\int(T-e)\cdot AT$ ($A$ is symmetric). Write $(T-e)\cdot AT=(T-e)\cdot A(T-e)+(T-e)\cdot Ae$ and expand
+$T-e=-\frac12|T-e|^2e+\varsigma e^\perp$ (as $T\cdot e=1-\frac12|T-e|^2$). Also $\int\varsigma\,ds=e^\perp\cdot(x_b-x_a)=0$.
+(iii) Drop the middle term of (ii) ($A\ge0$), use $A\le a^*I$, and subtract $\bar q\int\varsigma=0$. The second bound is
+Cauchy--Schwarz applied to $E'=v\int(T-e)\cdot AT$.
+(iv) On the arc $\rho\ge\varepsilon$, so $A=\Pi/\rho$; the first term of (ii) is at most $vN^2/\underline\rho$. For the
+last term use arclength $\sigma\in[0,l]$ from $x_a$ and coordinates $y=y_1e+y_2e^\perp$; then $q=Q(r)$ with
+$Q(y)=-y_1y_2/|y|^3$, and a direct computation gives $|\partial_{y_2}Q|\le|y|^{-2}$ and $|\partial_{y_1}Q|\le2|y_2|/|y|^3$.
+Let $\delta(\sigma):=\int_0^\sigma\varsigma$; then $\delta(0)=\delta(l)=0$, $|y_2(\sigma)|=|r_a\cdot e^\perp+\delta|\le|p_a|+|\delta|$,
+and by Wirtinger's inequality \cite[Thm.~257]{HLP} $\int\delta^2\le(l/\pi)^2\int\varsigma^2\le(l/\pi)^2N^2$, hence
+$\int|\delta|\le l^{3/2}N/\pi$. Integrating by parts (at a fixed time $dr/d\sigma=T$),
+\[
+\int\varsigma q\,d\sigma=-\int\delta\,\bigl(\partial_{y_1}Q\,(T\cdot e)+\partial_{y_2}Q\,\varsigma\bigr)\,d\sigma
+\le\int|\delta|\frac{2(|p_a|+|\delta|)}{\underline\rho^3}+\int\frac{|\delta||\varsigma|}{\underline\rho^2}
+\le\frac{2|p_a|l^{3/2}N}{\pi\underline\rho^3}+\frac{2l^2N^2}{\pi^2\underline\rho^3}+\frac{lN^2}{\pi\underline\rho^2},
+\]
+which gives the bound on $E'$. For $l'$: $T\cdot AT=\sin^2\phi/\rho$ with $|\sin\phi|=|T\times r|/\rho$ and
+$|T\times r|\le|T-e|\rho+|e\times r|=|T-e|\rho+|y_2|$; so $|\sin\phi|\le|T-e|+(|p_a|+|\delta|)/\underline\rho$, and
+Minkowski's inequality gives $(\int\sin^2\phi)^{1/2}\le N+(l^{1/2}|p_a|+lN/\pi)/\underline\rho$.
+\end{proof}
+
+\begin{lemma}[Duhamel inequality]\label{lem:duhamel}
+If $c(a,b;t_1)>0$ and $\underline\rho(t)\ge\varepsilon$ on $[t_1,t_2]$, then with the \emph{rate}
+$\mathcal A:=(v/\underline\rho)(1+l/(\pi\underline\rho)+2l^2/(\pi^2\underline\rho^2))$ and the \emph{forcing}
+$\mathcal B:=2vl^{3/2}|p_a|/(\pi\underline\rho^3)$,
+\[
+N(t_2)\le e^{\int_{t_1}^{t_2}\mathcal A}N(t_1)+\int_{t_1}^{t_2}e^{\int_t^{t_2}\mathcal A}\mathcal B(t)\,dt .
+\]
+If moreover $\underline\rho\ge Kl$ on $[t_1,t_2]$, then $\mathcal A\le\mathcal A^*(K)\,v/\underline\rho$, where
+$\mathcal A^*(K):=1+1/(\pi K)+2/(\pi K)^2$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:chords}(a), $c\ge c(t_1)>0$ on $[t_1,t_2]$, so $E$ is $C^1$ there (Lemma~\ref{lem:vflow}(c));
+$\mathcal A$ and $\mathcal B$ are continuous ($\underline\rho$ is a minimum of a jointly continuous function over a
+compact label set). For $\iota>0$ put $N_\iota:=(N^2+\iota^2)^{1/2}$. By Lemma~\ref{lem:Eprime}(iv),
+$N_\iota N_\iota'=E'\le\mathcal AN^2+\mathcal BN\le\mathcal AN_\iota^2+\mathcal BN_\iota$, so
+$N_\iota'\le\mathcal AN_\iota+\mathcal B$. Integrate this linear inequality and let $\iota\to0$. The last claim is
+$l/\underline\rho\le1/K$.
+\end{proof}
+

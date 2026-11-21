@@ -1,0 +1,358 @@
+% appC.tex -- Appendix C (writer H-depart): start chords, heading, departure, assembly.
+% Proves lem:startchord (stated here), lem:heading, thm:departure, prop:cond (stated in the main text).
+\section{Leaving the tail behind, and the assembly}\label{app:C}
+
+This appendix proves the results of Section~\ref{sec:assembly}: the start data of the body pairs
+(\S\ref{appC:start}), the heading lemma (\S\ref{appC:heading}), the departure theorem (\S\ref{appC:departure}), and the
+assembly with the hand-over data (TW) (\S\ref{appC:assembly}).
+
+\subsection{Conventions and the order of choices}\label{appC:conv}
+
+We take $d=1$ and use the locked numbers of Section~\ref{sec:intro}; $c_6=(1+\delta_1)/c_A=\frac92$. We always
+assume the absolute cap
+$v\le\frac1{23}$. It gives $\mu=v/(1-v)\le\frac1{22}$, $\mu_T=3v/(1+v)\le\frac18$, $1/(1-v)\le\frac{11}{10}$ and
+$e^{2\mu}\le1.1\le\delta_1$. We put $\gamma_*:=\frac78\le1-\mu_T$.
+
+\textbf{The scale $\lambda_0$.} We fix $\lambda_0$ once and for all with $\lambda_0\le\lambda_*$ and
+$C_{\mathrm{td}}\lambda_0^{\gamma_*}\le1$ (Theorem~\ref{thm:touchdown} applies to every $\lambda_0\in(0,\lambda_*]$).
+
+\textbf{Constants.} $C$ denotes a constant depending only on the locked parameters, on $m$ and on the constants of
+Theorem~\ref{thm:touchdown}: the absolute $v_T,G_T,\kappa_c$ and $C_{\mathrm{td}}$ (the constant called $C$ in
+(T1)--(T5)), and $\varepsilon_T,c_{\mathrm{sep}}$, which are fixed once $\lambda_0$ is fixed above. $C(R)$ may also
+depend on $R$; $O_R(v)$ is a quantity $\le C(R)\,v$. \emph{No constant depends on $v$ or $\varepsilon$.} Besides the
+ways listed at the end of Section~\ref{sec:chase}, the vision radius enters only through $z_0\ge2\varepsilon$, and every
+time integral below is bounded without $\varepsilon$; the one dangerous integral, $\int d\frt/(\frt+\varepsilon)$, is
+defused in the departure proof, part~(iii).
+
+\textbf{Assembly quantities.} We use $\We,\delta_0,\UA,\UE$ from Section~\ref{sec:assembly} and put $\bar D:=2\We+R$.
+Thus $\kappa_c\We=c_AK_RR=6R$, and all these lengths are at most $CR$. The scale $R$ is fixed after $\lambda_0$, so that
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item[(R1)] $K_RR\le\lambda_0$ and $C_{\mathrm{td}}R^{\gamma_*}\le\frac14s_0m(K_f/K_R)^\nu$;\qquad (R2) $c_{\mathrm{sep}}\ge c_AK_RR$;
+\item[(R3)] $2\We+2R+K_RR\le\frac12$ and $\UA\le G_T$;
+\item[(R4)] $3C_{\mathrm{td}}(\We+\delta_0)^{\gamma_*}\le\frac1{40}$;\qquad (R5) $8C_D(\UE+\bar D+R)^{\gamma_D}\le1$, where
+$C_D:=4C_{\mathrm{td}}+1$.
+\end{itemize}
+Each of these says that $R$ is below a threshold built from $C$-constants. Then $v_0=v_0(m,R)$ and $\varepsilon_*$ are
+chosen as in items (3)--(4) of the Parameter Lock (Section~\ref{sec:assembly}); besides the two applications of
+Theorem~\ref{thm:end} (with $\gamma$ and $\gamma_D$), $v_0$ satisfies finitely many conditions ``$O_R(v)\le$ fixed
+number'', listed where they occur. The
+heading error $\omega_0$ of \eqref{eq:headclaim} involves $v_0$, while the departure theorem asks $v_0$ to be small
+depending on $\omega_0$; there is no circularity, because that smallness condition depends on $\omega_0$ only through
+$\omega_0\le\frac14$ (in its proof $\omega_0$ enters through $h_H\le\frac14$, through polynomials in $\omega_0$, and through
+\eqref{eq:hint}, where $\omega_0^2\log^+(1/x_c)=(\omega_0^2/\gamma)\log^+(C_H/\omega_0)$ is bounded for
+$\omega_0\in(0,\frac14]$). Likewise $C_H$ uses $\omega_0$ only through $\omega_0\le\frac14$. The condition
+$z_0\ge2\varepsilon$ of item~(4) can be met by the lower bound in (T5), because $z_0\ge c\,\varepsilon^{1/(2-2v)}$ and
+$\varepsilon^{1/(2-2v)}/\varepsilon\ge\varepsilon^{-9/20}$ for $v\le\frac1{23}$.
+
+\subsection{Start data of the body pairs}\label{appC:start}
+
+\begin{lemma}[Start chords]\label{lem:startchord}
+Let $\gamma'\in\{\gamma,\gamma_D\}$, $M':=mR^{-\gamma'}$, and assume \textup{(R1)}. At $t_\td$ (labels $=$ arclength):
+\begin{enumerate}[(a)]\setlength{\itemsep}{1pt}
+\item every pair with $\varepsilon/2\le\lambda\le\lambda_0$ has $c(a,b)\ge\lambda/2\ge c_A\min(\lambda,K_RR)$;
+\item every pair with $\varepsilon/2\le\lambda\le R$ has
+\[
+N(a,b)\le s_0M'\lambda^{1/2+\gamma'}\Bigl(\frac{K_f\lambda}{K_RR}\Bigr)^\nu\le s_0M'\lambda^{1/2+\gamma'}\min\Bigl(1,\frac{K_f\lambda}{\min(a,K_RR)}\Bigr)^\nu .
+\]
+\end{enumerate}
+Consequently \textup{(S2)} holds for every cut of the front. \textup{(S1)} holds for every set of pairs in which each
+pair with $\lambda>\lambda_0$ has $c(a,b;t_\td)\ge c_AK_RR$.
+\end{lemma}
+
+\begin{proof}
+Since $\lambda\le\lambda_0<1$ and $\mu_T\le\frac18$, (T1) gives $N\le C_{\mathrm{td}}\lambda^{3/2-\mu_T}\le
+C_{\mathrm{td}}\lambda^{1/2+\gamma_*}$. (a) As $l=\lambda$, $c=\lambda-\frac12N^2\ge\lambda(1-\frac12C_{\mathrm{td}}^2\lambda_0^{2\gamma_*})
+\ge\lambda/2$, and $\lambda/2=c_A\lambda$. (b) As $\gamma_*\ge\gamma_D+\nu\ge\gamma'+\nu$ and $\lambda\le R$,
+\[
+N\le C_{\mathrm{td}}R^{\gamma_*}\lambda^{1/2}\Bigl(\frac\lambda R\Bigr)^{\gamma_*}
+\le s_0m\Bigl(\frac{K_f}{K_R}\Bigr)^{\nu}\lambda^{1/2}\Bigl(\frac\lambda R\Bigr)^{\gamma'+\nu}
+=s_0M'\lambda^{1/2+\gamma'}\Bigl(\frac{K_f\lambda}{K_RR}\Bigr)^\nu
+\]
+by (R1). Moreover $K_f\lambda/(K_RR)\le K_f/K_R<1$ and $\min(a,K_RR)\le K_RR$, which gives the second inequality (also
+for $a=0$). The last two sentences follow because (S1) asks for $c\ge c_A\min(\lambda,K_RR)$, which is (a) for
+$\lambda\le\lambda_0$ and the assumption for $\lambda>\lambda_0$.
+\end{proof}
+
+\subsection{Proof of the heading lemma}\label{appC:heading}
+
+\begin{proof}[Proof of Lemma~\ref{lem:heading}]
+The stage-A chase satisfies the conclusions (a)--(e) of Theorem~\ref{thm:end}, with exponent $\gamma_D$,
+$M_{\mathrm A}=mR^{-\gamma_D}$, excuse length $0$ (so every pair is good and $\mathcal F_*=\mathcal F$) and
+tilt constant $C_T$. By (T3) we have $|T(u,t_\td)-\hat n|\le C_{\mathrm{td}}u^{\gamma_*}$ for $u\le G_T$. We prove
+\begin{equation}\label{eq:headclaim}
+|\hat u_{j+1}-\hat n|\le\omega_0:=C_Tm\Bigl(\frac{\delta_0}R\Bigr)^{\gamma_D}+3C_{\mathrm{td}}(\We+\delta_0)^{\gamma_*}+C_{\mathrm{rot}}v_0,
+\qquad |\hat u_{j+1}-\hat n|\le C_H(\frt+\varepsilon)^{\gamma_D},
+\end{equation}
+with an absolute $C_{\mathrm{rot}}$ and $C_H=C(R)$. This is the claim with $h_H=\min(C_H(\frt+\varepsilon)^{\gamma_D},\omega_0)$;
+note that $\omega_0$ does not depend on $v\le v_0$.
+
+\emph{Why $\omega_0\le\frac14$.} The third term is at most $\frac1{40}$ once $v_0$ is small, the second is at most
+$\frac1{40}$ by (R4), and the first, which does \emph{not} shrink with $R$ or $v$, is $C_Tm\,4^{-3/4}<0.198<\frac15$
+($C_T<5.58$ for $\gamma_D$, $m=\frac1{10}$). So $\omega_0\le\frac15+\frac1{20}=\frac14$.
+
+Fix a non-final leg $j+1$ with $a_j<\We$. Put $\Lambda:=a_j+\varepsilon$, $\lambda_I:=\min(\Lambda,\delta_0)\in
+[\varepsilon,\delta_0]$ and $I:=(a_j,b)$ with $b:=a_j+\lambda_I\le\We+\delta_0\le\UA$. At every time of the legs
+$i+1\le j+1$, $I$ is a family pair: its left end is the base or lies beyond $a_{i+1}$, and
+$\varepsilon/2\le\lambda_I\le R$. We compare $\hat u_{j+1}$ with $e_I(t_j)$, $e_I(t_j)$ with $e_I(t_\td)$, and
+$e_I(t_\td)$ with $\hat n$ (Figure~\ref{fig:appC-heading}).
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  \draw[primary,very thick] (-4.4,-1.0) .. controls (-1.8,0.05) and (1.2,0.55)
+     .. coordinate[pos=0.03] (Ai) coordinate[pos=0.24] (Ai1) coordinate[pos=0.58] (Aj)
+        coordinate[pos=0.69] (Aj1) coordinate[pos=0.9] (B) (5.0,0.75);
+  \coordinate (P) at ($(Ai)!0.6!(Ai1)$);
+  \draw[accent,very thick] (Ai) -- (Ai1);
+  \draw[accent,dashed] (P) -- (Aj) node[pos=0.45,below,font=\footnotesize] {$r_a$};
+  \draw[accent,dashed] (P) -- (B) node[pos=0.75,above=1pt,font=\footnotesize] {$r_b$};
+  \draw[primary,thick,->] (Aj) -- (B);
+  \fill[accent] (P) circle (2.2pt) node[below right=0pt,font=\small] {$P(t)$};
+  \foreach \p/\n in {Ai/a_i, Ai1/a_{i+1}, Aj/a_j, Aj1/a_{j+1}, B/b}
+     {\fill[primary] (\p) circle (1.7pt) node[above left=0pt,font=\small] {$x_{\n}$};}
+  \draw[muted,decorate,decoration={brace,amplitude=4pt,mirror,raise=16pt}] (Ai1) -- (Aj)
+     node[midway,xshift=6pt,yshift=-27pt,font=\footnotesize] {$K_1$};
+  \draw[muted,decorate,decoration={brace,amplitude=4pt,mirror,raise=34pt}] (Ai1) -- (B)
+     node[midway,xshift=10pt,yshift=-46pt,font=\footnotesize] {$K_2$};
+\end{tikzpicture}
+\caption{Heading proof, Step 3: the sight lines from an earlier pursuer position to the ends of $I=(a_j,b)$ are
+nearly parallel to the chord of $I$ (or very long), so the chord hardly turns. In the close case this is read off from
+the chords of the family pairs $K_1=(a_{i+1},a_j)$ and $K_2=(a_{i+1},b)$ (braces), and of $K_3=(a_i,a_{i+1})$, the
+current leg.}
+\label{fig:appC-heading}
+\end{figure}
+
+\emph{Step 1 (at $t_j$).} $J:=(a_j,a_{j+1})$ has length in $[\varepsilon/\kappa,\varepsilon]$ by
+Theorem~\ref{thm:end}(b). Hence $J\subset I$ (as $\lambda_I\ge\varepsilon$) and $J$ is a family pair. Since
+$P(t_j)=x_{a_j}(t_j)$, the leg direction is $\hat u_{j+1}=e_J(t_j)$, and Theorem~\ref{thm:end}(c) gives
+$|\hat u_{j+1}-e_I(t_j)|\le C_Tm(\lambda_I/R)^{\gamma_D}$.
+
+\emph{Step 2 (at $t_\td$).} Let $\sigma:=\sup_I|T(\cdot,t_\td)-\hat n|\le C_{\mathrm{td}}b^{\gamma_*}$. Note
+$b\le\min(2\Lambda,\We+\delta_0)$, and $\sigma\le\frac1{40}$ by (R4). From $c\,e_I-l\,\hat n=\int_I(T-\hat n)\,ds$ and
+$c\ge\int_IT\cdot\hat n\,ds\ge l(1-\sigma^2/2)$ we get $c|e_I-\hat n|\le l\sigma+(l-c)\le l(\sigma+\sigma^2/2)$, so
+$|e_I(t_\td)-\hat n|\le2\sigma$.
+
+\emph{Step 3 (rotation of $e_I$ on $[t_\td,t_j]$).} Write $a:=a_j$. Differentiating $c_Ie_I=x_b-x_a$ and using
+$\partial_tx=vF(r)$ and $|e\times F(r)|=f(\rho)|e\times\hat r|\le|e\times\hat r|$ gives
+\[
+|e_I'|=\frac{|e_I\times(\partial_tx_b-\partial_tx_a)|}{c_I}\le\frac{v}{c_I}\bigl(|e_I\times\hat r_a|+|e_I\times\hat r_b|\bigr),
+\qquad c_I\ge c_A\lambda_I
+\]
+by the chord bound in Theorem~\ref{thm:end}(a). Let $t$ lie in an earlier leg $i+1$ ($i<j$). By Lemma~\ref{lem:chase}(1),
+$P=x_{a_{i+1}}-\varrho\,\hat u_{i+1}$ with $\varrho\ge0$ and $\hat u_{i+1}=e_{(a_i,a_{i+1})}(t)$. Put $W:=a_j-a_{i+1}$.
+
+\emph{Close case, $W+\lambda_I+\varepsilon\le R$.} Suppose $i\le j-2$. Then $K_1:=(a_{i+1},a_j)$, $K_2:=(a_{i+1},b)$,
+$K_3:=(a_i,a_{i+1})$ and $K_4:=(a_i,b)$ are family pairs at $t$: their left ends are $a_i$ or $a_{i+1}$, and their lengths
+lie in $[\varepsilon/\kappa,W+\lambda_I+\varepsilon]$. Moreover $I\subset K_2\supset K_1$ and $I\subset K_4\supset K_3$.
+With $s:=2C_Tm((W+\lambda_I+\varepsilon)/R)^{\gamma_D}$, two applications of Theorem~\ref{thm:end}(c) give
+$|e_I-e_{K_1}|\le s$ and $|e_I-\hat u_{i+1}|=|e_I-e_{K_3}|\le s$. Now $r_a=c(K_1)e_{K_1}+\varrho\hat u_{i+1}$ is a
+non-negative combination of two unit vectors within $s$ of $e_I$. Hence $|e_I\times r_a|\le s(c(K_1)+\varrho)$ and
+$r_a\cdot e_I\ge(1-s^2/2)(c(K_1)+\varrho)$, so $|e_I\times\hat r_a|\le\min(1,2s)$. The same holds for $b$ (with $K_2$),
+and for $i=j-1$ (then $r_a=\varrho\hat u_j$, and $(a_{j-1},a_j)\subset(a_{j-1},b)\supset I$). Thus
+$|e_I'|\le2v\min(1,2s)/(c_A\lambda_I)$.
+
+\emph{Far case, $W+\lambda_I+\varepsilon>R$.} Then $a_j-a_i\ge W>R-\delta_0-\varepsilon$ and $b>a_j$. So
+Theorem~\ref{thm:end}(d), applied on leg $i+1$ with base $a_i$, gives
+$\rho_a,\rho_b\ge c_A(R-\delta_0-\varepsilon)-\delta_1\varepsilon\ge\frac12\bigl(\frac34-\frac1{10}\bigr)R-\frac54\cdot\frac
+R{10}=\frac R5=:\rho_*$. (This is where $\delta_1=\frac54$ enters. Note $\rho_*\ge2\varepsilon$.) Hence $F(r)=\hat r$ at
+both ends. With $p:=e_I\times r_a=e_I\times r_b$ we have $|p|\le\min(\rho_a,\rho_b)$ and $|\rho_a-\rho_b|\le c_I$, so
+$|e_I\times(\hat r_b-\hat r_a)|=|p|\,|\rho_a-\rho_b|/(\rho_a\rho_b)\le c_I/\rho_*$. Thus $|e_I'|\le v/\rho_*=5v/R$.
+
+\emph{Durations.} Each leg lasts at most $\varepsilon/(1-v)$ and advances the base by at least $\varepsilon/\kappa$. So
+legs $1,\dots,j$ last at most $\kappa a_j/(1-v)\le\frac{11}8\Lambda$ in total. The close-case legs have
+$a_{i+1}\in[a_j-R,a_j]$, so there are at most $\kappa R/\varepsilon+1$ of them, lasting at most $\frac32R$ in total.
+Hence close-case time is at most $\frac32\min(\Lambda,R)$, and far-case time is at most $\frac{11}8(\We+\varepsilon)$.
+Since $\min(\Lambda,R)/\lambda_I\le R/\delta_0=4$ and $\We/R=c_AK_R/\kappa_c$ is absolute, integrating $|e_I'|$ gives
+\[
+|e_I(t_j)-e_I(t_\td)|\le\frac{2v}{c_A}\cdot\frac32\cdot4+\frac{5v}R\cdot\frac{11}8\Bigl(\We+\frac R{10}\Bigr)=:C_{\mathrm{rot}}v .
+\]
+If $\Lambda\le\delta_0$, then $\lambda_I=\Lambda$ and $W+\lambda_I+\varepsilon\le a_j+\Lambda+\varepsilon=2\Lambda\le R/2$, so
+only the close case occurs, with $s\le2C_Tm(2\Lambda/R)^{\gamma_D}$. Then
+$|e_I(t_j)-e_I(t_\td)|\le\frac{8vs}{\Lambda}\cdot\frac{11}8\Lambda\le C\,v\,R^{-\gamma_D}\Lambda^{\gamma_D}$.
+
+\emph{Step 4 (sum).} By Steps 1--3,
+$|\hat u_{j+1}-\hat n|\le C_Tm(\lambda_I/R)^{\gamma_D}+2\sigma+|e_I(t_j)-e_I(t_\td)|$.
+Always $\lambda_I\le\delta_0$ and $b\le\We+\delta_0$, which (with $v\le v_0$) gives the first bound in
+\eqref{eq:headclaim}. If
+$\Lambda\le\delta_0$, then $2\sigma\le2C_{\mathrm{td}}(2\Lambda)^{\gamma_*}\le4C_{\mathrm{td}}\Lambda^{\gamma_D}$ (as $\Lambda\le1$,
+$\gamma_*\ge\gamma_D$), and the sum is at most $C(R)\Lambda^{\gamma_D}$. If $\Lambda>\delta_0$, the sum is at most
+$\omega_0\le\frac14(\Lambda/\delta_0)^{\gamma_D}=C(R)\Lambda^{\gamma_D}$.
+
+\emph{Step 5 (from labels to time).} Leg $i+1$ lasts at least $c(a_i,a_{i+1};t_i)$, because
+$\partial_t|x_{a_{i+1}}-P|\ge-1$ (the point $x_{a_{i+1}}$ moves away from $P$). By (J2) for the family pair
+$(a_i,a_{i+1})$, whose length $\lambda\le\varepsilon\le R$, we get $c=l-\frac12N^2\ge\lambda-\frac12m^2(\lambda/R)^{2\gamma_D}\lambda
+\ge(1-\frac{m^2}2)\lambda$. Summing, $t_j-t_\td\ge(1-\frac{m^2}2)a_j$. For $t$ in leg $j+1$ this gives
+$\Lambda\le\frt/(1-m^2/2)+\varepsilon\le2(\frt+\varepsilon)$. With Step~4 this is the second bound in
+\eqref{eq:headclaim}, with $C_H:=2^{\gamma_D}C(R)$. Since $C_H$ comes from $C_T$, $m$, $R$ and $C_{\mathrm{td}}$
+($\omega_0$ enters only through $\omega_0\le\frac14$), it does not depend on $v$ or $\varepsilon$.
+\end{proof}
+
+\subsection{Proof of the departure theorem}\label{appC:departure}
+
+\begin{proof}[Proof of Theorem~\ref{thm:departure}]
+Let $C_D\ge1$ bound the constants in (D0)--(D1); in the application $C_D=4C_{\mathrm{td}}+1$. Write $\gamma:=\gamma_D$,
+$X:=X_s(\frt)$ and $X_0:=X_s(0)=s+z_0$. We use that $X_*:=\UE+z_0+D$ satisfies $8C_DX_*^{\gamma}\le1$. In the
+application $\UE,D\le CR$ and $z_0\le R$, so this is (R5). The heading bound enters only through four properties:
+$h_H$ is non-decreasing, $h_H\le\frac14$, $h_H(\frt)\le C_H(\frt+\varepsilon)^\gamma\le C_HX^\gamma$ (as
+$X\ge\frt+z_0\ge\frt+\varepsilon$), and the integral bound \eqref{eq:hint} below.
+
+\textbf{(i)} By (D2), $-P'\cdot\hat u=(1-(\hat u\times P')^2)^{1/2}\ge(15/16)^{1/2}>0.96$, so
+$z_s'=vF(r_s)\cdot\hat u-P'\cdot\hat u\ge0.96-v\ge\frac12$ a.e. At $t_\td$,
+$z_s=z_0+\int_0^sT\cdot\hat u\ge z_0+\frac s2$, since $|T-\hat u|\le C_DX_0^\gamma\le\frac18$ by (D1). Hence
+$z_s(\frt)\ge z_0+\frac s2+\frac\frt2\ge\frac12X$ and $\rho_s\ge z_s\ge\frac12X\ge\frac12z_0\ge\varepsilon$.
+Consequently $F(r_s)=r_s/\rho_s$, $a^*(\rho_s)=1/\rho_s\le2/X$, and since $\partial_\frt X=1$,
+\begin{equation}\label{eq:depamp}
+\exp\Bigl(v\int_{\frt'}^{\frt}a^*(\rho_s)\Bigr)\le\Bigl(\frac{X_s(\frt)}{X_s(\frt')}\Bigr)^{2v}\qquad(0\le\frt'\le\frt).
+\end{equation}
+
+\textbf{(ii)} Since $F(r)=r/\rho$, $y_s'=vy_s/\rho_s-P'\cdot\hat u^\perp$ and $|P'\cdot\hat u^\perp|=|\hat u\times P'|\le h_H$.
+Hence $|y_s|'\le(v/\rho_s)|y_s|+h_H$. At $t_\td$, $y_s=y_0+\int_0^s\hat u\times T$, so by (D0)--(D1)
+$|y_s(0)|\le C_Dz_0^{1+\gamma}+C_DsX_0^\gamma\le C_DX_0^{1+\gamma}$. Variation of constants and \eqref{eq:depamp},
+together with $X(\frt')\ge\frt'+z_0$ and the monotonicity of $h_H$, give
+\begin{equation}\label{eq:depy}
+\begin{aligned}
+|y_s(\frt)|&\le C_DX_0^{1+\gamma}\Bigl(\frac X{X_0}\Bigr)^{2v}+X^{2v}h_H(\frt)\int_0^{\frt}\frac{d\frt'}{(\frt'+z_0)^{2v}}\\
+&\le C_DX_0^{1+\gamma}\Bigl(\frac X{X_0}\Bigr)^{2v}+2Xh_H(\frt)\le C_DXX_0^\gamma+2Xh_H(\frt).
+\end{aligned}
+\end{equation}
+For the tangent, let $\delta:=|T-\hat u|$ and $\mathbf d:=T-\hat u$. By Lemma~\ref{lem:vflow}(b),
+$\partial_t(1-T\cdot\hat u)=v[\mathbf d\cdot AT-(T\cdot AT)(1-T\cdot\hat u)]\le v\,\mathbf d\cdot AT$. Here
+$\mathbf d\cdot AT=\mathbf d\cdot A\mathbf d+(\mathbf d\cdot\hat u)(\hat u\cdot A\hat u)+(\mathbf d\cdot\hat u^\perp)q_{\hat u}$ with
+$q_{\hat u}:=\hat u^\perp\cdot A\hat u$. The first term is $\le a^*\delta^2$ and the second is $\le0$ (as
+$\mathbf d\cdot\hat u=-\frac12\delta^2$ and $A\ge0$). By Lemma~\ref{lem:F}(iii), $|q_{\hat u}|\le|y_s|/\rho_s^2\le4|y_s|/X^2$.
+So $(\frac12\delta^2)'\le va^*\delta^2+v\delta|q_{\hat u}|$. Regularizing as $(\delta^2+\iota^2)^{1/2}$ and using variation of
+constants with \eqref{eq:depamp},
+\[
+\delta(\frt)\le\Bigl(\frac X{X_0}\Bigr)^{2v}C_DX_0^\gamma+4v\int_0^{\frt}\Bigl(\frac{X(\frt)}{X(\frt')}\Bigr)^{2v}\frac{|y_s(\frt')|}{X(\frt')^2}\,d\frt'.
+\]
+Insert the middle bound of \eqref{eq:depy} at time $\frt'$. Using $\int X(\frt')^{-2}d\frt'\le X_0^{-1}$ and
+$h_H(\frt')\le C_HX(\frt')^\gamma$, the integral is at most
+$C_DX_0^{\gamma-2v}X^{2v}+2C_HX^{2v}\int_0^{\frt}X(\frt')^{\gamma-1-2v}d\frt'\le(C_D+4C_H)X^\gamma$. Since also
+$(X/X_0)^{2v}X_0^\gamma\le X^\gamma$, we get
+\begin{equation}\label{eq:depT}
+\delta\le\bigl(C_D+4v(C_D+4C_H)\bigr)X^\gamma\le2C_DX^\gamma\le\tfrac14\qquad\text{once }v\le v_0(R).
+\end{equation}
+This is (ii). The constants are $C_D$ (absolute) and $C_H=C(R)$.
+
+\textbf{(iii)} By Lemma~\ref{lem:vflow}(b), $w_t/w=v\sin^2\phi/\rho_s$. Here
+$|\sin\phi|=|T\times\hat r|\le\delta+|y_s|/\rho_s\le4C_DX^\gamma+4h_H$ by \eqref{eq:depy}, \eqref{eq:depT} and
+$\rho_s\ge X/2$. Since $\rho_s\ge X/2\ge(\frt+\varepsilon)/2$,
+\[
+\log w\le v\int_0^D\frac{\sin^2\phi}{\rho_s}\,d\frt\le64v\,C_D^2\int_0^DX^{2\gamma-1}d\frt+64v\int_0^D\frac{h_H(\frt)^2}{\frt+\varepsilon}\,d\frt .
+\]
+The first integral is at most $X_*^{2\gamma}/(2\gamma)$. For the second, let $x_c:=(\omega_0/C_H)^{1/\gamma}$ and
+substitute $y=\frt+\varepsilon$, which is $\le D+\varepsilon\le1$ by (D3) (as $C_D\ge1$ and $z_0\ge2\varepsilon$):
+\begin{equation}\label{eq:hint}
+\int_0^D\frac{\min(C_H^2(\frt+\varepsilon)^{2\gamma},\omega_0^2)}{\frt+\varepsilon}\,d\frt
+\le\int_0^{x_c}C_H^2y^{2\gamma-1}dy+\int_{\min(x_c,1)}^1\frac{\omega_0^2}y\,dy
+\le\omega_0^2\Bigl(\frac1{2\gamma}+\log^+\frac1{x_c}\Bigr)=C(R).
+\end{equation}
+So $1\le w\le e^{C(R)v}=1+O_R(v)$ (the lower bound is Lemma~\ref{lem:vflow}(a)), and $\lambda\le l\le(1+O_R(v))\lambda$.
+Here the $(\frt+\varepsilon)^\gamma$ branch of $h_H$ is essential. With the cap $\omega_0$ alone the integral would be
+$\omega_0^2\log(1+D/\varepsilon)$, which is unbounded as $\varepsilon\to0$.
+
+\textbf{(iv)} Fix a pair $(a,b)$ with $\lambda\ge\varepsilon/2$, put $\tilde g:=a+z_0$ and
+$\frt_0:=\max(0,k_D\lambda-\tilde g)$. For $s\in[a,b]$, $X_s(\frt)\ge\tilde g+\frt$, and $l\le\frac54\lambda$ by (iii).
+
+\emph{Phase $\frt\le\frt_0$.} By Lemma~\ref{lem:Eprime}(iii), $E'\le vN\|AT\|_{L^2(ds)}$, so (after regularizing)
+$N'\le v\|AT\|_{L^2(ds)}$. On the arc $A=\Pi/\rho$, hence
+$|AT|=|\sin\phi|/\rho_s\le(4C_DX^\gamma+4C_HX^\gamma)\cdot2/X\le C(R)(\tilde g+\frt)^{\gamma-1}$. Therefore
+$N'\le C(R)\,v\,\lambda^{1/2}(\tilde g+\frt)^{\gamma-1}$, and integrating up to $\frt_0$ (where $\tilde g+\frt_0=k_D\lambda$
+if $\frt_0>0$) gives $N(\frt_0)\le N(0)+O_R(v)\lambda^{1/2+\gamma}$.
+
+\emph{Phase $\frt\ge\frt_0$.} Now $\underline\rho\ge\frac12(\tilde g+\frt)\ge\frac12k_D\lambda=5\lambda\ge4l$ and
+$\underline\rho\ge\varepsilon$. So Lemma~\ref{lem:duhamel} applies with $K=4$:
+$\mathcal A\le\mathcal A^*(4)v/\underline\rho\le\nu_D/(\tilde g+\frt)$ with $\nu_D:=2\mathcal A^*(4)v$, and
+$\mathcal B=2vl^{3/2}|p_a|/(\pi\underline\rho^3)$. To bound $p_a=r_a\times e_{ab}=z_a(\hat u\times e_{ab})+y_a(\hat u^\perp\times e_{ab})$:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item $|\hat u\times e_{ab}|\le|e_{ab}-\hat u|\le2\sup_{[a,b]}\delta\le4C_DX_b^\gamma\le8C_D(\tilde g+\frt)^\gamma$. Here
+$c\,e_{ab}-l\hat u=\int_a^b(T-\hat u)$, $c\ge l(1-\frac1{32})$, and $X_b=\tilde g+\lambda+\frt\le2(\tilde g+\frt)$;
+\item $|z_a|\le\rho_a\le(a+z_0+|y_0|)+(1+v)\frt\le2(\tilde g+\frt)$, using $|y_0|\le C_Dz_0^{1+\gamma}\le z_0$;
+\item $|y_a|\le(C_D+2C_H)(\tilde g+\frt)^{1+\gamma}$ by \eqref{eq:depy}, with $X_a=\tilde g+\frt$.
+\end{itemize}
+Hence $|p_a|\le C(R)(\tilde g+\frt)^{1+\gamma}$ and $\mathcal B\le O_R(v)\lambda^{3/2}(\tilde g+\frt)^{\gamma-2}$. Since
+$\int_{\frt_0}^\infty(\tilde g+\frt')^{\gamma-2}d\frt'\le(k_D\lambda)^{\gamma-1}/(1-\gamma)$ and
+$\exp\int_{\frt'}^{\frt}\mathcal A\le((\tilde g+\frt)/(\tilde g+\frt_0))^{\nu_D}$ for $\frt'\ge\frt_0$, Lemma~\ref{lem:duhamel} gives
+\[
+N(\frt)\le\Bigl(\frac{\tilde g+\frt}{\tilde g+\frt_0}\Bigr)^{\nu_D}\Bigl[N(\frt_0)+O_R(v)\lambda^{1/2+\gamma}\Bigr].
+\]
+Finally $(\tilde g+\frt)/(\tilde g+\frt_0)\le1+\frt/(k_D\lambda)$, because either $\frt_0=0$ and $\tilde g\ge k_D\lambda$, or
+$\tilde g+\frt_0=k_D\lambda$. Combined with the first phase this is (iv). Every $O_R(v)$ above has the form
+$v\times$(polynomial in $C_D$, $C_H$, $\omega_0$, $X_*$, $1/\gamma$, $1/(1-\gamma)$), so it does not depend on
+$\varepsilon$.
+\end{proof}
+
+\subsection{Proof of the conditional theorem}\label{appC:assembly}
+
+\begin{proof}[Proof of Proposition~\ref{prop:cond}]
+Let $v\le v_0$ and $\varepsilon\le\varepsilon_*$ with the choices of \S\ref{appC:conv}. By Theorem~\ref{thm:touchdown}
+(as $v\le v_T$, $\varepsilon\le\varepsilon_T$), Design~T is defined, $t_\td\le4$, and the curve $x^0$ on $[0,U]$,
+$1\le U\le8$, satisfies (T0)--(T5). Labels below refer to $t_\td$, where they are arclength.
+
+\emph{Step 1 (stage A).} Let $P_{\mathrm A}$ be Design~T followed by the chase on the working front $x^0|_{[0,\UA]}$,
+where $\UA\le\frac12$ (R3); in Setting~(H) this front has length $\UA$ and cut $b_c=\UA$. We apply
+Theorem~\ref{thm:end} to it with exponent $\gamma_D$, excuse length $0$, $U_0=8$ and $\varepsilon\le R/K_\varepsilon$. A
+pair in $[0,\UA]$ with $\lambda>\lambda_0$ has $a+U-b\ge U-\UA\ge\frac12$, where $U$ is the length of the whole front
+$x^0$ to which (T2) refers (chords do not depend on the cut), so (T2) and (R2) give $c\ge\min(c_{\mathrm{sep}},\frac12\kappa_c)\ge c_AK_RR$ (note
+$\kappa_c/2\ge\kappa_c\We=c_AK_RR$ by (R3)). Lemma~\ref{lem:startchord} with $\gamma'=\gamma_D$ then gives (S1) and
+(S2). Hence the conclusions (a)--(e) of Theorem~\ref{thm:end} hold for $P_{\mathrm A}$.
+
+\emph{Step 2 (common legs, hand-over time).} Let $a_j,t_j$ be the bases and leg starts of $P$. Suppose $P=P_{\mathrm A}$ on
+$[0,t_j]$ and $a_j<\We$. By causality (Lemma~\ref{lem:chase}(4)) the two working fronts agree on $[t_\td,t_j]$. Since
+$w\ge1$, $l_{t_j}(a_j,\UA)\ge\UA-a_j>\delta_0+R>\varepsilon$. So the rule of Definition~\ref{def:chase} gives the same
+$a_{j+1}<\UA$ for the fronts $x^0|_{[0,\UA]}$ and $x^0$ (cuts at $\UA$ and at $U$), leg $j+1$ is non-final for both, and both paths run along the same ray
+until they meet $x_{a_{j+1}}$. Hence $P=P_{\mathrm A}$ on $[0,t_{j+1}]$. By Theorem~\ref{thm:end}(b) for $P_{\mathrm A}$
+the base advances by $[\varepsilon/\kappa,\varepsilon]$ per leg. So $j_W$ exists, $a_{j_W}\in[\We,\We+\varepsilon)$,
+$j_W<\kappa\We/\varepsilon+1$, and each leg before $t_W$ lasts at most $\varepsilon/(1-v)$. Thus
+\[
+P=P_{\mathrm A}\ \text{on }[0,t_W],\qquad D:=t_W-t_\td\le\frac{\kappa\We+\varepsilon}{1-v}\le\bar D=2\We+R .
+\]
+
+\emph{Step 3 (heading).} The stage-A chase satisfies Theorem~\ref{thm:end} (Step 1), and (T3) holds on $[0,\UA]\subset[0,G_T]$.
+So Lemma~\ref{lem:heading} applies to $P_{\mathrm A}$. Legs $1,\dots,j_W$ are non-final with $a_j<\We$ and fill
+$[t_\td,t_W]$, so by Step 2, $|P'|=1$ and $|P'-\hat n|\le h_H(t-t_\td)$ a.e.\ on $[t_\td,t_W]$, with
+$h_H=\min(C_H(\frt+\varepsilon)^{\gamma_D},\omega_0)$ and $\omega_0\le\frac14$.
+
+\emph{Step 4 (departure).} The reversed arc $s\mapsto x(U-s,t)$, $s\in[0,\UE]$, is a virtual flow of $P$ from the
+unit-speed curve $x^0(U-\cdot)$ at $t_\td$. We apply Theorem~\ref{thm:departure} with $\hat u:=-\hat n$ (so
+$\hat u^\perp=-\hat n^\perp$) and $D$ as in Step 2.
+(D0): by (T5), $x^0(U)-P(t_\td)=z_0\hat u+y_0\hat u^\perp$. The choice of $\varepsilon_*$ gives $z_0\ge2\varepsilon$, and
+$z_0\le C_{\mathrm{td}}\varepsilon^{1/(2-2v)}\le C_{\mathrm{td}}\varepsilon^{1/2}\le R$. As $z_0+\varepsilon\le\frac32z_0$ and
+$1-\mu_T-\gamma_D\ge\frac18$, $|y_0|\le C_{\mathrm{td}}(\frac32z_0)^{2-\mu_T}\le\frac94C_{\mathrm{td}}z_0^{1+\gamma_D}$.
+(D1): the tangent of the reversed arc is $-T(U-s)$, and $|-T-\hat u|=|T-\hat n|\le C_{\mathrm{td}}(s+z_0)^{1-\mu_T}\le
+C_{\mathrm{td}}(s+z_0)^{\gamma_D}$ by (T4) (note $s\le\UE\le G_T$ and $s+z_0\le1$).
+(D2): by Step 3, $|\hat u\times P'|=|\hat n\times(P'-\hat n)|\le h_H\le\frac14$ and
+$P'\cdot\hat u=-1+\frac12|P'-\hat n|^2<0$.
+Finally $\UE+z_0+D\le\UE+R+\bar D$, so (R5) gives the smallness of $X_*$, with $C_D=4C_{\mathrm{td}}+1$.
+
+\emph{Step 5 (the data (TW)).} Let $(a,b)$ be a tail pair with $\varepsilon/2\le\lambda\le R$, i.e.\ $U-b<\We$. Then
+$U-a<\We+R=\UE$, so the pair lies in the departure arc (as $(U-b,U-a)$; $l,c,N$ do not depend on orientation).
+\emph{Gap:} $g_W=a-a_{j_W}\ge(U-\UE)-(\We+\varepsilon)\ge1-2\We-R-\varepsilon\ge K_RR\ge K_f\lambda$ by (R3), so
+$\min(g_W,K_RR)=K_RR$. \emph{Length:} by Theorem~\ref{thm:departure}(iii), $l_{t_W}(a,b)\le(1+\delta_t)\lambda$ with
+$\delta_t=O_R(v)$; this is the form (H) needs, as Proposition~\ref{prop:length} only uses $(1+\delta_t)(1+O_R(v))<\kappa$.
+\emph{Excess:} by (T1) ($\lambda\le R\le\lambda_0$), $N(a,b;t_\td)\le C_{\mathrm{td}}\lambda^{1/2+\gamma_*}$; also
+$1+D/(k_D\lambda)\le C_{\mathrm{TW}}R/\lambda$ with the absolute $C_{\mathrm{TW}}:=1+\bar D/(10R)$. So Theorem~\ref{thm:departure}(iv) gives
+$N(a,b;t_W)\le C_{\mathrm{TW}}^{\nu_D}(R/\lambda)^{\nu_D}\lambda^{1/2}[C_{\mathrm{td}}\lambda^{\gamma_*}+O_R(v)\lambda^{\gamma_D}]$.
+The bound (TW) requires is $s_0M\lambda^{1/2+\gamma}(K_f\lambda/(K_RR))^\nu=s_0m(K_f/K_R)^\nu\lambda^{1/2}(\lambda/R)^{\gamma+\nu}$.
+Take $v_0\le\frac1{53}$, so $\nu_D\le2.2v\le\frac1{24}$ and $\gamma+\nu+\nu_D\le\gamma_D\le \gamma_*$. Then the ratio of our
+bound to the required one is at most
+\[
+\frac{C_{\mathrm{TW}}^{\nu_D}}{s_0m(K_f/K_R)^\nu}\Bigl[C_{\mathrm{td}}R^{\gamma_*}\Bigl(\frac\lambda R\Bigr)^{\gamma_*-\gamma-\nu-\nu_D}
++O_R(v)\Bigl(\frac\lambda R\Bigr)^{\gamma_D-\gamma-\nu-\nu_D}\Bigr]\le C_{\mathrm{TW}}^{\nu_D}\Bigl(\frac14+\frac14\Bigr)\le1 .
+\]
+Here we used $\lambda\le R$, (R1), and $v_0=v_0(R)$ so small that $O_R(v)\le\frac14s_0m(K_f/K_R)^\nu$ and $C_{\mathrm{TW}}^{\nu_D}\le2$.
+So (TW) holds.
+
+\emph{Step 6 (the end theorem on the whole front).} Apply Theorem~\ref{thm:end} to $P$, i.e.\ the chase cut at $U$, with
+$\gamma=\frac23$, excuse length $\We$, $U\le U_0=8$, $\varepsilon\le R/K_\varepsilon$, and $U\ge1\ge2\We+R+\varepsilon$ (R3).
+(S1): a good pair with $\lambda>\lambda_0$ has $a\ge\We$ or $U-b\ge\We$, so (T2) and (R2) give
+$c\ge\min(c_{\mathrm{sep}},\kappa_c\We)=c_AK_RR$. Lemma~\ref{lem:startchord} ($\gamma'=\gamma$) then gives (S1) and (S2).
+(TW): Step 5, which is about the same path, the same $j_W$ and the same front at $t_W$ (Step 2). Hence the proviso
+holds at every leg, the chase stops at $T_\stopp\le t_\td+\kappa U/(1-v)\le4+\frac54\cdot8\cdot\frac{11}{10}=15$, and every
+true label of $[0,U]$ is seen by $T_\stopp$ (Theorem~\ref{thm:end}(b)).
+
+\emph{Step 7 (every direction; the path).} By (T0), every $\alpha\in[0,2\pi)$ is seen during $[0,t_\td]$ or is the
+direction of a true label, seen by $T_\stopp$ (Step 6, Lemma~\ref{lem:seen}). $P(0)=0$; $P$ is two unit-speed runs, then
+$1$-Lipschitz (Lemma~\ref{lem:chase}(0)), then constant. Design~T, $t_\td$, $x^0$, $U$ depend only on $(v,\varepsilon)$,
+and each leg only on $x^0$ and earlier $P$ (Lemma~\ref{lem:chase}(4)); so $P$ depends only on $(v,\varepsilon)$.
+\end{proof}

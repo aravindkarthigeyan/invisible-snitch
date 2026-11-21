@@ -1,0 +1,600 @@
+% appA.tex -- writer H-walk.  Appendix A: walking the front (proof of the End Theorem).
+% Uses the labels of the main text: thm:end, def:chase, lem:F, lem:vflow, lem:seen, lem:chords, lem:excess,
+% lem:splittilt, lem:Eprime, lem:duhamel (streamlined labels).  Defines: app:walk, lem:chase, lem:toolkit,
+% lem:locality, lem:tiltchain, lem:cont, prop:far, prop:near, prop:length, eq:Emu, eq:Imp.
+\providecommand{\eps}{\varepsilon}
+\providecommand{\Fam}{\mathcal{F}}
+\providecommand{\FamS}{\mathcal{F}_*}
+\providecommand{\rhoarc}{\underline{\rho}}
+\providecommand{\Tdef}{T_{\mathrm{def}}}
+
+\section{Walking the front: proof of the End Theorem}\label{app:walk}
+
+This appendix proves Theorem~\ref{thm:end}, along the plan sketched after its statement: a continuity argument
+(Lemma~\ref{lem:cont}) reduces it to the three estimates of Propositions~\ref{prop:far}, \ref{prop:near} and
+\ref{prop:length}; Sections~\ref{app:walk:chase}--\ref{app:walk:tools} collect the bookkeeping these estimates use.
+
+\subsection{Conventions}\label{app:walk:conv}
+
+\textbf{Parameters.} We use the locked numbers of Section~\ref{sec:intro} (in particular $\delta_1=\frac54$),
+$U\le U_0=8$, and $\gamma\in\{\frac23,\frac34\}$ (the main
+chase uses $\gamma=\frac23$, Stage~A uses $\gamma=\gamma_D=\frac34$; everything below holds for both). As in
+Setting~(H), $M=mR^{-\gamma}$ (so $M\lambda^\gamma=m(\lambda/R)^\gamma\le m$ for $\lambda\le R$),
+$\eps\le R/K_\eps$, and we assume $R\le1$. The derived constants are
+\[
+c_6:=\frac{1+\delta_1}{c_A}=\frac92,\qquad
+c_\rho^*:=c_A-\frac{2\delta_1}{K_f}=\frac14,\qquad
+c_R^*:=c_AK_R-\frac{\delta_1}{K_\eps}=\frac{47}8,\qquad
+\chi_g:=\kappa d_L=\frac52,
+\]
+\[
+C_T:=\frac{\sqrt5\,(1-2m^2)^{-1/2}}{1-2^{-\gamma}}\ \ \bigl(<6.11\text{ for }\gamma=\tfrac23,\ <5.58\text{ for }\gamma=\tfrac34\bigr),
+\qquad C_\mu:=1+\kappa C_T^2<48 .
+\]
+Note $c_\rho^*K_f=\frac52\ge2$; this is the inequality needed in Step~1 of the proof of Proposition~\ref{prop:far}.
+
+\textbf{What ``$C$'' means.} A letter $C$ (possibly with an index) is a positive number computed from the locked
+parameters only ($m=\frac1{10}$ included). It never depends on $\eps$, $v$, $R$, $\lambda$, $t$, $U$ or on the front;
+where $R$ enters, it is written out as a power of $R$. The vision radius enters only in the three ways listed at the
+end of Section~\ref{sec:chase} (the third is Lemma~\ref{lem:toolkit}(b) below).
+
+\textbf{How small $v_0$ is.} Always $v\le v_0\le\frac1{10}$. Then, with $\mu=v/(1-v)\le\frac19$,
+\begin{equation}\label{eq:V0}
+\tfrac1{1-v}\le\tfrac{10}9\le d_L,\qquad e^{2\mu}\le e^{2/9}<1.25=\delta_1 .
+\end{equation}
+Propositions~\ref{prop:far}--\ref{prop:length} add finitely many conditions $v_0\le R/C$; so $v_0=v_0(m,R)$, as in
+Theorem~\ref{thm:end}. Of the number $\delta_t=O_R(v)$ of Setting~(H) we only use $\delta_t\le\frac1{16}$ (true once
+$v_0$ is small).
+
+\subsection{The chase}\label{app:walk:chase}
+
+During a leg the pursuer runs straight at a point of the front, and that point flees straight away from it; in the
+short time $\eps/(1-v)$ that a leg lasts, the front can stretch only by the factor $e^{2\mu}\approx1$.
+
+\begin{lemma}[Chase basics]\label{lem:chase}
+Assume the proviso holds at every non-final leg start that is reached. Then:
+\begin{enumerate}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item[(0)] either the chase stops, or $t_j\to\infty$; and $P$ is $1$-Lipschitz;
+\item[(1)] during leg $j+1$ the points $x_{a_j},P,x_{a_{j+1}}$ lie on a line in this order, $|x_{a_{j+1}}-P|$
+decreases at rate at least $1-v$, and the leg lasts at most $c(a_j,a_{j+1};t_j)/(1-v)\le d_L\eps$;
+\item[(2)] every true label $u\in[a_j,a_{j+1}]$ is seen by time $t_j$ (this includes the final leg);
+\item[(3)] during leg $j+1$: $l_t(a,b)\le\delta_1l_{t_j}(a,b)$ for all $a<b$, and $|P-x_{a_j}|\le\delta_1\eps$;
+\item[(4)] if a path $\tilde P$ equals $P$ on $[0,t_j]$, the working fronts of $P$ and $\tilde P$ agree on $[t_\td,t_j]$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:vflow}(a) and $A\le a^*I\le(2/\eps)I$ (Lemma~\ref{lem:F}(ii)), $w_t\le(2v/\eps)w$; hence
+$l'\le(2v/\eps)l$ for every pair.
+
+(1) Let $\rho$ solve $\rho'=-1+vf(\rho)$ with $\rho(t_j)=c(a_j,a_{j+1};t_j)>0$. Since $F(\rho\hat u)=f(\rho)\hat u$,
+the point $y:=P+\rho\hat u_{j+1}$ solves $y'=vF(y-P)$ with $y(t_j)=x_{a_{j+1}}(t_j)$, so $y=x_{a_{j+1}}$ by uniqueness
+while $\rho>0$; and $\rho'\le-(1-v)$ because $f\le1$. Likewise $P-\sigma\hat u_{j+1}$, with $\sigma'=1+vf(\sigma)$,
+$\sigma(t_j)=0$, solves the equation of $x_{a_j}$ (as $F(-\sigma\hat u)=-f(\sigma)\hat u$), and $\sigma\ge0$. Finally
+$c(a_j,a_{j+1};t_j)\le l_{t_j}(a_j,a_{j+1})\le\eps$ and $1/(1-v)\le d_L$ by \eqref{eq:V0}.
+
+(3) Lengths grow at most by the factor $\exp\bigl((2v/\eps)\cdot\eps/(1-v)\bigr)=e^{2\mu}\le\delta_1$ during the leg.
+By (1), $|P-x_{a_j}|=\sigma\le c(a_j,a_{j+1};t)\le l_t(a_j,a_{j+1})\le\delta_1\eps$.
+(0) On $[t_\td,T]$, $w\le e^{2v(T-t_\td)/\eps}$; a non-final leg has $l_{t_j}(a_j,a_{j+1})=\eps$ (maximality and
+continuity of $l$ in the label), so it moves the base by at least $\eps e^{-2v(T-t_\td)/\eps}$, and only finitely many
+legs start before $T$. $P$ is piecewise linear with speed $\le1$.
+(2) At $t_j$, $P=x_{a_j}$, so $\rho_u(t_j)=c(a_j,u;t_j)\le l_{t_j}(a_j,u)\le\eps$ by the choice of $a_{j+1}$; apply
+Lemma~\ref{lem:seen}. (4) The front at time $t$ depends only on $x^0$ and on $P$ on $[t_\td,t]$ (uniqueness).
+\end{proof}
+
+\subsection{The toolkit}\label{app:walk:tools}
+
+\textbf{Reminders from Setting (H).} The base at time $t$ is $a_{j(t)}$, where $j(t)=j$ for $t\in(t_j,t_{j+1}]$ and
+$j(t_0)=0$. A leg start $t_j$ ($j\ge1$) belongs to both legs $j$ and $j+1$: a statement about leg $j+1$ may be applied
+at $t_j$ with the base $a_j$, since $P(t_j)=x_{a_j}(t_j)$. For a tail pair, $t_W$ is treated as a point of leg
+$j_W+1$ (base $a_{j_W}$). \emph{Every pair with $\lambda\le R$ is good}: a pair that is not good has $a<\We$ and
+$U-b<\We$, hence $\lambda>U-2\We\ge R+\eps$. Families shrink in time (a pair of the family of leg $k+1$, $k>j$, has
+$a\ge a_k\ge a_{j+1}$), and the gap of a fixed label is non-increasing in $t$ and constant on each leg. $\Tdef\le\infty$
+is the supremum of the times up to which the chase is defined.
+
+\begin{lemma}[Toolkit]\label{lem:toolkit}
+\textup{(CA)} For every good pair with $\lambda\ge\eps/2$ and every $t\ge t_\td$: $c(a,b;t)\ge c_A\min(\lambda,K_RR)$.
+In particular $c(a,b;t)\ge c_A\lambda$ for every pair with $\eps/2\le\lambda\le R$.
+
+\textup{(c) (Distance from the base.)} Let $t$ lie in leg $j+1$ and let $s\ge a_j$ be a label with $U-s\ge\We$ or
+$a_j\ge\We$. Then
+\[
+\rho_s(t)\ge c_A\min(s-a_j,K_RR)-\delta_1\eps,\qquad \max(\rho_s(t),\eps)\ge\min(s-a_j,K_RR)/c_6 .
+\]
+Now let $t'\le\Tdef$ and assume that \textup{(J1)} holds at every leg start $t_i\le t'$ for all pairs of $\FamS(t_i)$.
+\begin{enumerate}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item[\textup{(a)}] \emph{(Legs.)} Let $t_j\le t'$ be a leg start. (a1) If $U-a_j\ge\eps/2$ and leg $j+1$ is not final,
+then $a_{j+1}-a_j\in[\eps/\kappa,\eps]$ and $l_{t_j}(a_j,a_{j+1})=\eps$. (a2) If $U-a_j<\eps/2$, leg $j+1$ is final; if
+$a_j<\We$, it is not final. (a3) If leg $j+1$ is not final, $c(a_j,a_{j+1};t_j)\ge c_A(a_{j+1}-a_j)>0$: the proviso
+holds. (a4) At most $\kappa U/\eps$ non-final legs start in $[t_\td,t']$, each lasts at most $d_L\eps$, and
+$t'-t_\td\le\chi_gU\le20$.
+\item[\textup{(b)}] \emph{(Gap--time integrals.)} Fix a label $a$ and a set $\mathcal T\subset[t_\td,t']$ of times at
+which $g(\tau):=a-a_{j(\tau)}\ge0$. The values of $g$ on distinct legs differ by at least $\eps/\kappa$, and:
+(i) if $g_{\min}$ is the smallest value of $g$ on $\mathcal T$ and $h\ge0$ is non-increasing on $[g_{\min},\infty)$,
+then $\int_{\mathcal T}h(g(\tau))\,d\tau\le d_L\eps\,h(g_{\min})+\chi_g\int_{g_{\min}}^\infty h(y)\,dy$;
+(ii) if $g\le\bar g$ on $\mathcal T$ and $h\ge0$ is non-decreasing on $[0,\bar g+\eps/\kappa]$, then
+$\int_{\mathcal T}h(g(\tau))\,d\tau\le\chi_g\int_0^{\bar g+\eps/\kappa}h(y)\,dy$;
+(iii) at most $\kappa x/\eps+1$ legs meet $\{\tau\in\mathcal T:g(\tau)\le x\}$.
+\end{enumerate}
+\end{lemma}
+
+The point of (b): a leg lasts about $\eps$ and the gap drops by about $\eps$ per leg, so ``time at gap $g$'' is
+comparable to ``$dg$''.
+
+\begin{proof}
+(CA) Chords are non-decreasing in time (Lemma~\ref{lem:chords}(a)); apply (S1). Pairs with $\eps/2\le\lambda\le R$ are
+good, and $R\le K_RR$.
+
+(c) Put $\Delta:=s-a_j$ and $y:=\min(\Delta,K_RR)$. If $\Delta<\eps/2$, the first right-hand side is negative and the second is
+$<\eps$. Otherwise $(a_j,s)$ is good, and by (CA) and Lemma~\ref{lem:chase}(3),
+$\rho_s\ge|x_s-x_{a_j}|-|P-x_{a_j}|\ge c_Ay-\delta_1\eps$. If $c_Ay-\delta_1\eps\ge y/c_6$ we are done; otherwise,
+since $c_A-1/c_6=c_A\delta_1/(1+\delta_1)$, we get $y<(1+\delta_1)\eps/c_A=c_6\eps$, so $\max(\rho_s,\eps)\ge\eps>y/c_6$.
+
+(a) Always $a_{j+1}-a_j\le l_{t_j}(a_j,a_{j+1})\le\eps$, since $w\ge1$. The pairs $(a_j,s)$, $\eps/2\le s-a_j\le\eps$,
+lie in $\Fam(t_j)$ and are admissible (if $t_j<t_W$, then $a_j<\We$ and $U-s\ge U-\We-\eps\ge\We$), so (J1) applies.
+(a1) The label $s:=a_j+\eps/2\le U$ has $l_{t_j}(a_j,s)\le\kappa\eps/2<\eps$, so $a_{j+1}\ge s$. If the leg is not
+final, $l_{t_j}(a_j,a_{j+1})=\eps$ by maximality, and (J1) for $(a_j,a_{j+1})$ gives $\eps\le\kappa(a_{j+1}-a_j)$.
+(a2) A final leg has $U-a_j\le l_{t_j}(a_j,U)\le\eps$, so $a_j\ge U-\eps>\We$ if $\We>0$; thus legs with $a_j<\We$ are
+not final. Now let $U-a_j<\eps/2$ (so $a_j\ge\We$ and $t_j\ge t_W$); we argue by induction on $j$. For $j=0$,
+$l_{t_0}(0,U)=U<\eps/2$. For $j\ge1$, leg $j$ was walked, so by induction $U-a_{j-1}\ge\eps/2$ and by (a1)
+$\lambda_1:=a_j-a_{j-1}\in[\eps/\kappa,\eps]$ with $l_{t_{j-1}}(a_{j-1},a_j)=\eps$. The pair $(a_{j-1},U)$ has length
+$\lambda_1+(U-a_j)\in[\eps/2,\frac32\eps]\subset[\eps/2,R]$ and lies in $\Fam(t_j)=\FamS(t_j)$, so by (J1) and the
+monotonicity of lengths in $t$,
+$l_{t_j}(a_j,U)\le\kappa\cdot\frac32\eps-\eps=\frac78\eps<\eps$, i.e.\ $a_{j+1}=U$. (Here $\kappa<\frac43$ is used.)
+(a3) By (a1),(a2), $\eps/2\le a_{j+1}-a_j\le\eps\le R$; apply (CA).
+(a4) Each non-final leg moves the base by at least $\eps/\kappa$ (by (a1),(a2)) and the moves add up to at most $U$; each
+lasts at most $d_L\eps$ by Lemma~\ref{lem:chase}(1). Hence $t'-t_\td\le(\kappa U/\eps)d_L\eps=\chi_gU\le\frac52\cdot8$.
+
+(b) Non-final legs move the base by at least $\eps/\kappa$ (part (a)), so the values of $g$ are spaced by
+$\eps/\kappa$; the final leg occupies no time. (i) Let $g_1>\dots>g_n=g_{\min}$ be the values. For $i<n$,
+$g_i-\eps/\kappa\ge g_{i+1}\ge g_{\min}$ and $h$ is non-increasing, so $h(g_i)\le(\kappa/\eps)\int_{g_i-\eps/\kappa}^{g_i}h$;
+these intervals are disjoint. Each leg lasts at most $d_L\eps$, so the integral is at most
+$d_L\eps\,h(g_{\min})+d_L\eps(\kappa/\eps)\int_{g_{\min}}^\infty h$. (ii) Likewise
+$h(g_i)\le(\kappa/\eps)\int_{g_i}^{g_i+\eps/\kappa}h$ for every value, with disjoint intervals in
+$[0,\bar g+\eps/\kappa]$. (iii) The values in $[0,x]$ are spaced by $\eps/\kappa$.
+\end{proof}
+
+\textbf{Start times and bases.} For a pair $(a,b)\in\FamS(t)$ its \emph{start time} is $t_\circ:=t_\td$ if it is a body
+pair and $t_\circ:=t_W$ if it is a tail pair; at its start time a pair satisfies (S2) resp.\ (TW). For
+$\tau\in[t_\circ,t]$ let $\bar a(\tau):=a_{j(\tau)}$ and $\bar a^+(\tau):=a_{j(\tau)+1}$ be the base and the next base,
+with the convention $\bar a(t_W):=a_{j_W}$, $\bar a^+(t_W):=a_{j_W+1}$ for tail pairs.
+
+The next lemma says that the bootstrap bounds may be used, at all times since the start time, on the pair itself and
+on the pairs lying between the pursuer and it; the only subtlety is the excused tail.
+
+\begin{lemma}[Locality]\label{lem:locality}
+Let $t\le\Tdef$, $(a,b)\in\FamS(t)$ and $\tau\in[t_\circ,t]$; write $\bar a=\bar a(\tau)$, $\bar a^+=\bar a^+(\tau)$.
+\begin{enumerate}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item[(i)] $(a,b)$ is a pair of the family of the leg of $\tau$ and belongs to $\FamS(\tau)$; its gap
+$g(\tau):=a-\bar a\ge0$ is non-increasing on $[t_\circ,t]$ and constant on each leg; and $a\ge\bar a^+$ if $g(\tau)>0$.
+\item[(ii)] Every pair of the family of the leg of $\tau$ contained in $[\bar a,\max(b,\bar a^+)]$ belongs to
+$\FamS(\tau)$.
+\item[(iii)] Every $s\in[a,b]$ satisfies the hypothesis of Lemma~\ref{lem:toolkit}(c) at $\tau$ with the base $\bar a$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $a\ge a_{j(t)}\ge\bar a$. If $\tau$ lies in the leg of $t$, the family is the same; otherwise
+$a\ge a_{j(t)}\ge a_{j(\tau)+1}=\bar a^+$, so $(a,b)$ is in the family of the leg of $\tau$. For a tail pair at
+$\tau=t_W$, (TW) gives $a-a_{j_W}\ge K_f\lambda\ge5\eps>a_{j_W+1}-a_{j_W}$, so again $a\ge\bar a^+$. Body pairs are
+admissible at all times, tail pairs for $\tau\ge t_W$. The bases are non-decreasing, and $g(\tau)>0$ means $a\ne\bar a$,
+hence $a\ge\bar a^+$.
+(ii) If $\tau\ge t_W$, then $\FamS(\tau)=\Fam(\tau)$, which contains the family of the leg of $\tau$ (at $t_W$ the
+family of leg $j_W$ contains that of leg $j_W+1$). If $\tau<t_W$, then $(a,b)$ is a body pair and $\bar a<\We$, so
+$\bar a^+\le\bar a+\eps<\We+\eps$; a pair $(a'',b'')$ in $[\bar a,\max(b,\bar a^+)]$ has
+$U-b''\ge\min(U-b,\,U-\We-\eps)\ge\We$ (recall $U\ge2\We+R+\eps$ if $\We>0$), so it is a body pair.
+(iii) For a body pair $U-s\ge U-b\ge\We$; for a tail pair $\tau\ge t_W$ and $\bar a\ge a_{j_W}\ge\We$.
+\end{proof}
+
+Two nested chords whose lengths differ by at most a factor $4$ are nearly parallel, because the excess of the longer
+one limits how far the shorter one can tilt (Lemma~\ref{lem:splittilt}). A general nested pair is joined by a chain of
+intervals that halve in length, and the tilts add up to a geometric series.
+
+\begin{lemma}[Tilt chain]\label{lem:tiltchain}
+Let $t$ lie in leg $j+1$, let $I=(a,b)$ be a pair of the family of leg $j+1$, and suppose that \textup{(J1)},
+\textup{(J2)} hold at time $t$ for every pair of that family contained in $[a_j,\max(b,a_{j+1})]$. Then for every pair
+$J\subset I$ of that family,
+\[
+|e_J-e_I|\le C_TM\lambda_I^\gamma=C_Tm(\lambda_I/R)^\gamma ,
+\]
+and for $a<s\le b$ and $\lambda_s:=\max(s-a,\eps/2)$, with $e:=e_{ab}$,
+\begin{equation}\label{eq:Emu}
+\int_a^s|T-e|^2\,ds\le M^2\lambda^{2\gamma}\min(C_\mu\lambda_s,\lambda),\qquad
+\int_a^s|T-e|\,ds\le M\lambda^\gamma\bigl(\kappa\lambda_s\min(C_\mu\lambda_s,\lambda)\bigr)^{1/2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+All pairs below lie in $[a_j,b]$ and in the family, so (J1), (J2) and (CA) apply to them.
+
+\emph{Step 1 (one step).} Let $J\subsetneq I$ with $\rho:=\lambda_I/\lambda_J\le r\le4$. By
+Lemma~\ref{lem:splittilt}(i), $Z^2\le N(I)^2\,\ell(1-\ell/L)$ with $\ell:=l(J)\le\kappa\lambda_J$ and
+$L:=l(I)\le\kappa\lambda_I$. The function $\ell(1-\ell/L)$ increases with $L$, so
+$Z^2\le N(I)^2\max_{0<\ell\le\kappa\lambda_J}\ell(1-\ell/(\kappa\lambda_I))=N(I)^2\kappa\lambda_J\mathsf q(\rho)$, where
+$\mathsf q(\rho)=\rho/4$ for $\rho\le2$ (interior maximum) and $\mathsf q(\rho)=1-1/\rho$ for $\rho\ge2$ (endpoint).
+With (J2) and $c(J)\ge c_A\lambda_J$,
+\[
+\frac Z{c(J)}\le\frac{M\lambda_I^{1/2+\gamma}(\kappa\lambda_J\mathsf q(\rho))^{1/2}}{c_A\lambda_J}
+=\frac{\kappa^{1/2}}{c_A}\,\mathsf s(\rho)\,M\lambda_I^\gamma,\qquad \mathsf s(\rho):=(\rho\mathsf q(\rho))^{1/2}
+=\begin{cases}\rho/2,&\rho\le2,\\(\rho-1)^{1/2},&\rho\ge2,\end{cases}
+\]
+and $\kappa^{1/2}/c_A=\sqrt5$; $\mathsf s$ is increasing, $\mathsf s(2)=1$, $\mathsf s(4)=\sqrt3$. Moreover, as
+$M\lambda_I^\gamma\le m$, we have $N(I)^2/(4c(J))\le M^2\lambda_I^{1+2\gamma}/(4c_A\lambda_J)\le m^2r/2\le2m^2<1$. So
+Lemma~\ref{lem:splittilt}(ii) gives $|e_J-e_I|\le\sqrt5\,c_m\,\mathsf s(r)M\lambda_I^\gamma$ with
+$c_m:=(1-2m^2)^{-1/2}$.
+
+\emph{Step 2 (the chain).} Let $J=(a',b')$, $\lambda_k:=2^{-k}\lambda_I$ and $K:=\min\{k\ge1:\lambda_k\le\lambda_J\}$.
+\emph{Case A: $a\ge a_{j+1}$, or $a'=a$, or $\lambda_I/2\ge\eps$.} For $0\le k<K$ put $\alpha_k:=\min(a',b-\lambda_k)$,
+$I_k:=(\alpha_k,\alpha_k+\lambda_k)$, and $I_K:=J$. Then $I_0=I$; $J\subset I_k\subset I$ (as $\alpha_k\in[a,a']$ and the
+right end $\min(a'+\lambda_k,b)$ lies in $[b',b]$); $I_{k+1}\subset I_k$ ($\alpha_k$ is non-decreasing and the right
+end non-increasing in $k$). Each $I_k$ is in the family: its length lies in $(\lambda_J,\lambda_I]\subset[\eps/2,R]$,
+and its first point is either $a'$ (the first point of the family pair $J$) or $b-\lambda_k\ge a+\lambda_I/2$ with
+$k\ge1$; the latter is $\ge a_{j+1}$, trivially if $a\ge a_{j+1}$, and because $a+\eps\ge a_j+\eps\ge a_{j+1}$ if
+$\lambda_I/2\ge\eps$; if $a'=a$ then $\alpha_k=a$ throughout. Consecutive length ratios are $2$, except the last one,
+which lies in $[1,2]$. Step~1 with $r=2$ gives $|e_{I_{k+1}}-e_{I_k}|\le\sqrt5\,c_m M\lambda_k^\gamma$, and summing
+the geometric series,
+$|e_J-e_I|\le\sqrt5\,c_m M\lambda_I^\gamma\sum_{k\ge0}2^{-k\gamma}=C_TM\lambda_I^\gamma$.
+\emph{Case B: otherwise}, i.e.\ $a=a_j<a'$ and $\lambda_I<2\eps$. Then $\lambda_I/\lambda_J<2\eps/(\eps/2)=4$, and
+Step~1 with $r=4$ gives $|e_J-e_I|\le\sqrt{15}\,c_m M\lambda_I^\gamma\le C_TM\lambda_I^\gamma$ (as
+$\sqrt3<(1-2^{-\gamma})^{-1}$).
+
+\emph{Step 3 (\eqref{eq:Emu}).} $J:=(a,a+\lambda_s)\subset I$ is a family pair (first point $a$, length in
+$[\eps/2,\lambda]$). By Lemma~\ref{lem:excess}(b) with $\hat u=e$, (J2), (J1) and Step~2,
+$\int_a^s|T-e|^2\le\int_J|T-e|^2=N(J)^2+c(J)|e_J-e|^2\le M^2\lambda_s^{1+2\gamma}+\kappa\lambda_sC_T^2M^2\lambda^{2\gamma}
+\le C_\mu M^2\lambda^{2\gamma}\lambda_s$; also $\int_a^s|T-e|^2\le\int_I|T-e|^2=N(I)^2\le M^2\lambda^{1+2\gamma}$. The
+second bound follows by Cauchy--Schwarz, since $l(a,s)\le l(J)\le\kappa\lambda_s$.
+\end{proof}
+
+\subsection{The continuity scheme}\label{app:walk:cont}
+
+\begin{lemma}[Continuity scheme]\label{lem:cont}
+Put $\bar\theta:=\frac58$. Suppose that whenever $t^*\le\Tdef$ is such that the chase has not stopped before $t^*$ and
+\textup{(J1)}, \textup{(J2)} hold for all $t\in[t_\td,t^*]$ and all pairs of $\FamS(t)$, then for all
+$t\in[t_\td,t^*]$ and all pairs of $\FamS(t)$
+\begin{equation}\label{eq:Imp}
+\textup{(Imp)}\qquad l_t(a,b)\le\tfrac98\lambda\qquad\text{and}\qquad E(a,b;t)\le\tfrac12\bar\theta M^2\lambda^{1+2\gamma}.
+\end{equation}
+Then the proviso holds at every non-final leg start, the chase stops, \textup{(J1)}, \textup{(J2)} hold for all
+$t\in[t_\td,T_\stopp]$ and all pairs of $\FamS(t)$, and $t_W$ is reached if $\We>0$.
+\end{lemma}
+
+\begin{proof}
+Let $\tau^*$ be the supremum of the $t'\le\Tdef$ such that the chase has not stopped before $t'$ and (J1), (J2) hold on
+$[t_\td,t']$. At $t_\td$ we have $l=\lambda$ and, by (S2), $N\le s_0M\lambda^{1/2+\gamma}$ (all pairs of
+$\FamS(t_\td)$ are body pairs), so $\tau^*\ge t_\td$.
+
+\emph{The invariants hold at $\tau^*$} (if $\tau^*<\infty$). If $\tau^*\in(t_j,t_{j+1}]$, the family is constant on
+$(t_j,\tau^*]$, and so is $\FamS$ unless $\tau^*=t_W$; as $l,E$ are continuous in $t$ (Lemma~\ref{lem:vflow}(c)), (J1),
+(J2) pass to the limit. If $\tau^*=t_W$, the newly admitted pairs are tail pairs, covered by (TW). So (Imp) holds on
+$[t_\td,\tau^*]$.
+
+\emph{Extension.} Suppose the chase does not stop at $\tau^*$. If $\tau^*=t_j$ is a leg start, leg $j+1$ is not final
+and the proviso holds (Lemma~\ref{lem:toolkit}(a3) with $t'=\tau^*$), so the chase is defined on
+$[\tau^*,\tau^*+\delta_0]$ for some $\delta_0>0$ with no leg start and no $t_W$ in $(\tau^*,\tau^*+\delta_0]$; there
+$\FamS(t)\subset\FamS(\tau^*)$. For a fixed pair, $l'\le(2v/\eps)l$ and $|E'|=v|\int(T-e)\cdot AT|\le(4v/\eps)l$
+(Lemmas~\ref{lem:Eprime}(i), \ref{lem:F}(ii)). Choose $\delta\in(0,\delta_0]$ with $\frac98e^{2v\delta/\eps}<\kappa$ and
+$\delta(4v/\eps)\kappa\le\frac12(1-\bar\theta)M^2(\eps/2)^{2\gamma}$. Then for $t\in[\tau^*,\tau^*+\delta]$ and every
+pair of $\FamS(t)$ (recall $\lambda\ge\eps/2$): $l_t\le\frac98e^{2v\delta/\eps}\lambda<\kappa\lambda$, and
+$E(t)\le\frac12\bar\theta M^2\lambda^{1+2\gamma}+\delta(4v/\eps)\kappa\lambda\le\frac12M^2\lambda^{1+2\gamma}$. So
+(J1), (J2) hold on $[t_\td,\tau^*+\delta]$, contradicting the definition of $\tau^*$.
+
+Hence the chase stops at $\tau^*$, unless $\tau^*=\infty$; but then it would have infinitely many legs (by
+Lemma~\ref{lem:chase}(0)), against Lemma~\ref{lem:toolkit}(a4). So $\tau^*=T_\stopp<\infty$, the proviso held at every
+non-final leg start (Lemma~\ref{lem:toolkit}(a3)), and (J1), (J2) hold on $[t_\td,T_\stopp]$. Finally, if $\We>0$, the final leg $J+1$ has $U-a_J\le l_{t_J}(a_J,U)\le\eps$, so
+$a_J\ge U-\eps>\We$ and $j_W\le J$.
+\end{proof}
+
+\textbf{Standing assumptions for Sections~\ref{app:walk:far}--\ref{app:walk:length}.} Let $t^*$ be as in
+Lemma~\ref{lem:cont}: the chase has not stopped before $t^*$, and (J1), (J2) hold for all $t\in[t_\td,t^*]$ and all
+pairs of $\FamS(t)$. Then Lemma~\ref{lem:toolkit}(a),(b) hold with $t'=t^*$. Fix $t\in[t_\td,t^*]$ and
+$(a,b)\in\FamS(t)$, put $e:=e_{ab}$, and use the notation $t_\circ,\bar a,\bar a^+,g$ of Lemma~\ref{lem:locality};
+$\hat g:=\min(g(t),K_RR)$. For a tail pair at $t=t_W$, (TW) gives (Imp) directly ($l\le\frac{17}{16}\lambda$,
+$E\le\frac12s_0^2M^2\lambda^{1+2\gamma}$), so for tail pairs we take $t>t_W$. By Lemma~\ref{lem:locality}, at every
+$\tau\in[t_\circ,t]$: the pairs of the family of the leg of $\tau$ in $[\bar a,\max(b,\bar a^+)]$ satisfy (J1), (J2) and
+Lemma~\ref{lem:tiltchain}; Lemma~\ref{lem:toolkit}(c) applies at every $s\in[a,b]$ with base $\bar a$; and $P$ lies on
+$[x_{\bar a},x_{\bar a^+}]$ (Lemma~\ref{lem:chase}(1)). For $s\in[a,b]$ we write $\Delta_s:=s-\bar a(\tau)\ge g(\tau)$, $\hat\rho_s:=\max(\rho_s,\eps)$, and
+$\rhoarc:=\min_{[a,b]}\rho_s$; $p_a:=(x_a-P)\times e$, so $|p_a|$ is the distance from $P$ to the line through
+$x_a,x_b$. Note $l\ge\lambda$ (as $w\ge1$) and, by (J1), $l\le\kappa\lambda$.
+
+\subsection{Far pairs}\label{app:walk:far}
+
+\begin{proposition}[Far pairs]\label{prop:far}
+Let $v_0\le\min\bigl(\frac1{300},\frac R{10},\frac{mR}{C_1}\bigr)$ with the number $C_1$ of \eqref{eq:farfinal}. If
+$(a,b)$ is far at $t$, then it is far at every $\tau\in[t_\circ,t]$, and $N(a,b;t)\le f_FM\lambda^{1/2+\gamma}$.
+Moreover, at every $\tau\in[t_\circ,t]$, with $g=g(\tau)$:
+\begin{enumerate}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item[(i)] $\rhoarc\ge\eps$ and $\rhoarc\ge2l$; $\rhoarc\ge c_\rho^*g=g/4$ if $g\le K_RR$, and
+$\rhoarc\ge c_R^*R=\frac{47}8R$ if $g>K_RR$;
+\item[(ii)] if $g\le c_{\mathrm{off}}R$: $|p_a|\le C_pMg^{1+\gamma}$, where $C_p:=(\kappa C_\mu)^{1/2}(1+1/K_f)^{1/2+\gamma}<9$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The gap is non-increasing, so the pair is far on $[t_\circ,t]$. Fix $\tau\in[t_\circ,t]$ and $g=g(\tau)$; then
+$g\ge K_f\lambda\ge K_f\eps/2=5\eps$.
+
+\emph{Step 1: distance (this is where $\delta_1=\frac54$ is needed).} For $s\in[a,b]$, $\Delta_s\ge g$, so
+Lemma~\ref{lem:toolkit}(c) gives $\rho_s\ge c_A\min(g,K_RR)-\delta_1\eps$. If $g\le K_RR$: since
+$\eps\le2\lambda\le2g/K_f$, $\rhoarc\ge(c_A-2\delta_1/K_f)g=g/4$, and $g/4\ge5\eps/4\ge\eps$ --- at the smallest far gap
+$g=5\eps$ this is exactly the inequality $c_\rho^*K_f/2\ge1$; also $g/4\ge K_f\lambda/4=\frac52\lambda\ge2l$. If
+$g>K_RR$: as $\eps\le R/K_\eps$, $\rhoarc\ge c_AK_RR-\delta_1R/K_\eps=\frac{47}8R$, which is $\ge\eps$ and
+$\ge\frac{47}8\lambda\ge4l$. This proves (i). Hence Lemma~\ref{lem:duhamel} applies on $[t_\circ,t]$
+($c(a,b;t_\circ)>0$ by (CA)), with $\mathcal A\le(1+\frac1{2\pi}+\frac2{4\pi^2})v/\rhoarc\le\frac54v/\rhoarc$.
+
+\emph{Step 2: amplification.} We claim, for $t_\circ\le\tau\le t$,
+\begin{equation}\label{eq:amp}
+\exp\int_\tau^t\mathcal A\le A_0\Bigl(\frac{\min(g(\tau),K_RR)}{\hat g}\Bigr)^{\nu}.
+\end{equation}
+The times with $g>K_RR$ form an initial segment of total length at most $20$ (Lemma~\ref{lem:toolkit}(a4)), on which
+$\mathcal A\le\frac54\cdot\frac8{47}\frac vR<\frac v{4R}$; they contribute at most $5v/R$. On the times of $[\tau,t]$ with
+$g\le K_RR$ (present only if $g(t)\le K_RR$, and then $\hat g=g(t)$) we have $\mathcal A\le5v/g$, and
+Lemma~\ref{lem:toolkit}(b)(i) with $h(y)=y^{-1}\one\{y\le\min(g(\tau),K_RR)\}$ and $g_{\min}=g(t)\ge5\eps$ gives
+\[
+\int\mathcal A\le5v\Bigl[\frac{d_L\eps}{g(t)}+\chi_g\log\frac{\min(g(\tau),K_RR)}{g(t)}\Bigr]
+\le2v+\frac{25}2v\log\frac{\min(g(\tau),K_RR)}{\hat g}.
+\]
+Since $v\le\frac1{300}$ and $v\le R/10$: $5v/R+2v<\log2=\log A_0$ and $\frac{25}2v\le\frac1{24}=\nu$; as the ratio is
+$\ge1$, \eqref{eq:amp} follows.
+
+\emph{Step 3: forcing.} Write $\mathcal B:=2vl^{3/2}|p_a|/(\pi\rhoarc^3)$ for the forcing term of
+Lemma~\ref{lem:duhamel}.
+\emph{Case $g>c_{\mathrm{off}}R$.} At the label $s$ where $\rho_s=\rhoarc$, $|p_a|\le\rho_a\le\rhoarc+|x_a-x_s|\le\rhoarc+l\le\frac32\rhoarc$,
+so $\mathcal B\le\frac3\pi\kappa^{3/2}v\lambda^{3/2}/\rhoarc^2\le2v\lambda^{3/2}/\rhoarc^2$. On $\{g>K_RR\}$
+(duration $\le20$, $\rhoarc>5R$) this integrates to at most $\frac85v\lambda^{3/2}/R^2$. On $\{c_{\mathrm{off}}R<g\le K_RR\}$,
+$\rhoarc\ge g/4$, and Lemma~\ref{lem:toolkit}(b)(i) with $h(y)=y^{-2}$, $g_{\min}>R/2$ and $d_L\eps\le R/5$ gives
+$\int g^{-2}d\tau\le\frac R5\cdot\frac4{R^2}+\chi_g\frac2R<\frac6R$, hence a contribution at most
+$32\cdot6\,v\lambda^{3/2}/R$. Altogether, using $R\le1$,
+\begin{equation}\label{eq:forcefar}
+\int_{\{g>c_{\mathrm{off}}R\}}\mathcal B\,d\tau\le\frac{194\,v\lambda^{3/2}}{R^2}.
+\end{equation}
+\emph{Case $g\le c_{\mathrm{off}}R$: the offset.} $P(\tau)$ lies on $[x_{\bar a},x_{\bar a^+}]$ and the distance to a line is convex,
+so $|p_a|\le\max_{a'\in\{\bar a,\bar a^+\}}Y_{a'}$ with $Y_{a'}:=|(x_a-x_{a'})\times e|$. Fix $a'$, put $g':=a-a'\in[g-\eps,g]$,
+$L:=(a',a)$ and $I':=(a',b)$. Both are pairs of the family of the leg (first point $a'$; lengths $g'\ge4\eps$ and
+$g'+\lambda\le(1+\frac1{K_f})g\le\frac{11}{20}R<R$), contained in $[\bar a,\max(b,\bar a^+)]$, so (J1), (J2) and
+Lemma~\ref{lem:tiltchain} apply to them; note $(a,b)\subset I'$. Since $(x_a-x_{a'})\times e=\int_L(T-e)\times e\,ds$,
+Cauchy--Schwarz and Lemma~\ref{lem:excess}(b) give
+$Y_{a'}\le(l(L)\,V_e(L))^{1/2}$, and
+\[
+V_e(L)\le V_e(I')=N(I')^2+c(I')|e_{I'}-e|^2
+\le M^2\Lambda^{1+2\gamma}+\kappa\Lambda\,C_T^2M^2\Lambda^{2\gamma}=C_\mu M^2\Lambda^{1+2\gamma},
+\]
+with $\Lambda:=g'+\lambda\le(1+\frac1{K_f})g$ and $l(L)\le\kappa g$. Thus $Y_{a'}\le C_pMg^{1+\gamma}$, which is (ii).
+With $\rhoarc\ge g/4$ and $l\le\kappa\lambda$:
+\begin{equation}\label{eq:forcenear}
+\mathcal B\le C_{\mathcal B}\,vM\lambda^{3/2}g^{\gamma-2}\quad\text{on }\{g\le c_{\mathrm{off}}R\},\qquad C_{\mathcal B}:=\frac{128\kappa^{3/2}C_p}{\pi}<513.
+\end{equation}
+
+\emph{Step 4: result.} By Lemma~\ref{lem:duhamel} on $[t_\circ,t]$ and \eqref{eq:amp} (on $\{g\le c_{\mathrm{off}}R\}$,
+$\min(g(\tau),K_RR)=g(\tau)$ and $\hat g=g(t)$),
+\[
+N(t)\le A_0\Bigl(\frac{\min(g(t_\circ),K_RR)}{\hat g}\Bigr)^{\!\nu}N(t_\circ)
++A_0\Bigl(\frac{K_RR}{\hat g}\Bigr)^{\!\nu}\int_{\{g>c_{\mathrm{off}}R\}}\mathcal B\,d\tau
++A_0\int_{\{g\le c_{\mathrm{off}}R\}}\Bigl(\frac{g(\tau)}{g(t)}\Bigr)^{\!\nu}\mathcal B(\tau)\,d\tau .
+\]
+\emph{First term.} By (S2) for a body pair (where $g(t_\circ)=a$), or by (TW) for a tail pair (where
+$g(t_\circ)=g_W$), $N(t_\circ)\le s_0M\lambda^{1/2+\gamma}\min(1,K_f\lambda/G_\circ)^\nu$ with $G_\circ:=\min(g(t_\circ),K_RR)$. So the
+weight of $s_0M\lambda^{1/2+\gamma}$ is $(\min(G_\circ,K_f\lambda)/\hat g)^\nu$; this is $\le(K_f\lambda/g(t))^\nu\le1$ if
+$g(t)\le K_RR$, and $\le1$ otherwise (then $\hat g=K_RR\ge G_\circ$). So the term is at most
+$A_0s_0M\lambda^{1/2+\gamma}=\frac14M\lambda^{1/2+\gamma}$.
+\emph{Second term.} $(K_RR/\hat g)^\nu\le(K_R/K_f)^\nu(R/\lambda)^\nu\le2(R/\lambda)^\nu$, and since $\gamma+\nu<1$ and
+$\lambda\le R$, $\lambda^{3/2}(R/\lambda)^\nu\le\lambda^{1/2+\gamma}R^{1-\gamma}$. With \eqref{eq:forcefar} and
+$R^{-1-\gamma}=M/(mR)$ the term is at most $776\,(v/mR)\,M\lambda^{1/2+\gamma}$.
+\emph{Third term.} By \eqref{eq:forcenear} it is at most $2C_{\mathcal B} vM\lambda^{3/2}g(t)^{-\nu}\int h(g(\tau))\,d\tau$
+with $h(y):=y^{\nu+\gamma-2}$, non-increasing because $\nu+\gamma<1$. Lemma~\ref{lem:toolkit}(b)(i) ($g_{\min}=g(t)$)
+and $\eps\le2\lambda$, $g(t)\ge\lambda$ give
+\[
+g(t)^{-\nu}\!\int h\le d_L\eps\,g(t)^{\gamma-2}+\frac{\chi_g\,g(t)^{\gamma-1}}{1-\gamma-\nu}
+\le\Bigl(2d_L+\frac{\chi_g}{1-\gamma-\nu}\Bigr)\lambda^{\gamma-1}\le16\,\lambda^{\gamma-1}
+\]
+($1-\gamma-\nu\ge\frac5{24}$). So the term is at most $32C_{\mathcal B} vM\lambda^{1/2+\gamma}$.
+Adding up, with $m\le1$, $R\le1$:
+\begin{equation}\label{eq:farfinal}
+N(t)\le\Bigl(\frac14+\frac{C_1v}{4mR}\Bigr)M\lambda^{1/2+\gamma},\qquad C_1:=4(776+32C_{\mathcal B})<7\cdot10^4,
+\end{equation}
+which is $\le\frac12M\lambda^{1/2+\gamma}=f_FM\lambda^{1/2+\gamma}$ because $v\le mR/C_1$.
+\end{proof}
+
+\subsection{Near pairs}\label{app:walk:near}
+
+During the near phase (of duration of order $\lambda$) the excess grows at most at rate $v\,m_\lambda^2\,H(g/\lambda)$,
+where $H$ has an integrable singularity at the pursuer. The singular kernels are integrated with the following
+elementary inequality; the constant $C_*$ produced is finite and independent of $\eps$, which is all we need.
+
+\begin{lemma}[Layer cake]\label{lem:layercake}
+Let $\varpi$ be a positive measure on $[0,1]$ with $\varpi([0,\sigma])\le\Phi(\sigma)$ for all $\sigma\in[0,1]$, where
+$\Phi$ is $C^1$ and non-decreasing, and let $\psi\ge0$ be non-increasing. Then
+$\int\psi\,d\varpi\le\psi(0)\Phi(0)+\int_0^1\psi\Phi'\,d\sigma$.
+\end{lemma}
+
+\begin{proof}
+Write $\int\psi\,d\varpi=\int_0^\infty\varpi(\{\psi>u\})\,du$. Each $\{\psi>u\}$ is an interval $[0,\sigma_u)$ or
+$[0,\sigma_u]$, whose $\varpi$-measure is at most $\Phi(\sigma_u)$, which is the measure of the same set under
+$\Phi(0)\delta_0+\Phi'd\sigma$.
+\end{proof}
+
+\begin{proposition}[Near pairs]\label{prop:near}
+There is a number $C_*$ (depending only on the locked parameters; given in \eqref{eq:Cstar}) such that if $(a,b)$ is
+near at $t$, then
+\[
+E(a,b;t)\le\bigl(\tfrac12f_F^2+C_*v\bigr)M^2\lambda^{1+2\gamma}.
+\]
+In particular, if $v_0\le3/(16C_*)$, then $E(a,b;t)\le\frac12\bar\theta M^2\lambda^{1+2\gamma}$ with
+$\bar\theta=\frac12(1+f_F^2)=\frac58$.
+\end{proposition}
+
+\begin{proof}
+Put $m_\lambda:=M\lambda^\gamma\le m$. We measure everything in units of the pair length $\lambda$: at a time $\tau$ of
+a leg with gap $g$ and for $s\in[a,b]$, put
+\[
+\vartheta:=\frac\eps\lambda\in(0,2],\qquad
+\zeta:=\frac g\lambda\in[0,K_f),\qquad
+\sigma:=\frac{s-a}\lambda\in[0,1]
+\]
+(the normalised vision radius, gap, and position in the pair), so that $\Delta_s=\lambda(\zeta+\sigma)$.
+
+\emph{Start value.} The gap is constant on legs and non-increasing, so the times of $[t_\circ,t]$ at which the pair is
+near form an interval $(t_n,t]$, where $t_n$ is a leg start at which the pair is far, or $[t_\td,t]$ (then $t_\circ=t_\td$,
+since tail pairs are far at $t_W$; put $t_n:=t_\td$). In the second case $E(t_n)\le\frac12s_0^2M^2\lambda^{1+2\gamma}$ by
+(S2); in the first, Proposition~\ref{prop:far} at time $t_n$ (or (TW) if $t_n=t_W$) gives
+$E(t_n)\le\frac12f_F^2M^2\lambda^{1+2\gamma}$. On $(t_n,t]$, Lemma~\ref{lem:Eprime}(iii) with $\bar q=0$ gives
+$E'\le\mathrm I+\mathrm{II}$, where $\mathrm I:=v\int_a^ba^*(\rho_s)|T-e|^2\,ds$ and $\mathrm{II}:=v\int_a^b|\varsigma||q|\,ds$.
+
+\emph{Envelope.} Since $\Delta_s<(K_f+1)\lambda\le11R<K_RR$, Lemma~\ref{lem:toolkit}(c) gives $\hat\rho_s\ge\max(\eps,\Delta_s/c_6)
+=\lambda\max(\vartheta,(\zeta+\sigma)/c_6)\ge\lambda(\zeta+\sigma+\vartheta)/(2c_6)$. From Definition~\ref{def:F},
+$a^*(\rho_s)\le2/\hat\rho_s$. Hence
+\begin{equation}\label{eq:env}
+a^*(\rho_s)\le\frac{4c_6}{\lambda(\zeta+\sigma+\vartheta)},\qquad\frac1{\hat\rho_s}\le\frac{2c_6}{\lambda(\zeta+\sigma+\vartheta)} .
+\end{equation}
+\emph{Budgets.} Let $\Omega(\sigma):=\int_a^{a+\lambda\sigma}|T-e|^2ds$ and $G(\sigma):=\int_a^{a+\lambda\sigma}|\varsigma|\,ds$.
+By \eqref{eq:Emu} with $\lambda_s=\lambda\max(\sigma,\vartheta/2)\le\lambda(\sigma+\vartheta)$, and $|\varsigma|\le|T-e|$,
+\begin{equation}\label{eq:budget}
+\Omega(\sigma)\le C_\mu m_\lambda^2\lambda(\sigma+\vartheta),\qquad G(\sigma)\le(\kappa C_\mu)^{1/2}m_\lambda\lambda(\sigma+\vartheta).
+\end{equation}
+\emph{Term I.} By \eqref{eq:env}, \eqref{eq:budget} and Lemma~\ref{lem:layercake} with $\Phi=C_\mu m_\lambda^2\lambda(\sigma+\vartheta)$:
+\[
+\mathrm I\le4c_6C_\mu vm_\lambda^2\Bigl(\frac\vartheta{\zeta+\vartheta}+\int_0^1\frac{d\sigma}{\zeta+\sigma+\vartheta}\Bigr)
+\le4c_6C_\mu vm_\lambda^2H_1(\zeta),\qquad H_1(\zeta):=1+\log\Bigl(1+\frac1{\zeta+\vartheta}\Bigr).
+\]
+\emph{Term II at long-type times} ($g+\lambda>R$). By Lemma~\ref{lem:F}(iii), $|q|\le\rho_s/\hat\rho_s^2\le1/\hat\rho_s$, so by
+\eqref{eq:env}, \eqref{eq:budget}, $\mathrm{II}\le2c_6(\kappa C_\mu)^{1/2}vm_\lambda H_1(\zeta)$. Here
+$R/\lambda<\zeta+1<K_f+1$, so $m_\lambda=m(\lambda/R)^\gamma>m(K_f+1)^{-\gamma}$, and therefore
+$\mathrm{II}\le2c_6(\kappa C_\mu)^{1/2}(K_f+1)^\gamma m^{-1}\,vm_\lambda^2H_1(\zeta)$.
+
+\emph{Term II at short-type times} ($g+\lambda\le R$). By Lemma~\ref{lem:F}(iii), $|q(s)|\le|(x_s-P)\times e|/\hat\rho_s^2$,
+and $|(x_s-P)\times e|\le|(x_s-x_a)\times e|+|p_a|\le G(\sigma)+|p_a|$ (as $|T\times e|=|\varsigma|$). This splits
+$\mathrm{II}\le\mathrm{II}_a+\mathrm{II}_b$. For $\mathrm{II}_a=v\int G|\varsigma|\hat\rho_s^{-2}ds$ we use the measure
+$d(G^2/2)$, with $G^2/2\le\frac12\kappa C_\mu m_\lambda^2\lambda^2(\sigma+\vartheta)^2$, and the kernel $4c_6^2/(\lambda(\zeta+\sigma+\vartheta))^2$:
+\[
+\mathrm{II}_a\le2c_6^2\kappa C_\mu vm_\lambda^2\Bigl(\frac{\vartheta^2}{(\zeta+\vartheta)^2}+\int_0^1\frac{2(\sigma+\vartheta)\,d\sigma}{(\zeta+\sigma+\vartheta)^2}\Bigr)
+\le4c_6^2\kappa C_\mu vm_\lambda^2H_1(\zeta).
+\]
+For $\mathrm{II}_b=v|p_a|\int|\varsigma|\hat\rho_s^{-2}ds$ we use $dG$:
+\[
+\mathrm{II}_b\le\frac{4c_6^2(\kappa C_\mu)^{1/2}vm_\lambda|p_a|}{\lambda}\Bigl(\frac\vartheta{(\zeta+\vartheta)^2}+\int_0^1\frac{d\sigma}{(\zeta+\sigma+\vartheta)^2}\Bigr)
+\le\frac{8c_6^2(\kappa C_\mu)^{1/2}vm_\lambda|p_a|}{\lambda(\zeta+\vartheta)} .
+\]
+\emph{The offset.} As $P\in[x_{\bar a},x_{\bar a^+}]$, $|p_a|\le\max(Y_{\bar a},Y_{\bar a^+})$, $Y_{a'}:=|(x_a-x_{a'})\times e|$.
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item $g>0$. Then $a\ge\bar a^+$ (Lemma~\ref{lem:locality}(i)) and $g\ge\bar a^+-\bar a\ge\eps/\kappa>\eps/2$. For
+$a'\in\{\bar a,\bar a^+\}$ with $g':=a-a'>0$: if $g'\ge\eps/2$, $(a',a)$ is a family pair and $l(a',a)\le\kappa g'$; if
+$g'<\eps/2$, then $a'=\bar a^+$ and $(a',a)\subset(\bar a^+,\bar a^++\eps/2)$, a family pair, so $l(a',a)\le\kappa\eps/2$.
+In both cases $l(a',a)\le\kappa\lambda(\zeta+\vartheta)$. The pair $I':=(a',b)$ is a family pair (length
+$\Lambda\le g+\lambda\le R$) in $[\bar a,\max(b,\bar a^+)]$, and as in Step~3 of Proposition~\ref{prop:far},
+$\int_{I'}|T-e|^2\le C_\mu M^2\Lambda^{1+2\gamma}$ with $\Lambda\le(1+K_f)\lambda$. By Cauchy--Schwarz,
+$Y_{a'}\le(l(a',a)\int_{I'}|T-e|^2)^{1/2}\le(\kappa C_\mu)^{1/2}(1+K_f)^{1/2+\gamma}m_\lambda\lambda(\zeta+\vartheta)^{1/2}$;
+so $\mathrm{II}_b\le8c_6^2\kappa C_\mu(1+K_f)^{1/2+\gamma}vm_\lambda^2H_2(\zeta)$ with $H_2(\zeta):=(\zeta+\vartheta)^{-1/2}$.
+\item $g=0$. Then $a=\bar a$ and $Y_{\bar a}=0$; if the leg is final, $P=x_{\bar a}$ and $p_a=0$. Otherwise: if
+$\bar a^+\le b$, $Y_{\bar a^+}\le\int_a^b|T-e|\le(l\,N^2)^{1/2}\le\kappa^{1/2}m_\lambda\lambda$; if $\bar a^+>b$ (so
+$\lambda<\eps$, $\vartheta>1$), $I_0:=(\bar a,\bar a^+)$ is a family pair of length $\le\eps$ containing $(a,b)$, and by
+Lemma~\ref{lem:tiltchain}, $Y_{\bar a^+}=c(I_0)|e_{I_0}\times e|\le\kappa\eps\,C_TM\eps^\gamma\le2^{1+\gamma}\kappa C_Tm_\lambda\lambda$.
+So $\mathrm{II}_b\le32c_6^2(\kappa C_\mu)^{1/2}\kappa C_T\,vm_\lambda^2/\vartheta$ (using $2^{1+\gamma}\le4$ and
+$\kappa^{1/2}\le2\kappa C_T$).
+\end{itemize}
+\emph{Per-leg rate.} Let $C_2$ be the largest of the numbers
+$4c_6C_\mu+2c_6(\kappa C_\mu)^{1/2}(K_f+1)^\gamma/m$, $\ 4c_6C_\mu+4c_6^2\kappa C_\mu+8c_6^2\kappa C_\mu(1+K_f)^{1/2+\gamma}$,
+$\ 32c_6^2(\kappa C_\mu)^{1/2}\kappa C_T$. We have shown: on a leg with gap $\zeta>0$,
+$E'\le C_2vm_\lambda^2\bigl(H_1(\zeta)+H_2(\zeta)\bigr)$; on the leg with $g=0$, $E'\le C_2vm_\lambda^2(H_1(0)+1/\vartheta)$.
+
+\emph{Sum over the near legs.} Each leg lasts at most $d_L\eps=d_L\vartheta\lambda$. At most one leg has $g=0$; it
+contributes at most $d_L\vartheta\lambda\,C_2vm_\lambda^2(H_1(0)+1/\vartheta)\le4d_LC_2vm_\lambda^2\lambda$, since
+$\vartheta\le2$ and $\vartheta\log(1+1/\vartheta)\le1$. The positive gaps $\zeta_i$ are distinct, $\ge\vartheta/\kappa$, spaced by at
+least $\vartheta/\kappa$, and $<K_f$; for the non-increasing $H:=H_1+H_2$ this gives
+$\sum_iH(\zeta_i)\le H(\vartheta/\kappa)+(\kappa/\vartheta)\int_0^{K_f}H$, so these legs contribute at most
+$d_LC_2vm_\lambda^2\lambda\bigl(\vartheta H(\vartheta/\kappa)+\kappa\int_0^{K_f}H\bigr)$. Here
+$\vartheta H_1(\vartheta/\kappa)\le\vartheta+\vartheta\log(1+1/\vartheta)\le3$, $\vartheta H_2(\vartheta/\kappa)\le\vartheta^{1/2}\le\sqrt2$,
+$\int_0^{K_f}H_1\le K_f+\int_0^{K_f}\log(1+\frac1y)\,dy=10+11\log11-10\log10<14$, and
+$\int_0^{K_f}H_2\le2\sqrt{K_f}<7$. Hence
+\begin{equation}\label{eq:Cstar}
+E(t)-E(t_n)\le C_*vm_\lambda^2\lambda=C_*vM^2\lambda^{1+2\gamma},\qquad C_*:=d_LC_2\bigl(4+3+\sqrt2+21\kappa\bigr).
+\end{equation}
+$C_2$, and so $C_*$, involves only $c_6,C_\mu,C_T,\kappa,K_f,d_L$ and $1/m$: no $\eps$, $\lambda$, $R$ or $v$.
+Finally $\frac12f_F^2+C_*v\le\frac18+\frac3{16}=\frac12\bar\theta$.
+\end{proof}
+
+\subsection{Length}\label{app:walk:length}
+
+Stretching is driven by the same rates as bending, but it needs no cancellation: the length of a pair grows at rate at
+most $v\int a^*(\rho)\,ds$, and the time the pursuer spends near the pair is short.
+
+\begin{proposition}[Length]\label{prop:length}
+If $v_0\le R/C_3$ for a suitable number $C_3$ (fixed in the proof), then $l_t(a,b)\le\frac98\lambda<\kappa\lambda$.
+\end{proposition}
+
+\begin{proof}
+At the start time $l(t_\circ)\le(1+\delta)\lambda$, with $\delta:=0$ for body pairs and $\delta:=\delta_t\le\frac1{16}$ for
+tail pairs (by (TW)). Always $l'=v\int T\cdot AT\,ds\le v\int a^*(\rho_s)\,ds$ (Lemmas~\ref{lem:Eprime}(i),
+\ref{lem:F}(ii)). The pair is far on an initial segment of $[t_\circ,t]$ and near afterwards.
+
+\emph{Far times.} There $\rho\ge\rhoarc\ge\eps$ on the arc (Proposition~\ref{prop:far}(i)), so $A=\Pi/\rho$ and
+$(\log l)'\le v/\rhoarc$. (1) On $\{g>K_RR\}$ (duration $\le20$, $\rhoarc\ge\frac{47}8R$): increase of $\log l$ at most
+$4v/R$. (2) On $\{c_{\mathrm{off}}R<g\le K_RR\}$, $(\log l)'\le4v/g$, and Lemma~\ref{lem:toolkit}(b)(i) with
+$h(y)=y^{-1}\one\{y\le K_RR\}$, $g_{\min}>R/2$, gives $\int d\tau/g\le\frac R5\cdot\frac2R+\chi_g\log(2K_R)<9$: increase
+at most $36v$. (3) On $\{g\le c_{\mathrm{off}}R\}$ use Lemma~\ref{lem:Eprime}(iv):
+$(\log l)'\le(v/\rhoarc)\bigl[N/l^{1/2}+(|p_a|+l^{1/2}N/\pi)/\rhoarc\bigr]^2$. Here $\rhoarc\ge g/4$, $|p_a|\le C_pMg^{1+\gamma}$
+(Proposition~\ref{prop:far}), $N/l^{1/2}\le M\lambda^{\gamma}\le Mg^\gamma$ and $l^{1/2}N\le\kappa^{1/2}M\lambda^{1+\gamma}\le Mg^{1+\gamma}\cdot\kappa^{1/2}$,
+so $(\log l)'\le4(5+4C_p)^2vM^2g^{2\gamma-1}$. As $2\gamma-1>0$, Lemma~\ref{lem:toolkit}(b)(ii) with $\bar g=c_{\mathrm{off}}R$ and
+$c_{\mathrm{off}}R+\eps/\kappa\le R$ gives $\int g^{2\gamma-1}d\tau\le\chi_gR^{2\gamma}/(2\gamma)\le\chi_gR^{2\gamma}$; the increase
+is at most $4\chi_g(5+4C_p)^2vM^2R^{2\gamma}=4\chi_g(5+4C_p)^2m^2v$.
+
+\emph{Near times.} Write $a^*(\rho)=\eps^{-1}\one\{\rho<\eps\}+\int_{\max(\rho,\eps)}^\infty y^{-2}dy$ (check: both
+sides equal $1/\rho$ if $\rho\ge\eps$ and $2/\eps$ if $\rho<\eps$). With $\mathcal L(y):=$ arclength of
+$\{s\in(a,b):\rho_s<y\}$, Fubini gives $l'\le v\bigl[\mathcal L(\eps)/\eps+\int_\eps^\infty\mathcal L(y)y^{-2}dy\bigr]$.
+For $y\ge\eps$: if $\rho_s<y$, then $\Delta_s/c_6\le\max(\rho_s,\eps)\le y$ (Lemma~\ref{lem:toolkit}(c); $\Delta_s<K_RR$ as in the
+envelope above), so $s-a\le c_6y$; the set lies in $(a,a+\min(\lambda,c_6y))$ and, by (J1) for this family pair
+(length $\ge\eps/2$), $\mathcal L(y)\le\kappa\min(\lambda,c_6y)$.
+(1) $\mathcal L(\eps)\ne0$ forces some $\Delta_s\le c_6\eps$, hence $g\le c_6\eps$; by Lemma~\ref{lem:toolkit}(b)(iii) this
+happens on at most $\kappa c_6+1<7$ legs, each of duration $\le d_L\eps$, and there $\mathcal L(\eps)/\eps\le\kappa\lambda/\eps$.
+Contribution at most $7d_L\kappa v\lambda$.
+(2) Put $\bar\rho:=\max(\eps,\min_{[a,b]}\rho_s)$; $\mathcal L(y)=0$ for $\eps\le y<\bar\rho$, and
+$c_6\bar\rho\ge\max(c_6\eps,g)$ since $\Delta_s\ge g$. With $h_1(z):=\int_z^\infty\min(\lambda,y)y^{-2}dy$ --- which equals
+$1+\log(\lambda/z)$ for $z\le\lambda$ and $\lambda/z$ for $z>\lambda$, is non-increasing, satisfies $zh_1(z)\le\lambda$
+and $\int_0^{K_f\lambda}h_1=\lambda(2+\log K_f)$ --- the substitution $z=c_6y$ gives
+$\int_{\bar\rho}^\infty\mathcal L y^{-2}dy\le\kappa c_6h_1(c_6\bar\rho)\le\kappa c_6h_1(\max(c_6\eps,g))$. By
+Lemma~\ref{lem:toolkit}(b)(i) with the non-increasing $h(y):=h_1(\max(c_6\eps,y))\one\{y<K_f\lambda\}$ (all near gaps are $<K_f\lambda$; and $h\le h_1$),
+$\int\kappa c_6h_1(\max(c_6\eps,g(\tau)))\,d\tau\le\kappa c_6\bigl[d_L\eps\,h_1(c_6\eps)+\chi_g\int_0^{K_f\lambda}h_1\bigr]
+\le\kappa\bigl[d_L+c_6\chi_g(2+\log10)\bigr]\lambda$.
+So $l$ increases by at most $C_4v\lambda$ during the near phase, $C_4:=7d_L\kappa+\kappa d_L+\kappa c_6\chi_g(2+\log10)<81$.
+
+\emph{Conclusion.} $l_t(a,b)\le\frac{17}{16}\lambda\exp\bigl(4v/R+36v+4\chi_g(5+4C_p)^2m^2v\bigr)+81v\lambda$, and the
+right side is $\le\frac98\lambda$ once $v\le R/C_3$ for a suitable number $C_3$ (e.g.\ $C_3=2\cdot10^4$ works with
+$m=\frac1{10}$, $C_p<9$).
+\end{proof}
+
+\subsection{Proof of the End Theorem}\label{app:walk:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:end}]
+Take $v_0$ so small that \eqref{eq:V0} and the conditions of Propositions~\ref{prop:far}, \ref{prop:near},
+\ref{prop:length} hold, and $\delta_t\le\frac1{16}$; all of them are of the form $v_0\le R/C$ or $v_0\le1/C$ with $C$
+built from the locked parameters, so $v_0=v_0(m,R)$ and does not depend on $\eps$.
+
+\emph{(a) and the proviso.} Let $t^*$ be as in Lemma~\ref{lem:cont}, $t\in[t_\td,t^*]$ and $(a,b)\in\FamS(t)$. If $(a,b)$
+is a tail pair and $t=t_W$, (TW) gives $l\le\frac{17}{16}\lambda$ and $E\le\frac12s_0^2M^2\lambda^{1+2\gamma}$. Otherwise
+Proposition~\ref{prop:length} gives $l\le\frac98\lambda$, and $E\le\frac12f_F^2M^2\lambda^{1+2\gamma}\le\frac12\bar\theta
+M^2\lambda^{1+2\gamma}$ by Proposition~\ref{prop:far} if the pair is far at $t$, or $E\le\frac12\bar\theta M^2\lambda^{1+2\gamma}$
+by Proposition~\ref{prop:near} if it is near (these propositions use (J1), (J2) only for pairs of $\FamS(\tau)$,
+$\tau\le t$, by Lemma~\ref{lem:locality}). Thus (Imp) holds, and
+Lemma~\ref{lem:cont} gives the proviso, the stop, (J1), (J2) on $[t_\td,T_\stopp]$, and that $t_W$ is reached if $\We>0$.
+The chord bound in (a) is (CA) of Lemma~\ref{lem:toolkit}.
+
+\emph{(b)} By (a), (J1) holds at every leg start, so Lemma~\ref{lem:toolkit}(a) applies with $t'=T_\stopp$: every
+non-final leg moves the base by an amount in $[\eps/\kappa,\eps]$, there are at most $\kappa U/\eps$ of them, and each
+lasts at most $\eps/(1-v)$ (Lemma~\ref{lem:chase}(1)); hence $T_\stopp\le t_\td+\kappa U/(1-v)$. The final leg $J+1$
+has $a_{J+1}=U$, so the intervals $[a_j,a_{j+1}]$, $j\le J$, cover $[0,U]$, and by Lemma~\ref{lem:chase}(2) every true
+label is seen by $T_\stopp$.
+
+\emph{(c)} For $J\subset I$ in $\FamS(t)$, Lemma~\ref{lem:locality}(ii) (with $\tau=t$) shows that the pairs of the
+family contained in $[a_{j(t)},\max(b,a_{j(t)+1})]$ are admissible, so they satisfy (J1), (J2) by (a), and
+Lemma~\ref{lem:tiltchain} gives $|e_J-e_I|\le C_TM\lambda_I^\gamma$, with $C_T<6.11$ ($\gamma=\frac23$) resp.\
+$C_T<5.58$ ($\gamma=\frac34$).
+
+\emph{(d)} is Lemma~\ref{lem:toolkit}(c), with $c_6=(1+\delta_1)/c_A=\frac92$.
+
+\emph{(e)} If $\tilde P=P$ on $[0,t_j]$, the fronts agree on $[t_\td,t_j]$ (Lemma~\ref{lem:chase}(4)), hence so do
+the legs, bases, families and $t_W$ (if $t_W\le t_j$) up to $t_j$; (a), (c), (d) at times $t\le t_j$ involve only these
+data.
+\end{proof}

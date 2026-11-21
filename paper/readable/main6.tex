@@ -1,0 +1,165 @@
+﻿% main6.tex -- H-main.  Section 6: heading, departure, assembly; proof of the main theorem.
+%======================================================================
+\section{Leaving the tail behind, and putting it together}\label{sec:assembly}
+%======================================================================
+
+At touch-down the last point of the walk, the tail end $x^0(U)$, sits a distance $z_0\approx\varepsilon^{1/2}$ behind
+Harry. Pairs near it do not have the start data of Setting~(H) relative to the walk that is about to begin, so they are
+excused until Harry's base has advanced a fixed distance $\We$. During that time two things must be shown: Harry walks
+almost in a straight line, along $\hat n$ (the heading lemma), and the tail arc, which he is leaving at speed about $1$,
+stays flat (the departure theorem). At the hand-over time $t_W$ the tail pairs are then far pairs with good data, and
+the end theorem takes over (Figure~\ref{fig:departure}). Fix the assembly lengths
+\[
+\We:=\frac{c_AK_RR}{\kappa_c},\qquad \delta_0:=\frac R4,\qquad \UA:=\We+\delta_0+R,\qquad \UE:=\We+R ,
+\]
+and write $\frt:=t-t_\td$. All the objects needed to state the order of choices are now available.
+
+\takeaway{The Parameter Lock}{%
+\phantomsection\label{par:lock}%
+After the locked numbers of Section~\ref{sec:intro}, the remaining scales are chosen in this order; no choice depends on
+a later one.
+\begin{enumerate}[(1)]
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item \textbf{$m=\frac1{10}$} satisfies $m^2r_*<4c_A$ with $r_*:=4$ (that is, $2m^2<1$), which the tilt chain
+(Lemma~\ref{lem:tiltchain}) uses. Its smallness also makes the heading error $\omega_0$ of Lemma~\ref{lem:heading} below
+at most $\frac14$: the main part of $\omega_0$ is $C_Tm(\delta_0/R)^{\gamma_D}$ with $C_T$ from
+Theorem~\ref{thm:end}(c) and $\delta_0/R=\frac14$ fixed, so it does \emph{not} shrink with $R$ or $v$.
+\item \textbf{$\lambda_0\in(0,\lambda_*]$ with $C_{\mathrm{td}}\lambda_0^{7/8}\le1$}, with $\lambda_*$ and
+$C_{\mathrm{td}}$ from Theorem~\ref{thm:touchdown}; this fixes $c_{\mathrm{sep}}(\lambda_0)$ and
+$\varepsilon_{\mathrm T}(\lambda_0)$. \textbf{Then $R>0$ small}, depending only on $m$, $\lambda_0$ and on the constants of
+Theorem~\ref{thm:touchdown}: the finitely many conditions (R1)--(R5) are listed in Appendix~\ref{appC:conv}.
+\item \textbf{$v_0>0$ small}, depending on $m$ and $R$, with $v_0\le\min(\frac1{23},v_{\mathrm T})$, so that every
+error of size $O(v)$ or $O_R(v)$ is beaten by a fixed margin, for instance $A_0s_0=\frac14<f_F=\frac12$,
+$f_F^2=\frac14<1$, $1+O_R(v)<\kappa$, and $e^{2\mu}\le\delta_1$. The explicit caps used are $\frac1{53}$, $\frac1{300}$,
+$R/10$, $mR/C_1$, $3/(16C_*)$ and $R/(2\cdot10^4)$ (Appendices~A and~C).
+\item \textbf{$\varepsilon_*>0$ small}, depending on $\lambda_0$ and $R$ only:
+$\varepsilon_*\le\min(\varepsilon_{\mathrm T}(\lambda_0),R/K_\varepsilon)$, $C_{\mathrm{td}}\varepsilon_*^{1/2}\le R$,
+and so small that the tail end at touch-down is at distance at least $2\varepsilon$ behind Harry (possible uniformly in
+$v\le\frac1{23}$, since that distance is of order $\varepsilon^{1/(2-2v)}\gg\varepsilon$).
+\end{enumerate}}
+
+Two different flatness exponents are used: the walk as a whole is controlled with $\gamma=\frac23$, its first stretch
+(the Stage-A chase below) with $\gamma_D=\frac34$. The reason is the hand-over at $t_W$: the departure theorem loses a
+factor $(R/\lambda)^{\nu_D}$ with $\nu_D=O(v)$ (Theorem~\ref{thm:departure}(iv)), and the tail data (TW) for the walk need
+$\gamma+\nu+\nu_D\le\gamma_D$, so the walk must use a smaller exponent than the departure and heading estimates.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[scale=1.25,>=Stealth]
+  \draw[muted,dashed] (-3.8,0) -- (4.6,0) node[right,font=\small] {$\hat n$};
+  \draw[accent,very thick,->] (0,0) -- (2.4,0.18);
+  \fill[black] (0,0) circle (1.8pt) node[below=2pt,font=\small] {$P(t_\td)$};
+  \fill[accent] (2.4,0.18) circle (2pt);
+  \node[accent,font=\small,align=center] at (2.75,-0.5) {Harry at time $t$, heading\\[-1pt]within $h_H(\frt)$ of $\hat n$};
+  \draw[primary,very thick] (2.6,0.2) .. controls (3.2,0.26) and (3.8,0.34) .. (4.5,0.48);
+  \node[primary,font=\footnotesize] at (3.7,0.7) {front ahead};
+  \draw[primary,very thick] (-0.95,-0.08) .. controls (-1.9,-0.16) and (-2.8,-0.32) .. (-3.6,-0.58);
+  \fill[primary] (-0.95,-0.08) circle (2pt) node[above left=1pt,font=\small] {$x^0(U)$};
+  \draw[<->,muted] (-0.95,0.25) -- (0,0.25) node[midway,above,font=\footnotesize] {$z_0\approx\varepsilon^{1/2}$};
+  \node[font=\footnotesize,primary] at (-2.4,-0.75) {tail arc (length $\UE$)};
+  \draw[<->,muted] (-2.3,0.9) -- (2.4,0.9) node[midway,above,font=\footnotesize]
+     {distance grows at rate $\ge\frac12$: $\rho_s\ge\frac12(s+z_0+\frt)$};
+\end{tikzpicture}
+\caption{Leaving the tail behind. While Harry walks the first stretch of the front, his heading stays close to the
+touch-down heading $\hat n$, so he moves away from the tail arc at speed about $1$. The tail arc stays flat, and by
+the time Harry has walked a distance $\We$ its pairs are far from him and satisfy the start data of the end theorem.}
+\label{fig:departure}
+\end{figure}
+
+\textbf{The heading.} To control Harry's direction during the first stretch we apply the end theorem to a short initial
+piece of the front: the \emph{Stage-A chase} is Design~T followed by the greedy chase on the working front
+$x^0|_{[0,\UA]}$ (so $U=\UA$ and the cut is $b_c=\UA$ in Setting~(H)), with exponent $\gamma_D=\frac34$ and excuse
+length $0$. Stage~A is a bookkeeping device: its legs coincide with those of the real walk as long as the base is below
+$\We$ (causality), so the path is the same and only the cut differs. On this piece the end theorem gives tilt bounds;
+near the start of the walk the front is aligned with $\hat n$ by (T3).
+
+\begin{lemma}[Heading of the first legs]\label{lem:heading}
+Let $R$, $v_0$ and $\varepsilon_*$ be chosen as in the Parameter Lock, $v\le v_0$, $\varepsilon\le\varepsilon_*$, and
+suppose the Stage-A chase satisfies the conclusions of Theorem~\ref{thm:end} with exponent $\gamma_D$ and excuse length
+$0$. There are constants $C_H=C_H(R)$ and $\omega_0\le\frac14$, independent of $v$ and $\varepsilon$, such that for every
+non-final leg $j+1$ of the Stage-A chase with $a_j<\We$ and every $t$ in that leg,
+\[
+|\hat u_{j+1}-\hat n|\le h_H(\frt):=\min\bigl(C_H(\frt+\varepsilon)^{\gamma_D},\,\omega_0\bigr).
+\]
+\end{lemma}
+
+Here $\omega_0=C_Tm(\delta_0/R)^{\gamma_D}+O(R^{7/8})+O(v_0)$, with first term about $0.197$ (Parameter Lock, item
+(1)). The two branches of $h_H$ are both needed: the cap $\omega_0$ keeps Harry moving away from the tail, and the branch
+$C_H(\frt+\varepsilon)^{\gamma_D}$ makes the integral $\int h_H^2\,d\frt/(\frt+\varepsilon)$ bounded independently of
+$\varepsilon$.
+
+\begin{theorem}[Departure]\label{thm:departure}
+Let $x(s,t)$, $s\in[0,\UE]$, be a virtual flow of $P$ from a curve $x^\circ$ with $|\partial_sx^\circ|\equiv1$, started
+at $t_\td$. Let $\hat u$ be a unit vector, $D>0$, and write $r_s=x_s-P=z_s\hat u+y_s\hat u^\perp$ and
+$X_s(\frt):=s+z_0+\frt$ for $\frt\in[0,D]$. Let $C_D\ge1$, $C_H>0$, $0<\omega_0\le\frac14$, and
+$h_H(\frt):=\min(C_H(\frt+\varepsilon)^{\gamma_D},\omega_0)$. Assume:
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item[\textup{(D0)}] $x(0,t_\td)-P(t_\td)=z_0\hat u+y_0\hat u^\perp$ with $z_0\ge2\varepsilon$ and $|y_0|\le C_Dz_0^{1+\gamma_D}$;
+\item[\textup{(D1)}] $|T(s,t_\td)-\hat u|\le C_D(s+z_0)^{\gamma_D}$ for $s\in[0,\UE]$;
+\item[\textup{(D2)}] $|P'|=1$, $P'\cdot\hat u<0$ and $|\hat u\times P'|\le h_H(\frt)$ for a.e.\ $\frt\in[0,D]$;
+\item[\textup{(D3)}] $8C_D(\UE+z_0+D)^{\gamma_D}\le1$ \textup(the departure window is small; in particular
+$D+\varepsilon\le1$, as $z_0\ge2\varepsilon$\textup).
+\end{itemize}
+Then, for $v\le v_0$ with $v_0$ small depending only on $C_D,C_H,\omega_0$, and with $\nu_D:=2\mathcal A^*(4)v$
+\textup($\mathcal A^*$ from Lemma~\ref{lem:duhamel}\textup) and $k_D:=10$, for all $s\in[0,\UE]$ and $\frt\in[0,D]$:
+\begin{enumerate}[(i)]
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item $z_s\ge\frac12X_s(\frt)$, hence $\rho_s\ge\frac12X_s(\frt)\ge\varepsilon$;
+\item $|y_s(\frt)|\le CX_s(\frt)\bigl(X_s(0)^{\gamma_D}+h_H(\frt)\bigr)$ and $|T(s,t)-\hat u|\le CX_s(\frt)^{\gamma_D}$;
+\item $1\le w\le1+O_R(v)$, so $\lambda\le l_t(a,b)\le(1+O_R(v))\lambda$ for every pair;
+\item for every pair $(a,b)\subset[0,\UE]$ with $\lambda\ge\varepsilon/2$,
+\[
+N(a,b;t)\le\Bigl(1+\frac{\frt}{k_D\lambda}\Bigr)^{\nu_D}\Bigl[N(a,b;t_\td)+O_R(v)\,\lambda^{1/2+\gamma_D}\Bigr].
+\]
+\end{enumerate}
+Here $C$ and the implied constants in $O_R(v)$ depend only on $C_D$, $C_H$ and $\omega_0$; none depends on $\varepsilon$.
+\end{theorem}
+
+The mechanism is simple. Harry's velocity points away from the tail up to an angle of at most $\arcsin\frac14$, so every
+point of the tail arc falls behind at rate at least $\frac12$, which gives (i); then the arc feels only the smooth far
+field $x/|x|$, which can turn its tangent by an amount $\int v\,dt/\rho\approx v\log$, and (ii)--(iv) follow from the
+variation-of-constants formula and the Duhamel inequality. Both proofs are in Appendix~C.
+
+\begin{proposition}[Conditional form for $d=1$]\label{prop:cond}
+Let $v_0,\varepsilon_*>0$ be chosen by the Parameter Lock. For every $v\in(0,v_0]$ and $\varepsilon\in(0,\varepsilon_*]$,
+Design~T followed by the greedy chase on $x^0$ cut at $U$ is well defined, $1$-Lipschitz, depends only on
+$(v,\varepsilon)$, and sees every $\alpha\in[0,2\pi)$ by time $T_\stopp\le t_\td+\kappa U/(1-v)\le15$.
+\end{proposition}
+
+The proof is in Appendix~C; Table~\ref{tab:coverage} records which result controls which pairs at which times (the
+tail arc is read backwards from $x^0(U)$, with $\hat u:=-\hat n$, when Theorem~\ref{thm:departure} is applied).
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabularx}{\linewidth}{l l >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{What} & \textbf{When} & \textbf{Controlled by} \\
+\midrule
+Directions seen on runs 1--2, hole, grazing sliver & $[0,t_\td]$ & Theorem~\ref{thm:touchdown} (T0) \\
+Stage-A chase on $[0,\UA]$ ($\gamma_D=\frac34$) & $[t_\td,t_W]$ & Theorem~\ref{thm:end} (excuse length $0$) \\
+Harry's heading, $|P'-\hat n|\le h_H$ & $[t_\td,t_W]$ & Lemma~\ref{lem:heading} \\
+Tail arc $\{U-u\le\UE\}$; tail data (TW) & $[t_\td,t_W]$; at $t_W$ & Theorem~\ref{thm:departure} \\
+Body pairs of $[0,U]$ ($\gamma=\frac23$) & $[t_\td,T_\stopp]$ & Theorem~\ref{thm:end} with (S1)--(S2) \\
+Tail pairs of $[0,U]$ ($\gamma=\frac23$) & $[t_W,T_\stopp]$ & Theorem~\ref{thm:end} with (TW) \\
+All true labels seen & by $T_\stopp\le15$ & Theorem~\ref{thm:end}(b) \\
+\bottomrule
+\end{tabularx}
+\caption{Every direction, every pair and every time interval is covered by one of the results.}
+\label{tab:coverage}
+\end{table}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $v_0,\varepsilon_*$ be as in Proposition~\ref{prop:cond} and $T_0:=15$. Given $d>0$, $\varepsilon\in(0,d)$ and
+$v\in(0,v_0]$, put $\hat\varepsilon:=\min(\varepsilon/d,\varepsilon_*)$, let $P$ be the path of
+Proposition~\ref{prop:cond} for $(v,\hat\varepsilon)$, and set $H(t):=dP(t/d)$. Then $H(0)=0$ and $|H'|\le1$ a.e. If
+$S^P_\alpha$ denotes the candidate for $P$ starting at $e^{i\alpha}$, then $t\mapsto dS^P_\alpha(t/d)$ solves
+\eqref{eq:snitch} for $H$ with start $de^{i\alpha}$, so by uniqueness $S_\alpha(t)=dS^P_\alpha(t/d)$ on the interval of
+existence. Proposition~\ref{prop:cond} gives $t'\le15$ with $|S^P_\alpha(t')-P(t')|\le\hat\varepsilon$; hence
+$|S_\alpha(dt')-H(dt')|\le d\hat\varepsilon\le\varepsilon$ with $dt'\le T_0d$. Finally, $d\hat\varepsilon=\varepsilon'$,
+so $H$ is exactly the path described in the theorem.
+\end{proof}
+
+
+
